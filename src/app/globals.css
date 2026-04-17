@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  /* — Brand Colors (Moodboard v6) — */
+  --color-tiffany: #81D8D0;
+  --color-tiffany-light: #A3E4DE;
+  --color-tiffany-dark: #5EC4BA;
+  --color-purple: #6B3FA0;
+  --color-purple-light: #8B5FC0;
+
+  /* — Font Families — */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ——— LIGHT (default) ——— */
+:root {
+  --bg-primary: #F4F4F4;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FAFAFA;
+  --bg-input: #F8F8FA;
+  --bg-elevated: #0F0F0F;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #94A3B8;
+  --text-dim: #777777;
+  --border-default: rgba(17, 17, 17, 0.08);
+  --border-subtle: rgba(17, 17, 17, 0.04);
+  --overlay-gradient-start: rgba(244,244,244,0.95);
+  --overlay-gradient-end: rgba(244,244,244,0.6);
+  --card-shadow: 0 4px 40px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 12px 50px rgba(0, 0, 0, 0.08);
+}
+
+/* ——— DARK ——— */
+.dark {
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #0F0F0F;
+  --bg-card: #161616;
+  --bg-card-hover: #1A1A1A;
+  --bg-input: #111111;
+  --bg-elevated: #0F0F0F;
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --text-dim: rgba(255, 255, 255, 0.3);
+  --border-default: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --overlay-gradient-start: rgba(10, 10, 10, 0.95);
+  --overlay-gradient-end: rgba(10, 10, 10, 0.6);
+  --card-shadow: 0 4px 40px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 12px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* ——— BASE ——— */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    @apply antialiased;
+  }
+
+  ::selection {
+    background: #81D8D0;
+    color: #0A0A0A;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text-primary);
+  }
+
+  h1 { font-size: clamp(2.5rem, 7vw, 5rem); }
+  h2 { font-size: clamp(1.75rem, 4vw, 3rem); letter-spacing: -0.02em; }
+  h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); letter-spacing: -0.015em; }
+}
+
+/* ——— UTILITIES ——— */
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: var(--font-mono); }
+  .text-tiffany { color: #81D8D0; }
+  .text-purple { color: #6B3FA0; }
+
+  /* Theme-aware backgrounds */
+  .bg-page { background-color: var(--bg-primary); }
+  .bg-surface { background-color: var(--bg-secondary); }
+  .bg-card { background-color: var(--bg-card); }
+  .bg-input { background-color: var(--bg-input); }
+
+  /* Theme-aware text */
+  .text-primary { color: var(--text-primary); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-muted { color: var(--text-muted); }
+  .text-dim { color: var(--text-dim); }
+
+  /* Theme-aware borders */
+  .border-theme { border-color: var(--border-default); }
+  .border-subtle { border-color: var(--border-subtle); }
+
+  /* Gradient Signature */
+  .gradient-tiffany-purple {
+    background: linear-gradient(135deg, #81D8D0, #6B3FA0);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #81D8D0, #6B3FA0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section label */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #81D8D0;
+  }
+}
+
+/* ——— DOT GRID & ACCENT LINES ——— */
+/* Outside @layer so Tailwind v4 doesn't strip them */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.dark .dot-grid {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+}
+
+/* Purple variant — strong enough to be visible */
+.dot-grid-purple {
+  background-image: radial-gradient(circle, rgba(139,95,192,0.55) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Gradient fade — diagonal sweeps, strong at edges, gentle toward center */
+/* Right: sweeps from top-right down toward center-left */
+.dot-grid-fade-from-right {
+  -webkit-mask-image: linear-gradient(220deg, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.2) 50%, transparent 80%);
+  mask-image: linear-gradient(220deg, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.2) 50%, transparent 80%);
+}
+/* Left: sweeps from bottom-left up toward center-right */
+.dot-grid-fade-from-left {
+  -webkit-mask-image: linear-gradient(40deg, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.2) 50%, transparent 80%);
+  mask-image: linear-gradient(40deg, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.2) 50%, transparent 80%);
+}
+
+.accent-line-v {
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, #81D8D0, transparent);
+}
+.accent-line-h {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+}
+.dark .accent-line-h {
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+/* ——— ANIMATIONS ——— */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.08; transform: scale(1); }
+  50% { opacity: 0.18; transform: scale(1.15); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes orbit-spin {
+  0% { transform: rotateX(12deg) rotate(0deg); }
+  100% { transform: rotateX(12deg) rotate(360deg); }
+}
+
+/* ——— COBE GLOBE LABELS ——— */
+.globe-container {
+  position: relative;
+}
+
+.cobe-label {
+  position: absolute;
+  bottom: anchor(top);
+  left: anchor(center);
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: opacity 0.4s ease, filter 0.4s ease;
+  filter: blur(calc((1 - var(--cobe-visible-stockholm, 0)) * 4px));
+  z-index: 20;
+}
+
+.cobe-label-badge {
+  background: #81D8D0;
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(129, 216, 208, 0.3);
+}
+
+/* ——— SCROLLBAR ——— */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--bg-card); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #81D8D0; }
+
+/* ——— FLAG TICKER SCROLL ANIMATIONS ——— */
+@keyframes scroll-left {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
