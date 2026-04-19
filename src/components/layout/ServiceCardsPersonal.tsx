@@ -90,44 +90,49 @@ export function ServiceCardsPersonal() {
     <section id="services" className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 relative z-10">
 
-        {/* Editorial asymmetric header */}
+        {/* Moodboard-style editorial header */}
         <motion.div
           initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-16 md:mb-20"
+          className="mb-16 md:mb-20"
         >
-          {/* Left — label + heading */}
-          <div className="lg:col-span-5">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
-              <span className="text-[#6AD8D2] text-xs">◆</span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Våra tjänster</span>
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
-              Vad vi
+          {/* Small mono label — top right like moodboard */}
+          <div className="flex justify-between items-start mb-12">
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
+              Eventpartner — Tjänster
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">
+              Fullservice leverans
               <br />
-              <span className="italic font-light text-[var(--text-muted)]">gör.</span>
-            </h2>
+              36 länder
+            </span>
           </div>
 
-          {/* Right — description + micro metadata */}
-          <div className="lg:col-span-6 lg:col-start-7 flex flex-col justify-end">
-            <p className="text-[16px] text-[var(--text-secondary)] leading-[1.8] mb-6">
-              Från venue-scouting till fullskalig leverans. Vi skapar event som bygger ert varumärke — oavsett storlek eller komplexitet.
-            </p>
-            <div className="flex gap-8 border-t border-[var(--border-default)] pt-4">
-              {[
-                { value: "360,000+", label: "Venues" },
-                { value: "36", label: "Länder" },
-                { value: "24h", label: "Svarstid" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <span className="font-display text-[18px] font-medium text-[var(--text-primary)] block leading-none">{stat.value}</span>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mt-1 block">{stat.label}</span>
-                </div>
-              ))}
-            </div>
+          {/* Big heading — anchor, no pill */}
+          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-8">
+            Vad vi gör.
+          </h2>
+
+          {/* Description — larger, bolder, its own level */}
+          <p className="font-display text-[clamp(1.1rem,2.2vw,1.6rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-2xl mb-14">
+            Från venue-scouting till fullskalig leverans. Vi skapar event som bygger ert varumärke — oavsett storlek eller komplexitet.
+          </p>
+
+          {/* Metrics row — spread like moodboard bottom */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[var(--border-default)] pt-6">
+            {[
+              { label: "Venues", value: "360,000+" },
+              { label: "Länder", value: "36" },
+              { label: "Svarstid", value: "24h" },
+              { label: "Leveranspartners", value: "2,400+" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] block mb-1">{stat.label}</span>
+                <span className="font-display text-[17px] font-medium text-[var(--text-primary)]">{stat.value}</span>
+              </div>
+            ))}
           </div>
         </motion.div>
 
