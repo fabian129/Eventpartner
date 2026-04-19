@@ -9,7 +9,7 @@
 
 ### Identitet & Visuell röd tråd
 - [ ] **Minimalistisk logga** — "EP" som ikon + globen för sig
-- [ ] **Byta Tiffany accent** — `#81D8D0` → `#6AD8D2` (global find/replace i hela kodbasen)
+- [x] **Byta Tiffany accent** — `#81D8D0` → `#6AD8D2` ✅ (28 filer)
 - [ ] **Bildspråk med lila drag** — bilder ska ha subtil lila/purple toning
 - [ ] **Svartvita bilder → färg vid hover** — grayscale default, färg vid hover
 - [ ] **Mörka sektioner med liv** — bento-bildgrids i bakgrunden (strukturerade bilder bakom content)
@@ -21,13 +21,13 @@
 - [ ] **Uppdatera bildbiblioteket** — konferenser, kickoffs, mingel, middagar, teambuilding, firande
 
 ### Sektioner att ändra
-- [ ] **Ta bort TestimonialsSection** — helt bort från sidan
-- [ ] **Case Stories = mörk sektion** — scrollar man in i den → transition ljus→mörk
-- [ ] **Logo Banner** — stå still, stora ikoner (inte scrollande ticker)
-- [ ] **Pop-up ruta** — exit-intent / bottom-of-page. Samla in email/namn
+- [x] **Ta bort TestimonialsSection** — helt bort ✅
+- [x] **Case Stories = mörk sektion** — scrollar man in → dark bg + rounded top ✅
+- [x] **Logo Banner** — stå still, stora ikoner ✅
+- [x] **Pop-up ruta** — exit-intent + 80% scroll trigger ✅
 
 ### Navbar
-- [ ] **Uppdatera navigation:**
+- [x] **Uppdatera navigation:** ✅
   - Tjänster
   - Skräddarsy
   - Bli EventPartner VIP
@@ -35,7 +35,7 @@
   - Om oss
 
 ### Nyhetsbrev
-- [ ] **Nyhetsbrev-CTA på fler ställen** — väv in signup i fler sektioner
+- [x] **Nyhetsbrev-CTA på fler ställen** — 2 extra inline placements ✅
 - [ ] **Även inne i VIP-sidan**
 
 ---
