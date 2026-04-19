@@ -1,9 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 import { useState } from "react";
-import { Send, CheckCircle, ArrowRight } from "lucide-react";
+import { Send, CheckCircle, ArrowRight, ExternalLink } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
+import Link from "next/link";
 
 export function RequestFormSection() {
   const [submitted, setSubmitted] = useState(false);
@@ -23,6 +26,7 @@ export function RequestFormSection() {
       : "bg-white border border-black/[0.08] text-[#111] placeholder-[#94A3B8]"
   }`;
   const labelClass = "block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-2";
+  const requiredStar = <span className="text-[#81D8D0] ml-0.5">*</span>;
 
   return (
     <section id="request" className="relative w-full px-6 md:px-10 py-20 md:py-32 overflow-hidden" style={{ background: isDark ? "#0A0A0A" : "#F8F8FA" }}>
@@ -32,10 +36,10 @@ export function RequestFormSection() {
       <div className="max-w-[1100px] mx-auto relative z-10">
         {/* Big headline */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.9, ease: EASE }}
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] mb-6">
@@ -50,25 +54,25 @@ export function RequestFormSection() {
             <span className="italic font-light text-[var(--text-muted)]">Vi gör resten.</span>
           </h2>
           <p className="text-[15px] text-[var(--text-muted)] max-w-md mx-auto leading-relaxed">
-            Fyll i formuläret nedan så återkommer vi med kurerade venue-förslag inom 48 timmar. Helt kostnadsfritt.
+            Fyll i formuläret nedan så återkommer vi med skräddarsydda förslag inom 24 timmar. Helt kostnadsfritt.
           </p>
         </motion.div>
 
         {/* Form card */}
         <motion.form
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 35, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ delay: 0.15, duration: 0.7 }}
+          transition={{ delay: 0.15, duration: 0.9, ease: EASE }}
           className="bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-3xl p-8 md:p-12 transition-colors duration-500"
           style={{ boxShadow: isDark ? "0 4px 60px rgba(0,0,0,0.3)" : "0 4px 60px rgba(0,0,0,0.06)" }}
         >
           {/* Stats bar */}
           <div className="flex items-center justify-center gap-8 mb-10 pb-8 border-b border-[var(--border-default)]">
             {[
-              { value: "48h", label: "Svarstid" },
-              { value: "3st", label: "Kurerade förslag" },
+              { value: "24h", label: "Svarstid" },
+              { value: "3st", label: "Matchade förslag" },
               { value: "0 kr", label: "Kostnad" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
@@ -78,43 +82,40 @@ export function RequestFormSection() {
             ))}
           </div>
 
-          {/* Form fields */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+          {/* Form fields — Row 1: Contact info */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Företag</label>
+              <label className={labelClass}>Företag{requiredStar}</label>
               <input type="text" placeholder="Ert företagsnamn" required className={inputClass} />
             </div>
             <div>
-              <label className={labelClass}>Kontaktperson</label>
+              <label className={labelClass}>Kontaktperson{requiredStar}</label>
               <input type="text" placeholder="Namn" required className={inputClass} />
             </div>
             <div>
-              <label className={labelClass}>E-post</label>
+              <label className={labelClass}>E-post{requiredStar}</label>
               <input type="email" placeholder="du@företag.se" required className={inputClass} />
             </div>
+          </div>
+
+          {/* Row 2: Phone + Location */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Region</label>
-              <select className={inputClass}>
-                <option value="">Välj region</option>
-                <option>Skandinavien</option>
-                <option>Västeuropa</option>
-                <option>Sydeuropa</option>
-                <option>Östeuropa</option>
-                <option>Storbritannien</option>
-                <option>Hela Europa</option>
-              </select>
+              <label className={labelClass}>Telefon{requiredStar}</label>
+              <input type="tel" placeholder="+46 70 123 45 67" required className={inputClass} />
             </div>
             <div>
-              <label className={labelClass}>Antal gäster</label>
-              <select className={inputClass}>
-                <option value="">Välj</option>
-                <option>10–50</option>
-                <option>50–150</option>
-                <option>150–500</option>
-                <option>500–1,000</option>
-                <option>1,000+</option>
-              </select>
+              <label className={labelClass}>Land{requiredStar}</label>
+              <input type="text" placeholder="T.ex. Sverige, Spain, UK" required className={inputClass} />
             </div>
+            <div>
+              <label className={labelClass}>Stad</label>
+              <input type="text" placeholder="T.ex. Stockholm, Barcelona" className={inputClass} />
+            </div>
+          </div>
+
+          {/* Row 3: Event details */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
               <label className={labelClass}>Eventtyp</label>
               <select className={inputClass}>
@@ -124,14 +125,72 @@ export function RequestFormSection() {
                 <option>Team Building</option>
                 <option>Produktlansering</option>
                 <option>Gala / Middag</option>
+                <option>Kick-off</option>
                 <option>Övrigt</option>
+              </select>
+            </div>
+            <div>
+              <label className={labelClass}>Antal gäster{requiredStar}</label>
+              <input
+                type="number"
+                placeholder="Ange exakt antal"
+                min={1}
+                required
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Datum</label>
+              <input
+                type="text"
+                placeholder="T.ex. 15-17 juni 2026 eller Flexibelt"
+                className={inputClass}
+              />
+            </div>
+          </div>
+
+          {/* Row 4: Budget */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
+            <div>
+              <label className={labelClass}>Budget (ungefärlig)</label>
+              <select className={inputClass}>
+                <option value="">Ej specificerat</option>
+                <option>Under 50 000 kr</option>
+                <option>50 000 – 150 000 kr</option>
+                <option>150 000 – 500 000 kr</option>
+                <option>500 000 – 1 000 000 kr</option>
+                <option>Över 1 000 000 kr</option>
               </select>
             </div>
           </div>
 
+          {/* Message */}
           <div className="mb-8">
             <label className={labelClass}>Meddelande</label>
-            <textarea rows={4} placeholder="Berätta om ert event — datum, storlek, specifika önskemål..." className={`${inputClass} resize-none`} />
+            <textarea rows={4} placeholder="Berätta om ert event — specifika önskemål, krav, eller annat vi bör veta..." className={`${inputClass} resize-none`} />
+          </div>
+
+          {/* Extended inquiry link */}
+          <div className="mb-8 p-4 rounded-xl border border-[var(--border-default)] bg-[var(--bg-card)]">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-lg bg-[#7851A9]/10 border border-[#7851A9]/20 flex items-center justify-center shrink-0 mt-0.5">
+                <ExternalLink className="w-4 h-4 text-[#7851A9]" />
+              </div>
+              <div>
+                <p className="text-[14px] text-[var(--text-primary)] font-medium mb-1">
+                  Är ditt event större eller mer komplext?
+                </p>
+                <p className="text-[13px] text-[var(--text-muted)] leading-relaxed mb-2">
+                  Fyll i vårt utökade formulär för att ge oss mer detaljerad information direkt — venue-krav, catering, aktiviteter och mer.
+                </p>
+                <Link
+                  href="/skraddarsy"
+                  className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#81D8D0] hover:text-[#A3E4DE] transition-colors duration-300"
+                >
+                  Skräddarsy ditt event →
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* Big submit button */}
@@ -147,7 +206,7 @@ export function RequestFormSection() {
             >
               <span className="relative z-10 flex items-center gap-3">
                 {submitted ? (
-                  <><CheckCircle className="w-5 h-5" />Tack! Vi hör av oss inom 48h.</>
+                  <><CheckCircle className="w-5 h-5" />Tack! Vi hör av oss inom 24h.</>
                 ) : (
                   <>
                     Skicka kostnadsfri förfrågan
@@ -161,7 +220,7 @@ export function RequestFormSection() {
               </span>
             </button>
             <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--text-dim)]">
-              Inga förpliktelser • Svar inom 48h
+              Inga förpliktelser • Svar inom 24h
             </span>
           </div>
         </motion.form>

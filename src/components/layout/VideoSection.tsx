@@ -5,6 +5,8 @@ import { Play } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "@/components/utils/ThemeProvider";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 export function VideoSection() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -12,12 +14,12 @@ export function VideoSection() {
   return (
     <section id="about" className="relative w-full bg-[var(--bg-primary)] px-6 md:px-10 py-20 md:py-32">
       <div className="max-w-[1000px] mx-auto">
-        {/* Intro text — generous spacing above video */}
+        {/* Intro text — blur entrance */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.9, ease: EASE }}
           className="text-center mb-12 md:mb-16"
         >
           <p className="section-label mb-4">Om EventPartner</p>
@@ -31,12 +33,12 @@ export function VideoSection() {
           </p>
         </motion.div>
 
-        {/* Full-width video embed — 16:9 like a real video player */}
+        {/* Full-width video embed — scale + shadow entrance */}
         <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.97 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          initial={{ opacity: 0, y: 40, scale: 0.93, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 1, ease: EASE }}
           className="relative w-full rounded-2xl overflow-hidden group cursor-pointer"
           style={{
             aspectRatio: "16 / 9",

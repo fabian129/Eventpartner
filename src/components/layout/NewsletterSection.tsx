@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, ArrowRight, CheckCircle } from "lucide-react";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 /**
  * NewsletterSection — Clean, light email signup
  *
@@ -37,12 +39,12 @@ export function NewsletterSection() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80px] h-[1px] bg-[#111]/10" />
 
       <div className="relative max-w-[540px] mx-auto px-6 md:px-10 text-center">
-        {/* Label */}
+        {/* Label — cinematic entrance */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.8, ease: EASE }}
         >
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#81D8D0]">
             Nyhetsbrev
@@ -51,10 +53,10 @@ export function NewsletterSection() {
 
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.05 }}
+          transition={{ duration: 0.9, delay: 0.08, ease: EASE }}
         >
           <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[#111] leading-[1.1] mt-4 mb-3">
             Håll er uppdaterade.
@@ -66,10 +68,10 @@ export function NewsletterSection() {
 
         {/* Form */}
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
         >
           <AnimatePresence mode="wait">
             {!submitted ? (
@@ -96,7 +98,7 @@ export function NewsletterSection() {
                 />
                 <button
                   type="submit"
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#111] text-white text-sm font-medium hover:bg-[#81D8D0] hover:text-[#0a0a0a] transition-all duration-300 shrink-0"
+                  className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#111] text-white text-sm font-medium hover:bg-[#81D8D0] hover:text-[#0a0a0a] hover:scale-[1.02] hover:shadow-lg transition-all duration-300 shrink-0"
                 >
                   Prenumerera
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

@@ -8,8 +8,8 @@
   --color-tiffany: #81D8D0;
   --color-tiffany-light: #A3E4DE;
   --color-tiffany-dark: #5EC4BA;
-  --color-purple: #6B3FA0;
-  --color-purple-light: #8B5FC0;
+  --color-purple: #7851A9;
+  --color-purple-light: #9370C4;
 
   /* — Font Families — */
   --font-display: 'Space Grotesk', sans-serif;
@@ -98,7 +98,7 @@
   .font-display { font-family: var(--font-display); }
   .font-mono { font-family: var(--font-mono); }
   .text-tiffany { color: #81D8D0; }
-  .text-purple { color: #6B3FA0; }
+  .text-purple { color: #7851A9; }
 
   /* Theme-aware backgrounds */
   .bg-page { background-color: var(--bg-primary); }
@@ -118,11 +118,11 @@
 
   /* Gradient Signature */
   .gradient-tiffany-purple {
-    background: linear-gradient(135deg, #81D8D0, #6B3FA0);
+    background: linear-gradient(135deg, #81D8D0, #7851A9);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #81D8D0, #6B3FA0);
+    background: linear-gradient(135deg, #81D8D0, #7851A9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -150,7 +150,7 @@
 
 /* Purple variant — strong enough to be visible */
 .dot-grid-purple {
-  background-image: radial-gradient(circle, rgba(139,95,192,0.55) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(120,81,169,0.55) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 

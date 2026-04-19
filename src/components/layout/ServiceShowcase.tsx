@@ -1,204 +1,179 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Presentation, Lightbulb, Utensils, Mic2, PartyPopper, Users } from "lucide-react";
+import { MapPin, CalendarCheck, Users, Globe, CheckCircle, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
-const SERVICES = [
-  {
-    icon: Presentation,
-    title: "Konferens & möten",
-    description: "Från intima styrelsemöten till storskaliga konferenser med hundratals deltagare. Vi matchar format, teknik och venue — oavsett storlek.",
-    stat: "2,400+",
-    statLabel: "venues",
-    image: "/Images/interior-large-building-with-glass-ceiling.jpg",
-  },
-  {
-    icon: Lightbulb,
-    title: "Aktiviteter",
-    description: "Teambuilding, workshops och upplevelser som skapar bestående minnen. Skräddarsytt efter era mål och gruppstorlek.",
-    stat: "180+",
-    statLabel: "partners",
-    image: "/Images/colorful-seoul-floating-island.jpg",
-  },
-  {
-    icon: Utensils,
-    title: "Catering",
-    description: "Från standing lunch till sju-rätters gala. Vi kopplar er med rätt cateringleverantör för varje tillfälle och budget.",
-    stat: "340+",
-    statLabel: "leverantörer",
-    image: "/Images/decorated-hall-wedding-is-ready-celebration.jpg",
-  },
-  {
-    icon: Mic2,
-    title: "Talare & underhållning",
-    description: "Keynote-speakers, moderatorer, artister och DJ:s. Vi bokar rätt profil för ert event och budget.",
-    stat: "500+",
-    statLabel: "profiler",
-    image: "/Images/palace-culture-iasi-romania.jpg",
-  },
-  {
-    icon: PartyPopper,
-    title: "Middagar & galor",
-    description: "Representationsmiddagar, jubileer och galor i venues som gör intryck. Helhetskoordinering från meny till platsplanering.",
-    stat: "94%",
-    statLabel: "nöjda kunder",
-    image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
-  },
-  {
-    icon: Users,
-    title: "Kick-off",
-    description: "Starter som sätter tonen för hela året. Vi bygger upplevelser som inspirerar team och driver kultur framåt.",
-    stat: "48h",
-    statLabel: "svarstid",
-    image: "/Images/hotel-lobby.jpg",
-  },
-];
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function ServiceShowcase() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const active = SERVICES[activeIndex];
-
   return (
-    <section className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] overflow-visible">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-        {/* Section header */}
+    <section id="services" className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] overflow-hidden">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+
+        {/* Header — like page 41 */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-16 text-center"
+          transition={{ duration: 0.9, ease: EASE }}
+          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-20 gap-8"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
-            <span className="text-[#81D8D0] text-xs">◆</span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Fullservice-partner</span>
-          </div>
-          <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05] mx-auto">
-            Allt ni behöver.
-            <br />
-            <span className="italic font-light text-[var(--text-muted)]">En förfrågan.</span>
+          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-[var(--text-primary)] leading-[1.05]">
+            Allt ni behöver.<br />
+            <span className="italic text-[#81D8D0]" style={{ fontFamily: "var(--font-serif), 'Playfair Display', serif" }}>En partner.</span>
           </h2>
-          <p className="mt-4 text-[15px] text-[var(--text-muted)] max-w-md mx-auto leading-relaxed">
-            Vi hanterar allt från venue till catering, talare och aktiviteter. Ni fokuserar på eventet.
-          </p>
-        </motion.div>
 
-        {/* Main layout: Nav LEFT + Card RIGHT */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center"
-        >
-          {/* LEFT: Navigation — large titles, vertically centered & evenly spaced */}
-          <div className="lg:w-[300px] xl:w-[340px] shrink-0 flex flex-col lg:-ml-4 self-stretch">
-            <div className="flex flex-col justify-evenly h-full py-[5%]">
-              {SERVICES.map((service, i) => {
-                const isActive = i === activeIndex;
-                return (
-                  <button
-                    key={service.title}
-                    onClick={() => setActiveIndex(i)}
-                    className={`text-left flex-1 flex flex-col justify-center border-b border-[var(--border-default)]/30 transition-all duration-300 group ${
-                      i === 0 ? "border-t border-t-[var(--border-default)]/30" : ""
-                    }`}
-                  >
-                    <span className={`font-display text-[1.55rem] md:text-[1.8rem] tracking-tight transition-all duration-300 leading-none ${
-                      isActive
-                        ? "text-[var(--text-primary)] font-medium"
-                        : "text-[var(--text-dim)] font-normal group-hover:text-[var(--text-muted)]"
-                    }`}>
-                      {service.title}
-                    </span>
-                    {isActive && (
-                      <span className="block mt-1.5 text-[11px] text-[#81D8D0] font-mono uppercase tracking-[0.12em]">
-                        {service.stat} {service.statLabel}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
+          <div className="flex flex-col items-start md:items-end gap-3 shrink-0">
+            <div className="flex items-center gap-1.5 text-[#81D8D0]">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+              ))}
             </div>
-          </div>
-
-          {/* RIGHT: Large elevated card — image + content + CTA */}
-          <div className="flex-1 min-w-0">
-            <div className="p-[1px] rounded-[1.5rem] bg-gradient-to-b from-[var(--border-default)] via-[var(--border-default)]/20 to-transparent">
-              <div className="bg-[var(--bg-card)] rounded-[1.4rem] p-5 md:p-6 shadow-[0_2.8px_2.2px_rgba(0,0,0,0.02),0_6.7px_5.3px_rgba(0,0,0,0.028),0_12.5px_10px_rgba(0,0,0,0.035),0_22.3px_17.9px_rgba(0,0,0,0.042),0_41.8px_33.4px_rgba(0,0,0,0.05),0_100px_80px_rgba(0,0,0,0.07)]">
-
-                {/* Image */}
-                <div className="p-[1px] bg-[var(--border-default)]/50 rounded-xl mb-6">
-                  <div className="aspect-[16/9] w-full bg-[var(--bg-primary)] rounded-[11px] overflow-hidden relative">
-                    <Image
-                      key={active.image}
-                      src={active.image}
-                      alt={active.title}
-                      fill
-                      className="object-cover transition-all duration-700 ease-out hover:scale-[1.03]"
-                      sizes="(max-width: 768px) 100vw, 65vw"
-                    />
-
-                    {/* Floating overlay */}
-                    <div className="absolute bottom-4 left-4 md:bottom-5 md:left-5 p-[1px] rounded-xl bg-gradient-to-b from-white/60 to-white/10 backdrop-blur-md">
-                      <div className="bg-white/90 p-3 rounded-[11px] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06)] flex items-center gap-3">
-                        <div className="w-7 h-7 rounded-full bg-[#81D8D0]/10 border border-[#81D8D0]/20 flex items-center justify-center shrink-0">
-                          {(() => { const I = active.icon; return <I className="w-3.5 h-3.5 text-[#81D8D0]" />; })()}
-                        </div>
-                        <div>
-                          <div className="font-mono text-[7px] uppercase tracking-[0.15em] text-[#94A3B8]">Kategori</div>
-                          <div className="text-[13px] font-medium text-[#111] tracking-tight">{active.title}</div>
-                        </div>
-                        <div className="ml-3 w-2 h-2 rounded-full bg-[#81D8D0] relative">
-                          <div className="absolute inset-0 rounded-full bg-[#81D8D0] animate-ping opacity-30" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <div className="flex items-center gap-4">
+              <span className="text-sm font-light text-[var(--text-muted)]">4.9 (2,048 events levererade)</span>
+              <div className="flex -space-x-2.5">
+                <div className="w-10 h-10 rounded-xl bg-[var(--bg-card)] border-[3px] border-[var(--bg-primary)] overflow-hidden -rotate-3 shadow-sm">
+                  <Image src="/Images/conference-evening.jpg" alt="" width={80} height={80} className="w-full h-full object-cover" />
                 </div>
-
-                {/* Content inside card */}
-                <div className="px-1">
-                  <h3 className="font-display text-xl md:text-2xl font-medium text-[var(--text-primary)] tracking-tight mb-2">
-                    {active.title}
-                  </h3>
-                  <p className="text-[14px] text-[var(--text-muted)] leading-relaxed max-w-lg mb-5">
-                    {active.description}
-                  </p>
-
-                  {/* Stats + CTA */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-6">
-                      <div>
-                        <span className="font-display text-xl font-medium text-[var(--text-primary)] block leading-none">{active.stat}</span>
-                        <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-[var(--text-dim)]">{active.statLabel}</span>
-                      </div>
-                      <div className="w-px h-8 bg-[var(--border-default)]" />
-                      <div>
-                        <span className="font-display text-xl font-medium text-[var(--text-primary)] block leading-none">24h</span>
-                        <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-[var(--text-dim)]">svarstid</span>
-                      </div>
-                      <div className="w-px h-8 bg-[var(--border-default)]" />
-                      <div>
-                        <span className="font-display text-xl font-medium text-[var(--text-primary)] block leading-none">0 kr</span>
-                        <span className="font-mono text-[7px] uppercase tracking-[0.12em] text-[var(--text-dim)]">kostnad</span>
-                      </div>
-                    </div>
-
-                    <a
-                      href="#request"
-                      className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#111] text-white text-sm font-medium hover:bg-[#81D8D0] hover:text-[#0a0a0a] transition-all duration-300"
-                    >
-                      Boka nu →
-                    </a>
-                  </div>
+                <div className="w-10 h-10 rounded-xl bg-[var(--bg-card)] border-[3px] border-[var(--bg-primary)] overflow-hidden rotate-2 shadow-sm">
+                  <Image src="/Images/hotel-lobby.jpg" alt="" width={80} height={80} className="w-full h-full object-cover" />
+                </div>
+                <div className="w-10 h-10 rounded-xl bg-[var(--bg-card)] border-[3px] border-[var(--bg-primary)] overflow-hidden -rotate-2 shadow-sm">
+                  <Image src="/Images/decorated-hall-wedding-is-ready-celebration.jpg" alt="" width={80} height={80} className="w-full h-full object-cover" />
                 </div>
               </div>
             </div>
           </div>
+        </motion.div>
 
+        {/* Bento Grid — 12 column */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+
+          {/* LEFT — Large image card (6 col, tall) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: EASE }}
+            className="lg:col-span-6 relative h-[500px] md:h-[650px] rounded-[2rem] overflow-hidden group"
+          >
+            <Image
+              src="/Images/conference-evening.jpg"
+              alt="Premium conference venue"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+
+            {/* Overlay card */}
+            <div className="absolute bottom-6 left-6 right-6 md:right-auto md:w-80 bg-white rounded-2xl p-7 md:p-8 shadow-2xl transition-transform duration-500 hover:-translate-y-2">
+              <div className="flex items-center gap-2.5 mb-2">
+                <CheckCircle className="w-5 h-5 text-[var(--text-primary)]" />
+                <span className="text-base font-normal text-[var(--text-primary)]">Garanterat</span>
+              </div>
+              <p className="text-2xl md:text-3xl text-[var(--text-primary)] italic tracking-tight mb-3" style={{ fontFamily: "var(--font-serif), 'Playfair Display', serif" }}>
+                Rätt venue, varje gång.
+              </p>
+              <p className="text-sm font-light text-[var(--text-muted)] leading-relaxed">
+                360,000+ venues i 36 länder. Alltid svar inom 24h med minst 3 kurerade förslag.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* RIGHT — Two stacked cards (6 col) */}
+          <div className="lg:col-span-6 flex flex-col gap-6 md:gap-8">
+
+            {/* Top right — Light card */}
+            <motion.div
+              initial={{ opacity: 0, y: 25, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+              className="bg-[#F3F1ED] rounded-[2rem] relative overflow-hidden flex flex-col sm:flex-row min-h-[300px] p-8 md:p-10 group"
+            >
+              <div className="w-full sm:w-2/3 flex flex-col relative z-10 justify-center">
+                <CalendarCheck className="w-7 h-7 text-[var(--text-primary)] mb-6 stroke-[1.5]" />
+                <h3 className="text-2xl md:text-4xl font-light tracking-tight text-[var(--text-primary)] mb-1">Fullservice</h3>
+                <p className="text-2xl md:text-4xl italic tracking-tight text-[var(--text-muted)]" style={{ fontFamily: "var(--font-serif), 'Playfair Display', serif" }}>
+                  Eventleverans
+                </p>
+                <p className="text-sm font-light text-[var(--text-muted)] leading-relaxed max-w-[280px] mt-5">
+                  Konferenslokaler, teknik, catering och logi — allt samordnat under ett tak. En kontaktperson, noll krångel.
+                </p>
+              </div>
+              {/* Image peek */}
+              <div className="absolute right-0 bottom-0 top-0 w-1/2 min-w-[200px] flex items-end justify-end opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out">
+                <Image
+                  src="/Images/hotel-lobby.jpg"
+                  alt="Venue interior"
+                  width={400}
+                  height={600}
+                  className="h-[140%] w-auto object-cover object-left translate-x-8 translate-y-12 mix-blend-darken"
+                />
+              </div>
+            </motion.div>
+
+            {/* Bottom right — Dark/accent card */}
+            <motion.div
+              initial={{ opacity: 0, y: 25, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+              className="bg-[#2A2438] rounded-[2rem] relative overflow-hidden flex min-h-[300px] text-white p-8 md:p-10"
+            >
+              {/* Ambient glow */}
+              <div className="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-[#81D8D0]/15 blur-[80px] pointer-events-none" />
+
+              <div className="w-full flex justify-end">
+                <div className="w-full sm:w-2/3 flex flex-col relative z-10 justify-center pl-0 sm:pl-0">
+                  <h3 className="text-2xl md:text-4xl font-light tracking-tight mb-1">Global</h3>
+                  <p className="text-2xl md:text-4xl italic tracking-tight text-white/80 mb-8" style={{ fontFamily: "var(--font-serif), 'Playfair Display', serif" }}>
+                    Räckvidd
+                  </p>
+
+                  <div className="space-y-5">
+                    <div className="flex items-center gap-3.5">
+                      <Globe className="w-5 h-5 text-white/50 stroke-[1.5]" />
+                      <span className="text-sm font-light text-white/90">36 länder, ett nätverk</span>
+                    </div>
+                    <div className="flex items-center gap-3.5">
+                      <MapPin className="w-5 h-5 text-white/50 stroke-[1.5]" />
+                      <span className="text-sm font-light text-white/90">360,000+ kurerade venues</span>
+                    </div>
+                    <div className="flex items-center gap-3.5">
+                      <Users className="w-5 h-5 text-white/50 stroke-[1.5]" />
+                      <span className="text-sm font-light text-white/90">Från 10 till 10,000 gäster</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+
+        {/* Bottom CTA bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
+          className="mt-12 md:mt-16"
+        >
+          <Link
+            href="#request"
+            className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[#81D8D0]/20 transition-all duration-300"
+          >
+            <div>
+              <p className="text-[15px] font-medium text-[var(--text-primary)]">Skicka in din förfrågan</p>
+              <p className="text-[13px] text-[var(--text-muted)] mt-0.5">Vi matchar er med rätt venue inom 24h.</p>
+            </div>
+            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-default)] group-hover:bg-[#81D8D0]/10 group-hover:border-[#81D8D0]/20 flex items-center justify-center transition-all duration-300 ml-6">
+              <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[#81D8D0] transition-colors" />
+            </div>
+          </Link>
         </motion.div>
       </div>
     </section>

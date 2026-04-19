@@ -8,7 +8,7 @@ import { useTheme } from "@/components/utils/ThemeProvider";
 
 const NAV_LINKS = [
   { label: "Tjänster", href: "#services" },
-  { label: "Venues", href: "#venues" },
+  { label: "Skräddarsy ditt event", href: "/skraddarsy" },
   { label: "Om oss", href: "#about" },
 ];
 

@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { VenueGallery } from "@/components/layout/VenueGallery";
+import { TopVenuesGrid } from "@/components/layout/TopVenuesGrid";
 import type { Country } from "@/data/countries";
 
 export function CountryPageClient({ country }: { country: Country }) {
@@ -184,8 +184,8 @@ export function CountryPageClient({ country }: { country: Country }) {
           </div>
         </section>
 
-        {/* Venue Gallery — Interactive expandable panels */}
-        <VenueGallery venues={country.topVenues} countryName={country.nameSv} />
+        {/* Top Venues Grid — uses actual country data */}
+        <TopVenuesGrid venues={country.topVenues} countryName={country.nameSv} />
 
         {/* Bottom CTA */}
         <section className="w-full px-6 md:px-10 pb-20 md:pb-28">
