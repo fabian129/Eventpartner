@@ -177,28 +177,31 @@ export function CaseStoriesSection() {
         "--border-default": "rgba(255,255,255,0.08)",
       } as React.CSSProperties}
     >
-      {/* Header — inside container */}
+      {/* Header — moodboard editorial style */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 mb-12 md:mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
         >
-          <div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
-              <span className="text-[#6AD8D2] text-xs">◆</span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Case Stories</span>
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
-              Eventleverans i
-              <br />
-              <span className="italic font-light text-[var(--text-muted)]">världsklass.</span>
-            </h2>
+          {/* Mono labels */}
+          <div className="flex justify-between items-start mb-10">
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
+              Eventpartner — Case Stories
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">
+              Utvalda leveranser
+            </span>
           </div>
 
-          <p className="text-[15px] text-[var(--text-muted)] leading-relaxed max-w-sm md:text-right">
+          {/* Big heading */}
+          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
+            Eventleverans i världsklass.
+          </h2>
+
+          {/* Description */}
+          <p className="font-display text-[clamp(1rem,2vw,1.4rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-xl">
             Ledande företag använder EventPartner för att leverera konferenser, kickoffs och galor.
           </p>
         </motion.div>
