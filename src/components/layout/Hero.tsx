@@ -130,7 +130,7 @@ export function Hero() {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-black/8 bg-white mb-6"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#81D8D0]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#6AD8D2]" />
           <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-black/40">
             36 Countries • 360,000+ Venues
           </span>
@@ -145,7 +145,7 @@ export function Hero() {
           The World&apos;s Largest
           <br />
           Selection{" "}
-          <span className="italic font-light text-[#81D8D0]">
+          <span className="italic font-light text-[#6AD8D2]">
             of Venues
           </span>
         </motion.h1>

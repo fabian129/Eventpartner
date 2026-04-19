@@ -46,7 +46,7 @@ export function NewsletterSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
         >
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#81D8D0]">
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#6AD8D2]">
             Nyhetsbrev
           </span>
         </motion.div>
@@ -92,13 +92,13 @@ export function NewsletterSection() {
                   required
                   className={`flex-1 px-5 py-3.5 rounded-xl border bg-white text-sm text-[#111] placeholder:text-[#bbb] focus:outline-none transition-all duration-300 ${
                     focused
-                      ? "border-[#81D8D0] ring-1 ring-[#81D8D0]/20"
+                      ? "border-[#6AD8D2] ring-1 ring-[#6AD8D2]/20"
                       : "border-[#e0e0e0]"
                   }`}
                 />
                 <button
                   type="submit"
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#111] text-white text-sm font-medium hover:bg-[#81D8D0] hover:text-[#0a0a0a] hover:scale-[1.02] hover:shadow-lg transition-all duration-300 shrink-0"
+                  className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#111] text-white text-sm font-medium hover:bg-[#6AD8D2] hover:text-[#0a0a0a] hover:scale-[1.02] hover:shadow-lg transition-all duration-300 shrink-0"
                 >
                   Prenumerera
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -110,9 +110,9 @@ export function NewsletterSection() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="flex items-center justify-center gap-3 py-4 px-6 rounded-xl bg-[#81D8D0]/10 border border-[#81D8D0]/20"
+                className="flex items-center justify-center gap-3 py-4 px-6 rounded-xl bg-[#6AD8D2]/10 border border-[#6AD8D2]/20"
               >
-                <CheckCircle className="w-5 h-5 text-[#81D8D0]" />
+                <CheckCircle className="w-5 h-5 text-[#6AD8D2]" />
                 <span className="text-sm font-medium text-[#111]">
                   Tack! Ni hör av oss snart.
                 </span>

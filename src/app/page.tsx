@@ -11,7 +11,7 @@ import { RequestFormSection } from "@/components/layout/RequestFormSection";
 import { TestimonialsSection } from "@/components/layout/TestimonialsSection";
 import { ImageBreaker } from "@/components/layout/ImageBreaker";
 import { LogoTicker } from "@/components/layout/LogoTicker";
-import { EnterpriseSection } from "@/components/layout/EnterpriseSection";
+import { CaseStoriesSection } from "@/components/layout/CaseStoriesSection";
 import { AboutSection } from "@/components/layout/AboutSection";
 import { FAQSection } from "@/components/layout/FAQSection";
 import { WebshopTeaser } from "@/components/layout/WebshopTeaser";
@@ -78,7 +78,7 @@ export default function Home() {
       </ScrollSection>
 
       <ScrollSection>
-        <EnterpriseSection />
+        <CaseStoriesSection />
       </ScrollSection>
 
       <ScrollSection>

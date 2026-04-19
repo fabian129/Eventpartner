@@ -20,18 +20,18 @@ export function RequestFormSection() {
     setTimeout(() => setSubmitted(false), 4000);
   };
 
-  const inputClass = `w-full rounded-xl py-3.5 px-4 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#81D8D0]/30 focus:border-[#81D8D0]/50 transition-all font-sans ${
+  const inputClass = `w-full rounded-xl py-3.5 px-4 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#6AD8D2]/30 focus:border-[#6AD8D2]/50 transition-all font-sans ${
     isDark
       ? "bg-[#111] border border-white/[0.08] text-white placeholder-white/25"
       : "bg-white border border-black/[0.08] text-[#111] placeholder-[#94A3B8]"
   }`;
   const labelClass = "block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-2";
-  const requiredStar = <span className="text-[#81D8D0] ml-0.5">*</span>;
+  const requiredStar = <span className="text-[#6AD8D2] ml-0.5">*</span>;
 
   return (
     <section id="request" className="relative w-full px-6 md:px-10 py-20 md:py-32 overflow-hidden" style={{ background: isDark ? "#0A0A0A" : "#F8F8FA" }}>
       {/* Decorative glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "#81D8D0" }} />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "#6AD8D2" }} />
 
       <div className="max-w-[1100px] mx-auto relative z-10">
         {/* Big headline */}
@@ -43,7 +43,7 @@ export function RequestFormSection() {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] mb-6">
-            <Send className="w-3.5 h-3.5 text-[#81D8D0]" />
+            <Send className="w-3.5 h-3.5 text-[#6AD8D2]" />
             <span className="font-mono text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--text-dim)]">
               Kostnadsfri förfrågan
             </span>
@@ -185,7 +185,7 @@ export function RequestFormSection() {
                 </p>
                 <Link
                   href="/skraddarsy"
-                  className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#81D8D0] hover:text-[#A3E4DE] transition-colors duration-300"
+                  className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#6AD8D2] hover:text-[#A3E4DE] transition-colors duration-300"
                 >
                   Skräddarsy ditt event →
                 </Link>

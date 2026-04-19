@@ -49,7 +49,7 @@ export function VenuesByCountrySection() {
               <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-10">
                 <div className="flex items-end justify-between gap-4">
                   <div>
-                    <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#81D8D0] mb-1.5">{venue.type}</p>
+                    <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#6AD8D2] mb-1.5">{venue.type}</p>
                     <h3 className="font-display text-xl md:text-2xl font-medium text-white tracking-tight leading-[1.1]">{venue.name}</h3>
                   </div>
                   <div className="w-8 h-8 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
@@ -62,7 +62,7 @@ export function VenuesByCountrySection() {
         </div>
 
         <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }} className="mt-8 text-center">
-          <a href="#request" className="inline-flex items-center gap-2 px-6 py-2.5 text-[13px] text-[var(--text-muted)] bg-[var(--bg-card)] border border-[var(--border-default)] rounded-full transition-all duration-300 hover:border-[#81D8D0]/30 hover:text-[#81D8D0]">
+          <a href="#request" className="inline-flex items-center gap-2 px-6 py-2.5 text-[13px] text-[var(--text-muted)] bg-[var(--bg-card)] border border-[var(--border-default)] rounded-full transition-all duration-300 hover:border-[#6AD8D2]/30 hover:text-[#6AD8D2]">
             Kan inte hitta rätt venue? Berätta vad ni söker →
           </a>
         </motion.div>

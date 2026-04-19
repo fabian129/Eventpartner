@@ -74,7 +74,7 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="group relative rounded-2xl overflow-hidden cursor-pointer bg-white/[0.04] border border-white/[0.06] backdrop-blur-xl hover:bg-white/[0.07] hover:border-[#81D8D0]/20 transition-all duration-500"
+      className="group relative rounded-2xl overflow-hidden cursor-pointer bg-white/[0.04] border border-white/[0.06] backdrop-blur-xl hover:bg-white/[0.07] hover:border-[#6AD8D2]/20 transition-all duration-500"
     >
       {/* Subtle image accent — top strip */}
       <div className="relative h-[120px] overflow-hidden">
@@ -98,8 +98,8 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
       <div className="p-6">
         {/* Icon + title */}
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-8 h-8 rounded-lg bg-[#81D8D0]/10 border border-[#81D8D0]/15 flex items-center justify-center shrink-0">
-            <Icon className="w-4 h-4 text-[#81D8D0]" />
+          <div className="w-8 h-8 rounded-lg bg-[#6AD8D2]/10 border border-[#6AD8D2]/15 flex items-center justify-center shrink-0">
+            <Icon className="w-4 h-4 text-[#6AD8D2]" />
           </div>
           <h3 className="font-display text-base font-medium text-white tracking-tight">
             {service.title}
@@ -121,7 +121,7 @@ export function InspirationSection() {
       {/* Subtle glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[200px] opacity-[0.04] pointer-events-none"
-        style={{ background: "#81D8D0" }}
+        style={{ background: "#6AD8D2" }}
       />
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 relative z-10">
@@ -133,7 +133,7 @@ export function InspirationSection() {
           transition={{ duration: 0.7 }}
           className="mb-6 md:mb-8 max-w-2xl"
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#81D8D0] mb-4">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#6AD8D2] mb-4">
             Fullservice-partner
           </p>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white leading-[1.05]">

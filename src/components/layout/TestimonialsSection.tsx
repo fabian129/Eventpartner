@@ -72,8 +72,8 @@ function TestimonialCard({ testimonial }: { testimonial: typeof TESTIMONIALS_ROW
   return (
     <div className="flex-shrink-0 w-[380px] md:w-[420px] p-7 md:p-8 rounded-2xl bg-white/[0.07] backdrop-blur-xl border border-white/[0.10] hover:bg-white/[0.10] hover:border-white/[0.15] transition-all duration-500 group">
       {/* Quote icon */}
-      <div className="w-9 h-9 rounded-xl bg-[#81D8D0]/10 border border-[#81D8D0]/20 flex items-center justify-center mb-5">
-        <Quote className="w-3.5 h-3.5 text-[#81D8D0]" />
+      <div className="w-9 h-9 rounded-xl bg-[#6AD8D2]/10 border border-[#6AD8D2]/20 flex items-center justify-center mb-5">
+        <Quote className="w-3.5 h-3.5 text-[#6AD8D2]" />
       </div>
 
       {/* Quote text */}
@@ -145,7 +145,7 @@ export function TestimonialsSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50 z-[2]" />
 
       {/* Ambient glow */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-[#81D8D0]/[0.04] blur-[150px] pointer-events-none z-[2]" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-[#6AD8D2]/[0.04] blur-[150px] pointer-events-none z-[2]" />
 
       {/* Content */}
       <div className="relative z-10">
@@ -158,7 +158,7 @@ export function TestimonialsSection() {
           className="text-center mb-14 md:mb-18 px-6"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] mb-6">
-            <span className="text-[#81D8D0] text-xs">◆</span>
+            <span className="text-[#6AD8D2] text-xs">◆</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/40">Vad våra kunder säger</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white leading-[1.05]">

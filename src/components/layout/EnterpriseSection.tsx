@@ -44,7 +44,7 @@ export function EnterpriseSection() {
             <div className="mt-6">
               <Link
                 href="#request"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#81D8D0] hover:bg-[#74CCC4] text-[#0A0A0A] font-semibold text-[14px] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(129,216,208,0.2)]"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#6AD8D2] hover:bg-[#74CCC4] text-[#0A0A0A] font-semibold text-[14px] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(129,216,208,0.2)]"
               >
                 Boka Event
                 <ArrowRight className="w-4 h-4" />

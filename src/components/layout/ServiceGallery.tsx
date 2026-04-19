@@ -108,7 +108,7 @@ export function ServiceGallery() {
 
                 {/* Tag */}
                 <div className="absolute top-4 left-4 z-10">
-                  <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-[#81D8D0] bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded-md border border-white/[0.06]">
+                  <span className="font-mono text-[8px] uppercase tracking-[0.15em] text-[#6AD8D2] bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded-md border border-white/[0.06]">
                     {service.tag}
                   </span>
                 </div>

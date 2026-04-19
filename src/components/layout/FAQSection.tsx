@@ -55,7 +55,7 @@ export function FAQSection() {
           className="text-center mb-14 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
-            <span className="text-[#81D8D0] text-xs">◆</span>
+            <span className="text-[#6AD8D2] text-xs">◆</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Vanliga frågor</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
@@ -82,8 +82,8 @@ export function FAQSection() {
                   className={`w-full text-left px-6 py-5 rounded-xl border transition-all duration-300 ${
                     isOpen
                       ? isDark
-                        ? "border-[#81D8D0]/20 bg-[#81D8D0]/[0.03]"
-                        : "border-[#81D8D0]/25 bg-[#81D8D0]/[0.03]"
+                        ? "border-[#6AD8D2]/20 bg-[#6AD8D2]/[0.03]"
+                        : "border-[#6AD8D2]/25 bg-[#6AD8D2]/[0.03]"
                       : isDark
                         ? "border-white/[0.06] bg-[#111]/50 hover:border-white/[0.1]"
                         : "border-black/[0.06] bg-white hover:border-black/[0.1]"
@@ -93,12 +93,12 @@ export function FAQSection() {
                     <div className="flex items-center gap-3">
                       {/* Number accent */}
                       <span className={`font-mono text-[10px] font-semibold tracking-wider transition-colors duration-300 ${
-                        isOpen ? "text-[#81D8D0]" : "text-[var(--text-dim)]"
+                        isOpen ? "text-[#6AD8D2]" : "text-[var(--text-dim)]"
                       }`}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className={`text-[15px] font-medium transition-colors duration-300 ${
-                        isOpen ? "text-[#81D8D0]" : "text-[var(--text-primary)]"
+                        isOpen ? "text-[#6AD8D2]" : "text-[var(--text-primary)]"
                       }`}>
                         {faq.question}
                       </span>
@@ -142,7 +142,7 @@ export function FAQSection() {
           </p>
           <a
             href="#request"
-            className="inline-flex items-center gap-2 text-[14px] font-medium text-[#81D8D0] hover:text-[#A3E4DE] transition-colors duration-300"
+            className="inline-flex items-center gap-2 text-[14px] font-medium text-[#6AD8D2] hover:text-[#A3E4DE] transition-colors duration-300"
           >
             Kontakta oss direkt →
           </a>

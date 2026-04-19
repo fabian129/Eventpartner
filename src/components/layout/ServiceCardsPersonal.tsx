@@ -99,7 +99,7 @@ export function ServiceCardsPersonal() {
           className="mb-14 md:mb-18"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
-            <span className="text-[#81D8D0] text-xs">◆</span>
+            <span className="text-[#6AD8D2] text-xs">◆</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Alternativ vy — Personlig</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">

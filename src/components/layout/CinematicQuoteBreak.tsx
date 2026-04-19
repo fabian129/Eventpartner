@@ -35,7 +35,7 @@ export function CinematicQuoteBreak() {
           className="absolute top-8 left-8 md:top-12 md:left-12"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.07] backdrop-blur-md border border-white/[0.1]">
-            <Sparkles className="w-3 h-3 text-[#81D8D0]" />
+            <Sparkles className="w-3 h-3 text-[#6AD8D2]" />
             <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/60">
               Skräddarsy ditt event
             </span>
@@ -52,7 +52,7 @@ export function CinematicQuoteBreak() {
         >
           <div className="px-4 py-3 rounded-xl bg-white/[0.06] backdrop-blur-md border border-white/[0.08]">
             <div className="flex items-center gap-2 mb-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#81D8D0] animate-pulse" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#6AD8D2] animate-pulse" />
               <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-white/40">
                 Live
               </span>
@@ -72,7 +72,7 @@ export function CinematicQuoteBreak() {
             transition={{ duration: 0.8, ease: EASE }}
             className="mb-4"
           >
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#81D8D0]/80">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6AD8D2]/80">
               EventPartner
             </span>
           </motion.div>
@@ -127,7 +127,7 @@ export function CinematicQuoteBreak() {
             {/* Right: tiffany accent */}
             <Link
               href="/skraddarsy"
-              className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[#81D8D0] hover:bg-[#74CCC4] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(129,216,208,0.2)]"
+              className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[#6AD8D2] hover:bg-[#74CCC4] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(129,216,208,0.2)]"
             >
               <span className="text-[13px] font-semibold text-[#0A0A0A]/50">
                 Starta ert event

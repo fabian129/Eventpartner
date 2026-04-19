@@ -34,7 +34,7 @@ export function FullbleedImageBreak() {
       />
 
       {/* Subtle ambient glow */}
-      <div className="absolute top-1/2 right-0 w-[60%] h-[80%] -translate-y-1/2 bg-[#81D8D0]/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-[60%] h-[80%] -translate-y-1/2 bg-[#6AD8D2]/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 min-h-[600px] md:min-h-[700px]">
 
@@ -47,7 +47,7 @@ export function FullbleedImageBreak() {
             transition={{ duration: 0.9, ease: EASE }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#81D8D0] shadow-[0_0_8px_rgba(129,216,208,0.5)]" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#6AD8D2] shadow-[0_0_8px_rgba(129,216,208,0.5)]" />
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
                 Varför EventPartner
               </span>
@@ -94,9 +94,9 @@ export function FullbleedImageBreak() {
             >
               <a
                 href="#about"
-                className="group inline-flex items-center gap-3 text-[14px] font-medium text-white/50 hover:text-[#81D8D0] transition-colors duration-300"
+                className="group inline-flex items-center gap-3 text-[14px] font-medium text-white/50 hover:text-[#6AD8D2] transition-colors duration-300"
               >
-                <span className="h-[1px] w-8 bg-white/20 group-hover:w-12 group-hover:bg-[#81D8D0] transition-all duration-300" />
+                <span className="h-[1px] w-8 bg-white/20 group-hover:w-12 group-hover:bg-[#6AD8D2] transition-all duration-300" />
                 Läs mer om oss
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
@@ -136,7 +136,7 @@ export function FullbleedImageBreak() {
           >
             <div className="px-6 py-4 rounded-xl bg-white/[0.06] backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-2 h-2 rounded-full bg-[#81D8D0] shadow-[0_0_6px_rgba(129,216,208,0.5)] animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-[#6AD8D2] shadow-[0_0_6px_rgba(129,216,208,0.5)] animate-pulse" />
                 <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/50">
                   Studio Status
                 </span>
@@ -159,7 +159,7 @@ export function FullbleedImageBreak() {
             className="absolute top-20 right-16 z-20"
           >
             <div className="px-4 py-2.5 rounded-lg bg-white/[0.04] backdrop-blur-md border border-white/[0.06]">
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#81D8D0]/60">
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#6AD8D2]/60">
                 Featured Case
               </span>
               <p className="text-[12px] text-white/70 font-medium mt-0.5">
@@ -171,7 +171,7 @@ export function FullbleedImageBreak() {
       </div>
 
       {/* Bottom border accent line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#81D8D0]/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#6AD8D2]/20 to-transparent" />
     </section>
   );
 }

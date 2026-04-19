@@ -64,7 +64,7 @@ export function VideoSection() {
             <div className="relative">
               {/* Breathing pulse ring */}
               <div className="absolute inset-0 w-20 h-20 md:w-24 md:h-24 rounded-full border border-white/20 animate-ping" style={{ animationDuration: '2.5s' }} />
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-[#81D8D0]/25 group-hover:border-[#81D8D0]/40">
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-[#6AD8D2]/25 group-hover:border-[#6AD8D2]/40">
                 <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="white" fillOpacity={0.9} />
               </div>
             </div>

@@ -33,7 +33,7 @@ export function Navbar() {
               <span className="font-display text-[14px] font-semibold tracking-[0.05em] text-[var(--text-primary)]">
                 EVENTPARTNER
               </span>
-              <span className="text-[#81D8D0] text-[10px]">◆</span>
+              <span className="text-[#6AD8D2] text-[10px]">◆</span>
             </Link>
 
             <div className="w-px h-5 bg-[var(--border-default)]" />
@@ -57,7 +57,7 @@ export function Navbar() {
               <span className="font-display text-[14px] font-semibold tracking-[0.05em] text-[var(--text-primary)]">
                 EVENTPARTNER
               </span>
-              <span className="text-[#81D8D0] text-[10px]">◆</span>
+              <span className="text-[#6AD8D2] text-[10px]">◆</span>
             </Link>
           </div>
 
@@ -65,7 +65,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="w-9 h-9 rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)]/80 backdrop-blur-xl flex items-center justify-center text-[var(--text-muted)] hover:text-[#81D8D0] hover:border-[#81D8D0]/30 transition-all duration-300"
+              className="w-9 h-9 rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)]/80 backdrop-blur-xl flex items-center justify-center text-[var(--text-muted)] hover:text-[#6AD8D2] hover:border-[#6AD8D2]/30 transition-all duration-300"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -76,7 +76,7 @@ export function Navbar() {
               className="relative text-[13px] font-medium text-white bg-[#111] rounded-full px-5 py-2.5 transition-all duration-300 hover:bg-[#222] hover:shadow-lg hover:shadow-black/10 overflow-hidden group"
             >
               <span className="relative z-10">Boka Event →</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[#81D8D0] to-[#5EC4BA] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <span className="absolute inset-0 bg-gradient-to-r from-[#6AD8D2] to-[#5EC4BA] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
           </div>
 
@@ -118,7 +118,7 @@ export function Navbar() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 * i, duration: 0.4 }}
-                className="font-display text-2xl text-[var(--text-secondary)] hover:text-[#81D8D0] transition-colors"
+                className="font-display text-2xl text-[var(--text-secondary)] hover:text-[#6AD8D2] transition-colors"
               >
                 {link.label}
               </motion.a>

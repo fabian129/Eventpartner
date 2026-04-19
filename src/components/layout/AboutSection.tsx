@@ -14,9 +14,9 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  */
 
 const TEAM = [
-  { name: "Malin Eriksson", role: "Co-Founder & CEO", initials: "ME" },
-  { name: "Johan Andersson", role: "Co-Founder & COO", initials: "JA" },
-  { name: "Emma Karlsson", role: "Head of Partnerships", initials: "EK" },
+  { name: "Pontus Bredal Hansen", role: "Co-Founder & CEO", initials: "PH" },
+  { name: "Malin Berlin", role: "Co-Founder & COO", initials: "MB" },
+  { name: "Joakim Ström", role: "Head of Partnerships", initials: "JS" },
   { name: "David Lindgren", role: "Senior Event Manager", initials: "DL" },
 ];
 
@@ -59,7 +59,7 @@ export function AboutSection() {
             transition={{ duration: 0.8, ease: EASE }}
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-8">
-              <span className="text-[#81D8D0] text-xs">◆</span>
+              <span className="text-[#6AD8D2] text-xs">◆</span>
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Om oss</span>
             </div>
 
@@ -121,12 +121,13 @@ export function AboutSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
         >
-          <div className="flex items-center gap-4 mb-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#81D8D0]">Teamet</p>
-            <div className="flex-1 h-[1px] bg-[var(--border-default)]" />
-          </div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)] mb-6">Teamet</p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+          <p className="font-display text-[clamp(1.3rem,2.5vw,2rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.3] mb-14 max-w-3xl">
+            Ett litet team med djup erfarenhet inom eventproduktion, hotell och tech — som behandlar varje förfrågan som sin egen.
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {TEAM.map((member, i) => (
               <motion.div
                 key={member.name}
@@ -134,20 +135,18 @@ export function AboutSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: EASE }}
-                className="group"
               >
-                <div className="p-5 md:p-6 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-card)] hover:border-[#81D8D0]/15 transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-                  {/* Avatar */}
-                  <div className="w-14 h-14 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-default)] flex items-center justify-center text-base font-semibold text-[var(--text-muted)] group-hover:bg-[#81D8D0]/10 group-hover:text-[#81D8D0] group-hover:border-[#81D8D0]/20 transition-all duration-300 mb-4">
-                    {member.initials}
-                  </div>
-                  <h4 className="text-[15px] font-medium text-[var(--text-primary)] leading-tight mb-1">
-                    {member.name}
-                  </h4>
-                  <span className="text-[12px] text-[var(--text-muted)]">
-                    {member.role}
-                  </span>
+                {/* Dark portrait square */}
+                <div className="aspect-[4/5] rounded-2xl bg-[#1a1a1a] flex items-center justify-center mb-4">
+                  <span className="text-2xl font-semibold text-white/20">{member.initials}</span>
                 </div>
+                {/* Plain text — name + role */}
+                <h4 className="text-[16px] font-medium text-[var(--text-primary)] leading-tight mb-0.5">
+                  {member.name}
+                </h4>
+                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)]">
+                  {member.role}
+                </span>
               </motion.div>
             ))}
           </div>

@@ -23,7 +23,7 @@ interface BorderBeamProps {
 export function BorderBeam({
   duration = 8,
   size = 80,
-  color = "#81D8D0",
+  color = "#6AD8D2",
   delay = 0,
 }: BorderBeamProps) {
   return (

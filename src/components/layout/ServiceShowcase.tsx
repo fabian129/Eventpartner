@@ -22,11 +22,11 @@ export function ServiceShowcase() {
         >
           <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-[var(--text-primary)] leading-[1.05]">
             Allt ni behöver.<br />
-            <span className="italic text-[#81D8D0]" style={{ fontFamily: "var(--font-serif), 'Playfair Display', serif" }}>En partner.</span>
+            <span className="italic text-[#6AD8D2]" style={{ fontFamily: "var(--font-serif), 'Playfair Display', serif" }}>En partner.</span>
           </h2>
 
           <div className="flex flex-col items-start md:items-end gap-3 shrink-0">
-            <div className="flex items-center gap-1.5 text-[#81D8D0]">
+            <div className="flex items-center gap-1.5 text-[#6AD8D2]">
               {[...Array(5)].map((_, i) => (
                 <svg key={i} className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
               ))}
@@ -124,7 +124,7 @@ export function ServiceShowcase() {
               className="bg-[#2A2438] rounded-[2rem] relative overflow-hidden flex min-h-[300px] text-white p-8 md:p-10"
             >
               {/* Ambient glow */}
-              <div className="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-[#81D8D0]/15 blur-[80px] pointer-events-none" />
+              <div className="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-[#6AD8D2]/15 blur-[80px] pointer-events-none" />
 
               <div className="w-full flex justify-end">
                 <div className="w-full sm:w-2/3 flex flex-col relative z-10 justify-center pl-0 sm:pl-0">
@@ -164,14 +164,14 @@ export function ServiceShowcase() {
         >
           <Link
             href="#request"
-            className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[#81D8D0]/20 transition-all duration-300"
+            className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[#6AD8D2]/20 transition-all duration-300"
           >
             <div>
               <p className="text-[15px] font-medium text-[var(--text-primary)]">Skicka in din förfrågan</p>
               <p className="text-[13px] text-[var(--text-muted)] mt-0.5">Vi matchar er med rätt venue inom 24h.</p>
             </div>
-            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-default)] group-hover:bg-[#81D8D0]/10 group-hover:border-[#81D8D0]/20 flex items-center justify-center transition-all duration-300 ml-6">
-              <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[#81D8D0] transition-colors" />
+            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-default)] group-hover:bg-[#6AD8D2]/10 group-hover:border-[#6AD8D2]/20 flex items-center justify-center transition-all duration-300 ml-6">
+              <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[#6AD8D2] transition-colors" />
             </div>
           </Link>
         </motion.div>

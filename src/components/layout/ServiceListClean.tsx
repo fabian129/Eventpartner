@@ -14,17 +14,17 @@ function PinPulse() {
     <div className="relative w-full h-full flex items-center justify-center">
       {/* Radiating rings — visible pulse */}
       <div
-        className="absolute w-14 h-14 rounded-full border-2 border-[#81D8D0]/30"
+        className="absolute w-14 h-14 rounded-full border-2 border-[#6AD8D2]/30"
         style={{ animation: 'pingA 2.5s ease-out infinite' }}
       />
       <div
-        className="absolute w-9 h-9 rounded-full border border-[#81D8D0]/20"
+        className="absolute w-9 h-9 rounded-full border border-[#6AD8D2]/20"
         style={{ animation: 'pingA 2.5s ease-out 0.6s infinite' }}
       />
       {/* Center pin — breathing */}
       <div className="relative z-10 flex flex-col items-center" style={{ animation: 'pinBob 2s ease-in-out infinite' }}>
-        <div className="w-5 h-5 rounded-full bg-[#81D8D0]/40 group-hover:bg-[#81D8D0]/60 border-2 border-[#81D8D0]/50 group-hover:border-[#81D8D0]/80 transition-all duration-500 shadow-[0_0_16px_rgba(129,216,208,0.25)]" />
-        <div className="w-[2px] h-3.5 bg-[#81D8D0]/30 group-hover:bg-[#81D8D0]/50 transition-colors duration-500 rounded-full" />
+        <div className="w-5 h-5 rounded-full bg-[#6AD8D2]/40 group-hover:bg-[#6AD8D2]/60 border-2 border-[#6AD8D2]/50 group-hover:border-[#6AD8D2]/80 transition-all duration-500 shadow-[0_0_16px_rgba(129,216,208,0.25)]" />
+        <div className="w-[2px] h-3.5 bg-[#6AD8D2]/30 group-hover:bg-[#6AD8D2]/50 transition-colors duration-500 rounded-full" />
       </div>
       <style jsx>{`
         @keyframes pingA {
@@ -59,7 +59,7 @@ function LayersStack() {
         ))}
         {/* Floating node — orbiting */}
         <div
-          className="absolute w-3 h-3 rounded-full bg-[#81D8D0]/40 group-hover:bg-[#81D8D0]/65 border border-[#81D8D0]/50 transition-all duration-500 shadow-[0_0_8px_rgba(129,216,208,0.2)]"
+          className="absolute w-3 h-3 rounded-full bg-[#6AD8D2]/40 group-hover:bg-[#6AD8D2]/65 border border-[#6AD8D2]/50 transition-all duration-500 shadow-[0_0_8px_rgba(129,216,208,0.2)]"
           style={{ top: '0', right: '0', animation: 'nodeWander 3s ease-in-out infinite' }}
         />
       </div>
@@ -95,11 +95,11 @@ function GridConnect() {
       </div>
       {/* Connecting lines — animated */}
       <div
-        className="absolute w-7 h-[2px] bg-[#81D8D0]/25 group-hover:bg-[#81D8D0]/45 rounded-full transition-colors duration-500 rotate-45"
+        className="absolute w-7 h-[2px] bg-[#6AD8D2]/25 group-hover:bg-[#6AD8D2]/45 rounded-full transition-colors duration-500 rotate-45"
         style={{ animation: 'lineGlow 2.5s ease-in-out infinite' }}
       />
       <div
-        className="absolute w-5 h-[2px] bg-[#81D8D0]/15 group-hover:bg-[#81D8D0]/35 rounded-full transition-colors duration-500 -rotate-[30deg]"
+        className="absolute w-5 h-[2px] bg-[#6AD8D2]/15 group-hover:bg-[#6AD8D2]/35 rounded-full transition-colors duration-500 -rotate-[30deg]"
         style={{ animation: 'lineGlow 2.5s ease-in-out 0.8s infinite' }}
       />
       <style jsx>{`
@@ -155,7 +155,7 @@ function OrbitsGlow() {
       />
       {/* Orbiting dot — clearly visible */}
       <div
-        className="absolute w-2.5 h-2.5 rounded-full bg-[#81D8D0]/50 group-hover:bg-[#81D8D0]/75 shadow-[0_0_8px_rgba(129,216,208,0.3)] transition-colors duration-500"
+        className="absolute w-2.5 h-2.5 rounded-full bg-[#6AD8D2]/50 group-hover:bg-[#6AD8D2]/75 shadow-[0_0_8px_rgba(129,216,208,0.3)] transition-colors duration-500"
         style={{ animation: 'orbitMove 3.5s linear infinite' }}
       />
       {/* Second smaller orbiting dot */}
@@ -237,7 +237,7 @@ export function ServiceListClean() {
           className="mb-16 md:mb-20"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
-            <span className="text-[#81D8D0] text-xs">◆</span>
+            <span className="text-[#6AD8D2] text-xs">◆</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Alternativ vy — Clean lista</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
