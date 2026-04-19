@@ -80,22 +80,23 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
       </div>
 
       {service.variant === "image" ? (
-        /* Image variant — image top half, content bottom */
+        /* Image variant — fullbleed bg image with details overlaid */
         <>
-          <div className="relative mx-5 rounded-xl overflow-hidden" style={{ height: "55%" }}>
-            <Image
-              src={service.image}
-              alt={service.title}
-              fill
-              className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05] grayscale group-hover:grayscale-0"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </div>
-          <div className="px-6 pt-5 pb-6">
-            <h3 className="font-display text-[20px] font-medium text-white tracking-tight leading-tight mb-2">
+          <Image
+            src={service.image}
+            alt={service.title}
+            fill
+            className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05] grayscale group-hover:grayscale-0"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+          {/* Content overlaid at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 px-6 pb-6 z-10">
+            <h3 className="font-display text-[20px] md:text-[22px] font-medium text-white tracking-tight leading-tight mb-2">
               {service.title}
             </h3>
-            <p className="text-[13px] text-white/40 leading-relaxed">
+            <p className="text-[13px] text-white/50 leading-relaxed">
               {service.description}
             </p>
           </div>
@@ -208,8 +209,7 @@ export function ServiceCardsPersonal() {
         </motion.div>
       </div>
 
-      {/* Cards grid — FULLBLEED, outside container */}
-      <div className="px-3 md:px-4">
+      {/* Cards grid — inside container */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
           {SERVICES.slice(0, 2).map((service, i) => (
             <ServiceCard key={service.title} service={service} index={i} />
