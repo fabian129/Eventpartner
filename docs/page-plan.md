@@ -1,7 +1,8 @@
 # EventPartner — Sitemap & Page Plan
 
-> Baserat på kundmöte 2026-04-19 + page-planner skill
-> **Nyckelprincip:** Varje sektion måste ha ett klart "varför" — om du inte kan förklara varför den finns, skär bort den.
+> **Senast uppdaterad:** 2026-04-19 18:37
+> **Status:** Sidstruktur beslutad. Editorial moodboard-stil implementerad.
+> **Nyckelprincip:** Moodboard-DNA i alla sektioner — mono-labels, stor typografi, asymmetriska headers, inga generiska pill-badges.
 
 ---
 
@@ -9,153 +10,126 @@
 Få företag att skicka in eventförfrågningar (boka event via formulär).
 
 ## Target Audience
-B2B: eventansvariga på medelstora till stora företag (Åkes Bygg → Ericsson).
-Blandning av "wow"-kunder och "välkomnande"-kunder. Sidan måste kännas maffig men icke-exkluderande.
+B2B: eventansvariga på medelstora till stora företag.
+Sidan ska känna maffig men välkomnande.
 
-## Tone & Feel
-- Clean tech-estetik (behåll) + subtilt liv (bakgrundslinjer, grid-dots, struktur)
-- Svartvita bilder → färg vid hover
-- Lila bildtoning (subtil, EJ gradient-overlay)
-- Välkomnande: bilder med människor, mingel, firande — inte bara tomma salar
+## Design DNA — "Moodboard-stil"
+- **Mono-labels** top-left/right (`EVENTPARTNER — TJÄNSTER` / `FULLSERVICE LEVERANS`)
+- **Stor heading** som ankare — ingen pill-badge ovanför
+- **Bold description** text på display-font, inte liten muted text
+- **Metrics-rad** utspridd med mono-labels ovanför värden
+- **Mörka kort** med strukturerat innehåll (labels, stats, CTAs)
+- **Grayscale → färg** på bilder vid hover
+- **Bakgrundsstruktur** (grid/linjer) — implementeras globalt (ej per sektion)
 
 ---
 
-## 🌐 Sidstruktur (Routing)
+## 🌐 Routing
 
 ```
 /                  → Startsida (konvertering)
 /om-oss            → Editorial storytelling (förtroende)
 /vip               → EventPartner VIP / Förmånskund (premium)
-/land/[slug]       → Destination-sidor (redan finns)
+/skraddarsy        → Utökat formulär (komplex eventplanering)
+/land/[slug]       → Destination-sidor (finns)
 ```
 
 **Navbar:** `Tjänster` · `Skräddarsy` · `Bli EventPartner VIP` · `Webbshop` · `Om oss`
 
 ---
 
-## 📄 Startsidan `/` — Section Flow
+## 📄 Startsidan `/` — Beslutad sektionsordning
 
-### 1. Hero
-- **Mål:** Hook + kommunicera vad EP gör
-- **Innehåll:** Stor rubrik, CTA "Boka Event", 3D-glob
-- **Komponent:** `Hero.tsx` ✅ (finns)
+### 1. Hero ✅
+Stor rubrik, CTA, 3D-glob. `Hero.tsx`
 
-### 2. Logo Banner
-- **Mål:** Social proof — "stora företag litar på oss"
-- **Innehåll:** Stilla logotyper, stora ikoner
-- **Komponent:** `LogoTicker.tsx` ✅ (uppdaterad)
+### 2. Logo Banner ✅
+Stilla logotyper, stora ikoner. `LogoTicker.tsx`
 
-### 3. Video
-- **Mål:** Visa stämning/känsla — "så här ser ett EP-event ut"
-- **Innehåll:** Embedded video med venue-footage
-- **Komponent:** `VideoSection.tsx` ✅
+### 3. Video ✅
+Venue-footage. Process (HowItWorks) ingår i videon. `VideoSection.tsx`
 
-### 4. Tjänster (välj EN av tre alternativ)
-- **Mål:** Förklara vad EP erbjuder
-- **Alternativ A:** `ServiceShowcase` — Bento grid, editorial (mest "designad")
-- **Alternativ B:** `ServiceListClean` — Clean lista med levande ikoner (renast)
-- **Alternativ C:** `ServiceCardsPersonal` — Bildkort i glasmorph container (varmast)
-- **BESLUT KRÄVS:** Vilken behåller vi? De andra tas bort.
+### 4. Country Flags ✅
+Visa bredden — 36 länder. `CountryFlagsSection.tsx`
 
-### 5. Hur det fungerar
-- **Mål:** Demystifiera processen — "det är enkelt att jobba med oss"
-- **Innehåll:** 3-stegs process
-- **Komponent:** `HowItWorksSection.tsx` ✅
+### 5. Formulär (TIDIGT!) ✅
+Konvertera direkt. Mörkare bakgrund (#EAEAED), starkare inputkontrast. `RequestFormSection.tsx`
 
-### 6. Skräddarsy ditt event (Formulär)
-- **Mål:** KONVERTERA — primär CTA
-- **Innehåll:** Namn, email, eventtyp, antal gäster, datum
-- **Komponent:** `RequestFormSection.tsx` ✅
+### 6. Tjänster — Moodboard-kort ✅
+**Beslut: Bildkort (variant C) i moodboard-stil.**
+- 3 kort-varianter: `image` (fullbleed bakgrundsbild), `stat` (stor siffra), `cta` (button + checkmarks)
+- Moodboard-header: mono-labels, stor heading, bold description, metrics-rad
+- Container 1400px
+- `ServiceCardsPersonal.tsx`
 
-### 7. Case Stories (DARK)
-- **Mål:** Bevisa kvalitet — "vi har levererat åt Ericsson, Spotify..."
-- **Innehåll:** Horisontell scroll med stora bildkort, stats per event
-- **Komponent:** `CaseStoriesSection.tsx` ✅ (mörk, rounded top)
+### 7. CTA "Skapa ert nästa event" ✅
+Fullbleed break med bakgrundsbild. `CinematicQuoteBreak.tsx`
 
-### 8. Om oss (mini)
-- **Mål:** Bygga förtroende — "det här är människorna bakom EP"
-- **Innehåll:** Manifesto-text + teamgrid (länka till /om-oss för fullversion)
-- **Komponent:** `AboutSection.tsx` ✅
+### 8. Case Stories (mörk) ✅
+Horisontell scroll, moodboard-header. `CaseStoriesSection.tsx`
 
-### 9. FAQ
-- **Mål:** Övervinna invändningar
-- **Innehåll:** Vanliga frågor om priser, process, leverans
-- **Komponent:** `FAQSection.tsx` ✅
+### 9. Newsletter CTA ✅
+Inline signup. `NewsletterInline.tsx`
 
-### 10. Nyhetsbrev (footer-area)
-- **Mål:** Fånga leads som inte är redo att konvertera
-- **Innehåll:** Email signup
-- **Komponent:** `NewsletterSection.tsx` ✅
+### 10. Om oss (mini) ✅
+Editorial manifesto + team. Länkar till `/om-oss`. `AboutSection.tsx`
 
-### Footer
-- **Komponent:** `Footer.tsx` ✅
+### 11. FAQ ✅
+Moodboard-header, accordion. `FAQSection.tsx`
 
-### Övrigt (popup)
-- **Exit-intent popup** — triggas vid mouse-leave eller 80% scroll
-- **Komponent:** `ExitIntentPopup.tsx` ✅
+### Footer ✅
+`Footer.tsx`
+
+### Exit-intent popup ✅
+Mouse-leave / 80% scroll trigger. `ExitIntentPopup.tsx`
 
 ---
 
-## 🗑️ Sektioner att TA BORT från startsidan
+## 🗑️ Borttagna sektioner (beslutade)
 
-| Sektion | Anledning |
+| Sektion | Status |
 |---|---|
-| `TestimonialsSection` | ❌ Borttagen per kundbeslut |
-| `CountryFlagsSection` | ❓ Oklart syfte — kan flyttas till destination-sidor |
-| `ImageBreaker` | ❓ Fullbleed-bild utan tydlig funktion |
-| `CinematicQuoteBreak` | ❓ "Quote break" — kan ersättas av casen |
-| `WebshopTeaser` | ❓ Behövs den på startsidan? Navbar har "Webbshop"-länk |
-| `SectionTransition` (line/diamond) | ❓ Visuellt element — behåll om det ger "liv" |
-| Extra tjänstesektioner (2 av 3) | ❌ Behåll 1, ta bort resten |
+| `TestimonialsSection` | ❌ Borttagen (kundmöte) |
+| `HowItWorksSection` | ❌ Borttagen (process ingår i videon) |
+| `ServiceShowcase` (bento) | ❌ Ej vald — bildkort vann |
+| `ServiceListClean` (lista) | ❌ Ej vald — bildkort vann |
+| `ImageBreaker` | ❌ Borttagen |
+| `WebshopTeaser` | ❌ Borttagen från startsidan |
+| `SectionTransitions` | ❌ Borttagen — ersätts av global grid/linjer |
+| Extra `NewsletterSection` | ❌ Ersatt av `NewsletterInline` |
 
 ---
 
-## 📄 `/om-oss` — Editorial Storytelling
+## 📄 `/om-oss` — Editorial Storytelling (EJ BYGGD)
 
-### Section Flow
-1. **Hero** — "EVENTPARTNER" masthead + stor manifestotext
-2. **Bakgrund** — Varför de startade, erfarenhet, vision (stor editorial text)
-3. **Stats** — 36 länder, 2000+ events, 10+ år
-4. **Teamet** — Porträtt + bio per person (Pontus, Malin, Joakim + ev. fler)
-5. **Nyhetsbrev CTA** — inline signup
-6. **CTA** — "Boka Event" eller "Kontakta oss"
-
----
-
-## 📄 `/vip` — EventPartner VIP / Förmånskund
-
-### Koncept
-Premium-sida med Rich Purple (#7851A9) som accentfärg.
-Visar exklusiva förmåner för återkommande kunder.
-
-### Section Flow
-1. **Hero** — Purple-accent, "Bli EventPartner VIP"
-2. **Förmåner** — Lista med VIP-benefits (prioriterad service, rabatter, dedikerad kontakt)
-3. **Pricing/Tiers** — Om relevant (Guld/Platinum)
-4. **Nyhetsbrev** — Signup som del av VIP-upplevelsen
-5. **CTA** — "Ansök om VIP-status"
+1. Hero — "EVENTPARTNER" masthead + manifestotext
+2. Bakgrund — Varför de startade, erfarenhet, vision
+3. Stats — 36 länder, 2000+ events, 10+ år
+4. Teamet — Porträtt + bio
+5. Nyhetsbrev CTA
+6. CTA — "Boka Event"
 
 ---
 
-## 🎨 Globalt: "Liv" i sektionerna
+## 📄 `/vip` — EventPartner VIP (EJ BYGGD)
 
-Istället för att lägga "saker" i bakgrunden, använd **subtila strukturelement**:
+Rich Purple (#7851A9) accent. Exklusiva förmåner.
 
-| Element | Var | Hur |
-|---|---|---|
-| **Grid-dots** | Ljusa sektioner | Subtila prickar i bakgrunden (opacity 0.03-0.05) |
-| **Linjer** | Section-transitions | Animerade vertikala/horisontella linjer |
-| **Gradient mesh** | Hero, CTA-sektioner | Mjuka färgfält i bakgrunden |
-| **Grayscale→färg** | Alla bilder | CSS filter: `grayscale(1)` → `grayscale(0)` on hover |
-
-**INTE:** Gradient-overlays på bilder, lila toning som overlay, flashiga partiklar.
+1. Hero — Purple-accent
+2. Förmåner — VIP-benefits
+3. Pricing/Tiers
+4. Nyhetsbrev
+5. CTA — "Ansök om VIP-status"
 
 ---
 
-## ✅ Beslut som behövs från dig
+## 🎨 Kvarvarande polish — Globalt
 
-1. **Vilken tjänstesektion?** A (bento), B (lista), eller C (bildkort)?
-2. **CountryFlags** — behåll på startsidan eller flytta till /land?
-3. **ImageBreaker + CinematicQuoteBreak** — behåll eller bort?
-4. **WebshopTeaser** — startsidan eller egen sida?
-5. **SectionTransitions** — behåll linjer/diamonds?
+| Uppgift | Status |
+|---|---|
+| Global bakgrundsstruktur (grid/linjer) | ⬜ Ej påbörjad |
+| Logga — EP ikon + glob | ⬜ User gör |
+| Bilder med lila toning (subtil) | ⬜ Ej påbörjad |
+| Välkomnande bilder (människor, mingel) | ⬜ Behöver bildval |
+| Sanity CMS-integration | ⬜ Ej påbörjad |
+| Responsive fine-tuning | ⬜ Ej testad |
