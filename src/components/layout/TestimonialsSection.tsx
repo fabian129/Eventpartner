@@ -127,13 +127,15 @@ function MarqueeRow({ testimonials, direction = "left", speed = 35 }: {
 export function TestimonialsSection() {
   return (
     <section className="relative w-full py-28 md:py-36 overflow-hidden">
-      {/* Fullbleed background image */}
+      {/* Fullbleed background image — full resolution */}
       <Image
-        src="/Images/conference-evening.jpg"
+        src="/Images/man-walking-street-night-time.jpg"
         alt="Event atmosphere"
         fill
         className="object-cover"
         sizes="100vw"
+        quality={90}
+        unoptimized
       />
 
       {/* Dark overlay */}

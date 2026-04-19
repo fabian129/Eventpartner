@@ -5,6 +5,7 @@ import { CountryFlagsSection } from "@/components/layout/CountryFlagsSection";
 import { HowItWorksSection } from "@/components/layout/HowItWorksSection";
 import { ServiceShowcase } from "@/components/layout/ServiceShowcase";
 import { ServiceListClean } from "@/components/layout/ServiceListClean";
+import { ServiceCardsPersonal } from "@/components/layout/ServiceCardsPersonal";
 import { CinematicQuoteBreak } from "@/components/layout/CinematicQuoteBreak";
 import { RequestFormSection } from "@/components/layout/RequestFormSection";
 import { TestimonialsSection } from "@/components/layout/TestimonialsSection";
@@ -56,6 +57,10 @@ export default function Home() {
 
       <ScrollSection>
         <ServiceListClean />
+      </ScrollSection>
+
+      <ScrollSection>
+        <ServiceCardsPersonal />
       </ScrollSection>
 
       <ScrollSection fadeOut={false}>
