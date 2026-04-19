@@ -87,8 +87,8 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
 
 export function ServiceCardsPersonal() {
   return (
-    <section className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)]">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+    <section id="services" className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)]">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10">
 
         {/* Header */}
         <motion.div
@@ -100,7 +100,7 @@ export function ServiceCardsPersonal() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
             <span className="text-[#6AD8D2] text-xs">◆</span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Alternativ vy — Personlig</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Våra tjänster</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
             Vad vi gör.
@@ -110,30 +110,20 @@ export function ServiceCardsPersonal() {
           </p>
         </motion.div>
 
-        {/* Glassmorphic container — cards sit on this "plate" */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-          className="rounded-3xl p-3 md:p-4 backdrop-blur-xl border border-[var(--border-default)] bg-[var(--bg-card)]/60"
-          style={{
-            boxShadow: "0 4px 40px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02), inset 0 1px 0 rgba(255,255,255,0.06)",
-          }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-3.5">
-            {/* Top row: 2 cards (7 + 5) */}
-            {SERVICES.slice(0, 2).map((service, i) => (
-              <ServiceCard key={service.title} service={service} index={i} />
-            ))}
+        {/* Cards grid — no container, full width */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
+          {/* Top row: 2 cards (7 + 5) */}
+          {SERVICES.slice(0, 2).map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i} />
+          ))}
 
-            {/* Bottom row: 3 cards (4 + 4 + 4) */}
-            {SERVICES.slice(2).map((service, i) => (
-              <ServiceCard key={service.title} service={service} index={i + 2} />
-            ))}
-          </div>
-        </motion.div>
+          {/* Bottom row: 3 cards (4 + 4 + 4) */}
+          {SERVICES.slice(2).map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i + 2} />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+
