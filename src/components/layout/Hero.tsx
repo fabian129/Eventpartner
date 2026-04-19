@@ -59,7 +59,16 @@ const LABELS: { id: string; name: string; venues: string }[] = [
   { id: "singapore", name: "SINGAPORE", venues: "190+" },
 ];
 
-export function Hero() {
+interface HeroCMS {
+  badge?: string;
+  headline?: string;
+  headlineAccent?: string;
+  subheadline?: string;
+  cta1?: string;
+  cta2?: string;
+}
+
+export function Hero({ cms }: { cms?: HeroCMS }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerInteracting = useRef<number | null>(null);
   const pointerInteractionMovement = useRef(0);
@@ -132,7 +141,7 @@ export function Hero() {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#6AD8D2]" />
           <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-black/40">
-            36 Countries • 360,000+ Venues
+            {cms?.badge || "36 Countries • 360,000+ Venues"}
           </span>
         </motion.div>
 
@@ -142,11 +151,11 @@ export function Hero() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-medium leading-[0.92] tracking-[-0.04em] text-[#111] mb-5"
         >
-          The World&apos;s Largest
+          {cms?.headline || "The World's Largest"}
           <br />
-          Selection{" "}
+          {cms?.headline ? null : "Selection "}
           <span className="italic font-light text-[#6AD8D2]">
-            of Venues
+            {cms?.headlineAccent || "of Venues"}
           </span>
         </motion.h1>
 
@@ -156,8 +165,7 @@ export function Hero() {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="text-[15px] text-black/40 leading-relaxed max-w-lg mx-auto mb-8"
         >
-          Vi matchar ert varumärke med rätt venue, rätt format och rätt
-          upplevelse — sömlöst från förfrågan till leverans.
+          {cms?.subheadline || "We match your brand with the right venue, the right format, and the right experience — seamlessly from inquiry to delivery."}
         </motion.p>
 
         <motion.div
@@ -167,10 +175,10 @@ export function Hero() {
           className="flex flex-col sm:flex-row gap-3 justify-center"
         >
           <a href="#request" className="inline-flex items-center justify-center text-[13px] text-white bg-[#111] rounded-full px-7 py-3 font-medium transition-all duration-300 hover:bg-[#222] hover:shadow-lg hover:shadow-black/10">
-            Skicka förfrågan →
+            {cms?.cta1 || "Send inquiry →"}
           </a>
           <a href="#about" className="inline-flex items-center justify-center text-[13px] text-black/50 bg-white border border-black/8 rounded-full px-7 py-3 transition-all duration-300 hover:bg-black/[0.03] hover:text-black/70">
-            Se hur det fungerar
+            {cms?.cta2 || "See how it works"}
           </a>
         </motion.div>
       </div>

@@ -6,15 +6,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 
-const NAV_LINKS = [
-  { label: "Tjänster", href: "#services" },
-  { label: "Skräddarsy", href: "#request" },
-  { label: "Bli EventPartner VIP", href: "/vip" },
-  { label: "Webbshop", href: "#webshop" },
-  { label: "Om oss", href: "/om-oss" },
+const DEFAULT_LINKS = [
+  { label: "Services", href: "#services" },
+  { label: "Customize", href: "#request" },
+  { label: "Become VIP", href: "/vip" },
+  { label: "Shop", href: "#webshop" },
+  { label: "About", href: "/om-oss" },
 ];
 
-export function Navbar() {
+interface NavCMS {
+  links?: { label: string; href: string }[];
+  cta?: string;
+}
+
+export function Navbar({ cms }: { cms?: NavCMS }) {
+  const NAV_LINKS = cms?.links?.length ? cms.links : DEFAULT_LINKS;
+  const ctaText = cms?.cta || "Book Event →";
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -77,7 +84,7 @@ export function Navbar() {
               href="#request"
               className="relative text-[13px] font-medium text-white bg-[#111] rounded-full px-5 py-2.5 transition-all duration-300 hover:bg-[#222] hover:shadow-lg hover:shadow-black/10 overflow-hidden group"
             >
-              <span className="relative z-10">Boka Event →</span>
+              <span className="relative z-10">{ctaText}</span>
               <span className="absolute inset-0 bg-gradient-to-r from-[#6AD8D2] to-[#5EC4BA] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
           </div>
@@ -133,7 +140,7 @@ export function Navbar() {
               transition={{ delay: 0.2, duration: 0.4 }}
               className="mt-4 text-[13px] font-medium text-white bg-[#111] rounded-full px-6 py-3"
             >
-              Boka Event →
+              {ctaText}
             </motion.a>
           </motion.div>
         )}

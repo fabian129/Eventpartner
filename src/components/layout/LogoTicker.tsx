@@ -17,7 +17,7 @@ export function LogoTicker() {
       {/* Label */}
       <div className="text-center mb-8">
         <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-dim)]">
-          Betrodda av ledande företag
+          Trusted by leading companies
         </span>
       </div>
 

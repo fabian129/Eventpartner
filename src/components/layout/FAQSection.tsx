@@ -7,44 +7,54 @@ import { useTheme } from "@/components/utils/ThemeProvider";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const FAQS = [
+const DEFAULT_FAQS = [
   {
-    question: "Vad kostar det att använda EventPartner?",
-    answer: "Att skicka en förfrågan och få venue-förslag är helt kostnadsfritt. Vi tar en serviceavgift först när ni bokar — och den är alltid transparent och överenskommen i förväg. Inga dolda kostnader.",
+    question: "What does it cost to use EventPartner?",
+    answer: "Sending an inquiry and receiving venue proposals is completely free. We charge a service fee only when you book — and it's always transparent and agreed upon in advance. No hidden costs.",
   },
   {
-    question: "Hur snabbt får jag svar på min förfrågan?",
-    answer: "Vi återkommer alltid inom 24 timmar med skräddarsydda förslag som matchar era behov. Vid brådskande ärenden kan vi ofta leverera snabbare — kontakta oss direkt så prioriterar vi er.",
+    question: "How quickly will I get a response?",
+    answer: "We always respond within 24 hours with tailored proposals matching your needs. For urgent matters, we can often deliver faster — contact us directly and we'll prioritize you.",
   },
   {
-    question: "Vilka länder och städer täcker ni?",
-    answer: "Vi har venues i 36 europeiska länder — från Island till Cypern, från Portugal till Finland. Totalt över 360,000 venues. Oavsett om ni behöver ett konferenshotell i Stockholm eller en gala-venue i Barcelona, vi hittar rätt.",
+    question: "Which countries and cities do you cover?",
+    answer: "We have venues in 36 European countries — from Iceland to Cyprus, from Portugal to Finland. Over 360,000 venues in total. Whether you need a conference hotel in Stockholm or a gala venue in Barcelona, we'll find the right one.",
   },
   {
-    question: "Kan ni hantera riktigt stora evenemang?",
-    answer: "Absolut. Vi hanterar allt från intima styrelsemöten med 10 personer till storskaliga konferenser med tusentals deltagare. Vår projektledning och vårt nätverk av leverantörer skalas efter era behov.",
+    question: "Can you handle really large events?",
+    answer: "Absolutely. We handle everything from intimate board meetings with 10 people to large-scale conferences with thousands of attendees. Our project management and supplier network scales to your needs.",
   },
   {
-    question: "Vad händer om jag behöver ändra eller avboka?",
-    answer: "Vi hanterar all kommunikation med venues och leverantörer åt er, inklusive ändringar och avbokningar. Villkoren varierar beroende på venue och avtal, men vi ser alltid till att ni har full transparens kring er bokning.",
+    question: "What happens if I need to change or cancel?",
+    answer: "We handle all communication with venues and suppliers on your behalf, including changes and cancellations. Terms vary depending on venue and agreement, but we always ensure full transparency regarding your booking.",
   },
   {
-    question: "Hur skiljer sig EventPartner från att boka direkt?",
-    answer: "Tre saker: vi sparar er tid genom att sköta all research och förhandling, vi har bättre priser tack vare vår volym, och vi ger er tillgång till venues och paket som inte alltid är publikt tillgängliga. Plus att ni får en dedikerad kontaktperson genom hela processen.",
+    question: "How does EventPartner differ from booking directly?",
+    answer: "Three things: we save you time by handling all research and negotiation, we get better prices thanks to our volume, and we give you access to venues and packages not always publicly available. Plus you get a dedicated contact person throughout the entire process.",
   },
   {
-    question: "Jobbar ni bara med stora företag?",
-    answer: "Nej — vi hjälper företag i alla storlekar. Från startups som planerar sin första kick-off till globala koncerner med löpande eventbehov. Processen är densamma: ni berättar vad ni söker, vi levererar.",
+    question: "Do you only work with large companies?",
+    answer: "No — we help companies of all sizes. From startups planning their first kick-off to global corporations with ongoing event needs. The process is the same: you tell us what you're looking for, we deliver.",
   },
 ];
 
-export function FAQSection() {
+interface FaqCMS {
+  headline?: string;
+  description?: string;
+  items?: { question: string; answer: string }[];
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+export function FAQSection({ cms }: { cms?: FaqCMS }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
+  const faqs = cms?.items?.length ? cms.items : DEFAULT_FAQS;
+
   return (
-    <section id="faq" className="relative w-full py-24 md:py-32 overflow-hidden bg-[var(--bg-primary)]">
+    <section id="faq" className="relative w-full py-24 md:py-32 overflow-hidden">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         {/* Moodboard editorial header */}
         <motion.div
@@ -60,24 +70,24 @@ export function FAQSection() {
               Eventpartner — FAQ
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              7 vanliga frågor
+              {faqs.length} questions
             </span>
           </div>
 
           {/* Big heading */}
           <h2 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
-            Har du frågor?
+            {cms?.headline || "Have questions?"}
           </h2>
 
           {/* Description */}
           <p className="font-display text-[clamp(1rem,2vw,1.3rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-xl">
-            Allt du behöver veta om att jobba med EventPartner — från kostnad till leveranstid.
+            {cms?.description || "Everything you need to know about working with EventPartner — from pricing to delivery time."}
           </p>
         </motion.div>
 
         {/* FAQ Accordion — staggered with growing line */}
         <div className="space-y-3">
-          {FAQS.map((faq, i) => {
+          {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
               <motion.div
@@ -148,13 +158,13 @@ export function FAQSection() {
           className="text-center mt-12"
         >
           <p className="text-[14px] text-[var(--text-muted)] mb-3">
-            Hittar du inte svaret du söker?
+            {cms?.ctaText || "Can't find the answer you're looking for?"}
           </p>
           <a
             href="#request"
             className="inline-flex items-center gap-2 text-[14px] font-medium text-[#6AD8D2] hover:text-[#A3E4DE] transition-colors duration-300"
           >
-            Kontakta oss direkt →
+            {cms?.ctaLink || "Contact us directly →"}
           </a>
         </motion.div>
       </div>

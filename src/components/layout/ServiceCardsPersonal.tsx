@@ -6,219 +6,278 @@ import Image from "next/image";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 /**
- * ServiceCardsPersonal — Moodboard-style presentation cards.
+ * ServiceCardsPersonal — Clean bento. 5 cards.
  *
- * Dark cards with mono labels, structured content,
- * tiffany accents, small images. Mix of card types
- * for visual variety in bento layout.
+ * All cards have fullbleed images.
+ * Each card has ONE unique micro-detail (not more).
+ * Square-ish proportions. Sharp corners.
+ * Fullservice = wide hero at bottom.
  */
 
 const SERVICES = [
   {
-    title: "Konferens & Möten",
-    description: "Från intima styrelsemöten till storskaliga konferenser. Vi matchar format, teknik och venue.",
+    title: "Conferences & Meetings",
+    desc: "From boardroom meetings to large-scale conferences.",
     image: "/Images/interior-large-building-with-glass-ceiling.jpg",
-    label: "01 — Kärntjänst",
-    stat: { value: "2,048+", unit: "events levererade" },
-    span: "md:col-span-7",
-    variant: "image" as const,
+    label: "01",
+    icon: "mic" as const,
   },
   {
-    title: "Kick-off & Teambuilding",
-    description: "Upplevelser som sätter tonen för hela året. Vi bygger events som inspirerar team och driver kultur framåt.",
+    title: "Kick-offs & Team Building",
+    desc: "Experiences that set the tone for the entire year.",
     image: "/Images/colorful-seoul-floating-island.jpg",
-    label: "02 — Upplevelser",
-    stat: { value: "94%", unit: "nöjda kunder" },
-    span: "md:col-span-5",
-    variant: "stat" as const,
+    label: "02",
+    icon: "users" as const,
   },
   {
-    title: "Middagar & Galor",
-    description: "Representationsmiddagar och galor i venues som gör intryck. Helhetskoordinering från meny till platsplanering.",
+    title: "Dinners & Galas",
+    desc: "Representational dinners at venues that make an impression.",
     image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
-    label: "03 — Premium",
-    stat: { value: "36", unit: "länder" },
-    span: "md:col-span-4",
-    variant: "image" as const,
+    label: "03",
+    icon: "glass" as const,
   },
   {
     title: "Venue Sourcing",
-    description: "360,000+ venues i 36 länder. Vi hittar rätt lokal baserat på era krav — alltid minst 3 förslag inom 24 timmar.",
+    desc: "360,000+ venues in 36 countries. Always 3 proposals within 24h.",
     image: "/Images/hotel-lobby.jpg",
-    label: "04 — Plattform",
-    stat: { value: "360,000+", unit: "venues" },
-    span: "md:col-span-4",
-    variant: "stat" as const,
-  },
-  {
-    title: "Fullservice Leverans",
-    description: "Lokaler, teknik, catering och logi samordnat under ett tak. En kontaktperson, noll krångel.",
-    image: "/Images/palace-culture-iasi-romania.jpg",
-    label: "05 — Leverans",
-    stat: { value: "24h", unit: "svarstid" },
-    span: "md:col-span-4",
-    variant: "cta" as const,
+    label: "04",
+    icon: "globe" as const,
   },
 ];
 
-function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: number }) {
+/* ————————————————————————————————————————
+   ICON — small, subtle, top-right
+   ———————————————————————————————————————— */
+function CardIcon({ type }: { type: "mic" | "users" | "glass" | "globe" }) {
+  const cls = "text-white/25 group-hover:text-white/45 transition-colors duration-500";
+  switch (type) {
+    case "mic":
+      return (
+        <svg className={cls} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+          <line x1="12" x2="12" y1="19" y2="22" />
+        </svg>
+      );
+    case "users":
+      return (
+        <svg className={cls} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      );
+    case "glass":
+      return (
+        <svg className={cls} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M8 22h8" />
+          <path d="M12 11v11" />
+          <path d="m20 7-8 4-8-4" />
+          <path d="M20 7v-.5A2.5 2.5 0 0 0 17.5 4h-11A2.5 2.5 0 0 0 4 6.5V7" />
+        </svg>
+      );
+    case "globe":
+      return (
+        <svg className={cls} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+          <path d="M2 12h20" />
+        </svg>
+      );
+  }
+}
+
+/* ————————————————————————————————————————
+   SERVICE CARD — fullbleed image, title, one detail
+   ———————————————————————————————————————— */
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: (typeof SERVICES)[0];
+  index: number;
+}) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 25 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.7, delay: index * 0.08, ease: EASE }}
-      className={`${service.span} relative group cursor-pointer overflow-hidden rounded-2xl bg-[#0F0F0F] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500`}
-      style={{ minHeight: "clamp(340px, 44vh, 500px)" }}
+      transition={{ duration: 0.55, delay: index * 0.06, ease: EASE }}
+      className="relative group cursor-pointer overflow-hidden h-full rounded-xl"
     >
-      {/* Mono label top bar */}
-      <div className="flex items-center justify-between px-6 pt-5 pb-3">
-        <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-white/30">
+      <div className="relative w-full h-full">
+        {/* Fullbleed muted image → color on hover */}
+        <Image
+          src={service.image}
+          alt={service.title}
+          fill
+          className="object-cover transition-all duration-[1s] ease-out
+                     saturate-[0.3] brightness-[0.65]
+                     group-hover:saturate-100 group-hover:brightness-[0.8] group-hover:scale-[1.03]"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+
+        {/* Gradient — just enough for text */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+        {/* Number label — top left, visible */}
+        <span className="absolute top-4 left-5 z-10 font-mono text-[11px] tracking-[0.12em] text-white/40 font-medium">
           {service.label}
         </span>
-        <span className="text-[#6AD8D2] text-[8px]">◆</span>
+
+        {/* Icon — top right */}
+        <div className="absolute top-4 right-5 z-10">
+          <CardIcon type={service.icon} />
+        </div>
+
+        {/* Title + description — moved up from bottom edge */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 pb-6 z-10">
+          <h3 className="font-display text-[24px] md:text-[28px] font-medium text-white tracking-tight leading-[1.1] mb-1.5
+                         [text-shadow:0_1px_4px_rgba(0,0,0,0.4)]">
+            {service.title}
+          </h3>
+          <p className="text-[11px] md:text-[12px] text-white/35 leading-relaxed">
+            {service.desc}
+          </p>
+        </div>
+
+        {/* Subtle border */}
+        <div className="absolute inset-0 border border-white/[0.04] group-hover:border-white/[0.08] transition-colors duration-500 pointer-events-none z-20" />
       </div>
-
-      {service.variant === "image" ? (
-        /* Image variant — fullbleed bg image with details overlaid */
-        <>
-          <Image
-            src={service.image}
-            alt={service.title}
-            fill
-            className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05] grayscale group-hover:grayscale-0"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
-          {/* Content overlaid at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 px-6 pb-6 z-10">
-            <h3 className="font-display text-[20px] md:text-[22px] font-medium text-white tracking-tight leading-tight mb-2">
-              {service.title}
-            </h3>
-            <p className="text-[13px] text-white/50 leading-relaxed">
-              {service.description}
-            </p>
-          </div>
-        </>
-      ) : service.variant === "stat" ? (
-        /* Stat variant — big number, then content */
-        <div className="flex flex-col justify-between h-full px-6 pb-6">
-          <div className="mt-4">
-            <span className="font-display text-[clamp(3rem,5vw,4.5rem)] font-medium text-white/90 leading-none block">
-              {service.stat.value}
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6AD8D2]/60 mt-2 block">
-              {service.stat.unit}
-            </span>
-          </div>
-          <div className="mt-auto pt-8 border-t border-white/[0.06]">
-            <h3 className="font-display text-[18px] font-medium text-white tracking-tight leading-tight mb-2">
-              {service.title}
-            </h3>
-            <p className="text-[13px] text-white/35 leading-relaxed">
-              {service.description}
-            </p>
-          </div>
-        </div>
-      ) : (
-        /* CTA variant — content + action button */
-        <div className="flex flex-col justify-between h-full px-6 pb-6">
-          <div className="mt-4">
-            <h3 className="font-display text-[22px] font-medium text-white tracking-tight leading-tight mb-3">
-              {service.title}
-            </h3>
-            <p className="text-[14px] text-white/40 leading-relaxed mb-6">
-              {service.description}
-            </p>
-            <div className="flex gap-4 text-[13px]">
-              <span className="text-white/50">✓ En kontaktperson</span>
-              <span className="text-white/50">✓ Transparent pris</span>
-            </div>
-          </div>
-          <div className="mt-auto pt-6">
-            <a
-              href="#request"
-              className="inline-flex items-center justify-center w-full py-3 rounded-xl bg-white/[0.06] border border-white/[0.08] text-[14px] font-medium text-white hover:bg-[#6AD8D2] hover:text-[#0A0A0A] hover:border-[#6AD8D2] transition-all duration-300"
-            >
-              Kom igång →
-            </a>
-            <div className="flex items-center justify-center gap-2 mt-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#6AD8D2]" />
-              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/25">Ready</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Subtle hover glow */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br from-[#6AD8D2]/[0.02] via-transparent to-transparent" />
     </motion.div>
   );
 }
 
-export function ServiceCardsPersonal() {
-  return (
-    <section id="services" className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 relative z-10">
+/* ————————————————————————————————————————
+   MAIN SECTION
+   ———————————————————————————————————————— */
+interface ServicesCMS {
+  label?: string;
+  labelRight?: string;
+  headline?: string;
+  description?: string;
+  stats?: { value: string; label: string }[];
+  cards?: { title: string; desc: string; icon: string }[];
+  fullserviceTitle?: string;
+  fullserviceDesc?: string;
+}
 
-        {/* Moodboard-style editorial header */}
+export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
+  return (
+    <section
+      id="services"
+      className="relative w-full py-24 md:py-32 overflow-hidden"
+    >
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 relative z-10">
+        {/* Editorial header */}
         <motion.div
           initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="mb-16 md:mb-20"
+          className="mb-14"
         >
-          {/* Small mono label — top right like moodboard */}
-          <div className="flex justify-between items-start mb-12">
+          <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              Eventpartner — Tjänster
+              {cms?.label || "EventPartner — Services"}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">
-              Fullservice leverans
-              <br />
-              36 länder
+              {cms?.labelRight || "Full-service delivery\n36 countries"}
             </span>
           </div>
 
-          {/* Big heading — anchor, no pill */}
-          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-8">
-            Vad vi gör.
+          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
+            {cms?.headline || "What we do."}
           </h2>
 
-          {/* Description — larger, bolder, its own level */}
-          <p className="font-display text-[clamp(1.1rem,2.2vw,1.6rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-2xl mb-14">
-            Från venue-scouting till fullskalig leverans. Vi skapar event som bygger ert varumärke — oavsett storlek eller komplexitet.
+          <p className="font-display text-[clamp(1.1rem,2.2vw,1.5rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-2xl mb-10">
+            {cms?.description || "From venue scouting to full-scale delivery. We create events that build your brand."}
           </p>
 
-          {/* Metrics row — spread like moodboard bottom */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[var(--border-default)] pt-6">
-            {[
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[var(--border-default)] pt-5">
+            {(cms?.stats || [
               { label: "Venues", value: "360,000+" },
-              { label: "Länder", value: "36" },
-              { label: "Svarstid", value: "24h" },
-              { label: "Leveranspartners", value: "2,400+" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] block mb-1">{stat.label}</span>
-                <span className="font-display text-[17px] font-medium text-[var(--text-primary)]">{stat.value}</span>
+              { label: "Countries", value: "36" },
+              { label: "Response time", value: "24h" },
+              { label: "Partners", value: "2,400+" },
+            ]).map((s) => (
+              <div key={s.label}>
+                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] block mb-1">{s.label}</span>
+                <span className="font-display text-[17px] font-medium text-[var(--text-primary)]">{s.value}</span>
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* Cards grid — inside container */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
-          {SERVICES.slice(0, 2).map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i} />
-          ))}
-          {SERVICES.slice(2).map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i + 2} />
-          ))}
+        {/* BENTO — on a dark plate with rounded corners */}
+        <div className="bg-[#111111] rounded-2xl p-2 md:p-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          {/* Top 4 cards — square-ish */}
+          {SERVICES.map((service, i) => {
+            const cmsCard = cms?.cards?.[i];
+            const merged = cmsCard ? {
+              ...service,
+              title: cmsCard.title || service.title,
+              desc: cmsCard.desc || service.desc,
+            } : service;
+            return (
+              <div key={service.title} className="aspect-[4/3] md:aspect-[3/2]">
+                <ServiceCard service={merged} index={i} />
+              </div>
+            );
+          })}
+
+          {/* Fullservice CTA — wide */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.55, delay: 0.3, ease: EASE }}
+            className="md:col-span-2 aspect-[16/6] md:aspect-[16/5] relative group cursor-pointer overflow-hidden rounded-xl"
+          >
+            <div className="relative w-full h-full">
+              <Image
+                src="/Images/palace-culture-iasi-romania.jpg"
+                alt="Fullservice leverans"
+                fill
+                className="object-cover transition-all duration-[1s] ease-out
+                           saturate-[0.2] brightness-[0.45]
+                           group-hover:saturate-[0.5] group-hover:brightness-[0.55] group-hover:scale-[1.02]"
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+              <div className="absolute inset-0 rounded-xl border border-white/[0.04] group-hover:border-white/[0.08] transition-colors duration-500 pointer-events-none z-20" />
+
+              {/* Ghost label */}
+              <span className="absolute top-4 left-5 z-10 font-mono text-[9px] tracking-[0.15em] uppercase text-white/20">
+                05
+              </span>
+
+              {/* Detail: two expanding lines */}
+              <div className="absolute top-4 right-5 z-10 flex flex-col gap-[3px] opacity-30 group-hover:opacity-60 transition-all duration-700">
+                <div className="w-5 h-[1px] bg-[#6AD8D2]/60 group-hover:w-8 transition-all duration-500" />
+                <div className="w-5 h-[1px] bg-[#6AD8D2]/60 group-hover:w-4 transition-all duration-500 delay-75" />
+                <div className="w-5 h-[1px] bg-[#6AD8D2]/60 group-hover:w-6 transition-all duration-500 delay-150" />
+              </div>
+
+              {/* Content */}
+              <div className="absolute inset-0 z-10 flex items-end p-6 md:p-8">
+                <div>
+                  <h3 className="font-display text-[28px] md:text-[38px] font-medium text-white tracking-tight leading-[1.05] mb-2
+                                 [text-shadow:0_1px_4px_rgba(0,0,0,0.4)]">
+                    {cms?.fullserviceTitle || "Full-Service Delivery"}
+                  </h3>
+                  <p className="text-[12px] md:text-[13px] text-white/35 leading-relaxed max-w-md">
+                    {cms?.fullserviceDesc || "Venues, technology, catering, and accommodation — one contact, zero hassle."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
         </div>
       </div>
     </section>
   );
 }
-

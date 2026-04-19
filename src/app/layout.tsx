@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/utils/ThemeProvider";
+import { VisualEditing } from "next-sanity/visual-editing";
+import { draftMode } from "next/headers";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
@@ -37,11 +39,12 @@ export const metadata: Metadata = {
 import { SmoothScroll } from "@/components/utils/SmoothScroll";
 import { SidebarNav } from "@/components/layout/SidebarNav";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isDraftMode = (await draftMode()).isEnabled;
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -53,6 +56,7 @@ export default function RootLayout({
             {children}
           </SmoothScroll>
         </ThemeProvider>
+        {isDraftMode && <VisualEditing />}
       </body>
     </html>
   );

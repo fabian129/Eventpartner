@@ -7,29 +7,42 @@ import { useTheme } from "@/components/utils/ThemeProvider";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-export function VideoSection() {
+interface VideoCMS {
+  label?: string;
+  headline?: string;
+  headlineAccent?: string;
+  description?: string;
+}
+
+export function VideoSection({ cms }: { cms?: VideoCMS }) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
   return (
-    <section id="about" className="relative w-full bg-[var(--bg-primary)] px-6 md:px-10 py-20 md:py-32">
-      <div className="max-w-[1000px] mx-auto">
+    <section id="about" className="relative w-full px-6 md:px-10 py-20 md:py-32">
+      <div className="max-w-[1200px] mx-auto">
         {/* Intro text — blur entrance */}
         <motion.div
           initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="text-center mb-12 md:mb-16"
+          className="mb-10 md:mb-14"
         >
-          <p className="section-label mb-4">Om EventPartner</p>
-          <h2 className="font-display text-3xl md:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.1] mb-6">
-            Vi är er partner,
-            <br />
-            <span className="italic font-light text-[var(--text-muted)]">inte en förmedlare.</span>
+          <div className="flex justify-between items-start mb-10">
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
+              {cms?.label || "EventPartner — Introduction"}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
+              2:45
+            </span>
+          </div>
+          <h2 className="font-display text-[clamp(2.5rem,7vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.92] mb-5">
+            {cms?.headline || "We are your partner,"}<br />
+            <span className="text-[var(--text-muted)]">{cms?.headlineAccent || "not a middleman."}</span>
           </h2>
-          <p className="text-base md:text-lg text-[var(--text-muted)] max-w-xl mx-auto leading-relaxed">
-            Se hur vi hjälper de bästa företagen att hitta rätt venues och skapa minnesvärda event.
+          <p className="font-display text-[clamp(1.05rem,2vw,1.35rem)] font-normal text-[var(--text-muted)] max-w-2xl leading-[1.5]">
+            {cms?.description || "See how we help the best companies find the right venues and create memorable events."}
           </p>
         </motion.div>
 
@@ -77,7 +90,7 @@ export function VideoSection() {
                 EventPartner — Introduction
               </p>
               <p className="text-sm text-white/80 font-medium">
-                Så fungerar det
+                See how it works
               </p>
             </div>
             <p className="font-mono text-[11px] text-white/40">

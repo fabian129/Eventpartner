@@ -89,9 +89,16 @@ function CountryRow({ countries, direction, speed }: { countries: CountryItem[];
   );
 }
 
-export function CountryFlagsSection() {
+interface FlagsCMS {
+  label?: string;
+  labelRight?: string;
+  headline?: string;
+  description?: string;
+}
+
+export function CountryFlagsSection({ cms }: { cms?: FlagsCMS }) {
   return (
-    <section id="coverage" className="relative w-full bg-[var(--bg-primary)] py-20 md:py-28 overflow-hidden">
+    <section id="coverage" className="relative w-full py-24 md:py-32 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -99,14 +106,19 @@ export function CountryFlagsSection() {
         transition={{ duration: 0.6 }}
         className="text-center mb-12 md:mb-16 px-6"
       >
-        <p className="section-label mb-4">Global Coverage</p>
-        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05] mb-4">
-          36 länder. 360,000+ venues.
-          <br />
-          <span className="italic font-light text-[var(--text-muted)]">En förfrågan.</span>
+        <div className="flex justify-center gap-6 mb-8">
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
+            {cms?.label || "EventPartner — Network"}
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
+            {cms?.labelRight || "100% Europe"}
+          </span>
+        </div>
+        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-4">
+          {cms?.headline || "36 countries. 360,000+ venues."}
         </h2>
         <p className="text-base text-[var(--text-muted)] max-w-md mx-auto leading-relaxed">
-          Hela Europa — vi har venues som matchar era behov oavsett destination.
+          {cms?.description || "All of Europe — we have venues that match your needs regardless of destination."}
         </p>
       </motion.div>
 
@@ -135,11 +147,11 @@ function StatsBar() {
       transition={{ delay: 0.2, duration: 0.6 }}
       className="flex items-center justify-center gap-8 md:gap-16 mt-12 md:mt-16 px-6"
     >
-      <StatCounter value={36} suffix="" label="Länder" active={isInView} />
+      <StatCounter value={36} suffix="" label="Countries" active={isInView} />
       <StatCounter value={360} suffix="K+" label="Venues" active={isInView} delay={0.15} />
       <div className="text-center">
         <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">100%</span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">Europa</span>
+        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">Europe</span>
       </div>
       <div className="text-center">
         <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">24/7</span>

@@ -19,46 +19,46 @@ const STORIES = [
   {
     client: "Ericsson",
     event: "European Leadership Summit 2024",
-    description: "Tre dagars konferens för 400 ledare från 12 länder. Fullservice från venue-sourcing i Stockholm till AV-teknik och galakväll.",
+    description: "Three-day conference for 400 leaders from 12 countries. Full-service from venue sourcing in Stockholm to AV technology and gala evening.",
     image: "/Images/interior-large-building-with-glass-ceiling.jpg",
-    stats: { guests: "400", location: "Stockholm", duration: "3 dagar" },
+    stats: { guests: "400", location: "Stockholm", duration: "3 days" },
     color: "#6AD8D2",
   },
   {
     client: "Spotify",
     event: "Global Kick-off 2024",
-    description: "Årlig kick-off för 600+ medarbetare. TeamBuilding, keynotes och afterparty i unik venue utanför Barcelona.",
+    description: "Annual kick-off for 600+ employees. Team building, keynotes, and afterparty at a unique venue outside Barcelona.",
     image: "/Images/colorful-seoul-floating-island.jpg",
-    stats: { guests: "600+", location: "Barcelona", duration: "2 dagar" },
+    stats: { guests: "600+", location: "Barcelona", duration: "2 days" },
     color: "#7851A9",
   },
   {
     client: "H&M",
     event: "Sustainability Gala",
-    description: "Representationsmiddag och konferens med fokus på hållbarhet. 250 inbjudna gäster i en historisk venue i Köpenhamn.",
+    description: "Representational dinner and conference focused on sustainability. 250 invited guests at a historic venue in Copenhagen.",
     image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
-    stats: { guests: "250", location: "Köpenhamn", duration: "1 kväll" },
+    stats: { guests: "250", location: "Copenhagen", duration: "1 evening" },
     color: "#6AD8D2",
   },
   {
     client: "Sandvik",
     event: "International Sales Conference",
-    description: "Säljkonferens för 300 personer i Milano. Hotellkoordinering, transferservice, konferensprogram och middagar.",
+    description: "Sales conference for 300 people in Milan. Hotel coordination, transfer service, conference program, and dinners.",
     image: "/Images/palace-culture-iasi-romania.jpg",
-    stats: { guests: "300", location: "Milano", duration: "4 dagar" },
+    stats: { guests: "300", location: "Milan", duration: "4 days" },
     color: "#7851A9",
   },
   {
     client: "Klarna",
     event: "Product Launch & Press Event",
-    description: "Exklusiv produktlansering för press och partners i central London-venue. Detaljplanerad upplevelse från A till Ö.",
+    description: "Exclusive product launch for press and partners at a central London venue. Meticulously planned experience from A to Z.",
     image: "/Images/hotel-lobby.jpg",
-    stats: { guests: "150", location: "London", duration: "1 dag" },
+    stats: { guests: "150", location: "London", duration: "1 day" },
     color: "#6AD8D2",
   },
 ];
 
-function StoryCard({ story, index }: { story: typeof STORIES[0]; index: number }) {
+function StoryCard({ story, index, ctaText }: { story: typeof STORIES[0]; index: number; ctaText?: string }) {
   return (
     <div
       className="flex-shrink-0 w-[85vw] md:w-[70vw] lg:w-[55vw] h-[500px] md:h-[580px] relative rounded-2xl overflow-hidden group cursor-pointer snap-center"
@@ -94,7 +94,7 @@ function StoryCard({ story, index }: { story: typeof STORIES[0]; index: number }
       {/* Stats — top right */}
       <div className="absolute top-6 right-6 z-10 flex gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
         {[
-          { icon: Users, value: story.stats.guests, label: "Gäster" },
+          { icon: Users, value: story.stats.guests, label: "Guests" },
           { icon: MapPin, value: story.stats.location },
           { icon: Calendar, value: story.stats.duration },
         ].map((stat, i) => (
@@ -116,7 +116,7 @@ function StoryCard({ story, index }: { story: typeof STORIES[0]; index: number }
 
         {/* CTA on hover */}
         <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-400 delay-100 translate-y-3 group-hover:translate-y-0">
-          <span className="text-[13px] font-medium" style={{ color: story.color }}>Läs berättelsen</span>
+          <span className="text-[13px] font-medium" style={{ color: story.color }}>{ctaText || "Read the story"}</span>
           <ArrowRight className="w-3.5 h-3.5" style={{ color: story.color }} />
         </div>
       </div>
@@ -127,7 +127,16 @@ function StoryCard({ story, index }: { story: typeof STORIES[0]; index: number }
   );
 }
 
-export function CaseStoriesSection() {
+interface CasesCMS {
+  label?: string;
+  labelRight?: string;
+  headline?: string;
+  description?: string;
+  cards?: { client: string; event: string; description: string; guests: string; location: string; duration: string }[];
+  cta?: string;
+}
+
+export function CaseStoriesSection({ cms }: { cms?: CasesCMS }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -164,15 +173,15 @@ export function CaseStoriesSection() {
 
   return (
     <section
-      className="relative w-full py-24 md:py-32 overflow-hidden rounded-t-[2rem]"
+      className="relative w-full py-24 md:py-32 overflow-hidden"
       style={{
-        background: "#0A0A0A",
+        // No background — inherits from page-root via DarkZone transition
         // Force dark text colors inside this section
         "--text-primary": "#FFFFFF",
         "--text-secondary": "rgba(255,255,255,0.7)",
         "--text-muted": "rgba(255,255,255,0.4)",
         "--text-dim": "rgba(255,255,255,0.25)",
-        "--bg-primary": "#0A0A0A",
+        "--bg-primary": "transparent",
         "--bg-card": "rgba(255,255,255,0.04)",
         "--border-default": "rgba(255,255,255,0.08)",
       } as React.CSSProperties}
@@ -188,21 +197,21 @@ export function CaseStoriesSection() {
           {/* Mono labels */}
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              Eventpartner — Case Stories
+              {cms?.label || "EventPartner — Case Stories"}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">
-              Utvalda leveranser
+              {cms?.labelRight || "Selected deliveries"}
             </span>
           </div>
 
           {/* Big heading */}
           <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
-            Eventleverans i världsklass.
+            {cms?.headline || "World-class event delivery."}
           </h2>
 
           {/* Description */}
           <p className="font-display text-[clamp(1rem,2vw,1.4rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-xl">
-            Ledande företag använder EventPartner för att leverera konferenser, kickoffs och galor.
+            {cms?.description || "Leading companies use EventPartner to deliver conferences, kick-offs, and galas."}
           </p>
         </motion.div>
       </div>
@@ -229,17 +238,28 @@ export function CaseStoriesSection() {
           {/* Left spacer */}
           <div className="flex-shrink-0 w-[calc((100vw-1200px)/2)] hidden xl:block" />
 
-          {STORIES.map((story, i) => (
-            <StoryCard key={story.client} story={story} index={i} />
-          ))}
+          {STORIES.map((story, i) => {
+            const cmsCard = cms?.cards?.[i];
+            const merged = cmsCard ? {
+              ...story,
+              event: cmsCard.event || story.event,
+              description: cmsCard.description || story.description,
+              stats: {
+                guests: cmsCard.guests || story.stats.guests,
+                location: cmsCard.location || story.stats.location,
+                duration: cmsCard.duration || story.stats.duration,
+              },
+            } : story;
+            return <StoryCard key={story.client} story={merged} index={i} ctaText={cms?.cta} />;
+          })}
 
           {/* Right spacer */}
           <div className="flex-shrink-0 w-6 md:w-10" />
         </div>
 
         {/* Fade hints on edges */}
-        <div className="absolute top-0 right-0 bottom-6 w-20 md:w-32 bg-gradient-to-l from-[var(--bg-primary)] to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 left-0 bottom-6 w-10 md:w-16 bg-gradient-to-r from-[var(--bg-primary)] to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 bottom-6 w-20 md:w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 left-0 bottom-6 w-10 md:w-16 bg-gradient-to-r from-[#0A0A0A] to-transparent pointer-events-none z-10" />
       </motion.div>
 
       {/* Active dot indicator */}

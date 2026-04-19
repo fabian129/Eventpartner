@@ -8,7 +8,14 @@ import { Send, CheckCircle, ArrowRight, ExternalLink } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import Link from "next/link";
 
-export function RequestFormSection() {
+export function RequestFormSection({ cms }: { cms?: {
+  badge?: string;
+  headline?: string;
+  headlineAccent?: string;
+  description?: string;
+  button?: string;
+  disclaimer?: string;
+} }) {
   const [submitted, setSubmitted] = useState(false);
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -45,16 +52,16 @@ export function RequestFormSection() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] mb-6">
             <Send className="w-3.5 h-3.5 text-[#6AD8D2]" />
             <span className="font-mono text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              Kostnadsfri förfrågan
+              {cms?.badge || "Free inquiry"}
             </span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-5">
-            Berätta vad ni söker.
+            {cms?.headline || "Tell us what you need."}
             <br />
-            <span className="italic font-light text-[var(--text-muted)]">Vi gör resten.</span>
+            <span className="italic font-light text-[var(--text-muted)]">{cms?.headlineAccent || "We'll handle the rest."}</span>
           </h2>
           <p className="text-[15px] text-[var(--text-muted)] max-w-md mx-auto leading-relaxed">
-            Fyll i formuläret nedan så återkommer vi med skräddarsydda förslag inom 24 timmar. Helt kostnadsfritt.
+            {cms?.description || "Fill in the form below and we'll get back to you with tailored proposals within 24 hours. Completely free."}
           </p>
         </motion.div>
 
@@ -71,9 +78,9 @@ export function RequestFormSection() {
           {/* Stats bar */}
           <div className="flex items-center justify-center gap-8 mb-10 pb-8 border-b border-[var(--border-default)]">
             {[
-              { value: "24h", label: "Svarstid" },
-              { value: "3st", label: "Matchade förslag" },
-              { value: "0 kr", label: "Kostnad" },
+              { value: "24h", label: "Response time" },
+              { value: "3", label: "Matched proposals" },
+              { value: "Free", label: "Cost" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">{stat.value}</span>
@@ -85,65 +92,65 @@ export function RequestFormSection() {
           {/* Form fields — Row 1: Contact info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Företag{requiredStar}</label>
-              <input type="text" placeholder="Ert företagsnamn" required className={inputClass} />
+              <label className={labelClass}>Company{requiredStar}</label>
+              <input type="text" placeholder="Your company name" required className={inputClass} />
             </div>
             <div>
-              <label className={labelClass}>Kontaktperson{requiredStar}</label>
-              <input type="text" placeholder="Namn" required className={inputClass} />
+              <label className={labelClass}>Contact person{requiredStar}</label>
+              <input type="text" placeholder="Name" required className={inputClass} />
             </div>
             <div>
-              <label className={labelClass}>E-post{requiredStar}</label>
-              <input type="email" placeholder="du@företag.se" required className={inputClass} />
+              <label className={labelClass}>Email{requiredStar}</label>
+              <input type="email" placeholder="you@company.com" required className={inputClass} />
             </div>
           </div>
 
           {/* Row 2: Phone + Location */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Telefon{requiredStar}</label>
+              <label className={labelClass}>Phone{requiredStar}</label>
               <input type="tel" placeholder="+46 70 123 45 67" required className={inputClass} />
             </div>
             <div>
-              <label className={labelClass}>Land{requiredStar}</label>
-              <input type="text" placeholder="T.ex. Sverige, Spain, UK" required className={inputClass} />
+              <label className={labelClass}>Country{requiredStar}</label>
+              <input type="text" placeholder="E.g. Sweden, Spain, UK" required className={inputClass} />
             </div>
             <div>
-              <label className={labelClass}>Stad</label>
-              <input type="text" placeholder="T.ex. Stockholm, Barcelona" className={inputClass} />
+              <label className={labelClass}>City</label>
+              <input type="text" placeholder="E.g. Stockholm, Barcelona" className={inputClass} />
             </div>
           </div>
 
           {/* Row 3: Event details */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Eventtyp</label>
+              <label className={labelClass}>Event type</label>
               <select className={inputClass}>
-                <option value="">Välj typ</option>
-                <option>Konferens</option>
-                <option>Företagsevent</option>
+                <option value="">Select type</option>
+                <option>Conference</option>
+                <option>Corporate Event</option>
                 <option>Team Building</option>
-                <option>Produktlansering</option>
-                <option>Gala / Middag</option>
+                <option>Product Launch</option>
+                <option>Gala / Dinner</option>
                 <option>Kick-off</option>
-                <option>Övrigt</option>
+                <option>Other</option>
               </select>
             </div>
             <div>
-              <label className={labelClass}>Antal gäster{requiredStar}</label>
+              <label className={labelClass}>Number of guests{requiredStar}</label>
               <input
                 type="number"
-                placeholder="Ange exakt antal"
+                placeholder="Enter exact number"
                 min={1}
                 required
                 className={inputClass}
               />
             </div>
             <div>
-              <label className={labelClass}>Datum</label>
+              <label className={labelClass}>Date</label>
               <input
                 type="text"
-                placeholder="T.ex. 15-17 juni 2026 eller Flexibelt"
+                placeholder="E.g. June 15-17, 2026 or Flexible"
                 className={inputClass}
               />
             </div>
@@ -152,22 +159,22 @@ export function RequestFormSection() {
           {/* Row 4: Budget */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Budget (ungefärlig)</label>
+              <label className={labelClass}>Budget (approximate)</label>
               <select className={inputClass}>
-                <option value="">Ej specificerat</option>
-                <option>Under 50 000 kr</option>
-                <option>50 000 – 150 000 kr</option>
-                <option>150 000 – 500 000 kr</option>
-                <option>500 000 – 1 000 000 kr</option>
-                <option>Över 1 000 000 kr</option>
+                <option value="">Not specified</option>
+                <option>Under €5,000</option>
+                <option>€5,000 – €15,000</option>
+                <option>€15,000 – €50,000</option>
+                <option>€50,000 – €100,000</option>
+                <option>Over €100,000</option>
               </select>
             </div>
           </div>
 
           {/* Message */}
           <div className="mb-8">
-            <label className={labelClass}>Meddelande</label>
-            <textarea rows={4} placeholder="Berätta om ert event — specifika önskemål, krav, eller annat vi bör veta..." className={`${inputClass} resize-none`} />
+            <label className={labelClass}>Message</label>
+            <textarea rows={4} placeholder="Tell us about your event — specific wishes, requirements, or anything else we should know..." className={`${inputClass} resize-none`} />
           </div>
 
           {/* Extended inquiry link */}
@@ -178,16 +185,16 @@ export function RequestFormSection() {
               </div>
               <div>
                 <p className="text-[14px] text-[var(--text-primary)] font-medium mb-1">
-                  Är ditt event större eller mer komplext?
+                  Is your event larger or more complex?
                 </p>
                 <p className="text-[13px] text-[var(--text-muted)] leading-relaxed mb-2">
-                  Fyll i vårt utökade formulär för att ge oss mer detaljerad information direkt — venue-krav, catering, aktiviteter och mer.
+                  Fill in our extended form to give us more detailed information — venue requirements, catering, activities, and more.
                 </p>
                 <Link
                   href="/skraddarsy"
                   className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#6AD8D2] hover:text-[#A3E4DE] transition-colors duration-300"
                 >
-                  Skräddarsy ditt event →
+                  Customize your event →
                 </Link>
               </div>
             </div>
@@ -206,10 +213,10 @@ export function RequestFormSection() {
             >
               <span className="relative z-10 flex items-center gap-3">
                 {submitted ? (
-                  <><CheckCircle className="w-5 h-5" />Tack! Vi hör av oss inom 24h.</>
+                  <><CheckCircle className="w-5 h-5" />Thank you! We'll get back to you within 24h.</>
                 ) : (
                   <>
-                    Skicka kostnadsfri förfrågan
+                    {cms?.button || "Send free inquiry"}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </>
                 )}
@@ -220,7 +227,7 @@ export function RequestFormSection() {
               </span>
             </button>
             <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--text-dim)]">
-              Inga förpliktelser • Svar inom 24h
+              {cms?.disclaimer || "No obligations • Response within 24h"}
             </span>
           </div>
         </motion.form>

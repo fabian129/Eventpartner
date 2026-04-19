@@ -8,21 +8,21 @@ import Image from "next/image";
 
 const FOOTER_LINKS = {
   company: {
-    title: "Företaget",
+    title: "Company",
     links: [
-      { label: "Om oss", href: "/om-oss" },
-      { label: "Ledning", href: "/ledning" },
-      { label: "Karriär", href: "/karriar" },
+      { label: "About us", href: "/om-oss" },
+      { label: "Leadership", href: "/ledning" },
+      { label: "Careers", href: "/karriar" },
       { label: "Press", href: "/press" },
     ],
   },
   services: {
-    title: "Tjänster",
+    title: "Services",
     links: [
-      { label: "Vad kostar det?", href: "/priser" },
-      { label: "Bli förmånskund", href: "/formanskund" },
+      { label: "Pricing", href: "/priser" },
+      { label: "Become a VIP", href: "/formanskund" },
       { label: "Book a demo", href: "/demo" },
-      { label: "Webbshop", href: "/webbshop" },
+      { label: "Shop", href: "/webbshop" },
     ],
   },
   support: {
@@ -30,19 +30,19 @@ const FOOTER_LINKS = {
     links: [
       { label: "FAQ", href: "/faq" },
       { label: "EventPartner Assistant", href: "/assistant" },
-      { label: "Säkerhet & Compliance", href: "/sakerhet" },
+      { label: "Security & Compliance", href: "/sakerhet" },
       { label: "GDPR & Privacy", href: "/privacy" },
     ],
   },
   venues: {
-    title: "Populära länder",
+    title: "Popular Countries",
     links: [
-      { label: "Sverige", href: "/land/sweden" },
-      { label: "Norge", href: "/land/norway" },
-      { label: "Danmark", href: "/land/denmark" },
-      { label: "Tyskland", href: "/land/germany" },
-      { label: "Storbritannien", href: "/land/uk" },
-      { label: "Alla 36 länder →", href: "#coverage" },
+      { label: "Sweden", href: "/land/sweden" },
+      { label: "Norway", href: "/land/norway" },
+      { label: "Denmark", href: "/land/denmark" },
+      { label: "Germany", href: "/land/germany" },
+      { label: "United Kingdom", href: "/land/uk" },
+      { label: "All 36 countries →", href: "#coverage" },
     ],
   },
 };
@@ -61,7 +61,16 @@ const INSPO_IMAGES = [
   "/Images/illuminated-footbridge-amidst-cherry-trees-night.jpg",
 ];
 
-export function Footer() {
+interface FooterCMS {
+  brandDesc?: string;
+  socialLabel?: string;
+  newsletterDesc?: string;
+  ctaTitle?: string;
+  ctaDesc?: string;
+  columns?: { title: string; links: { label: string; href: string }[] }[];
+}
+
+export function Footer({ cms }: { cms?: FooterCMS }) {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -102,7 +111,7 @@ export function Footer() {
               <span className="font-display text-xl font-medium text-white tracking-tight">EventPartner</span>
             </div>
             <p className="text-sm text-white/40 mb-6 leading-relaxed">
-              Signa upp till vårt kostnadsfria nyhetsbrev — och få tillgång till exklusiva erbjudanden och rabatter.
+              {cms?.newsletterDesc || "Sign up for our free newsletter — and get access to exclusive offers and discounts."}
             </p>
 
             {subscribed ? (
@@ -111,7 +120,7 @@ export function Footer() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-[#6AD8D2]/10 border border-[#6AD8D2]/20"
               >
-                <span className="text-[#6AD8D2] text-sm font-medium">✓ Tack! Du är registrerad.</span>
+                <span className="text-[#6AD8D2] text-sm font-medium">✓ Thank you! You're registered.</span>
               </motion.div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex items-center gap-2 max-w-sm mx-auto">
@@ -154,12 +163,12 @@ export function Footer() {
                 </span>
               </Link>
               <p className="text-[13px] text-white/35 leading-relaxed max-w-xs mb-6">
-                Din kompletta partner för företagsevent i hela Europa. 360,000+ venues, en plattform.
+                {cms?.brandDesc || "Your complete partner for corporate events across Europe. 360,000+ venues, one platform."}
               </p>
 
               {/* Social Links */}
               <div className="flex items-center gap-2.5">
-                <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-white/25 mr-1">Följ oss:</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-white/25 mr-1">{cms?.socialLabel || "Follow us:"}</span>
                 {SOCIAL_LINKS.map(({ label, href, Icon }) => (
                   <a
                     key={label}
@@ -176,7 +185,7 @@ export function Footer() {
             </div>
 
             {/* Link columns */}
-            {Object.values(FOOTER_LINKS).map((section) => (
+            {(cms?.columns || Object.values(FOOTER_LINKS)).map((section) => (
               <div key={section.title} className="md:col-span-2 md:first:col-start-5">
                 <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6AD8D2] mb-5">
                   {section.title}
@@ -208,8 +217,8 @@ export function Footer() {
             className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-gradient-to-r from-[#6AD8D2]/10 to-[#6B3FA0]/10 border border-white/[0.06] hover:border-[#6AD8D2]/20 transition-all duration-300"
           >
             <div>
-              <p className="text-white text-sm md:text-base font-medium mb-1">Skicka in din förfrågan idag</p>
-              <p className="text-white/35 text-xs md:text-sm">Alltid svar inom max 24h med minst 3 offerter som passar era önskemål.</p>
+              <p className="text-white text-sm md:text-base font-medium mb-1">{cms?.ctaTitle || "Send your inquiry today"}</p>
+              <p className="text-white/35 text-xs md:text-sm">{cms?.ctaDesc || "Always a response within 24h with at least 3 proposals matching your needs."}</p>
             </div>
             <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#6AD8D2] group-hover:border-[#6AD8D2] group-hover:text-black text-white/40 transition-all duration-300 shrink-0 ml-4">
               <ArrowRight className="w-4 h-4" />

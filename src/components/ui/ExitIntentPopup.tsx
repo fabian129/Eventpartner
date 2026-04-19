@@ -12,7 +12,16 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  * Collects email + name for lead capture.
  */
 
-export function ExitIntentPopup() {
+interface ExitCMS {
+  label?: string;
+  headline?: string;
+  headlineAccent?: string;
+  description?: string;
+  button?: string;
+  privacy?: string;
+}
+
+export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
   const [show, setShow] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -107,23 +116,23 @@ export function ExitIntentPopup() {
                   <div className="w-12 h-12 rounded-full bg-[#6AD8D2]/10 border border-[#6AD8D2]/20 flex items-center justify-center mx-auto mb-4">
                     <span className="text-[#6AD8D2] text-xl">✓</span>
                   </div>
-                  <h3 className="font-display text-xl font-medium text-white mb-2">Tack!</h3>
-                  <p className="text-[14px] text-white/50">Vi hör av oss inom kort.</p>
+                  <h3 className="font-display text-xl font-medium text-white mb-2">Thank you!</h3>
+                  <p className="text-[14px] text-white/50">We'll be in touch shortly.</p>
                 </motion.div>
               ) : (
                 /* Form state */
                 <>
                   <div className="mb-6">
                     <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#6AD8D2]/70 block mb-3">
-                      Innan du går
+                      {cms?.label || "Before you go"}
                     </span>
                     <h3 className="font-display text-2xl md:text-3xl font-medium text-white tracking-tight leading-tight mb-3">
-                      Låt oss hitta er
+                      {cms?.headline || "Let us find your"}
                       <br />
-                      <span className="italic font-light text-white/50">perfekta venue.</span>
+                      <span className="italic font-light text-white/50">{cms?.headlineAccent || "perfect venue."}</span>
                     </h3>
                     <p className="text-[14px] text-white/40 leading-relaxed">
-                      Lämna era uppgifter så kontaktar vi er med skräddarsydda förslag — inom 24 timmar.
+                      {cms?.description || "Leave your details and we'll contact you with tailored proposals — within 24 hours."}
                     </p>
                   </div>
 
@@ -131,33 +140,33 @@ export function ExitIntentPopup() {
                     <input
                       type="text"
                       name="name"
-                      placeholder="Namn"
+                      placeholder="Name"
                       required
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-[#6AD8D2]/30 transition-colors duration-200"
                     />
                     <input
                       type="email"
                       name="email"
-                      placeholder="E-post"
+                      placeholder="Email"
                       required
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-[#6AD8D2]/30 transition-colors duration-200"
                     />
                     <input
                       type="text"
                       name="company"
-                      placeholder="Företag (valfritt)"
+                      placeholder="Company (optional)"
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-[#6AD8D2]/30 transition-colors duration-200"
                     />
                     <button
                       type="submit"
                       className="w-full py-3 rounded-xl bg-[#6AD8D2] text-[#0A0A0A] font-medium text-[14px] hover:bg-[#5EC4BA] transition-colors duration-200 mt-2"
                     >
-                      Skicka förfrågan →
+                      {cms?.button || "Send inquiry →"}
                     </button>
                   </form>
 
                   <p className="text-[11px] text-white/20 text-center mt-4">
-                    Vi delar aldrig era uppgifter. Ni kan avregistrera er när som helst.
+                    {cms?.privacy || "We never share your information. You can unsubscribe at any time."}
                   </p>
                 </>
               )}
