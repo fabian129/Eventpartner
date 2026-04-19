@@ -45,24 +45,31 @@ export function FAQSection() {
 
   return (
     <section id="faq" className="relative w-full py-24 md:py-32 overflow-hidden bg-[var(--bg-primary)]">
-      <div className="max-w-[800px] mx-auto px-6 md:px-10">
-        {/* Header — cinematic blur entrance */}
+      <div className="max-w-[900px] mx-auto px-6 md:px-10">
+        {/* Editorial header */}
         <motion.div
           initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="text-center mb-14 md:mb-16"
+          className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-14 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
-            <span className="text-[#6AD8D2] text-xs">◆</span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Vanliga frågor</span>
+          <div className="md:col-span-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
+              <span className="text-[#6AD8D2] text-xs">◆</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Vanliga frågor</span>
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
+              Har du frågor?
+              <br />
+              <span className="italic font-light text-[var(--text-muted)]">Vi har svar.</span>
+            </h2>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
-            Har du frågor?
-            <br />
-            <span className="italic font-light text-[var(--text-muted)]">Vi har svar.</span>
-          </h2>
+          <div className="md:col-span-5 md:col-start-8 flex items-end">
+            <p className="text-[15px] text-[var(--text-muted)] leading-relaxed">
+              Allt du behöver veta om att jobba med EventPartner — från kostnad till leveranstid.
+            </p>
+          </div>
         </motion.div>
 
         {/* FAQ Accordion — staggered with growing line */}
