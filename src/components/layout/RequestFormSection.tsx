@@ -23,13 +23,13 @@ export function RequestFormSection() {
   const inputClass = `w-full rounded-xl py-3.5 px-4 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#6AD8D2]/30 focus:border-[#6AD8D2]/50 transition-all font-sans ${
     isDark
       ? "bg-[#111] border border-white/[0.08] text-white placeholder-white/25"
-      : "bg-white border border-black/[0.08] text-[#111] placeholder-[#94A3B8]"
+      : "bg-white border border-black/[0.12] text-[#111] placeholder-[#94A3B8] shadow-sm"
   }`;
   const labelClass = "block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-2";
   const requiredStar = <span className="text-[#6AD8D2] ml-0.5">*</span>;
 
   return (
-    <section id="request" className="relative w-full px-6 md:px-10 py-20 md:py-32 overflow-hidden" style={{ background: isDark ? "#0A0A0A" : "#F8F8FA" }}>
+    <section id="request" className="relative w-full px-6 md:px-10 py-20 md:py-32 overflow-hidden" style={{ background: isDark ? "#0A0A0A" : "#EAEAED" }}>
       {/* Decorative glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "#6AD8D2" }} />
 
@@ -66,7 +66,7 @@ export function RequestFormSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.9, ease: EASE }}
           className="bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-3xl p-8 md:p-12 transition-colors duration-500"
-          style={{ boxShadow: isDark ? "0 4px 60px rgba(0,0,0,0.3)" : "0 4px 60px rgba(0,0,0,0.06)" }}
+          style={{ boxShadow: isDark ? "0 4px 60px rgba(0,0,0,0.3)" : "0 4px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04)" }}
         >
           {/* Stats bar */}
           <div className="flex items-center justify-center gap-8 mb-10 pb-8 border-b border-[var(--border-default)]">
