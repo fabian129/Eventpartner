@@ -135,8 +135,10 @@ export function ServiceCardsPersonal() {
             ))}
           </div>
         </motion.div>
+      </div>
 
-        {/* Cards grid */}
+      {/* Cards grid — FULLBLEED, outside container */}
+      <div className="px-3 md:px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
           {SERVICES.slice(0, 2).map((service, i) => (
             <ServiceCard key={service.title} service={service} index={i} />
