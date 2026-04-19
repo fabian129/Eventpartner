@@ -19,6 +19,8 @@ import { NewsletterSection } from "@/components/layout/NewsletterSection";
 import { SectionTransition } from "@/components/layout/SectionTransition";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollSection } from "@/components/ui/ScrollSection";
+import { ExitIntentPopup } from "@/components/ui/ExitIntentPopup";
+import { NewsletterInline } from "@/components/layout/NewsletterInline";
 
 export default function Home() {
   return (
@@ -77,6 +79,8 @@ export default function Home() {
         <CaseStoriesSection />
       </ScrollSection>
 
+      <NewsletterInline />
+
       <ScrollSection>
         <AboutSection />
       </ScrollSection>
@@ -84,6 +88,8 @@ export default function Home() {
       <ScrollSection>
         <FAQSection />
       </ScrollSection>
+
+      <NewsletterInline />
 
       <ScrollSection>
         <WebshopTeaser />
@@ -94,6 +100,7 @@ export default function Home() {
       </ScrollSection>
 
       <Footer />
+      <ExitIntentPopup />
     </>
   );
 }
