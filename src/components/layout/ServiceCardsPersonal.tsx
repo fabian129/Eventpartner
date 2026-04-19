@@ -6,44 +6,58 @@ import Image from "next/image";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 /**
- * ServiceCardsPersonal — Lifestyle image grid with text overlay.
+ * ServiceCardsPersonal — Moodboard-style presentation cards.
  *
- * Inspired by warm, personal product pages (Alveos-style).
- * Large rounded cards with fullbleed venue/event photography.
- * Title + description overlaid at the bottom with a soft gradient.
- * Mix of card sizes for visual rhythm.
+ * Dark cards with mono labels, structured content,
+ * tiffany accents, small images. Mix of card types
+ * for visual variety in bento layout.
  */
 
 const SERVICES = [
   {
     title: "Konferens & Möten",
-    description: "Från intima styrelsemöten till storskaliga konferenser. Vi matchar format, teknik och venue — perfekt, varje gång.",
+    description: "Från intima styrelsemöten till storskaliga konferenser. Vi matchar format, teknik och venue.",
     image: "/Images/interior-large-building-with-glass-ceiling.jpg",
+    label: "01 — Kärntjänst",
+    stat: { value: "2,048+", unit: "events levererade" },
     span: "md:col-span-7",
+    variant: "image" as const,
   },
   {
     title: "Kick-off & Teambuilding",
     description: "Upplevelser som sätter tonen för hela året. Vi bygger events som inspirerar team och driver kultur framåt.",
     image: "/Images/colorful-seoul-floating-island.jpg",
+    label: "02 — Upplevelser",
+    stat: { value: "94%", unit: "nöjda kunder" },
     span: "md:col-span-5",
+    variant: "stat" as const,
   },
   {
     title: "Middagar & Galor",
     description: "Representationsmiddagar och galor i venues som gör intryck. Helhetskoordinering från meny till platsplanering.",
     image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
+    label: "03 — Premium",
+    stat: { value: "36", unit: "länder" },
     span: "md:col-span-4",
+    variant: "image" as const,
   },
   {
     title: "Venue Sourcing",
     description: "360,000+ venues i 36 länder. Vi hittar rätt lokal baserat på era krav — alltid minst 3 förslag inom 24 timmar.",
     image: "/Images/hotel-lobby.jpg",
+    label: "04 — Plattform",
+    stat: { value: "360,000+", unit: "venues" },
     span: "md:col-span-4",
+    variant: "stat" as const,
   },
   {
     title: "Fullservice Leverans",
     description: "Lokaler, teknik, catering och logi samordnat under ett tak. En kontaktperson, noll krångel.",
     image: "/Images/palace-culture-iasi-romania.jpg",
+    label: "05 — Leverans",
+    stat: { value: "24h", unit: "svarstid" },
     span: "md:col-span-4",
+    variant: "cta" as const,
   },
 ];
 
@@ -54,33 +68,90 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.7, delay: index * 0.08, ease: EASE }}
-      className={`${service.span} relative group cursor-pointer overflow-hidden rounded-2xl`}
-      style={{ height: "clamp(320px, 42vh, 480px)" }}
+      className={`${service.span} relative group cursor-pointer overflow-hidden rounded-2xl bg-[#0F0F0F] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500`}
+      style={{ minHeight: "clamp(340px, 44vh, 500px)" }}
     >
-      {/* Fullbleed image */}
-      <Image
-        src={service.image}
-        alt={service.title}
-        fill
-        className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05]"
-        sizes="(max-width: 768px) 100vw, 50vw"
-      />
-
-      {/* Gradient overlay — warm, from bottom */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/60 transition-all duration-500" />
-
-      {/* Content — bottom aligned */}
-      <div className="absolute bottom-0 left-0 right-0 p-7 md:p-8 z-10">
-        <h3 className="font-display text-xl md:text-2xl font-medium text-white tracking-tight leading-tight mb-2 group-hover:translate-y-[-2px] transition-transform duration-500">
-          {service.title}
-        </h3>
-        <p className="text-[13px] md:text-[14px] text-white/60 leading-relaxed max-w-[360px] opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-24 transition-all duration-500 ease-out">
-          {service.description}
-        </p>
+      {/* Mono label top bar */}
+      <div className="flex items-center justify-between px-6 pt-5 pb-3">
+        <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-white/30">
+          {service.label}
+        </span>
+        <span className="text-[#6AD8D2] text-[8px]">◆</span>
       </div>
 
-      {/* Subtle shine on hover */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br from-white/[0.04] via-transparent to-transparent" />
+      {service.variant === "image" ? (
+        /* Image variant — image top half, content bottom */
+        <>
+          <div className="relative mx-5 rounded-xl overflow-hidden" style={{ height: "55%" }}>
+            <Image
+              src={service.image}
+              alt={service.title}
+              fill
+              className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05] grayscale group-hover:grayscale-0"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+          <div className="px-6 pt-5 pb-6">
+            <h3 className="font-display text-[20px] font-medium text-white tracking-tight leading-tight mb-2">
+              {service.title}
+            </h3>
+            <p className="text-[13px] text-white/40 leading-relaxed">
+              {service.description}
+            </p>
+          </div>
+        </>
+      ) : service.variant === "stat" ? (
+        /* Stat variant — big number, then content */
+        <div className="flex flex-col justify-between h-full px-6 pb-6">
+          <div className="mt-4">
+            <span className="font-display text-[clamp(3rem,5vw,4.5rem)] font-medium text-white/90 leading-none block">
+              {service.stat.value}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6AD8D2]/60 mt-2 block">
+              {service.stat.unit}
+            </span>
+          </div>
+          <div className="mt-auto pt-8 border-t border-white/[0.06]">
+            <h3 className="font-display text-[18px] font-medium text-white tracking-tight leading-tight mb-2">
+              {service.title}
+            </h3>
+            <p className="text-[13px] text-white/35 leading-relaxed">
+              {service.description}
+            </p>
+          </div>
+        </div>
+      ) : (
+        /* CTA variant — content + action button */
+        <div className="flex flex-col justify-between h-full px-6 pb-6">
+          <div className="mt-4">
+            <h3 className="font-display text-[22px] font-medium text-white tracking-tight leading-tight mb-3">
+              {service.title}
+            </h3>
+            <p className="text-[14px] text-white/40 leading-relaxed mb-6">
+              {service.description}
+            </p>
+            <div className="flex gap-4 text-[13px]">
+              <span className="text-white/50">✓ En kontaktperson</span>
+              <span className="text-white/50">✓ Transparent pris</span>
+            </div>
+          </div>
+          <div className="mt-auto pt-6">
+            <a
+              href="#request"
+              className="inline-flex items-center justify-center w-full py-3 rounded-xl bg-white/[0.06] border border-white/[0.08] text-[14px] font-medium text-white hover:bg-[#6AD8D2] hover:text-[#0A0A0A] hover:border-[#6AD8D2] transition-all duration-300"
+            >
+              Kom igång →
+            </a>
+            <div className="flex items-center justify-center gap-2 mt-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#6AD8D2]" />
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/25">Ready</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Subtle hover glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br from-[#6AD8D2]/[0.02] via-transparent to-transparent" />
     </motion.div>
   );
 }
