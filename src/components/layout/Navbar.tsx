@@ -8,8 +8,10 @@ import { useTheme } from "@/components/utils/ThemeProvider";
 
 const NAV_LINKS = [
   { label: "Tjänster", href: "#services" },
-  { label: "Skräddarsy ditt event", href: "/skraddarsy" },
-  { label: "Om oss", href: "#about" },
+  { label: "Skräddarsy", href: "#request" },
+  { label: "Bli EventPartner VIP", href: "/vip" },
+  { label: "Webbshop", href: "#webshop" },
+  { label: "Om oss", href: "/om-oss" },
 ];
 
 export function Navbar() {

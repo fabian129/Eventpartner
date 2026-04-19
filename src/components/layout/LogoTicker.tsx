@@ -1,54 +1,39 @@
 "use client";
 
 /**
- * LogoTicker — Infinite scrolling client/partner logo banner.
- * Placed right after Hero for social proof.
- * CSS-only animation for performance.
+ * LogoTicker — Static client/partner logo banner.
+ * Large text logos, no scrolling animation.
+ * Centered grid layout with generous spacing.
  */
 
 const LOGOS = [
   "Volvo", "Ericsson", "H&M", "Spotify", "IKEA",
-  "Sandvik", "Atlas Copco", "SEB", "Handelsbanken", "Telia",
-  "ABB", "Scania", "Klarna", "Northvolt", "Vattenfall",
+  "Sandvik", "Atlas Copco", "SEB", "Klarna", "Telia",
 ];
 
 export function LogoTicker() {
   return (
-    <section className="relative w-full mt-8 py-8 md:py-10 overflow-hidden border-y border-[var(--border-default)] bg-[var(--bg-primary)]">
+    <section className="relative w-full mt-8 py-10 md:py-14 border-y border-[var(--border-default)] bg-[var(--bg-primary)]">
       {/* Label */}
-      <div className="text-center mb-6">
+      <div className="text-center mb-8">
         <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-dim)]">
           Betrodda av ledande företag
         </span>
       </div>
 
-      {/* Scrolling track */}
-      <div className="relative flex overflow-hidden">
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--bg-primary)] to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--bg-primary)] to-transparent z-10" />
-
-        {/* Double track for seamless loop */}
-        <div className="flex animate-[tickerScroll_30s_linear_infinite] gap-12 md:gap-16">
-          {[...LOGOS, ...LOGOS].map((name, i) => (
-            <div
-              key={`${name}-${i}`}
-              className="flex-shrink-0 flex items-center justify-center"
+      {/* Static logo grid */}
+      <div className="max-w-[1100px] mx-auto px-6 md:px-10">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 md:gap-x-14 lg:gap-x-16 gap-y-6">
+          {LOGOS.map((name) => (
+            <span
+              key={name}
+              className="text-[17px] md:text-[19px] font-semibold text-[var(--text-dim)] tracking-wide opacity-30 hover:opacity-60 transition-opacity duration-300 cursor-default"
             >
-              <span className="text-[14px] md:text-[15px] font-medium text-[var(--text-dim)] tracking-wide whitespace-nowrap opacity-40 hover:opacity-70 transition-opacity duration-300">
-                {name}
-              </span>
-            </div>
+              {name}
+            </span>
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes tickerScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
     </section>
   );
 }

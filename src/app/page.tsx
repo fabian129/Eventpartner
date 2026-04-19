@@ -8,7 +8,7 @@ import { ServiceListClean } from "@/components/layout/ServiceListClean";
 import { ServiceCardsPersonal } from "@/components/layout/ServiceCardsPersonal";
 import { CinematicQuoteBreak } from "@/components/layout/CinematicQuoteBreak";
 import { RequestFormSection } from "@/components/layout/RequestFormSection";
-import { TestimonialsSection } from "@/components/layout/TestimonialsSection";
+
 import { ImageBreaker } from "@/components/layout/ImageBreaker";
 import { LogoTicker } from "@/components/layout/LogoTicker";
 import { CaseStoriesSection } from "@/components/layout/CaseStoriesSection";
@@ -71,11 +71,7 @@ export default function Home() {
         <RequestFormSection />
       </ScrollSection>
 
-      <SectionTransition variant="dots" />
 
-      <ScrollSection>
-        <TestimonialsSection />
-      </ScrollSection>
 
       <ScrollSection>
         <CaseStoriesSection />

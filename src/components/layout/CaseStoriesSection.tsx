@@ -163,7 +163,20 @@ export function CaseStoriesSection() {
   };
 
   return (
-    <section className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] overflow-hidden">
+    <section
+      className="relative w-full py-24 md:py-32 overflow-hidden rounded-t-[2rem]"
+      style={{
+        background: "#0A0A0A",
+        // Force dark text colors inside this section
+        "--text-primary": "#FFFFFF",
+        "--text-secondary": "rgba(255,255,255,0.7)",
+        "--text-muted": "rgba(255,255,255,0.4)",
+        "--text-dim": "rgba(255,255,255,0.25)",
+        "--bg-primary": "#0A0A0A",
+        "--bg-card": "rgba(255,255,255,0.04)",
+        "--border-default": "rgba(255,255,255,0.08)",
+      } as React.CSSProperties}
+    >
       {/* Header — inside container */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 mb-12 md:mb-16">
         <motion.div
