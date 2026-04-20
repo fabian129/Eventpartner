@@ -12,6 +12,7 @@ import { FAQSection } from "@/components/layout/FAQSection";
 import { LogoTicker } from "@/components/layout/LogoTicker";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollSection } from "@/components/ui/ScrollSection";
+import { WebshopTeaser } from "@/components/layout/WebshopTeaser";
 import { DarkZone } from "@/components/ui/DarkZone";
 import { ExitIntentPopup } from "@/components/ui/ExitIntentPopup";
 import { client } from "@/../sanity/lib/client";
@@ -153,7 +154,12 @@ export default async function Home() {
         } : undefined} />
       </ScrollSection>
 
-      {/* 10. FAQ */}
+      {/* 10. Webshop Teaser */}
+      <ScrollSection>
+        <WebshopTeaser />
+      </ScrollSection>
+
+      {/* 11. FAQ */}
       <ScrollSection fadeOut={false}>
         <FAQSection cms={data ? {
           headline: t(data.faqHeadline),
