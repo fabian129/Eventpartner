@@ -25,7 +25,7 @@ interface NavCMS {
 }
 
 export function Navbar({ cms }: { cms?: NavCMS }) {
-  const NAV_LINKS = cms?.links?.length ? cms.links : DEFAULT_LINKS;
+  const NAV_LINKS = DEFAULT_LINKS;
   const ctaText = cms?.cta || "Book Event →";
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
