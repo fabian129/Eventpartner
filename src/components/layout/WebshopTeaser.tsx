@@ -144,7 +144,7 @@ export function WebshopTeaser() {
   const [overlayVisible, setOverlayVisible] = useState(false);
 
   return (
-    <section className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] overflow-hidden">
+    <section id="shop" className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] overflow-hidden">
       {/* Gray dot-grid — left edge */}
       <div
         className="absolute pointer-events-none z-0"

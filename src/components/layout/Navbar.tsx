@@ -3,19 +3,24 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/components/utils/ThemeProvider";
+import { Menu, X } from "lucide-react";
 
 const DEFAULT_LINKS = [
   { label: "Services", href: "#services" },
-  { label: "Customize", href: "#request" },
-  { label: "Become VIP", href: "/vip" },
-  { label: "Shop", href: "#webshop" },
-  { label: "About", href: "/om-oss" },
+  { label: "Customize", href: "#request", disabled: true },
+  { label: "Become VIP", href: "#", disabled: true },
+  { label: "Shop", href: "#shop" },
+  { label: "About", href: "#about" },
 ];
 
+interface NavLink {
+  label: string;
+  href: string;
+  disabled?: boolean;
+}
+
 interface NavCMS {
-  links?: { label: string; href: string }[];
+  links?: NavLink[];
   cta?: string;
 }
 
@@ -24,7 +29,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
   const ctaText = cms?.cta || "Book Event →";
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -51,8 +56,13 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.label}
-                  href={link.href}
-                  className="text-[13px] text-[var(--text-secondary)] px-3 py-2 rounded-full transition-all duration-300 hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]"
+                  href={link.disabled ? undefined : link.href}
+                  onClick={link.disabled ? (e: React.MouseEvent) => e.preventDefault() : undefined}
+                  className={`text-[13px] px-3 py-2 rounded-full transition-all duration-300 ${
+                    link.disabled
+                      ? "text-[var(--text-dim)] cursor-not-allowed opacity-50"
+                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]"
+                  }`}
                 >
                   {link.label}
                 </a>
@@ -70,16 +80,8 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             </Link>
           </div>
 
-          {/* Right: theme toggle + CTA */}
+          {/* Right: CTA */}
           <div className="hidden md:flex items-center gap-2">
-            <button
-              onClick={toggleTheme}
-              className="w-9 h-9 rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)]/80 backdrop-blur-xl flex items-center justify-center text-[var(--text-muted)] hover:text-[#6AD8D2] hover:border-[#6AD8D2]/30 transition-all duration-300"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
-
             <a
               href="#request"
               className="relative text-[13px] font-medium text-white bg-[#111] rounded-full px-5 py-2.5 transition-all duration-300 hover:bg-[#222] hover:shadow-lg hover:shadow-black/10 overflow-hidden group"
@@ -89,15 +91,8 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             </a>
           </div>
 
-          {/* Mobile: theme toggle + hamburger */}
+          {/* Mobile: hamburger */}
           <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={toggleTheme}
-              className="w-8 h-8 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] flex items-center justify-center text-[var(--text-muted)]"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-[var(--text-secondary)] p-2"
