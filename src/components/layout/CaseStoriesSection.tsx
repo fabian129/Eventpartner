@@ -20,7 +20,7 @@ const STORIES = [
     client: "Ericsson",
     event: "European Leadership Summit 2024",
     description: "Three-day conference for 400 leaders from 12 countries. Full-service from venue sourcing in Stockholm to AV technology and gala evening.",
-    image: "/Images/interior-large-building-with-glass-ceiling.jpg",
+    image: "/Images/venue-dark-modern.jpg",
     stats: { guests: "400", location: "Stockholm", duration: "3 days" },
     color: "#6AD8D2",
   },

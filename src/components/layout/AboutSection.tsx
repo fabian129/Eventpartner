@@ -23,7 +23,7 @@ const TEAM = [
 const DEFAULT_STATS = [
   { value: "36", label: "Countries" },
   { value: "2,048+", label: "Events delivered" },
-  { value: "10+", label: "Years of experience" },
+  { value: "2,400+", label: "Venue partners" },
   { value: "94%", label: "Customer satisfaction" },
 ];
 
@@ -79,7 +79,7 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
                 {cms?.label || "EventPartner — About Us"}
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-                Since 2014
+                Pan-European network
               </span>
             </div>
 

@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!country) return {};
   
   return {
-    title: `Event Venues i ${country.nameSv} — EventPartner`,
-    description: `Hitta de bästa event- och konferenslokalerna i ${country.nameSv}. ${country.venues} venues tillgängliga. Skicka in din förfrågan idag — kostnadsfritt.`,
+    title: `Event Venues in ${country.name} — EventPartner`,
+    description: `Find the best event and conference venues in ${country.name}. ${country.venues} venues available. Submit your inquiry today — free of charge.`,
   };
 }
 

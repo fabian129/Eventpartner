@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
+import { DotGrid } from "@/components/ui/DotGrid";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -54,8 +55,9 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
   const faqs = cms?.items?.length ? cms.items : DEFAULT_FAQS;
 
   return (
-    <section id="faq" className="relative w-full py-24 md:py-32 overflow-hidden">
-      <div className="max-w-[900px] mx-auto px-6 md:px-10">
+    <section id="faq" className="relative w-full py-24 md:py-32">
+      <DotGrid bleedBottom={100} mirror />
+      <div className="relative z-[1] max-w-[900px] mx-auto px-6 md:px-10">
         {/* Moodboard editorial header */}
         <motion.div
           initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}

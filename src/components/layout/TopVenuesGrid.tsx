@@ -7,17 +7,17 @@ import type { Venue } from "@/data/countries";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/* Placeholder venue images — cycle through available stock photos */
+/* Venue images — human-centric event photography */
 const VENUE_IMAGES = [
-  "/Images/hotel-lobby.jpg",
-  "/Images/interior-large-building-with-glass-ceiling.jpg",
-  "/Images/decorated-hall-wedding-is-ready-celebration.jpg",
-  "/Images/palace-culture-iasi-romania.jpg",
+  "/Images/round-table-discussion-business-conference-meeting-event-audience-conference-hall-business.jpg",
+  "/Images/close-up-wineglasses-table.jpg",
+  "/Images/diverse-business-people-dinner-party.jpg",
+  "/Images/group-people-restaurant.jpg",
+  "/Images/speaker-giving-talk-conference-hall-business-event-rear-view-unrecognizable-people.jpg",
+  "/Images/lunch-with-friends.jpg",
+  "/Images/group-people-music-concert.jpg",
   "/Images/conference-evening.jpg",
-  "/Images/hotel.jpg",
-  "/Images/interior-modern-high-building-high-quality-photo.jpg",
-  "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
-  "/Images/high-angle-view-wedding-celebration-sunset-copy-space.jpg",
+  "/Images/hotel-lobby.jpg",
   "/Images/venue-dark-modern.jpg",
 ];
 
@@ -34,9 +34,9 @@ export function TopVenuesGrid({ venues, countryName }: { venues: Venue[]; countr
           transition={{ duration: 0.7, ease: EASE }}
           className="mb-8"
         >
-          <p className="section-label mb-2">Populära venues</p>
+          <p className="section-label mb-2">Popular venues</p>
           <h2 className="font-display text-2xl md:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
-            Top {venues.length} i {countryName}
+            Top {venues.length} in {countryName}
           </h2>
         </motion.div>
       </div>

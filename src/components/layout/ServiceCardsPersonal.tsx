@@ -18,28 +18,28 @@ const SERVICES = [
   {
     title: "Conferences & Meetings",
     desc: "From boardroom meetings to large-scale conferences.",
-    image: "/Images/interior-large-building-with-glass-ceiling.jpg",
+    image: "/Images/speaker-giving-talk-conference-hall-business-event-rear-view-unrecognizable-people.jpg",
     label: "01",
     icon: "mic" as const,
   },
   {
     title: "Kick-offs & Team Building",
     desc: "Experiences that set the tone for the entire year.",
-    image: "/Images/colorful-seoul-floating-island.jpg",
+    image: "/Images/man-walking-street-night-time.jpg",
     label: "02",
     icon: "users" as const,
   },
   {
     title: "Dinners & Galas",
     desc: "Representational dinners at venues that make an impression.",
-    image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
+    image: "/Images/decorated-hall-wedding-is-ready-celebration.jpg",
     label: "03",
     icon: "glass" as const,
   },
   {
     title: "Venue Sourcing",
     desc: "360,000+ venues in 36 countries. Always 3 proposals within 24h.",
-    image: "/Images/hotel-lobby.jpg",
+    image: "/Images/group-people-restaurant.jpg",
     label: "04",
     icon: "globe" as const,
   },
@@ -238,8 +238,8 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
           >
             <div className="relative w-full h-full">
               <Image
-                src="/Images/palace-culture-iasi-romania.jpg"
-                alt="Fullservice leverans"
+                src="/Images/black-white-shot-beautiful-building-with-sculptures-chess-floor.jpg"
+                alt="Full-service event delivery"
                 fill
                 className="object-cover transition-all duration-[1s] ease-out
                            saturate-[0.2] brightness-[0.45]

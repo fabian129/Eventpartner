@@ -47,22 +47,29 @@ export function RequestFormSection({ cms }: { cms?: {
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="text-center mb-12 md:mb-16"
+          className="mb-12 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-primary)] mb-6">
-            <Send className="w-3.5 h-3.5 text-[#6AD8D2]" />
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {cms?.badge || "Free inquiry"}
+          {/* Mono labels */}
+          <div className="flex justify-between items-start mb-10">
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
+              EventPartner — Inquiry
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
+              {cms?.badge || "Free • 24h response"}
             </span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-5">
-            {cms?.headline || "Tell us what you need."}
-            <br />
-            <span className="italic font-light text-[var(--text-muted)]">{cms?.headlineAccent || "We'll handle the rest."}</span>
-          </h2>
-          <p className="text-[15px] text-[var(--text-muted)] max-w-md mx-auto leading-relaxed">
-            {cms?.description || "Fill in the form below and we'll get back to you with tailored proposals within 24 hours. Completely free."}
-          </p>
+
+          {/* Two-column: heading left, description right */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">
+              {cms?.headline || "Tell us what you need."}
+              <br />
+              <span className="italic font-light text-[var(--text-muted)]">{cms?.headlineAccent || "We'll handle the rest."}</span>
+            </h2>
+            <p className="font-display text-[clamp(1rem,2vw,1.3rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-sm md:text-right">
+              {cms?.description || "Fill in the form and we'll deliver tailored proposals within 24 hours. Completely free."}
+            </p>
+          </div>
         </motion.div>
 
         {/* Form card */}

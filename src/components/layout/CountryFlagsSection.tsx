@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { COUNTRIES } from "@/data/countries";
+import { DotGrid } from "@/components/ui/DotGrid";
 
 // Build slug lookup from central data
 const SLUG_MAP: Record<string, string> = {};
@@ -98,15 +99,19 @@ interface FlagsCMS {
 
 export function CountryFlagsSection({ cms }: { cms?: FlagsCMS }) {
   return (
-    <section id="coverage" className="relative w-full py-24 md:py-32 overflow-hidden">
+    <section id="coverage" className="relative w-full py-24 md:py-32">
+      {/* Dot-grid */}
+      <DotGrid bleedBottom={200} />
+
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-12 md:mb-16 px-6"
+        className="relative z-[1] max-w-[1200px] mx-auto mb-12 md:mb-16 px-6 md:px-10"
       >
-        <div className="flex justify-center gap-6 mb-8">
+        {/* Mono labels */}
+        <div className="flex justify-between items-start mb-10">
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
             {cms?.label || "EventPartner — Network"}
           </span>
@@ -114,16 +119,18 @@ export function CountryFlagsSection({ cms }: { cms?: FlagsCMS }) {
             {cms?.labelRight || "100% Europe"}
           </span>
         </div>
-        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-4">
-          {cms?.headline || "36 countries. 360,000+ venues."}
+
+        {/* Heading + description stacked */}
+        <h2 className="font-display text-[clamp(2rem,5vw,3.8rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
+          {cms?.headline || "36 countries.\n360,000+ venues."}
         </h2>
-        <p className="text-base text-[var(--text-muted)] max-w-md mx-auto leading-relaxed">
-          {cms?.description || "All of Europe — we have venues that match your needs regardless of destination."}
+        <p className="font-display text-[clamp(1rem,2vw,1.2rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-lg">
+          {cms?.description || "All of Europe — we source the perfect venue regardless of destination."}
         </p>
       </motion.div>
 
       {/* Country cards ticker — large, interactive */}
-      <div className="flex flex-col gap-5">
+      <div className="relative z-[1] flex flex-col gap-5">
         <CountryRow countries={COUNTRIES_ROW_1} direction="left" speed={80} />
         <CountryRow countries={COUNTRIES_ROW_2} direction="right" speed={85} />
       </div>
@@ -145,7 +152,7 @@ function StatsBar() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: 0.2, duration: 0.6 }}
-      className="flex items-center justify-center gap-8 md:gap-16 mt-12 md:mt-16 px-6"
+      className="relative z-[1] flex items-center justify-center gap-8 md:gap-16 mt-12 md:mt-16 px-6"
     >
       <StatCounter value={36} suffix="" label="Countries" active={isInView} />
       <StatCounter value={360} suffix="K+" label="Venues" active={isInView} delay={0.15} />

@@ -40,26 +40,26 @@ export function DarkZone({ children, exitToLight = true }: DarkZoneProps) {
     let t: number;
 
     if (exitToLight) {
-      // Entry: 0.10→0.18 = light→dark (8% range)
-      // Steady: 0.18→0.82 = fully dark
-      // Exit: 0.82→0.90 = dark→light (8% range)
-      if (v <= 0.10) {
+      // Entry: 0.13→0.25 = light→dark (12% range, starts later)
+      // Steady: 0.25→0.80 = fully dark
+      // Exit: 0.80→0.90 = dark→light (10% range)
+      if (v <= 0.13) {
         t = 0;
-      } else if (v < 0.18) {
-        t = (v - 0.10) / 0.08;
-      } else if (v < 0.82) {
+      } else if (v < 0.25) {
+        t = (v - 0.13) / 0.12;
+      } else if (v < 0.80) {
         t = 1;
       } else if (v < 0.90) {
-        t = Math.max(0, 1 - (v - 0.82) / 0.08);
+        t = Math.max(0, 1 - (v - 0.80) / 0.10);
       } else {
         t = 0;
       }
     } else {
-      // Entry-only: 0.10→0.18 = light→dark, stays dark forever
-      if (v <= 0.10) {
+      // Entry-only: 0.13→0.25 = light→dark (12% range, starts later), stays dark forever
+      if (v <= 0.13) {
         t = 0;
-      } else if (v < 0.18) {
-        t = (v - 0.10) / 0.08;
+      } else if (v < 0.25) {
+        t = (v - 0.13) / 0.12;
       } else {
         t = 1;
       }
