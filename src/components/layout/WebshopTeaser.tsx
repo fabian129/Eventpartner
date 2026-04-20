@@ -145,8 +145,28 @@ export function WebshopTeaser() {
 
   return (
     <section className="relative w-full py-24 md:py-32 bg-[var(--bg-primary)] overflow-hidden">
-      {/* Dot grid — right edge, behind cards */}
-      <div className="absolute top-[10%] right-0 w-[30%] h-[80%] dot-grid dot-grid-fade-from-right pointer-events-none z-0" />
+      {/* Gray dot-grid — left edge */}
+      <div
+        className="absolute pointer-events-none z-0"
+        style={{
+          top: 0, bottom: 0, left: 0, right: 0,
+          backgroundImage: "radial-gradient(circle, rgba(160,160,160,0.65) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+          WebkitMaskImage: "radial-gradient(ellipse 25% 65% at 3% 50%, black 0%, rgba(0,0,0,0.3) 50%, transparent 80%)",
+          maskImage: "radial-gradient(ellipse 25% 65% at 3% 50%, black 0%, rgba(0,0,0,0.3) 50%, transparent 80%)",
+        }}
+      />
+      {/* Gray dot-grid — right edge */}
+      <div
+        className="absolute pointer-events-none z-0"
+        style={{
+          top: 0, bottom: 0, left: 0, right: 0,
+          backgroundImage: "radial-gradient(circle, rgba(160,160,160,0.65) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+          WebkitMaskImage: "radial-gradient(ellipse 25% 65% at 97% 50%, black 0%, rgba(0,0,0,0.3) 50%, transparent 80%)",
+          maskImage: "radial-gradient(ellipse 25% 65% at 97% 50%, black 0%, rgba(0,0,0,0.3) 50%, transparent 80%)",
+        }}
+      />
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10">
         {/* Editorial header */}
