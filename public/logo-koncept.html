@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EventPartner – Logo Lockup Concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --tiffany: #6AD8D2;
+      --tiffany-light: #e6f9f8;
+      --tiffany-dark: #4DBDB7;
+      --charcoal: #111111;
+      --slate: #666666;
+      --mist: #F4F4F4;
+      --border: rgba(17,17,17,0.08);
+      --white: #ffffff;
+      --display: 'Space Grotesk', sans-serif;
+    }
+
+    body {
+      font-family: var(--display);
+      background: var(--mist);
+      color: var(--charcoal);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ———— HERO ———— */
+    .hero {
+      background: var(--charcoal);
+      color: var(--white);
+      padding: 80px 40px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px; height: 400px;
+      border: 1px solid rgba(106, 216, 210, 0.12);
+      border-radius: 50%;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--tiffany);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 em {
+      color: var(--tiffany);
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .hero p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ———— GRID ———— */
+    .concepts-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: var(--slate);
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    .logo-card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 2px solid transparent;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .logo-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+    }
+    .logo-card.selected {
+      border-color: var(--tiffany);
+      box-shadow: 0 0 0 4px var(--tiffany-light), 0 8px 32px rgba(106, 216, 210, 0.12);
+    }
+
+    .card-preview {
+      padding: 40px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      transition: background 0.3s;
+    }
+
+    .card-preview.bg-light { background: var(--white); }
+    .card-preview.bg-dark { background: var(--charcoal); }
+
+    .card-info {
+      padding: 16px 20px 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-info h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-info p {
+      font-size: 12px;
+      color: var(--slate);
+      line-height: 1.4;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--tiffany-dark);
+      background: var(--tiffany-light);
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 8px;
+    }
+
+    /* ———— TOGGLE ———— */
+    .bg-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+    .bg-toggle button {
+      font-family: var(--display);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--slate);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .bg-toggle button.active {
+      background: var(--charcoal);
+      color: var(--white);
+      border-color: var(--charcoal);
+    }
+
+    /* ———— SVG LOGO STYLES ———— */
+    .lockup-svg { max-width: 260px; height: auto; }
+    .lockup-svg.compact { max-width: 200px; }
+    .lockup-svg.stacked { max-width: 140px; }
+
+    /* ———— RESPONSIVE ———— */
+    @media (max-width: 768px) {
+      .hero { padding: 60px 20px 40px; }
+      .logo-grid { grid-template-columns: 1fr; }
+      .concepts-section { padding: 40px 16px; }
+    }
+
+    /* ———— SELECTION BAR ———— */
+    .selection-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--charcoal);
+      color: var(--white);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .selection-bar.visible { transform: translateY(0); }
+    .selection-bar .count { font-size: 13px; font-weight: 500; }
+    .selection-bar .count span { color: var(--tiffany); font-weight: 700; }
+    .copy-btn {
+      padding: 9px 20px;
+      background: var(--tiffany);
+      color: var(--charcoal);
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--display);
+    }
+
+    hr.divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">Logo Lockup · April 2026</div>
+    <h1>Event<em>Partner</em></h1>
+    <p>Icon + wordmark lockup concepts. 3 founders, connecting people worldwide. Click on any you like — we iterate fast.</p>
+  </header>
+
+  <!-- SECTION A: Horizontal Lockups -->
+  <section class="concepts-section" id="horizontal">
+    <div class="section-label">A · Horizontal Lockup</div>
+    <div class="section-title">Icon + EventPartner — Side by Side</div>
+    <div class="section-desc">The icon sits to the left of the wordmark. Best for navbars and headers.</div>
+    
+    <div class="logo-grid">
+
+      <!-- A1: Clean horizontal with icon left -->
+      <div class="logo-card" data-id="A1" onclick="toggleSelect(this)">
+        <div class="card-preview bg-light">
+          <svg class="lockup-svg" viewBox="0 0 320 60" xmlns="http://www.w3.org/2000/svg">
+            <!-- 3-Person Icon with Globe -->
+            <g transform="translate(0, 3)">
+              <!-- Left person -->
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#999" stroke-width="2.2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- Center person with globe head -->
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2" stroke="#6AD8D2" stroke-width="0.5"/>
+              <!-- Globe lines -->
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="white" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="white" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- Right person -->
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#999" stroke-width="2.2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+            </g>
+            <!-- Wordmark -->
+            <text x="78" y="29" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="600" letter-spacing="0.06em" fill="#111">
+              <tspan>EVENT</tspan><tspan fill="#6AD8D2">PARTNER</tspan>
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <span class="card-tag">Recommended</span>
+          <h3>Classic Horizontal — Half Tiffany</h3>
+          <p>"EVENT" in charcoal, "PARTNER" in tiffany. Clean split that highlights partnership.</p>
+        </div>
+      </div>
+
+      <!-- A2: Full dark wordmark -->
+      <div class="logo-card" data-id="A2" onclick="toggleSelect(this)">
+        <div class="card-preview bg-light">
+          <svg class="lockup-svg" viewBox="0 0 320 60" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 3)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#999" stroke-width="2.2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="white" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="white" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#999" stroke-width="2.2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+            </g>
+            <text x="78" y="29" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="600" letter-spacing="0.06em" fill="#111">
+              EVENTPARTNER
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Classic Horizontal — Full Charcoal</h3>
+          <p>All-dark wordmark with globe icon providing the only colour accent.</p>
+        </div>
+      </div>
+
+      <!-- A3: Mixed case EventPartner -->
+      <div class="logo-card" data-id="A3" onclick="toggleSelect(this)">
+        <div class="card-preview bg-light">
+          <svg class="lockup-svg" viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 3)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="white" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="white" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <text x="78" y="30" font-family="'Space Grotesk', sans-serif" font-size="18" font-weight="500" letter-spacing="-0.03em" fill="#111">
+              <tspan>Event</tspan><tspan font-weight="600">Partner</tspan>
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <span class="card-tag">Recommended</span>
+          <h3>Mixed Case — EventPartner</h3>
+          <p>Capital E and P with lighter "Event" and bolder "Partner". Approachable yet premium.</p>
+        </div>
+      </div>
+
+      <!-- A4: Mixed case with tiffany P -->
+      <div class="logo-card" data-id="A4" onclick="toggleSelect(this)">
+        <div class="card-preview bg-light">
+          <svg class="lockup-svg" viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 3)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="white" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="white" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <text x="78" y="30" font-family="'Space Grotesk', sans-serif" font-size="18" font-weight="500" letter-spacing="-0.03em" fill="#111">
+              <tspan>Event</tspan><tspan font-weight="600" fill="#6AD8D2">Partner</tspan>
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Mixed Case — Tiffany "Partner"</h3>
+          <p>The word "Partner" in brand tiffany, linking the text colour to the globe accent.</p>
+        </div>
+      </div>
+
+      <!-- A5: Separator line between icon and text -->
+      <div class="logo-card" data-id="A5" onclick="toggleSelect(this)">
+        <div class="card-preview bg-light">
+          <svg class="lockup-svg" viewBox="0 0 350 60" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 3)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#999" stroke-width="2.2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="white" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="white" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#999" stroke-width="2.2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+            </g>
+            <!-- Separator -->
+            <line x1="72" y1="8" x2="72" y2="44" stroke="#ddd" stroke-width="1"/>
+            <!-- Two-line text -->
+            <text x="84" y="22" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="600" letter-spacing="-0.02em" fill="#111">
+              EventPartner
+            </text>
+            <text x="84" y="38" font-family="'Space Grotesk', sans-serif" font-size="8.5" font-weight="400" letter-spacing="0.12em" fill="#999" text-transform="uppercase">
+              CONNECTING PEOPLE WORLDWIDE
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Divided Lockup + Tagline</h3>
+          <p>Vertical separator with tagline below. Great for full brand presence.</p>
+        </div>
+      </div>
+
+      <!-- A6: Light weight horizontal -->
+      <div class="logo-card" data-id="A6" onclick="toggleSelect(this)">
+        <div class="card-preview bg-light">
+          <svg class="lockup-svg" viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 3)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#c0c0c0" stroke-width="1.8"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#c0c0c0" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="white" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="white" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#c0c0c0" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#c0c0c0" stroke-width="1.8"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#c0c0c0" stroke-width="1.8" stroke-linecap="round"/>
+            </g>
+            <text x="78" y="24" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="300" letter-spacing="0.22em" fill="#111">
+              EVENT
+            </text>
+            <text x="78" y="39" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="600" letter-spacing="0.22em" fill="#111">
+              PARTNER
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Stacked Text — Light/Bold Split</h3>
+          <p>"EVENT" in light weight above "PARTNER" in bold. Two-register typography.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SECTION B: Dark Backgrounds -->
+  <section class="concepts-section" id="dark-versions">
+    <div class="section-label">B · Dark Mode Versions</div>
+    <div class="section-title">Same Lockups on Dark</div>
+    <div class="section-desc">How they look on your site's dark mode background.</div>
+
+    <div class="logo-grid">
+
+      <!-- B1: Dark version of A3 mixed case -->
+      <div class="logo-card" data-id="B1" onclick="toggleSelect(this)">
+        <div class="card-preview bg-dark">
+          <svg class="lockup-svg" viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 3)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#666" stroke-width="2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="rgba(255,255,255,0.6)" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#666" stroke-width="2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <text x="78" y="30" font-family="'Space Grotesk', sans-serif" font-size="18" font-weight="500" letter-spacing="-0.03em" fill="white">
+              <tspan>Event</tspan><tspan font-weight="600">Partner</tspan>
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <span class="card-tag">Recommended</span>
+          <h3>Dark Mode — Mixed Case</h3>
+          <p>White text on dark. The globe pops beautifully against dark backgrounds.</p>
+        </div>
+      </div>
+
+      <!-- B2: Dark version of A1 split color -->
+      <div class="logo-card" data-id="B2" onclick="toggleSelect(this)">
+        <div class="card-preview bg-dark">
+          <svg class="lockup-svg" viewBox="0 0 320 60" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 3)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#555" stroke-width="2.2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="rgba(255,255,255,0.6)" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#555" stroke-width="2.2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round"/>
+            </g>
+            <text x="78" y="29" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="600" letter-spacing="0.06em" fill="white">
+              <tspan>EVENT</tspan><tspan fill="#6AD8D2">PARTNER</tspan>
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Dark Mode — All-Caps Split</h3>
+          <p>White EVENT + Tiffany PARTNER. High contrast on dark.</p>
+        </div>
+      </div>
+
+      <!-- B3: Dark version of A5 with tagline -->
+      <div class="logo-card" data-id="B3" onclick="toggleSelect(this)">
+        <div class="card-preview bg-dark">
+          <svg class="lockup-svg" viewBox="0 0 350 60" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 3)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#555" stroke-width="2.2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="rgba(255,255,255,0.6)" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#555" stroke-width="2.2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#555" stroke-width="2.2" stroke-linecap="round"/>
+            </g>
+            <line x1="72" y1="8" x2="72" y2="44" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="84" y="22" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="600" letter-spacing="-0.02em" fill="white">
+              EventPartner
+            </text>
+            <text x="84" y="38" font-family="'Space Grotesk', sans-serif" font-size="8.5" font-weight="400" letter-spacing="0.12em" fill="#666">
+              CONNECTING PEOPLE WORLDWIDE
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Dark — Divided with Tagline</h3>
+          <p>Full brand lockup on dark. Tagline tells the story immediately.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SECTION C: Stacked / Centered -->
+  <section class="concepts-section" id="stacked">
+    <div class="section-label">C · Stacked Lockup</div>
+    <div class="section-title">Icon Above Text — Centered</div>
+    <div class="section-desc">For use in favicons, app icons, social avatars, and compact spaces.</div>
+
+    <div class="logo-grid">
+      <!-- C1: Stacked centered -->
+      <div class="logo-card" data-id="C1" onclick="toggleSelect(this)">
+        <div class="card-preview bg-light">
+          <svg class="lockup-svg stacked" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(22, 0)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="white" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="white" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <text x="70" y="62" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="600" letter-spacing="0.18em" fill="#111">
+              EVENTPARTNER
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Stacked — All Caps</h3>
+          <p>Icon above, uppercase wordmark below. Classic stacked lockup.</p>
+        </div>
+      </div>
+
+      <!-- C2: Stacked with mixed case -->
+      <div class="logo-card" data-id="C2" onclick="toggleSelect(this)">
+        <div class="card-preview bg-light">
+          <svg class="lockup-svg stacked" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(22, 0)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="white" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="white" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <text x="70" y="60" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="500" letter-spacing="-0.02em" fill="#111">
+              <tspan>Event</tspan><tspan font-weight="600">Partner</tspan>
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <span class="card-tag">Recommended</span>
+          <h3>Stacked — Mixed Case</h3>
+          <p>EventPartner in mixed case under the icon. Warm and premium feel.</p>
+        </div>
+      </div>
+
+      <!-- C3: Stacked dark -->
+      <div class="logo-card" data-id="C3" onclick="toggleSelect(this)">
+        <div class="card-preview bg-dark">
+          <svg class="lockup-svg stacked" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(22, 0)">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#555" stroke-width="2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="rgba(255,255,255,0.6)" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#555" stroke-width="2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <text x="70" y="60" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="500" letter-spacing="-0.02em" fill="white">
+              <tspan>Event</tspan><tspan font-weight="600">Partner</tspan>
+            </text>
+          </svg>
+        </div>
+        <div class="card-info">
+          <h3>Stacked — Dark Mode</h3>
+          <p>Stacked mixed case on dark. Perfect for dark mode headers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SECTION D: Navbar Preview -->
+  <section class="concepts-section" id="navbar-preview">
+    <div class="section-label">D · In Context</div>
+    <div class="section-title">How It Looks in the Navbar</div>
+    <div class="section-desc">Live preview of how the lockup sits in EventPartner's actual navigation bar.</div>
+
+    <!-- Light navbar mock -->
+    <div style="background: #F4F4F4; border-radius: 16px; padding: 16px 0; margin-bottom: 20px; overflow: hidden;">
+      <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 0 24px;">
+        <div style="display: flex; align-items: center; gap: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(16px); border: 1px solid rgba(0,0,0,0.06); border-radius: 999px; padding: 0;">
+          <div style="padding: 10px 16px; display: flex; align-items: center; gap: 10px;">
+            <!-- Inline mini icon -->
+            <svg width="44" height="28" viewBox="0 0 66 42" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="white" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="white" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="white" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#b0b0b0" stroke-width="2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: #111;">Event<b style="font-weight: 600;">Partner</b></span>
+            <span style="color: #6AD8D2; font-size: 8px;">◆</span>
+          </div>
+          <div style="width: 1px; height: 20px; background: rgba(0,0,0,0.06);"></div>
+          <nav style="display: flex; align-items: center; gap: 2px; padding: 0 8px;">
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: #666; text-decoration: none; transition: all 0.3s;">Services</a>
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: #bbb; text-decoration: none;">Customize</a>
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: #bbb; text-decoration: none;">Become VIP</a>
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: #666; text-decoration: none;">Shop</a>
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: #666; text-decoration: none;">About</a>
+          </nav>
+        </div>
+        <a style="font-family: 'Space Grotesk'; font-size: 13px; font-weight: 500; color: white; background: #111; border-radius: 999px; padding: 10px 20px; text-decoration: none;">Book Event →</a>
+      </div>
+    </div>
+
+    <!-- Dark navbar mock -->
+    <div style="background: #0A0A0A; border-radius: 16px; padding: 16px 0; overflow: hidden;">
+      <div style="display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 0 24px;">
+        <div style="display: flex; align-items: center; gap: 0; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.06); border-radius: 999px; padding: 0;">
+          <div style="padding: 10px 16px; display: flex; align-items: center; gap: 10px;">
+            <svg width="44" height="28" viewBox="0 0 66 42" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="10" r="5.5" fill="none" stroke="#555" stroke-width="2"/>
+              <path d="M4 38 Q4 24 14 24 Q24 24 24 38" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="33" cy="8" r="7.5" fill="#6AD8D2"/>
+              <ellipse cx="33" cy="8" rx="5" ry="7.5" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1"/>
+              <line x1="25.5" y1="8" x2="40.5" y2="8" stroke="rgba(255,255,255,0.6)" stroke-width="0.8"/>
+              <path d="M28 3.5 Q33 6 38 3.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M28 12.5 Q33 10 38 12.5" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.7"/>
+              <path d="M18 38 Q18 22 33 22 Q48 22 48 38" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="52" cy="10" r="5.5" fill="none" stroke="#555" stroke-width="2"/>
+              <path d="M42 38 Q42 24 52 24 Q62 24 62 38" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span style="font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: white;">Event<b style="font-weight: 600;">Partner</b></span>
+            <span style="color: #6AD8D2; font-size: 8px;">◆</span>
+          </div>
+          <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.06);"></div>
+          <nav style="display: flex; align-items: center; gap: 2px; padding: 0 8px;">
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: rgba(255,255,255,0.5); text-decoration: none;">Services</a>
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: rgba(255,255,255,0.3); text-decoration: none;">Customize</a>
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: rgba(255,255,255,0.3); text-decoration: none;">Become VIP</a>
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: rgba(255,255,255,0.5); text-decoration: none;">Shop</a>
+            <a style="font-family: 'Space Grotesk'; font-size: 13px; padding: 8px 12px; border-radius: 999px; color: rgba(255,255,255,0.5); text-decoration: none;">About</a>
+          </nav>
+        </div>
+        <a style="font-family: 'Space Grotesk'; font-size: 13px; font-weight: 500; color: #111; background: #6AD8D2; border-radius: 999px; padding: 10px 20px; text-decoration: none;">Book Event →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="text-align: center; padding: 60px 40px 100px; max-width: 600px; margin: 0 auto;">
+    <h2 style="font-family: var(--display); font-size: 22px; font-weight: 500; margin-bottom: 8px; letter-spacing: -0.03em;">Vad tycker ni?</h2>
+    <p style="font-size: 13px; color: var(--slate); line-height: 1.6;">Klicka på de koncept ni gillar, kopiera ID:na och skicka till oss. Vi itererar snabbt tills ni hittar rätt.</p>
+    <div style="margin-top: 20px; padding: 14px 24px; background: var(--tiffany-light); border-radius: 12px; font-size: 12px; color: var(--tiffany-dark); font-weight: 500;">
+      💡 Tip: All text uses Space Grotesk — your site's actual font. These are production-ready SVGs.
+    </div>
+  </section>
+
+  <!-- SELECTION BAR -->
+  <div class="selection-bar" id="selectionBar">
+    <div>
+      <span class="count">Selected: <span id="count">0</span></span>
+      <span style="font-size: 12px; color: rgba(255,255,255,0.4); margin-left: 12px;" id="selectedIds"></span>
+    </div>
+    <button class="copy-btn" onclick="copySelection()">Copy selection →</button>
+  </div>
+
+  <script>
+    const selected = new Set();
+    function toggleSelect(card) {
+      const id = card.dataset.id;
+      if (selected.has(id)) { selected.delete(id); card.classList.remove('selected'); }
+      else { selected.add(id); card.classList.add('selected'); }
+      document.getElementById('count').textContent = selected.size;
+      document.getElementById('selectedIds').textContent = [...selected].join(', ');
+      document.getElementById('selectionBar').classList.toggle('visible', selected.size > 0);
+    }
+    function copySelection() {
+      const text = `EventPartner Logo Lockup - Selected: ${[...selected].join(', ')}`;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied! ✓';
+        setTimeout(() => btn.textContent = 'Copy selection →', 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>

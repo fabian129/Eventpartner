@@ -38,3 +38,53 @@ export const HOMEPAGE_QUERY = defineQuery(
     exitButton, exitPrivacy
   }`
 );
+
+export const ABOUT_PAGE_QUERY = defineQuery(
+  `*[_type == "aboutPage"][0]{
+    // Hero
+    heroLabel, heroLabelRight, heroHeadline, heroHeadlineAccent, heroHeadlineLine3, heroSubtitle,
+    // Stats
+    stats,
+    // Story
+    storyLabel, storyHeadline, storyHeadlineAccent, storyQuote, storyBody1, storyBody2,
+    // Values
+    valuesLabel, valuesHeadline, valuesHeadlineAccent, valueCards,
+    // Team
+    teamLabel, teamIntro, teamMembers,
+    // CTA
+    ctaHeadline, ctaDescription
+  }`
+);
+
+export const SECURITY_PAGE_QUERY = defineQuery(
+  `*[_type == "securityPage"][0]{
+    // Hero
+    heroLabel, heroLabelRight, heroBadge, heroHeadline, heroHeadlineAccent, heroSubtitle,
+    // Pillars
+    pillarsLabel, pillarsHeadline, pillarsHeadlineAccent, pillarCards,
+    // Compliance
+    complianceLabel, complianceHeadline, complianceHeadlineAccent, complianceSections,
+    // Rights
+    rightsLabel, rightsHeadline, rightsHeadlineAccent, rightsIntro, rightsList,
+    // DPO
+    dpoTitle, dpoSubtitle, dpoDescription, dpoEmail,
+    // CTA
+    ctaHeadline, ctaDescription
+  }`
+);
+
+export const VIP_PAGE_QUERY = defineQuery(
+  `*[_type == "vipPage"][0]{
+    // Hero
+    heroLabel, heroLabelRight, heroHeadline, heroHeadlineAccent, heroStats, heroAnchorText,
+    // Manifesto
+    manifestoLabel, manifestoHeadline, manifestoHeadlineAccent,
+    manifestoQuote, manifestoBody1, manifestoBody2, manifestoMotto, manifestoStats,
+    // Tiers
+    tiersLabel, tiersLabelRight, tiersHeadline, tiersDescription, tierCards,
+    // Steps
+    stepsLabel, stepsLabelRight, stepsHeadline, steps,
+    // CTA
+    ctaCard1Title, ctaCard1Desc, ctaCard2Title, ctaCard2Headline, ctaCard2Sub
+  }`
+);

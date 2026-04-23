@@ -293,7 +293,7 @@ const homepage = {
     { _key: "customize", label: { en: "Customize", sv: "Skräddarsy" }, href: "#request" },
     { _key: "vip", label: { en: "Become VIP", sv: "Bli VIP" }, href: "/vip" },
     { _key: "shop", label: { en: "Shop", sv: "Webbshop" }, href: "#webshop" },
-    { _key: "about", label: { en: "About", sv: "Om oss" }, href: "/om-oss" },
+    { _key: "about", label: { en: "About", sv: "Om oss" }, href: "/about" },
   ],
   navCta: { en: "Book Event →", sv: "Boka Event →" },
 
@@ -426,7 +426,7 @@ const homepage = {
       _key: "company",
       title: { en: "Company", sv: "Företaget" },
       links: [
-        { _key: "about", label: { en: "About us", sv: "Om oss" }, href: "/om-oss" },
+        { _key: "about", label: { en: "About us", sv: "Om oss" }, href: "/about" },
         { _key: "leadership", label: { en: "Leadership", sv: "Ledning" }, href: "/ledning" },
         { _key: "careers", label: { en: "Careers", sv: "Karriär" }, href: "/karriar" },
         { _key: "press", label: { en: "Press", sv: "Press" }, href: "/press" },
@@ -437,7 +437,7 @@ const homepage = {
       title: { en: "Services", sv: "Tjänster" },
       links: [
         { _key: "pricing", label: { en: "Pricing", sv: "Vad kostar det?" }, href: "/priser" },
-        { _key: "vip", label: { en: "Become a VIP", sv: "Bli förmånskund" }, href: "/formanskund" },
+        { _key: "vip", label: { en: "Become a VIP", sv: "Bli förmånskund" }, href: "/vip" },
         { _key: "demo", label: { en: "Book a demo", sv: "Boka en demo" }, href: "/demo" },
         { _key: "shop", label: { en: "Shop", sv: "Webbshop" }, href: "/webbshop" },
       ],
@@ -448,7 +448,7 @@ const homepage = {
       links: [
         { _key: "faq", label: { en: "FAQ", sv: "FAQ" }, href: "/faq" },
         { _key: "assistant", label: { en: "EventPartner Assistant", sv: "EventPartner Assistant" }, href: "/assistant" },
-        { _key: "security", label: { en: "Security & Compliance", sv: "Säkerhet & Compliance" }, href: "/sakerhet" },
+        { _key: "security", label: { en: "Security & Compliance", sv: "Säkerhet & Compliance" }, href: "/security" },
         { _key: "privacy", label: { en: "GDPR & Privacy", sv: "GDPR & Privacy" }, href: "/privacy" },
       ],
     },
@@ -519,10 +519,167 @@ const homepage = {
   ],
 };
 
+const aboutPageData = {
+  _type: "aboutPage",
+  _id: "aboutPage",
+  heroLabel: { en: "About EventPartner", sv: "Om EventPartner" },
+  heroLabelRight: { en: "Est. 2024", sv: "Grundat 2024" },
+  heroHeadline: { en: "People who", sv: "Människor som" },
+  heroHeadlineAccent: { en: "understand", sv: "förstår" },
+  heroHeadlineLine3: { en: "events.", sv: "event." },
+  heroSubtitle: {
+    en: "EventPartner was founded on one idea: to make enterprise event planning as seamless as booking a hotel room. With a network spanning 36 European countries and deep industry expertise, we make it possible — every day.",
+    sv: "EventPartner grundades på en idé: att göra företagseventplanering lika smidigt som att boka ett hotellrum. Med ett nätverk som spänner över 36 europeiska länder och djup branschexpertis gör vi det möjligt — varje dag.",
+  },
+  stats: [
+    { _key: "s1", value: "36", label: { en: "Countries", sv: "Länder" } },
+    { _key: "s2", value: "2,048+", label: { en: "Events delivered", sv: "Levererade event" } },
+    { _key: "s3", value: "2,400+", label: { en: "Venue partners", sv: "Venue-partners" } },
+    { _key: "s4", value: "94%", label: { en: "Customer satisfaction", sv: "Kundnöjdhet" } },
+  ],
+  storyLabel: { en: "Our Story", sv: "Vår historia" },
+  storyHeadline: { en: "From idea to", sv: "Från idé till" },
+  storyHeadlineAccent: { en: "industry leader.", sv: "branschledare." },
+  storyQuote: {
+    en: "We believe every event is an opportunity to build something lasting. Not just a conference — a memory. Not just a dinner — a relationship.",
+    sv: "Vi tror att varje event är en möjlighet att bygga något bestående. Inte bara en konferens — ett minne. Inte bara en middag — en relation.",
+  },
+  storyBody1: {
+    en: "Founded in the Mediterranean but operating across all of Europe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
+    sv: "Grundat i Medelhavet men verksamt i hela Europa, kopplar EventPartner samman företag med den perfekta venue:n för varje tillfälle. Från intima styrelsemiddagar till företagskonferenser med 5 000 deltagare, tar vårt erfarna team fram skräddarsydda förslag — snabbt.",
+  },
+  storyBody2: {
+    en: "Our backgrounds span event production, hospitality, and technology. We combined all three to create a service that is personal, reliable, and remarkably efficient. One inquiry, multiple options, zero hassle.",
+    sv: "Vår bakgrund spänner över eventproduktion, hospitality och teknik. Vi kombinerade alla tre för att skapa en tjänst som är personlig, pålitlig och remarkabelt effektiv. En förfrågan, flera alternativ, noll krångel.",
+  },
+  valuesLabel: { en: "What We Stand For", sv: "Vad vi står för" },
+  valuesHeadline: { en: "Built on principles,", sv: "Byggt på principer," },
+  valuesHeadlineAccent: { en: "not just promises.", sv: "inte bara löften." },
+  valueCards: [
+    { _key: "v1", title: { en: "Personal Service", sv: "Personlig service" }, description: { en: "Every inquiry is handled by a real person, not a chatbot. We believe in relationships built on trust and genuine care.", sv: "Varje förfrågan hanteras av en riktig person, inte en chatbot. Vi tror på relationer byggda på förtroende och genuin omsorg." }, icon: "heart" },
+    { _key: "v2", title: { en: "Speed & Reliability", sv: "Snabbhet & pålitlighet" }, description: { en: "Proposals within 24 hours, always. We know that time-critical event planning doesn't wait for anyone.", sv: "Förslag inom 24 timmar, alltid. Vi vet att tidskritisk eventplanering inte väntar på någon." }, icon: "zap" },
+    { _key: "v3", title: { en: "Pan-European Reach", sv: "Paneuropeisk räckvidd" }, description: { en: "One partner across 36 countries. No more juggling local agencies — we handle everything from Stockholm to Barcelona.", sv: "En partner i 36 länder. Sluta jonglera lokala byråer — vi hanterar allt från Stockholm till Barcelona." }, icon: "globe" },
+    { _key: "v4", title: { en: "Transparency", sv: "Transparens" }, description: { en: "No hidden fees, clear pricing, and a comparison of at least 3 venue options for every single request.", sv: "Inga dolda avgifter, tydlig prissättning och jämförelse av minst 3 venue-alternativ för varje förfrågan." }, icon: "shield" },
+  ],
+  teamLabel: { en: "The Team", sv: "Teamet" },
+  teamIntro: {
+    en: "A small team with deep experience in event production, hospitality, and tech — treating every inquiry as their own.",
+    sv: "Ett litet team med djup erfarenhet inom eventproduktion, hospitality och teknik — som behandlar varje förfrågan som sin egen.",
+  },
+  teamMembers: [
+    { _key: "t1", name: "Pontus Bredal Hansen", role: { en: "Co-Founder & CEO", sv: "Medgrundare & VD" }, initials: "PH" },
+    { _key: "t2", name: "Malin Berlin", role: { en: "Co-Founder & COO", sv: "Medgrundare & COO" }, initials: "MB" },
+    { _key: "t3", name: "Joakim Ström", role: { en: "Head of Partnerships", sv: "Chef för partnerskap" }, initials: "JS" },
+    { _key: "t4", name: "David Lindgren", role: { en: "Senior Event Manager", sv: "Senior eventansvarig" }, initials: "DL" },
+  ],
+  ctaHeadline: { en: "Ready to plan your next event?", sv: "Redo att planera ert nästa event?" },
+  ctaDescription: { en: "Send us your inquiry — always free, always personal, always within 24 hours.", sv: "Skicka er förfrågan — alltid gratis, alltid personligt, alltid inom 24 timmar." },
+};
+
+const securityPageData = {
+  _type: "securityPage",
+  _id: "securityPage",
+  heroLabel: { en: "Security & Compliance", sv: "Säkerhet & Compliance" },
+  heroLabelRight: { en: "GDPR · EU Data", sv: "GDPR · EU-data" },
+  heroBadge: { en: "Enterprise-Grade Security", sv: "Säkerhet i företagsklass" },
+  heroHeadline: { en: "Your data", sv: "Er data" },
+  heroHeadlineAccent: { en: "is sacred.", sv: "är helig." },
+  heroSubtitle: {
+    en: "We handle event data for some of Europe's largest organizations. That trust is earned through rigorous security practices, full GDPR compliance, and absolute transparency about how we protect your information.",
+    sv: "Vi hanterar eventdata för några av Europas största organisationer. Det förtroendet förtjänas genom rigorösa säkerhetsrutiner, full GDPR-efterlevnad och absolut transparens kring hur vi skyddar er information.",
+  },
+  pillarsLabel: { en: "Security Foundations", sv: "Säkerhetsgrund" },
+  pillarsHeadline: { en: "Built on six", sv: "Byggt på sex" },
+  pillarsHeadlineAccent: { en: "security pillars.", sv: "säkerhetspelare." },
+  pillarCards: [
+    { _key: "p1", title: { en: "Data Encryption", sv: "Datakryptering" }, description: { en: "All data is encrypted in transit (TLS 1.3) and at rest (AES-256).", sv: "All data krypteras under överföring (TLS 1.3) och i vila (AES-256)." }, icon: "lock" },
+    { _key: "p2", title: { en: "EU-Based Infrastructure", sv: "EU-baserad infrastruktur" }, description: { en: "All data is hosted on EU-based servers.", sv: "All data lagras på EU-baserade servrar." }, icon: "server" },
+    { _key: "p3", title: { en: "GDPR Compliant", sv: "GDPR-kompatibel" }, description: { en: "EventPartner is fully GDPR compliant.", sv: "EventPartner är fullt GDPR-kompatibelt." }, icon: "fileCheck" },
+    { _key: "p4", title: { en: "Access Control", sv: "Åtkomstkontroll" }, description: { en: "Role-based access control (RBAC) ensures only authorized personnel can access sensitive information.", sv: "Rollbaserad åtkomstkontroll (RBAC) säkerställer att enbart behörig personal har tillgång till känslig information." }, icon: "userCheck" },
+    { _key: "p5", title: { en: "Transparency", sv: "Transparens" }, description: { en: "We publish a clear privacy policy and maintain open communication.", sv: "Vi publicerar en tydlig integritetspolicy och upprätthåller öppen kommunikation." }, icon: "eye" },
+    { _key: "p6", title: { en: "Incident Response", sv: "Incidenthantering" }, description: { en: "We maintain a documented incident response plan with 72-hour notification.", sv: "Vi har en dokumenterad incidenthanteringsplan med 72-timmars notifiering." }, icon: "alertTriangle" },
+  ],
+  dpoEmail: "dpo@eventpartner.se",
+  dpoTitle: { en: "Data Protection Officer", sv: "Dataskyddsombud" },
+  dpoSubtitle: { en: "For questions about data processing", sv: "För frågor om databehandling" },
+  dpoDescription: {
+    en: "If you have any questions about how we process your data, wish to exercise your rights, or want to report a data protection concern, please contact our Data Protection Officer.",
+    sv: "Om ni har frågor om hur vi behandlar era uppgifter, vill utöva era rättigheter eller vill rapportera ett dataskyddsärende, kontakta vårt dataskyddsombud.",
+  },
+  ctaHeadline: { en: "Questions about security?", sv: "Frågor om säkerhet?" },
+  ctaDescription: { en: "We're happy to discuss our security practices in detail. Get in touch with our team.", sv: "Vi diskuterar gärna våra säkerhetsrutiner i detalj. Kontakta vårt team." },
+};
+
+const vipPageData = {
+  _type: "vipPage",
+  _id: "vipPage",
+  heroLabel: { en: "EventPartner — VIP Programme", sv: "EventPartner — VIP-program" },
+  heroLabelRight: { en: "Exclusive access · 3:12", sv: "Exklusiv tillgång · 3:12" },
+  heroHeadline: { en: "Your partner,", sv: "Er partner," },
+  heroHeadlineAccent: { en: "not a vendor.", sv: "inte en leverantör." },
+  heroStats: [
+    { _key: "s1", value: "12h", label: { en: "Response time", sv: "Svarstid" } },
+    { _key: "s2", value: "10%", label: { en: "Max discount", sv: "Max rabatt" } },
+    { _key: "s3", value: "36", label: { en: "Countries", sv: "Länder" } },
+    { _key: "s4", value: "1:1", label: { en: "Dedicated manager", sv: "Dedikerad kontakt" } },
+  ],
+  heroAnchorText: { en: "Welcome to the VIP Programme ↓", sv: "Välkommen till VIP-programmet ↓" },
+  manifestoLabel: { en: "EventPartner — VIP Benefits", sv: "EventPartner — VIP-förmåner" },
+  manifestoHeadline: { en: "Everything you need.", sv: "Allt ni behöver." },
+  manifestoHeadlineAccent: { en: "Nothing you don't.", sv: "Inget ni inte behöver." },
+  manifestoQuote: {
+    en: "We don't treat every client the same — we treat every client as if they're the only one.",
+    sv: "Vi behandlar inte varje kund lika — vi behandlar varje kund som om de vore den enda.",
+  },
+  manifestoBody1: {
+    en: "Our VIP programme gives your team direct access to a dedicated account manager who understands your brand, your standards, and your history.",
+    sv: "Vårt VIP-program ger ert team direkt tillgång till en dedikerad kontaktperson som förstår ert varumärke, era standarder och er historik.",
+  },
+  manifestoBody2: {
+    en: "Whether you're planning 5 events per year or 50, VIP clients receive custom contract terms, exclusive venue access, and strategic support.",
+    sv: "Oavsett om ni planerar 5 event per år eller 50, får VIP-kunder skräddarsydda avtalsvillkor, exklusiv venue-tillgång och strategiskt stöd.",
+  },
+  manifestoMotto: { en: "Priority is not a perk — it's the standard.", sv: "Prioritet är inte en förmån — det är standarden." },
+  manifestoStats: [
+    { _key: "ms1", value: "< 12h", label: { en: "Response time", sv: "Svarstid" } },
+    { _key: "ms2", value: "Up to 10%", label: { en: "Discounts", sv: "Rabatter" } },
+    { _key: "ms3", value: "1:1", label: { en: "Account manager", sv: "Kontaktperson" } },
+    { _key: "ms4", value: "Custom", label: { en: "Contract terms", sv: "Avtalsvillkor" } },
+  ],
+  tiersLabel: { en: "EventPartner — Membership tiers", sv: "EventPartner — Medlemsnivåer" },
+  tiersLabelRight: { en: "Two levels", sv: "Två nivåer" },
+  tiersHeadline: { en: "Choose your level.", sv: "Välj er nivå." },
+  tiersDescription: { en: "Two tiers, designed around your needs. Both include dedicated support — Gold adds enterprise-grade flexibility.", sv: "Två nivåer, utformade efter era behov. Båda inkluderar dedikerat stöd — Gold lägger till flexibilitet i företagsklass." },
+  tierCards: [
+    { _key: "silver", name: { en: "VIP Silver", sv: "VIP Silver" }, badge: { en: "Most Popular", sv: "Mest populär" }, price: { en: "Free", sv: "Gratis" }, priceSub: { en: "Volume-based qualification", sv: "Volymbaserad kvalificering" }, features: [{ en: "Dedicated account manager", sv: "Dedikerad kontaktperson" }, { en: "Priority response within 12h", sv: "Prioriterat svar inom 12h" }, { en: "5% discount on all bookings", sv: "5% rabatt på alla bokningar" }, { en: "Access to VIP-only venues", sv: "Tillgång till VIP-exklusiva venues" }, { en: "Quarterly event trend reports", sv: "Kvartalsvisa eventrapporter" }], cta: { en: "Apply Now", sv: "Ansök nu" }, highlight: false },
+    { _key: "gold", name: { en: "VIP Gold", sv: "VIP Gold" }, badge: { en: "Enterprise", sv: "Enterprise" }, price: { en: "By Invitation", sv: "Via inbjudan" }, priceSub: { en: "10+ events per year", sv: "10+ event per år" }, features: [{ en: "Everything in Silver", sv: "Allt i Silver" }, { en: "Personal event concierge", sv: "Personlig event-concierge" }, { en: "10% discount on all bookings", sv: "10% rabatt på alla bokningar" }, { en: "Complimentary site inspections", sv: "Kostnadsfria platsinspektioner" }, { en: "Custom contract & billing terms", sv: "Skräddarsydda avtals- & faktureringsvillkor" }, { en: "Exclusive event portfolio reviews", sv: "Exklusiva portfolio-genomgångar" }, { en: "Priority cancellation flexibility", sv: "Prioriterad avbokningsflexibilitet" }], cta: { en: "Request Invitation", sv: "Begär inbjudan" }, highlight: true },
+  ],
+  stepsLabel: { en: "EventPartner — How to join", sv: "EventPartner — Så går du med" },
+  stepsLabelRight: { en: "3 steps", sv: "3 steg" },
+  stepsHeadline: { en: "Three simple steps.", sv: "Tre enkla steg." },
+  steps: [
+    { _key: "st1", step: "01", title: { en: "Apply", sv: "Ansök" }, description: { en: "Fill in your company details and event volume through the form below. Takes less than 2 minutes.", sv: "Fyll i era företagsuppgifter och eventvolym via formuläret nedan. Tar mindre än 2 minuter." } },
+    { _key: "st2", step: "02", title: { en: "Qualify", sv: "Kvalificera" }, description: { en: "Our team reviews your profile and matches you with the right VIP tier based on your needs and volume.", sv: "Vårt team granskar er profil och matchar er med rätt VIP-nivå baserat på era behov och volym." } },
+    { _key: "st3", step: "03", title: { en: "Enjoy", sv: "Njut" }, description: { en: "Start receiving priority service, exclusive pricing, and a dedicated account manager from day one.", sv: "Börja ta emot prioriterad service, exklusiva priser och en dedikerad kontaktperson från dag ett." } },
+  ],
+  ctaCard1Title: { en: "Talk to us", sv: "Prata med oss" },
+  ctaCard1Desc: { en: "Get answers to your VIP questions.", sv: "Få svar på era VIP-frågor." },
+  ctaCard2Title: { en: "Apply for VIP", sv: "Ansök om VIP" },
+  ctaCard2Headline: { en: "Start your VIP journey.", sv: "Starta er VIP-resa." },
+  ctaCard2Sub: { en: "Today.", sv: "Idag." },
+};
+
 async function seed() {
-  console.log("🌱 Seeding homepage content...");
+  console.log("🌱 Seeding all page content...");
   await client.createOrReplace(homepage);
-  console.log("✅ Homepage seeded with EN + SV content!");
+  console.log("  ✅ Homepage seeded");
+  await client.createOrReplace(aboutPageData);
+  console.log("  ✅ About page seeded");
+  await client.createOrReplace(securityPageData);
+  console.log("  ✅ Security page seeded");
+  await client.createOrReplace(vipPageData);
+  console.log("  ✅ VIP page seeded");
+  console.log("🎉 All pages seeded with EN + SV content!");
 }
 
 seed().catch((err) => {

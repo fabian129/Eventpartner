@@ -10,28 +10,28 @@ const FOOTER_LINKS = {
   company: {
     title: "Company",
     links: [
-      { label: "About us", href: "/om-oss" },
-      { label: "Leadership", href: "/ledning" },
-      { label: "Careers", href: "/karriar" },
-      { label: "Press", href: "/press" },
+      { label: "About us", href: "/about" },
+      { label: "Leadership", href: "/about#team" },
+      { label: "Careers", href: "/about" },
+      { label: "Press", href: "/about" },
     ],
   },
   services: {
     title: "Services",
     links: [
-      { label: "Pricing", href: "/priser" },
-      { label: "Become a VIP", href: "/formanskund" },
-      { label: "Book a demo", href: "/demo" },
-      { label: "Shop", href: "/webbshop" },
+      { label: "Pricing", href: "/vip" },
+      { label: "Become a VIP", href: "/vip" },
+      { label: "Book a demo", href: "/#request" },
+      { label: "Shop", href: "/#shop" },
     ],
   },
   support: {
     title: "Support",
     links: [
-      { label: "FAQ", href: "/faq" },
-      { label: "EventPartner Assistant", href: "/assistant" },
-      { label: "Security & Compliance", href: "/sakerhet" },
-      { label: "GDPR & Privacy", href: "/privacy" },
+      { label: "FAQ", href: "/#faq" },
+      { label: "EventPartner Assistant", href: "/#request" },
+      { label: "Security & Compliance", href: "/security" },
+      { label: "GDPR & Privacy", href: "/security" },
     ],
   },
   venues: {
@@ -236,7 +236,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
           <div className="flex gap-6">
             <Link href="/privacy" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">Terms</Link>
-            <Link href="/sakerhet" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">GDPR</Link>
+            <Link href="/security" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">GDPR</Link>
           </div>
         </div>
       </div>

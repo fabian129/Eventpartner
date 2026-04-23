@@ -8,9 +8,9 @@ import { Menu, X } from "lucide-react";
 const DEFAULT_LINKS = [
   { label: "Services", href: "#services" },
   { label: "Customize", href: "#request", disabled: true },
-  { label: "Become VIP", href: "#", disabled: true },
+  { label: "Become VIP", href: "/vip" },
   { label: "Shop", href: "#shop" },
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
 ];
 
 interface NavLink {

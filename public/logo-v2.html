@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EventPartner — Logotypkoncept v2</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a; color: #f5f5f5;
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hero */
+    .hero { text-align: center; padding: 80px 24px 40px; }
+    .hero-badge {
+      display: inline-block; padding: 6px 16px;
+      border: 1px solid #333; border-radius: 100px;
+      font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #888; margin-bottom: 24px;
+    }
+    .hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; letter-spacing: -0.03em; }
+    .hero h1 em { font-style: normal; color: #81D8D0; }
+    .hero p { max-width: 600px; margin: 16px auto 0; color: #888; line-height: 1.6; font-size: 15px; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #0a0a0aee; backdrop-filter: blur(12px);
+      padding: 12px 24px;
+      display: flex; gap: 8px; overflow-x: auto; justify-content: center;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .nav-pill {
+      padding: 6px 16px; border-radius: 100px; border: 1px solid #333;
+      background: transparent; color: #888; font-size: 13px;
+      cursor: pointer; text-decoration: none; white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .nav-pill:hover, .nav-pill.active { background: #81D8D0; color: #0a0a0a; border-color: #81D8D0; }
+
+    /* Categories */
+    .category { padding: 60px 24px 40px; max-width: 1400px; margin: 0 auto; }
+    .category h2 { font-size: 28px; margin-bottom: 8px; }
+    .category .subtitle { color: #666; margin-bottom: 32px; font-size: 15px; }
+
+    /* Logo grid */
+    .logo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; }
+
+    .logo-card {
+      position: relative; background: #111; border: 1px solid #222;
+      border-radius: 16px; overflow: hidden; cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .logo-card:hover { border-color: #444; transform: translateY(-2px); }
+    .logo-card.selected { border-color: #81D8D0; box-shadow: 0 0 20px rgba(129, 216, 208, 0.2); }
+
+    .logo-card .preview {
+      padding: 32px; display: flex; align-items: center; justify-content: center;
+      min-height: 220px; background: #ffffff;
+    }
+    .logo-card .preview.dark { background: #0d0d0d; }
+    .logo-card .preview svg { max-width: 100%; height: auto; }
+
+    .logo-card .info { padding: 16px 20px; }
+    .logo-card .info .tag {
+      display: inline-block; padding: 3px 8px; border-radius: 4px;
+      background: rgba(129, 216, 208, 0.15); color: #81D8D0;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .logo-card .info h3 { font-size: 15px; font-weight: 600; }
+    .logo-card .info p { font-size: 13px; color: #666; margin-top: 4px; line-height: 1.4; }
+
+    .logo-card .select-btn {
+      position: absolute; top: 12px; right: 12px;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid #444; background: #0a0a0a88;
+      color: transparent; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-card.selected .select-btn {
+      background: #81D8D0; border-color: #81D8D0; color: #0a0a0a;
+    }
+
+    /* CTA */
+    .cta-section { text-align: center; padding: 80px 24px; max-width: 600px; margin: 0 auto; }
+    .cta-section h2 { font-size: 28px; margin-bottom: 12px; }
+    .cta-section p { color: #888; line-height: 1.6; }
+    .hint { background: #1a1a1a; border-radius: 12px; padding: 16px 24px;
+            margin-top: 24px; font-size: 14px; color: #aaa; }
+
+    /* Selection bar */
+    .selection-bar {
+      position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%);
+      background: #1a1a1a; border: 1px solid #333; border-radius: 16px;
+      padding: 12px 24px; display: flex; align-items: center; gap: 16px;
+      transition: bottom 0.3s ease; z-index: 200; min-width: 300px;
+    }
+    .selection-bar.visible { bottom: 24px; }
+    .copy-btn {
+      background: #81D8D0; color: #0a0a0a; border: none; padding: 8px 20px;
+      border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px;
+    }
+    .selected-ids { font-size: 12px; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-badge">Logotypkoncept · April 2026</div>
+    <h1>Event<em>Partner</em></h1>
+    <p>Förfinade varianter av Malins figurkoncept – 3 grundare, globalt nätverk. Klicka på favoriter och kopiera urvalet.</p>
+  </header>
+
+  <nav class="nav">
+    <a href="#cat-a" class="nav-pill active">A: Refined Outline</a>
+    <a href="#cat-b" class="nav-pill">B: Filled</a>
+    <a href="#cat-c" class="nav-pill">C: Pill / Modern</a>
+    <a href="#cat-d" class="nav-pill">D: Mixed Treatments</a>
+    <a href="#cat-e" class="nav-pill">E: Lockup</a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- KATEGORI A: REFINED OUTLINE -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <section class="category" id="cat-a">
+    <h2>A — Refined Outline</h2>
+    <p class="subtitle">Malins formspråk: raka axlar, U-kroppar, ring-huvuden. Förfinad geometri med professionella proportioner.</p>
+    <div class="logo-grid">
+
+      <!-- A1 -->
+      <div class="logo-card" data-id="A1">
+        <div class="preview">
+          <svg viewBox="0 0 800 400" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp A1">
+            <defs>
+              <filter id="a1-shadow" x="-5%" y="-5%" width="115%" height="115%">
+                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
+              </filter>
+            </defs>
+            <rect width="100%" height="100%" fill="#ffffff"/>
+            <g transform="translate(280, 40)" filter="url(#a1-shadow)">
+              <!-- Left figure -->
+              <circle cx="56" cy="32" r="22" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M12 64 L100 64" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M12 64 C12 64 12 150 12 152 C12 168 24 176 36 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M100 64 C100 64 100 150 100 152 C100 168 88 176 76 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Center figure (globe head) -->
+              <circle cx="168" cy="24" r="32" fill="#81D8D0"/>
+              <ellipse cx="168" cy="24" rx="22" ry="32" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"/>
+              <line x1="136" y1="24" x2="200" y2="24" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+              <path d="M152 -2 C158 6 178 6 184 -2" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.8"/>
+              <path d="M152 50 C158 42 178 42 184 50" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.8"/>
+              <path d="M108 64 L228 64" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M108 64 C108 64 108 156 108 160 C108 178 122 188 140 188" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M228 64 C228 64 228 156 228 160 C228 178 214 188 196 188" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Right figure -->
+              <circle cx="280" cy="32" r="22" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M236 64 L324 64" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M236 64 C236 64 236 150 236 152 C236 168 248 176 260 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M324 64 C324 64 324 150 324 152 C324 168 312 176 300 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <!-- Text -->
+            <text x="400" y="310" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#c0c0c0" font-weight="300">EVENT</text>
+            <text x="400" y="348" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#888" font-weight="500">PARTNER</text>
+          </svg>
+        </div>
+        <div class="info">
+          <span class="tag">Rekommenderas</span>
+          <h3>A1 · Malin Clean — Medium Weight</h3>
+          <p>8pt streck, mjuka kurvor, diskret skugga. Renaste tolkningen av hennes design.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj A1">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <!-- A2 -->
+      <div class="logo-card" data-id="A2">
+        <div class="preview">
+          <svg viewBox="0 0 800 400" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp A2">
+            <rect width="100%" height="100%" fill="#ffffff"/>
+            <g transform="translate(280, 40)">
+              <!-- Left figure — thinner elegant -->
+              <circle cx="56" cy="32" r="22" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round"/>
+              <path d="M12 64 L100 64" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round"/>
+              <path d="M12 64 C12 64 12 150 12 152 C12 168 24 176 36 176" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M100 64 C100 64 100 150 100 152 C100 168 88 176 76 176" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Center figure -->
+              <circle cx="168" cy="24" r="32" fill="#81D8D0"/>
+              <ellipse cx="168" cy="24" rx="22" ry="32" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2"/>
+              <line x1="136" y1="24" x2="200" y2="24" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+              <path d="M152 -2 C158 6 178 6 184 -2" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+              <path d="M152 50 C158 42 178 42 184 50" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+              <path d="M108 64 L228 64" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round"/>
+              <path d="M108 64 C108 64 108 156 108 160 C108 178 122 188 140 188" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M228 64 C228 64 228 156 228 160 C228 178 214 188 196 188" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Right figure -->
+              <circle cx="280" cy="32" r="22" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round"/>
+              <path d="M236 64 L324 64" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round"/>
+              <path d="M236 64 C236 64 236 150 236 152 C236 168 248 176 260 176" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M324 64 C324 64 324 150 324 152 C324 168 312 176 300 176" fill="none" stroke="#d5d5d5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text x="400" y="310" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#ddd" font-weight="300">EVENT</text>
+            <text x="400" y="348" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#aaa" font-weight="500">PARTNER</text>
+          </svg>
+        </div>
+        <div class="info">
+          <h3>A2 · Malin Elegant — Light</h3>
+          <p>5pt streck, ljusare tonalitet. Luftig, editorial känsla.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj A2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <!-- A3 -->
+      <div class="logo-card" data-id="A3">
+        <div class="preview">
+          <svg viewBox="0 0 800 400" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp A3">
+            <rect width="100%" height="100%" fill="#ffffff"/>
+            <g transform="translate(280, 40)">
+              <!-- Left figure — heavy/bold -->
+              <circle cx="56" cy="32" r="22" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round"/>
+              <path d="M12 64 L100 64" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round"/>
+              <path d="M12 64 C12 64 12 148 12 152 C12 170 26 178 40 178" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M100 64 C100 64 100 148 100 152 C100 170 86 178 72 178" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Center figure -->
+              <circle cx="168" cy="22" r="34" fill="#81D8D0"/>
+              <ellipse cx="168" cy="22" rx="23" ry="34" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+              <line x1="134" y1="22" x2="202" y2="22" stroke="rgba(255,255,255,0.5)" stroke-width="2.5"/>
+              <path d="M150 -6 C158 4 178 4 186 -6" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+              <path d="M150 50 C158 40 178 40 186 50" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+              <path d="M108 64 L228 64" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round"/>
+              <path d="M108 64 C108 64 108 154 108 160 C108 180 124 190 144 190" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M228 64 C228 64 228 154 228 160 C228 180 212 190 192 190" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Right figure -->
+              <circle cx="280" cy="32" r="22" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round"/>
+              <path d="M236 64 L324 64" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round"/>
+              <path d="M236 64 C236 64 236 148 236 152 C236 170 250 178 264 178" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M324 64 C324 64 324 148 324 152 C324 170 310 178 296 178" fill="none" stroke="#aaa" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text x="400" y="310" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#bbb" font-weight="300">EVENT</text>
+            <text x="400" y="348" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#777" font-weight="600">PARTNER</text>
+          </svg>
+        </div>
+        <div class="info">
+          <span class="tag">Nära Malins original</span>
+          <h3>A3 · Malin Heavy — Bold</h3>
+          <p>11pt streck, närmast Malins 3D-renderade original. Kraftfull närvaro.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj A3">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <!-- A4: Dark mode -->
+      <div class="logo-card" data-id="A4">
+        <div class="preview dark">
+          <svg viewBox="0 0 800 400" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp A4">
+            <rect width="100%" height="100%" fill="#0d0d0d"/>
+            <g transform="translate(280, 40)">
+              <circle cx="56" cy="32" r="22" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round"/>
+              <path d="M12 64 L100 64" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round"/>
+              <path d="M12 64 C12 64 12 150 12 152 C12 168 24 176 36 176" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M100 64 C100 64 100 150 100 152 C100 168 88 176 76 176" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="168" cy="24" r="32" fill="#81D8D0"/>
+              <ellipse cx="168" cy="24" rx="22" ry="32" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5"/>
+              <line x1="136" y1="24" x2="200" y2="24" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+              <path d="M152 -2 C158 6 178 6 184 -2" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.8"/>
+              <path d="M152 50 C158 42 178 42 184 50" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.8"/>
+              <path d="M108 64 L228 64" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round"/>
+              <path d="M108 64 C108 64 108 156 108 160 C108 178 122 188 140 188" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M228 64 C228 64 228 156 228 160 C228 178 214 188 196 188" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="280" cy="32" r="22" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round"/>
+              <path d="M236 64 L324 64" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round"/>
+              <path d="M236 64 C236 64 236 150 236 152 C236 168 248 176 260 176" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M324 64 C324 64 324 150 324 152 C324 168 312 176 300 176" fill="none" stroke="#444" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text x="400" y="310" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="rgba(255,255,255,0.35)" font-weight="300">EVENT</text>
+            <text x="400" y="348" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="rgba(255,255,255,0.8)" font-weight="500">PARTNER</text>
+          </svg>
+        </div>
+        <div class="info">
+          <span class="tag">Rekommenderas</span>
+          <h3>A4 · Malin Clean — Dark Mode</h3>
+          <p>8pt outline på mörk bakgrund. Globen poppar, figurerna syns tydligt.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj A4">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- KATEGORI B: FILLED SILHOUETTES -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <section class="category" id="cat-b">
+    <h2>B — Fyllda siluetter</h2>
+    <p class="subtitle">Solida former ger tyngd och igenkänning. Funkar i alla storlekar.</p>
+    <div class="logo-grid">
+
+      <!-- B1 -->
+      <div class="logo-card" data-id="B1">
+        <div class="preview">
+          <svg viewBox="0 0 800 400" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp B1">
+            <rect width="100%" height="100%" fill="#ffffff"/>
+            <g transform="translate(280, 40)">
+              <!-- Left figure — solid silhouette -->
+              <circle cx="56" cy="28" r="24" fill="#c8c8c8"/>
+              <rect x="12" y="60" width="88" height="8" rx="4" fill="#c8c8c8"/>
+              <path d="M12 64 C12 64 12 150 12 155 C12 172 26 180 40 180 L40 180" fill="#c8c8c8"/>
+              <path d="M100 64 C100 64 100 150 100 155 C100 172 86 180 72 180 L72 180" fill="#c8c8c8"/>
+              <!-- Center figure — globe + solid body -->
+              <circle cx="168" cy="22" r="34" fill="#81D8D0"/>
+              <ellipse cx="168" cy="22" rx="23" ry="34" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5"/>
+              <line x1="134" y1="22" x2="202" y2="22" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>
+              <path d="M150 -6 C158 4 178 4 186 -6" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+              <path d="M150 50 C158 40 178 40 186 50" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+              <rect x="108" y="60" width="120" height="8" rx="4" fill="#c8c8c8"/>
+              <path d="M108 64 C108 64 108 158 108 164 C108 184 126 194 146 194 L146 194" fill="#c8c8c8"/>
+              <path d="M228 64 C228 64 228 158 228 164 C228 184 210 194 190 194 L190 194" fill="#c8c8c8"/>
+              <!-- Right figure -->
+              <circle cx="280" cy="28" r="24" fill="#c8c8c8"/>
+              <rect x="236" y="60" width="88" height="8" rx="4" fill="#c8c8c8"/>
+              <path d="M236 64 C236 64 236 150 236 155 C236 172 250 180 264 180 L264 180" fill="#c8c8c8"/>
+              <path d="M324 64 C324 64 324 150 324 155 C324 172 310 180 296 180 L296 180" fill="#c8c8c8"/>
+            </g>
+            <text x="400" y="310" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#c0c0c0" font-weight="300">EVENT</text>
+            <text x="400" y="348" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#888" font-weight="500">PARTNER</text>
+          </svg>
+        </div>
+        <div class="info">
+          <h3>B1 · Solid Silhouettes</h3>
+          <p>Fyllda former med raka axlar. Tydlig och skalbar.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj B1">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <!-- B2 dark -->
+      <div class="logo-card" data-id="B2">
+        <div class="preview dark">
+          <svg viewBox="0 0 800 400" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp B2">
+            <rect width="100%" height="100%" fill="#0d0d0d"/>
+            <g transform="translate(280, 40)">
+              <circle cx="56" cy="28" r="24" fill="#333"/>
+              <rect x="12" y="60" width="88" height="8" rx="4" fill="#333"/>
+              <path d="M12 64 C12 64 12 150 12 155 C12 172 26 180 40 180" fill="#333"/>
+              <path d="M100 64 C100 64 100 150 100 155 C100 172 86 180 72 180" fill="#333"/>
+              <circle cx="168" cy="22" r="34" fill="#81D8D0"/>
+              <ellipse cx="168" cy="22" rx="23" ry="34" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2.5"/>
+              <line x1="134" y1="22" x2="202" y2="22" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+              <path d="M150 -6 C158 4 178 4 186 -6" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+              <path d="M150 50 C158 40 178 40 186 50" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+              <rect x="108" y="60" width="120" height="8" rx="4" fill="#333"/>
+              <path d="M108 64 C108 64 108 158 108 164 C108 184 126 194 146 194" fill="#333"/>
+              <path d="M228 64 C228 64 228 158 228 164 C228 184 210 194 190 194" fill="#333"/>
+              <circle cx="280" cy="28" r="24" fill="#333"/>
+              <rect x="236" y="60" width="88" height="8" rx="4" fill="#333"/>
+              <path d="M236 64 C236 64 236 150 236 155 C236 172 250 180 264 180" fill="#333"/>
+              <path d="M324 64 C324 64 324 150 324 155 C324 172 310 180 296 180" fill="#333"/>
+            </g>
+            <text x="400" y="310" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="rgba(255,255,255,0.35)" font-weight="300">EVENT</text>
+            <text x="400" y="348" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="rgba(255,255,255,0.8)" font-weight="500">PARTNER</text>
+          </svg>
+        </div>
+        <div class="info">
+          <h3>B2 · Solid Silhouettes — Dark</h3>
+          <p>Mörka fyllda figurer, globen lyser. Premium nattläge.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj B2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- KATEGORI C: PILL / MODERN -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <section class="category" id="cat-c">
+    <h2>C — Pill / Modern</h2>
+    <p class="subtitle">Avrundade pill-kroppar med fyllda huvuden. Modernt, approachable.</p>
+    <div class="logo-grid">
+
+      <!-- C1 -->
+      <div class="logo-card" data-id="C1">
+        <div class="preview">
+          <svg viewBox="0 0 800 400" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp C1">
+            <rect width="100%" height="100%" fill="#ffffff"/>
+            <g transform="translate(280, 30)">
+              <!-- Left figure: filled circle head + pill body -->
+              <circle cx="56" cy="30" r="22" fill="#d0d0d0"/>
+              <rect x="28" y="64" width="56" height="90" rx="28" fill="#d0d0d0"/>
+              <!-- Center figure: globe head + larger pill body -->
+              <circle cx="168" cy="24" r="30" fill="#81D8D0"/>
+              <ellipse cx="168" cy="24" rx="20" ry="30" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.2"/>
+              <line x1="138" y1="24" x2="198" y2="24" stroke="rgba(255,255,255,0.45)" stroke-width="1.8"/>
+              <path d="M153 -1 C159 6 177 6 183 -1" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.6"/>
+              <path d="M153 49 C159 42 177 42 183 49" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.6"/>
+              <rect x="132" y="64" width="72" height="100" rx="36" fill="#d0d0d0"/>
+              <!-- Right figure -->
+              <circle cx="280" cy="30" r="22" fill="#d0d0d0"/>
+              <rect x="252" y="64" width="56" height="90" rx="28" fill="#d0d0d0"/>
+            </g>
+            <text x="400" y="316" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#c0c0c0" font-weight="300">EVENT</text>
+            <text x="400" y="354" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#888" font-weight="500">PARTNER</text>
+          </svg>
+        </div>
+        <div class="info">
+          <h3>C1 · Pill Bodies</h3>
+          <p>Rundade pill-former. Slack/Figma-inspirerat, modernt och vänligt.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj C1">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- KATEGORI D: MIXED TREATMENTS -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <section class="category" id="cat-d">
+    <h2>D — Mixed Treatments</h2>
+    <p class="subtitle">Samma figurkoncept med olika typografi- och färgbehandlingar.</p>
+    <div class="logo-grid">
+
+      <!-- D1: Mixed case -->
+      <div class="logo-card" data-id="D1">
+        <div class="preview">
+          <svg viewBox="0 0 800 400" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp D1">
+            <rect width="100%" height="100%" fill="#ffffff"/>
+            <g transform="translate(280, 40)">
+              <circle cx="56" cy="32" r="22" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M12 64 L100 64" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M12 64 C12 64 12 150 12 152 C12 168 24 176 36 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M100 64 C100 64 100 150 100 152 C100 168 88 176 76 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="168" cy="24" r="32" fill="#81D8D0"/>
+              <ellipse cx="168" cy="24" rx="22" ry="32" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"/>
+              <line x1="136" y1="24" x2="200" y2="24" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+              <path d="M152 -2 C158 6 178 6 184 -2" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.8"/>
+              <path d="M152 50 C158 42 178 42 184 50" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.8"/>
+              <path d="M108 64 L228 64" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M108 64 C108 64 108 156 108 160 C108 178 122 188 140 188" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M228 64 C228 64 228 156 228 160 C228 178 214 188 196 188" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="280" cy="32" r="22" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M236 64 L324 64" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M236 64 C236 64 236 150 236 152 C236 168 248 176 260 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M324 64 C324 64 324 150 324 152 C324 168 312 176 300 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text x="400" y="340" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="48" letter-spacing="-0.02em" fill="#888">
+              <tspan font-weight="300">Event</tspan><tspan font-weight="600" fill="#555">Partner</tspan>
+            </text>
+          </svg>
+        </div>
+        <div class="info">
+          <span class="tag">Rekommenderas</span>
+          <h3>D1 · Mixed Case — Weight Toning</h3>
+          <p>"EventPartner" med tunnt/bold-skift. Modern, approachable, premium.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj D1">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <!-- D2: Tiffany PARTNER -->
+      <div class="logo-card" data-id="D2">
+        <div class="preview">
+          <svg viewBox="0 0 800 400" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp D2">
+            <rect width="100%" height="100%" fill="#ffffff"/>
+            <g transform="translate(280, 40)">
+              <circle cx="56" cy="32" r="22" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M12 64 L100 64" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M12 64 C12 64 12 150 12 152 C12 168 24 176 36 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M100 64 C100 64 100 150 100 152 C100 168 88 176 76 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="168" cy="24" r="32" fill="#81D8D0"/>
+              <ellipse cx="168" cy="24" rx="22" ry="32" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"/>
+              <line x1="136" y1="24" x2="200" y2="24" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+              <path d="M152 -2 C158 6 178 6 184 -2" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.8"/>
+              <path d="M152 50 C158 42 178 42 184 50" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.8"/>
+              <path d="M108 64 L228 64" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M108 64 C108 64 108 156 108 160 C108 178 122 188 140 188" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M228 64 C228 64 228 156 228 160 C228 178 214 188 196 188" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="280" cy="32" r="22" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M236 64 L324 64" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round"/>
+              <path d="M236 64 C236 64 236 150 236 152 C236 168 248 176 260 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M324 64 C324 64 324 150 324 152 C324 168 312 176 300 176" fill="none" stroke="#c0c0c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text x="400" y="310" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#bbb" font-weight="400">EVENT</text>
+            <text x="400" y="348" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="28" letter-spacing="0.32em" fill="#81D8D0" font-weight="600">PARTNER</text>
+          </svg>
+        </div>
+        <div class="info">
+          <h3>D2 · Tiffany PARTNER</h3>
+          <p>"PARTNER" i tiffany-färg kopplad till globen. Tydligt brand-language.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj D2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- KATEGORI E: LOCKUP -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <section class="category" id="cat-e">
+    <h2>E — Horisontell Lockup</h2>
+    <p class="subtitle">Kompakta kombinationer för header, navbar och småformat.</p>
+    <div class="logo-grid">
+
+      <!-- E1 -->
+      <div class="logo-card" data-id="E1">
+        <div class="preview">
+          <svg viewBox="0 0 800 200" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp E1">
+            <rect width="100%" height="100%" fill="#ffffff"/>
+            <g transform="translate(20, 20)">
+              <!-- Left figure mini -->
+              <circle cx="38" cy="22" r="14" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M8 44 L68 44" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M8 44 C8 44 8 100 8 104 C8 116 16 122 26 122" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M68 44 C68 44 68 100 68 104 C68 116 60 122 50 122" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Center figure mini -->
+              <circle cx="112" cy="16" r="20" fill="#81D8D0"/>
+              <ellipse cx="112" cy="16" rx="14" ry="20" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"/>
+              <line x1="92" y1="16" x2="132" y2="16" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/>
+              <path d="M76 44 L148 44" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M76 44 C76 44 76 104 76 108 C76 122 86 130 98 130" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M148 44 C148 44 148 104 148 108 C148 122 138 130 126 130" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Right figure mini -->
+              <circle cx="186" cy="22" r="14" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M156 44 L216 44" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M156 44 C156 44 156 100 156 104 C156 116 164 122 174 122" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M216 44 C216 44 216 100 216 104 C216 116 208 122 198 122" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <!-- Text beside icon -->
+            <text x="300" y="75" font-family="'Space Grotesk', sans-serif" font-size="26" letter-spacing="0.28em" fill="#c0c0c0" font-weight="300">EVENT</text>
+            <text x="300" y="112" font-family="'Space Grotesk', sans-serif" font-size="26" letter-spacing="0.28em" fill="#888" font-weight="500">PARTNER</text>
+          </svg>
+        </div>
+        <div class="info">
+          <span class="tag">Rekommenderas</span>
+          <h3>E1 · Horisontell Lockup</h3>
+          <p>Ikon + stacked text i kompakt format. Perfekt för navbar och headers.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj E1">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <!-- E2: Mixed case horizontal -->
+      <div class="logo-card" data-id="E2">
+        <div class="preview">
+          <svg viewBox="0 0 800 200" width="800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EventPartner logotyp E2">
+            <rect width="100%" height="100%" fill="#ffffff"/>
+            <g transform="translate(20, 20)">
+              <circle cx="38" cy="22" r="14" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M8 44 L68 44" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M8 44 C8 44 8 100 8 104 C8 116 16 122 26 122" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M68 44 C68 44 68 100 68 104 C68 116 60 122 50 122" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="112" cy="16" r="20" fill="#81D8D0"/>
+              <ellipse cx="112" cy="16" rx="14" ry="20" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"/>
+              <line x1="92" y1="16" x2="132" y2="16" stroke="rgba(255,255,255,0.4)" stroke-width="1.4"/>
+              <path d="M76 44 L148 44" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M76 44 C76 44 76 104 76 108 C76 122 86 130 98 130" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M148 44 C148 44 148 104 148 108 C148 122 138 130 126 130" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="186" cy="22" r="14" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M156 44 L216 44" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round"/>
+              <path d="M156 44 C156 44 156 100 156 104 C156 116 164 122 174 122" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M216 44 C216 44 216 100 216 104 C216 116 208 122 198 122" fill="none" stroke="#c0c0c0" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text x="300" y="100" font-family="'Space Grotesk', sans-serif" font-size="44" letter-spacing="-0.02em" fill="#888">
+              <tspan font-weight="300">Event</tspan><tspan font-weight="600" fill="#555">Partner</tspan>
+            </text>
+          </svg>
+        </div>
+        <div class="info">
+          <h3>E2 · Horisontell Mixed Case</h3>
+          <p>Ikon + "EventPartner" med vikttoning. Modern one-liner.</p>
+        </div>
+        <button class="select-btn" onclick="toggleSelect(this)" aria-label="Välj E2">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16.667 5L7.5 14.167 3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Vad tycker du?</h2>
+    <p>Klicka på dina favoriter ovan och kopiera valet — eller skicka tillbaka en lista med de ID:n du gillar (t.ex. "A1, D1, E2") samt eventuella ändringsönskemål.</p>
+    <div class="hint">
+      💡 Alla varianter renderas som skarpa SVG:er i Space Grotesk — produktionsklara och oändligt skalbara.
+    </div>
+  </section>
+
+  <!-- SELECTION BAR -->
+  <div class="selection-bar" id="selectionBar">
+    <div>
+      <span class="count"><span id="selCount">0</span> valda</span>
+      <span class="selected-ids" id="selIds"></span>
+    </div>
+    <button class="copy-btn" onclick="copySelection()">Kopiera val</button>
+  </div>
+
+  <script>
+    function toggleSelect(btn) {
+      btn.closest('.logo-card').classList.toggle('selected');
+      updateBar();
+    }
+    document.querySelectorAll('.logo-card').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('.select-btn')) return;
+        card.classList.toggle('selected');
+        updateBar();
+      });
+    });
+    function updateBar() {
+      const selected = document.querySelectorAll('.logo-card.selected');
+      const ids = Array.from(selected).map(c => c.dataset.id);
+      document.getElementById('selCount').textContent = ids.length;
+      document.getElementById('selIds').textContent = ids.join(', ');
+      document.getElementById('selectionBar').classList.toggle('visible', ids.length > 0);
+    }
+    function copySelection() {
+      const selected = document.querySelectorAll('.logo-card.selected');
+      const ids = Array.from(selected).map(c => c.dataset.id);
+      const text = 'EventPartner Logotyp — Mina favoriter: ' + ids.join(', ');
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = '✓ Kopierat!';
+        setTimeout(() => { btn.textContent = 'Kopiera val'; }, 2000);
+      });
+    }
+    // Nav active state
+    const pills = document.querySelectorAll('.nav-pill');
+    const sections = document.querySelectorAll('.category');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          pills.forEach(p => p.classList.remove('active'));
+          const pill = document.querySelector(`.nav-pill[href="#${entry.target.id}"]`);
+          if (pill) pill.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -60% 0px' });
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
