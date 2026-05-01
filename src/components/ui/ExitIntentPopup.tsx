@@ -113,8 +113,8 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-center py-6"
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#6AD8D2]/10 border border-[#6AD8D2]/20 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-[#6AD8D2] text-xl">✓</span>
+                  <div className="w-12 h-12 rounded-full bg-tiffany/10 border border-tiffany/20 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-tiffany text-xl">✓</span>
                   </div>
                   <h3 className="font-display text-xl font-medium text-white mb-2">Thank you!</h3>
                   <p className="text-[14px] text-white/50">We'll be in touch shortly.</p>
@@ -123,7 +123,7 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
                 /* Form state */
                 <>
                   <div className="mb-6">
-                    <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#6AD8D2]/70 block mb-3">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-tiffany/70 block mb-3">
                       {cms?.label || "Before you go"}
                     </span>
                     <h3 className="font-display text-2xl md:text-3xl font-medium text-white tracking-tight leading-tight mb-3">
@@ -142,24 +142,24 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
                       name="name"
                       placeholder="Name"
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-[#6AD8D2]/30 transition-colors duration-200"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-tiffany/30 transition-colors duration-200"
                     />
                     <input
                       type="email"
                       name="email"
                       placeholder="Email"
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-[#6AD8D2]/30 transition-colors duration-200"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-tiffany/30 transition-colors duration-200"
                     />
                     <input
                       type="text"
                       name="company"
                       placeholder="Company (optional)"
-                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-[#6AD8D2]/30 transition-colors duration-200"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-tiffany/30 transition-colors duration-200"
                     />
                     <button
                       type="submit"
-                      className="w-full py-3 rounded-xl bg-[#6AD8D2] text-[#0A0A0A] font-medium text-[14px] hover:bg-[#5EC4BA] transition-colors duration-200 mt-2"
+                      className="w-full py-3 rounded-xl bg-tiffany text-[#0A0A0A] font-medium text-[14px] hover:bg-[#5EC4BA] transition-colors duration-200 mt-2"
                     >
                       {cms?.button || "Send inquiry →"}
                     </button>

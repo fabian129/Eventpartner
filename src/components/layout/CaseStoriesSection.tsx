@@ -22,7 +22,7 @@ const STORIES = [
     description: "Three-day conference for 400 leaders from 12 countries. Full-service from venue sourcing in Stockholm to AV technology and gala evening.",
     image: "/Images/venue-dark-modern.webp",
     stats: { guests: "400", location: "Stockholm", duration: "3 days" },
-    color: "#6AD8D2",
+    color: "var(--color-tiffany)",
   },
   {
     client: "Spotify",
@@ -30,7 +30,7 @@ const STORIES = [
     description: "Annual kick-off for 600+ employees. Team building, keynotes, and afterparty at a unique venue outside Barcelona.",
     image: "/Images/colorful-seoul-floating-island.webp",
     stats: { guests: "600+", location: "Barcelona", duration: "2 days" },
-    color: "#7851A9",
+    color: "var(--color-purple)",
   },
   {
     client: "H&M",
@@ -38,7 +38,7 @@ const STORIES = [
     description: "Representational dinner and conference focused on sustainability. 250 invited guests at a historic venue in Copenhagen.",
     image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.webp",
     stats: { guests: "250", location: "Copenhagen", duration: "1 evening" },
-    color: "#6AD8D2",
+    color: "var(--color-tiffany)",
   },
   {
     client: "Sandvik",
@@ -46,7 +46,7 @@ const STORIES = [
     description: "Sales conference for 300 people in Milan. Hotel coordination, transfer service, conference program, and dinners.",
     image: "/Images/palace-culture-iasi-romania.webp",
     stats: { guests: "300", location: "Milan", duration: "4 days" },
-    color: "#7851A9",
+    color: "var(--color-purple)",
   },
   {
     client: "Klarna",
@@ -54,7 +54,7 @@ const STORIES = [
     description: "Exclusive product launch for press and partners at a central London venue. Meticulously planned experience from A to Z.",
     image: "/Images/hotel-lobby.webp",
     stats: { guests: "150", location: "London", duration: "1 day" },
-    color: "#6AD8D2",
+    color: "var(--color-tiffany)",
   },
 ];
 
@@ -273,7 +273,7 @@ export function CaseStoriesSection({ cms }: { cms?: CasesCMS }) {
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={() => scrollTo("prev")}
-            className="w-12 h-12 rounded-xl border border-[var(--border-default)] bg-[var(--bg-card)] hover:border-[#6AD8D2]/30 hover:bg-[#6AD8D2]/5 flex items-center justify-center transition-all duration-300"
+            className="w-12 h-12 rounded-xl border border-[var(--border-default)] bg-[var(--bg-card)] hover:border-tiffany/30 hover:bg-tiffany/5 flex items-center justify-center transition-all duration-300"
             aria-label="Föregående"
           >
             <ArrowRight className="w-5 h-5 text-[var(--text-muted)] rotate-180" />
@@ -293,7 +293,7 @@ export function CaseStoriesSection({ cms }: { cms?: CasesCMS }) {
                     el.scrollTo({ left: cardWidth * i, behavior: "smooth" });
                   }}
                   className={`h-[3px] rounded-full transition-all duration-300 cursor-pointer ${
-                    i === activeIndex ? "w-8 bg-[#6AD8D2]/60" : "w-3 bg-[var(--border-default)] hover:bg-[var(--text-muted)]"
+                    i === activeIndex ? "w-8 bg-tiffany/60" : "w-3 bg-[var(--border-default)] hover:bg-[var(--text-muted)]"
                   }`}
                 />
               ))}
@@ -305,7 +305,7 @@ export function CaseStoriesSection({ cms }: { cms?: CasesCMS }) {
 
           <button
             onClick={() => scrollTo("next")}
-            className="w-12 h-12 rounded-xl border border-[var(--border-default)] bg-[var(--bg-card)] hover:border-[#6AD8D2]/30 hover:bg-[#6AD8D2]/5 flex items-center justify-center transition-all duration-300"
+            className="w-12 h-12 rounded-xl border border-[var(--border-default)] bg-[var(--bg-card)] hover:border-tiffany/30 hover:bg-tiffany/5 flex items-center justify-center transition-all duration-300"
             aria-label="Nästa"
           >
             <ArrowRight className="w-5 h-5 text-[var(--text-muted)]" />

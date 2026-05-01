@@ -51,7 +51,7 @@ function CountryRow({ countries, direction, speed }: { countries: CountryItem[];
         {doubled.map((country, i) => {
           const slug = SLUG_MAP[country.code];
           const card = (
-            <div className="flex items-center gap-4 px-6 py-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-card)] hover:border-[#6AD8D2]/40 hover:shadow-xl hover:shadow-[#6AD8D2]/10 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+            <div className="flex items-center gap-4 px-6 py-5 rounded-2xl border border-[var(--border-default)] bg-[var(--bg-card)] hover:border-tiffany/40 hover:shadow-xl hover:shadow-tiffany/10 transition-all duration-300 hover:scale-105 hover:-translate-y-1">
               {/* Flag */}
               <div className="w-14 h-10 rounded-lg overflow-hidden border border-[var(--border-subtle)] shrink-0 shadow-sm">
                 <Image
@@ -68,7 +68,7 @@ function CountryRow({ countries, direction, speed }: { countries: CountryItem[];
                 <span className="text-[16px] font-semibold text-[var(--text-primary)] leading-tight truncate">
                   {country.name}
                 </span>
-                <span className="font-mono text-[11px] text-[#6AD8D2] tracking-wide">
+                <span className="font-mono text-[11px] text-tiffany tracking-wide">
                   {country.venues} venues
                 </span>
               </div>

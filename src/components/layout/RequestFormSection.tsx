@@ -29,19 +29,19 @@ export function RequestFormSection({ cms }: { cms?: {
     setTimeout(() => setSubmitted(false), 4000);
   };
 
-  const inputClass = `w-full rounded-xl py-3.5 px-4 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#6AD8D2]/30 focus:border-[#6AD8D2]/50 transition-all font-sans ${
+  const inputClass = `w-full rounded-xl py-3.5 px-4 text-[14px] focus:outline-none focus:ring-2 focus:ring-tiffany/30 focus:border-tiffany/50 transition-all font-sans ${
     isDark
       ? "bg-[#111] border border-white/[0.08] text-white placeholder-white/25"
       : "bg-white border border-black/[0.12] text-[#111] placeholder-[#94A3B8] shadow-sm"
   }`;
   const labelClass = "block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-2";
-  const requiredStar = <span className="text-[#6AD8D2] ml-0.5">*</span>;
+  const requiredStar = <span className="text-tiffany ml-0.5">*</span>;
 
   return (
     <section id="request" className="relative w-full px-6 md:px-10 py-20 md:py-32 overflow-hidden" style={{ background: isDark ? "#0A0A0A" : "#EAEAED" }}>
       {/* Decorative glows */}
-      <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "#7851A9" }} />
-      <div className="absolute top-20 left-2/3 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.05]" style={{ background: "#6AD8D2" }} />
+      <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "var(--color-purple)" }} />
+      <div className="absolute top-20 left-2/3 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.05]" style={{ background: "var(--color-tiffany)" }} />
 
       <div className="max-w-[1100px] mx-auto relative z-10">
         {/* Big headline */}
@@ -67,7 +67,7 @@ export function RequestFormSection({ cms }: { cms?: {
             <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">
               {cms?.headline || "Tell us what you need."}
               <br />
-              <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-[#7851A9] via-[#9370C4] to-[#6AD8D2]">{cms?.headlineAccent || "We'll handle the rest."}</span>
+              <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-purple via-purple-light to-tiffany">{cms?.headlineAccent || "We'll handle the rest."}</span>
             </h2>
             <p className="font-display text-[clamp(1rem,2vw,1.3rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-sm md:text-right">
               {cms?.description || "Fill in the form and we'll deliver tailored proposals within 24 hours. Completely free."}
@@ -190,8 +190,8 @@ export function RequestFormSection({ cms }: { cms?: {
           {/* Extended inquiry link */}
           <div className="mb-8 p-4 rounded-xl border border-[var(--border-default)] bg-[var(--bg-card)]">
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#7851A9]/10 border border-[#7851A9]/20 flex items-center justify-center shrink-0 mt-0.5">
-                <ExternalLink className="w-4 h-4 text-[#7851A9]" />
+              <div className="w-8 h-8 rounded-lg bg-purple/10 border border-purple/20 flex items-center justify-center shrink-0 mt-0.5">
+                <ExternalLink className="w-4 h-4 text-purple" />
               </div>
               <div>
                 <p className="text-[14px] text-[var(--text-primary)] font-medium mb-1">
@@ -202,7 +202,7 @@ export function RequestFormSection({ cms }: { cms?: {
                 </p>
                 <Link
                   href="/skraddarsy"
-                  className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#7851A9] hover:text-[#9370C4] transition-colors duration-300"
+                  className="inline-flex items-center gap-1.5 text-[13px] font-medium text-purple hover:text-purple-light transition-colors duration-300"
                 >
                   Customize your event →
                 </Link>
@@ -263,7 +263,7 @@ export function RequestFormSection({ cms }: { cms?: {
               />
             </div>
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#7851A9] mb-1">Direct contact</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-purple mb-1">Direct contact</p>
               <h3 className="font-display text-lg md:text-xl font-medium text-[var(--text-primary)]">Prefer a quick chat?</h3>
               <p className="text-[13px] md:text-[14px] text-[var(--text-muted)] mt-0.5 leading-relaxed">
                 Book a 15-min discovery call directly with Malin.

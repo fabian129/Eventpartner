@@ -75,7 +75,7 @@ export function Hero({ cms }: { cms?: HeroCMS }) {
           {cms?.headline || "The World's"}
           <br />
           {cms?.headline ? null : "Largest Selection "}
-          <span className="italic font-light text-[#6AD8D2] block mt-2">
+          <span className="italic font-light text-tiffany block mt-2">
             {cms?.headlineAccent || "of Venues"}
           </span>
         </motion.h1>

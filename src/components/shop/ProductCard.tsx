@@ -26,7 +26,7 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="group bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl overflow-hidden transition-all duration-300 hover:border-[#6AD8D2]/30 hover:shadow-[0_0_30px_rgba(106,216,210,0.05)]">
+    <div className="group bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl overflow-hidden transition-all duration-300 hover:border-tiffany/30 hover:shadow-[0_0_30px_rgba(106,216,210,0.05)]">
       {/* Product Image */}
       <div className="relative aspect-square bg-[var(--bg-primary)] overflow-hidden">
         {imageUrl ? (
@@ -92,7 +92,7 @@ export function ProductCard({ product }: ProductCardProps) {
                   onClick={() => setSelectedVariantIndex(i)}
                   className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
                     i === selectedVariantIndex
-                      ? "border-[#6AD8D2] text-[#6AD8D2] bg-[#6AD8D2]/10"
+                      ? "border-tiffany text-tiffany bg-tiffany/10"
                       : "border-[var(--border-default)] text-[var(--text-secondary)] hover:border-[var(--text-secondary)]"
                   } ${!v.availableForSale ? "opacity-40 line-through" : ""}`}
                   disabled={!v.availableForSale}

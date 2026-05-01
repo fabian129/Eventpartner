@@ -42,7 +42,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-3 bg-white/95 backdrop-blur-md shadow-sm" : "py-6 bg-transparent"}`}>
         {/* Bottom animated gradient line (only visible on scroll for a cleaner top look) */}
-        <div className={`absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-[#7851A9] via-[#6AD8D2] to-[#7851A9] animate-gradient-x transition-opacity duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`} />
+        <div className={`absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-purple via-tiffany to-purple animate-gradient-x transition-opacity duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`} />
         
         <div className="flex items-center justify-between w-full max-w-[1400px] mx-auto px-6 md:px-12">
           {/* Left: Logo */}
@@ -71,18 +71,18 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
                   href={link.href}
                   className={`relative text-[13px] px-4 py-2 transition-all duration-300 font-medium group ${scrolled ? "text-[#555]" : "text-white/80"}`}
                 >
-                  <span className={`relative z-10 transition-all duration-300 ${scrolled ? "group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#7851A9] group-hover:to-[#6AD8D2]" : "group-hover:text-white"}`}>
+                  <span className={`relative z-10 transition-all duration-300 ${scrolled ? "group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple group-hover:to-tiffany" : "group-hover:text-white"}`}>
                     {link.label}
                   </span>
                   {/* Subtle underline that expands from center */}
-                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#7851A9] to-[#6AD8D2] transition-all duration-300 group-hover:w-[40%] rounded-full opacity-0 group-hover:opacity-100" />
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-purple to-tiffany transition-all duration-300 group-hover:w-[40%] rounded-full opacity-0 group-hover:opacity-100" />
                 </a>
               ))}
             </nav>
 
             <a
               href="#request"
-              className="relative text-[12px] font-medium text-white rounded-full px-5 py-2 transition-all duration-300 hover:scale-105 overflow-hidden group shadow-[0_2px_10px_rgba(120,81,169,0.2)] hover:shadow-[0_0_20px_rgba(106,216,210,0.6)] bg-gradient-to-r from-[#7851A9] via-[#6AD8D2] to-[#7851A9] animate-gradient-x hover:brightness-110"
+              className="relative text-[12px] font-medium text-white rounded-full px-5 py-2 transition-all duration-300 hover:scale-105 overflow-hidden group shadow-[0_2px_10px_rgba(120,81,169,0.2)] hover:shadow-[0_0_20px_rgba(106,216,210,0.6)] bg-gradient-to-r from-purple via-tiffany to-purple animate-gradient-x hover:brightness-110"
             >
               <span className="relative z-10">{ctaText}</span>
             </a>
@@ -119,7 +119,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 * i, duration: 0.4 }}
-                className="font-display text-2xl text-[var(--text-secondary)] hover:text-[#6AD8D2] transition-colors"
+                className="font-display text-2xl text-[var(--text-secondary)] hover:text-tiffany transition-colors"
               >
                 {link.label}
               </motion.a>

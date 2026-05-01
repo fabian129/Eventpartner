@@ -39,12 +39,12 @@ export function EnterpriseSection() {
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-[2.8rem] font-medium tracking-tight text-[var(--text-primary)] leading-[1.15]">
               Eventleverans i<br />
-              <span className="italic font-light text-[#7851A9]">världsklass.</span>
+              <span className="italic font-light text-purple">världsklass.</span>
             </h2>
             <div className="mt-6">
               <Link
                 href="#request"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#6AD8D2] hover:bg-[#74CCC4] text-[#0A0A0A] font-semibold text-[14px] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(129,216,208,0.2)]"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-tiffany hover:bg-[#74CCC4] text-[#0A0A0A] font-semibold text-[14px] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(129,216,208,0.2)]"
               >
                 Boka Event
                 <ArrowRight className="w-4 h-4" />

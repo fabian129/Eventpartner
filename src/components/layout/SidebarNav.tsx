@@ -58,7 +58,7 @@ export function SidebarNav() {
           <button
             key={action}
             onClick={() => handleClick(action)}
-            className="group relative h-10 w-10 rounded-full grid place-items-center text-[var(--text-muted)] hover:text-[#6AD8D2] hover:bg-[#6AD8D2]/10 transition-all duration-200"
+            className="group relative h-10 w-10 rounded-full grid place-items-center text-[var(--text-muted)] hover:text-tiffany hover:bg-tiffany/10 transition-all duration-200"
           >
             <Icon className="w-4 h-4" />
             {/* Tooltip */}

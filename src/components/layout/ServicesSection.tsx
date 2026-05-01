@@ -38,7 +38,7 @@ export function ServicesSection() {
           <div className="relative z-10 p-6 md:p-8 flex flex-col h-full justify-end">
             <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }} className="mb-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-black/40">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#6AD8D2]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-tiffany" />
                 <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/80">Premium Events</span>
               </div>
             </motion.div>
@@ -69,14 +69,14 @@ export function ServicesSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay, duration: 0.5 }}
-                  className="rounded-xl p-6 flex flex-col justify-between min-h-[180px] group transition-all duration-300 hover:border-[#6AD8D2]/20"
+                  className="rounded-xl p-6 flex flex-col justify-between min-h-[180px] group transition-all duration-300 hover:border-tiffany/20"
                   style={{ background: cardBg, border: `1px solid ${cardBorder}`, boxShadow: isDark ? "none" : "0 2px 20px rgba(0,0,0,0.03)" }}
                 >
                   <div className="flex justify-between items-start">
                     <div className="p-2.5 rounded-lg" style={{ background: iconBg, border: `1px solid ${iconBorder}` }}>
-                      <Icon className={`w-5 h-5 ${isDark ? "text-white" : "text-[#6AD8D2]"}`} strokeWidth={1.5} />
+                      <Icon className={`w-5 h-5 ${isDark ? "text-white" : "text-tiffany"}`} strokeWidth={1.5} />
                     </div>
-                    <span className="text-[10px] text-[var(--text-dim)] group-hover:text-[#6AD8D2]/50 transition-colors">→</span>
+                    <span className="text-[10px] text-[var(--text-dim)] group-hover:text-tiffany/50 transition-colors">→</span>
                   </div>
                   <div>
                     <h3 className="text-base font-medium text-[var(--text-primary)] mb-1">{title}</h3>
@@ -92,13 +92,13 @@ export function ServicesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="rounded-xl p-6 flex items-center justify-between gap-6 flex-grow group transition-all duration-300 hover:border-[#6AD8D2]/20"
+              className="rounded-xl p-6 flex items-center justify-between gap-6 flex-grow group transition-all duration-300 hover:border-tiffany/20"
               style={{ background: cardBg, border: `1px solid ${cardBorder}`, boxShadow: isDark ? "none" : "0 2px 20px rgba(0,0,0,0.03)" }}
             >
               <div className="flex flex-col gap-2 max-w-[360px]">
                 <div className="flex items-center gap-3">
                   <div className="p-2.5 rounded-lg" style={{ background: iconBg, border: `1px solid ${iconBorder}` }}>
-                    <Building2 className={`w-5 h-5 ${isDark ? "text-white" : "text-[#6AD8D2]"}`} strokeWidth={1.5} />
+                    <Building2 className={`w-5 h-5 ${isDark ? "text-white" : "text-tiffany"}`} strokeWidth={1.5} />
                   </div>
                   <h3 className="text-base font-medium text-[var(--text-primary)]">Digital Dashboard</h3>
                 </div>
@@ -117,7 +117,7 @@ export function ServicesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="md:col-span-5 rounded-xl p-6 md:p-8 flex flex-col justify-between min-h-[380px] relative overflow-hidden group transition-all duration-300 hover:border-[#6AD8D2]/20"
+            className="md:col-span-5 rounded-xl p-6 md:p-8 flex flex-col justify-between min-h-[380px] relative overflow-hidden group transition-all duration-300 hover:border-tiffany/20"
             style={{ background: cardBg, border: `1px solid ${cardBorder}`, boxShadow: isDark ? "none" : "0 2px 20px rgba(0,0,0,0.03)" }}
           >
             {/* Subtle B&W background image peek */}
@@ -135,10 +135,10 @@ export function ServicesSection() {
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-6">
                 <div className="p-2.5 rounded-lg" style={{ background: iconBg, border: `1px solid ${iconBorder}` }}>
-                  <Users className={`w-5 h-5 ${isDark ? "text-white" : "text-[#6AD8D2]"}`} strokeWidth={1.5} />
+                  <Users className={`w-5 h-5 ${isDark ? "text-white" : "text-tiffany"}`} strokeWidth={1.5} />
                 </div>
                 <div className="p-2.5 rounded-lg" style={{ background: iconBg, border: `1px solid ${iconBorder}` }}>
-                  <BarChart3 className={`w-5 h-5 ${isDark ? "text-white" : "text-[#6AD8D2]"}`} strokeWidth={1.5} />
+                  <BarChart3 className={`w-5 h-5 ${isDark ? "text-white" : "text-tiffany"}`} strokeWidth={1.5} />
                 </div>
               </div>
               <h3 className="font-display text-2xl md:text-3xl font-normal text-[var(--text-primary)] tracking-tight leading-[1.1] mb-3">

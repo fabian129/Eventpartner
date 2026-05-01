@@ -256,9 +256,9 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
 
               {/* Detail: two expanding lines */}
               <div className="absolute top-4 right-5 z-10 flex flex-col gap-[3px] opacity-30 group-hover:opacity-60 transition-all duration-700">
-                <div className="w-5 h-[1px] bg-[#6AD8D2]/60 group-hover:w-8 transition-all duration-500" />
-                <div className="w-5 h-[1px] bg-[#6AD8D2]/60 group-hover:w-4 transition-all duration-500 delay-75" />
-                <div className="w-5 h-[1px] bg-[#6AD8D2]/60 group-hover:w-6 transition-all duration-500 delay-150" />
+                <div className="w-5 h-[1px] bg-tiffany/60 group-hover:w-8 transition-all duration-500" />
+                <div className="w-5 h-[1px] bg-tiffany/60 group-hover:w-4 transition-all duration-500 delay-75" />
+                <div className="w-5 h-[1px] bg-tiffany/60 group-hover:w-6 transition-all duration-500 delay-150" />
               </div>
 
               {/* Content */}

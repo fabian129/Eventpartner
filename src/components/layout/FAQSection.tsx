@@ -104,8 +104,8 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
                   className={`w-full text-left px-6 py-5 rounded-xl border transition-all duration-300 ${
                     isOpen
                       ? isDark
-                        ? "border-[#6AD8D2]/20 bg-[#6AD8D2]/[0.03]"
-                        : "border-[#6AD8D2]/25 bg-[#6AD8D2]/[0.03]"
+                        ? "border-tiffany/20 bg-tiffany/[0.03]"
+                        : "border-tiffany/25 bg-tiffany/[0.03]"
                       : isDark
                         ? "border-white/[0.06] bg-[#111]/50 hover:border-white/[0.1]"
                         : "border-black/[0.06] bg-white hover:border-black/[0.1]"
@@ -115,12 +115,12 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
                     <div className="flex items-center gap-3">
                       {/* Number accent */}
                       <span className={`font-mono text-[10px] font-semibold tracking-wider transition-colors duration-300 ${
-                        isOpen ? "text-[#6AD8D2]" : "text-[var(--text-dim)]"
+                        isOpen ? "text-tiffany" : "text-[var(--text-dim)]"
                       }`}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className={`text-[15px] font-medium transition-colors duration-300 ${
-                        isOpen ? "text-[#6AD8D2]" : "text-[var(--text-primary)]"
+                        isOpen ? "text-tiffany" : "text-[var(--text-primary)]"
                       }`}>
                         {faq.question}
                       </span>
@@ -164,7 +164,7 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
           </p>
           <a
             href="#request"
-            className="inline-flex items-center gap-2 text-[14px] font-medium text-[#6AD8D2] hover:text-[#A3E4DE] transition-colors duration-300"
+            className="inline-flex items-center gap-2 text-[14px] font-medium text-tiffany hover:text-[#A3E4DE] transition-colors duration-300"
           >
             {cms?.ctaLink || "Contact us directly →"}
           </a>

@@ -14,17 +14,17 @@ function PinPulse() {
     <div className="relative w-full h-full flex items-center justify-center">
       {/* Radiating rings — visible pulse */}
       <div
-        className="absolute w-14 h-14 rounded-full border-2 border-[#6AD8D2]/30"
+        className="absolute w-14 h-14 rounded-full border-2 border-tiffany/30"
         style={{ animation: 'pingA 2.5s ease-out infinite' }}
       />
       <div
-        className="absolute w-9 h-9 rounded-full border border-[#6AD8D2]/20"
+        className="absolute w-9 h-9 rounded-full border border-tiffany/20"
         style={{ animation: 'pingA 2.5s ease-out 0.6s infinite' }}
       />
       {/* Center pin — breathing */}
       <div className="relative z-10 flex flex-col items-center" style={{ animation: 'pinBob 2s ease-in-out infinite' }}>
-        <div className="w-5 h-5 rounded-full bg-[#6AD8D2]/40 group-hover:bg-[#6AD8D2]/60 border-2 border-[#6AD8D2]/50 group-hover:border-[#6AD8D2]/80 transition-all duration-500 shadow-[0_0_16px_rgba(129,216,208,0.25)]" />
-        <div className="w-[2px] h-3.5 bg-[#6AD8D2]/30 group-hover:bg-[#6AD8D2]/50 transition-colors duration-500 rounded-full" />
+        <div className="w-5 h-5 rounded-full bg-tiffany/40 group-hover:bg-tiffany/60 border-2 border-tiffany/50 group-hover:border-tiffany/80 transition-all duration-500 shadow-[0_0_16px_rgba(129,216,208,0.25)]" />
+        <div className="w-[2px] h-3.5 bg-tiffany/30 group-hover:bg-tiffany/50 transition-colors duration-500 rounded-full" />
       </div>
       <style jsx>{`
         @keyframes pingA {
@@ -59,7 +59,7 @@ function LayersStack() {
         ))}
         {/* Floating node — orbiting */}
         <div
-          className="absolute w-3 h-3 rounded-full bg-[#6AD8D2]/40 group-hover:bg-[#6AD8D2]/65 border border-[#6AD8D2]/50 transition-all duration-500 shadow-[0_0_8px_rgba(129,216,208,0.2)]"
+          className="absolute w-3 h-3 rounded-full bg-tiffany/40 group-hover:bg-tiffany/65 border border-tiffany/50 transition-all duration-500 shadow-[0_0_8px_rgba(129,216,208,0.2)]"
           style={{ top: '0', right: '0', animation: 'nodeWander 3s ease-in-out infinite' }}
         />
       </div>
@@ -95,11 +95,11 @@ function GridConnect() {
       </div>
       {/* Connecting lines — animated */}
       <div
-        className="absolute w-7 h-[2px] bg-[#6AD8D2]/25 group-hover:bg-[#6AD8D2]/45 rounded-full transition-colors duration-500 rotate-45"
+        className="absolute w-7 h-[2px] bg-tiffany/25 group-hover:bg-tiffany/45 rounded-full transition-colors duration-500 rotate-45"
         style={{ animation: 'lineGlow 2.5s ease-in-out infinite' }}
       />
       <div
-        className="absolute w-5 h-[2px] bg-[#6AD8D2]/15 group-hover:bg-[#6AD8D2]/35 rounded-full transition-colors duration-500 -rotate-[30deg]"
+        className="absolute w-5 h-[2px] bg-tiffany/15 group-hover:bg-tiffany/35 rounded-full transition-colors duration-500 -rotate-[30deg]"
         style={{ animation: 'lineGlow 2.5s ease-in-out 0.8s infinite' }}
       />
       <style jsx>{`
@@ -145,7 +145,7 @@ function OrbitsGlow() {
     <div className="relative w-full h-full flex items-center justify-center">
       {/* Outer orbit ring — spinning */}
       <div
-        className="absolute w-14 h-14 rounded-full border border-[rgba(148,163,184,0.2)] group-hover:border-[#7851A9]/25 transition-colors duration-500"
+        className="absolute w-14 h-14 rounded-full border border-[rgba(148,163,184,0.2)] group-hover:border-purple/25 transition-colors duration-500"
         style={{ animation: 'ringRotate 6s linear infinite' }}
       />
       {/* Inner orbit ring */}
@@ -155,17 +155,17 @@ function OrbitsGlow() {
       />
       {/* Orbiting dot — clearly visible */}
       <div
-        className="absolute w-2.5 h-2.5 rounded-full bg-[#6AD8D2]/50 group-hover:bg-[#6AD8D2]/75 shadow-[0_0_8px_rgba(129,216,208,0.3)] transition-colors duration-500"
+        className="absolute w-2.5 h-2.5 rounded-full bg-tiffany/50 group-hover:bg-tiffany/75 shadow-[0_0_8px_rgba(129,216,208,0.3)] transition-colors duration-500"
         style={{ animation: 'orbitMove 3.5s linear infinite' }}
       />
       {/* Second smaller orbiting dot */}
       <div
-        className="absolute w-1.5 h-1.5 rounded-full bg-[#7851A9]/30 group-hover:bg-[#7851A9]/50 transition-colors duration-500"
+        className="absolute w-1.5 h-1.5 rounded-full bg-purple/30 group-hover:bg-purple/50 transition-colors duration-500"
         style={{ animation: 'orbitMove 5s linear infinite reverse' }}
       />
       {/* Center — pulsing */}
       <div
-        className="w-3.5 h-3.5 rounded-full bg-[rgba(148,163,184,0.25)] group-hover:bg-[#7851A9]/35 transition-all duration-500"
+        className="w-3.5 h-3.5 rounded-full bg-[rgba(148,163,184,0.25)] group-hover:bg-purple/35 transition-all duration-500"
         style={{ animation: 'centerPulse 2s ease-in-out infinite' }}
       />
       <style jsx>{`
@@ -237,7 +237,7 @@ export function ServiceListClean() {
           className="mb-16 md:mb-20"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border-default)] bg-[var(--bg-card)] mb-6">
-            <span className="text-[#6AD8D2] text-xs">◆</span>
+            <span className="text-tiffany text-xs">◆</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Alternativ vy — Clean lista</span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
@@ -259,13 +259,13 @@ export function ServiceListClean() {
                 className="group border-b border-[var(--border-default)] py-8 md:py-10 flex items-center gap-6 md:gap-10 cursor-pointer hover:bg-[var(--bg-card-hover)] transition-colors duration-300 px-2 md:px-4 -mx-2 md:-mx-4 rounded-lg"
               >
                 {/* Number */}
-                <span className="font-mono text-[11px] text-[var(--text-muted)] group-hover:text-[#7851A9] transition-colors duration-300 w-8 shrink-0">
+                <span className="font-mono text-[11px] text-[var(--text-muted)] group-hover:text-purple transition-colors duration-300 w-8 shrink-0">
                   {service.number}
                 </span>
 
                 {/* Title + Description */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-display text-xl md:text-2xl font-medium text-[var(--text-primary)] tracking-tight group-hover:text-[#7851A9] transition-colors duration-300 mb-1">
+                  <h3 className="font-display text-xl md:text-2xl font-medium text-[var(--text-primary)] tracking-tight group-hover:text-purple transition-colors duration-300 mb-1">
                     {service.title}
                   </h3>
                   <p className="text-[13px] md:text-[14px] text-[var(--text-muted)] leading-relaxed max-w-xl opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-20 transition-all duration-500 overflow-hidden">
@@ -279,7 +279,7 @@ export function ServiceListClean() {
                 </div>
 
                 {/* Arrow */}
-                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[#7851A9] group-hover:translate-x-1 transition-all duration-300 shrink-0 hidden md:block" />
+                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-purple group-hover:translate-x-1 transition-all duration-300 shrink-0 hidden md:block" />
               </motion.div>
             );
           })}
@@ -295,14 +295,14 @@ export function ServiceListClean() {
         >
           <Link
             href="#request"
-            className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[#7851A9]/20 transition-all duration-300"
+            className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-purple/20 transition-all duration-300"
           >
             <div>
               <p className="text-[15px] font-medium text-[var(--text-primary)]">Skicka in din förfrågan</p>
               <p className="text-[13px] text-[var(--text-muted)] mt-0.5">Vi matchar er med rätt venue inom 24h.</p>
             </div>
-            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-default)] group-hover:bg-[#7851A9]/10 group-hover:border-[#7851A9]/20 flex items-center justify-center transition-all duration-300 ml-6">
-              <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[#7851A9] transition-colors" />
+            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-default)] group-hover:bg-purple/10 group-hover:border-purple/20 flex items-center justify-center transition-all duration-300 ml-6">
+              <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-purple transition-colors" />
             </div>
           </Link>
         </motion.div>

@@ -33,7 +33,7 @@ export function SectionTransition({
           whileInView={{ width: "100%" }}
           viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="h-[1px] max-w-[600px] bg-gradient-to-r from-transparent via-[#6AD8D2]/30 to-transparent"
+          className="h-[1px] max-w-[600px] bg-gradient-to-r from-transparent via-tiffany/30 to-transparent"
         />
       </div>
     );
@@ -47,14 +47,14 @@ export function SectionTransition({
           whileInView={{ opacity: 1, rotate: 45, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-2.5 h-2.5 bg-[#6AD8D2]/40 rounded-[1px]"
+          className="w-2.5 h-2.5 bg-tiffany/40 rounded-[1px]"
         />
         <motion.div
           initial={{ width: "0%" }}
           whileInView={{ width: "100%" }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="h-[1px] max-w-[120px] bg-gradient-to-r from-transparent via-[#6AD8D2]/20 to-transparent"
+          className="h-[1px] max-w-[120px] bg-gradient-to-r from-transparent via-tiffany/20 to-transparent"
         />
       </div>
     );
@@ -76,8 +76,8 @@ export function SectionTransition({
             }}
             className={`rounded-full ${
               i === 1
-                ? "w-2 h-2 bg-[#6AD8D2]/50"
-                : "w-1.5 h-1.5 bg-[#6AD8D2]/25"
+                ? "w-2 h-2 bg-tiffany/50"
+                : "w-1.5 h-1.5 bg-tiffany/25"
             }`}
           />
         ))}

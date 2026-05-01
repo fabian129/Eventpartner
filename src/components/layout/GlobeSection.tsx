@@ -128,7 +128,7 @@ export function GlobeSection() {
           transition={{ duration: 0.8 }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-black/8 bg-white mb-6"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#6AD8D2]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-tiffany" />
           <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-black/40">
             Global Presence
           </span>
@@ -143,7 +143,7 @@ export function GlobeSection() {
         >
           360,000+ Venues
           <br />
-          <span className="italic font-light text-[#6AD8D2]">in 36 Countries</span>
+          <span className="italic font-light text-tiffany">in 36 Countries</span>
         </motion.h2>
         
         <motion.p

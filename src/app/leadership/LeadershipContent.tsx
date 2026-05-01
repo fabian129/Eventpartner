@@ -58,7 +58,7 @@ export function LeadershipContent({ headline, description, teamMembers }: { head
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute bottom-4 right-4 w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#6AD8D2] hover:border-[#6AD8D2]"
+                    className="absolute bottom-4 right-4 w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-tiffany hover:border-tiffany"
                   >
                     <Linkedin className="w-4 h-4 text-white" />
                   </a>
@@ -73,12 +73,12 @@ export function LeadershipContent({ headline, description, teamMembers }: { head
 
       {/* CTA */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10">
-        <motion.a href="/#request" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[#6AD8D2]/30 transition-all duration-300">
+        <motion.a href="/#request" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300">
           <div>
             <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">Want to work with us?</p>
             <p className="text-[var(--text-secondary)] text-sm">Send us your event inquiry — always free, always personal.</p>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-[#6AD8D2]/10 border border-[#6AD8D2]/20 flex items-center justify-center group-hover:bg-[#6AD8D2] group-hover:text-black text-[#6AD8D2] transition-all duration-300 shrink-0 ml-6"><ArrowRight className="w-5 h-5" /></div>
+          <div className="w-12 h-12 rounded-xl bg-tiffany/10 border border-tiffany/20 flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-tiffany transition-all duration-300 shrink-0 ml-6"><ArrowRight className="w-5 h-5" /></div>
         </motion.a>
       </section>
     </main>

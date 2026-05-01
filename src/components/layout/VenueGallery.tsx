@@ -21,7 +21,7 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
         >
           <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
             Venues som<br />
-            <span className="text-[#7851A9]">imponerar.</span>
+            <span className="text-purple">imponerar.</span>
           </h2>
         </motion.div>
 

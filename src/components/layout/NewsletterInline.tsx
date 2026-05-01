@@ -52,11 +52,11 @@ export function NewsletterInline({ cms }: { cms?: NewsletterCMS }) {
             <input
               type="email"
               placeholder={cms?.placeholder || "Your email"}
-              className="flex-1 md:w-[220px] px-4 py-2.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-default)] text-[14px] text-[var(--text-primary)] placeholder:text-[var(--text-dim)] focus:outline-none focus:border-[#6AD8D2]/30 transition-colors"
+              className="flex-1 md:w-[220px] px-4 py-2.5 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-default)] text-[14px] text-[var(--text-primary)] placeholder:text-[var(--text-dim)] focus:outline-none focus:border-tiffany/30 transition-colors"
             />
             <button
               type="submit"
-              className="px-4 py-2.5 rounded-xl bg-[#6AD8D2] text-[#0A0A0A] text-[13px] font-medium hover:bg-[#5EC4BA] transition-colors flex items-center gap-1.5 whitespace-nowrap"
+              className="px-4 py-2.5 rounded-xl bg-tiffany text-[#0A0A0A] text-[13px] font-medium hover:bg-[#5EC4BA] transition-colors flex items-center gap-1.5 whitespace-nowrap"
             >
               {cms?.button || "Subscribe"} <ArrowRight className="w-3.5 h-3.5" />
             </button>

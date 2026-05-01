@@ -50,7 +50,7 @@ function ManifestoReveal() {
   return (
     <motion.p initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.06, delayChildren: 0.5 } } }} className="font-display text-[clamp(1.6rem,3.8vw,2.8rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.3] text-center max-w-4xl mx-auto">
       {MANIFESTO.map((w, i) => (
-        <motion.span key={i} variants={wordVariants} className={`inline-block mr-[0.3em] ${w.accent ? "text-[#7851A9]" : ""} ${w.italic ? "italic font-light" : ""}`}>{w.text}</motion.span>
+        <motion.span key={i} variants={wordVariants} className={`inline-block mr-[0.3em] ${w.accent ? "text-purple" : ""} ${w.italic ? "italic font-light" : ""}`}>{w.text}</motion.span>
       ))}
     </motion.p>
   );
@@ -116,7 +116,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
           <div className="absolute inset-0 flex items-center justify-center z-10">
             <div className="relative">
               <div className="absolute inset-0 w-20 h-20 md:w-24 md:h-24 rounded-full border border-white/20 animate-ping" style={{ animationDuration: "2.5s" }} />
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-[#7851A9]/25 group-hover:border-[#7851A9]/40"><Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="white" fillOpacity={0.9} /></div>
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-purple/25 group-hover:border-purple/40"><Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="white" fillOpacity={0.9} /></div>
             </div>
           </div>
           <div className="absolute bottom-0 left-0 right-0 px-6 py-5 z-10 flex justify-between items-end">
@@ -167,19 +167,19 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
             {tiers.map((tier, i) => (
               <motion.div key={tier.name} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }} className={`relative group overflow-hidden rounded-xl p-8 md:p-10 ${tier.highlight ? "bg-gradient-to-br from-[#1a1a1a] to-[#111]" : "bg-[#161616]"}`} style={{ minHeight: "480px" }}>
                 <span className="absolute top-4 left-5 font-mono text-[11px] tracking-[0.12em] text-white/20 font-medium">{String(i + 1).padStart(2, "0")}</span>
-                {tier.badge && (<div className="absolute top-4 right-5"><span className={`inline-block font-mono text-[9px] uppercase tracking-[0.12em] px-3 py-1 rounded-full ${tier.highlight ? "bg-[#7851A9]/15 text-[#9370C4] border border-[#7851A9]/15" : "bg-white/[0.04] text-white/30 border border-white/[0.06]"}`}>{tier.badge}</span></div>)}
+                {tier.badge && (<div className="absolute top-4 right-5"><span className={`inline-block font-mono text-[9px] uppercase tracking-[0.12em] px-3 py-1 rounded-full ${tier.highlight ? "bg-purple/15 text-purple-light border border-purple/15" : "bg-white/[0.04] text-white/30 border border-white/[0.06]"}`}>{tier.badge}</span></div>)}
                 <div className="mt-12">
                   <h3 className="font-display text-[28px] md:text-[32px] font-medium text-white tracking-tight leading-[1.05] mb-2">{tier.name}</h3>
                   <div className="mb-8">
-                    <span className={`font-display text-lg font-medium ${tier.highlight ? "text-[#7851A9]" : "text-[#6AD8D2]"}`}>{tier.price}</span>
+                    <span className={`font-display text-lg font-medium ${tier.highlight ? "text-purple" : "text-tiffany"}`}>{tier.price}</span>
                     <span className="block font-mono text-[10px] uppercase tracking-[0.1em] mt-1 text-white/25">{tier.priceSub}</span>
                   </div>
                   <ul className="space-y-3 mb-10">
                     {tier.features.map((f) => (
-                      <li key={f} className="flex items-start gap-3"><Check className={`w-4 h-4 mt-0.5 shrink-0 ${tier.highlight ? "text-[#7851A9]/60" : "text-[#6AD8D2]/50"}`} /><span className="text-[13px] leading-relaxed text-white/45">{f}</span></li>
+                      <li key={f} className="flex items-start gap-3"><Check className={`w-4 h-4 mt-0.5 shrink-0 ${tier.highlight ? "text-purple/60" : "text-tiffany/50"}`} /><span className="text-[13px] leading-relaxed text-white/45">{f}</span></li>
                     ))}
                   </ul>
-                  <a href="/#request" className={`inline-flex items-center gap-2 text-[13px] font-medium transition-all duration-300 ${tier.highlight ? "text-[#7851A9] hover:text-[#9370C4]" : "text-[#6AD8D2] hover:text-[#5EC4BA]"}`}>{tier.cta}<ArrowRight className="w-3.5 h-3.5" /></a>
+                  <a href="/#request" className={`inline-flex items-center gap-2 text-[13px] font-medium transition-all duration-300 ${tier.highlight ? "text-purple hover:text-purple-light" : "text-tiffany hover:text-[#5EC4BA]"}`}>{tier.cta}<ArrowRight className="w-3.5 h-3.5" /></a>
                 </div>
                 <div className="absolute inset-0 border border-white/[0.04] group-hover:border-white/[0.08] transition-colors duration-500 pointer-events-none rounded-xl" />
               </motion.div>
@@ -219,7 +219,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                 <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] group-hover:translate-x-0.5 transition-all duration-300 flex-shrink-0" />
               </div>
             </Link>
-            <Link href="/#request" className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[#7851A9] hover:bg-[#6A47A0] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(120,81,169,0.15)]">
+            <Link href="/#request" className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-purple hover:bg-[#6A47A0] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(120,81,169,0.15)]">
               <span className="text-[13px] font-semibold text-white/50">{cms?.ctaCard2Title || "Apply for VIP"}</span>
               <div className="flex items-end justify-between mt-4">
                 <p className="text-[18px] md:text-[22px] text-white font-medium leading-snug max-w-[280px]">{cms?.ctaCard2Headline || "Start your VIP journey."}<br /><span className="text-white/50">{cms?.ctaCard2Sub || "Today."}</span></p>

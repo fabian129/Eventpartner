@@ -110,9 +110,9 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
               <motion.div
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-[#6AD8D2]/10 border border-[#6AD8D2]/20"
+                className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-tiffany/10 border border-tiffany/20"
               >
-                <span className="text-[#6AD8D2] text-sm font-medium">✓ Thank you! You're registered.</span>
+                <span className="text-tiffany text-sm font-medium">✓ Thank you! You're registered.</span>
               </motion.div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex items-center gap-2 max-w-sm mx-auto">
@@ -124,12 +124,12 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email Address"
                     required
-                    className="w-full py-3 pl-10 pr-4 rounded-xl bg-white/[0.05] border border-white/[0.1] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#6AD8D2]/40 focus:ring-1 focus:ring-[#6AD8D2]/20 transition-all"
+                    className="w-full py-3 pl-10 pr-4 rounded-xl bg-white/[0.05] border border-white/[0.1] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-tiffany/40 focus:ring-1 focus:ring-tiffany/20 transition-all"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="px-5 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-[#6AD8D2] transition-all duration-300 shrink-0"
+                  className="px-5 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-tiffany transition-all duration-300 shrink-0"
                 >
                   Sign Up
                 </button>
@@ -173,7 +173,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-9 h-9 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-white/30 hover:text-[#6AD8D2] hover:border-[#6AD8D2]/30 hover:bg-[#6AD8D2]/5 hover:scale-110 transition-all duration-300"
+                    className="w-9 h-9 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-white/30 hover:text-tiffany hover:border-tiffany/30 hover:bg-tiffany/5 hover:scale-110 transition-all duration-300"
                   >
                     <Icon className="w-4 h-4" />
                   </a>
@@ -184,7 +184,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
             {/* Link columns */}
             {Object.values(FOOTER_LINKS).map((section) => (
               <div key={section.title} className="md:col-span-2 md:first:col-start-5">
-                <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6AD8D2] mb-5">
+                <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-tiffany mb-5">
                   {section.title}
                 </h4>
                 <ul className="space-y-3">
@@ -192,7 +192,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="text-[13px] text-white/40 hover:text-[#6AD8D2] transition-colors duration-300 inline-flex items-center gap-1"
+                        className="text-[13px] text-white/40 hover:text-tiffany transition-colors duration-300 inline-flex items-center gap-1"
                       >
                         {link.label}
                       </Link>
@@ -211,13 +211,13 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
         <div className="max-w-[1200px] mx-auto">
           <a
             href="#request"
-            className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-gradient-to-r from-[#6AD8D2]/10 to-[#6B3FA0]/10 border border-white/[0.06] hover:border-[#6AD8D2]/20 transition-all duration-300"
+            className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-gradient-to-r from-tiffany/10 to-[#6B3FA0]/10 border border-white/[0.06] hover:border-tiffany/20 transition-all duration-300"
           >
             <div>
               <p className="text-white text-sm md:text-base font-medium mb-1">{cms?.ctaTitle || "Send your inquiry today"}</p>
               <p className="text-white/35 text-xs md:text-sm">{cms?.ctaDesc || "Always a response within 24h with at least 3 proposals matching your needs."}</p>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#6AD8D2] group-hover:border-[#6AD8D2] group-hover:text-black text-white/40 transition-all duration-300 shrink-0 ml-4">
+            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-tiffany group-hover:border-tiffany group-hover:text-black text-white/40 transition-all duration-300 shrink-0 ml-4">
               <ArrowRight className="w-4 h-4" />
             </div>
           </a>

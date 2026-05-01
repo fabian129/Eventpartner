@@ -62,10 +62,10 @@ function AccordionItem({ faq, index, isOpen, onToggle }: { faq: { question: stri
     >
       <button
         onClick={onToggle}
-        className="w-full flex items-start justify-between gap-6 p-6 md:p-8 bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl hover:border-[#6AD8D2]/20 transition-all duration-300 text-left group"
+        className="w-full flex items-start justify-between gap-6 p-6 md:p-8 bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl hover:border-tiffany/20 transition-all duration-300 text-left group"
       >
         <div className="flex items-start gap-4 min-w-0">
-          <span className="font-mono text-[10px] text-[#6AD8D2] mt-1.5 shrink-0">
+          <span className="font-mono text-[10px] text-tiffany mt-1.5 shrink-0">
             {String(index + 1).padStart(2, "0")}
           </span>
           <h3 className="text-[17px] md:text-lg font-medium text-[var(--text-primary)] leading-snug">
@@ -75,7 +75,7 @@ function AccordionItem({ faq, index, isOpen, onToggle }: { faq: { question: stri
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3, ease: EASE }}
-          className="shrink-0 w-8 h-8 rounded-lg bg-[var(--bg-primary)] border border-[var(--border-default)] flex items-center justify-center group-hover:border-[#6AD8D2]/30 transition-colors"
+          className="shrink-0 w-8 h-8 rounded-lg bg-[var(--bg-primary)] border border-[var(--border-default)] flex items-center justify-center group-hover:border-tiffany/30 transition-colors"
         >
           <ChevronDown className="w-4 h-4 text-[var(--text-muted)]" />
         </motion.div>
@@ -142,7 +142,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
           className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[0.88] mb-10"
         >
           {cms?.heroHeadline || "Got"}<br />
-          <span className="text-[#6AD8D2]">{cms?.heroHeadlineAccent || "questions?"}</span>
+          <span className="text-tiffany">{cms?.heroHeadlineAccent || "questions?"}</span>
         </motion.h1>
 
         <motion.p
@@ -169,7 +169,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search questions..."
-            className="w-full bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl pl-12 pr-4 py-4 text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#6AD8D2]/40 transition-colors"
+            className="w-full bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl pl-12 pr-4 py-4 text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-tiffany/40 transition-colors"
           />
         </motion.div>
       </section>
@@ -212,11 +212,11 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
         >
           <a
             href="/help"
-            className="group flex items-center justify-between p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[#6AD8D2]/30 transition-all duration-300"
+            className="group flex items-center justify-between p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300"
           >
             <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-xl bg-[#6AD8D2]/10 flex items-center justify-center shrink-0">
-                <MessageCircle className="w-5 h-5 text-[#6AD8D2]" />
+              <div className="w-12 h-12 rounded-xl bg-tiffany/10 flex items-center justify-center shrink-0">
+                <MessageCircle className="w-5 h-5 text-tiffany" />
               </div>
               <div>
                 <p className="text-lg font-display font-medium text-[var(--text-primary)] mb-0.5">
@@ -227,17 +227,17 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
                 </p>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-[var(--bg-primary)] border border-[var(--border-default)] flex items-center justify-center group-hover:bg-[#6AD8D2] group-hover:text-black text-[var(--text-muted)] transition-all duration-300 shrink-0 ml-4">
+            <div className="w-10 h-10 rounded-lg bg-[var(--bg-primary)] border border-[var(--border-default)] flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-[var(--text-muted)] transition-all duration-300 shrink-0 ml-4">
               <ArrowRight className="w-4 h-4" />
             </div>
           </a>
           <a
             href="/vip"
-            className="group flex items-center justify-between p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[#7851A9]/30 transition-all duration-300"
+            className="group flex items-center justify-between p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-purple/30 transition-all duration-300"
           >
             <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-xl bg-[#7851A9]/10 flex items-center justify-center shrink-0">
-                <HelpCircle className="w-5 h-5 text-[#7851A9]" />
+              <div className="w-12 h-12 rounded-xl bg-purple/10 flex items-center justify-center shrink-0">
+                <HelpCircle className="w-5 h-5 text-purple" />
               </div>
               <div>
                 <p className="text-lg font-display font-medium text-[var(--text-primary)] mb-0.5">
@@ -248,7 +248,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
                 </p>
               </div>
             </div>
-            <div className="w-10 h-10 rounded-lg bg-[var(--bg-primary)] border border-[var(--border-default)] flex items-center justify-center group-hover:bg-[#7851A9] group-hover:text-white text-[var(--text-muted)] transition-all duration-300 shrink-0 ml-4">
+            <div className="w-10 h-10 rounded-lg bg-[var(--bg-primary)] border border-[var(--border-default)] flex items-center justify-center group-hover:bg-purple group-hover:text-white text-[var(--text-muted)] transition-all duration-300 shrink-0 ml-4">
               <ArrowRight className="w-4 h-4" />
             </div>
           </a>
@@ -263,7 +263,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[#6AD8D2]/30 transition-all duration-300"
+          className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300"
         >
           <div>
             <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">
@@ -273,7 +273,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
               {cms?.ctaDescription || "Send us your inquiry and we'll get back to you within 24 hours."}
             </p>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-[#6AD8D2]/10 border border-[#6AD8D2]/20 flex items-center justify-center group-hover:bg-[#6AD8D2] group-hover:text-black text-[#6AD8D2] transition-all duration-300 shrink-0 ml-6">
+          <div className="w-12 h-12 rounded-xl bg-tiffany/10 border border-tiffany/20 flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-tiffany transition-all duration-300 shrink-0 ml-6">
             <ArrowRight className="w-5 h-5" />
           </div>
         </motion.a>

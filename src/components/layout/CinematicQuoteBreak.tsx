@@ -101,7 +101,7 @@ export function CinematicQuoteBreak({ cms }: { cms?: CtaCMS }) {
             {/* Right: tiffany accent */}
             <Link
               href="/skraddarsy"
-              className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[#6AD8D2] hover:bg-[#74CCC4] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(106,216,210,0.15)]"
+              className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-tiffany hover:bg-[#74CCC4] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(106,216,210,0.15)]"
             >
               <span className="text-[13px] font-semibold text-[#0A0A0A]/50">
                 {cms?.card2Title || "Start your event"}

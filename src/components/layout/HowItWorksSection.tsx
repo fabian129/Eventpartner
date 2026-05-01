@@ -137,7 +137,7 @@ export function HowItWorksSection() {
   return (
     <section id="how-it-works" className="relative w-full py-28 md:py-36 overflow-x-hidden overflow-y-visible" style={{ background: "#0e0e14" }}>
       {/* Subtle ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[200px] pointer-events-none bg-[#7851A9]/[0.06]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[200px] pointer-events-none bg-purple/[0.06]" />
 
       <div className="max-w-[1300px] mx-auto px-6 md:px-12 relative z-10">
         {/* Header */}
@@ -207,7 +207,7 @@ export function HowItWorksSection() {
                   className="relative flex flex-col items-center text-center group cursor-pointer"
                 >
                   {/* Step node — solid bg, z-10 so line goes behind */}
-                  <div className="relative z-10 w-[150px] h-[150px] md:w-[160px] md:h-[160px] rounded-2xl flex flex-col items-center justify-center mb-6 bg-[#161622] border border-white/[0.08] group-hover:border-[#7851A9]/40 group-hover:bg-[#1a1a2e] group-hover:shadow-[0_0_40px_rgba(120,81,169,0.12)] transition-all duration-500">
+                  <div className="relative z-10 w-[150px] h-[150px] md:w-[160px] md:h-[160px] rounded-2xl flex flex-col items-center justify-center mb-6 bg-[#161622] border border-white/[0.08] group-hover:border-purple/40 group-hover:bg-[#1a1a2e] group-hover:shadow-[0_0_40px_rgba(120,81,169,0.12)] transition-all duration-500">
                     <span className="absolute top-2.5 left-1/2 -translate-x-1/2 font-mono text-[9px] font-semibold text-white/60 group-hover:text-white tracking-[0.15em] transition-colors duration-500">
                       {step.number}
                     </span>
@@ -242,7 +242,7 @@ export function HowItWorksSection() {
               <p className="text-[15px] font-semibold text-white">Skicka in din förfrågan idag</p>
               <p className="text-[13px] text-white/35 mt-0.5">Alltid svar inom max 24h med minst 3 offerter som passar era önskemål.</p>
             </div>
-            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[#7851A9]/20 border border-[#7851A9]/20 group-hover:bg-[#7851A9]/30 group-hover:border-[#7851A9]/40 flex items-center justify-center transition-all duration-300 ml-6">
+            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-purple/20 border border-purple/20 group-hover:bg-purple/30 group-hover:border-purple/40 flex items-center justify-center transition-all duration-300 ml-6">
               <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
             </div>
           </Link>

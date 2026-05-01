@@ -98,7 +98,7 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
           <div className="absolute top-3 left-3">
             <span className={`text-[10px] font-semibold uppercase tracking-[0.08em] px-3 py-1.5 rounded-full backdrop-blur-md border ${
               product.badge === "Bästsäljare"
-                ? "bg-[#6AD8D2]/90 text-white border-[#6AD8D2]"
+                ? "bg-tiffany/90 text-white border-tiffany"
                 : product.badge === "Nyhet"
                 ? "bg-[#6B3FA0]/90 text-white border-[#6B3FA0]"
                 : "bg-white/90 text-[#111] border-black/10"
@@ -114,7 +114,7 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
 
       {/* Info */}
       <div className="p-4 md:p-5">
-        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#6AD8D2] mb-1 block">
+        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-tiffany mb-1 block">
           {product.category}
         </span>
         <h4 className="font-display text-[15px] font-medium text-[#111] tracking-tight mb-2">
@@ -223,12 +223,12 @@ export function WebshopTeaser() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 2.3 }}
-              className="relative z-10 text-center max-w-lg px-10 py-12 rounded-3xl bg-white/80 backdrop-blur-xl border border-[#6AD8D2]/20 shadow-[0_8px_60px_rgba(129,216,208,0.12)]"
+              className="relative z-10 text-center max-w-lg px-10 py-12 rounded-3xl bg-white/80 backdrop-blur-xl border border-tiffany/20 shadow-[0_8px_60px_rgba(129,216,208,0.12)]"
             >
               {/* Animated glow ring around lock */}
               <div className="relative w-20 h-20 mx-auto mb-8">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#6AD8D2] to-[#5CC8C2] animate-pulse opacity-20" />
-                <div className="relative w-full h-full rounded-2xl bg-gradient-to-br from-[#6AD8D2] to-[#5CC8C2] flex items-center justify-center shadow-[0_4px_20px_rgba(129,216,208,0.3)]">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-tiffany to-[#5CC8C2] animate-pulse opacity-20" />
+                <div className="relative w-full h-full rounded-2xl bg-gradient-to-br from-tiffany to-[#5CC8C2] flex items-center justify-center shadow-[0_4px_20px_rgba(129,216,208,0.3)]">
                   <Lock className="w-8 h-8 text-white" />
                 </div>
               </div>
@@ -243,7 +243,7 @@ export function WebshopTeaser() {
 
               <a
                 href="#request"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#6AD8D2] text-white text-sm font-semibold hover:bg-[#5CC8C2] hover:shadow-[0_4px_24px_rgba(129,216,208,0.3)] transition-all duration-300"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-tiffany text-white text-sm font-semibold hover:bg-[#5CC8C2] hover:shadow-[0_4px_24px_rgba(129,216,208,0.3)] transition-all duration-300"
               >
                 <ShoppingBag className="w-4 h-4" />
                 Contact us

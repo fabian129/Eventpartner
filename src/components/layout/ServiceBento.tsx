@@ -102,7 +102,7 @@ function BentoCard({ service, index }: { service: typeof SERVICES[0]; index: num
         ref={cursorRef}
         className="absolute z-30 pointer-events-none -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
       >
-        <div className="bg-[#6AD8D2] text-[#0a0a0a] text-[10px] font-semibold uppercase tracking-[0.1em] px-4 py-2 rounded-full whitespace-nowrap shadow-lg shadow-[#6AD8D2]/20">
+        <div className="bg-tiffany text-[#0a0a0a] text-[10px] font-semibold uppercase tracking-[0.1em] px-4 py-2 rounded-full whitespace-nowrap shadow-lg shadow-tiffany/20">
           Boka nu →
         </div>
       </div>
