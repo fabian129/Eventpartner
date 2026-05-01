@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Users, Calendar, Award } from "lucide-react";
+import Image from "next/image";
+import { MapPin, Users, Calendar, Award, Linkedin } from "lucide-react";
+import { urlFor } from "@/../sanity/lib/image";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -13,7 +15,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  * Stats woven into the narrative. Team grid below.
  */
 
-const TEAM = [
+const TEAM: { name: string; role: string; bio?: string; linkedin?: string; image?: any; initials: string }[] = [
   { name: "Pontus Bredal Hansen", role: "Co-Founder & CEO", initials: "PH" },
   { name: "Malin Berlin", role: "Co-Founder & COO", initials: "MB" },
   { name: "Joakim Ström", role: "Head of Partnerships", initials: "JS" },
@@ -39,7 +41,7 @@ interface AboutCMS {
   stats?: { value: string; label: string }[];
   teamLabel?: string;
   teamIntro?: string;
-  team?: { name: string; role: string; initials: string }[];
+  team?: { name: string; role: string; bio?: string; linkedin?: string; image?: any; initials: string }[];
 }
 
 export function AboutSection({ cms }: { cms?: AboutCMS }) {
@@ -147,7 +149,7 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
             {cms?.teamIntro || "A small team with deep experience in event production, hospitality, and tech — treating every inquiry as their own."}
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {(cms?.team || TEAM).map((member, i) => (
               <motion.div
                 key={member.name}
@@ -156,17 +158,46 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: EASE }}
               >
-                {/* Dark portrait square */}
-                <div className="aspect-[4/5] rounded-2xl bg-[#1a1a1a] flex items-center justify-center mb-4">
-                  <span className="text-2xl font-semibold text-white/20">{member.initials}</span>
+                {/* Portrait — image or initials fallback */}
+                <div className="aspect-[4/5] rounded-2xl bg-[#1a1a1a] relative overflow-hidden mb-4 group">
+                  {member.image ? (
+                    <>
+                      <Image
+                        src={urlFor(member.image).width(400).height(500).url()}
+                        alt={member.name}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-2xl font-semibold text-white/20">{member.initials}</span>
+                    </div>
+                  )}
                 </div>
-                {/* Plain text — name + role */}
+                {/* Info */}
                 <h4 className="text-[16px] font-medium text-[var(--text-primary)] leading-tight mb-0.5">
                   {member.name}
                 </h4>
-                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)]">
+                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)] block">
                   {member.role}
                 </span>
+                {member.bio && (
+                  <p className="text-[12px] text-[var(--text-muted)] leading-[1.6] mt-2">{member.bio}</p>
+                )}
+                {member.linkedin && (
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mt-2 text-[11px] font-medium text-tiffany hover:text-[#5EC4BA] transition-colors"
+                  >
+                    <Linkedin className="w-3 h-3" />
+                    LinkedIn
+                  </a>
+                )}
               </motion.div>
             ))}
           </div>

@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, Heart, Shield, Zap, Users, MapPin, Calendar, Award, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { Globe, Heart, Shield, Zap, Users, MapPin, Calendar, Award, ArrowRight, Linkedin } from "lucide-react";
+import { urlFor } from "@/../sanity/lib/image";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const ICON_MAP: Record<string, any> = { heart: Heart, zap: Zap, globe: Globe, shield: Shield };
 const STAT_ICONS = [MapPin, Calendar, Users, Award];
 
-const DEFAULT_TEAM = [
+const DEFAULT_TEAM: { name: string; role: string; bio?: string; linkedin?: string; image?: any; initials: string }[] = [
   { name: "Pontus Bredal Hansen", role: "Co-Founder & CEO", initials: "PH" },
   { name: "Malin Berlin", role: "Co-Founder & COO", initials: "MB" },
   { name: "Joakim Ström", role: "Head of Partnerships", initials: "JS" },
@@ -38,7 +40,7 @@ interface AboutCMS {
   valuesLabel?: string; valuesHeadline?: string; valuesHeadlineAccent?: string;
   valueCards?: { title: string; description: string; icon?: string }[];
   teamLabel?: string; teamIntro?: string;
-  teamMembers?: { name: string; role: string; initials: string }[];
+  teamMembers?: { name: string; role: string; bio?: string; linkedin?: string; image?: any; initials: string }[];
   ctaHeadline?: string; ctaDescription?: string;
 }
 
@@ -117,12 +119,38 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{cms?.teamLabel || "The Team"}</span>
           <p className="font-display text-[clamp(1.3rem,2.5vw,2rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.3] mb-14 max-w-3xl">{cms?.teamIntro || "A small team with deep experience in event production, hospitality, and tech — treating every inquiry as their own."}</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {team.map((member, i) => (
               <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: EASE }}>
-                <div className="aspect-[4/5] rounded-2xl bg-[#1a1a1a] flex items-center justify-center mb-4 group hover:bg-[#222] transition-colors duration-300"><span className="text-2xl font-semibold text-white/20 group-hover:text-tiffany/40 transition-colors duration-300">{member.initials}</span></div>
+                <div className="aspect-[4/5] rounded-2xl bg-[#1a1a1a] relative overflow-hidden mb-4 group">
+                  {member.image ? (
+                    <>
+                      <Image
+                        src={urlFor(member.image).width(400).height(500).url()}
+                        alt={member.name}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center group hover:bg-[#222] transition-colors duration-300">
+                      <span className="text-2xl font-semibold text-white/20 group-hover:text-tiffany/40 transition-colors duration-300">{member.initials}</span>
+                    </div>
+                  )}
+                </div>
                 <h4 className="text-[16px] font-medium text-[var(--text-primary)] leading-tight mb-0.5">{member.name}</h4>
-                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)]">{member.role}</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)] block">{member.role}</span>
+                {member.bio && (
+                  <p className="text-[12px] text-[var(--text-muted)] leading-[1.6] mt-2">{member.bio}</p>
+                )}
+                {member.linkedin && (
+                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-2 text-[11px] font-medium text-tiffany hover:text-[#5EC4BA] transition-colors">
+                    <Linkedin className="w-3 h-3" />
+                    LinkedIn
+                  </a>
+                )}
               </motion.div>
             ))}
           </div>

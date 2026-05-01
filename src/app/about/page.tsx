@@ -59,6 +59,9 @@ export default async function AboutPage() {
         teamMembers: data.teamMembers?.map((m: any) => ({
           name: m.name,
           role: t(m.role),
+          bio: t(m.bio),
+          linkedin: m.linkedin,
+          image: m.image,
           initials: m.initials,
         })),
         ctaHeadline: t(data.ctaHeadline),

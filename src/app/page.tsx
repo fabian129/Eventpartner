@@ -170,6 +170,9 @@ export default async function Home() {
           team: data.aboutTeam?.map((m: any) => ({
             name: m.name,
             role: t(m.role),
+            bio: t(m.bio),
+            linkedin: m.linkedin,
+            image: m.image,
             initials: m.initials,
           })),
         } : undefined} />
