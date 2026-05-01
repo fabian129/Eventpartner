@@ -42,8 +42,8 @@ const MANIFESTO: WordSegment[] = [
 ];
 
 const wordVariants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const } },
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 function ManifestoReveal() {
@@ -90,7 +90,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">{cms?.heroLabelRight || "Exclusive access · 3:12"}</span>
         </motion.div>
 
-        <motion.h1 initial={{ opacity: 0, y: 30, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 0.2, duration: 1, ease: EASE }} className="font-display text-[clamp(2.8rem,7vw,5.5rem)] font-medium tracking-[-0.04em] text-[var(--text-primary)] leading-[0.92] mb-16 md:mb-20">
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 1, ease: EASE }} className="font-display text-[clamp(2.8rem,7vw,5.5rem)] font-medium tracking-[-0.04em] text-[var(--text-primary)] leading-[0.92] mb-16 md:mb-20">
           {cms?.heroHeadline || "Your partner,"}{" "}
           <span className="italic font-light" style={{ background: "linear-gradient(135deg, #7851A9 0%, #9370C4 50%, #6AD8D2 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{cms?.heroHeadlineAccent || "not a vendor."}</span>
         </motion.h1>
@@ -110,7 +110,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
           {cms?.heroAnchorText || "Welcome to the VIP Programme ↓"}
         </motion.p>
 
-        <motion.div initial={{ opacity: 0, y: 50, scale: 0.93, filter: "blur(6px)" }} animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }} transition={{ delay: 2.6, duration: 1.2, ease: EASE }} className="relative w-full rounded-2xl overflow-hidden group cursor-pointer" style={{ aspectRatio: "16 / 9", boxShadow: "0 30px 80px -20px rgba(0,0,0,0.12)" }}>
+        <motion.div initial={{ opacity: 0, y: 50, scale: 0.93 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 2.6, duration: 1.2, ease: EASE }} className="relative w-full rounded-2xl overflow-hidden group cursor-pointer" style={{ aspectRatio: "16 / 9", boxShadow: "0 30px 80px -20px rgba(0,0,0,0.12)" }}>
           <Image src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1920&auto=format&fit=crop" alt="VIP event experience" fill className="object-cover grayscale brightness-[0.75] group-hover:grayscale-0 group-hover:brightness-90 transition-all duration-700" sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
           <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -129,7 +129,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
       {/* Manifesto */}
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 py-24 md:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-          <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
+          <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <div className="flex justify-between items-start mb-8"><span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.manifestoLabel || "EventPartner — VIP Benefits"}</span></div>
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">{cms?.manifestoHeadline || "Everything you need."}<br />{cms?.manifestoHeadlineAccent || "Nothing you don\u0027t."}</h2>
             <div className="grid grid-cols-2 gap-4 mt-10">
@@ -141,7 +141,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
               ))}
             </div>
           </motion.div>
-          <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
+          <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
             <p className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.25] mb-10">&ldquo;{cms?.manifestoQuote || "We don\u0027t treat every client the same — we treat every client as if they\u0027re the only one."}&rdquo;</p>
             <div className="space-y-6 border-t border-[var(--border-default)] pt-10">
               <p className="text-[16px] text-[var(--text-secondary)] leading-[1.8]">{cms?.manifestoBody1 || "Our VIP programme gives your team direct access to a dedicated account manager who understands your brand, your standards, and your history. Every inquiry is prioritised, every proposal is tailored, and every detail is handled with care."}</p>
@@ -154,7 +154,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
 
       {/* Tiers */}
       <section className="max-w-[1400px] mx-auto px-6 md:px-10 py-24 md:py-32">
-        <motion.div initial={{ opacity: 0, y: 20, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }} className="mb-14">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }} className="mb-14">
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.tiersLabel || "EventPartner — Membership tiers"}</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">{cms?.tiersLabelRight || "Two levels"}</span>
@@ -190,7 +190,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
 
       {/* How It Works */}
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 py-24 md:py-32">
-        <motion.div initial={{ opacity: 0, y: 20, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }} className="mb-14">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }} className="mb-14">
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.stepsLabel || "EventPartner — How to join"}</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.stepsLabelRight || "3 steps"}</span>

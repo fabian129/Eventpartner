@@ -55,8 +55,8 @@ export function CinematicQuoteBreak({ cms }: { cms?: CtaCMS }) {
 
         {/* Big headline */}
         <motion.h2
-          initial={{ opacity: 0, y: 25, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
           className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-medium tracking-tight text-white leading-[0.95] mb-4"

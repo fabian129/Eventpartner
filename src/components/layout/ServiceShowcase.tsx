@@ -14,8 +14,8 @@ export function ServiceShowcase() {
 
         {/* Header — like page 41 */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
           className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-20 gap-8"
@@ -53,8 +53,8 @@ export function ServiceShowcase() {
 
           {/* LEFT — Large image card (6 col, tall) */}
           <motion.div
-            initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease: EASE }}
             className="lg:col-span-6 relative h-[500px] md:h-[650px] rounded-[2rem] overflow-hidden group"
@@ -87,8 +87,8 @@ export function ServiceShowcase() {
 
             {/* Top right — Light card */}
             <motion.div
-              initial={{ opacity: 0, y: 25, filter: "blur(6px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
               className="bg-[#F3F1ED] rounded-[2rem] relative overflow-hidden flex flex-col sm:flex-row min-h-[300px] p-8 md:p-10 group"
@@ -117,8 +117,8 @@ export function ServiceShowcase() {
 
             {/* Bottom right — Dark/accent card */}
             <motion.div
-              initial={{ opacity: 0, y: 25, filter: "blur(6px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
               className="bg-[#2A2438] rounded-[2rem] relative overflow-hidden flex min-h-[300px] text-white p-8 md:p-10"

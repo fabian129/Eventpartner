@@ -97,13 +97,8 @@ export function ScrollSection({
     ]
   );
 
-  // Blur only on entrance (exit blur is too expensive and less impactful)
-  const blurValue = useTransform(
-    scrollYProgress,
-    [0, 0.15],
-    [fadeIn ? entranceBlur : 0, 0]
-  );
-  const filter = useTransform(blurValue, (v) => (v > 0.1 ? `blur(${v}px)` : "none"));
+  // Blur removed — filter: blur() is not GPU-accelerated and triggers
+  // expensive repaints. opacity + scale + y provide sufficient entrance effect.
 
   return (
     <motion.div
@@ -112,8 +107,7 @@ export function ScrollSection({
         opacity,
         scale,
         y,
-        filter,
-        willChange: "transform, opacity, filter",
+        willChange: "transform, opacity",
       }}
       className={className}
     >

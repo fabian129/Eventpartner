@@ -189,8 +189,8 @@ export function CaseStoriesSection({ cms }: { cms?: CasesCMS }) {
       {/* Header — moodboard editorial style */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 mb-12 md:mb-16">
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
         >

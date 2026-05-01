@@ -41,8 +41,8 @@ export function NewsletterSection() {
       <div className="relative max-w-[540px] mx-auto px-6 md:px-10 text-center">
         {/* Label — cinematic entrance */}
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
         >
@@ -53,8 +53,8 @@ export function NewsletterSection() {
 
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 25, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, delay: 0.08, ease: EASE }}
         >
@@ -68,8 +68,8 @@ export function NewsletterSection() {
 
         {/* Form */}
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
         >

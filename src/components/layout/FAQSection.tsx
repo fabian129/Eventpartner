@@ -60,8 +60,8 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
       <div className="relative z-[1] max-w-[900px] mx-auto px-6 md:px-10">
         {/* Moodboard editorial header */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
           className="mb-14 md:mb-16"
@@ -94,8 +94,8 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
             return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.06, ease: EASE }}
               >
@@ -153,8 +153,8 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
 
         {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
           className="text-center mt-12"

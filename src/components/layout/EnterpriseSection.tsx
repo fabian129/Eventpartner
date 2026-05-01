@@ -31,8 +31,8 @@ export function EnterpriseSection() {
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-20 md:pt-28 pb-10">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 md:gap-12">
           <motion.div
-            initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: EASE }}
             className="md:max-w-[50%]"

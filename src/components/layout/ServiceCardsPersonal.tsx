@@ -172,8 +172,8 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 relative z-10">
         {/* Editorial header */}
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
           className="mb-14"

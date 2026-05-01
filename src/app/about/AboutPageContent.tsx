@@ -81,11 +81,11 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
       {/* Story */}
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-          <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
+          <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#6AD8D2] block mb-6">{cms?.storyLabel || "Our Story"}</span>
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{cms?.storyHeadline || "From idea to"}<br />{cms?.storyHeadlineAccent || "industry leader."}</h2>
           </motion.div>
-          <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
+          <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
             <p className="font-display text-[clamp(1.3rem,3vw,2rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.3] mb-8">&ldquo;{cms?.storyQuote || "We believe every event is an opportunity to build something lasting. Not just a conference — a memory. Not just a dinner — a relationship."}&rdquo;</p>
             <div className="space-y-6 border-t border-[var(--border-default)] pt-8">
               <p className="text-[16px] text-[var(--text-secondary)] leading-[1.8]">{cms?.storyBody1 || "Founded in the Mediterranean but operating across all of Europe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast."}</p>
@@ -114,7 +114,7 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
 
       {/* Team */}
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
-        <motion.div initial={{ opacity: 0, y: 20, filter: "blur(6px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#6AD8D2] block mb-6">{cms?.teamLabel || "The Team"}</span>
           <p className="font-display text-[clamp(1.3rem,2.5vw,2rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.3] mb-14 max-w-3xl">{cms?.teamIntro || "A small team with deep experience in event production, hospitality, and tech — treating every inquiry as their own."}</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">

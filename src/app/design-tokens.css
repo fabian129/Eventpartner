@@ -1,0 +1,63 @@
+/* =============================================
+   DESIGN TOKENS — EventPartner
+   Genererad: 2026-05-01
+   Referens: Stripe (corporate/precision) + Notion (warm/inclusive)
+   Känsla: luxury-corporate
+   ============================================= */
+
+:root {
+  /* === TYPOGRAFI (max 3 + 1 nav-small) === */
+  --font-hero: clamp(2.5rem, 7vw, 5.5rem);
+  --font-section: clamp(1.5rem, 3vw, 2.5rem);
+  --font-body: clamp(1rem, 1.2vw, 1.25rem);
+  --font-mono-small: 10px;
+
+  --font-weight-heading: 500;
+  --font-weight-body: 400;
+  --line-height-heading: 0.95;
+  --line-height-body: 1.6;
+  --letter-spacing-heading: -0.02em;
+
+  /* === FÄRGER (3 bas + varianter via opacity) === */
+  /* Already defined in globals.css @theme — referenced here for documentation:
+     --color-tiffany: #6AD8D2  (accent / action)
+     --color-purple:  #7851A9  (accent-secondary / premium)
+     --color-surface: #F4F4F4  (light bg) / #0A0A0A (dark bg)
+  */
+
+  /* === SPACING (strikt 8px-system) === */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+  --space-section: 128px;
+
+  /* === FORM === */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+
+  /* === KNAPPAR === */
+  --btn-shadow: none;
+  --btn-radius: var(--radius-md);
+  --btn-padding: var(--space-sm) var(--space-md);
+
+  /* === LAYOUT === */
+  --content-width: 1200px;
+  --content-narrow: 800px;
+  --content-wide: 1400px;
+
+  /* === TRANSITIONS === */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 150ms var(--ease-luxury);
+  --transition-base: 300ms var(--ease-luxury);
+  --transition-slow: 600ms var(--ease-luxury);
+
+  /* === ANIMATION === */
+  --anim-entrance-duration: 0.7s;
+  --anim-stagger: 0.08s;
+}

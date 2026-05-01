@@ -44,8 +44,8 @@ export function RequestFormSection({ cms }: { cms?: {
       <div className="max-w-[1100px] mx-auto relative z-10">
         {/* Big headline */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
           className="mb-12 md:mb-16"
@@ -76,8 +76,8 @@ export function RequestFormSection({ cms }: { cms?: {
         {/* Form card */}
         <motion.form
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 35, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.9, ease: EASE }}
           className="bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-3xl p-8 md:p-12 transition-colors duration-500"
@@ -242,8 +242,8 @@ export function RequestFormSection({ cms }: { cms?: {
 
         {/* Book Meeting Alternative with Malin */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.25, duration: 0.9, ease: EASE }}
           className="mt-6 md:mt-8 bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 transition-colors duration-500"

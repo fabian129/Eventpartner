@@ -13,8 +13,8 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
       <div className="max-w-[1200px] mx-auto px-6 md:px-10">
         {/* Header — blur entrance */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: EASE }}
           className="mb-12 md:mb-16"
@@ -27,8 +27,8 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
 
         {/* Card 1 — Large hero card with scale reveal */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 1, ease: EASE }}
           className="relative h-[500px] md:h-[620px] overflow-hidden group mb-5"
@@ -78,8 +78,8 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
           {/* Card 2 */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.93, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            initial={{ opacity: 0, scale: 0.93 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
             className="relative h-[360px] md:h-[420px] overflow-hidden group"
@@ -102,8 +102,8 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
 
           {/* Card 3 */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.93, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            initial={{ opacity: 0, scale: 0.93 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
             className="relative h-[360px] md:h-[420px] overflow-hidden group"
@@ -127,8 +127,8 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
 
         {/* Card 4 — Wide bottom card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
           className="relative h-[320px] md:h-[400px] overflow-hidden group"

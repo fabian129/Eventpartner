@@ -69,10 +69,8 @@ function getItemVariants(
     visible.x = 0;
   }
 
-  if (blur) {
-    hidden.filter = "blur(8px)";
-    visible.filter = "blur(0px)";
-  }
+  // blur filter removed — expensive repaint, not GPU-accelerated
+  // opacity + y/x provides equivalent entrance quality
 
   return { hidden, visible };
 }
@@ -82,7 +80,7 @@ export function SectionReveal({
   className = "",
   delay = 0,
   direction = "up",
-  blur = true,
+  blur = false,
   duration = 0.9,
   staggerDelay = 0.1,
   threshold = 0.15,
@@ -109,7 +107,7 @@ function SectionRevealItem({
   children,
   className = "",
   direction = "up",
-  blur = true,
+  blur = false,
   duration = 0.9,
 }: {
   children: ReactNode;

@@ -142,8 +142,8 @@ export function HowItWorksSection() {
       <div className="max-w-[1300px] mx-auto px-6 md:px-12 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
           className="text-center mb-20 md:mb-24"
@@ -200,8 +200,8 @@ export function HowItWorksSection() {
               return (
                 <motion.div
                   key={step.number}
-                  initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.15 + i * 0.1, ease: EASE }}
                   className="relative flex flex-col items-center text-center group cursor-pointer"

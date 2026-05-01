@@ -1,0 +1,18 @@
+{
+  "project": "EventPartner",
+  "generated": "2026-05-01",
+  "primaryReference": "stripe.com + notion.so",
+  "feeling": "luxury-corporate",
+  "rules": {
+    "maxFontSizes": 3,
+    "maxColors": 3,
+    "maxCtasPerViewport": 2,
+    "maxHeadlineWords": 7,
+    "maxBorderRadius": "12px",
+    "buttonShadow": "none",
+    "spacingUnit": 8,
+    "verbFirstCtas": true,
+    "startWithHook": true,
+    "signatureElement": "DarkZone light-to-dark gradient transition + dot-grid patterns + cinematic hero slideshow"
+  }
+}

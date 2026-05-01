@@ -110,12 +110,12 @@ export function SecurityPageContent({ cms }: { cms?: SecurityCMS }) {
       {/* Data Rights */}
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-          <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
+          <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#6AD8D2] block mb-6">{cms?.rightsLabel || "Your Rights"}</span>
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{cms?.rightsHeadline || "You are in"}<br />{cms?.rightsHeadlineAccent || "control."}</h2>
             <p className="text-[15px] text-[var(--text-secondary)] leading-[1.7] mt-6">{cms?.rightsIntro || "Under GDPR, you have extensive rights regarding your personal data. We make it easy to exercise them."}</p>
           </motion.div>
-          <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
+          <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
             <div className="space-y-0 divide-y divide-[var(--border-default)]">
               {rights.map((r) => (
                 <div key={r.right} className="py-5 first:pt-0 last:pb-0">

@@ -24,8 +24,8 @@ export function VideoSection({ cms }: { cms?: VideoCMS }) {
 
         {/* Full-width video embed — scale + shadow entrance */}
         <motion.div
-          initial={{ opacity: 0, y: 40, scale: 0.93, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 40, scale: 0.93 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, ease: EASE }}
           className="relative w-full rounded-2xl overflow-hidden group cursor-pointer"

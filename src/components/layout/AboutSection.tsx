@@ -69,8 +69,8 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
           {/* Left column — narrow, label + pull quote */}
           <motion.div
             className="lg:col-span-4"
-            initial={{ opacity: 0, y: 25, filter: "blur(8px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: EASE }}
           >
@@ -109,8 +109,8 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
           {/* Right column — wide, manifesto text in large format */}
           <motion.div
             className="lg:col-span-7 lg:col-start-6"
-            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
           >
@@ -136,8 +136,8 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
 
         {/* ─── Team ─── */}
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
         >

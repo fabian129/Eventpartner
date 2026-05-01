@@ -41,8 +41,8 @@ export function FullbleedImageBreak() {
         {/* Left: Editorial text */}
         <div className="flex flex-col justify-center px-8 md:px-16 lg:px-20 py-20 md:py-28">
           <motion.div
-            initial={{ opacity: 0, x: -25, filter: "blur(8px)" }}
-            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, x: -25 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease: EASE }}
           >
@@ -128,8 +128,8 @@ export function FullbleedImageBreak() {
 
           {/* Glassmorphic floating card */}
           <motion.div
-            initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
             className="absolute bottom-16 right-12 z-20"

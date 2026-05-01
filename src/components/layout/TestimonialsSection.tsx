@@ -151,8 +151,8 @@ export function TestimonialsSection() {
       <div className="relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: EASE }}
           className="text-center mb-14 md:mb-18 px-6"

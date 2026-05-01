@@ -40,7 +40,7 @@ export function AiAssistantContent({ cms }: { cms?: AiCMS }) {
 
       {/* Bot Preview Card */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
-        <motion.div initial={{ opacity: 0, y: 25, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true }} transition={{ duration: 0.9, ease: EASE }} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#111] to-[#1a1a1a] border border-white/[0.06] p-10 md:p-16">
+        <motion.div initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: EASE }} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#111] to-[#1a1a1a] border border-white/[0.06] p-10 md:p-16">
           {/* Glow */}
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#6AD8D2]/[0.06] rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#7851A9]/[0.04] rounded-full blur-[100px] pointer-events-none" />
