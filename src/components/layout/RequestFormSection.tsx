@@ -82,7 +82,7 @@ export function RequestFormSection({ cms }: { cms?: {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.9, ease: EASE }}
-          className="bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-3xl p-8 md:p-12 transition-colors duration-500"
+          className="bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-2xl p-8 md:p-12 transition-colors duration-500"
           style={{ boxShadow: isDark ? "0 4px 60px rgba(0,0,0,0.3)" : "0 4px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04)" }}
         >
           {/* Stats bar */}
@@ -248,7 +248,7 @@ export function RequestFormSection({ cms }: { cms?: {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.25, duration: 0.9, ease: EASE }}
-          className="mt-6 md:mt-8 bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 transition-colors duration-500"
+          className="mt-6 md:mt-8 bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 transition-colors duration-500"
           style={{ boxShadow: isDark ? "0 4px 40px rgba(0,0,0,0.15)" : "0 4px 40px rgba(0,0,0,0.04)" }}
         >
           <div className="flex items-center gap-5 w-full md:w-auto">

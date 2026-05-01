@@ -168,7 +168,7 @@ export function ServiceBento() {
           {/* Gradient border */}
           <div className="p-[1px] rounded-[1.25rem] bg-gradient-to-b from-[var(--border-default)] via-[var(--border-default)]/20 to-transparent">
             {/* Inner elevated card */}
-            <div className="bg-[var(--bg-card)] rounded-3xl p-3 md:p-4 shadow-[0_2.8px_2.2px_rgba(0,0,0,0.02),0_6.7px_5.3px_rgba(0,0,0,0.028),0_12.5px_10px_rgba(0,0,0,0.035),0_22.3px_17.9px_rgba(0,0,0,0.042),0_41.8px_33.4px_rgba(0,0,0,0.05),0_100px_80px_rgba(0,0,0,0.07)]">
+            <div className="bg-[var(--bg-card)] rounded-2xl p-3 md:p-4 shadow-[0_2.8px_2.2px_rgba(0,0,0,0.02),0_6.7px_5.3px_rgba(0,0,0,0.028),0_12.5px_10px_rgba(0,0,0,0.035),0_22.3px_17.9px_rgba(0,0,0,0.042),0_41.8px_33.4px_rgba(0,0,0,0.05),0_100px_80px_rgba(0,0,0,0.07)]">
               
               {/* Bento grid */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-2.5 auto-rows-auto">

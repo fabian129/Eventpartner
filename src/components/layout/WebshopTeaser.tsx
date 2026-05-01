@@ -223,7 +223,7 @@ export function WebshopTeaser() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 2.3 }}
-              className="relative z-10 text-center max-w-lg px-10 py-12 rounded-3xl bg-white/80 backdrop-blur-xl border border-tiffany/20 shadow-[0_8px_60px_rgba(129,216,208,0.12)]"
+              className="relative z-10 text-center max-w-lg px-10 py-12 rounded-2xl bg-white/80 backdrop-blur-xl border border-tiffany/20 shadow-[0_8px_60px_rgba(129,216,208,0.12)]"
             >
               {/* Animated glow ring around lock */}
               <div className="relative w-20 h-20 mx-auto mb-8">
