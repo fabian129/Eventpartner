@@ -16,9 +16,9 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  */
 
 const TEAM: { name: string; role: string; bio?: string; linkedin?: string; image?: any; initials: string }[] = [
-  { name: "Pontus Bredal Hansen", role: "Co-Founder & CEO", initials: "PH" },
-  { name: "Malin Berlin", role: "Co-Founder & COO", initials: "MB" },
-  { name: "Joakim Ström", role: "Head of Partnerships", initials: "JS" },
+  { name: "Pontus Bredal Hansen", role: "Co-Founder & CEO", initials: "PH", linkedin: "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110", image: "/Images/team/pontus.webp" },
+  { name: "Malin Berlin", role: "Co-Founder & COO", initials: "MB", linkedin: "https://www.linkedin.com/in/malinberlins", image: "/Images/team/malin-farg.webp" },
+  { name: "Joakim Ström", role: "Head of Partnerships", initials: "JS", linkedin: "https://www.linkedin.com/in/joakim-strom-ab5aaa13a", image: "/Images/team/joakim.webp" },
   { name: "David Lindgren", role: "Senior Event Manager", initials: "DL" },
 ];
 
@@ -163,7 +163,7 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
                   {member.image ? (
                     <>
                       <Image
-                        src={urlFor(member.image).width(400).height(500).url()}
+                        src={typeof member.image === 'string' ? member.image : urlFor(member.image).width(400).height(500).url()}
                         alt={member.name}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
