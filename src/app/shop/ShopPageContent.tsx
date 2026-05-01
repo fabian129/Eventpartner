@@ -40,13 +40,26 @@ export function ShopPageContent() {
 
   useEffect(() => {
     async function fetchProducts() {
+      // Skip API call if credentials are missing or placeholder
+      if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || !process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN) {
+        setLoadingProducts(false);
+        return;
+      }
+      
       try {
         setLoadingProducts(true);
         const shopifyProducts = await getProducts(20);
         setProducts(shopifyProducts);
-      } catch (err) {
-        console.error("Failed to fetch Shopify products:", err);
-        setProductError("Unable to load products. Please try again later.");
+        setProductError(null);
+      } catch (err: any) {
+        // 401 = token invalid/expired — show empty store, not error
+        if (err?.message?.includes("401") || err?.message?.includes("UNAUTHORIZED")) {
+          console.warn("Shopify Storefront token invalid — showing empty store state. Re-create token in Shopify Admin > Settings > Apps > Headless.");
+          setProducts([]);
+        } else {
+          console.error("Failed to fetch Shopify products:", err);
+          setProductError("Unable to load products. Please try again later.");
+        }
       } finally {
         setLoadingProducts(false);
       }
