@@ -33,6 +33,26 @@ export const leadershipPage = defineType({
         },
       ],
     }),
+    defineField({
+      name: "sectionLabel",
+      title: "Section Label (left)",
+      type: "localizedString",
+    }),
+    defineField({
+      name: "sectionLabelRight",
+      title: "Section Label (right)",
+      type: "localizedString",
+    }),
+    defineField({
+      name: "ctaHeadline",
+      title: "CTA Headline",
+      type: "localizedString",
+    }),
+    defineField({
+      name: "ctaDescription",
+      title: "CTA Description",
+      type: "localizedText",
+    }),
   ],
 
   preview: {

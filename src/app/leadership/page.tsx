@@ -41,7 +41,15 @@ export default async function LeadershipPage() {
         links: homeData.navLinks?.map((l: any) => ({ label: t(l.label), href: l.href })),
         cta: t(homeData.navCta),
       } : undefined} />
-      <LeadershipContent headline={headline} description={description} teamMembers={teamMembers} />
+      <LeadershipContent
+        headline={headline}
+        description={description}
+        teamMembers={teamMembers}
+        sectionLabel={t(data?.sectionLabel) || undefined}
+        sectionLabelRight={t(data?.sectionLabelRight) || undefined}
+        ctaHeadline={t(data?.ctaHeadline) || undefined}
+        ctaDescription={t(data?.ctaDescription) || undefined}
+      />
       <DarkZone exitToLight={false}>
         <Footer cms={homeData ? {
           brandDesc: t(homeData.footerBrandDesc),

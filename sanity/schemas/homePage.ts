@@ -24,6 +24,8 @@ export const homePage = defineType({
     { name: "requestForm", title: "Request Form" },
     { name: "footer", title: "Footer" },
     { name: "exitIntent", title: "Exit Intent Popup" },
+    { name: "globe", title: "Globe Section" },
+    { name: "webshop", title: "Webshop Teaser" },
   ],
 
   fields: [
@@ -645,6 +647,98 @@ export const homePage = defineType({
       title: "Privacy Disclaimer",
       type: "localizedText",
       group: "exitIntent",
+    }),
+
+    /* ─── GLOBE SECTION ─── */
+    defineField({
+      name: "globeBadge",
+      title: "Badge Text",
+      type: "localizedString",
+      group: "globe",
+    }),
+    defineField({
+      name: "globeHeadline",
+      title: "Headline (e.g. '360,000+ Venues')",
+      type: "localizedString",
+      group: "globe",
+    }),
+    defineField({
+      name: "globeHeadlineAccent",
+      title: "Headline Accent (e.g. 'in 36 Countries')",
+      type: "localizedString",
+      group: "globe",
+    }),
+    defineField({
+      name: "globeDescription",
+      title: "Description",
+      type: "localizedText",
+      group: "globe",
+    }),
+
+    /* ─── WEBSHOP TEASER ─── */
+    defineField({
+      name: "webshopLabel",
+      title: "Section Label (left)",
+      type: "localizedString",
+      group: "webshop",
+    }),
+    defineField({
+      name: "webshopLabelRight",
+      title: "Section Label (right)",
+      type: "localizedString",
+      group: "webshop",
+    }),
+    defineField({
+      name: "webshopHeadline",
+      title: "Headline",
+      type: "localizedString",
+      group: "webshop",
+    }),
+    defineField({
+      name: "webshopHeadlineAccent",
+      title: "Headline Accent (muted part)",
+      type: "localizedString",
+      group: "webshop",
+    }),
+    defineField({
+      name: "webshopDescription",
+      title: "Description",
+      type: "localizedText",
+      group: "webshop",
+    }),
+    defineField({
+      name: "webshopComingSoonTitle",
+      title: "Coming Soon Title",
+      type: "localizedString",
+      group: "webshop",
+    }),
+    defineField({
+      name: "webshopComingSoonDesc",
+      title: "Coming Soon Description",
+      type: "localizedText",
+      group: "webshop",
+    }),
+    defineField({
+      name: "webshopCtaText",
+      title: "CTA Button Text",
+      type: "localizedString",
+      group: "webshop",
+    }),
+
+    /* ─── VIDEO TEXT OVERLAY ─── */
+    defineField({
+      name: "videoBottomLabel",
+      title: "Video Bottom Label",
+      type: "localizedString",
+      group: "video",
+      description: "e.g. 'EventPartner — Introduction'",
+    }),
+    defineField({
+      name: "videoBottomText",
+      title: "Video Bottom Text",
+      type: "localizedString",
+      group: "video",
+      description: "e.g. 'See how it works'",
     }),
   ],
 

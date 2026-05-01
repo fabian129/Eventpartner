@@ -12,6 +12,8 @@ interface VideoCMS {
   headline?: string;
   headlineAccent?: string;
   description?: string;
+  bottomLabel?: string;
+  bottomText?: string;
 }
 
 export function VideoSection({ cms }: { cms?: VideoCMS }) {
@@ -63,10 +65,10 @@ export function VideoSection({ cms }: { cms?: VideoCMS }) {
           <div className="absolute bottom-0 left-0 right-0 px-6 py-5 z-10 flex justify-between items-end">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/50 mb-1">
-                EventPartner — Introduction
+                {cms?.bottomLabel || "EventPartner \u2014 Introduction"}
               </p>
               <p className="text-sm text-white/80 font-medium">
-                See how it works
+                {cms?.bottomText || "See how it works"}
               </p>
             </div>
             <p className="font-mono text-[11px] text-white/40">

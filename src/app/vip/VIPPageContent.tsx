@@ -33,23 +33,24 @@ const DEFAULT_MINI_STATS = [
 ];
 
 type WordSegment = { text: string; accent?: boolean; italic?: boolean };
-const MANIFESTO: WordSegment[] = [
-  { text: "We" }, { text: "connect" }, { text: "ambitious" }, { text: "companies" }, { text: "with" },
-  { text: "extraordinary", accent: true, italic: true }, { text: "venues" }, { text: "—" },
-  { text: "rejecting" }, { text: "the" }, { text: "ordinary," }, { text: "prioritising" },
-  { text: "precision," }, { text: "and" }, { text: "delivering" }, { text: "events" },
-  { text: "that" }, { text: "genuinely", accent: true, italic: true }, { text: "elevate." },
-];
+
+const DEFAULT_MANIFESTO_TEXT = "We connect ambitious companies with extraordinary venues — rejecting the ordinary, prioritising precision, and delivering events that genuinely elevate.";
+const ACCENT_WORDS = ["extraordinary", "genuinely"];
 
 const wordVariants = {
   hidden: { opacity: 0, y: 18 },
   visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
-function ManifestoReveal() {
+function ManifestoReveal({ text }: { text?: string }) {
+  const words = (text || DEFAULT_MANIFESTO_TEXT).split(" ").map((w) => ({
+    text: w,
+    accent: ACCENT_WORDS.some((a) => w.toLowerCase().startsWith(a)),
+    italic: ACCENT_WORDS.some((a) => w.toLowerCase().startsWith(a)),
+  }));
   return (
     <motion.p initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.06, delayChildren: 0.5 } } }} className="font-display text-[clamp(1.6rem,3.8vw,2.8rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.3] text-center max-w-4xl mx-auto">
-      {MANIFESTO.map((w, i) => (
+      {words.map((w, i) => (
         <motion.span key={i} variants={wordVariants} className={`inline-block mr-[0.3em] ${w.accent ? "text-purple" : ""} ${w.italic ? "italic font-light" : ""}`}>{w.text}</motion.span>
       ))}
     </motion.p>
@@ -61,6 +62,8 @@ interface VIPCMS {
   heroHeadline?: string; heroHeadlineAccent?: string;
   heroStats?: { value: string; label: string }[];
   heroAnchorText?: string;
+  heroIntroText?: string;
+  videoLabel?: string; videoText?: string;
   manifestoLabel?: string; manifestoHeadline?: string; manifestoHeadlineAccent?: string;
   manifestoQuote?: string; manifestoBody1?: string; manifestoBody2?: string;
   manifestoMotto?: string; manifestoStats?: { value: string; label: string }[];
@@ -95,7 +98,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
           <span className="italic font-light" style={{ background: "linear-gradient(135deg, #7851A9 0%, #9370C4 50%, #6AD8D2 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{cms?.heroHeadlineAccent || "not a vendor."}</span>
         </motion.h1>
 
-        <ManifestoReveal />
+        <ManifestoReveal text={cms?.heroIntroText} />
 
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.0, duration: 0.8, ease: EASE }} className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[var(--border-default)] pt-5 mt-16 md:mt-20 mb-20 md:mb-28">
           {heroStats.map((s) => (
@@ -120,7 +123,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
             </div>
           </div>
           <div className="absolute bottom-0 left-0 right-0 px-6 py-5 z-10 flex justify-between items-end">
-            <div><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/50 mb-1">EventPartner — VIP Programme</p><p className="text-sm text-white/80 font-medium">Discover the VIP experience</p></div>
+            <div><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/50 mb-1">{cms?.videoLabel || "EventPartner \u2014 VIP Programme"}</p><p className="text-sm text-white/80 font-medium">{cms?.videoText || "Discover the VIP experience"}</p></div>
             <p className="font-mono text-[11px] text-white/40">3:12</p>
           </div>
         </motion.div>

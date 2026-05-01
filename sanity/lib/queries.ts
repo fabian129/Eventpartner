@@ -35,7 +35,14 @@ export const HOMEPAGE_QUERY = defineQuery(
     footerCtaTitle, footerCtaDesc, footerColumns,
     // Exit Intent
     exitLabel, exitHeadline, exitHeadlineAccent, exitDescription,
-    exitButton, exitPrivacy
+    exitButton, exitPrivacy,
+    // Globe
+    globeBadge, globeHeadline, globeHeadlineAccent, globeDescription,
+    // Webshop Teaser
+    webshopLabel, webshopLabelRight, webshopHeadline, webshopHeadlineAccent,
+    webshopDescription, webshopComingSoonTitle, webshopComingSoonDesc, webshopCtaText,
+    // Video overlay text
+    videoBottomLabel, videoBottomText
   }`
 );
 
@@ -77,6 +84,7 @@ export const VIP_PAGE_QUERY = defineQuery(
   `*[_type == "vipPage"][0]{
     // Hero
     heroLabel, heroLabelRight, heroHeadline, heroHeadlineAccent, heroStats, heroAnchorText,
+    heroIntroText, videoLabel, videoText,
     // Manifesto
     manifestoLabel, manifestoHeadline, manifestoHeadlineAccent,
     manifestoQuote, manifestoBody1, manifestoBody2, manifestoMotto, manifestoStats,
@@ -91,7 +99,9 @@ export const VIP_PAGE_QUERY = defineQuery(
 
 export const LEADERSHIP_PAGE_QUERY = defineQuery(
   `*[_type == "leadershipPage"][0]{
-    headline, description, teamMembers
+    headline, description, teamMembers,
+    sectionLabel, sectionLabelRight,
+    ctaHeadline, ctaDescription
   }`
 );
 

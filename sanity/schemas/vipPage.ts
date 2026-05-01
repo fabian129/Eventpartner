@@ -65,6 +65,25 @@ export const vipPage = defineType({
       type: "localizedString",
       group: "hero",
     }),
+    defineField({
+      name: "heroIntroText",
+      title: "Intro Manifesto (animated word reveal)",
+      type: "localizedText",
+      group: "hero",
+      description: "e.g. 'We connect ambitious companies with extraordinary venues — rejecting the ordinary, prioritising precision, and delivering events that genuinely elevate.'",
+    }),
+    defineField({
+      name: "videoLabel",
+      title: "Video Overlay Label",
+      type: "localizedString",
+      group: "hero",
+    }),
+    defineField({
+      name: "videoText",
+      title: "Video Overlay Text",
+      type: "localizedString",
+      group: "hero",
+    }),
 
     /* ─── MANIFESTO ─── */
     defineField({

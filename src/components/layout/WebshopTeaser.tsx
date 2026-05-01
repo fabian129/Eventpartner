@@ -140,7 +140,15 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
   );
 }
 
-export function WebshopTeaser() {
+interface WebshopCMS {
+  label?: string; labelRight?: string;
+  headline?: string; headlineAccent?: string;
+  description?: string;
+  comingSoonTitle?: string; comingSoonDesc?: string;
+  ctaText?: string;
+}
+
+export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
   const [overlayVisible, setOverlayVisible] = useState(false);
 
   return (
@@ -179,19 +187,19 @@ export function WebshopTeaser() {
         >
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              EventPartner — Shop
+              {cms?.label || "EventPartner \u2014 Shop"}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              Coming soon
+              {cms?.labelRight || "Coming soon"}
             </span>
           </div>
           <h2 className="font-display text-[clamp(2rem,5vw,3.8rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
-            Everything for your event.
+            {cms?.headline || "Everything for your event."}
             <br />
-            <span className="italic font-light text-[var(--text-muted)]">Order online.</span>
+            <span className="italic font-light text-[var(--text-muted)]">{cms?.headlineAccent || "Order online."}</span>
           </h2>
           <p className="font-display text-[clamp(1rem,2vw,1.2rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-lg">
-            Name badges, conference kits, décor and branded merchandise — all curated for professional events.
+            {cms?.description || "Name badges, conference kits, d\u00e9cor and branded merchandise \u2014 all curated for professional events."}
           </p>
         </motion.div>
 
@@ -234,11 +242,10 @@ export function WebshopTeaser() {
               </div>
 
               <h3 className="font-display text-3xl md:text-4xl font-medium text-[#111] tracking-tight mb-3">
-                Coming soon.
+                {cms?.comingSoonTitle || "Coming soon."}
               </h3>
               <p className="text-[15px] text-[#666] leading-relaxed mb-8 max-w-sm mx-auto">
-                Our webshop for event products launches soon.<br />
-                Contact us and we'll handle your order today.
+                {cms?.comingSoonDesc || "Our webshop for event products launches soon. Contact us and we'll handle your order today."}
               </p>
 
               <a
@@ -246,7 +253,7 @@ export function WebshopTeaser() {
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-tiffany text-white text-sm font-semibold hover:bg-[#5CC8C2] hover:shadow-[0_4px_24px_rgba(129,216,208,0.3)] transition-all duration-300"
               >
                 <ShoppingBag className="w-4 h-4" />
-                Contact us
+                {cms?.ctaText || "Contact us"}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
               <p className="mt-5 text-[11px] text-[#bbb] tracking-[0.2em]">

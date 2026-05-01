@@ -58,6 +58,8 @@ export default async function Home() {
             headline: t(data.videoHeadline),
             headlineAccent: t(data.videoHeadlineAccent),
             description: t(data.videoDescription),
+            bottomLabel: t(data.videoBottomLabel),
+            bottomText: t(data.videoBottomText),
           } : undefined} />
         </ScrollSection>
 
@@ -67,7 +69,12 @@ export default async function Home() {
         </ScrollSection>
 
         {/* 3b. Global Scale */}
-        <GlobeSection />
+        <GlobeSection cms={data ? {
+          badge: t(data.globeBadge),
+          headline: t(data.globeHeadline),
+          headlineAccent: t(data.globeHeadlineAccent),
+          description: t(data.globeDescription),
+        } : undefined} />
 
       {/* 4. Country Flags */}
       <ScrollSection>
@@ -170,7 +177,16 @@ export default async function Home() {
 
       {/* 10. Webshop Teaser */}
       <ScrollSection>
-        <WebshopTeaser />
+        <WebshopTeaser cms={data ? {
+          label: t(data.webshopLabel),
+          labelRight: t(data.webshopLabelRight),
+          headline: t(data.webshopHeadline),
+          headlineAccent: t(data.webshopHeadlineAccent),
+          description: t(data.webshopDescription),
+          comingSoonTitle: t(data.webshopComingSoonTitle),
+          comingSoonDesc: t(data.webshopComingSoonDesc),
+          ctaText: t(data.webshopCtaText),
+        } : undefined} />
       </ScrollSection>
 
       {/* 11. FAQ */}

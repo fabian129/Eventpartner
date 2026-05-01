@@ -13,7 +13,7 @@ interface TeamMember {
   image?: string | null;
 }
 
-export function LeadershipContent({ headline, description, teamMembers }: { headline: string; description: string; teamMembers: TeamMember[] }) {
+export function LeadershipContent({ headline, description, teamMembers, sectionLabel, sectionLabelRight, ctaHeadline, ctaDescription }: { headline: string; description: string; teamMembers: TeamMember[]; sectionLabel?: string; sectionLabelRight?: string; ctaHeadline?: string; ctaDescription?: string }) {
   return (
     <main className="relative w-full pt-32 md:pt-44 pb-20 md:pb-32 overflow-hidden">
       <div className="absolute inset-0 dot-grid dot-grid-fade-from-right pointer-events-none opacity-50" />
@@ -21,8 +21,8 @@ export function LeadershipContent({ headline, description, teamMembers }: { head
       {/* Hero */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: EASE }} className="flex justify-between items-center mb-10">
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">Our Team</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">EventPartner</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{sectionLabel || "Our Team"}</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{sectionLabelRight || "EventPartner"}</span>
         </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE }} className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[0.88] mb-10">
           {headline}
@@ -75,8 +75,8 @@ export function LeadershipContent({ headline, description, teamMembers }: { head
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10">
         <motion.a href="/#request" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300">
           <div>
-            <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">Want to work with us?</p>
-            <p className="text-[var(--text-secondary)] text-sm">Send us your event inquiry — always free, always personal.</p>
+            <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">{ctaHeadline || "Want to work with us?"}</p>
+            <p className="text-[var(--text-secondary)] text-sm">{ctaDescription || "Send us your event inquiry — always free, always personal."}</p>
           </div>
           <div className="w-12 h-12 rounded-xl bg-tiffany/10 border border-tiffany/20 flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-tiffany transition-all duration-300 shrink-0 ml-6"><ArrowRight className="w-5 h-5" /></div>
         </motion.a>

@@ -57,7 +57,14 @@ const LABELS: { id: string; name: string; venues: string }[] = [
   { id: "singapore", name: "SINGAPORE", venues: "190+" },
 ];
 
-export function GlobeSection() {
+interface GlobeCMS {
+  badge?: string;
+  headline?: string;
+  headlineAccent?: string;
+  description?: string;
+}
+
+export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerInteracting = useRef<number | null>(null);
   const pointerInteractionMovement = useRef(0);
@@ -130,7 +137,7 @@ export function GlobeSection() {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-tiffany" />
           <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-black/40">
-            Global Presence
+            {cms?.badge || "Global Presence"}
           </span>
         </motion.div>
 
@@ -141,9 +148,9 @@ export function GlobeSection() {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="font-display text-5xl sm:text-6xl font-medium tracking-tight text-[#111]"
         >
-          360,000+ Venues
+          {cms?.headline || "360,000+ Venues"}
           <br />
-          <span className="italic font-light text-tiffany">in 36 Countries</span>
+          <span className="italic font-light text-tiffany">{cms?.headlineAccent || "in 36 Countries"}</span>
         </motion.h2>
         
         <motion.p
@@ -153,7 +160,7 @@ export function GlobeSection() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="mt-6 text-black/50 text-[15px] max-w-lg mx-auto leading-relaxed"
         >
-          Our global network ensures you always find the perfect spot, no matter where your next event takes place.
+          {cms?.description || "Our global network ensures you always find the perfect spot, no matter where your next event takes place."}
         </motion.p>
       </div>
 
