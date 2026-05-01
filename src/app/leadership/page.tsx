@@ -31,6 +31,7 @@ export default async function LeadershipPage() {
   const teamMembers = data?.teamMembers?.map((m: any) => ({
     name: m.name,
     role: t(m.role),
+    bio: t(m.bio),
     linkedin: m.linkedin,
     image: m.image ? urlFor(m.image).url() : null,
   })) || FALLBACK_TEAM;

@@ -26,6 +26,7 @@ export const leadershipPage = defineType({
           fields: [
             { name: "name", title: "Name", type: "string" },
             { name: "role", title: "Role", type: "localizedString" },
+            { name: "bio", title: "Bio / Description", type: "localizedText" },
             { name: "linkedin", title: "LinkedIn URL", type: "url" },
             { name: "image", title: "Profile Image", type: "image", options: { hotspot: true } },
           ],

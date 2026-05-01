@@ -9,6 +9,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 interface TeamMember {
   name: string;
   role: string;
+  bio?: string;
   linkedin?: string;
   image?: string | null;
 }
@@ -66,6 +67,20 @@ export function LeadershipContent({ headline, description, teamMembers, sectionL
               </div>
               <h3 className="text-xl font-display font-semibold text-[var(--text-primary)]">{member.name}</h3>
               <p className="text-[var(--text-secondary)] mt-1 font-mono text-[12px] uppercase tracking-[0.08em]">{member.role}</p>
+              {member.bio && (
+                <p className="text-[13px] text-[var(--text-muted)] leading-[1.7] mt-3">{member.bio}</p>
+              )}
+              {member.linkedin && (
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-3 text-[12px] font-medium text-tiffany hover:text-[#5EC4BA] transition-colors"
+                >
+                  <Linkedin className="w-3.5 h-3.5" />
+                  LinkedIn
+                </a>
+              )}
             </motion.div>
           ))}
         </div>
