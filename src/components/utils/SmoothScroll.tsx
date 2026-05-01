@@ -10,10 +10,13 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     const [lenis, setLenis] = useState<Lenis | null>(null);
 
     useEffect(() => {
+        // Use native window scroll (no DOM wrapping) to prevent hydration mismatch
         const instance = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
+            wrapper: window as any,
+            content: document.documentElement,
         });
 
         setLenis(instance);
