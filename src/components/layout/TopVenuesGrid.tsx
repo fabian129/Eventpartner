@@ -9,16 +9,16 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 /* Venue images — human-centric event photography */
 const VENUE_IMAGES = [
-  "/Images/round-table-discussion-business-conference-meeting-event-audience-conference-hall-business.jpg",
-  "/Images/close-up-wineglasses-table.jpg",
-  "/Images/diverse-business-people-dinner-party.jpg",
-  "/Images/group-people-restaurant.jpg",
-  "/Images/speaker-giving-talk-conference-hall-business-event-rear-view-unrecognizable-people.jpg",
-  "/Images/lunch-with-friends.jpg",
-  "/Images/group-people-music-concert.jpg",
-  "/Images/conference-evening.jpg",
-  "/Images/hotel-lobby.jpg",
-  "/Images/venue-dark-modern.jpg",
+  "/Images/round-table-discussion-business-conference-meeting-event-audience-conference-hall-business.webp",
+  "/Images/close-up-wineglasses-table.webp",
+  "/Images/diverse-business-people-dinner-party.webp",
+  "/Images/group-people-restaurant.webp",
+  "/Images/speaker-giving-talk-conference-hall-business-event-rear-view-unrecognizable-people.webp",
+  "/Images/lunch-with-friends.webp",
+  "/Images/group-people-music-concert.webp",
+  "/Images/conference-evening.webp",
+  "/Images/hotel-lobby.webp",
+  "/Images/venue-dark-modern.webp",
 ];
 
 export function TopVenuesGrid({ venues, countryName }: { venues: Venue[]; countryName: string }) {

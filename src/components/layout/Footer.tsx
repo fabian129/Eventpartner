@@ -41,10 +41,10 @@ const SOCIAL_LINKS = [
 
 // Curated inspiration images for the newsletter visual strip
 const INSPO_IMAGES = [
-  "/Images/hotel-lobby.jpg",
-  "/Images/decorated-hall-wedding-is-ready-celebration.jpg",
-  "/Images/palace-culture-iasi-romania.jpg",
-  "/Images/illuminated-footbridge-amidst-cherry-trees-night.jpg",
+  "/Images/hotel-lobby.webp",
+  "/Images/decorated-hall-wedding-is-ready-celebration.webp",
+  "/Images/palace-culture-iasi-romania.webp",
+  "/Images/illuminated-footbridge-amidst-cherry-trees-night.webp",
 ];
 
 interface FooterCMS {

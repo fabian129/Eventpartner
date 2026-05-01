@@ -129,7 +129,7 @@ export function TestimonialsSection() {
     <section className="relative w-full py-28 md:py-36 overflow-hidden">
       {/* Fullbleed background image — full resolution */}
       <Image
-        src="/Images/man-walking-street-night-time.jpg"
+        src="/Images/man-walking-street-night-time.webp"
         alt="Event atmosphere"
         fill
         className="object-cover"

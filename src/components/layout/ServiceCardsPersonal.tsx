@@ -18,28 +18,28 @@ const SERVICES = [
   {
     title: "Conferences & Meetings",
     desc: "From boardroom meetings to large-scale conferences.",
-    image: "/Images/speaker-giving-talk-conference-hall-business-event-rear-view-unrecognizable-people.jpg",
+    image: "/Images/speaker-giving-talk-conference-hall-business-event-rear-view-unrecognizable-people.webp",
     label: "01",
     icon: "mic" as const,
   },
   {
     title: "Kick-offs & Team Building",
     desc: "Experiences that set the tone for the entire year.",
-    image: "/Images/man-walking-street-night-time.jpg",
+    image: "/Images/man-walking-street-night-time.webp",
     label: "02",
     icon: "users" as const,
   },
   {
     title: "Dinners & Galas",
     desc: "Representational dinners at venues that make an impression.",
-    image: "/Images/decorated-hall-wedding-is-ready-celebration.jpg",
+    image: "/Images/decorated-hall-wedding-is-ready-celebration.webp",
     label: "03",
     icon: "glass" as const,
   },
   {
     title: "Venue Sourcing",
     desc: "360,000+ venues in 36 countries. Always 3 proposals within 24h.",
-    image: "/Images/group-people-restaurant.jpg",
+    image: "/Images/group-people-restaurant.webp",
     label: "04",
     icon: "globe" as const,
   },
@@ -238,7 +238,7 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
           >
             <div className="relative w-full h-full">
               <Image
-                src="/Images/black-white-shot-beautiful-building-with-sculptures-chess-floor.jpg"
+                src="/Images/black-white-shot-beautiful-building-with-sculptures-chess-floor.webp"
                 alt="Full-service event delivery"
                 fill
                 className="object-cover transition-all duration-[1s] ease-out

@@ -18,7 +18,7 @@ const SERVICES = [
     description: "Från styrelserum till storskaliga konferenser",
     stat: "2,400+",
     statLabel: "venues",
-    image: "/Images/interior-large-building-with-glass-ceiling.jpg",
+    image: "/Images/interior-large-building-with-glass-ceiling.webp",
     span: "md:col-span-4 md:row-span-2", // Tall left
   },
   {
@@ -26,7 +26,7 @@ const SERVICES = [
     description: "Teambuilding & upplevelser",
     stat: "180+",
     statLabel: "partners",
-    image: "/Images/colorful-seoul-floating-island.jpg",
+    image: "/Images/colorful-seoul-floating-island.webp",
     span: "md:col-span-4", // Top middle
   },
   {
@@ -34,7 +34,7 @@ const SERVICES = [
     description: "Standing lunch till galamiddag",
     stat: "340+",
     statLabel: "leverantörer",
-    image: "/Images/decorated-hall-wedding-is-ready-celebration.jpg",
+    image: "/Images/decorated-hall-wedding-is-ready-celebration.webp",
     span: "md:col-span-4", // Top right
   },
   {
@@ -42,7 +42,7 @@ const SERVICES = [
     description: "Keynotes, artister & moderatorer",
     stat: "500+",
     statLabel: "profiler",
-    image: "/Images/palace-culture-iasi-romania.jpg",
+    image: "/Images/palace-culture-iasi-romania.webp",
     span: "md:col-span-4", // Bottom middle
   },
   {
@@ -50,7 +50,7 @@ const SERVICES = [
     description: "Venues som gör intryck",
     stat: "94%",
     statLabel: "nöjda kunder",
-    image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
+    image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.webp",
     span: "md:col-span-4", // Bottom right
   },
   {
@@ -58,7 +58,7 @@ const SERVICES = [
     description: "Sätter tonen för hela året",
     stat: "48h",
     statLabel: "svarstid",
-    image: "/Images/hotel-lobby.jpg",
+    image: "/Images/hotel-lobby.webp",
     span: "md:col-span-12", // Full-width bottom banner
   },
 ];

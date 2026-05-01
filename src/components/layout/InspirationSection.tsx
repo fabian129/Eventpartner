@@ -21,7 +21,7 @@ const SERVICES = [
     description: "Från intima styrelsemöten till storskaliga konferenser med hundratals deltagare. Vi matchar format, teknik och venue.",
     stat: "2,400+",
     statLabel: "konferensvenues",
-    image: "/Images/interior-large-building-with-glass-ceiling.jpg",
+    image: "/Images/interior-large-building-with-glass-ceiling.webp",
   },
   {
     icon: Lightbulb,
@@ -29,7 +29,7 @@ const SERVICES = [
     description: "Teambuilding, workshops och upplevelser som skapar bestående minnen. Skräddarsytt efter era mål.",
     stat: "180+",
     statLabel: "aktivitetspartners",
-    image: "/Images/colorful-seoul-floating-island.jpg",
+    image: "/Images/colorful-seoul-floating-island.webp",
   },
   {
     icon: Utensils,
@@ -37,7 +37,7 @@ const SERVICES = [
     description: "Från standing lunch till sju-rätters gala. Vi kopplar er med rätt cateringleverantör för varje tillfälle.",
     stat: "340+",
     statLabel: "cateringpartners",
-    image: "/Images/decorated-hall-wedding-is-ready-celebration.jpg",
+    image: "/Images/decorated-hall-wedding-is-ready-celebration.webp",
   },
   {
     icon: Mic2,
@@ -45,7 +45,7 @@ const SERVICES = [
     description: "Keynote-speakers, moderatorer, artister och DJ:s. Vi bokar rätt profil för ert event och budget.",
     stat: "500+",
     statLabel: "profiler",
-    image: "/Images/palace-culture-iasi-romania.jpg",
+    image: "/Images/palace-culture-iasi-romania.webp",
   },
   {
     icon: PartyPopper,
@@ -53,7 +53,7 @@ const SERVICES = [
     description: "Representationsmiddagar, jubileer och galor i venues som gör intryck. Helhetskoordinering från meny till platsplanering.",
     stat: "94%",
     statLabel: "nöjda kunder",
-    image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
+    image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.webp",
   },
   {
     icon: Users,
@@ -61,7 +61,7 @@ const SERVICES = [
     description: "Starter som sätter tonen för hela året. Vi bygger upplevelser som inspirerar team och driver kultur framåt.",
     stat: "48h",
     statLabel: "snitt svarstid",
-    image: "/Images/hotel-lobby.jpg",
+    image: "/Images/hotel-lobby.webp",
   },
 ];
 

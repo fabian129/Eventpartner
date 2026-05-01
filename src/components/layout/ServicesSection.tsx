@@ -123,7 +123,7 @@ export function ServicesSection() {
             {/* Subtle B&W background image peek */}
             <div className="absolute inset-0 pointer-events-none">
               <Image
-                src="/Images/hotel-lobby.jpg"
+                src="/Images/hotel-lobby.webp"
                 alt=""
                 fill
                 className="object-cover grayscale brightness-[0.4] opacity-[0.12] group-hover:opacity-[0.2] transition-opacity duration-700"

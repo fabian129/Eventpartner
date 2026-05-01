@@ -31,7 +31,7 @@ const items: GalleryItem[] = [
         title: "Grand Hotel Lobby",
         category: "Luxury Hospitality",
         description: "VVIP arrivals and welcome reception venue.",
-        image: "/Images/hotel-lobby.jpg",
+        image: "/Images/hotel-lobby.webp",
         size: "medium",
     },
     {
@@ -39,7 +39,7 @@ const items: GalleryItem[] = [
         title: "Seoul Floating Island",
         category: "International Launch",
         description: "Futuristic venue for global tech product reveal.",
-        image: "/Images/colorful-seoul-floating-island.jpg",
+        image: "/Images/colorful-seoul-floating-island.webp",
         size: "medium",
     },
     // Row 3: Side by Side
@@ -48,7 +48,7 @@ const items: GalleryItem[] = [
         title: "Historic Palace Gala",
         category: "Cultural Landmark",
         description: "Exclusive dinner in a protected heritage site.",
-        image: "/Images/palace-culture-iasi-romania.jpg",
+        image: "/Images/palace-culture-iasi-romania.webp",
         size: "medium",
     },
     {
@@ -56,7 +56,7 @@ const items: GalleryItem[] = [
         title: "Cherry Blossom Bridge",
         category: "Scenic Outdoor",
         description: "Spring festival activation and walkway experience.",
-        image: "/Images/illuminated-footbridge-amidst-cherry-trees-night.jpg",
+        image: "/Images/illuminated-footbridge-amidst-cherry-trees-night.webp",
         size: "medium",
     },
     // Row 4: Large Feature
@@ -74,7 +74,7 @@ const items: GalleryItem[] = [
         title: "Royal Wedding Reception",
         category: "Private Celebration",
         description: "Elegant candlelit dinner for high-profile guests.",
-        image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
+        image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.webp",
         size: "medium",
     },
     {

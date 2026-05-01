@@ -14,9 +14,9 @@ interface HeroCMS {
 }
 
 const IMAGES = [
-  "/Images/conference-evening.jpg",
-  "/Images/elegant-wedding-reception-room-with-sea-view-through-windows.jpg",
-  "/Images/group-people-restaurant.jpg",
+  "/Images/conference-evening.webp",
+  "/Images/elegant-wedding-reception-room-with-sea-view-through-windows.webp",
+  "/Images/group-people-restaurant.webp",
 ];
 
 export function Hero({ cms }: { cms?: HeroCMS }) {

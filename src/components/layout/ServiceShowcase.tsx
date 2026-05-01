@@ -35,13 +35,13 @@ export function ServiceShowcase() {
               <span className="text-sm font-light text-[var(--text-muted)]">4.9 (2,048 events levererade)</span>
               <div className="flex -space-x-2.5">
                 <div className="w-10 h-10 rounded-xl bg-[var(--bg-card)] border-[3px] border-[var(--bg-primary)] overflow-hidden -rotate-3 shadow-sm">
-                  <Image src="/Images/conference-evening.jpg" alt="" width={80} height={80} className="w-full h-full object-cover" />
+                  <Image src="/Images/conference-evening.webp" alt="Conference evening venue" width={80} height={80} className="w-full h-full object-cover" />
                 </div>
                 <div className="w-10 h-10 rounded-xl bg-[var(--bg-card)] border-[3px] border-[var(--bg-primary)] overflow-hidden rotate-2 shadow-sm">
-                  <Image src="/Images/hotel-lobby.jpg" alt="" width={80} height={80} className="w-full h-full object-cover" />
+                  <Image src="/Images/hotel-lobby.webp" alt="Hotel lobby interior" width={80} height={80} className="w-full h-full object-cover" />
                 </div>
                 <div className="w-10 h-10 rounded-xl bg-[var(--bg-card)] border-[3px] border-[var(--bg-primary)] overflow-hidden -rotate-2 shadow-sm">
-                  <Image src="/Images/decorated-hall-wedding-is-ready-celebration.jpg" alt="" width={80} height={80} className="w-full h-full object-cover" />
+                  <Image src="/Images/decorated-hall-wedding-is-ready-celebration.webp" alt="Decorated event hall" width={80} height={80} className="w-full h-full object-cover" />
                 </div>
               </div>
             </div>
@@ -60,7 +60,7 @@ export function ServiceShowcase() {
             className="lg:col-span-6 relative h-[500px] md:h-[650px] rounded-[2rem] overflow-hidden group"
           >
             <Image
-              src="/Images/conference-evening.jpg"
+              src="/Images/conference-evening.webp"
               alt="Premium conference venue"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
@@ -106,7 +106,7 @@ export function ServiceShowcase() {
               {/* Image peek */}
               <div className="absolute right-0 bottom-0 top-0 w-1/2 min-w-[200px] flex items-end justify-end opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out">
                 <Image
-                  src="/Images/hotel-lobby.jpg"
+                  src="/Images/hotel-lobby.webp"
                   alt="Venue interior"
                   width={400}
                   height={600}

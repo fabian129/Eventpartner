@@ -34,7 +34,7 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
           className="relative h-[500px] md:h-[620px] overflow-hidden group mb-5"
         >
           <Image
-            src="/Images/hotel-lobby.jpg"
+            src="/Images/hotel-lobby.webp"
             alt="Premium hotel lobby"
             fill
             className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.03]"
@@ -85,7 +85,7 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
             className="relative h-[360px] md:h-[420px] overflow-hidden group"
           >
             <Image
-              src="/Images/decorated-hall-wedding-is-ready-celebration.jpg"
+              src="/Images/decorated-hall-wedding-is-ready-celebration.webp"
               alt="Decorated event hall"
               fill
               className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.03]"
@@ -109,7 +109,7 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
             className="relative h-[360px] md:h-[420px] overflow-hidden group"
           >
             <Image
-              src="/Images/interior-large-building-with-glass-ceiling.jpg"
+              src="/Images/interior-large-building-with-glass-ceiling.webp"
               alt="Grand glass ceiling interior"
               fill
               className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.03]"
@@ -134,7 +134,7 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
           className="relative h-[320px] md:h-[400px] overflow-hidden group"
         >
           <Image
-            src="/Images/palace-culture-iasi-romania.jpg"
+            src="/Images/palace-culture-iasi-romania.webp"
             alt="Palace venue"
             fill
             className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.03]"

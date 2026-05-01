@@ -102,7 +102,7 @@ export function EnterpriseSection() {
         className="relative w-full h-[45vh] md:h-[55vh] min-h-[300px]"
       >
         <Image
-          src="/Images/venue-dark-modern.jpg"
+          src="/Images/venue-dark-modern.webp"
           alt="Conference presentation"
           fill
           className="object-cover grayscale"

@@ -114,7 +114,7 @@ export function FullbleedImageBreak() {
             className="absolute inset-0"
           >
             <Image
-              src="/Images/venue-dark-modern.jpg"
+              src="/Images/venue-dark-modern.webp"
               alt="Modern event venue"
               fill
               className="object-cover"

@@ -46,7 +46,7 @@ export function LeadershipContent({ headline, description, teamMembers }: { head
             >
               <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden bg-[#1a1a1a] border border-[var(--border-default)] mb-6">
                 <Image
-                  src={member.image || "/Images/team/pontus.jpg"}
+                  src={member.image || "/Images/team/pontus.webp"}
                   alt={member.name}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { motion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -252,9 +254,11 @@ export function RequestFormSection({ cms }: { cms?: {
           <div className="flex items-center gap-5 w-full md:w-auto">
             <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 border border-[var(--border-default)]">
               {/* Real Malin picture */}
-              <img 
-                src="/Images/team/malin-color-real.jpeg" 
-                alt="Malin" 
+              <Image 
+                src="/Images/Team/malin-color-real.webp" 
+                alt="Malin Eriksson — EventPartner" 
+                width={80} 
+                height={80} 
                 className="w-full h-full object-cover"
               />
             </div>

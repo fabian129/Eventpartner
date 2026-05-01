@@ -17,37 +17,37 @@ const SERVICES = [
     title: "Konferens & möten",
     description: "Från styrelserum till storskaliga konferenser med hundratals deltagare.",
     tag: "Konferens",
-    image: "/Images/interior-large-building-with-glass-ceiling.jpg",
+    image: "/Images/interior-large-building-with-glass-ceiling.webp",
   },
   {
     title: "Aktiviteter",
     description: "Teambuilding, workshops och upplevelser som skapar bestående minnen.",
     tag: "Aktiviteter",
-    image: "/Images/colorful-seoul-floating-island.jpg",
+    image: "/Images/colorful-seoul-floating-island.webp",
   },
   {
     title: "Catering",
     description: "Från standing lunch till sju-rätters gala. Rätt leverantör för varje tillfälle.",
     tag: "Catering",
-    image: "/Images/decorated-hall-wedding-is-ready-celebration.jpg",
+    image: "/Images/decorated-hall-wedding-is-ready-celebration.webp",
   },
   {
     title: "Talare",
     description: "Keynotes, moderatorer, artister och DJ:s för ert event.",
     tag: "Underhållning",
-    image: "/Images/palace-culture-iasi-romania.jpg",
+    image: "/Images/palace-culture-iasi-romania.webp",
   },
   {
     title: "Middagar",
     description: "Galor, jubileer & representationsmiddagar i venues som gör intryck.",
     tag: "Middagar",
-    image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg",
+    image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.webp",
   },
   {
     title: "Kick-off",
     description: "Starter som sätter tonen för hela året.",
     tag: "Kick-off",
-    image: "/Images/hotel-lobby.jpg",
+    image: "/Images/hotel-lobby.webp",
   },
 ];
 

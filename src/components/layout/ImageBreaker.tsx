@@ -6,15 +6,15 @@ import Image from "next/image";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const ROW1 = [
-  { src: "/Images/hotel-lobby.jpg", alt: "Grand venue lobby", label: "Venue", span: "col-span-2" },
-  { src: "/Images/conference-evening.jpg", alt: "Conference", label: "Konferens", span: "col-span-1" },
+  { src: "/Images/hotel-lobby.webp", alt: "Grand venue lobby", label: "Venue", span: "col-span-2" },
+  { src: "/Images/conference-evening.webp", alt: "Conference", label: "Konferens", span: "col-span-1" },
 ];
 
 const ROW2 = [
-  { src: "/Images/decorated-hall-wedding-is-ready-celebration.jpg", alt: "Gala dinner", label: "Gala" },
-  { src: "/Images/interior-large-building-with-glass-ceiling.jpg", alt: "Modern venue", label: "Modern" },
-  { src: "/Images/venue-dark-modern.jpg", alt: "Presentation", label: "Presentation" },
-  { src: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.jpg", alt: "Intimate dinner", label: "Intim" },
+  { src: "/Images/decorated-hall-wedding-is-ready-celebration.webp", alt: "Gala dinner", label: "Gala" },
+  { src: "/Images/interior-large-building-with-glass-ceiling.webp", alt: "Modern venue", label: "Modern" },
+  { src: "/Images/venue-dark-modern.webp", alt: "Presentation", label: "Presentation" },
+  { src: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.webp", alt: "Intimate dinner", label: "Intim" },
 ];
 
 export function ImageBreaker() {
