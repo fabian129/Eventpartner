@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 };
 
 const FALLBACK_TEAM = [
-  { name: "Pontus Bredal-Hansen", role: "CEO & Co-founder", linkedin: "https://linkedin.com/in/pontus", image: "/Images/team/pontus.webp" },
-  { name: "Joakim", role: "Co-founder", linkedin: "https://linkedin.com/in/joakim", image: "/Images/team/joakim.webp" },
-  { name: "Malin", role: "Head of Marketing", linkedin: "https://linkedin.com/in/malin", image: "/Images/team/malin-farg.webp" },
+  { name: "Pontus Bredal-Hansen", role: "CEO & Co-founder", linkedin: "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110", image: "/Images/team/pontus.webp" },
+  { name: "Joakim Ström", role: "Co-founder", linkedin: "https://www.linkedin.com/in/joakim-strom-ab5aaa13a", image: "/Images/team/joakim.webp" },
+  { name: "Malin Berlin", role: "Head of Marketing", linkedin: "https://www.linkedin.com/in/malinberlins", image: "/Images/team/malin-farg.webp" },
 ];
 
 export default async function LeadershipPage() {

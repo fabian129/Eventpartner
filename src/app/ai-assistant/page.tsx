@@ -37,6 +37,11 @@ export default async function AiAssistantPage() {
         heroSubtitle: t(data.heroSubtitle),
         botTitle: t(data.botTitle),
         botDescription: t(data.botDescription),
+        botStatus: t(data.botStatus),
+        botLaunchDate: t(data.botLaunchDate),
+        featuresLabel: t(data.featuresLabel),
+        featuresHeadline: t(data.featuresHeadline),
+        features: data.features?.map((f: any) => ({ title: t(f.title), desc: t(f.desc), icon: f.icon })),
         ctaHeadline: t(data.ctaHeadline),
         ctaDescription: t(data.ctaDescription),
       } : undefined} />

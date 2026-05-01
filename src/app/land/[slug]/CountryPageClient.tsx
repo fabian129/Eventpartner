@@ -185,7 +185,7 @@ export function CountryPageClient({ country }: { country: Country }) {
         </section>
 
         {/* Top Venues Grid — uses actual country data */}
-        <TopVenuesGrid venues={country.topVenues} countryName={country.name} />
+        <TopVenuesGrid venues={country.topVenues} countryName={country.name} countrySlug={country.slug} />
 
         {/* Bottom CTA */}
         <section className="w-full px-6 md:px-10 pb-20 md:pb-28">

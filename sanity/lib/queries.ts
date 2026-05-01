@@ -97,7 +97,12 @@ export const LEADERSHIP_PAGE_QUERY = defineQuery(
 
 export const CAREERS_PAGE_QUERY = defineQuery(
   `*[_type == "careersPage"][0]{
-    headline, description, openApplicationTitle, openApplicationDesc
+    heroLabel, heroLabelRight,
+    headline, description,
+    perks,
+    openApplicationTitle, openApplicationDesc, formHeadline,
+    successTitle, successDesc,
+    ctaHeadline, ctaDescription
   }`
 );
 
@@ -109,7 +114,11 @@ export const WEBSHOP_PAGE_QUERY = defineQuery(
 
 export const AI_ASSISTANT_PAGE_QUERY = defineQuery(
   `*[_type == "aiAssistantPage"][0]{
-    headline, description, botTitle, botDescription
+    heroLabel, heroLabelRight,
+    heroHeadline, heroHeadlineAccent, heroSubtitle,
+    botTitle, botDescription, botStatus, botLaunchDate,
+    featuresLabel, featuresHeadline, features,
+    ctaHeadline, ctaDescription
   }`
 );
 
@@ -121,6 +130,12 @@ export const FAQ_PAGE_QUERY = defineQuery(
 
 export const HELP_CENTER_PAGE_QUERY = defineQuery(
   `*[_type == "helpCenterPage"][0]{
-    headline, description, contactEmail, contactPhone
+    heroLabel, heroLabelRight,
+    heroHeadline, heroHeadlineAccent, heroSubtitle,
+    stats,
+    channelsLabel, channelsHeadline, channels,
+    formLabel, formHeadline, formDescription,
+    contactEmail, contactPhone,
+    ctaHeadline, ctaDescription
   }`
 );

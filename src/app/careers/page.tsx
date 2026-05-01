@@ -25,10 +25,18 @@ export default async function CareersPage() {
         cta: t(homeData.navCta),
       } : undefined} />
       <CareersContent cms={data ? {
+        heroLabel: t(data.heroLabel),
+        heroLabelRight: t(data.heroLabelRight),
         headline: t(data.headline),
         description: t(data.description),
+        perks: data.perks?.map((p: any) => ({ title: t(p.title), desc: t(p.desc), icon: p.icon })),
         openApplicationTitle: t(data.openApplicationTitle),
         openApplicationDesc: t(data.openApplicationDesc),
+        formHeadline: t(data.formHeadline),
+        successTitle: t(data.successTitle),
+        successDesc: t(data.successDesc),
+        ctaHeadline: t(data.ctaHeadline),
+        ctaDescription: t(data.ctaDescription),
       } : undefined} />
       <DarkZone exitToLight={false}>
         <Footer cms={homeData ? {
