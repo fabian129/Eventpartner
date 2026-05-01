@@ -6,6 +6,19 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
 import { ABOUT_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize } from "@/../sanity/lib/locale";
+import { urlFor } from "@/../sanity/lib/image";
+
+const TEAM_FALLBACK_IMAGES: Record<string, string> = {
+  "Pontus Bredal Hansen": "/Images/team/pontus.webp",
+  "Malin Berlin": "/Images/team/malin-farg.webp",
+  "Joakim Ström": "/Images/team/joakim.webp",
+};
+
+const TEAM_FALLBACK_LINKEDIN: Record<string, string> = {
+  "Pontus Bredal Hansen": "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110",
+  "Malin Berlin": "https://www.linkedin.com/in/malinberlins",
+  "Joakim Ström": "https://www.linkedin.com/in/joakim-strom-ab5aaa13a",
+};
 
 export const metadata: Metadata = {
   title: "About Us — EventPartner",
@@ -56,14 +69,17 @@ export default async function AboutPage() {
         })),
         teamLabel: t(data.teamLabel),
         teamIntro: t(data.teamIntro),
-        teamMembers: data.teamMembers?.map((m: any) => ({
-          name: m.name,
-          role: t(m.role),
-          bio: t(m.bio),
-          linkedin: m.linkedin,
-          image: m.image,
-          initials: m.initials,
-        })),
+        teamMembers: data.teamMembers?.map((m: any) => {
+          const fallbackImg = TEAM_FALLBACK_IMAGES[m.name];
+          return {
+            name: m.name,
+            role: t(m.role),
+            bio: t(m.bio),
+            linkedin: m.linkedin || TEAM_FALLBACK_LINKEDIN[m.name],
+            image: m.image ? urlFor(m.image).width(400).height(500).url() : fallbackImg,
+            initials: m.initials,
+          };
+        }),
         ctaHeadline: t(data.ctaHeadline),
         ctaDescription: t(data.ctaDescription),
       } : undefined} />
