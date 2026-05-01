@@ -38,6 +38,7 @@ export const metadata: Metadata = {
 
 import { SmoothScroll } from "@/components/utils/SmoothScroll";
 import { SidebarNav } from "@/components/layout/SidebarNav";
+import { ShopProvider } from "@/components/shop/ShopProvider";
 
 export default async function RootLayout({
   children,
@@ -51,10 +52,12 @@ export default async function RootLayout({
         className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} font-sans antialiased overflow-x-hidden`}
       >
         <ThemeProvider>
-          <SidebarNav />
-          <SmoothScroll>
-            {children}
-          </SmoothScroll>
+          <ShopProvider>
+            <SidebarNav />
+            <SmoothScroll>
+              {children}
+            </SmoothScroll>
+          </ShopProvider>
         </ThemeProvider>
         {isDraftMode && <VisualEditing />}
       </body>

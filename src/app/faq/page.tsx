@@ -1,44 +1,63 @@
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { DarkZone } from "@/components/ui/DarkZone";
+import { FaqPageContent } from "./FaqPageContent";
+import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
-import { FAQ_PAGE_QUERY } from "@/../sanity/lib/queries";
+import { FAQ_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize } from "@/../sanity/lib/locale";
+
+export const metadata: Metadata = {
+  title: "FAQ — EventPartner",
+  description:
+    "Find answers to frequently asked questions about EventPartner's venue sourcing, pricing, VIP programme, and how we help plan corporate events across 36 European countries.",
+};
 
 export default async function FaqPage() {
   const { data } = await sanityFetch({ query: FAQ_PAGE_QUERY });
-  const t = (field: { en?: string; sv?: string } | undefined | null) => localize(field);
+  const { data: homeData } = await sanityFetch({ query: HOMEPAGE_QUERY });
 
-  const headline = t(data?.headline) || "FAQ";
-  const description = t(data?.description) || "Frequently Asked Questions.";
-  const faqs = data?.faqs || [];
+  const t = (field: { en?: string; sv?: string } | undefined | null) =>
+    localize(field);
 
   return (
-    <main className="min-h-screen pt-32 pb-24 bg-[var(--bg-primary)]">
-      <div className="max-w-[1000px] mx-auto px-6 md:px-12">
-        <div className="max-w-2xl mb-16">
-          <h1 className="text-4xl md:text-6xl font-display font-semibold text-[var(--text-primary)] mb-6">
-            {headline}
-          </h1>
-          <p className="text-lg text-[var(--text-secondary)] whitespace-pre-line">
-            {description}
-          </p>
-        </div>
-
-        <div className="space-y-4">
-          {faqs.length > 0 ? (
-            faqs.map((faq: any, i: number) => (
-              <div key={i} className="p-6 bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl">
-                <h3 className="text-xl font-display font-semibold text-[var(--text-primary)] mb-2">
-                  {t(faq.question)}
-                </h3>
-                <p className="text-[var(--text-secondary)] whitespace-pre-line">
-                  {t(faq.answer)}
-                </p>
-              </div>
-            ))
-          ) : (
-            <p className="text-[var(--text-secondary)]">Content coming soon...</p>
-          )}
-        </div>
-      </div>
-    </main>
+    <div id="page-root" style={{ backgroundColor: "#F4F4F4" }}>
+      <Navbar cms={homeData ? {
+        links: homeData.navLinks?.map((l: any) => ({
+          label: t(l.label),
+          href: l.href,
+        })),
+        cta: t(homeData.navCta),
+      } : undefined} />
+      <FaqPageContent cms={data ? {
+        heroLabel: t(data.heroLabel),
+        heroLabelRight: t(data.heroLabelRight),
+        heroHeadline: t(data.heroHeadline),
+        heroHeadlineAccent: t(data.heroHeadlineAccent),
+        heroSubtitle: t(data.heroSubtitle),
+        faqs: data.faqs?.map((faq: any) => ({
+          question: t(faq.question),
+          answer: t(faq.answer),
+        })),
+        ctaHeadline: t(data.ctaHeadline),
+        ctaDescription: t(data.ctaDescription),
+      } : undefined} />
+      <DarkZone exitToLight={false}>
+        <Footer cms={homeData ? {
+          brandDesc: t(homeData.footerBrandDesc),
+          socialLabel: t(homeData.footerSocialLabel),
+          newsletterDesc: t(homeData.footerNewsletterDesc),
+          ctaTitle: t(homeData.footerCtaTitle),
+          ctaDesc: t(homeData.footerCtaDesc),
+          columns: homeData.footerColumns?.map((col: any) => ({
+            title: t(col.title),
+            links: col.links?.map((l: any) => ({
+              label: t(l.label),
+              href: l.href,
+            })),
+          })),
+        } : undefined} />
+      </DarkZone>
+    </div>
   );
 }
