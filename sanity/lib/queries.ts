@@ -88,3 +88,39 @@ export const VIP_PAGE_QUERY = defineQuery(
     ctaCard1Title, ctaCard1Desc, ctaCard2Title, ctaCard2Headline, ctaCard2Sub
   }`
 );
+
+export const LEADERSHIP_PAGE_QUERY = defineQuery(
+  `*[_type == "leadershipPage"][0]{
+    headline, description, teamMembers
+  }`
+);
+
+export const CAREERS_PAGE_QUERY = defineQuery(
+  `*[_type == "careersPage"][0]{
+    headline, description, openApplicationTitle, openApplicationDesc
+  }`
+);
+
+export const WEBSHOP_PAGE_QUERY = defineQuery(
+  `*[_type == "webshopPage"][0]{
+    headline, description, merchTitle, merchPendingMessage, quoteTitle, quoteButton
+  }`
+);
+
+export const AI_ASSISTANT_PAGE_QUERY = defineQuery(
+  `*[_type == "aiAssistantPage"][0]{
+    headline, description, botTitle, botDescription
+  }`
+);
+
+export const FAQ_PAGE_QUERY = defineQuery(
+  `*[_type == "faqPage"][0]{
+    headline, description, faqs
+  }`
+);
+
+export const HELP_CENTER_PAGE_QUERY = defineQuery(
+  `*[_type == "helpCenterPage"][0]{
+    headline, description, contactEmail, contactPhone
+  }`
+);

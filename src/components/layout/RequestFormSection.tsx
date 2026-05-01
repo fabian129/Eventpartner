@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 import { useState } from "react";
-import { Send, CheckCircle, ArrowRight, ExternalLink } from "lucide-react";
+import { Send, CheckCircle, ArrowRight, ExternalLink, Calendar } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import Link from "next/link";
 
@@ -37,8 +37,9 @@ export function RequestFormSection({ cms }: { cms?: {
 
   return (
     <section id="request" className="relative w-full px-6 md:px-10 py-20 md:py-32 overflow-hidden" style={{ background: isDark ? "#0A0A0A" : "#EAEAED" }}>
-      {/* Decorative glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "#6AD8D2" }} />
+      {/* Decorative glows */}
+      <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "#7851A9" }} />
+      <div className="absolute top-20 left-2/3 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.05]" style={{ background: "#6AD8D2" }} />
 
       <div className="max-w-[1100px] mx-auto relative z-10">
         {/* Big headline */}
@@ -64,7 +65,7 @@ export function RequestFormSection({ cms }: { cms?: {
             <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">
               {cms?.headline || "Tell us what you need."}
               <br />
-              <span className="italic font-light text-[var(--text-muted)]">{cms?.headlineAccent || "We'll handle the rest."}</span>
+              <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-[#7851A9] via-[#9370C4] to-[#6AD8D2]">{cms?.headlineAccent || "We'll handle the rest."}</span>
             </h2>
             <p className="font-display text-[clamp(1rem,2vw,1.3rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-sm md:text-right">
               {cms?.description || "Fill in the form and we'll deliver tailored proposals within 24 hours. Completely free."}
@@ -199,7 +200,7 @@ export function RequestFormSection({ cms }: { cms?: {
                 </p>
                 <Link
                   href="/skraddarsy"
-                  className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#6AD8D2] hover:text-[#A3E4DE] transition-colors duration-300"
+                  className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#7851A9] hover:text-[#9370C4] transition-colors duration-300"
                 >
                   Customize your event →
                 </Link>
@@ -238,6 +239,46 @@ export function RequestFormSection({ cms }: { cms?: {
             </span>
           </div>
         </motion.form>
+
+        {/* Book Meeting Alternative with Malin */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.25, duration: 0.9, ease: EASE }}
+          className="mt-6 md:mt-8 bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 transition-colors duration-500"
+          style={{ boxShadow: isDark ? "0 4px 40px rgba(0,0,0,0.15)" : "0 4px 40px rgba(0,0,0,0.04)" }}
+        >
+          <div className="flex items-center gap-5 w-full md:w-auto">
+            <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 border border-[var(--border-default)]">
+              {/* Real Malin picture */}
+              <img 
+                src="/Images/team/malin-color-real.jpeg" 
+                alt="Malin" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#7851A9] mb-1">Direct contact</p>
+              <h3 className="font-display text-lg md:text-xl font-medium text-[var(--text-primary)]">Prefer a quick chat?</h3>
+              <p className="text-[13px] md:text-[14px] text-[var(--text-muted)] mt-0.5 leading-relaxed">
+                Book a 15-min discovery call directly with Malin.
+              </p>
+            </div>
+          </div>
+          <a
+            href="#book"
+            onClick={(e) => { e.preventDefault(); console.log("Open calendar modal"); }}
+            className={`w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors ${
+              isDark 
+                ? 'bg-white/5 hover:bg-white/10 text-white border border-white/10' 
+                : 'bg-black/5 hover:bg-black/10 text-[#111] border border-black/5'
+            }`}
+          >
+            <Calendar className="w-4 h-4" />
+            Book meeting
+          </a>
+        </motion.div>
       </div>
     </section>
   );

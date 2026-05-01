@@ -10,39 +10,25 @@ const FOOTER_LINKS = {
   company: {
     title: "Company",
     links: [
-      { label: "About us", href: "/about" },
-      { label: "Leadership", href: "/about#team" },
-      { label: "Careers", href: "/about" },
-      { label: "Press", href: "/about" },
+      { label: "About", href: "/about" },
+      { label: "Leadership", href: "/leadership" },
+      { label: "Careers", href: "/careers" },
     ],
   },
   services: {
     title: "Services",
     links: [
-      { label: "Pricing", href: "/vip" },
-      { label: "Become a VIP", href: "/vip" },
-      { label: "Book a demo", href: "/#request" },
-      { label: "Shop", href: "/#shop" },
+      { label: "VIP", href: "/vip" },
+      { label: "Webshop", href: "/shop" },
+      { label: "AI Assistant", href: "/ai-assistant" },
     ],
   },
   support: {
     title: "Support",
     links: [
-      { label: "FAQ", href: "/#faq" },
-      { label: "EventPartner Assistant", href: "/#request" },
-      { label: "Security & Compliance", href: "/security" },
-      { label: "GDPR & Privacy", href: "/security" },
-    ],
-  },
-  venues: {
-    title: "Popular Countries",
-    links: [
-      { label: "Sweden", href: "/land/sweden" },
-      { label: "Norway", href: "/land/norway" },
-      { label: "Denmark", href: "/land/denmark" },
-      { label: "Germany", href: "/land/germany" },
-      { label: "United Kingdom", href: "/land/uk" },
-      { label: "All 36 countries →", href: "#coverage" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Help center", href: "/help" },
+      { label: "Security & Privacy", href: "/security" },
     ],
   },
 };
@@ -185,7 +171,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
             </div>
 
             {/* Link columns */}
-            {(cms?.columns || Object.values(FOOTER_LINKS)).map((section) => (
+            {Object.values(FOOTER_LINKS).map((section) => (
               <div key={section.title} className="md:col-span-2 md:first:col-start-5">
                 <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6AD8D2] mb-5">
                   {section.title}

@@ -194,6 +194,17 @@
   100% { transform: translateX(100%); }
 }
 
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 8s ease-in-out infinite;
+  background-size: 200% 200%;
+}
+
 @keyframes orbit-spin {
   0% { transform: rotateX(12deg) rotate(0deg); }
   100% { transform: rotateX(12deg) rotate(360deg); }

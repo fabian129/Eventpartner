@@ -223,6 +223,24 @@ export const homePage = defineType({
       type: "localizedText",
       group: "countryFlags",
     }),
+    defineField({
+      name: "flagsMetrics",
+      title: "Metrics Row",
+      type: "array",
+      group: "countryFlags",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "value", title: "Numeric Value (for counter)", type: "number" },
+            { name: "stringValue", title: "String Value (if not a counter, e.g. '24/7')", type: "string" },
+            { name: "suffix", title: "Suffix (e.g. K+, %)", type: "string" },
+            { name: "label", title: "Label", type: "localizedString" },
+          ],
+          preview: { select: { title: "label.en", subtitle: "value" } },
+        },
+      ],
+    }),
 
     /* ─── CASE STORIES ─── */
     defineField({

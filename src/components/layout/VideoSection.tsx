@@ -19,32 +19,8 @@ export function VideoSection({ cms }: { cms?: VideoCMS }) {
   const isDark = theme === "dark";
 
   return (
-    <section id="about" className="relative w-full px-6 md:px-10 py-20 md:py-32">
+    <section id="video" className="relative w-full px-6 md:px-10 pt-10 pb-20 md:pb-32 z-20">
       <div className="max-w-[1200px] mx-auto">
-        {/* Intro text — blur entrance */}
-        <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: EASE }}
-          className="mb-10 md:mb-14"
-        >
-          <div className="flex justify-between items-start mb-10">
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {cms?.label || "EventPartner — Introduction"}
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              2:45
-            </span>
-          </div>
-          <h2 className="font-display text-[clamp(2.5rem,7vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.92] mb-5">
-            {cms?.headline || "We are your partner,"}<br />
-            <span className="text-[var(--text-muted)]">{cms?.headlineAccent || "not a middleman."}</span>
-          </h2>
-          <p className="font-display text-[clamp(1.05rem,2vw,1.35rem)] font-normal text-[var(--text-muted)] max-w-2xl leading-[1.5]">
-            {cms?.description || "See how we help the best companies find the right venues and create memorable events."}
-          </p>
-        </motion.div>
 
         {/* Full-width video embed — scale + shadow entrance */}
         <motion.div

@@ -4,12 +4,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const DEFAULT_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Customize", href: "#request", disabled: true },
+  { label: "Services", href: "/#services" },
+  { label: "Customize", href: "/#request" },
   { label: "Become VIP", href: "/vip" },
-  { label: "Shop", href: "#shop" },
+  { label: "Shop", href: "/shop" },
   { label: "About", href: "/about" },
 ];
 
@@ -39,63 +40,59 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2" : "py-4"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-3 bg-white/95 backdrop-blur-md shadow-sm" : "py-6 bg-transparent"}`}>
+        {/* Bottom animated gradient line (only visible on scroll for a cleaner top look) */}
+        <div className={`absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-[#7851A9] via-[#6AD8D2] to-[#7851A9] animate-gradient-x transition-opacity duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`} />
+        
         <div className="flex items-center justify-between w-full max-w-[1400px] mx-auto px-6 md:px-12">
-          {/* Left: Logo + Links */}
-          <div className={`hidden md:flex items-center gap-0 rounded-full transition-all duration-500 ${scrolled ? "bg-[var(--bg-primary)]/90 backdrop-blur-xl border border-[var(--border-default)] shadow-lg shadow-black/[0.03]" : "bg-transparent border border-transparent"}`}>
-            <Link href="/" className="px-4 py-2.5 flex items-center gap-2">
-              <span className="font-display text-[14px] font-semibold tracking-[0.05em] text-[var(--text-primary)]">
-                EVENTPARTNER
-              </span>
-              <span className="text-[#6AD8D2] text-[10px]">◆</span>
+          {/* Left: Logo */}
+          <div className="flex shrink-0">
+            <Link href="/" className="flex items-center gap-2">
+              <div className={`relative h-10 w-40 hover:opacity-100 transition-all duration-500 ${scrolled ? "opacity-70" : "opacity-100"}`}>
+                {/* When scrolled: black (brightness-0) + parent opacity for dark grey. 
+                    When top: white (invert brightness-0) */}
+                <Image 
+                  src="/Images/logos/Primary logo EP.png" 
+                  alt="EventPartner" 
+                  fill 
+                  className={`object-contain object-left scale-[1.7] origin-left transition-all duration-500 ${scrolled ? "brightness-0" : "invert brightness-0"}`} 
+                  priority 
+                />
+              </div>
             </Link>
+          </div>
 
-            <div className="w-px h-5 bg-[var(--border-default)]" />
-
-            <nav className="flex items-center gap-1 px-2">
+          {/* Right: Links & CTA */}
+          <div className="hidden md:flex items-center gap-8">
+            <nav className="flex items-center gap-1">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.label}
-                  href={link.disabled ? undefined : link.href}
-                  onClick={link.disabled ? (e: React.MouseEvent) => e.preventDefault() : undefined}
-                  className={`text-[13px] px-3 py-2 rounded-full transition-all duration-300 ${
-                    link.disabled
-                      ? "text-[var(--text-dim)] cursor-not-allowed opacity-50"
-                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]"
-                  }`}
+                  href={link.href}
+                  className={`relative text-[13px] px-4 py-2 transition-all duration-300 font-medium group ${scrolled ? "text-[#555]" : "text-white/80"}`}
                 >
-                  {link.label}
+                  <span className={`relative z-10 transition-all duration-300 ${scrolled ? "group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#7851A9] group-hover:to-[#6AD8D2]" : "group-hover:text-white"}`}>
+                    {link.label}
+                  </span>
+                  {/* Subtle underline that expands from center */}
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#7851A9] to-[#6AD8D2] transition-all duration-300 group-hover:w-[40%] rounded-full opacity-0 group-hover:opacity-100" />
                 </a>
               ))}
             </nav>
-          </div>
 
-          {/* Mobile logo */}
-          <div className="md:hidden">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="font-display text-[14px] font-semibold tracking-[0.05em] text-[var(--text-primary)]">
-                EVENTPARTNER
-              </span>
-              <span className="text-[#6AD8D2] text-[10px]">◆</span>
-            </Link>
-          </div>
-
-          {/* Right: CTA */}
-          <div className="hidden md:flex items-center gap-2">
             <a
               href="#request"
-              className="relative text-[13px] font-medium text-white bg-[#111] rounded-full px-5 py-2.5 transition-all duration-300 hover:bg-[#222] hover:shadow-lg hover:shadow-black/10 overflow-hidden group"
+              className="relative text-[12px] font-medium text-white rounded-full px-5 py-2 transition-all duration-300 hover:scale-105 overflow-hidden group shadow-[0_2px_10px_rgba(120,81,169,0.2)] hover:shadow-[0_0_20px_rgba(106,216,210,0.6)] bg-gradient-to-r from-[#7851A9] via-[#6AD8D2] to-[#7851A9] animate-gradient-x hover:brightness-110"
             >
               <span className="relative z-10">{ctaText}</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[#6AD8D2] to-[#5EC4BA] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
           </div>
 
-          {/* Mobile: hamburger */}
-          <div className="md:hidden flex items-center gap-2">
+          {/* Mobile hamburger */}
+          <div className="md:hidden flex items-center shrink-0 ml-auto">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-[var(--text-secondary)] p-2"
+              className={`p-2 hover:bg-black/5 rounded-full transition-colors ${scrolled ? "text-[#111]" : "text-white"}`}
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

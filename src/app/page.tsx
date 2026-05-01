@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/layout/Hero";
+import { GlobeSection } from "@/components/layout/GlobeSection";
 import { VideoSection } from "@/components/layout/VideoSection";
 import { CountryFlagsSection } from "@/components/layout/CountryFlagsSection";
 import { ServiceCardsPersonal } from "@/components/layout/ServiceCardsPersonal";
@@ -14,6 +15,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollSection } from "@/components/ui/ScrollSection";
 import { WebshopTeaser } from "@/components/layout/WebshopTeaser";
 import { DarkZone } from "@/components/ui/DarkZone";
+import { HeroLightUpZone } from "@/components/ui/HeroLightUp";
 import { ExitIntentPopup } from "@/components/ui/ExitIntentPopup";
 import { client } from "@/../sanity/lib/client";
 import { HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
@@ -28,7 +30,7 @@ export default async function Home() {
     localize(field);
 
   return (
-    <div id="page-root" style={{ backgroundColor: "#F4F4F4" }}>
+    <div id="page-root" style={{ backgroundColor: "#111" }}>
       <Navbar cms={data ? {
         links: data.navLinks?.map((l: any) => ({
           label: t(l.label),
@@ -37,7 +39,7 @@ export default async function Home() {
         cta: t(data.navCta),
       } : undefined} />
 
-      {/* 1. Hero — hook + CTA */}
+      {/* 1. Hero — hook + CTA (110vh high) */}
       <Hero cms={data ? {
         badge: t(data.heroBadge),
         headline: t(data.heroHeadline),
@@ -47,20 +49,25 @@ export default async function Home() {
         cta2: t(data.heroCta2),
       } : undefined} />
 
-      {/* 2. Logo Banner — social proof */}
-      <ScrollSection fadeOut={false}>
-        <LogoTicker />
-      </ScrollSection>
+      {/* The rest of the light page content wrapped in the LightUp zone */}
+      <HeroLightUpZone>
+        {/* 2. Harmon Brothers Style Video Overlap (Straddles the seam between Hero and light section) */}
+        <ScrollSection>
+          <VideoSection cms={data ? {
+            label: t(data.videoLabel),
+            headline: t(data.videoHeadline),
+            headlineAccent: t(data.videoHeadlineAccent),
+            description: t(data.videoDescription),
+          } : undefined} />
+        </ScrollSection>
 
-      {/* 3. Video */}
-      <ScrollSection>
-        <VideoSection cms={data ? {
-          label: t(data.videoLabel),
-          headline: t(data.videoHeadline),
-          headlineAccent: t(data.videoHeadlineAccent),
-          description: t(data.videoDescription),
-        } : undefined} />
-      </ScrollSection>
+        {/* 3. Logo Banner — social proof */}
+        <ScrollSection fadeOut={false}>
+          <LogoTicker />
+        </ScrollSection>
+
+        {/* 3b. Global Scale */}
+        <GlobeSection />
 
       {/* 4. Country Flags */}
       <ScrollSection>
@@ -69,6 +76,12 @@ export default async function Home() {
           labelRight: t(data.flagsLabelRight),
           headline: t(data.flagsHeadline),
           description: t(data.flagsDescription),
+          metrics: data.flagsMetrics?.map((m: any) => ({
+            value: m.value,
+            stringValue: m.stringValue,
+            suffix: m.suffix,
+            label: t(m.label)
+          }))
         } : undefined} />
       </ScrollSection>
 
@@ -104,6 +117,7 @@ export default async function Home() {
           fullserviceDesc: t(data.servicesFullserviceDesc),
         } : undefined} />
       </ScrollSection>
+      </HeroLightUpZone>
 
       {/* 7-8. Dark Zone 1: Cases + Newsletter */}
       <DarkZone>

@@ -95,6 +95,12 @@ interface FlagsCMS {
   labelRight?: string;
   headline?: string;
   description?: string;
+  metrics?: Array<{
+    value?: number;
+    stringValue?: string;
+    suffix?: string;
+    label?: string;
+  }>;
 }
 
 export function CountryFlagsSection({ cms }: { cms?: FlagsCMS }) {
@@ -121,7 +127,7 @@ export function CountryFlagsSection({ cms }: { cms?: FlagsCMS }) {
         </div>
 
         {/* Heading + description stacked */}
-        <h2 className="font-display text-[clamp(2rem,5vw,3.8rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
+        <h2 className="font-display text-[clamp(2rem,5vw,3.8rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6 whitespace-pre-wrap">
           {cms?.headline || "36 countries.\n360,000+ venues."}
         </h2>
         <p className="font-display text-[clamp(1rem,2vw,1.2rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-lg">
@@ -136,14 +142,28 @@ export function CountryFlagsSection({ cms }: { cms?: FlagsCMS }) {
       </div>
 
       {/* Stats bar — animated counters */}
-      <StatsBar />
+      <StatsBar metrics={cms?.metrics} />
     </section>
   );
 }
 
-function StatsBar() {
+function StatsBar({ metrics }: { metrics?: FlagsCMS["metrics"] }) {
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  const renderMetric = (m: any, i: number) => {
+    if (m.value !== undefined && m.value !== null) {
+      return <StatCounter key={i} value={m.value} suffix={m.suffix || ""} label={m.label || ""} active={isInView} delay={i * 0.15} />;
+    }
+    return (
+      <div key={i} className="text-center">
+        <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">
+          {m.stringValue}{m.suffix}
+        </span>
+        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">{m.label}</span>
+      </div>
+    );
+  };
 
   return (
     <motion.div
@@ -152,18 +172,24 @@ function StatsBar() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: 0.2, duration: 0.6 }}
-      className="relative z-[1] flex items-center justify-center gap-8 md:gap-16 mt-12 md:mt-16 px-6"
+      className="relative z-[1] flex flex-wrap items-center justify-center gap-8 md:gap-16 mt-12 md:mt-16 px-6"
     >
-      <StatCounter value={36} suffix="" label="Countries" active={isInView} />
-      <StatCounter value={360} suffix="K+" label="Venues" active={isInView} delay={0.15} />
-      <div className="text-center">
-        <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">100%</span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">Europe</span>
-      </div>
-      <div className="text-center">
-        <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">24/7</span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">Support</span>
-      </div>
+      {metrics && metrics.length > 0 ? (
+        metrics.map((m, i) => renderMetric(m, i))
+      ) : (
+        <>
+          <StatCounter value={36} suffix="" label="Countries" active={isInView} />
+          <StatCounter value={360} suffix="K+" label="Venues" active={isInView} delay={0.15} />
+          <div className="text-center">
+            <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">100%</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">Europe</span>
+          </div>
+          <div className="text-center">
+            <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">24/7</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">Support</span>
+          </div>
+        </>
+      )}
     </motion.div>
   );
 }
