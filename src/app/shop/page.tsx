@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { sanityFetch } from "@/../sanity/lib/live";
+import { client } from "@/../sanity/lib/client";
 import { WEBSHOP_PAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize } from "@/../sanity/lib/locale";
 
@@ -12,7 +12,7 @@ export default function ShopPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await sanityFetch({ query: WEBSHOP_PAGE_QUERY });
+        const data = await client.fetch(WEBSHOP_PAGE_QUERY);
         setCms(data);
       } catch (err) {
         console.error("Failed to fetch webshop page data:", err);
