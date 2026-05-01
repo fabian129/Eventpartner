@@ -93,12 +93,12 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
           {/* Newsletter signup */}
           <div className="text-center max-w-lg mx-auto">
             <div className="flex items-center justify-center mb-6">
-              <div className="relative h-10 w-14 opacity-80 overflow-hidden">
+              <div className="relative h-12 w-12 opacity-80">
                 <Image 
-                  src="/Images/logos/Primary logo EP.png" 
+                  src="/Images/logos/EVENT PARTNER 3.png" 
                   alt="EventPartner Symbol" 
                   fill 
-                  className="object-cover object-top invert brightness-0 scale-[1.35] origin-top" 
+                  className="object-contain object-center invert brightness-0" 
                 />
               </div>
             </div>
