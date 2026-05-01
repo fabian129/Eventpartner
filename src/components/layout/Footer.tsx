@@ -93,7 +93,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
           {/* Newsletter signup */}
           <div className="text-center max-w-lg mx-auto">
             <div className="flex items-center justify-center mb-6">
-              <div className="relative h-12 w-12 opacity-80">
+              <div className="relative h-24 w-24 opacity-90">
                 <Image 
                   src="/Images/logos/EVENT PARTNER 3.png" 
                   alt="EventPartner Symbol" 
