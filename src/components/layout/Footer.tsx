@@ -93,8 +93,14 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
           {/* Newsletter signup */}
           <div className="text-center max-w-lg mx-auto">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Globe className="w-5 h-5 text-[#6AD8D2]" />
-              <span className="font-display text-xl font-medium text-white tracking-tight">EventPartner</span>
+              <div className="relative h-8 w-32 opacity-80">
+                <Image 
+                  src="/Images/logos/Primary logo EP.png" 
+                  alt="EventPartner" 
+                  fill 
+                  className="object-contain object-center scale-[1.7] origin-center invert brightness-0" 
+                />
+              </div>
             </div>
             <p className="text-sm text-white/40 mb-6 leading-relaxed">
               {cms?.newsletterDesc || "Sign up for our free newsletter — and get access to exclusive offers and discounts."}
@@ -144,9 +150,14 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
             {/* Brand column */}
             <div className="col-span-2 md:col-span-3">
               <Link href="/" className="inline-block mb-4 group">
-                <span className="font-display text-2xl font-medium tracking-tight text-white">
-                  EventPartner<span className="text-[#6AD8D2] ml-1 text-sm group-hover:text-white transition-colors duration-300">◆</span>
-                </span>
+                <div className="relative h-8 w-32 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                  <Image 
+                    src="/Images/logos/Primary logo EP.png" 
+                    alt="EventPartner" 
+                    fill 
+                    className="object-contain object-left scale-[1.7] origin-left invert brightness-0" 
+                  />
+                </div>
               </Link>
               <p className="text-[13px] text-white/35 leading-relaxed max-w-xs mb-6">
                 {cms?.brandDesc || "Your complete partner for corporate events across Europe. 360,000+ venues, one platform."}
