@@ -1,34 +1,16 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect, type ReactNode } from "react";
+import { gsap, ScrollTrigger } from "@/lib/animation";
 
 /**
- * ScrollSection — Scroll-linked cinematic entrance/exit wrapper.
+ * ScrollSection — GSAP ScrollTrigger-powered cinematic entrance/exit.
  *
- * Wraps any section and applies scroll-driven opacity, scale, y-shift
- * and blur so that content "paints in" when entering the viewport
- * and gently fades out when leaving.
+ * Replaces previous Framer Motion implementation.
+ * Uses a SINGLE ScrollTrigger per section (batched) instead of
+ * multiple useTransform hooks, eliminating layout thrashing.
  *
- * Creates a "focus window" effect — only the current section is 100% visible.
- *
- * Usage:
- *   <ScrollSection>
- *     <MySection />
- *   </ScrollSection>
- *
- * Props:
- *   fadeIn  — entrance animation (default: true)
- *   fadeOut — exit animation (default: true)
- *   entranceBlur — blur on entrance in px (default: 6)
- *   entranceY — y-offset on entrance in px (default: 30)
- *   exitOpacity — minimum opacity on exit (default: 0.3)
- *   exitY — y-shift on exit in px (default: -15)
- *   exitScale — scale on exit (default: 0.98)
- *
- * The scroll offset maps: 0 = section top hits viewport bottom,
- *                          1 = section bottom hits viewport top.
- * Entrance triggers during 0→0.15, exit during 0.8→1.
+ * GPU-accelerated: only transform + opacity.
  */
 
 interface ScrollSectionProps {
@@ -36,7 +18,6 @@ interface ScrollSectionProps {
   className?: string;
   fadeIn?: boolean;
   fadeOut?: boolean;
-  entranceBlur?: number;
   entranceY?: number;
   exitOpacity?: number;
   exitY?: number;
@@ -48,70 +29,70 @@ export function ScrollSection({
   className = "",
   fadeIn = true,
   fadeOut = true,
-  entranceBlur = 6,
   entranceY = 30,
   exitOpacity = 0.3,
   exitY = -15,
   exitScale = 0.98,
 }: ScrollSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
 
-  // --- Entrance: scrollYProgress 0 → 0.15 ---
-  // --- Steady:   scrollYProgress 0.15 → 0.8 ---
-  // --- Exit:     scrollYProgress 0.8 → 1 ---
+  useEffect(() => {
+    if (!ref.current) return;
 
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.15, 0.8, 1],
-    [
-      fadeIn ? 0 : 1,
-      1,
-      1,
-      fadeOut ? exitOpacity : 1,
-    ]
-  );
+    const el = ref.current;
 
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.15, 0.8, 1],
-    [
-      fadeIn ? 0.98 : 1,
-      1,
-      1,
-      fadeOut ? exitScale : 1,
-    ]
-  );
+    // Set initial state for entrance
+    if (fadeIn) {
+      gsap.set(el, { opacity: 0, y: entranceY, scale: 0.98 });
+    }
 
-  const y = useTransform(
-    scrollYProgress,
-    [0, 0.15, 0.8, 1],
-    [
-      fadeIn ? entranceY : 0,
-      0,
-      0,
-      fadeOut ? exitY : 0,
-    ]
-  );
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: "top bottom",     // section top hits viewport bottom
+        end: "bottom top",       // section bottom hits viewport top
+        scrub: 0.8,              // smooth scroll-linked scrub
+      },
+    });
 
-  // Blur removed — filter: blur() is not GPU-accelerated and triggers
-  // expensive repaints. opacity + scale + y provide sufficient entrance effect.
+    // Entrance: 0% → 15% of scroll range
+    if (fadeIn) {
+      tl.to(el, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.15,
+        ease: "power3.out",
+      });
+    }
+
+    // Steady state: 15% → 80%
+    tl.to(el, { duration: 0.65 });
+
+    // Exit: 80% → 100%
+    if (fadeOut) {
+      tl.to(el, {
+        opacity: exitOpacity,
+        y: exitY,
+        scale: exitScale,
+        duration: 0.2,
+        ease: "power2.in",
+      });
+    }
+
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
+  }, [fadeIn, fadeOut, entranceY, exitOpacity, exitY, exitScale]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      style={{
-        opacity,
-        scale,
-        y,
-        willChange: "transform, opacity",
-      }}
       className={className}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

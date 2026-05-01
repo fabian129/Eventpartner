@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { gsap } from "@/lib/animation";
 
 interface HeroCMS {
   badge?: string;
@@ -21,8 +22,10 @@ const IMAGES = [
 
 export function Hero({ cms }: { cms?: HeroCMS }) {
   const [currentImage, setCurrentImage] = useState(0);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const hasAnimated = useRef(false);
 
-  // Simple slideshow interval
+  // Slideshow interval
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % IMAGES.length);
@@ -30,10 +33,36 @@ export function Hero({ cms }: { cms?: HeroCMS }) {
     return () => clearInterval(interval);
   }, []);
 
+  // GSAP staggered word reveal on mount
+  useEffect(() => {
+    if (!headlineRef.current || hasAnimated.current) return;
+    hasAnimated.current = true;
+
+    const words = headlineRef.current.querySelectorAll(".hero-word");
+    if (words.length === 0) return;
+
+    gsap.set(words, { opacity: 0, y: 40, rotateX: -15 });
+    
+    gsap.to(words, {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      duration: 1.2,
+      stagger: 0.1,
+      ease: "power3.out",
+      delay: 0.3,
+    });
+  }, []);
+
+  // Split text into word spans for GSAP stagger
+  const headline1 = cms?.headline || "The World's";
+  const headline2 = cms?.headline ? "" : "Largest Selection";
+  const accent = cms?.headlineAccent || "of Venues";
+
   return (
     <section className="relative w-full h-[100vh] min-h-[700px] flex flex-col justify-center bg-black">
       
-      {/* Background Slideshow - Covers 115vh to bleed down behind the video section */}
+      {/* Background Slideshow — Framer AnimatePresence (correct use case) */}
       <div className="absolute top-0 left-0 right-0 h-[115vh] z-0 overflow-hidden">
         <AnimatePresence initial={false}>
           <motion.div
@@ -49,36 +78,43 @@ export function Hero({ cms }: { cms?: HeroCMS }) {
               alt="Premium Event" 
               fill 
               priority={currentImage === 0}
-              // The Cinematic Grade: Moody, high contrast, slightly desaturated
               className="object-cover brightness-[0.55] contrast-[1.15] saturate-[0.85]"
             />
           </motion.div>
         </AnimatePresence>
 
-        {/* Soft radial vignette behind the text to ensure legibility without flat boxes */}
+        {/* Vignette + gradients */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.3)_0%,transparent_60%)]" />
-        
-        {/* Top gradient strictly for Navbar legibility */}
         <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black/60 to-transparent" />
-        {/* Bottom gradient to blend into the next section smoothly */}
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#111] to-transparent" />
       </div>
 
-      {/* Typography Content - Perfectly Centered in 100vh */}
+      {/* Typography — GSAP staggered word reveal (outer wrapper for GSAP, no Framer here) */}
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 flex flex-col justify-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
+        <h1
+          ref={headlineRef}
           className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[7.5rem] font-medium leading-[0.9] tracking-[-0.03em] text-white drop-shadow-xl max-w-4xl"
+          style={{ perspective: "600px" }}
         >
-          {cms?.headline || "The World's"}
+          {headline1.split(" ").map((word, i) => (
+            <span key={`h1-${i}`} className="hero-word inline-block mr-[0.25em]">
+              {word}
+            </span>
+          ))}
           <br />
-          {cms?.headline ? null : "Largest Selection "}
+          {headline2 && headline2.split(" ").map((word, i) => (
+            <span key={`h2-${i}`} className="hero-word inline-block mr-[0.25em]">
+              {word}
+            </span>
+          ))}
           <span className="italic font-light text-tiffany block mt-2">
-            {cms?.headlineAccent || "of Venues"}
+            {accent.split(" ").map((word, i) => (
+              <span key={`a-${i}`} className="hero-word inline-block mr-[0.25em]">
+                {word}
+              </span>
+            ))}
           </span>
-        </motion.h1>
+        </h1>
       </div>
       
     </section>
