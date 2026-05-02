@@ -15,6 +15,20 @@ export const metadata: Metadata = {
     "Meet the leadership team behind EventPartner — Europe's largest event booking platform connecting enterprises with 2,400+ venues across 36 countries.",
 };
 
+const FALLBACK_IMAGES: Record<string, string> = {
+  "Pontus Bredal-Hansen": "/Images/team/pontus.webp",
+  "Pontus Bredal Hansen": "/Images/team/pontus.webp",
+  "Malin Berlin": "/Images/team/malin-farg.webp",
+  "Joakim Ström": "/Images/team/joakim.webp",
+};
+
+const FALLBACK_LINKEDIN: Record<string, string> = {
+  "Pontus Bredal-Hansen": "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110",
+  "Pontus Bredal Hansen": "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110",
+  "Malin Berlin": "https://www.linkedin.com/in/malinberlins",
+  "Joakim Ström": "https://www.linkedin.com/in/joakim-strom-ab5aaa13a",
+};
+
 const FALLBACK_TEAM = [
   { name: "Pontus Bredal-Hansen", role: "CEO & Co-founder", linkedin: "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110", image: "/Images/team/pontus.webp" },
   { name: "Joakim Ström", role: "Co-founder", linkedin: "https://www.linkedin.com/in/joakim-strom-ab5aaa13a", image: "/Images/team/joakim.webp" },
@@ -32,8 +46,8 @@ export default async function LeadershipPage() {
     name: m.name,
     role: t(m.role),
     bio: t(m.bio),
-    linkedin: m.linkedin,
-    image: m.image ? urlFor(m.image).url() : null,
+    linkedin: m.linkedin || FALLBACK_LINKEDIN[m.name],
+    image: m.image ? urlFor(m.image).url() : FALLBACK_IMAGES[m.name] || null,
   })) || FALLBACK_TEAM;
 
   return (
