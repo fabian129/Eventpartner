@@ -3,17 +3,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Globe, Heart, Shield, Zap, Users, MapPin, Calendar, Award, ArrowRight, Linkedin } from "lucide-react";
-import { urlFor } from "@/../sanity/lib/image";
+import { TEAM_MEMBERS } from "@/lib/teamMembers";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const ICON_MAP: Record<string, any> = { heart: Heart, zap: Zap, globe: Globe, shield: Shield };
 const STAT_ICONS = [MapPin, Calendar, Users, Award];
 
-const DEFAULT_TEAM: { name: string; role: string; bio?: string; linkedin?: string; image?: any; initials: string }[] = [
-  { name: "Pontus Bredal Hansen", role: "Co-Founder & CEO", initials: "PH", linkedin: "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110", image: "/Images/team/pontus.webp" },
-  { name: "Malin Berlin", role: "Co-Founder & COO", initials: "MB", linkedin: "https://www.linkedin.com/in/malinberlins", image: "/Images/team/malin-farg.webp" },
-  { name: "Joakim Ström", role: "Head of Partnerships", initials: "JS", linkedin: "https://www.linkedin.com/in/joakim-strom-ab5aaa13a", image: "/Images/team/joakim.webp" },
-];
+// Team data comes from shared teamMembers.ts — single source of truth
 
 const DEFAULT_STATS = [
   { value: "36", label: "Countries" },
@@ -39,14 +35,14 @@ interface AboutCMS {
   valuesLabel?: string; valuesHeadline?: string; valuesHeadlineAccent?: string;
   valueCards?: { title: string; description: string; icon?: string }[];
   teamLabel?: string; teamIntro?: string;
-  teamMembers?: { name: string; role: string; bio?: string; linkedin?: string; image?: any; initials: string }[];
+
   ctaHeadline?: string; ctaDescription?: string;
 }
 
 export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
   const stats = cms?.stats || DEFAULT_STATS;
   const values = cms?.valueCards?.map(v => ({ icon: ICON_MAP[v.icon || "heart"] || Heart, title: v.title, description: v.description })) || DEFAULT_VALUES;
-  const team = cms?.teamMembers || DEFAULT_TEAM;
+  const team = TEAM_MEMBERS;
 
   return (
     <main className="relative w-full pt-32 md:pt-44 pb-20 md:pb-32 overflow-hidden">
@@ -122,22 +118,14 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
             {team.map((member, i) => (
               <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: EASE }}>
                 <div className="aspect-[4/5] rounded-2xl bg-[#1a1a1a] relative overflow-hidden mb-4 group">
-                  {member.image ? (
-                    <>
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center group hover:bg-[#222] transition-colors duration-300">
-                      <span className="text-2xl font-semibold text-white/20 group-hover:text-tiffany/40 transition-colors duration-300">{member.initials}</span>
-                    </div>
-                  )}
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 <h4 className="text-[16px] font-medium text-[var(--text-primary)] leading-tight mb-0.5">{member.name}</h4>
                 <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)] block">{member.role}</span>

@@ -23,17 +23,6 @@ import { localize } from "@/../sanity/lib/locale";
 import { sanityFetch, SanityLive } from "@/../sanity/lib/live";
 import { urlFor } from "@/../sanity/lib/image";
 
-const TEAM_FALLBACK_IMAGES: Record<string, string> = {
-  "Pontus Bredal Hansen": "/Images/team/pontus.webp",
-  "Malin Berlin": "/Images/team/malin-farg.webp",
-  "Joakim Ström": "/Images/team/joakim.webp",
-};
-
-const TEAM_FALLBACK_LINKEDIN: Record<string, string> = {
-  "Pontus Bredal Hansen": "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110",
-  "Malin Berlin": "https://www.linkedin.com/in/malinberlins",
-  "Joakim Ström": "https://www.linkedin.com/in/joakim-strom-ab5aaa13a",
-};
 
 export default async function Home() {
   const { data } = await sanityFetch({ query: HOMEPAGE_QUERY });
@@ -180,17 +169,6 @@ export default async function Home() {
           })),
           teamLabel: t(data.aboutTeamLabel),
           teamIntro: t(data.aboutTeamIntro),
-          team: data.aboutTeam?.map((m: any) => {
-            const fallbackImg = TEAM_FALLBACK_IMAGES[m.name];
-            return {
-              name: m.name,
-              role: t(m.role),
-              bio: t(m.bio),
-              linkedin: m.linkedin || TEAM_FALLBACK_LINKEDIN[m.name],
-              image: m.image ? urlFor(m.image).width(400).height(500).url() : fallbackImg,
-              initials: m.initials,
-            };
-          }),
         } : undefined} />
       </ScrollSection>
 

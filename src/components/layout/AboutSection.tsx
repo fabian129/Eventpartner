@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { MapPin, Users, Calendar, Award, Linkedin } from "lucide-react";
-import { urlFor } from "@/../sanity/lib/image";
+import { TEAM_MEMBERS } from "@/lib/teamMembers";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -13,13 +13,9 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  * Big typographic "EVENTPARTNER" masthead top-left.
  * Asymmetric columns with manifesto-style large text.
  * Stats woven into the narrative. Team grid below.
+ *
+ * Team images are ALWAYS from local files — never from CMS.
  */
-
-const TEAM: { name: string; role: string; bio?: string; linkedin?: string; image?: any; initials: string }[] = [
-  { name: "Pontus Bredal Hansen", role: "Co-Founder & CEO", initials: "PH", linkedin: "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110", image: "/Images/team/pontus.webp" },
-  { name: "Malin Berlin", role: "Co-Founder & COO", initials: "MB", linkedin: "https://www.linkedin.com/in/malinberlins", image: "/Images/team/malin-farg.webp" },
-  { name: "Joakim Ström", role: "Head of Partnerships", initials: "JS", linkedin: "https://www.linkedin.com/in/joakim-strom-ab5aaa13a", image: "/Images/team/joakim.webp" },
-];
 
 const DEFAULT_STATS = [
   { value: "36", label: "Countries" },
@@ -40,7 +36,6 @@ interface AboutCMS {
   stats?: { value: string; label: string }[];
   teamLabel?: string;
   teamIntro?: string;
-  team?: { name: string; role: string; bio?: string; linkedin?: string; image?: any; initials: string }[];
 }
 
 export function AboutSection({ cms }: { cms?: AboutCMS }) {
@@ -148,8 +143,8 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
             {cms?.teamIntro || "A small team with deep experience in event production, hospitality, and tech — treating every inquiry as their own."}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {(cms?.team || TEAM).map((member, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            {TEAM_MEMBERS.map((member, i) => (
               <motion.div
                 key={member.name}
                 initial={{ opacity: 0, y: 15 }}
@@ -157,24 +152,16 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: EASE }}
               >
-                {/* Portrait — image or initials fallback */}
+                {/* Portrait */}
                 <div className="aspect-[4/5] rounded-2xl bg-[#1a1a1a] relative overflow-hidden mb-4 group">
-                  {member.image ? (
-                    <>
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-2xl font-semibold text-white/20">{member.initials}</span>
-                    </div>
-                  )}
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 {/* Info */}
                 <h4 className="text-[16px] font-medium text-[var(--text-primary)] leading-tight mb-0.5">
@@ -183,9 +170,6 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
                 <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)] block">
                   {member.role}
                 </span>
-                {member.bio && (
-                  <p className="text-[12px] text-[var(--text-muted)] leading-[1.6] mt-2">{member.bio}</p>
-                )}
                 {member.linkedin && (
                   <a
                     href={member.linkedin}
