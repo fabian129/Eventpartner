@@ -120,7 +120,8 @@ export default async function Home() {
 
       {/* 7-8. Dark Zone 1: Cases + Newsletter */}
       <DarkZone>
-        <CaseStoriesSection cms={data ? {
+        {/* Cases hidden temporarily per client request */}
+        {/* <CaseStoriesSection cms={data ? {
           label: t(data.casesLabel),
           labelRight: t(data.casesLabelRight),
           headline: t(data.casesHeadline),
@@ -134,7 +135,7 @@ export default async function Home() {
             duration: t(c.duration),
           })),
           cta: t(data.casesCta),
-        } : undefined} />
+        } : undefined} /> */}
         <NewsletterInline cms={data ? {
           headline: t(data.newsletterHeadline),
           description: t(data.newsletterDescription),
@@ -145,7 +146,7 @@ export default async function Home() {
 
       {/* 9. About */}
       <ScrollSection>
-        <AboutSection cms={data ? {
+        <AboutSection showTeam={false} cms={data ? {
           label: t(data.aboutLabel),
           headline: t(data.aboutHeadline),
           headlineAccent: t(data.aboutHeadlineAccent),

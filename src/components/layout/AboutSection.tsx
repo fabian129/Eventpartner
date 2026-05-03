@@ -38,7 +38,12 @@ interface AboutCMS {
   teamIntro?: string;
 }
 
-export function AboutSection({ cms }: { cms?: AboutCMS }) {
+interface AboutProps {
+  cms?: AboutCMS;
+  showTeam?: boolean;
+}
+
+export function AboutSection({ cms, showTeam = true }: AboutProps) {
   const stats = cms?.stats?.length ? cms.stats : DEFAULT_STATS;
   return (
     <section id="about" className="relative w-full py-28 md:py-40 overflow-hidden">
@@ -131,6 +136,7 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
         </div>
 
         {/* ─── Team ─── */}
+        {showTeam && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -185,6 +191,7 @@ export function AboutSection({ cms }: { cms?: AboutCMS }) {
             ))}
           </div>
         </motion.div>
+        )}
       </div>
     </section>
   );

@@ -93,9 +93,9 @@ export function TopVenuesGrid({
               alt={venue.name}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 25vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
               loading="lazy"
-              quality={75}
+              quality={90}
             />
             {/* Overlay — visible on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
