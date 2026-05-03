@@ -17,6 +17,15 @@ export function RequestFormSection({ cms }: { cms?: {
   description?: string;
   button?: string;
   disclaimer?: string;
+  inquiryLabel?: string;
+  extendedTitle?: string;
+  extendedDesc?: string;
+  extendedLink?: string;
+  meetingLabel?: string;
+  meetingTitle?: string;
+  meetingDesc?: string;
+  meetingButton?: string;
+  successMessage?: string;
 } }) {
   const [submitted, setSubmitted] = useState(false);
   const { theme } = useTheme();
@@ -55,7 +64,7 @@ export function RequestFormSection({ cms }: { cms?: {
           {/* Mono labels */}
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              EventPartner — Inquiry
+              {cms?.inquiryLabel || "EventPartner — Inquiry"}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
               {cms?.badge || "Free • 24h response"}
@@ -195,16 +204,16 @@ export function RequestFormSection({ cms }: { cms?: {
               </div>
               <div>
                 <p className="text-[14px] text-[var(--text-primary)] font-medium mb-1">
-                  Is your event larger or more complex?
+                  {cms?.extendedTitle || "Is your event larger or more complex?"}
                 </p>
                 <p className="text-[13px] text-[var(--text-muted)] leading-relaxed mb-2">
-                  Fill in our extended form to give us more detailed information — venue requirements, catering, activities, and more.
+                  {cms?.extendedDesc || "Fill in our extended form to give us more detailed information — venue requirements, catering, activities, and more."}
                 </p>
                 <Link
                   href="/skraddarsy"
                   className="inline-flex items-center gap-1.5 text-[13px] font-medium text-purple hover:text-purple-light transition-colors duration-300"
                 >
-                  Customize your event →
+                  {cms?.extendedLink || "Customize your event →"}
                 </Link>
               </div>
             </div>
@@ -223,7 +232,7 @@ export function RequestFormSection({ cms }: { cms?: {
             >
               <span className="relative z-10 flex items-center gap-3">
                 {submitted ? (
-                  <><CheckCircle className="w-5 h-5" />Thank you! We'll get back to you within 24h.</>
+                  <><CheckCircle className="w-5 h-5" />{cms?.successMessage || "Thank you! We'll get back to you within 24h."}</>
                 ) : (
                   <>
                     {cms?.button || "Send free inquiry"}
@@ -263,10 +272,10 @@ export function RequestFormSection({ cms }: { cms?: {
               />
             </div>
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-purple mb-1">Direct contact</p>
-              <h3 className="font-display text-lg md:text-xl font-medium text-[var(--text-primary)]">Prefer a quick chat?</h3>
+              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-purple mb-1">{cms?.meetingLabel || "Direct contact"}</p>
+              <h3 className="font-display text-lg md:text-xl font-medium text-[var(--text-primary)]">{cms?.meetingTitle || "Prefer a quick chat?"}</h3>
               <p className="text-[13px] md:text-[14px] text-[var(--text-muted)] mt-0.5 leading-relaxed">
-                Book a 15-min discovery call directly with Malin.
+                {cms?.meetingDesc || "Book a 15-min discovery call directly with Malin."}
               </p>
             </div>
           </div>
@@ -280,7 +289,7 @@ export function RequestFormSection({ cms }: { cms?: {
             }`}
           >
             <Calendar className="w-4 h-4" />
-            Book meeting
+            {cms?.meetingButton || "Book meeting"}
           </a>
         </motion.div>
       </div>

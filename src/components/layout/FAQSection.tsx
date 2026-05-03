@@ -40,6 +40,8 @@ const DEFAULT_FAQS = [
 ];
 
 interface FaqCMS {
+  label?: string;
+  labelRight?: string;
   headline?: string;
   description?: string;
   items?: { question: string; answer: string }[];
@@ -69,10 +71,10 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
           {/* Mono labels */}
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              Eventpartner — FAQ
+              {cms?.label || "Eventpartner \u2014 FAQ"}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {faqs.length} questions
+              {cms?.labelRight || `${faqs.length} questions`}
             </span>
           </div>
 

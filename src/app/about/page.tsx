@@ -59,6 +59,10 @@ export default async function AboutPage() {
         teamIntro: t(data.teamIntro),
         ctaHeadline: t(data.ctaHeadline),
         ctaDescription: t(data.ctaDescription),
+        teamRoles: data.teamMembers?.map((m: any) => ({
+          name: m.name,
+          role: t(m.role),
+        })),
       } : undefined} />
       <DarkZone exitToLight={false}>
         <Footer cms={homeData ? {

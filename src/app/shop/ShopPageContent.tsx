@@ -74,10 +74,23 @@ export function ShopPageContent() {
 
   const t = (field: { en?: string; sv?: string } | undefined | null) => localize(field);
 
-  const headline = t(cms?.headline) || "Merchandise & Video Brochures";
-  const description = t(cms?.description) || "Explore our curated selection of event merchandise and request a quote for our premium Video Plus Print brochures.";
+  const headline = t(cms?.headline) || "Everything for your event.";
+  const headlineAccent = t(cms?.headlineAccent) || "Order online.";
+  const description = t(cms?.description) || "Name badges, conference kits, décor and branded merchandise — all curated for professional events.";
   const quoteTitle = t(cms?.quoteTitle) || "Video Plus Print Quote";
   const quoteButton = t(cms?.quoteButton) || "Request Quote";
+  const heroLabel = t(cms?.heroLabel) || "EventPartner — Shop";
+  const heroLabelRight = t(cms?.heroLabelRight) || "Event Merchandise";
+  const merchLabel = t(cms?.merchLabel) || "Event Merchandise";
+  const comingSoonTitle = t(cms?.comingSoonTitle) || "Coming Soon";
+  const comingSoonDesc = t(cms?.comingSoonDesc) || "Our event merchandise catalog is being prepared. Check back soon for branded products and conference essentials.";
+  const vppHeadline = t(cms?.vppHeadline) || "Premium video";
+  const vppHeadlineAccent = t(cms?.vppHeadlineAccent) || "brochures.";
+  const vppDesc = t(cms?.vppDescription) || "Stand out at your next event with our custom Video Plus Print brochures — a tangible, high-impact marketing tool that combines print with embedded video.";
+  const successTitle = t(cms?.successTitle) || "Quote Request Sent";
+  const successDesc = t(cms?.successDescription) || "We will get back to you with a custom Video Plus Print quote within 24 hours.";
+  const ctaHeadline = t(cms?.ctaHeadline) || "Need a custom solution?";
+  const ctaDesc = t(cms?.ctaDescription) || "Contact us for bulk orders, custom branding, or tailored merchandise packages.";
 
   return (
     <main className="relative w-full pt-32 md:pt-44 pb-20 md:pb-32 overflow-hidden">
@@ -86,14 +99,14 @@ export function ShopPageContent() {
       {/* Hero */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-16 md:mb-24">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: EASE }} className="flex justify-between items-center mb-10">
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">Shop</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">EventPartner Store</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{heroLabel}</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{heroLabelRight}</span>
         </motion.div>
 
         <div className="flex items-start justify-between gap-8">
           <div>
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE }} className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[0.88] mb-10">
-              Event<br /><span className="text-tiffany">merchandise.</span>
+              {headline}<br /><span className="text-tiffany">{headlineAccent}</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease: EASE }} className="text-[clamp(1rem,2vw,1.25rem)] text-[var(--text-secondary)] leading-[1.7] max-w-2xl">
               {description}
@@ -135,7 +148,7 @@ export function ShopPageContent() {
       {/* ─── Merchandise Products (Shopify / Printify) ─── */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="flex items-center gap-4 mb-10">
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany">Event Merchandise</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany">{merchLabel}</span>
           <div className="h-px flex-1 bg-[var(--border-default)]" />
         </motion.div>
 
@@ -166,9 +179,9 @@ export function ShopPageContent() {
             <div className="w-16 h-16 bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-full flex items-center justify-center mx-auto mb-4">
               <ShoppingBag className="w-8 h-8 text-[var(--text-secondary)] opacity-40" />
             </div>
-            <h3 className="text-xl font-display font-semibold text-[var(--text-primary)] mb-2">Coming Soon</h3>
+            <h3 className="text-xl font-display font-semibold text-[var(--text-primary)] mb-2">{comingSoonTitle}</h3>
             <p className="text-[var(--text-secondary)] max-w-md mx-auto">
-              Our event merchandise catalog is being prepared. Check back soon for branded products and conference essentials.
+              {comingSoonDesc}
             </p>
           </motion.div>
         ) : (
@@ -187,8 +200,8 @@ export function ShopPageContent() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{quoteTitle}</span>
-            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">Premium video<br />brochures.</h2>
-            <p className="text-[var(--text-secondary)] text-[15px] leading-[1.8] mt-6">Stand out at your next event with our custom Video Plus Print brochures — a tangible, high-impact marketing tool that combines print with embedded video.</p>
+            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{vppHeadline}<br />{vppHeadlineAccent}</h2>
+            <p className="text-[var(--text-secondary)] text-[15px] leading-[1.8] mt-6">{vppDesc}</p>
           </motion.div>
 
           <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
@@ -196,8 +209,8 @@ export function ShopPageContent() {
               {submitted ? (
                 <div className="flex flex-col items-center justify-center text-center py-12">
                   <div className="w-16 h-16 bg-tiffany/10 text-tiffany rounded-full flex items-center justify-center mb-6 text-2xl">✓</div>
-                  <h3 className="text-2xl font-display font-semibold text-[var(--text-primary)] mb-2">Quote Request Sent</h3>
-                  <p className="text-[var(--text-secondary)]">We will get back to you with a custom Video Plus Print quote within 24 hours.</p>
+                  <h3 className="text-2xl font-display font-semibold text-[var(--text-primary)] mb-2">{successTitle}</h3>
+                  <p className="text-[var(--text-secondary)]">{successDesc}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -229,8 +242,8 @@ export function ShopPageContent() {
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10">
         <motion.a href="/#request" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300">
           <div>
-            <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">Need a custom solution?</p>
-            <p className="text-[var(--text-secondary)] text-sm">Contact us for bulk orders, custom branding, or tailored merchandise packages.</p>
+            <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">{ctaHeadline}</p>
+            <p className="text-[var(--text-secondary)] text-sm">{ctaDesc}</p>
           </div>
           <div className="w-12 h-12 rounded-xl bg-tiffany/10 border border-tiffany/20 flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-tiffany transition-all duration-300 shrink-0 ml-6"><ArrowRight className="w-5 h-5" /></div>
         </motion.a>

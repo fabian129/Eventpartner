@@ -386,6 +386,12 @@ export const homePage = defineType({
       group: "about",
     }),
     defineField({
+      name: "aboutLabelRight",
+      title: "Section Label Right",
+      type: "localizedString",
+      group: "about",
+    }),
+    defineField({
       name: "aboutHeadline",
       title: "Headline (line 1)",
       type: "localizedString",
@@ -474,6 +480,18 @@ export const homePage = defineType({
 
     /* ─── FAQ ─── */
     defineField({
+      name: "faqLabel",
+      title: "Section Label",
+      type: "localizedString",
+      group: "faq",
+    }),
+    defineField({
+      name: "faqLabelRight",
+      title: "Section Label Right",
+      type: "localizedString",
+      group: "faq",
+    }),
+    defineField({
       name: "faqHeadline",
       title: "Headline",
       type: "localizedString",
@@ -548,6 +566,61 @@ export const homePage = defineType({
     defineField({
       name: "formDisclaimer",
       title: "Disclaimer Text",
+      type: "localizedString",
+      group: "requestForm",
+    }),
+    defineField({
+      name: "formInquiryLabel",
+      title: "Inquiry Eyebrow Label",
+      type: "localizedString",
+      group: "requestForm",
+      description: "e.g. 'EventPartner — Inquiry'",
+    }),
+    defineField({
+      name: "formExtendedTitle",
+      title: "Extended Form Card Title",
+      type: "localizedString",
+      group: "requestForm",
+    }),
+    defineField({
+      name: "formExtendedDesc",
+      title: "Extended Form Card Description",
+      type: "localizedText",
+      group: "requestForm",
+    }),
+    defineField({
+      name: "formExtendedLink",
+      title: "Extended Form Link Text",
+      type: "localizedString",
+      group: "requestForm",
+    }),
+    defineField({
+      name: "formMeetingLabel",
+      title: "Meeting Card Eyebrow",
+      type: "localizedString",
+      group: "requestForm",
+    }),
+    defineField({
+      name: "formMeetingTitle",
+      title: "Meeting Card Title",
+      type: "localizedString",
+      group: "requestForm",
+    }),
+    defineField({
+      name: "formMeetingDesc",
+      title: "Meeting Card Description",
+      type: "localizedText",
+      group: "requestForm",
+    }),
+    defineField({
+      name: "formMeetingButton",
+      title: "Meeting Button Text",
+      type: "localizedString",
+      group: "requestForm",
+    }),
+    defineField({
+      name: "formSuccessMessage",
+      title: "Success Message",
       type: "localizedString",
       group: "requestForm",
     }),

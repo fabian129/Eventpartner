@@ -37,12 +37,14 @@ interface AboutCMS {
   teamLabel?: string; teamIntro?: string;
 
   ctaHeadline?: string; ctaDescription?: string;
+  teamRoles?: { name: string; role: string }[];
 }
 
 export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
   const stats = cms?.stats || DEFAULT_STATS;
   const values = cms?.valueCards?.map(v => ({ icon: ICON_MAP[v.icon || "heart"] || Heart, title: v.title, description: v.description })) || DEFAULT_VALUES;
-  const team = TEAM_MEMBERS;
+  const roleMap = new Map(cms?.teamRoles?.map(t => [t.name, t.role]));
+  const team = TEAM_MEMBERS.map(m => ({ ...m, role: roleMap.get(m.name) || m.role }));
 
   return (
     <main className="relative w-full pt-32 md:pt-44 pb-20 md:pb-32 overflow-hidden">

@@ -93,6 +93,15 @@ export default async function Home() {
           description: t(data.formDescription),
           button: t(data.formButton),
           disclaimer: t(data.formDisclaimer),
+          inquiryLabel: t(data.formInquiryLabel),
+          extendedTitle: t(data.formExtendedTitle),
+          extendedDesc: t(data.formExtendedDesc),
+          extendedLink: t(data.formExtendedLink),
+          meetingLabel: t(data.formMeetingLabel),
+          meetingTitle: t(data.formMeetingTitle),
+          meetingDesc: t(data.formMeetingDesc),
+          meetingButton: t(data.formMeetingButton),
+          successMessage: t(data.formSuccessMessage),
         } : undefined} />
       </ScrollSection>
 
@@ -148,6 +157,7 @@ export default async function Home() {
       <ScrollSection>
         <AboutSection showTeam={false} cms={data ? {
           label: t(data.aboutLabel),
+          labelRight: t(data.aboutLabelRight),
           headline: t(data.aboutHeadline),
           headlineAccent: t(data.aboutHeadlineAccent),
           quote: t(data.aboutQuote),
@@ -160,6 +170,10 @@ export default async function Home() {
           })),
           teamLabel: t(data.aboutTeamLabel),
           teamIntro: t(data.aboutTeamIntro),
+          teamRoles: data.aboutTeam?.map((m: any) => ({
+            name: m.name,
+            role: t(m.role),
+          })),
         } : undefined} />
       </ScrollSection>
 
@@ -180,6 +194,8 @@ export default async function Home() {
       {/* 11. FAQ */}
       <ScrollSection fadeOut={false}>
         <FAQSection cms={data ? {
+          label: t(data.faqLabel),
+          labelRight: t(data.faqLabelRight),
           headline: t(data.faqHeadline),
           description: t(data.faqDescription),
           items: data.faqItems?.map((item: any) => ({

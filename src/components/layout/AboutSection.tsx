@@ -36,6 +36,7 @@ interface AboutCMS {
   stats?: { value: string; label: string }[];
   teamLabel?: string;
   teamIntro?: string;
+  teamRoles?: { name: string; role: string }[];
 }
 
 interface AboutProps {
@@ -80,7 +81,7 @@ export function AboutSection({ cms, showTeam = true }: AboutProps) {
                 {cms?.label || "EventPartner — About Us"}
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-                Pan-European network
+                {cms?.labelRight || "Pan-European network"}
               </span>
             </div>
 
@@ -150,7 +151,7 @@ export function AboutSection({ cms, showTeam = true }: AboutProps) {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            {TEAM_MEMBERS.map((member, i) => (
+            {(() => { const roleMap = new Map(cms?.teamRoles?.map(t => [t.name, t.role])); return TEAM_MEMBERS.map(m => ({ ...m, role: roleMap.get(m.name) || m.role })); })().map((member, i) => (
               <motion.div
                 key={member.name}
                 initial={{ opacity: 0, y: 15 }}

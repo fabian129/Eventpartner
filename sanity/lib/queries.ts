@@ -9,6 +9,7 @@ export const HOMEPAGE_QUERY = defineQuery(
     heroCta1, heroCta2,
     // Video
     videoLabel, videoHeadline, videoHeadlineAccent, videoDescription,
+    videoBottomLabel, videoBottomText,
     // Services
     servicesLabel, servicesLabelRight, servicesHeadline, servicesDescription,
     servicesStats, serviceCards, servicesFullserviceTitle, servicesFullserviceDesc,
@@ -23,13 +24,16 @@ export const HOMEPAGE_QUERY = defineQuery(
     // Newsletter
     newsletterHeadline, newsletterDescription, newsletterPlaceholder, newsletterButton,
     // About
-    aboutLabel, aboutHeadline, aboutHeadlineAccent, aboutQuote, aboutBody, aboutBody2, aboutMotto, aboutStats,
+    aboutLabel, aboutLabelRight, aboutHeadline, aboutHeadlineAccent, aboutQuote, aboutBody, aboutBody2, aboutMotto, aboutStats,
     aboutTeamLabel, aboutTeamIntro, aboutTeam,
     // FAQ
-    faqHeadline, faqDescription, faqItems, faqCtaText, faqCtaLink,
+    faqLabel, faqLabelRight, faqHeadline, faqDescription, faqItems, faqCtaText, faqCtaLink,
     // Request Form
     formBadge, formHeadline, formHeadlineAccent, formDescription,
     formButton, formDisclaimer,
+    formInquiryLabel, formExtendedTitle, formExtendedDesc, formExtendedLink,
+    formMeetingLabel, formMeetingTitle, formMeetingDesc, formMeetingButton,
+    formSuccessMessage,
     // Footer
     footerBrandDesc, footerSocialLabel, footerNewsletterDesc,
     footerCtaTitle, footerCtaDesc, footerColumns,
@@ -118,7 +122,10 @@ export const CAREERS_PAGE_QUERY = defineQuery(
 
 export const WEBSHOP_PAGE_QUERY = defineQuery(
   `*[_type == "webshopPage"][0]{
-    headline, description, merchTitle, merchPendingMessage, quoteTitle, quoteButton
+    heroLabel, heroLabelRight, headline, headlineAccent, description,
+    merchLabel, merchTitle, merchPendingMessage, comingSoonTitle, comingSoonDesc,
+    quoteTitle, quoteButton, vppHeadline, vppHeadlineAccent, vppDescription,
+    successTitle, successDescription, ctaHeadline, ctaDescription
   }`
 );
 
