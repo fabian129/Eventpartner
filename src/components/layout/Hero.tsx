@@ -15,9 +15,11 @@ interface HeroCMS {
 }
 
 const IMAGES = [
-  "/Images/conference-evening.webp",
-  "/Images/elegant-wedding-reception-room-with-sea-view-through-windows.webp",
-  "/Images/group-people-restaurant.webp",
+  "/Images/hero/tall-centrepiece-made-pink-flowers-crystal-chains-stands-dinner-table.jpg",
+  "/Images/hero/friends-gathered-rooftop-terrace-meal-with-city-skyline-background.jpg",
+  "/Images/hero/happy-audience-conference-laughing-business-people-seminar-workshop-training-diversity-men-women-crowd-presentation-learning-knowledge-funny-corporate-discussion.jpg",
+  "/Images/hero/food-festive-restaurant-party-unity-concept.jpg",
+  "/Images/hero/big-dinner-party-with-small-crowd-multiethnic-diverse-friends-celebrating-restaurant-beautiful-happy-hosts-propose-toast-raise-wine-glasses-while-sitting-table-evening.jpg",
 ];
 
 export function Hero({ cms }: { cms?: HeroCMS }) {
