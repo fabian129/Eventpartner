@@ -31,7 +31,7 @@ export default async function Home() {
     localize(field);
 
   return (
-    <div id="page-root" style={{ backgroundColor: "#111" }}>
+    <div id="page-root" style={{ backgroundColor: "#111" }} suppressHydrationWarning>
       <Navbar cms={data ? {
         links: data.navLinks?.map((l: any) => ({
           label: t(l.label),

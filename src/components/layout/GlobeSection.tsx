@@ -63,38 +63,25 @@ function lngToBasePhi(lng: number): number {
   return -(lng * Math.PI) / 180 + 3 * Math.PI / 2;
 }
 
-/* ── Venue preview images — Unsplash stock for top venues ── */
-const VENUE_IMAGES: Record<string, { url: string; venue: string; city: string }> = {
-  sweden:    { url: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=600&q=80', venue: 'Stockholmsmässan', city: 'Stockholm' },
-  norway:    { url: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&q=80', venue: 'Oslo Spektrum', city: 'Oslo' },
-  iceland:   { url: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80', venue: 'Harpa Concert Hall', city: 'Reykjavik' },
-  estonia:   { url: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=600&q=80', venue: 'Tallinn Creative Hub', city: 'Tallinn' },
-  latvia:    { url: 'https://images.unsplash.com/photo-1591377032364-8a31e4c0dff8?w=600&q=80', venue: 'Riga Congress Centre', city: 'Riga' },
-  lithuania: { url: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=600&q=80', venue: 'LITEXPO', city: 'Vilnius' },
-  uk:        { url: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80', venue: 'ExCeL London', city: 'London' },
-  ireland:   { url: 'https://images.unsplash.com/photo-1549918864-48ac978761a4?w=600&q=80', venue: 'Convention Centre Dublin', city: 'Dublin' },
-  france:    { url: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80', venue: 'Palais des Congrès', city: 'Paris' },
-  belgium:   { url: 'https://images.unsplash.com/photo-1559113202-c916b8e44d8b?w=600&q=80', venue: 'SQUARE Brussels', city: 'Brussels' },
-  netherlands: { url: 'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&q=80', venue: 'RAI Amsterdam', city: 'Amsterdam' },
-  luxembourg: { url: 'https://images.unsplash.com/photo-1587974928442-77dc3e0748b1?w=600&q=80', venue: 'European Convention Center', city: 'Luxembourg' },
-  'czech-republic': { url: 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=600&q=80', venue: 'Prague Congress Centre', city: 'Prague' },
-  poland:    { url: 'https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=600&q=80', venue: 'ICE Kraków', city: 'Kraków' },
-  slovakia:  { url: 'https://images.unsplash.com/photo-1555699786-8be834f53ac0?w=600&q=80', venue: 'Incheba Expo', city: 'Bratislava' },
-  hungary:   { url: 'https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=600&q=80', venue: 'Hungexpo', city: 'Budapest' },
-  switzerland: { url: 'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?w=600&q=80', venue: 'Palexpo', city: 'Geneva' },
-  spain:     { url: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&q=80', venue: 'Fira Barcelona', city: 'Barcelona' },
-  portugal:  { url: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=80', venue: 'MEO Arena', city: 'Lisbon' },
-  italy:     { url: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600&q=80', venue: 'Fiera Milano', city: 'Milan' },
-  greece:    { url: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=80', venue: 'Megaron Athens', city: 'Athens' },
-  malta:     { url: 'https://images.unsplash.com/photo-1557683311-eac922347aa1?w=600&q=80', venue: 'MFCC Malta', city: 'Valletta' },
-  croatia:   { url: 'https://images.unsplash.com/photo-1555990793-da11153b2473?w=600&q=80', venue: 'Zagreb Fair', city: 'Zagreb' },
-  slovenia:  { url: 'https://images.unsplash.com/photo-1569396116180-210c182bedb8?w=600&q=80', venue: 'GR Ljubljana', city: 'Ljubljana' },
-  serbia:    { url: 'https://images.unsplash.com/photo-1586449480584-bbd437dab6bd?w=600&q=80', venue: 'Belgrade Fair', city: 'Belgrade' },
-  'bosnia-herzegovina': { url: 'https://images.unsplash.com/photo-1586880244386-8b3e34c8382c?w=600&q=80', venue: 'Skenderija', city: 'Sarajevo' },
-  montenegro: { url: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80', venue: 'Porto Montenegro', city: 'Tivat' },
-  'north-macedonia': { url: 'https://images.unsplash.com/photo-1601288496920-b6154fe3626a?w=600&q=80', venue: 'Boris Trajkovski', city: 'Skopje' },
-  romania:   { url: 'https://images.unsplash.com/photo-1584646098378-0874589d76b1?w=600&q=80', venue: 'Romexpo', city: 'Bucharest' },
+/* ── Venue preview images — Image counts per country — matches TopVenuesGrid */
+const IMAGE_COUNTS: Record<string, number> = {
+  'belgium': 5, 'bosnia-herzegovina': 15, 'croatia': 15, 'czech-republic': 15,
+  'estonia': 15, 'france': 15, 'greece': 15, 'hungary': 15, 'iceland': 15,
+  'ireland': 15, 'italy': 15, 'latvia': 15, 'lithuania': 15, 'luxembourg': 15,
+  'malta': 15, 'montenegro': 15, 'netherlands': 15, 'north-macedonia': 15,
+  'norway': 15, 'poland': 5, 'portugal': 15, 'romania': 15, 'serbia': 15,
+  'slovakia': 15, 'slovenia': 15, 'spain': 15, 'sweden': 15, 'switzerland': 15,
+  'uk': 15,
 };
+
+/** Get the primary venue image for a country — same source as TopVenuesGrid */
+function getVenuePreviewImage(countrySlug: string): string {
+  const count = IMAGE_COUNTS[countrySlug] || 0;
+  if (count >= 15) return `/Images/venues/${countrySlug}/venue-1.jpg`;
+  if (count >= 5) return `/Images/venues/${countrySlug}/venue-1.jpg`;
+  // Fallback for countries without venue photos
+  return '/Images/round-table-discussion-business-conference-meeting-event-audience-conference-hall-business.webp';
+}
 
 /* ── CMS types ── */
 interface GlobeCMS {
@@ -411,15 +398,15 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
       className="relative w-full min-h-screen overflow-hidden flex flex-col justify-center"
       style={{ background: "#0B0B0B" }}
     >
-      {/* Dark overlay — covers content ABOVE this section during scroll entrance */}
+      {/* Dark overlay — covers navbar + sections above/below, NOT this section */}
       <div
         ref={darkOverlayRef}
-        className="fixed inset-0 pointer-events-none z-[60]"
+        className="fixed inset-0 pointer-events-none z-[55]"
         style={{ background: "#0B0B0B", opacity: 0 }}
       />
 
-      {/* ── Content wrapper ── */}
-      <div className="relative z-30 w-full px-6 md:px-12 lg:px-16 py-12">
+      {/* ── Content wrapper — z-60 sits ABOVE both overlay and navbar ── */}
+      <div className="relative z-[60] w-full px-6 md:px-12 lg:px-16 py-12">
 
         {/* Headline */}
         <h2
@@ -428,7 +415,7 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
         >
           <span className="headline-word inline-block mr-3">360,000+</span>
           <span className="headline-word inline-block mr-3">Venues.</span>
-          <span className="headline-word inline-block italic font-light text-tiffany">29 Countries.</span>
+          <span className="headline-word inline-block italic font-light text-tiffany">36 Countries.</span>
         </h2>
 
         {/* Globe + Dashboard */}
@@ -661,8 +648,8 @@ function RegionDetail({
         </span>
       </div>
 
-      {/* Country list — max 7, never needs scroll */}
-      <div className="custom-scrollbar-dark" style={{ maxHeight: "min(480px, 55vh)" }}>
+      {/* Country list */}
+      <div>
         {countries.map((country) => (
           <CountryRow
             key={country.slug}
@@ -673,40 +660,45 @@ function RegionDetail({
         ))}
       </div>
 
-      {/* Venue image preview — FIXED HEIGHT, always present, no layout shift */}
+      {/* Venue image preview — shows first venue from the country page */}
       <div className="px-5 py-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
         <div className="relative w-full h-36 rounded-xl overflow-hidden bg-white/[0.02]">
           <AnimatePresence mode="wait">
-            {hoveredCountry && VENUE_IMAGES[hoveredCountry] ? (
-              <motion.div
-                key={hoveredCountry}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={VENUE_IMAGES[hoveredCountry].url}
-                  alt={VENUE_IMAGES[hoveredCountry].venue}
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-3 left-4 right-4">
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <MapPin className="w-3 h-3 text-tiffany" />
-                    <span className="font-display text-[13px] font-medium text-white">
-                      {VENUE_IMAGES[hoveredCountry].venue}
+            {hoveredCountry ? (() => {
+              const country = COUNTRIES.find(c => c.slug === hoveredCountry);
+              const topVenue = country?.topVenues[0];
+              return (
+                <motion.div
+                  key={hoveredCountry}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={getVenuePreviewImage(hoveredCountry)}
+                    alt={topVenue?.name || "Venue"}
+                    fill
+                    className="object-cover"
+                    quality={90}
+                    sizes="(min-width: 1024px) 400px, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <MapPin className="w-3 h-3 text-tiffany" />
+                      <span className="font-display text-[13px] font-medium text-white">
+                        {topVenue?.name || "Top Venue"}
+                      </span>
+                    </div>
+                    <span className="font-mono text-[10px] text-white/50 uppercase tracking-[0.1em]">
+                      {topVenue?.city || ""}
                     </span>
                   </div>
-                  <span className="font-mono text-[10px] text-white/50 uppercase tracking-[0.1em]">
-                    {VENUE_IMAGES[hoveredCountry].city}
-                  </span>
-                </div>
-              </motion.div>
-            ) : (
+                </motion.div>
+              );
+            })() : (
               <motion.div
                 key="placeholder"
                 initial={{ opacity: 0 }}
