@@ -338,7 +338,7 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
               const py = (y + 1) / 2 * ov.height;
               const baseOp = Math.min(1, z * 3);
               const op = dimmed ? baseOp * 0.1 : baseOp;
-              const r = (dimmed ? 3.5 : size) * scale;
+              const r = (dimmed ? 5 : size) * scale;
 
               if (highlighted) {
                 // Glow ring
@@ -362,12 +362,12 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
               if (!coords) return;
               const isHL = hovRegion ? hovRegion.countrySlugs.includes(c.slug) : false;
               const isDim = hovRegion ? !isHL : false;
-              drawDot(coords[0], coords[1], isHL ? 9 : 8, isHL, isDim);
+              drawDot(coords[0], coords[1], isHL ? 10 : 10, isHL, isDim);
             });
 
             // Draw global coming-soon city dots (always smaller, dim on hover)
             GLOBAL_COORDS.forEach(([lat, lng]) => {
-              drawDot(lat, lng, 5.5, false, !!hovRegion);
+              drawDot(lat, lng, 7, false, !!hovRegion);
             });
           }
         }
