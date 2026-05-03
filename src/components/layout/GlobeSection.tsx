@@ -428,7 +428,7 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
 
           {/* LEFT: Globe */}
           <div className="w-full lg:w-[60%] relative flex-shrink-0 z-0">
-            <div className="relative w-full" style={{ maxWidth: "750px", aspectRatio: "1/1", margin: "0 auto" }}>
+            <div className="relative w-full" style={{ maxWidth: "710px", aspectRatio: "1/1", margin: "0 auto" }}>
               {/* COBE host */}
               <div ref={hostRef} className="absolute inset-0 z-0" />
               {/* Overlay canvas */}
