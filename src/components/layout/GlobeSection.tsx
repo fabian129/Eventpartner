@@ -686,8 +686,7 @@ function RegionDetail({
                     alt={topVenue?.name || "Venue"}
                     fill
                     className="object-cover"
-                    quality={90}
-                    sizes="(min-width: 1024px) 400px, 100vw"
+                    unoptimized
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4">
