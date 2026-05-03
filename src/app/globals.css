@@ -257,6 +257,20 @@
 ::-webkit-scrollbar-thumb { background: var(--bg-card); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #6AD8D2; }
 
+/* Subtle scrollbar for country list */
+.custom-scrollbar::-webkit-scrollbar { width: 3px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6AD8D2; }
+.custom-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.1) transparent; }
+
+/* Dark glass panel scrollbar */
+.custom-scrollbar-dark::-webkit-scrollbar { width: 3px; }
+.custom-scrollbar-dark::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar-dark::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+.custom-scrollbar-dark::-webkit-scrollbar-thumb:hover { background: #6AD8D2; }
+.custom-scrollbar-dark { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent; }
+
 /* ——— FLAG TICKER SCROLL ANIMATIONS ——— */
 @keyframes scroll-left {
   0% { transform: translate3d(0, 0, 0); }

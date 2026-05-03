@@ -2,7 +2,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/layout/Hero";
 import { GlobeSection } from "@/components/layout/GlobeSection";
 import { VideoSection } from "@/components/layout/VideoSection";
-import { CountryFlagsSection } from "@/components/layout/CountryFlagsSection";
 import { ServiceCardsPersonal } from "@/components/layout/ServiceCardsPersonal";
 import { CinematicQuoteBreak } from "@/components/layout/CinematicQuoteBreak";
 import { RequestFormSection } from "@/components/layout/RequestFormSection";
@@ -70,21 +69,11 @@ export default async function Home() {
           <LogoTicker />
         </ScrollSection>
 
-        {/* 3b. Global Scale */}
         <GlobeSection cms={data ? {
           badge: t(data.globeBadge),
           headline: t(data.globeHeadline),
           headlineAccent: t(data.globeHeadlineAccent),
           description: t(data.globeDescription),
-        } : undefined} />
-
-      {/* 4. Country Flags */}
-      <ScrollSection>
-        <CountryFlagsSection cms={data ? {
-          label: t(data.flagsLabel),
-          labelRight: t(data.flagsLabelRight),
-          headline: t(data.flagsHeadline),
-          description: t(data.flagsDescription),
           metrics: data.flagsMetrics?.map((m: any) => ({
             value: m.value,
             stringValue: m.stringValue,
@@ -92,7 +81,8 @@ export default async function Home() {
             label: t(m.label)
           }))
         } : undefined} />
-      </ScrollSection>
+
+
 
       {/* 5. Request Form */}
       <ScrollSection>

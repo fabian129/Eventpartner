@@ -1,249 +1,844 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import createGlobe from "cobe";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { gsap, ScrollTrigger } from "@/lib/animation";
+import Image from "next/image";
+import Link from "next/link";
+import { COUNTRIES, Country } from "@/data/countries";
+import { COUNTRY_COORDS, projectToScreen } from "@/data/countryCoords";
+import { REGIONS, Region, getRegionForCountry } from "@/data/regions";
+import { ArrowRight, MapPin, ChevronLeft, Globe2, Lock } from "lucide-react";
 
-const MARKERS: { location: [number, number]; size: number; id?: string }[] = [
-  // Labeled cities
-  { location: [59.33, 18.07], size: 0.06, id: "stockholm" },
-  { location: [51.51, -0.13], size: 0.06, id: "london" },
-  { location: [48.86, 2.35], size: 0.06, id: "paris" },
-  { location: [25.20, 55.27], size: 0.06, id: "dubai" },
-  { location: [35.68, 139.69], size: 0.06, id: "tokyo" },
-  { location: [40.71, -74.01], size: 0.06, id: "newyork" },
-  { location: [-33.87, 151.21], size: 0.06, id: "sydney" },
-  { location: [1.35, 103.82], size: 0.06, id: "singapore" },
-  // Unlabeled venue markers — spread globally
-  { location: [59.91, 10.75], size: 0.015 }, { location: [55.68, 12.57], size: 0.015 },
-  { location: [60.17, 24.94], size: 0.015 }, { location: [63.43, 10.39], size: 0.015 },
-  { location: [52.52, 13.41], size: 0.015 }, { location: [52.37, 4.90], size: 0.015 },
-  { location: [50.85, 4.35], size: 0.015 }, { location: [47.37, 8.54], size: 0.015 },
-  { location: [48.21, 16.37], size: 0.015 }, { location: [46.95, 7.45], size: 0.015 },
-  { location: [41.90, 12.50], size: 0.015 }, { location: [40.42, -3.70], size: 0.015 },
-  { location: [38.72, -9.14], size: 0.015 }, { location: [37.98, 23.73], size: 0.015 },
-  { location: [41.01, 28.98], size: 0.015 }, { location: [45.44, 12.32], size: 0.015 },
-  { location: [43.30, 5.37], size: 0.015 }, { location: [39.47, -0.38], size: 0.015 },
-  { location: [50.08, 14.44], size: 0.015 }, { location: [47.50, 19.04], size: 0.015 },
-  { location: [44.43, 26.10], size: 0.015 }, { location: [52.23, 21.01], size: 0.015 },
-  { location: [45.81, 15.98], size: 0.015 },
-  { location: [34.05, -118.24], size: 0.015 }, { location: [41.88, -87.63], size: 0.015 },
-  { location: [25.76, -80.19], size: 0.015 }, { location: [49.28, -123.12], size: 0.015 },
-  { location: [45.50, -73.57], size: 0.015 }, { location: [37.77, -122.42], size: 0.015 },
-  { location: [33.45, -112.07], size: 0.015 }, { location: [29.76, -95.37], size: 0.015 },
-  { location: [38.91, -77.04], size: 0.015 }, { location: [42.36, -71.06], size: 0.015 },
-  { location: [-23.55, -46.64], size: 0.015 }, { location: [-34.60, -58.38], size: 0.015 },
-  { location: [4.71, -74.07], size: 0.015 }, { location: [-12.05, -77.04], size: 0.015 },
-  { location: [-33.45, -70.67], size: 0.015 }, { location: [-22.91, -43.17], size: 0.015 },
-  { location: [37.57, 126.98], size: 0.015 }, { location: [31.23, 121.47], size: 0.015 },
-  { location: [22.32, 114.17], size: 0.015 }, { location: [13.76, 100.52], size: 0.015 },
-  { location: [28.61, 77.21], size: 0.015 }, { location: [39.90, 116.40], size: 0.015 },
-  { location: [14.60, 120.98], size: 0.015 }, { location: [24.47, 54.37], size: 0.015 },
-  { location: [26.23, 50.59], size: 0.015 }, { location: [32.07, 34.78], size: 0.015 },
-  { location: [30.04, 31.24], size: 0.015 }, { location: [-33.92, 18.42], size: 0.015 },
-  { location: [-1.29, 36.82], size: 0.015 }, { location: [6.52, 3.38], size: 0.015 },
-  { location: [33.59, -7.62], size: 0.015 }, { location: [36.81, 10.18], size: 0.015 },
-  { location: [-37.81, 144.96], size: 0.015 }, { location: [-36.85, 174.76], size: 0.015 },
+/* ── COBE markers: EP countries + global coming-soon cities for "venues everywhere" feel ── */
+const GLOBAL_COORDS: [number, number][] = [
+  // Middle East & Africa
+  [25.28, 55.30],   // Dubai
+  [24.47, 54.37],   // Abu Dhabi
+  [26.07, 50.55],   // Bahrain
+  [21.42, 39.83],   // Jeddah
+  [30.04, 31.24],   // Cairo
+  [-33.92, 18.42],  // Cape Town
+  [-1.29, 36.82],   // Nairobi
+  [6.52, 3.38],     // Lagos
+  [33.89, 35.50],   // Beirut
+  // Asia Pacific
+  [35.68, 139.69],  // Tokyo
+  [1.35, 103.82],   // Singapore
+  [22.32, 114.17],  // Hong Kong
+  [37.57, 126.98],  // Seoul
+  [-33.87, 151.21], // Sydney
+  [13.76, 100.50],  // Bangkok
+  [28.61, 77.21],   // Delhi
+  [19.08, 72.88],   // Mumbai
+  [31.23, 121.47],  // Shanghai
+  // Americas
+  [40.71, -74.01],  // New York
+  [34.05, -118.24], // Los Angeles
+  [41.88, -87.63],  // Chicago
+  [25.76, -80.19],  // Miami
+  [43.65, -79.38],  // Toronto
+  [-23.55, -46.63], // São Paulo
+  [19.43, -99.13],  // Mexico City
+  [-34.60, -58.38], // Buenos Aires
 ];
 
-const LABELS: { id: string; name: string; venues: string }[] = [
-  { id: "stockholm", name: "STOCKHOLM", venues: "420+" },
-  { id: "london", name: "LONDON", venues: "1,200+" },
-  { id: "paris", name: "PARIS", venues: "890+" },
-  { id: "dubai", name: "DUBAI", venues: "310+" },
-  { id: "tokyo", name: "TOKYO", venues: "540+" },
-  { id: "newyork", name: "NEW YORK", venues: "950+" },
-  { id: "sydney", name: "SYDNEY", venues: "280+" },
-  { id: "singapore", name: "SINGAPORE", venues: "190+" },
-];
+/* COBE markers disabled — all dots rendered via overlay canvas for crisp edges */
+const MARKERS: { location: [number, number]; size: number }[] = [];
 
+/* ── Globe tuning ── */
+const THETA = 0.25;
+const PHI_START = 0.3;
+const SPEED = 0.0004;
+
+/**
+ * Convert longitude to the COBE phi that puts that longitude facing the camera.
+ * COBE rendering: phi controls azimuthal rotation.
+ * Derived from COBE source: for a point at longitude `lng` to face the camera,
+ * phi = PI/2 - (lng * PI/180 - PI) = 3PI/2 - lng*PI/180.
+ * Simplified: -(lng * PI/180) + 3PI/2 ≈ -(lng * PI/180) + 4.712
+ */
+function lngToBasePhi(lng: number): number {
+  return -(lng * Math.PI) / 180 + 3 * Math.PI / 2;
+}
+
+/* ── Venue preview images — Unsplash stock for top venues ── */
+const VENUE_IMAGES: Record<string, { url: string; venue: string; city: string }> = {
+  sweden:    { url: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=600&q=80', venue: 'Stockholmsmässan', city: 'Stockholm' },
+  norway:    { url: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&q=80', venue: 'Oslo Spektrum', city: 'Oslo' },
+  iceland:   { url: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80', venue: 'Harpa Concert Hall', city: 'Reykjavik' },
+  estonia:   { url: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=600&q=80', venue: 'Tallinn Creative Hub', city: 'Tallinn' },
+  latvia:    { url: 'https://images.unsplash.com/photo-1591377032364-8a31e4c0dff8?w=600&q=80', venue: 'Riga Congress Centre', city: 'Riga' },
+  lithuania: { url: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=600&q=80', venue: 'LITEXPO', city: 'Vilnius' },
+  uk:        { url: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80', venue: 'ExCeL London', city: 'London' },
+  ireland:   { url: 'https://images.unsplash.com/photo-1549918864-48ac978761a4?w=600&q=80', venue: 'Convention Centre Dublin', city: 'Dublin' },
+  france:    { url: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80', venue: 'Palais des Congrès', city: 'Paris' },
+  belgium:   { url: 'https://images.unsplash.com/photo-1559113202-c916b8e44d8b?w=600&q=80', venue: 'SQUARE Brussels', city: 'Brussels' },
+  netherlands: { url: 'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&q=80', venue: 'RAI Amsterdam', city: 'Amsterdam' },
+  luxembourg: { url: 'https://images.unsplash.com/photo-1587974928442-77dc3e0748b1?w=600&q=80', venue: 'European Convention Center', city: 'Luxembourg' },
+  'czech-republic': { url: 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=600&q=80', venue: 'Prague Congress Centre', city: 'Prague' },
+  poland:    { url: 'https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=600&q=80', venue: 'ICE Kraków', city: 'Kraków' },
+  slovakia:  { url: 'https://images.unsplash.com/photo-1555699786-8be834f53ac0?w=600&q=80', venue: 'Incheba Expo', city: 'Bratislava' },
+  hungary:   { url: 'https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=600&q=80', venue: 'Hungexpo', city: 'Budapest' },
+  switzerland: { url: 'https://images.unsplash.com/photo-1527668752968-14dc70a27c95?w=600&q=80', venue: 'Palexpo', city: 'Geneva' },
+  spain:     { url: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&q=80', venue: 'Fira Barcelona', city: 'Barcelona' },
+  portugal:  { url: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=80', venue: 'MEO Arena', city: 'Lisbon' },
+  italy:     { url: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600&q=80', venue: 'Fiera Milano', city: 'Milan' },
+  greece:    { url: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=80', venue: 'Megaron Athens', city: 'Athens' },
+  malta:     { url: 'https://images.unsplash.com/photo-1557683311-eac922347aa1?w=600&q=80', venue: 'MFCC Malta', city: 'Valletta' },
+  croatia:   { url: 'https://images.unsplash.com/photo-1555990793-da11153b2473?w=600&q=80', venue: 'Zagreb Fair', city: 'Zagreb' },
+  slovenia:  { url: 'https://images.unsplash.com/photo-1569396116180-210c182bedb8?w=600&q=80', venue: 'GR Ljubljana', city: 'Ljubljana' },
+  serbia:    { url: 'https://images.unsplash.com/photo-1586449480584-bbd437dab6bd?w=600&q=80', venue: 'Belgrade Fair', city: 'Belgrade' },
+  'bosnia-herzegovina': { url: 'https://images.unsplash.com/photo-1586880244386-8b3e34c8382c?w=600&q=80', venue: 'Skenderija', city: 'Sarajevo' },
+  montenegro: { url: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80', venue: 'Porto Montenegro', city: 'Tivat' },
+  'north-macedonia': { url: 'https://images.unsplash.com/photo-1601288496920-b6154fe3626a?w=600&q=80', venue: 'Boris Trajkovski', city: 'Skopje' },
+  romania:   { url: 'https://images.unsplash.com/photo-1584646098378-0874589d76b1?w=600&q=80', venue: 'Romexpo', city: 'Bucharest' },
+};
+
+/* ── CMS types ── */
 interface GlobeCMS {
   badge?: string;
   headline?: string;
   headlineAccent?: string;
   description?: string;
+  metrics?: Array<{ value?: number; stringValue?: string; suffix?: string; label?: string }>;
 }
 
 export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pointerInteracting = useRef<number | null>(null);
-  const pointerInteractionMovement = useRef(0);
-  const phiRef = useRef(0.3);
-  const rotationOffsetRef = useRef(0);
+  const hostRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLCanvasElement>(null);
+  const phiRef = useRef(PHI_START);
+  const offsetRef = useRef(0);
+  const ptrDown = useRef<number | null>(null);
+  const ptrMove = useRef(0);
+  const hovRef = useRef<string | null>(null);
+  const activeRegionRef = useRef<string | null>(null);
+  const hoveredRegionRef = useRef<string | null>(null);
 
+  /* ScrollTrigger refs */
+  const sectionRef = useRef<HTMLElement>(null);
+  const darkOverlayRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const dashboardRef = useRef<HTMLDivElement>(null);
+
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
+
+  /* ── ScrollTrigger: dark entrance + pin ── */
   useEffect(() => {
-    if (!canvasRef.current) return;
+    if (!sectionRef.current || !darkOverlayRef.current) return;
 
-    let width = canvasRef.current.offsetWidth;
-    let animFrame: number;
+    const overlay = darkOverlayRef.current;
 
-    const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
-      width: width * 2,
-      height: width * 2,
-      phi: 0.3,
-      theta: 0.15,
-      dark: 0,
-      diffuse: 1.2,
-      mapSamples: 36000,
-      mapBrightness: 6,
-      baseColor: [1, 1, 1],
-      markerColor: [0.506, 0.847, 0.816],
-      glowColor: [0.92, 0.92, 0.92],
-      markers: MARKERS,
-      opacity: 0.85,
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        end: "top top",
+        scrub: 0.6,
+      },
     });
 
-    const animate = () => {
-      if (!pointerInteracting.current) {
-        phiRef.current += 0.0008;
-      }
+    // Dark overlay fades in
+    tl.fromTo(darkOverlayRef.current,
+      { opacity: 0 },
+      { opacity: 1, ease: "none" },
+      0
+    );
 
-      globe.update({
-        phi: phiRef.current + rotationOffsetRef.current,
-        width: width * 2,
-        height: width * 2,
-      });
+    // Headline staggers in
+    if (headlineRef.current) {
+      const words = headlineRef.current.querySelectorAll(".headline-word");
+      tl.fromTo(words,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.08, ease: "power3.out" },
+        0.3
+      );
+    }
 
-      animFrame = requestAnimationFrame(animate);
-    };
-    animFrame = requestAnimationFrame(animate);
+    // Dashboard slides in
+    if (dashboardRef.current) {
+      tl.fromTo(dashboardRef.current,
+        { x: 60, opacity: 0 },
+        { x: 0, opacity: 1, ease: "power3.out" },
+        0.4
+      );
+    }
 
-    setTimeout(() => {
-      if (canvasRef.current) canvasRef.current.style.opacity = "1";
-    }, 400);
-
-    const onResize = () => {
-      if (canvasRef.current) width = canvasRef.current.offsetWidth;
-    };
-    window.addEventListener("resize", onResize);
+    // Exit: fade overlay back out when scrolling PAST the section
+    const exitTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "bottom 80%",
+        end: "bottom 20%",
+        scrub: 0.6,
+      },
+    });
+    exitTl.to(overlay, { opacity: 0, ease: "none" });
 
     return () => {
-      cancelAnimationFrame(animFrame);
-      globe.destroy();
-      window.removeEventListener("resize", onResize);
+      tl.scrollTrigger?.kill();
+      tl.kill();
+      exitTl.scrollTrigger?.kill();
+      exitTl.kill();
     };
   }, []);
 
+  /* Target phi is now computed directly in the animation loop using refs.
+     No React lifecycle = no stale closures. */
+
+  const onSelectRegion = useCallback((slug: string) => {
+    const region = REGIONS.find((r) => r.slug === slug);
+    if (!region || region.status === "coming-soon") return;
+    setSelectedRegion(slug);
+    setHoveredCountry(null);
+    hovRef.current = null;
+    activeRegionRef.current = slug;
+  }, []);
+
+  const onBack = useCallback(() => {
+    setSelectedRegion(null);
+    setHoveredCountry(null);
+    hovRef.current = null;
+    activeRegionRef.current = null;
+  }, []);
+
+  const onHoverRegion = useCallback((slug: string | null) => {
+    hoveredRegionRef.current = slug;
+  }, []);
+
+  const onHoverCountry = useCallback((slug: string | null) => {
+    setHoveredCountry(slug);
+    hovRef.current = slug;
+  }, []);
+
+  /* ── Pointer handlers (globe drag) ── */
+   const onDown = useCallback((e: React.PointerEvent) => {
+    ptrDown.current = e.clientX;
+    if (overlayRef.current) overlayRef.current.style.cursor = "grabbing";
+  }, []);
+  const onUp = useCallback(() => {
+    ptrDown.current = null;
+    // Merge accumulated drag offset INTO phi — no separate tracking during targeting
+    phiRef.current += offsetRef.current;
+    offsetRef.current = 0;
+    ptrMove.current = 0;
+    if (overlayRef.current) overlayRef.current.style.cursor = "grab";
+  }, []);
+  const onPointerMove = useCallback((e: React.PointerEvent) => {
+    if (ptrDown.current !== null) {
+      const d = e.clientX - ptrDown.current;
+      offsetRef.current = d / 200;
+    }
+  }, []);
+
+  /* ── COBE lifecycle ── */
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host) return;
+    const canvas = document.createElement("canvas");
+    canvas.className = "w-full h-full opacity-0 transition-opacity duration-[1200ms]";
+    host.appendChild(canvas);
+
+    let w = host.offsetWidth;
+    const globe = createGlobe(canvas, {
+      devicePixelRatio: Math.min(window.devicePixelRatio, 1.5),
+      width: w * 2, height: w * 2,
+      phi: PHI_START, theta: THETA,
+      dark: 1, diffuse: 1.4, mapSamples: 16000, mapBrightness: 3.5,
+      baseColor: [0.75, 0.78, 0.82],
+      markerColor: [0.42, 0.85, 0.82],
+      glowColor: [0.12, 0.12, 0.15],
+      markers: MARKERS, opacity: 0.85,
+    });
+
+    const ov = overlayRef.current;
+    if (ov) { ov.width = w * 2; ov.height = w * 2; }
+
+    let raf: number;
+    const loop = () => {
+      /* Compute target EVERY FRAME from mutable refs — no stale closures */
+      let tgt: number | null = null;
+      if (hovRef.current) {
+        // Country hovered (inside region detail)
+        const c = COUNTRY_COORDS[hovRef.current];
+        if (c) tgt = lngToBasePhi(c[1]);
+      } else if (activeRegionRef.current) {
+        // Region selected
+        const r = REGIONS.find((r) => r.slug === activeRegionRef.current);
+        if (r) tgt = lngToBasePhi(r.center[1]);
+      } else if (hoveredRegionRef.current) {
+        // Region card hovered (in default grid view)
+        const r = REGIONS.find((r) => r.slug === hoveredRegionRef.current);
+        if (r) tgt = lngToBasePhi(r.center[1]);
+      }
+
+      if (ptrDown.current !== null) {
+        // drag — user controls, phi stays, offset moves
+      } else if (tgt !== null) {
+        // Shortest-path rotation: normalize target and current into [0, TAU)
+        const TAU = Math.PI * 2;
+        // Normalize both to [0, TAU)
+        const normCur = ((phiRef.current % TAU) + TAU) % TAU;
+        const normTgt = ((tgt % TAU) + TAU) % TAU;
+        // Delta in [-PI, PI)
+        let delta = normTgt - normCur;
+        if (delta > Math.PI) delta -= TAU;
+        if (delta < -Math.PI) delta += TAU;
+        // Dead-zone: stop lerping when close enough (prevents micro-oscillation)
+        if (Math.abs(delta) > 0.001) {
+          phiRef.current += delta * 0.06;
+        }
+      } else {
+        phiRef.current += SPEED;
+      }
+
+      // Final phi = base + any active drag offset
+      const phi = phiRef.current + offsetRef.current;
+      globe.update({ phi, width: w * 2, height: w * 2 });
+
+      // Overlay canvas — dots with region-aware dimming
+      if (ov) {
+        const ctx = ov.getContext("2d");
+        if (ctx) {
+          ctx.clearRect(0, 0, ov.width, ov.height);
+          const scale = w / 600;
+          const activeReg = activeRegionRef.current;
+          const activeRegion = activeReg ? REGIONS.find((r) => r.slug === activeReg) : null;
+
+          if (activeRegion) {
+            // ── REGION SELECTED: show only that region's country dots ──
+            activeRegion.countrySlugs.forEach((slug) => {
+              const coords = COUNTRY_COORDS[slug];
+              if (!coords) return;
+              const { x, y, z } = projectToScreen(coords[0], coords[1], phi, THETA);
+              if (z <= 0) return;
+
+              const px = (x + 1) / 2 * ov.width;
+              const py = (y + 1) / 2 * ov.height;
+              const baseOp = Math.min(1, z * 3);
+              const isH = hovRef.current === slug;
+              const r = (isH ? 14 : 9) * scale;
+
+              // Hover glow ring
+              if (isH) {
+                ctx.beginPath(); ctx.arc(px, py, 28 * scale, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(106,216,210,${baseOp * 0.18})`;
+                ctx.fill();
+              }
+              // Main dot
+              ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2);
+              ctx.fillStyle = isH
+                ? `rgba(106,216,210,${baseOp})`
+                : `rgba(106,216,210,${baseOp * 0.65})`;
+              ctx.fill();
+              // Center highlight
+              ctx.beginPath(); ctx.arc(px, py, r * 0.3, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255,255,255,${baseOp * 0.85})`;
+              ctx.fill();
+            });
+          } else {
+            // ── DEFAULT: all dots via overlay canvas (crisp edges) ──
+            const hovReg = hoveredRegionRef.current;
+            const hovRegion = hovReg ? REGIONS.find((r) => r.slug === hovReg) : null;
+
+            // Helper: draw a single dot
+            const drawDot = (lat: number, lng: number, size: number, highlighted: boolean, dimmed: boolean) => {
+              const { x, y, z } = projectToScreen(lat, lng, phi, THETA);
+              if (z <= 0) return;
+              const px = (x + 1) / 2 * ov.width;
+              const py = (y + 1) / 2 * ov.height;
+              const baseOp = Math.min(1, z * 3);
+              const op = dimmed ? baseOp * 0.1 : baseOp;
+              const r = (dimmed ? 3.5 : size) * scale;
+
+              if (highlighted) {
+                // Glow ring
+                ctx.beginPath(); ctx.arc(px, py, 20 * scale, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(106,216,210,${op * 0.15})`;
+                ctx.fill();
+              }
+              // Main dot
+              ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(106,216,210,${op * (highlighted ? 0.95 : 0.7)})`;
+              ctx.fill();
+              // White center
+              ctx.beginPath(); ctx.arc(px, py, r * 0.3, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255,255,255,${op * (highlighted ? 0.9 : 0.55)})`;
+              ctx.fill();
+            };
+
+            // Draw all 29 EP country dots
+            COUNTRIES.forEach((c) => {
+              const coords = COUNTRY_COORDS[c.slug];
+              if (!coords) return;
+              const isHL = hovRegion ? hovRegion.countrySlugs.includes(c.slug) : false;
+              const isDim = hovRegion ? !isHL : false;
+              drawDot(coords[0], coords[1], isHL ? 9 : 8, isHL, isDim);
+            });
+
+            // Draw global coming-soon city dots (always smaller, dim on hover)
+            GLOBAL_COORDS.forEach(([lat, lng]) => {
+              drawDot(lat, lng, 5.5, false, !!hovRegion);
+            });
+          }
+        }
+      }
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    setTimeout(() => { canvas.style.opacity = "1"; }, 300);
+
+    const onResize = () => {
+      w = host.offsetWidth;
+      if (ov) { ov.width = w * 2; ov.height = w * 2; }
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      cancelAnimationFrame(raf);
+      globe.destroy();
+      window.removeEventListener("resize", onResize);
+      while (host.firstChild) host.removeChild(host.firstChild);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <section className="relative w-full py-32 overflow-hidden bg-white">
-      <div className="relative z-30 w-full max-w-4xl mx-auto px-6 text-center mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-black/8 bg-white mb-6"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-tiffany" />
-          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-black/40">
-            {cms?.badge || "Global Presence"}
-          </span>
-        </motion.div>
+    <section
+      ref={sectionRef}
+      id="globe-section"
+      className="relative w-full min-h-screen overflow-hidden flex flex-col justify-center"
+      style={{ background: "#0B0B0B" }}
+    >
+      {/* Dark overlay — covers content ABOVE this section during scroll entrance */}
+      <div
+        ref={darkOverlayRef}
+        className="fixed inset-0 pointer-events-none z-[60]"
+        style={{ background: "#0B0B0B", opacity: 0 }}
+      />
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="font-display text-5xl sm:text-6xl font-medium tracking-tight text-[#111]"
-        >
-          {cms?.headline || "360,000+ Venues"}
-          <br />
-          <span className="italic font-light text-tiffany">{cms?.headlineAccent || "in 36 Countries"}</span>
-        </motion.h2>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="mt-6 text-black/50 text-[15px] max-w-lg mx-auto leading-relaxed"
-        >
-          {cms?.description || "Our global network ensures you always find the perfect spot, no matter where your next event takes place."}
-        </motion.p>
-      </div>
+      {/* ── Content wrapper ── */}
+      <div className="relative z-30 w-full px-6 md:px-12 lg:px-16 py-12">
 
-      <div className="relative z-10 w-full flex justify-center">
-        <div className="relative globe-container" style={{ width: "min(650px, 90vw)", height: "min(650px, 90vw)" }}>
-          {LABELS.map((label) => (
-            <div
-              key={label.id}
-              className="cobe-label"
-              style={{
-                positionAnchor: `--cobe-${label.id}`,
-                opacity: `var(--cobe-visible-${label.id}, 0)`,
-              } as React.CSSProperties}
-            >
-              <div className="cobe-label-badge">
-                {label.name}
+        {/* Headline */}
+        <h2
+          ref={headlineRef}
+          className="font-display text-[clamp(2rem,5vw,3.6rem)] font-medium tracking-tight text-white leading-[0.95] mb-10"
+        >
+          <span className="headline-word inline-block mr-3">360,000+</span>
+          <span className="headline-word inline-block mr-3">Venues.</span>
+          <span className="headline-word inline-block italic font-light text-tiffany">29 Countries.</span>
+        </h2>
+
+        {/* Globe + Dashboard */}
+        <div className="relative flex flex-col lg:flex-row items-center lg:items-stretch" style={{ minHeight: "clamp(450px, 60vh, 700px)" }}>
+
+          {/* LEFT: Globe */}
+          <div className="w-full lg:w-[55%] relative flex-shrink-0 z-0">
+            <div className="relative w-full" style={{ maxWidth: "650px", aspectRatio: "1/1", margin: "0 auto" }}>
+              {/* COBE host */}
+              <div ref={hostRef} className="absolute inset-0 z-0" />
+              {/* Overlay canvas */}
+              <canvas
+                ref={overlayRef}
+                onPointerDown={onDown}
+                onPointerUp={onUp}
+                onPointerOut={onUp}
+                onPointerMove={onPointerMove}
+                className="absolute inset-0 z-10 cursor-grab"
+                style={{ width: "100%", height: "100%" }}
+              />
+              {/* Orbit text */}
+              <div className="absolute inset-0 z-5 pointer-events-none hidden md:flex items-center justify-center" style={{ perspective: "800px" }}>
+                <svg viewBox="0 0 500 500" className="w-[102%] h-[102%] absolute" style={{ transform: "rotateX(12deg)", animation: "orbit-spin 60s linear infinite" }}>
+                  <defs>
+                    <path id="orb" d="M 250,250 m -230,0 a 230,230 0 1,1 460,0 a 230,230 0 1,1 -460,0" fill="none" />
+                  </defs>
+                  <circle cx="250" cy="250" r="230" fill="none" stroke="white" strokeWidth="0.3" opacity="0.06" />
+                  <text fill="white" opacity="0.12" style={{ fontSize: "10px", fontFamily: "'JetBrains Mono',monospace", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                    <textPath href="#orb" startOffset="0%">
+                      EVENTPARTNER • 360,000+ VENUES • 29 COUNTRIES • EVENTPARTNER • 360,000+ VENUES • 29 COUNTRIES •
+                    </textPath>
+                  </text>
+                </svg>
               </div>
             </div>
-          ))}
-
-          <div
-            className="absolute inset-0 z-15 pointer-events-none hidden md:flex items-center justify-center"
-            style={{ perspective: "800px" }}
-          >
-            <svg
-              viewBox="0 0 500 500"
-              className="w-[102%] h-[102%] absolute"
-              style={{
-                transform: "rotateX(12deg)",
-                animation: "orbit-spin 60s linear infinite",
-              }}
-            >
-              <defs>
-                <path
-                  id="orbit-path"
-                  d="M 250, 250 m -230, 0 a 230,230 0 1,1 460,0 a 230,230 0 1,1 -460,0"
-                  fill="none"
-                />
-              </defs>
-              <circle cx="250" cy="250" r="230" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-[var(--border-default)]" opacity="0.4" />
-              <text className="fill-[var(--text-dim)]" style={{ fontSize: "10px", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-                <textPath href="#orbit-path" startOffset="0%">
-                  EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES • EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES • EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES • EVENTPARTNER • 360,000+ VENUES •
-                </textPath>
-              </text>
-            </svg>
           </div>
 
-          <canvas
-            ref={canvasRef}
-            onPointerDown={(e) => {
-              pointerInteracting.current = e.clientX - pointerInteractionMovement.current;
-              if (canvasRef.current) canvasRef.current.style.cursor = "grabbing";
-            }}
-            onPointerUp={() => {
-              pointerInteracting.current = null;
-              if (canvasRef.current) canvasRef.current.style.cursor = "grab";
-            }}
-            onPointerOut={() => {
-              pointerInteracting.current = null;
-              if (canvasRef.current) canvasRef.current.style.cursor = "grab";
-            }}
-            onMouseMove={(e) => {
-              if (pointerInteracting.current !== null) {
-                const delta = e.clientX - pointerInteracting.current;
-                pointerInteractionMovement.current = delta;
-                rotationOffsetRef.current = delta / 200;
-              }
-            }}
-            onTouchMove={(e) => {
-              if (pointerInteracting.current !== null && e.touches[0]) {
-                const delta = e.touches[0].clientX - pointerInteracting.current;
-                pointerInteractionMovement.current = delta;
-                rotationOffsetRef.current = delta / 100;
-              }
-            }}
-            className="w-full h-full opacity-0 transition-opacity duration-[1500ms] cursor-grab"
-          />
+          {/* RIGHT: Dashboard panel */}
+          <div ref={dashboardRef} className="w-full lg:w-[48%] lg:-ml-8 relative z-20 mt-6 lg:mt-0 lg:self-center">
+            <div
+              className="rounded-2xl border overflow-hidden"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                borderColor: "rgba(255,255,255,0.06)",
+                backdropFilter: "blur(24px)",
+                WebkitBackdropFilter: "blur(24px)",
+                boxShadow: "0 4px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)",
+              }}
+            >
+              <AnimatePresence mode="wait">
+                {selectedRegion ? (
+                  <RegionDetail
+                    key="detail"
+                    regionSlug={selectedRegion}
+                    hoveredCountry={hoveredCountry}
+                    onHoverCountry={onHoverCountry}
+                    onBack={onBack}
+                  />
+                ) : (
+                  <RegionGrid
+                    key="grid"
+                    onSelectRegion={onSelectRegion}
+                    onHoverRegion={onHoverRegion}
+                  />
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </div>
-      
-      {/* Soft fade out at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 z-20 pointer-events-none" style={{ background: "linear-gradient(to top, var(--bg-primary), transparent)" }} />
     </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════
+   REGION GRID — Default dashboard view (2×3 or 2×4 grid)
+   ══════════════════════════════════════════════════════════════ */
+function RegionGrid({ onSelectRegion, onHoverRegion }: { onSelectRegion: (slug: string) => void; onHoverRegion: (slug: string | null) => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+    >
+      {/* Panel header */}
+      <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+        <div className="flex items-center gap-2.5">
+          <Globe2 className="w-4 h-4 text-tiffany/70" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-white/45">
+            Explore by Region
+          </span>
+        </div>
+        <span className="font-mono text-[10px] text-white/20">
+          {REGIONS.filter(r => r.status === 'active').reduce((sum, r) => sum + r.countrySlugs.length, 0)} countries
+        </span>
+      </div>
+
+      {/* Region cards grid */}
+      <div className="p-4 grid grid-cols-2 gap-3.5">
+        {REGIONS.map((region, i) => (
+          <RegionCard
+            key={region.slug}
+            region={region}
+            index={i}
+            onClick={() => onSelectRegion(region.slug)}
+            onHover={onHoverRegion}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Single region card ── */
+function RegionCard({ region, index, onClick, onHover }: { region: Region; index: number; onClick: () => void; onHover: (slug: string | null) => void }) {
+  const isComingSoon = region.status === "coming-soon";
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05, duration: 0.3 }}
+      onClick={onClick}
+      onMouseEnter={() => !isComingSoon && onHover(region.slug)}
+      onMouseLeave={() => onHover(null)}
+      disabled={isComingSoon}
+      className={`group relative text-left p-5 rounded-xl border transition-all duration-200 ${
+        isComingSoon
+          ? "opacity-40 cursor-not-allowed border-white/[0.04] bg-white/[0.01]"
+          : "cursor-pointer border-white/[0.05] bg-white/[0.02] hover:border-tiffany/20 hover:bg-tiffany/[0.04] active:scale-[0.98]"
+      }`}
+    >
+      {/* Region name */}
+      <div className="flex items-center justify-between mb-3.5">
+        <span className={`font-display text-[15px] font-medium tracking-tight ${
+          isComingSoon ? "text-white/30" : "text-white/80 group-hover:text-tiffany"
+        } transition-colors`}>
+          {region.name}
+        </span>
+        {isComingSoon ? (
+          <Lock className="w-3 h-3 text-white/15" />
+        ) : (
+          <ArrowRight className="w-3 h-3 text-white/10 group-hover:text-tiffany/60 group-hover:translate-x-0.5 transition-all" />
+        )}
+      </div>
+
+      {/* Mini flags preview */}
+      <div className="flex items-center gap-2 mb-3">
+        {isComingSoon ? (
+          <span className="font-mono text-[9px] text-white/20 italic">Coming soon</span>
+        ) : (
+          region.previewFlags.map((code) => (
+            <div key={code} className="w-8 h-5.5 rounded-sm overflow-hidden border border-white/[0.08]">
+              <Image
+                src={`https://flagcdn.com/w40/${code}.png`}
+                alt="" width={40} height={28}
+                className="w-full h-full object-cover" unoptimized
+              />
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Country count + venues */}
+      <div className="flex items-center justify-between">
+        <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-white/30">
+          {isComingSoon ? "—" : `${region.countrySlugs.length} countries`}
+        </span>
+        {!isComingSoon && (
+          <span className="font-mono text-[10px] text-tiffany/50">
+            {region.totalVenues} venues
+          </span>
+        )}
+      </div>
+    </motion.button>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════
+   REGION DETAIL — Country list for selected region
+   ══════════════════════════════════════════════════════════════ */
+function RegionDetail({
+  regionSlug,
+  hoveredCountry,
+  onHoverCountry,
+  onBack,
+}: {
+  regionSlug: string;
+  hoveredCountry: string | null;
+  onHoverCountry: (slug: string | null) => void;
+  onBack: () => void;
+}) {
+  const region = REGIONS.find((r) => r.slug === regionSlug);
+  if (!region) return null;
+
+  const countries = region.countrySlugs
+    .map((s) => COUNTRIES.find((c) => c.slug === s))
+    .filter(Boolean) as Country[];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 20 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+    >
+      {/* Panel header with back button */}
+      <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+        <button
+          onClick={onBack}
+          className="flex items-center gap-1.5 text-white/40 hover:text-tiffany transition-colors group"
+        >
+          <ChevronLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+          <span className="font-mono text-[12px] uppercase tracking-[0.1em]">All Regions</span>
+        </button>
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-tiffany animate-pulse" />
+          <span className="font-display text-[15px] font-medium text-white/90">{region.name}</span>
+        </div>
+      </div>
+
+      {/* Region summary */}
+      <div className="px-6 py-3.5 border-b flex items-center justify-between" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
+        <span className="font-mono text-[11px] text-white/35">
+          {countries.length} countries
+        </span>
+        <span className="font-mono text-[11px] text-tiffany/50">
+          {region.totalVenues} venues
+        </span>
+      </div>
+
+      {/* Country list — max 7, never needs scroll */}
+      <div className="custom-scrollbar-dark" style={{ maxHeight: "min(480px, 55vh)" }}>
+        {countries.map((country) => (
+          <CountryRow
+            key={country.slug}
+            country={country}
+            isHovered={hoveredCountry === country.slug}
+            onHover={onHoverCountry}
+          />
+        ))}
+      </div>
+
+      {/* Venue image preview — FIXED HEIGHT, always present, no layout shift */}
+      <div className="px-5 py-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+        <div className="relative w-full h-36 rounded-xl overflow-hidden bg-white/[0.02]">
+          <AnimatePresence mode="wait">
+            {hoveredCountry && VENUE_IMAGES[hoveredCountry] ? (
+              <motion.div
+                key={hoveredCountry}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={VENUE_IMAGES[hoveredCountry].url}
+                  alt={VENUE_IMAGES[hoveredCountry].venue}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-3 left-4 right-4">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <MapPin className="w-3 h-3 text-tiffany" />
+                    <span className="font-display text-[13px] font-medium text-white">
+                      {VENUE_IMAGES[hoveredCountry].venue}
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-white/50 uppercase tracking-[0.1em]">
+                    {VENUE_IMAGES[hoveredCountry].city}
+                  </span>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="placeholder"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <div className="flex items-center gap-2 text-white/15">
+                  <MapPin className="w-4 h-4" />
+                  <span className="font-mono text-[11px] uppercase tracking-[0.12em]">
+                    Hover a country to preview venue
+                  </span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+    </motion.div>
+  );
+}
+
+/* ── Country row — fixed height, no inline expand ── */
+function CountryRow({ country, isHovered, onHover }: {
+  country: Country; isHovered: boolean; onHover: (s: string | null) => void;
+}) {
+  return (
+    <Link href={`/land/${country.slug}`}>
+      <div
+        className={`group px-6 py-4 transition-all duration-200 cursor-pointer border-b ${
+          isHovered
+            ? "bg-tiffany/[0.08] border-tiffany/10"
+            : "border-white/[0.03] hover:bg-white/[0.02]"
+        }`}
+        onMouseEnter={() => onHover(country.slug)}
+        onMouseLeave={() => onHover(null)}
+      >
+        <div className="flex items-center gap-4">
+          {/* Flag */}
+          <div className="w-12 h-8 rounded-md overflow-hidden border border-white/10 shrink-0">
+            <Image
+              src={`https://flagcdn.com/w80/${country.code}.png`}
+              alt={country.name} width={80} height={56}
+              className="w-full h-full object-cover" unoptimized
+            />
+          </div>
+          {/* Name */}
+          <span className={`font-display text-[16px] font-medium flex-1 transition-colors ${
+            isHovered ? "text-tiffany" : "text-white/80"
+          }`}>
+            {country.name}
+          </span>
+          {/* Venue count */}
+          <span className="font-mono text-[13px] text-tiffany/70 tracking-wide shrink-0">
+            {country.venues}
+          </span>
+          {/* Arrow */}
+          <ArrowRight className={`w-4 h-4 shrink-0 transition-all duration-200 ${
+            isHovered ? "text-tiffany translate-x-0.5" : "text-white/20 group-hover:text-white/40"
+          }`} />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════
+   STATS BAR
+   ══════════════════════════════════════════════════════════════ */
+function StatsBar({ metrics }: { metrics?: GlobeCMS["metrics"] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.2, duration: 0.6 }}
+      className="relative z-10 flex flex-wrap items-center justify-center gap-10 md:gap-20 py-14 md:py-20 px-8"
+    >
+      {metrics && metrics.length > 0 ? (
+        metrics.map((m, i) => {
+          if (m.value != null) return <Counter key={i} value={m.value} suffix={m.suffix || ""} label={m.label || ""} go={inView} delay={i * 0.15} />;
+          return (
+            <div key={i} className="text-center">
+              <span className="font-display text-2xl md:text-3xl font-medium text-white block">{m.stringValue}{m.suffix}</span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">{m.label}</span>
+            </div>
+          );
+        })
+      ) : (
+        <>
+          <Counter value={29} suffix="" label="Countries" go={inView} />
+          <Counter value={360} suffix="K+" label="Venues" go={inView} delay={0.15} />
+          <div className="text-center">
+            <span className="font-display text-2xl md:text-3xl font-medium text-white block">100%</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">Europe</span>
+          </div>
+          <div className="text-center">
+            <span className="font-display text-2xl md:text-3xl font-medium text-white block">24/7</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">Support</span>
+          </div>
+        </>
+      )}
+    </motion.div>
+  );
+}
+
+function Counter({ value, suffix, label, go, delay = 0 }: { value: number; suffix: string; label: string; go: boolean; delay?: number }) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (!go) return;
+    const t = setTimeout(() => {
+      const dur = 2000, s = performance.now();
+      const step = (now: number) => {
+        const p = Math.min((now - s) / dur, 1);
+        setN(Math.round((1 - Math.pow(1 - p, 3)) * value));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, delay * 1000);
+    return () => clearTimeout(t);
+  }, [go, value, delay]);
+
+  return (
+    <div className="text-center">
+      <span className="font-display text-2xl md:text-3xl font-medium text-white block tabular-nums">{n}{suffix}</span>
+      <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">{label}</span>
+    </div>
   );
 }
