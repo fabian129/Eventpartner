@@ -653,25 +653,78 @@ function RegionDetail({
         </span>
       </div>
 
-      {/* Country list */}
-      <div>
+      {/* Country grid — 2 columns */}
+      <div className="p-4 grid grid-cols-2 gap-2">
         {countries.map((country) => (
-          <CountryRow
-            key={country.slug}
-            country={country}
-            isHovered={hoveredCountry === country.slug}
-            onHover={onHoverCountry}
-          />
+          <Link href={`/land/${country.slug}`} key={country.slug}>
+            <div
+              className={`group flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 cursor-pointer border ${
+                hoveredCountry === country.slug
+                  ? "bg-tiffany/[0.08] border-tiffany/10"
+                  : "border-transparent hover:bg-white/[0.03]"
+              }`}
+              onMouseEnter={() => onHoverCountry(country.slug)}
+              onMouseLeave={() => onHoverCountry(null)}
+            >
+              {/* Flag */}
+              <div className="w-10 h-7 rounded-sm overflow-hidden border border-white/10 shrink-0">
+                <Image
+                  src={`https://flagcdn.com/w80/${country.code}.png`}
+                  alt={country.name} width={80} height={56}
+                  className="w-full h-full object-cover" unoptimized
+                />
+              </div>
+              {/* Name + venues */}
+              <div className="flex-1 min-w-0">
+                <span className={`font-display text-[14px] font-medium block truncate transition-colors ${
+                  hoveredCountry === country.slug ? "text-tiffany" : "text-white/80"
+                }`}>
+                  {country.name}
+                </span>
+                <span className="font-mono text-[10px] text-white/30">{country.venues}</span>
+              </div>
+              <ArrowRight className={`w-3.5 h-3.5 shrink-0 transition-all duration-200 ${
+                hoveredCountry === country.slug ? "text-tiffany translate-x-0.5" : "text-white/15"
+              }`} />
+            </div>
+          </Link>
         ))}
       </div>
 
-      {/* Venue image preview — shows first venue from the country page */}
-      <div className="px-5 py-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-        <div className="relative w-full h-52 rounded-xl overflow-hidden bg-white/[0.02]">
+      {/* Venue image preview — shows up to 3 venue images on hover */}
+      <div className="px-4 pb-4 border-t pt-4" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+        <div className="relative w-full h-44 rounded-xl overflow-hidden bg-white/[0.02]">
           <AnimatePresence mode="wait">
             {hoveredCountry ? (() => {
               const country = COUNTRIES.find(c => c.slug === hoveredCountry);
-              const topVenue = country?.topVenues[0];
+              const imgCount = IMAGE_COUNTS[hoveredCountry] || 0;
+              const venueCount = Math.min(imgCount >= 15 ? 3 : imgCount >= 5 ? 2 : 0, 3);
+              
+              if (venueCount === 0) {
+                return (
+                  <motion.div
+                    key={`${hoveredCountry}-fallback`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src="/Images/round-table-discussion-business-conference-meeting-event-audience-conference-hall-business.webp"
+                      alt="Venue" fill className="object-cover" unoptimized
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <div className="absolute bottom-3 left-4">
+                      <div className="flex items-center gap-1.5">
+                        <MapPin className="w-3 h-3 text-tiffany" />
+                        <span className="font-display text-[13px] font-medium text-white">{country?.name}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              }
+
               return (
                 <motion.div
                   key={hoveredCountry}
@@ -679,27 +732,33 @@ function RegionDetail({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.25 }}
-                  className="absolute inset-0"
+                  className="absolute inset-0 flex gap-1.5"
                 >
-                  <Image
-                    src={getVenuePreviewImage(hoveredCountry)}
-                    alt={topVenue?.name || "Venue"}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-3 left-4 right-4">
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <MapPin className="w-3 h-3 text-tiffany" />
-                      <span className="font-display text-[13px] font-medium text-white">
-                        {topVenue?.name || "Top Venue"}
-                      </span>
+                  {Array.from({ length: venueCount }, (_, i) => (
+                    <div key={i} className="relative flex-1 overflow-hidden rounded-lg">
+                      <Image
+                        src={`/Images/venues/${hoveredCountry}/venue-${i + 1}.jpg`}
+                        alt={country?.topVenues[i]?.name || "Venue"}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      {country?.topVenues[i] && (
+                        <div className="absolute bottom-2 left-2.5 right-2">
+                          <div className="flex items-center gap-1">
+                            <MapPin className="w-2.5 h-2.5 text-tiffany" />
+                            <span className="font-display text-[11px] font-medium text-white truncate">
+                              {country.topVenues[i].name}
+                            </span>
+                          </div>
+                          <span className="font-mono text-[9px] text-white/40 uppercase tracking-[0.08em]">
+                            {country.topVenues[i].city}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <span className="font-mono text-[10px] text-white/50 uppercase tracking-[0.1em]">
-                      {topVenue?.city || ""}
-                    </span>
-                  </div>
+                  ))}
                 </motion.div>
               );
             })() : (
@@ -714,7 +773,7 @@ function RegionDetail({
                 <div className="flex items-center gap-2 text-white/15">
                   <MapPin className="w-4 h-4" />
                   <span className="font-mono text-[11px] uppercase tracking-[0.12em]">
-                    Hover a country to preview venue
+                    Hover a country to preview venues
                   </span>
                 </div>
               </motion.div>
