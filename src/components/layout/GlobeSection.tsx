@@ -408,15 +408,21 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
       {/* ── Content wrapper — z-60 sits ABOVE both overlay and navbar ── */}
       <div className="relative z-[60] w-full px-6 md:px-12 lg:px-16 py-12">
 
-        {/* Headline */}
-        <h2
-          ref={headlineRef}
-          className="font-display text-[clamp(2rem,5vw,3.6rem)] font-medium tracking-tight text-white leading-[0.95] mb-10"
-        >
-          <span className="headline-word inline-block mr-3">360,000+</span>
-          <span className="headline-word inline-block mr-3">Venues.</span>
-          <span className="headline-word inline-block italic font-light text-tiffany">36 Countries.</span>
-        </h2>
+        {/* Headline — CTA-driven */}
+        <div ref={headlineRef} className="mb-10">
+          <h2
+            className="font-display text-[clamp(2rem,5vw,3.6rem)] font-medium tracking-tight text-white leading-[0.95] mb-4"
+          >
+            <span className="headline-word inline-block mr-3">Find</span>
+            <span className="headline-word inline-block mr-3">your</span>
+            <span className="headline-word inline-block mr-3">venue.</span>
+            <span className="headline-word inline-block italic font-light text-tiffany">Anywhere in Europe.</span>
+          </h2>
+          <p className="headline-word text-white/40 text-[15px] md:text-base font-sans max-w-xl leading-relaxed">
+            Explore our network of <span className="text-tiffany/80 font-medium">360,000+ venues across 36 countries</span>. 
+            Select a region, browse venues, and submit your inquiry — we respond within 24 hours with at least 3 curated proposals.
+          </p>
+        </div>
 
         {/* Globe + Dashboard */}
         <div className="relative flex flex-col lg:flex-row items-center lg:items-stretch" style={{ minHeight: "clamp(450px, 60vh, 700px)" }}>
@@ -445,7 +451,7 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
                   <circle cx="250" cy="250" r="230" fill="none" stroke="white" strokeWidth="0.3" opacity="0.06" />
                   <text fill="white" opacity="0.12" style={{ fontSize: "10px", fontFamily: "'JetBrains Mono',monospace", letterSpacing: "0.2em", textTransform: "uppercase" }}>
                     <textPath href="#orb" startOffset="0%">
-                      EVENTPARTNER • 360,000+ VENUES • 29 COUNTRIES • EVENTPARTNER • 360,000+ VENUES • 29 COUNTRIES •
+                      EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES • EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES •
                     </textPath>
                   </text>
                 </svg>
@@ -484,6 +490,34 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
               </AnimatePresence>
             </div>
           </div>
+        </div>
+
+        {/* Stats bar — social proof */}
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {[
+            { value: '360,000+', label: 'Venues', accent: true },
+            { value: '36', label: 'Countries', accent: false },
+            { value: '24h', label: 'Response time', accent: false },
+            { value: '3+', label: 'Proposals per inquiry', accent: false },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="text-center py-4 px-3 rounded-xl border"
+              style={{
+                background: 'rgba(255,255,255,0.02)',
+                borderColor: 'rgba(255,255,255,0.05)',
+              }}
+            >
+              <div className={`font-display text-2xl md:text-3xl font-medium tracking-tight ${
+                stat.accent ? 'text-tiffany' : 'text-white'
+              }`}>
+                {stat.value}
+              </div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 mt-1">
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -662,7 +696,7 @@ function RegionDetail({
 
       {/* Venue image preview — shows first venue from the country page */}
       <div className="px-5 py-4 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-        <div className="relative w-full h-36 rounded-xl overflow-hidden bg-white/[0.02]">
+        <div className="relative w-full h-52 rounded-xl overflow-hidden bg-white/[0.02]">
           <AnimatePresence mode="wait">
             {hoveredCountry ? (() => {
               const country = COUNTRIES.find(c => c.slug === hoveredCountry);
