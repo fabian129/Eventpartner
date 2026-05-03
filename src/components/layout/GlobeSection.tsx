@@ -427,7 +427,7 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
         <div className="relative flex flex-col lg:flex-row items-center lg:items-stretch" style={{ minHeight: "clamp(450px, 60vh, 700px)" }}>
 
           {/* LEFT: Globe */}
-          <div className="w-full lg:w-[55%] relative flex-shrink-0 z-0">
+          <div className="w-full lg:w-[60%] relative flex-shrink-0 z-0">
             <div className="relative w-full" style={{ maxWidth: "750px", aspectRatio: "1/1", margin: "0 auto" }}>
               {/* COBE host */}
               <div ref={hostRef} className="absolute inset-0 z-0" />
@@ -459,7 +459,7 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
           </div>
 
           {/* RIGHT: Dashboard panel */}
-          <div ref={dashboardRef} className="w-full lg:w-[48%] lg:-ml-8 relative z-20 mt-6 lg:mt-0 lg:self-center">
+          <div ref={dashboardRef} className="w-full lg:w-[42%] lg:-ml-8 relative z-20 mt-6 lg:mt-0 lg:self-center">
             <div
               className="rounded-2xl border overflow-hidden"
               style={{
