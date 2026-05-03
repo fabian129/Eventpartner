@@ -48,7 +48,7 @@ export function CountryPageClient({ country }: { country: Country }) {
               transition={{ duration: 0.4 }}
             >
               <Link
-                href="/#coverage"
+                href="/#globe-section"
                 className="inline-flex items-center gap-2 text-[var(--text-muted)] hover:text-[#81D8D0] transition-colors text-sm mb-8"
               >
                 <ArrowLeft className="w-4 h-4" />
