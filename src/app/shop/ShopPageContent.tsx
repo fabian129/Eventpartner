@@ -9,11 +9,7 @@ import { ShoppingBag, ArrowRight, Send, Package, Truck, Shield } from "lucide-re
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const INFO_CARDS = [
-  { icon: Package, value: "Print on Demand", label: "No minimum order" },
-  { icon: Truck, value: "EU Shipping", label: "Fast delivery across Europe" },
-  { icon: Shield, value: "Quality", label: "Premium branded products" },
-];
+
 
 interface ShopCMS {
   heroLabel?: string; heroLabelRight?: string;
@@ -24,6 +20,9 @@ interface ShopCMS {
   vppHeadline?: string; vppHeadlineAccent?: string; vppDescription?: string;
   successTitle?: string; successDescription?: string;
   ctaHeadline?: string; ctaDescription?: string;
+  infoCard1Title?: string; infoCard1Label?: string;
+  infoCard2Title?: string; infoCard2Label?: string;
+  infoCard3Title?: string; infoCard3Label?: string;
 }
 
 export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
@@ -128,8 +127,12 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
       {/* Info Cards */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-16 md:mb-24">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {INFO_CARDS.map((card, i) => (
-            <motion.div key={card.label} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.08 * i, ease: EASE }} className="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300">
+          {[
+            { icon: Package, value: cms?.infoCard1Title || "Print on Demand", label: cms?.infoCard1Label || "No minimum order" },
+            { icon: Truck, value: cms?.infoCard2Title || "EU Shipping", label: cms?.infoCard2Label || "Fast delivery across Europe" },
+            { icon: Shield, value: cms?.infoCard3Title || "Quality", label: cms?.infoCard3Label || "Premium branded products" },
+          ].map((card, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.08 * i, ease: EASE }} className="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300">
               <card.icon className="w-4 h-4 text-tiffany mb-4 opacity-60" />
               <span className="font-display text-lg font-semibold text-[var(--text-primary)] block leading-tight">{card.value}</span>
               <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mt-1 block">{card.label}</span>

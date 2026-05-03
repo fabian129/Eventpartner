@@ -125,7 +125,9 @@ export const WEBSHOP_PAGE_QUERY = defineQuery(
     heroLabel, heroLabelRight, headline, headlineAccent, description,
     merchLabel, merchTitle, merchPendingMessage, comingSoonTitle, comingSoonDesc,
     quoteTitle, quoteButton, vppHeadline, vppHeadlineAccent, vppDescription,
-    successTitle, successDescription, ctaHeadline, ctaDescription
+    successTitle, successDescription, ctaHeadline, ctaDescription,
+    infoCard1Title, infoCard1Label, infoCard2Title, infoCard2Label,
+    infoCard3Title, infoCard3Label
   }`
 );
 

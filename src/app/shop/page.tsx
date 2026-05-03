@@ -44,6 +44,12 @@ export default async function ShopPage() {
         successDescription: t(shopData.successDescription),
         ctaHeadline: t(shopData.ctaHeadline),
         ctaDescription: t(shopData.ctaDescription),
+        infoCard1Title: t(shopData.infoCard1Title),
+        infoCard1Label: t(shopData.infoCard1Label),
+        infoCard2Title: t(shopData.infoCard2Title),
+        infoCard2Label: t(shopData.infoCard2Label),
+        infoCard3Title: t(shopData.infoCard3Title),
+        infoCard3Label: t(shopData.infoCard3Label),
       } : undefined} />
       <DarkZone exitToLight={false}>
         <Footer cms={homeData ? {

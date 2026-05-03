@@ -101,6 +101,36 @@ export const webshopPage = defineType({
       title: "Bottom CTA Description",
       type: "localizedText",
     }),
+    defineField({
+      name: "infoCard1Title",
+      title: "Info Card 1 — Title",
+      type: "localizedString",
+    }),
+    defineField({
+      name: "infoCard1Label",
+      title: "Info Card 1 — Subtitle",
+      type: "localizedString",
+    }),
+    defineField({
+      name: "infoCard2Title",
+      title: "Info Card 2 — Title",
+      type: "localizedString",
+    }),
+    defineField({
+      name: "infoCard2Label",
+      title: "Info Card 2 — Subtitle",
+      type: "localizedString",
+    }),
+    defineField({
+      name: "infoCard3Title",
+      title: "Info Card 3 — Title",
+      type: "localizedString",
+    }),
+    defineField({
+      name: "infoCard3Label",
+      title: "Info Card 3 — Subtitle",
+      type: "localizedString",
+    }),
   ],
 
   preview: {
