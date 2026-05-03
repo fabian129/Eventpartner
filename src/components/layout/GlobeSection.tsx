@@ -408,19 +408,18 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
       {/* ── Content wrapper — z-60 sits ABOVE both overlay and navbar ── */}
       <div className="relative z-[60] w-full px-6 md:px-12 lg:px-16 py-12">
 
-        {/* Headline — CTA-driven */}
-        <div ref={headlineRef} className="mb-10">
+        {/* Headline — compact CTA with inline stats */}
+        <div ref={headlineRef} className="mb-6">
           <h2
-            className="font-display text-[clamp(2rem,5vw,3.6rem)] font-medium tracking-tight text-white leading-[0.95] mb-4"
+            className="font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-medium tracking-tight text-white leading-[1] mb-3"
           >
-            <span className="headline-word inline-block mr-3">Find</span>
-            <span className="headline-word inline-block mr-3">your</span>
-            <span className="headline-word inline-block mr-3">venue.</span>
+            <span className="headline-word inline-block mr-2">Find</span>
+            <span className="headline-word inline-block mr-2">your</span>
+            <span className="headline-word inline-block mr-2">venue.</span>
             <span className="headline-word inline-block italic font-light text-tiffany">Anywhere in Europe.</span>
           </h2>
-          <p className="headline-word text-white/40 text-[15px] md:text-base font-sans max-w-xl leading-relaxed">
-            Explore our network of <span className="text-tiffany/80 font-medium">360,000+ venues across 36 countries</span>. 
-            Select a region, browse venues, and submit your inquiry — we respond within 24 hours with at least 3 curated proposals.
+          <p className="headline-word text-white/35 text-[14px] font-sans max-w-2xl leading-relaxed">
+            <span className="text-white/50 font-medium">360,000+ venues</span> · <span className="text-white/50 font-medium">36 countries</span> · <span className="text-white/50 font-medium">24h response</span> · <span className="text-white/50 font-medium">3+ proposals</span> per inquiry. Select a region and browse venues to get started.
           </p>
         </div>
 
@@ -448,8 +447,8 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
                   <defs>
                     <path id="orb" d="M 250,250 m -230,0 a 230,230 0 1,1 460,0 a 230,230 0 1,1 -460,0" fill="none" />
                   </defs>
-                  <circle cx="250" cy="250" r="230" fill="none" stroke="white" strokeWidth="0.3" opacity="0.06" />
-                  <text fill="white" opacity="0.12" style={{ fontSize: "10px", fontFamily: "'JetBrains Mono',monospace", letterSpacing: "0.2em", textTransform: "uppercase" }}>
+                  <circle cx="250" cy="250" r="230" fill="none" stroke="white" strokeWidth="0.4" opacity="0.12" />
+                  <text fill="white" opacity="0.25" style={{ fontSize: "10px", fontFamily: "'JetBrains Mono',monospace", letterSpacing: "0.2em", textTransform: "uppercase" }}>
                     <textPath href="#orb" startOffset="0%">
                       EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES • EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES •
                     </textPath>
@@ -490,34 +489,6 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
               </AnimatePresence>
             </div>
           </div>
-        </div>
-
-        {/* Stats bar — social proof */}
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {[
-            { value: '360,000+', label: 'Venues', accent: true },
-            { value: '36', label: 'Countries', accent: false },
-            { value: '24h', label: 'Response time', accent: false },
-            { value: '3+', label: 'Proposals per inquiry', accent: false },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="text-center py-4 px-3 rounded-xl border"
-              style={{
-                background: 'rgba(255,255,255,0.02)',
-                borderColor: 'rgba(255,255,255,0.05)',
-              }}
-            >
-              <div className={`font-display text-2xl md:text-3xl font-medium tracking-tight ${
-                stat.accent ? 'text-tiffany' : 'text-white'
-              }`}>
-                {stat.value}
-              </div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/30 mt-1">
-                {stat.label}
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
