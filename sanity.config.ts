@@ -5,6 +5,23 @@ import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { schemaTypes } from "./sanity/schemas";
 
+/**
+ * All singleton page documents.
+ * Each entry: [schemaType, display title, icon emoji]
+ */
+const PAGE_SINGLETONS = [
+  { type: "homePage", title: "🏠 Homepage" },
+  { type: "aboutPage", title: "👥 About" },
+  { type: "leadershipPage", title: "👔 Leadership" },
+  { type: "securityPage", title: "🔒 Security" },
+  { type: "vipPage", title: "⭐ VIP" },
+  { type: "careersPage", title: "💼 Careers" },
+  { type: "webshopPage", title: "🛍️ Webshop" },
+  { type: "faqPage", title: "❓ FAQ" },
+  { type: "aiAssistantPage", title: "🤖 AI Assistant" },
+  { type: "helpCenterPage", title: "📚 Help Center" },
+] as const;
+
 export default defineConfig({
   name: "default",
   title: "EventPartner",
@@ -18,12 +35,18 @@ export default defineConfig({
       structure: (S) =>
         S.list()
           .title("Content")
-          .items([
-            S.listItem()
-              .title("Homepage")
-              .id("homePage")
-              .child(S.document().schemaType("homePage").documentId("homePage")),
-          ]),
+          .items(
+            PAGE_SINGLETONS.map((page) =>
+              S.listItem()
+                .title(page.title)
+                .id(page.type)
+                .child(
+                  S.document()
+                    .schemaType(page.type)
+                    .documentId(page.type)
+                )
+            )
+          ),
     }),
     presentationTool({
       previewUrl: {
@@ -44,7 +67,11 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+    // Prevent creating new instances of singleton page types
     templates: (templates) =>
-      templates.filter(({ schemaType }) => schemaType !== "homePage"),
+      templates.filter(
+        ({ schemaType }) =>
+          !PAGE_SINGLETONS.some((p) => p.type === schemaType)
+      ),
   },
 });
