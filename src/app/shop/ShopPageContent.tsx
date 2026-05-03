@@ -2,9 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { client } from "@/../sanity/lib/client";
-import { WEBSHOP_PAGE_QUERY } from "@/../sanity/lib/queries";
-import { localize } from "@/../sanity/lib/locale";
 import { getProducts, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { useCart } from "@/context/CartContext";
@@ -18,25 +15,23 @@ const INFO_CARDS = [
   { icon: Shield, value: "Quality", label: "Premium branded products" },
 ];
 
-export function ShopPageContent() {
+interface ShopCMS {
+  heroLabel?: string; heroLabelRight?: string;
+  headline?: string; headlineAccent?: string; description?: string;
+  merchLabel?: string;
+  comingSoonTitle?: string; comingSoonDesc?: string;
+  quoteTitle?: string; quoteButton?: string;
+  vppHeadline?: string; vppHeadlineAccent?: string; vppDescription?: string;
+  successTitle?: string; successDescription?: string;
+  ctaHeadline?: string; ctaDescription?: string;
+}
+
+export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
   const [submitted, setSubmitted] = useState(false);
-  const [cms, setCms] = useState<any>(null);
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [productError, setProductError] = useState<string | null>(null);
   const { totalQuantity, openCart } = useCart();
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await client.fetch(WEBSHOP_PAGE_QUERY);
-        setCms(data);
-      } catch (err) {
-        console.error("Failed to fetch webshop page data:", err);
-      }
-    }
-    fetchData();
-  }, []);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -72,25 +67,23 @@ export function ShopPageContent() {
     setSubmitted(true);
   };
 
-  const t = (field: { en?: string; sv?: string } | undefined | null) => localize(field);
-
-  const headline = t(cms?.headline) || "Everything for your event.";
-  const headlineAccent = t(cms?.headlineAccent) || "Order online.";
-  const description = t(cms?.description) || "Name badges, conference kits, décor and branded merchandise — all curated for professional events.";
-  const quoteTitle = t(cms?.quoteTitle) || "Video Plus Print Quote";
-  const quoteButton = t(cms?.quoteButton) || "Request Quote";
-  const heroLabel = t(cms?.heroLabel) || "EventPartner — Shop";
-  const heroLabelRight = t(cms?.heroLabelRight) || "Event Merchandise";
-  const merchLabel = t(cms?.merchLabel) || "Event Merchandise";
-  const comingSoonTitle = t(cms?.comingSoonTitle) || "Coming Soon";
-  const comingSoonDesc = t(cms?.comingSoonDesc) || "Our event merchandise catalog is being prepared. Check back soon for branded products and conference essentials.";
-  const vppHeadline = t(cms?.vppHeadline) || "Premium video";
-  const vppHeadlineAccent = t(cms?.vppHeadlineAccent) || "brochures.";
-  const vppDesc = t(cms?.vppDescription) || "Stand out at your next event with our custom Video Plus Print brochures — a tangible, high-impact marketing tool that combines print with embedded video.";
-  const successTitle = t(cms?.successTitle) || "Quote Request Sent";
-  const successDesc = t(cms?.successDescription) || "We will get back to you with a custom Video Plus Print quote within 24 hours.";
-  const ctaHeadline = t(cms?.ctaHeadline) || "Need a custom solution?";
-  const ctaDesc = t(cms?.ctaDescription) || "Contact us for bulk orders, custom branding, or tailored merchandise packages.";
+  const headline = cms?.headline || "Everything for your event.";
+  const headlineAccent = cms?.headlineAccent || "Order online.";
+  const description = cms?.description || "Name badges, conference kits, décor and branded merchandise — all curated for professional events.";
+  const quoteTitle = cms?.quoteTitle || "Video Plus Print Quote";
+  const quoteButton = cms?.quoteButton || "Request Quote";
+  const heroLabel = cms?.heroLabel || "EventPartner — Shop";
+  const heroLabelRight = cms?.heroLabelRight || "Event Merchandise";
+  const merchLabel = cms?.merchLabel || "Event Merchandise";
+  const comingSoonTitle = cms?.comingSoonTitle || "Coming Soon";
+  const comingSoonDesc = cms?.comingSoonDesc || "Our event merchandise catalog is being prepared. Check back soon for branded products and conference essentials.";
+  const vppHeadline = cms?.vppHeadline || "Premium video";
+  const vppHeadlineAccent = cms?.vppHeadlineAccent || "brochures.";
+  const vppDesc = cms?.vppDescription || "Stand out at your next event with our custom Video Plus Print brochures — a tangible, high-impact marketing tool that combines print with embedded video.";
+  const successTitle = cms?.successTitle || "Quote Request Sent";
+  const successDesc = cms?.successDescription || "We will get back to you with a custom Video Plus Print quote within 24 hours.";
+  const ctaHeadline = cms?.ctaHeadline || "Need a custom solution?";
+  const ctaDesc = cms?.ctaDescription || "Contact us for bulk orders, custom branding, or tailored merchandise packages.";
 
   return (
     <main className="relative w-full pt-32 md:pt-44 pb-20 md:pb-32 overflow-hidden">
