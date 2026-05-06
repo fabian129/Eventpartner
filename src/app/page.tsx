@@ -1,11 +1,11 @@
 import { Navbar } from "@/components/layout/Navbar";
-import { Hero } from "@/components/layout/Hero";
-import { GlobeSection } from "@/components/layout/GlobeSection";
+import { GlobeHero } from "@/components/layout/GlobeHero";
 import { VideoSection } from "@/components/layout/VideoSection";
 import { ServiceCardsPersonal } from "@/components/layout/ServiceCardsPersonal";
 import { CinematicQuoteBreak } from "@/components/layout/CinematicQuoteBreak";
 import { RequestFormSection } from "@/components/layout/RequestFormSection";
 import { CaseStoriesSection } from "@/components/layout/CaseStoriesSection";
+import { VIPTeaser } from "@/components/layout/VIPTeaser";
 import { NewsletterInline } from "@/components/layout/NewsletterInline";
 import { AboutSection } from "@/components/layout/AboutSection";
 import { FAQSection } from "@/components/layout/FAQSection";
@@ -40,8 +40,8 @@ export default async function Home() {
         cta: t(data.navCta),
       } : undefined} />
 
-      {/* 1. Hero — hook + CTA (110vh high) */}
-      <Hero cms={data ? {
+      {/* 1. Globe Hero — fullscreen globe + headline + region strip */}
+      <GlobeHero cms={data ? {
         badge: t(data.heroBadge),
         headline: t(data.heroHeadline),
         headlineAccent: t(data.heroHeadlineAccent),
@@ -52,7 +52,7 @@ export default async function Home() {
 
       {/* The rest of the light page content wrapped in the LightUp zone */}
       <HeroLightUpZone>
-        {/* 2. Harmon Brothers Style Video Overlap (Straddles the seam between Hero and light section) */}
+        {/* 2. Video + Partner banner — own section below hero */}
         <ScrollSection>
           <VideoSection cms={data ? {
             label: t(data.videoLabel),
@@ -68,19 +68,6 @@ export default async function Home() {
         <ScrollSection fadeOut={false}>
           <LogoTicker />
         </ScrollSection>
-
-        <GlobeSection cms={data ? {
-          badge: t(data.globeBadge),
-          headline: t(data.globeHeadline),
-          headlineAccent: t(data.globeHeadlineAccent),
-          description: t(data.globeDescription),
-          metrics: data.flagsMetrics?.map((m: any) => ({
-            value: m.value,
-            stringValue: m.stringValue,
-            suffix: m.suffix,
-            label: t(m.label)
-          }))
-        } : undefined} />
 
 
 
@@ -127,33 +114,12 @@ export default async function Home() {
       </ScrollSection>
       </HeroLightUpZone>
 
-      {/* 7-8. Dark Zone 1: Cases + Newsletter */}
+      {/* 7. Dark Zone: VIP */}
       <DarkZone>
-        {/* Cases hidden temporarily per client request */}
-        {/* <CaseStoriesSection cms={data ? {
-          label: t(data.casesLabel),
-          labelRight: t(data.casesLabelRight),
-          headline: t(data.casesHeadline),
-          description: t(data.casesDescription),
-          cards: data.caseCards?.map((c: any) => ({
-            client: c.client,
-            event: t(c.event),
-            description: t(c.description),
-            guests: c.guests,
-            location: t(c.location),
-            duration: t(c.duration),
-          })),
-          cta: t(data.casesCta),
-        } : undefined} /> */}
-        <NewsletterInline cms={data ? {
-          headline: t(data.newsletterHeadline),
-          description: t(data.newsletterDescription),
-          placeholder: t(data.newsletterPlaceholder),
-          button: t(data.newsletterButton),
-        } : undefined} />
+        <VIPTeaser />
       </DarkZone>
 
-      {/* 9. About */}
+      {/* 8. About */}
       <ScrollSection>
         <AboutSection showTeam={false} cms={data ? {
           label: t(data.aboutLabel),
@@ -176,6 +142,14 @@ export default async function Home() {
           })),
         } : undefined} />
       </ScrollSection>
+
+      {/* 9. Newsletter */}
+      <NewsletterInline cms={data ? {
+        headline: t(data.newsletterHeadline),
+        description: t(data.newsletterDescription),
+        placeholder: t(data.newsletterPlaceholder),
+        button: t(data.newsletterButton),
+      } : undefined} />
 
       {/* 10. Webshop Teaser */}
       <ScrollSection>

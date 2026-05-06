@@ -306,7 +306,8 @@ export async function createCart(): Promise<ShopifyCart> {
 export async function addToCart(
   cartId: string,
   variantId: string,
-  quantity = 1
+  quantity = 1,
+  attributes?: { key: string; value: string }[]
 ): Promise<ShopifyCart> {
   const query = `
     ${CART_FRAGMENT}
@@ -319,13 +320,18 @@ export async function addToCart(
     }
   `;
 
+  const lineInput: Record<string, unknown> = { merchandiseId: variantId, quantity };
+  if (attributes && attributes.length > 0) {
+    lineInput.attributes = attributes;
+  }
+
   const data = await shopifyFetch<{
     cartLinesAdd: { cart: ShopifyCart & { lines: { edges: { node: ShopifyCartLine }[] } } };
   }>({
     query,
     variables: {
       cartId,
-      lines: [{ merchandiseId: variantId, quantity }],
+      lines: [lineInput],
     },
   });
 

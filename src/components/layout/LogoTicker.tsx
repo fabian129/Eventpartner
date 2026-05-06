@@ -13,7 +13,7 @@ const LOGOS = [
 
 export function LogoTicker() {
   return (
-    <section className="relative w-full mt-8 py-10 md:py-14 border-y border-[var(--border-default)] bg-[var(--bg-primary)]">
+    <section className="relative w-full mt-2 pt-8 pb-24 md:pb-32 border-y border-[var(--border-default)] bg-[var(--bg-primary)]">
       {/* Label */}
       <div className="text-center mb-8">
         <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-dim)]">

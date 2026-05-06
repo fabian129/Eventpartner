@@ -21,8 +21,29 @@ export function VideoSection({ cms }: { cms?: VideoCMS }) {
   const isDark = theme === "dark";
 
   return (
-    <section id="video" className="relative w-full px-6 md:px-10 pt-10 pb-20 md:pb-32 z-20">
+    <section id="video" className="relative w-full px-6 md:px-10 pt-20 md:pt-40 pb-24 md:pb-32 z-20">
       <div className="max-w-[1200px] mx-auto">
+
+        {/* Headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: EASE }}
+          className="text-center mb-8 md:mb-12"
+        >
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-dim)] block mb-3">
+            {cms?.label || "How it works"}
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--text-primary)] leading-tight">
+            {cms?.headline || "Your event,"} <span className="text-tiffany">{cms?.headlineAccent || "simplified"}</span>
+          </h2>
+          {(cms?.description || true) && (
+            <p className="text-[15px] md:text-[16px] text-[var(--text-secondary)] max-w-[520px] mx-auto mt-3 leading-relaxed">
+              {cms?.description || "See how EventPartner connects you with the perfect venue in minutes, not weeks."}
+            </p>
+          )}
+        </motion.div>
 
         {/* Full-width video embed — scale + shadow entrance */}
         <motion.div

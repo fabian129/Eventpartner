@@ -16,7 +16,7 @@ const SERVICE_ITEMS = [
 ];
 
 const DEFAULT_LINKS = [
-  { label: "Services", href: "/#services", hasDropdown: true },
+  { label: "VIP", href: "/vip" },
   { label: "Customize", href: "/#request" },
   { label: "Shop", href: "/shop" },
   { label: "About", href: "/about" },

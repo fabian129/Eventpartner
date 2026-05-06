@@ -25,7 +25,7 @@ interface CartContextType {
   totalQuantity: number;
   openCart: () => void;
   closeCart: () => void;
-  addItem: (variantId: string, quantity?: number) => Promise<void>;
+  addItem: (variantId: string, quantity?: number, attributes?: { key: string; value: string }[]) => Promise<void>;
   updateItem: (lineId: string, quantity: number) => Promise<void>;
   removeItem: (lineId: string) => Promise<void>;
 }
@@ -64,11 +64,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [cart]);
 
   const addItem = useCallback(
-    async (variantId: string, quantity = 1) => {
+    async (variantId: string, quantity = 1, attributes?: { key: string; value: string }[]) => {
       setIsLoading(true);
       try {
         const currentCart = await ensureCart();
-        const updatedCart = await addToCart(currentCart.id, variantId, quantity);
+        const updatedCart = await addToCart(currentCart.id, variantId, quantity, attributes);
         setCart(updatedCart);
         localStorage.setItem(CART_ID_KEY, updatedCart.id);
         setIsOpen(true); // Open cart drawer when item added
