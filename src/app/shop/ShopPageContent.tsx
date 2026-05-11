@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { getProducts, type ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { useCart } from "@/context/CartContext";
+import { VPPShowcase } from "@/components/shop/VPPShowcase";
 import { ShoppingBag, ArrowRight, Send, Package, Truck, Shield } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -191,8 +192,11 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
         )}
       </section>
 
+      {/* ─── VPP Product Showcase ─── */}
+      <VPPShowcase />
+
       {/* ─── VPP Quote Form ─── */}
-      <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
+      <section id="vpp-quote" className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{quoteTitle}</span>

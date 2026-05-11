@@ -17,32 +17,54 @@ const FALLBACK_IMAGES = [
 ];
 
 /**
- * Get the primary image for a venue based on country slug and index.
- * Countries with 15 images: 3 per venue (1,4,7,10,13)
- * Countries with 5 images: 1 per venue (1,2,3,4,5)
+ * Get the best-quality image for a venue.
+ * Uses pre-ranked venue-best-N.jpg files (sorted by file size / resolution).
  */
 function getVenueImage(countrySlug: string, venueIndex: number, imageCount: number): string {
-  if (imageCount >= 15) {
-    // 3 images per venue: first image of each set
-    const imgNum = venueIndex * 3 + 1;
-    return `/Images/venues/${countrySlug}/venue-${imgNum}.jpg`;
-  } else if (imageCount >= 5) {
-    // 1 image per venue
-    return `/Images/venues/${countrySlug}/venue-${venueIndex + 1}.jpg`;
+  if (imageCount >= 5) {
+    return `/Images/venues/${countrySlug}/venue-best-${venueIndex + 1}.jpg`;
   }
   // Fallback
   return FALLBACK_IMAGES[venueIndex % FALLBACK_IMAGES.length];
 }
 
-// Image counts per country (from extraction)
 const IMAGE_COUNTS: Record<string, number> = {
-  'belgium': 5, 'bosnia-herzegovina': 15, 'croatia': 15, 'czech-republic': 15,
-  'estonia': 15, 'france': 15, 'greece': 15, 'hungary': 15, 'iceland': 15,
-  'ireland': 15, 'italy': 15, 'latvia': 15, 'lithuania': 15, 'luxembourg': 15,
-  'malta': 15, 'montenegro': 15, 'netherlands': 15, 'north-macedonia': 15,
-  'norway': 15, 'poland': 5, 'portugal': 15, 'romania': 15, 'serbia': 15,
-  'slovakia': 15, 'slovenia': 15, 'spain': 15, 'sweden': 15, 'switzerland': 15,
-  'uk': 15,
+  'afghanistan': 15, 'albania': 15, 'algeria': 15, 'andorra': 12, 'angola': 14,
+  'antigua-and-barbuda': 14, 'argentina': 15, 'armenia': 15, 'aruba': 15, 'australia': 14,
+  'austria': 15, 'azerbaijan': 15, 'bahamas': 12, 'bahrain': 15, 'bangladesh': 15,
+  'barbados': 15, 'belgium': 5, 'belize': 13, 'benin': 12, 'bermuda': 13,
+  'bhutan': 13, 'bolivia': 14, 'bosnia-herzegovina': 15, 'botswana': 15, 'brazil': 15,
+  'brunei': 15, 'bulgaria': 15, 'burkina-faso': 15, 'cambodia': 14, 'cameroon': 14,
+  'canada': 15, 'cape-verde': 15, 'cayman-islands': 14, 'central-african-republic': 15,
+  'chad': 13, 'chile': 15, 'china': 15, 'colombia': 15, 'congo': 15,
+  'costa-rica': 15, 'croatia': 15, 'czech-republic': 15, 'denmark': 15, 'djibouti': 13,
+  'dominica': 15, 'dominican-republic': 14, 'ecuador': 14, 'egypt': 15,
+  'el-salvador': 15, 'equatorial-guinea': 15, 'eritrea': 14, 'estonia': 15,
+  'eswatini': 12, 'ethiopia': 15, 'fiji': 13, 'finland': 15, 'france': 15,
+  'gambia': 15, 'georgia': 14, 'germany': 15, 'ghana': 15, 'gibraltar': 15,
+  'greece': 15, 'grenada': 14, 'guatemala': 15, 'guinea': 15, 'guinea-bissau': 11,
+  'honduras': 15, 'hong-kong': 15, 'hungary': 15, 'iceland': 15, 'india': 15,
+  'indonesia': 15, 'ireland': 15, 'israel': 15, 'italy': 15, 'jamaica': 14,
+  'japan': 15, 'jordan': 14, 'kazakhstan': 15, 'kenya': 15, 'kiribati': 14,
+  'kuwait': 15, 'kyrgyzstan': 14, 'laos': 15, 'latvia': 15, 'lebanon': 15,
+  'lesotho': 14, 'liberia': 14, 'lithuania': 15, 'luxembourg': 15, 'macau': 14,
+  'madagascar': 14, 'malawi': 15, 'malaysia': 15, 'maldives': 15, 'mali': 15,
+  'malta': 15, 'marshall-islands': 15, 'mauritania': 15, 'mauritius': 15,
+  'mexico': 15, 'micronesia': 15, 'moldova': 15, 'monaco': 15, 'mongolia': 15,
+  'montenegro': 15, 'morocco': 15, 'mozambique': 15, 'myanmar': 14, 'namibia': 15,
+  'nauru': 12, 'nepal': 14, 'netherlands': 15, 'new-zealand': 15, 'nicaragua': 14,
+  'niger': 14, 'nigeria': 15, 'north-macedonia': 15, 'norway': 15, 'oman': 14,
+  'pakistan': 15, 'palau': 14, 'panama': 13, 'paraguay': 15, 'peru': 15,
+  'philippines': 14, 'poland': 5, 'portugal': 15, 'puerto-rico': 15, 'qatar': 15,
+  'romania': 15, 'rwanda': 14, 'saint-kitts-and-nevis': 13, 'saint-lucia': 14,
+  'saint-vincent-and-the-grenadines': 12, 'samoa': 12, 'sao-tome-and-principe': 13,
+  'saudi-arabia': 14, 'senegal': 15, 'serbia': 15, 'seychelles': 15,
+  'sierra-leone': 14, 'singapore': 15, 'slovakia': 15, 'slovenia': 15, 'somalia': 14,
+  'south-africa': 15, 'south-korea': 15, 'south-sudan': 11, 'spain': 15,
+  'sri-lanka': 15, 'sudan': 14, 'sweden': 15, 'switzerland': 15, 'tanzania': 15,
+  'thailand': 15, 'togo': 14, 'tonga': 15, 'tunisia': 15, 'turkey': 15,
+  'tuvalu': 14, 'uganda': 15, 'uk': 15, 'ukraine': 14, 'uruguay': 14,
+  'uzbekistan': 14, 'vanuatu': 15, 'vietnam': 15, 'zambia': 15, 'zimbabwe': 15,
 };
 
 export function TopVenuesGrid({ 
@@ -93,9 +115,9 @@ export function TopVenuesGrid({
               alt={venue.name}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 768px) 100vw, 33vw"
               loading="lazy"
-              quality={90}
+              unoptimized
             />
             {/* Overlay — visible on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">

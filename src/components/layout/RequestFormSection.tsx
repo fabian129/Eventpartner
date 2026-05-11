@@ -73,7 +73,7 @@ export function RequestFormSection({ cms }: { cms?: {
 
           {/* Two-column: heading left, description right */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">
+            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
               {cms?.headline || "Tell us what you need."}
               <br />
               <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-purple via-purple-light to-tiffany">{cms?.headlineAccent || "We'll handle the rest."}</span>
@@ -210,7 +210,7 @@ export function RequestFormSection({ cms }: { cms?: {
                   {cms?.extendedDesc || "Fill in our extended form to give us more detailed information — venue requirements, catering, activities, and more."}
                 </p>
                 <Link
-                  href="/skraddarsy"
+                  href="/customize"
                   className="inline-flex items-center gap-1.5 text-[13px] font-medium text-purple hover:text-purple-light transition-colors duration-300"
                 >
                   {cms?.extendedLink || "Customize your event →"}

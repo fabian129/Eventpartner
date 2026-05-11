@@ -155,39 +155,72 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
         </div>
       </section>
 
-      {/* Tiers */}
+      {/* Tiers — Single VIP Card */}
       <section className="max-w-[1400px] mx-auto px-6 md:px-10 py-24 md:py-32">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }} className="mb-14">
           <div className="flex justify-between items-start mb-10">
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.tiersLabel || "EventPartner — Membership tiers"}</span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">{cms?.tiersLabelRight || "Two levels"}</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.tiersLabel || "EventPartner — VIP Membership"}</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">{cms?.tiersLabelRight || "Exclusive"}</span>
           </div>
-          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">{cms?.tiersHeadline || "Choose your level."}</h2>
-          <p className="font-display text-[clamp(1.1rem,2.2vw,1.5rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-2xl">{cms?.tiersDescription || "Two tiers, designed around your needs. Both include dedicated support — Gold adds enterprise-grade flexibility."}</p>
+          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">{cms?.tiersHeadline || "What you get."}</h2>
+          <p className="font-display text-[clamp(1.1rem,2.2vw,1.5rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-2xl">{cms?.tiersDescription || "Our VIP membership, designed around your needs. Includes a dedicated booking resource for booking and coordinating all your events. Everywhere."}</p>
         </motion.div>
+
+        {/* Dark wrapper — same style as original */}
         <div className="bg-[#111111] rounded-2xl p-2 md:p-3">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {tiers.map((tier, i) => (
-              <motion.div key={tier.name} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }} className={`relative group overflow-hidden rounded-xl p-8 md:p-10 ${tier.highlight ? "bg-gradient-to-br from-[#1a1a1a] to-[#111]" : "bg-[#161616]"}`} style={{ minHeight: "480px" }}>
-                <span className="absolute top-4 left-5 font-mono text-[11px] tracking-[0.12em] text-white/20 font-medium">{String(i + 1).padStart(2, "0")}</span>
-                {tier.badge && (<div className="absolute top-4 right-5"><span className={`inline-block font-mono text-[9px] uppercase tracking-[0.12em] px-3 py-1 rounded-full ${tier.highlight ? "bg-purple/15 text-purple-light border border-purple/15" : "bg-white/[0.04] text-white/30 border border-white/[0.06]"}`}>{tier.badge}</span></div>)}
-                <div className="mt-12">
-                  <h3 className="font-display text-[28px] md:text-[32px] font-medium text-white tracking-tight leading-[1.05] mb-2">{tier.name}</h3>
-                  <div className="mb-8">
-                    <span className={`font-display text-lg font-medium ${tier.highlight ? "text-purple" : "text-tiffany"}`}>{tier.price}</span>
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.1em] mt-1 text-white/25">{tier.priceSub}</span>
-                  </div>
-                  <ul className="space-y-3 mb-10">
-                    {tier.features.map((f) => (
-                      <li key={f} className="flex items-start gap-3"><Check className={`w-4 h-4 mt-0.5 shrink-0 ${tier.highlight ? "text-purple/60" : "text-tiffany/50"}`} /><span className="text-[13px] leading-relaxed text-white/45">{f}</span></li>
-                    ))}
-                  </ul>
-                  <a href="/#request" className={`inline-flex items-center gap-2 text-[13px] font-medium transition-all duration-300 ${tier.highlight ? "text-purple hover:text-purple-light" : "text-tiffany hover:text-[#5EC4BA]"}`}>{tier.cta}<ArrowRight className="w-3.5 h-3.5" /></a>
-                </div>
-                <div className="absolute inset-0 border border-white/[0.04] group-hover:border-white/[0.08] transition-colors duration-500 pointer-events-none rounded-xl" />
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.55, ease: EASE }}
+            className="relative group overflow-hidden rounded-xl bg-gradient-to-br from-[#1a1a1a] to-[#111] transition-shadow duration-700 hover:shadow-[0_0_60px_-12px_rgba(120,81,169,0.15)]"
+            style={{ minHeight: "420px" }}
+          >
+            {/* Corner number */}
+            <span className="absolute top-5 left-6 font-mono text-[11px] tracking-[0.12em] text-white/20 font-medium">01</span>
+
+            {/* Badge */}
+            <div className="absolute top-5 right-6">
+              <span className="inline-block font-mono text-[9px] uppercase tracking-[0.12em] px-3 py-1 rounded-full bg-purple/15 text-purple-light border border-purple/15">999€ /month</span>
+            </div>
+
+            <div className="pt-14 pb-10 px-8 md:px-10 lg:px-12">
+              {/* Title + Price */}
+              <h3 className="font-display text-[28px] md:text-[32px] font-medium text-white tracking-tight leading-[1.05] mb-2">VIP-Partner</h3>
+              <div className="mb-8">
+                <span className="font-display text-lg font-medium text-purple">By Invitation</span>
+                <span className="block font-mono text-[10px] uppercase tracking-[0.1em] mt-1 text-white/25">Annual booking volume of at least €300,000 required</span>
+              </div>
+
+              {/* Features — two columns */}
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 mb-10">
+                {[
+                  "A dedicated booking resource for booking & coordinating",
+                  "Negotiated VIP pricing & exclusive venue access",
+                  "Up to 14% discount on all bookings",
+                  "Advanced reporting & spend control",
+                  "A centralised booking flow for the entire organisation",
+                  "Access to the EventPartner AI Assistant",
+                  "Global networking & partner opportunities",
+                  "Priority response within 12h",
+                  "Custom contract & billing terms",
+                ].map((f) => (
+                  <li key={f} className="flex items-start gap-3">
+                    <Check className="w-4 h-4 mt-0.5 shrink-0 text-purple/60" />
+                    <span className="text-[13px] leading-relaxed text-white/45">{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <a href="/#request" className="inline-flex items-center gap-2 text-[13px] font-medium text-purple hover:text-purple-light transition-all duration-300">
+                Request Invitation <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+            {/* Subtle border — purple tint on hover */}
+            <div className="absolute inset-0 border border-white/[0.04] group-hover:border-purple/[0.1] transition-colors duration-700 pointer-events-none rounded-xl" />
+          </motion.div>
         </div>
       </section>
 
@@ -216,16 +249,16 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }}>
           <div className="max-w-[800px] grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-3 md:gap-4">
             <Link href="/#request" className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[var(--text-muted)] transition-all duration-300 min-h-[130px]">
-              <span className="text-[13px] font-semibold text-[var(--text-secondary)]">{cms?.ctaCard1Title || "Talk to us"}</span>
+              <span className="text-[13px] font-semibold text-[var(--text-secondary)]">{cms?.ctaCard1Title || "Questions?"}</span>
               <div className="flex items-end justify-between mt-4">
-                <p className="text-[15px] md:text-[17px] text-[var(--text-muted)] leading-snug max-w-[200px]">{cms?.ctaCard1Desc || "Get answers to your VIP questions."}</p>
+                <p className="text-[15px] md:text-[17px] text-[var(--text-muted)] leading-snug max-w-[200px]">{cms?.ctaCard1Desc || "We'll tell you if you qualify."}</p>
                 <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] group-hover:translate-x-0.5 transition-all duration-300 flex-shrink-0" />
               </div>
             </Link>
             <Link href="/#request" className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-purple hover:bg-[#6A47A0] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(120,81,169,0.15)]">
-              <span className="text-[13px] font-semibold text-white/50">{cms?.ctaCard2Title || "Apply for VIP"}</span>
+              <span className="text-[13px] font-semibold text-white/50">{cms?.ctaCard2Title || "Apply"}</span>
               <div className="flex items-end justify-between mt-4">
-                <p className="text-[18px] md:text-[22px] text-white font-medium leading-snug max-w-[280px]">{cms?.ctaCard2Headline || "Start your VIP journey."}<br /><span className="text-white/50">{cms?.ctaCard2Sub || "Today."}</span></p>
+                <p className="text-[18px] md:text-[22px] text-white font-medium leading-snug max-w-[280px]">{cms?.ctaCard2Headline || "Request an invitation."}<br /><span className="text-white/50">{cms?.ctaCard2Sub || "Today."}</span></p>
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/15 transition-colors flex-shrink-0"><ArrowRight className="w-5 h-5 text-white group-hover:translate-x-0.5 transition-transform duration-300" /></div>
               </div>
             </Link>

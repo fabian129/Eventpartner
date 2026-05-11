@@ -1,93 +1,131 @@
 # EventPartner — TODO
 
-> **Senast uppdaterad:** 2026-05-06
+> **Senast uppdaterad:** 2026-05-10
 
 ---
 
-## Shop (Prio 1)
-- [x] Shopify produkter laddas och visas
-- [x] Customize & Order — designer modal med canvas
+## ✅ KLART
+
+### Grundplattform
+- [x] Next.js App Router + TypeScript setup
+- [x] Design token system + constraints
+- [x] Alla bilder WebP-optimerade (365 MB → 9 MB)
+- [x] GSAP ScrollTrigger + Framer Motion animationer
+- [x] `prefers-reduced-motion` accessibility
+- [x] Hydration error fixad (Lenis wrapper)
+
+### Sidor (alla premium-nivå)
+- [x] Startsida med Hero slideshow, Globe, Case Stories, VIP, Newsletter
+- [x] VIP-sida (`/vip`)
+- [x] Shop-sida (`/shop`)
+- [x] Leadership med Pontus, Joakim, Malin + LinkedIn
+- [x] Careers med perks + ansökningsformulär
+- [x] FAQ med accordion + sökning
+- [x] AI Assistant ("Coming Soon")
+- [x] Security & Privacy (GDPR)
+- [x] Help Center med kontaktformulär
+- [x] Logotyp i transparent format
+
+### Navigering
+- [x] Uppdaterad navbar: VIP, Customize, Shop, About
+- [x] Gamla sidor borttagna
+
+### Shop — Frontend
+- [x] Shopify Storefront API-klient (`shopify.ts`)
+- [x] Cart mutations (create, add, update, remove)
+- [x] CartContext med localStorage-persistering
+- [x] ProductCard med variant-väljare, pris, badges
+- [x] CartDrawer med quantity controls + checkout redirect
+- [x] Graceful 401-fallback ("Coming Soon")
+- [x] Product Designer med canvas
 - [x] Lokala produktbilder (CORS fix)
-- [x] Blank mockup som canvas-bakgrund (bild 2)
-- [x] Special Instructions-fält → bifogas till order
-- [ ] **Molnlagring för design-PNG** — byt `/api/upload-design` från `public/uploads/` till Vercel Blob eller Supabase Storage (lokala filer försvinner vid deploy)
-- [ ] **Blanka framsidesmockups** — nuvarande bild 2 är baksidan. Hämta rena front-mockups från Printify
-- [ ] **Produktkatalog** — Malin/Pontus behöver rensa irrelevanta Printify-produkter (yoga mat, kimono etc.)
-- [ ] **Cart → Checkout** — verifiera att Shopify checkout visar design-attributen korrekt
-- [ ] **Order confirmation** — verifiera att EP-teamet ser design-PNG i Shopify admin
+- [x] Special Instructions-fält
+
+### VPP (Video Plus Print)
+- [x] VPP-bilder inlagda
+- [x] VPP offertformulär byggt
+
+### Länder & Regioner ✅ NY
+- [x] 169 länder med venue-data (29 EU + 140 globala)
+- [x] 5 venues per land med namn, stad, kapacitet, typ
+- [x] Modulär filstruktur (europe/africa/asia-pacific/americas/middle-east)
+- [x] 10 aktiva regioner (5 EU + 5 globala)
+- [x] countryCoords.ts med koordinater för alla länder
+- [x] Globe-rendering med alla landpunkter
 
 ---
 
-## Identitet & Visuell röd tråd
-- [ ] **Minimalistisk logga** — "EP" som ikon + globen för sig
-- [x] **Byta Tiffany accent** — `#81D8D0` → `#6AD8D2`
-- [ ] **Bildspråk med lila drag** — bilder ska ha subtil lila/purple toning
-- [ ] **Svartvita bilder → färg vid hover** — grayscale default, färg vid hover
-- [ ] **Mörka sektioner med liv** — bento-bildgrids i bakgrunden
-- [ ] **Mindre "kalt"** — subtila detaljer: gradient accents, texturer, micro-animations
+## 🟡 PRIO 1 — Shopify Live
+
+| Status | Uppgift | Notering |
+|--------|---------|----------|
+| ✅ | **Shopify Storefront Token** — fungerar, ingen 401 | Verifierad 2026-05-10 |
+| ✅ | **Printify → Shopify koppling** — 7 produkter synkade | Crewneck, Cap, Long Sleeve, T-shirt, Mugg, Acrylic Sign |
+| ✅ | **Produktbilder, priser, varianter** — laddas korrekt | SEK-priser, variant-väljare, Shopify CDN-bilder |
+| 🟡 | **Verifiera end-to-end köpflöde** — Browse → Cart → Checkout | Kan testas nu — ingen blocker |
+| ⏳ | **Produktkatalog-rensning** — ta bort irrelevanta produkter | Pontus/Malin |
+| ⏳ | **Blanka framsidesmockups** — hämta rena front-mockups från Printify | Pontus/Malin |
 
 ---
 
-## Bildval & Känsla
-- [ ] **Mix av storslagna events OCH trevliga firmafester** — visa bredden
-- [ ] **Välkomnande bilder** — människor som är glada, värme
-- [ ] **Uppdatera bildbiblioteket** — konferenser, kickoffs, mingel, middagar, teambuilding
+## 🟡 PRIO 2 — Formulär & Backend
+
+| Status | Uppgift | Beskrivning |
+|--------|---------|-------------|
+| ⏳ | **VPP Formulär Backend** | E-post till Scott/Pontus vid inskickad offertförfrågan |
+| ⏳ | **Careers Formulär Backend** | E-post vid inskickad ansökan |
+| ⏳ | **Help Center Formulär Backend** | E-post vid supportförfrågan |
+| ⏳ | **Molnlagring för design-PNG** | Byt `/api/upload-design` från `public/uploads/` → Vercel Blob |
 
 ---
 
-## Sektioner
-- [x] **Ta bort TestimonialsSection**
-- [x] **Case Stories = mörk sektion** med scroll-transition
-- [x] **Logo Banner** — stilla, stora ikoner
-- [x] **Pop-up ruta** — exit-intent + 80% scroll trigger
-- [x] **VIP-sektion** — editorial, ansökan-baserad, guld-accenter
-- [x] **Newsletter** — mellan About och Webshop, mörk kontrast
+## 🟡 PRIO 3 — Innehåll & Design
+
+| Status | Uppgift | Beskrivning |
+|--------|---------|-------------|
+| ⏳ | **Om oss-sida** (`/om-oss`) | Editorial storytelling, teammedlemmar, manifesto |
+| ⏳ | **Bildspråk** | Mix av storslagna events + firmafester, välkomnande bilder |
+| ⏳ | **Visuell polish** | Lila toning, grayscale→färg hover, gradient accents |
+| ⏳ | **Blanka framsidesmockups** | Hämta rena front-mockups från Printify |
+| ⏳ | **Byt placeholder-loggor** | Samsung, Volvo etc. → officiella eller bort |
+| ⏳ | **Video** | Planera in videoplacering (Hero / Case Stories / Om oss) |
 
 ---
 
-## Nya sidor
-- [ ] **Om oss-sida** (`/om-oss`) — Editorial storytelling
-  - Varför de startade, erfarenhet, vision
-  - Info om varje teammedlem (bio + bild)
-  - Manifesto-stil, tidningskänsla
-- [x] **VIP-sida** (`/vip`) — Premium membership, Rich Purple
-- [ ] **Nyhetsbrev i VIP-sidan** — signup integrerad
+## 🟢 PRIO 4 — CMS & Admin
+
+| Status | Uppgift | Beskrivning |
+|--------|---------|-------------|
+| ⏳ | **Sanity CMS — statiska strängar** | Synka Hero, Services, Case Stories, FAQ till Sanity |
+| ⏳ | **Sanity onboarding** | Visa Malin/Pontus hur de redigerar i Sanity Studio |
+| ⏳ | **Länder i CMS** | Flytta venue-data till Sanity för enkel redigering |
+| ⏳ | **Admin Dashboard** | Gömd `/admin` med orderstatus, team, content |
 
 ---
 
-## Navbar
-- [x] **Navigation uppdaterad:** VIP, Customize, Shop, About
+## 🔵 NICE TO HAVE — V2
 
----
-
-## Länder & Regioner
-- [ ] Ladda ner 175 globala länder från Google Drive (.docx-filer)
-- [ ] Parsa och integrera i `countries.ts`
-- [ ] Verifiera att globe + sök fungerar med alla länder
-
----
-
-## Branding & Assets
-- [ ] Byt placeholder-loggor (Samsung, Volvo etc.) mot officiella assets
-- [ ] Uppdatera EP-logotyp till hög-kvalitetsversion
-
----
-
-## Video
-- [ ] **Planera in videoplacering** — Hero? Case stories? Om oss?
-
----
-
-## CMS (Sanity)
-- [ ] Synka alla statiska strängar till Sanity
-- [ ] Onboarda Malin/Pontus i Sanity Studio
-- [ ] Schemas för: Hero, Services, Case Stories, About, FAQ
-
----
-
-## Nice to have — Framtida
-- [ ] Bildspråk med lila toning — avancerad color grading
-- [ ] Fler case stories med riktigt content
+- [ ] Help Center AI-bot (separat AI-backend)
+- [ ] VPP Custom Configurator (pris-motor, specifikationer)
+- [ ] VPP filuppladdning + video-validering
 - [ ] SEO-sidor per destination
 - [ ] i18n (SV/EN)
 - [ ] PDF-generering
+- [ ] Fler case stories med riktigt content
+- [ ] Avancerad bildspråk med lila color grading
+- [ ] Dold Team-flik (kampanjhantering)
+
+---
+
+## Snabb-sammanfattning
+
+| Kategori | Klart | Kvar |
+|----------|-------|------|
+| Sidor & Navigation | ✅ 10/10 | — |
+| Shop Frontend | ✅ 9/9 | — |
+| Länder & Globe | ✅ 169 länder | — |
+| **Shopify Live** | ✅ Token + produkter | **E2E-test + katalog-rensning** |
+| **Formulär Backend** | ❌ | **3 formulär + molnlagring** |
+| Innehåll & Design | ⏳ | 6 uppgifter |
+| CMS & Admin | ⏳ | 4 uppgifter |
+| V2 Features | ⏳ | 9 uppgifter |

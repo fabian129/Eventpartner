@@ -51,7 +51,7 @@ export function useCanvas(options?: UseCanvasOptions) {
 
   const exportPNG = useCallback(() => {
     if (!canvas) return "";
-    return canvas.toDataURL({ format: "png", quality: 1 });
+    return canvas.toDataURL({ multiplier: 1, format: "png", quality: 1 });
   }, [canvas]);
 
   const exportJSON = useCallback(() => {

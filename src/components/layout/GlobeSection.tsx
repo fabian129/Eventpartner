@@ -496,9 +496,70 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   REGION GRID — Default dashboard view (2×3 or 2×4 grid)
+   CONTINENT GROUPING — maps region slugs to continents
+   ══════════════════════════════════════════════════════════════ */
+type Continent = {
+  id: string;
+  label: string;
+  emoji: string;
+  regionSlugs: string[];
+};
+
+const CONTINENTS: Continent[] = [
+  {
+    id: 'europe',
+    label: 'Europe',
+    emoji: '🌍',
+    regionSlugs: ['nordics', 'western-europe', 'central-europe', 'southern-europe', 'balkans-southeast', 'nordic-extended', 'central-europe-extended', 'balkans-extended'],
+  },
+  {
+    id: 'middle-east',
+    label: 'Middle East',
+    emoji: '🕌',
+    regionSlugs: ['middle-east'],
+  },
+  {
+    id: 'africa',
+    label: 'Africa',
+    emoji: '🌍',
+    regionSlugs: ['africa'],
+  },
+  {
+    id: 'asia-pacific',
+    label: 'Asia Pacific',
+    emoji: '🌏',
+    regionSlugs: ['asia-pacific'],
+  },
+  {
+    id: 'americas',
+    label: 'Americas',
+    emoji: '🌎',
+    regionSlugs: ['north-america', 'south-america'],
+  },
+];
+
+/* ══════════════════════════════════════════════════════════════
+   REGION GRID — Two-level: Continents → Sub-regions
    ══════════════════════════════════════════════════════════════ */
 function RegionGrid({ onSelectRegion, onHoverRegion }: { onSelectRegion: (slug: string) => void; onHoverRegion: (slug: string | null) => void }) {
+  const [activeContinent, setActiveContinent] = useState<string | null>(null);
+
+  const selectedContinent = CONTINENTS.find(c => c.id === activeContinent);
+  const subRegions = selectedContinent
+    ? selectedContinent.regionSlugs.map(s => REGIONS.find(r => r.slug === s)).filter(Boolean) as Region[]
+    : [];
+
+  // For single-region continents, skip sub-region step and go directly to region detail
+  const handleContinentClick = (continent: Continent) => {
+    if (continent.regionSlugs.length === 1) {
+      // Single region → go directly to country list
+      onSelectRegion(continent.regionSlugs[0]);
+    } else {
+      // Multiple sub-regions → show sub-region picker
+      setActiveContinent(continent.id);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -509,33 +570,133 @@ function RegionGrid({ onSelectRegion, onHoverRegion }: { onSelectRegion: (slug: 
       {/* Panel header */}
       <div className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-2.5">
-          <Globe2 className="w-4 h-4 text-tiffany/70" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-white/45">
-            Explore by Region
-          </span>
+          {activeContinent ? (
+            <button
+              onClick={() => { setActiveContinent(null); onHoverRegion(null); }}
+              className="flex items-center gap-1.5 text-white/40 hover:text-tiffany transition-colors group"
+            >
+              <ChevronLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.12em]">Back</span>
+            </button>
+          ) : (
+            <>
+              <Globe2 className="w-4 h-4 text-tiffany/70" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-white/45">
+                Explore by Region
+              </span>
+            </>
+          )}
         </div>
         <span className="font-mono text-[10px] text-white/20">
-          {REGIONS.filter(r => r.status === 'active').reduce((sum, r) => sum + r.countrySlugs.length, 0)} countries
+          {activeContinent && selectedContinent
+            ? `${subRegions.reduce((s, r) => s + r.countrySlugs.length, 0)} countries`
+            : `${REGIONS.filter(r => r.status === 'active').reduce((sum, r) => sum + r.countrySlugs.length, 0)} countries`
+          }
         </span>
       </div>
 
-      {/* Region cards grid */}
-      <div className="p-4 grid grid-cols-2 gap-3.5">
-        {REGIONS.map((region, i) => (
-          <RegionCard
-            key={region.slug}
-            region={region}
-            index={i}
-            onClick={() => onSelectRegion(region.slug)}
-            onHover={onHoverRegion}
-          />
-        ))}
-      </div>
+      <AnimatePresence mode="wait">
+        {!activeContinent ? (
+          /* ── Level 1: Continent buttons ── */
+          <motion.div
+            key="continents"
+            initial={{ opacity: 0, x: -15 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -15 }}
+            transition={{ duration: 0.2 }}
+            className="p-4 flex flex-col gap-2"
+          >
+            {CONTINENTS.map((continent, i) => {
+              const regions = continent.regionSlugs.map(s => REGIONS.find(r => r.slug === s)).filter(Boolean) as Region[];
+              const totalCountries = regions.reduce((s, r) => s + r.countrySlugs.length, 0);
+              const totalVenues = regions.reduce((s, r) => s + parseInt(r.totalVenues.replace(/[^\d]/g, '') || '0'), 0);
+              const allFlags = regions.flatMap(r => r.previewFlags).slice(0, 5);
+
+              return (
+                <motion.button
+                  key={continent.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.04, duration: 0.25 }}
+                  onClick={() => handleContinentClick(continent)}
+                  onMouseEnter={() => {
+                    // Hover highlights first region in continent
+                    if (regions[0]) onHoverRegion(regions[0].slug);
+                  }}
+                  onMouseLeave={() => onHoverRegion(null)}
+                  className="group flex items-center gap-4 px-4 py-3.5 rounded-xl border border-white/[0.05] bg-white/[0.02] hover:border-tiffany/20 hover:bg-tiffany/[0.04] active:scale-[0.98] transition-all duration-200 cursor-pointer text-left"
+                >
+                  {/* Emoji */}
+                  <span className="text-lg shrink-0">{continent.emoji}</span>
+
+                  {/* Label + stats */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="font-display text-[15px] font-medium tracking-tight text-white/80 group-hover:text-tiffany transition-colors">
+                        {continent.label}
+                      </span>
+                      <ArrowRight className="w-3 h-3 text-white/10 group-hover:text-tiffany/60 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    </div>
+                    <div className="flex items-center gap-3">
+                      {/* Mini flags */}
+                      <div className="flex items-center gap-1">
+                        {allFlags.map((code) => (
+                          <div key={code} className="w-6 h-4 rounded-[2px] overflow-hidden border border-white/[0.08]">
+                            <Image
+                              src={`https://flagcdn.com/w40/${code}.png`}
+                              alt="" width={40} height={28}
+                              className="w-full h-full object-cover" unoptimized
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      <span className="font-mono text-[10px] text-white/25">
+                        {totalCountries} countries
+                      </span>
+                      <span className="font-mono text-[10px] text-tiffany/40">
+                        {totalVenues.toLocaleString()}+ venues
+                      </span>
+                    </div>
+                  </div>
+                </motion.button>
+              );
+            })}
+          </motion.div>
+        ) : (
+          /* ── Level 2: Sub-regions within selected continent ── */
+          <motion.div
+            key="subregions"
+            initial={{ opacity: 0, x: 15 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 15 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Continent title */}
+            <div className="px-6 py-3 border-b flex items-center gap-2" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
+              <span className="text-base">{selectedContinent?.emoji}</span>
+              <span className="font-display text-[15px] font-medium text-white/90">{selectedContinent?.label}</span>
+            </div>
+
+            {/* Sub-region cards */}
+            <div className="p-4 grid grid-cols-2 gap-3">
+              {subRegions.map((region, i) => (
+                <RegionCard
+                  key={region.slug}
+                  region={region}
+                  index={i}
+                  onClick={() => onSelectRegion(region.slug)}
+                  onHover={onHoverRegion}
+                />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
 
-/* ── Single region card ── */
+/* ── Single region card (used inside sub-region view) ── */
 function RegionCard({ region, index, onClick, onHover }: { region: Region; index: number; onClick: () => void; onHover: (slug: string | null) => void }) {
   const isComingSoon = region.status === "coming-soon";
 
@@ -548,15 +709,15 @@ function RegionCard({ region, index, onClick, onHover }: { region: Region; index
       onMouseEnter={() => !isComingSoon && onHover(region.slug)}
       onMouseLeave={() => onHover(null)}
       disabled={isComingSoon}
-      className={`group relative text-left p-5 rounded-xl border transition-all duration-200 ${
+      className={`group relative text-left p-4 rounded-xl border transition-all duration-200 ${
         isComingSoon
           ? "opacity-40 cursor-not-allowed border-white/[0.04] bg-white/[0.01]"
           : "cursor-pointer border-white/[0.05] bg-white/[0.02] hover:border-tiffany/20 hover:bg-tiffany/[0.04] active:scale-[0.98]"
       }`}
     >
       {/* Region name */}
-      <div className="flex items-center justify-between mb-3.5">
-        <span className={`font-display text-[15px] font-medium tracking-tight ${
+      <div className="flex items-center justify-between mb-2.5">
+        <span className={`font-display text-[14px] font-medium tracking-tight ${
           isComingSoon ? "text-white/30" : "text-white/80 group-hover:text-tiffany"
         } transition-colors`}>
           {region.name}
@@ -569,12 +730,12 @@ function RegionCard({ region, index, onClick, onHover }: { region: Region; index
       </div>
 
       {/* Mini flags preview */}
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-1.5 mb-2">
         {isComingSoon ? (
           <span className="font-mono text-[9px] text-white/20 italic">Coming soon</span>
         ) : (
           region.previewFlags.map((code) => (
-            <div key={code} className="w-8 h-5.5 rounded-sm overflow-hidden border border-white/[0.08]">
+            <div key={code} className="w-7 h-5 rounded-[2px] overflow-hidden border border-white/[0.08]">
               <Image
                 src={`https://flagcdn.com/w40/${code}.png`}
                 alt="" width={40} height={28}
@@ -587,12 +748,12 @@ function RegionCard({ region, index, onClick, onHover }: { region: Region; index
 
       {/* Country count + venues */}
       <div className="flex items-center justify-between">
-        <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-white/30">
+        <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-white/30">
           {isComingSoon ? "—" : `${region.countrySlugs.length} countries`}
         </span>
         {!isComingSoon && (
-          <span className="font-mono text-[10px] text-tiffany/50">
-            {region.totalVenues} venues
+          <span className="font-mono text-[9px] text-tiffany/50">
+            {region.totalVenues}
           </span>
         )}
       </div>

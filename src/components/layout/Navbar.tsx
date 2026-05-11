@@ -15,13 +15,6 @@ const SERVICE_ITEMS = [
   { label: "Exhibitions", href: "/#services", desc: "Trade shows & product launches" },
 ];
 
-const DEFAULT_LINKS = [
-  { label: "VIP", href: "/vip" },
-  { label: "Customize", href: "/#request" },
-  { label: "Shop", href: "/shop" },
-  { label: "About", href: "/about" },
-];
-
 interface NavLink {
   label: string;
   href: string;
@@ -33,6 +26,13 @@ interface NavCMS {
   links?: NavLink[];
   cta?: string;
 }
+
+const DEFAULT_LINKS: NavLink[] = [
+  { label: "VIP", href: "/vip" },
+  { label: "Customize", href: "/customize" },
+  { label: "Shop", href: "/shop" },
+  { label: "About", href: "/about" },
+];
 
 export function Navbar({ cms }: { cms?: NavCMS }) {
   const NAV_LINKS = DEFAULT_LINKS;

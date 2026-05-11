@@ -1,47 +1,182 @@
-// Capital city coordinates [latitude, longitude] for all 29 EP countries
+// Capital city coordinates for all EP countries
 // Used by GlobeSection for COBE markers + interactive overlay
 
 export const COUNTRY_COORDS: Record<string, [number, number]> = {
-  belgium:              [50.85,   4.35],
-  "bosnia-herzegovina": [43.86,  18.41],
-  croatia:              [45.81,  15.98],
-  "czech-republic":     [50.08,  14.44],
-  estonia:              [59.44,  24.75],
-  france:               [48.86,   2.35],
-  greece:               [37.98,  23.73],
-  hungary:              [47.50,  19.04],
-  iceland:              [64.15, -21.94],
-  ireland:              [53.35,  -6.26],
-  italy:                [41.90,  12.50],
-  latvia:               [56.95,  24.11],
-  lithuania:            [54.69,  25.28],
-  luxembourg:           [49.61,   6.13],
-  malta:                [35.90,  14.51],
-  montenegro:           [42.44,  19.26],
-  netherlands:          [52.37,   4.90],
-  "north-macedonia":    [41.99,  21.43],
-  norway:               [59.91,  10.75],
-  poland:               [52.23,  21.01],
-  portugal:             [38.72,  -9.14],
-  romania:              [44.43,  26.10],
-  serbia:               [44.79,  20.45],
-  slovakia:             [48.15,  17.11],
-  slovenia:             [46.06,  14.51],
-  spain:                [40.42,  -3.70],
-  sweden:               [59.33,  18.07],
-  switzerland:          [46.95,   7.45],
-  uk:                   [51.51,  -0.13],
+  "afghanistan": [34.53, 69.17],
+  "albania": [41.33, 19.82],
+  "algeria": [36.75, 3.04],
+  "andorra": [42.51, 1.52],
+  "angola": [-8.84, 13.23],
+
+  "argentina": [-34.6, -58.38],
+  "armenia": [40.18, 44.51],
+  "aruba": [12.51, -69.97],
+  "australia": [-33.87, 151.21],
+  "azerbaijan": [40.41, 49.87],
+  "bahamas": [25.05, -77.34],
+  "bahrain": [26.23, 50.59],
+  "bangladesh": [23.81, 90.41],
+
+  "belgium": [50.85, 4.35],
+  "belize": [17.5, -88.2],
+  "benin": [6.37, 2.43],
+
+  "bhutan": [27.47, 89.64],
+  "bolivia": [-16.5, -68.15],
+  "bosnia-herzegovina": [43.86, 18.41],
+  "botswana": [-24.65, 25.91],
+  "brazil": [-23.55, -46.63],
+  "brunei": [4.93, 114.95],
+  "bulgaria": [42.7, 23.32],
+  "burkina-faso": [12.37, -1.52],
+  "cambodia": [11.56, 104.93],
+  "cameroon": [3.87, 11.52],
+  "canada": [45.42, -75.7],
+
+  "cayman-islands": [19.29, -81.38],
+  "central-african-republic": [4.36, 18.56],
+  "chad": [12.13, 15.06],
+  "chile": [-33.45, -70.67],
+  "china": [39.9, 116.4],
+  "colombia": [4.71, -74.07],
+  "congo": [-4.27, 15.28],
+  "costa-rica": [9.93, -84.08],
+  "croatia": [45.81, 15.98],
+  "czech-republic": [50.08, 14.44],
+  "denmark": [55.68, 12.57],
+  "djibouti": [11.59, 43.15],
+
+  "dominican-republic": [18.49, -69.93],
+  "ecuador": [-0.18, -78.47],
+  "egypt": [30.04, 31.24],
+  "el-salvador": [13.69, -89.19],
+  "equatorial-guinea": [3.75, 8.78],
+  "eritrea": [15.34, 38.93],
+  "estonia": [59.44, 24.75],
+  "eswatini": [-26.32, 31.13],
+  "ethiopia": [9.02, 38.75],
+  // fiji, kiribati, marshall-islands, micronesia, nauru, palau, samoa, tonga, tuvalu, vanuatu
+  // — removed from globe overlay (Pacific dots look misplaced)
+  "finland": [60.17, 24.94],
+  "france": [48.86, 2.35],
+  "gambia": [13.45, -16.58],
+  "georgia": [41.72, 44.79],
+  "germany": [52.52, 13.41],
+  "ghana": [5.6, -0.19],
+  "gibraltar": [36.14, -5.35],
+  "greece": [37.98, 23.73],
+
+  "guatemala": [14.63, -90.51],
+  "guinea": [9.64, -13.58],
+  "guinea-bissau": [11.86, -15.6],
+  "honduras": [14.07, -87.19],
+  "hong-kong": [22.32, 114.17],
+  "hungary": [47.5, 19.04],
+  "iceland": [64.15, -21.94],
+  "india": [28.61, 77.21],
+  "indonesia": [-6.21, 106.85],
+  "ireland": [53.35, -6.26],
+  "israel": [31.77, 35.22],
+  "italy": [41.9, 12.5],
+  "jamaica": [18.11, -77.3],
+  "japan": [35.68, 139.69],
+  "jordan": [31.95, 35.93],
+  "kazakhstan": [51.17, 71.45],
+  "kenya": [-1.29, 36.82],
+
+  "kuwait": [29.38, 47.99],
+  "kyrgyzstan": [42.87, 74.59],
+  "laos": [17.97, 102.63],
+  "latvia": [56.95, 24.11],
+  "lebanon": [33.89, 35.5],
+  "lesotho": [-29.31, 27.48],
+  "liberia": [6.3, -10.8],
+  "lithuania": [54.69, 25.28],
+  "luxembourg": [49.61, 6.13],
+  "macau": [22.2, 113.55],
+
+  "malawi": [-13.96, 33.79],
+  "malaysia": [3.14, 101.69],
+
+  "mali": [12.64, -8],
+  "malta": [35.9, 14.51],
+
+  "mauritania": [18.09, -15.98],
+
+  "mexico": [19.43, -99.13],
+
+  "moldova": [47.01, 28.86],
+  "monaco": [43.73, 7.42],
+  "mongolia": [47.92, 106.92],
+  "montenegro": [42.44, 19.26],
+  "morocco": [33.97, -6.85],
+  "mozambique": [-25.97, 32.57],
+  "myanmar": [16.87, 96.2],
+  "namibia": [-22.56, 17.08],
+
+  "nepal": [27.72, 85.32],
+  "netherlands": [52.37, 4.9],
+
+  "nicaragua": [12.11, -86.24],
+  "niger": [13.51, 2.13],
+  "nigeria": [9.06, 7.49],
+  "north-macedonia": [41.99, 21.43],
+  "norway": [59.91, 10.75],
+  "oman": [23.59, 58.54],
+  "pakistan": [33.69, 73.04],
+
+  "panama": [8.98, -79.52],
+  "paraguay": [-25.26, -57.58],
+  "peru": [-12.05, -77.04],
+  "philippines": [14.6, 120.98],
+  "poland": [52.23, 21.01],
+  "portugal": [38.72, -9.14],
+  "puerto-rico": [18.47, -66.1],
+  "qatar": [25.29, 51.53],
+  "romania": [44.43, 26.1],
+  "rwanda": [-1.94, 29.87],
+
+
+
+
+
+  "saudi-arabia": [24.71, 46.68],
+  "senegal": [14.69, -17.44],
+  "serbia": [44.79, 20.45],
+
+  "sierra-leone": [8.48, -13.23],
+  "singapore": [1.35, 103.82],
+  "slovakia": [48.15, 17.11],
+  "slovenia": [46.06, 14.51],
+  "somalia": [2.05, 45.32],
+  "south-africa": [-33.93, 18.42],
+  "south-korea": [37.57, 126.98],
+  "south-sudan": [4.85, 31.58],
+  "spain": [40.42, -3.7],
+  "sri-lanka": [6.93, 79.84],
+  "sudan": [15.6, 32.53],
+  "sweden": [59.33, 18.07],
+  "switzerland": [46.95, 7.45],
+  "tanzania": [-6.79, 39.28],
+  "thailand": [13.76, 100.5],
+  "togo": [6.17, 1.23],
+
+  "tunisia": [36.81, 10.18],
+  "turkey": [39.93, 32.85],
+
+  "uganda": [0.35, 32.58],
+  "uk": [51.51, -0.13],
+  "ukraine": [50.45, 30.52],
+  "uruguay": [-34.9, -56.19],
+  "uzbekistan": [41.3, 69.24],
+
+  "vietnam": [21.03, 105.85],
+  "zambia": [-15.39, 28.32],
+  "zimbabwe": [-17.83, 31.05],
 };
 
 /**
  * Project a lat/lng to 2D screen position matching COBE's rendering.
- * COBE source analysis:
- *   U([lat,lng]): r=lat*PI/180, a=lng*PI/180-PI, o=cos(r) → [-o*cos(a), sin(r), o*sin(a)]
- *   O(t): with f=phi, l=theta →
- *     screenX = cos(f)*t[0] + sin(f)*t[2]
- *     screenY = sin(f)*sin(l)*t[0] + cos(l)*t[1] - cos(f)*sin(l)*t[2]
- *     depth   = -sin(f)*cos(l)*t[0] + sin(l)*t[1] + cos(f)*cos(l)*t[2]
- *   W(location): pos = U(location) * (0.8+elevation), return O(pos)
  */
 export function projectToScreen(
   lat: number,
@@ -49,23 +184,18 @@ export function projectToScreen(
   phi: number,
   theta: number
 ): { x: number; y: number; z: number } {
-  // U(): convert lat/lng to 3D
   const r = (lat * Math.PI) / 180;
   const a = (lng * Math.PI) / 180 - Math.PI;
   const o = Math.cos(r);
-  // Unit sphere point
   const p0 = -o * Math.cos(a);
   const p1 = Math.sin(r);
   const p2 = o * Math.sin(a);
 
-  // Scale to globe surface — slightly inset from COBE's radius (0.8)
-  // to keep dots visually inside the globe edge
   const scale = 0.78;
   const t0 = p0 * scale;
   const t1 = p1 * scale;
   const t2 = p2 * scale;
 
-  // O(): rotation by phi (f) and theta (l)
   const cf = Math.cos(phi);
   const sf = Math.sin(phi);
   const cl = Math.cos(theta);
