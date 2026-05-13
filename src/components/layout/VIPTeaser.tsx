@@ -8,7 +8,7 @@ import Image from "next/image";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 /* ── What's included in the VIP programme ── */
-const INCLUSIONS = [
+const DEFAULT_INCLUSIONS = [
   { icon: Crown, text: "Priority access to Europe's most exclusive venues" },
   { icon: UserCheck, text: "Dedicated senior account manager" },
   { icon: Globe, text: "Preferred rates across 36 countries" },
@@ -19,7 +19,29 @@ const INCLUSIONS = [
   { icon: Palette, text: "Custom branding packages included" },
 ];
 
-export function VIPTeaser() {
+const ICON_MAP: Record<string, any> = {
+  crown: Crown, userCheck: UserCheck, globe: Globe, eye: Eye,
+  headphones: Headphones, chart: BarChart3, compass: Compass, palette: Palette,
+};
+
+interface VIPTeaserCMS {
+  label?: string;
+  headline?: string;
+  headlineMuted?: string;
+  body1?: string;
+  body2?: string;
+  inclusions?: { text: string; icon?: string }[];
+  ctaText?: string;
+  ctaSub?: string;
+}
+
+export function VIPTeaser({ cms }: { cms?: VIPTeaserCMS } = {}) {
+  const inclusions = cms?.inclusions?.length
+    ? cms.inclusions.map((item) => ({
+        icon: ICON_MAP[item.icon || "crown"] || Crown,
+        text: item.text,
+      }))
+    : DEFAULT_INCLUSIONS;
   return (
     <section className="relative w-full py-28 md:py-40 px-6 md:px-10 overflow-hidden">
 
@@ -105,12 +127,12 @@ export function VIPTeaser() {
           <div className="w-12 h-px bg-gradient-to-r from-[#7851A9] to-[#6AD8D2] mb-8" />
 
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#9370C4] mb-6">
-            By invitation only
+            {cms?.label || "By invitation only"}
           </p>
 
           <h2 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] font-medium text-white leading-[1.05] tracking-tight max-w-[700px]">
-            A different standard{" "}
-            <span className="text-white/30">for companies that refuse to compromise.</span>
+            {cms?.headline || "A different standard"}{" "}
+            <span className="text-white/30">{cms?.headlineMuted || "for companies that refuse to compromise."}</span>
           </h2>
         </motion.div>
 
@@ -125,15 +147,10 @@ export function VIPTeaser() {
             transition={{ duration: 0.8, ease: EASE }}
           >
             <p className="text-[16px] md:text-[17px] text-white/50 leading-[1.9] mb-8">
-              The EventPartner VIP Programme is reserved for organisations that 
-              expect precision, discretion, and flawless execution. Every detail — 
-              from venue selection to on-site coordination — is handled by your 
-              dedicated senior team.
+              {cms?.body1 || "The EventPartner VIP Programme is reserved for organisations that expect precision, discretion, and flawless execution. Every detail — from venue selection to on-site coordination — is handled by your dedicated senior team."}
             </p>
             <p className="text-[15px] text-white/30 leading-[1.9]">
-              Membership is by application only. We maintain a deliberately 
-              limited roster to ensure each client receives the attention their 
-              events demand.
+              {cms?.body2 || "Membership is by application only. We maintain a deliberately limited roster to ensure each client receives the attention their events demand."}
             </p>
           </motion.div>
 
@@ -148,7 +165,7 @@ export function VIPTeaser() {
               What&apos;s included
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {INCLUSIONS.map((item, i) => {
+              {inclusions.map((item, i) => {
                 const Icon = item.icon;
                 return (
                   <motion.div
@@ -188,12 +205,12 @@ export function VIPTeaser() {
               <span className="absolute inset-0 rounded-full p-[1px] bg-gradient-to-r from-[#7851A9] via-[#9370C4] to-[#6AD8D2] group-hover:p-[1.5px] transition-all duration-500" style={{ WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude" }} />
               {/* Hover glow intensify */}
               <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ boxShadow: "0 0 30px rgba(120,81,169,0.3), 0 0 60px rgba(106,216,210,0.15)" }} />
-              <span className="relative z-10">Apply for Membership</span>
+              <span className="relative z-10">{cms?.ctaText || "Apply for Membership"}</span>
               <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </Link>
           <span className="text-[12px] text-white/15 font-mono tracking-wide">
-            Limited availability · Reviewed within 48h
+            {cms?.ctaSub || "Limited availability · Reviewed within 48h"}
           </span>
         </motion.div>
 

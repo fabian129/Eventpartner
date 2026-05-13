@@ -117,16 +117,17 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             className={`hidden md:flex items-center gap-0 rounded-full transition-all duration-500 border ${pillBg}`}
           >
             {/* Logo */}
-            <Link href="/" className="pl-3 pr-2 py-2 flex items-center gap-2 shrink-0">
-              <div className="relative h-8 w-32">
+            <Link href="/" className="pl-2 pr-2 py-1.5 flex items-center gap-1 shrink-0">
+              <div className="relative h-[75px] w-[75px]">
                 <Image
-                  src="/Images/logos/Primary logo EP.png"
+                  src="/Images/logos/ep-icon-chrome.png"
                   alt="EventPartner"
                   fill
-                  className={`object-contain object-left scale-[1.25] origin-left transition-all duration-500 ${logoFilter}`}
+                  className="object-contain transition-all duration-500"
                   priority
                 />
               </div>
+              <span className={`text-[12px] font-semibold tracking-tight transition-colors duration-500 ${isDarkBg ? 'text-white/90' : 'text-[#111]'}`}>EventPartner</span>
             </Link>
 
             {/* Divider */}
@@ -222,16 +223,17 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
 
           {/* Mobile logo */}
           <div className="md:hidden shrink-0">
-            <Link href="/" className="flex items-center">
-              <div className="relative h-8 w-32">
+            <Link href="/" className="flex items-center gap-1">
+              <div className="relative h-[75px] w-[75px]">
                 <Image
-                  src="/Images/logos/Primary logo EP.png"
+                  src="/Images/logos/ep-icon-chrome.png"
                   alt="EventPartner"
                   fill
-                  className={`object-contain object-left scale-[1.25] origin-left transition-all duration-500 ${logoFilter}`}
+                  className="object-contain transition-all duration-500"
                   priority
                 />
               </div>
+              <span className={`text-[12px] font-semibold tracking-tight transition-colors duration-500 ${isDarkBg ? 'text-white/90' : 'text-[#111]'}`}>EventPartner</span>
             </Link>
           </div>
 
@@ -293,15 +295,16 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             </button>
 
             {/* Logo in mobile menu */}
-            <div className="absolute top-5 left-6">
-              <div className="relative h-8 w-32">
+            <div className="absolute top-5 left-6 flex items-center gap-1">
+              <div className="relative h-[75px] w-[75px]">
                 <Image
-                  src="/Images/logos/Primary logo EP.png"
+                  src="/Images/logos/ep-icon-chrome.png"
                   alt="EventPartner"
                   fill
-                  className="object-contain object-left scale-[1.25] origin-left invert brightness-0"
+                  className="object-contain invert brightness-0"
                 />
               </div>
+              <span className="text-[11px] font-semibold tracking-tight text-white/90">EventPartner</span>
             </div>
 
             {/* Mobile nav links */}

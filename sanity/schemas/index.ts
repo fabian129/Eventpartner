@@ -10,6 +10,7 @@ import { webshopPage } from "./webshopPage";
 import { faqPage } from "./faqPage";
 import { aiAssistantPage } from "./aiAssistantPage";
 import { helpCenterPage } from "./helpCenterPage";
+import { customizePage } from "./customizePage";
 
 export const schemaTypes = [
   localizedString,
@@ -24,4 +25,5 @@ export const schemaTypes = [
   faqPage,
   aiAssistantPage,
   helpCenterPage,
+  customizePage,
 ];

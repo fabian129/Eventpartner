@@ -34,7 +34,31 @@ const ACTIVITY_OPTIONS = [
   "Transport / Logistics", "AV / Tech setup", "Other",
 ];
 
-export function CustomizeFormContent() {
+interface CustomizeCMS {
+  heroLabel?: string;
+  heroLabelRight?: string;
+  heroHeadline?: string;
+  heroHeadlineAccent?: string;
+  heroDescription?: string;
+  submitButton?: string;
+  successMessage?: string;
+  disclaimer?: string;
+  backLink?: string;
+  contactTitle?: string;
+  contactSubtitle?: string;
+  eventTitle?: string;
+  eventSubtitle?: string;
+  venueTitle?: string;
+  venueSubtitle?: string;
+  cateringTitle?: string;
+  cateringSubtitle?: string;
+  activitiesTitle?: string;
+  activitiesSubtitle?: string;
+  anythingElseTitle?: string;
+  anythingElseSubtitle?: string;
+}
+
+export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
   const [submitted, setSubmitted] = useState(false);
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
 
@@ -65,7 +89,7 @@ export function CustomizeFormContent() {
         {/* Breadcrumb */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mb-8">
           <Link href="/" className="text-[12px] font-mono text-[#888] hover:text-[#555] transition-colors">
-            ← Back to home
+            {cms?.backLink || "← Back to home"}
           </Link>
         </motion.div>
 
@@ -79,21 +103,21 @@ export function CustomizeFormContent() {
         >
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#888]">
-              EventPartner — Customize
+              {cms?.heroLabel || "EventPartner — Customize"}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#888]">
-              Extended form
+              {cms?.heroLabelRight || "Extended form"}
             </span>
           </div>
           <h1 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-medium tracking-tight text-[#111] leading-[1.05] mb-4">
-            Customize your event.
+            {cms?.heroHeadline || "Customize your event."}
             <br />
             <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-[#6AD8D2]">
-              Every detail matters.
+              {cms?.heroHeadlineAccent || "Every detail matters."}
             </span>
           </h1>
           <p className="font-display text-[clamp(1rem,2vw,1.2rem)] font-normal text-[#666] leading-[1.5] max-w-lg">
-            The more you tell us, the better we can match you with the perfect venues and services. All fields marked with * are required.
+            {cms?.heroDescription || "The more you tell us, the better we can match you with the perfect venues and services. All fields marked with * are required."}
           </p>
         </motion.div>
 
@@ -109,8 +133,8 @@ export function CustomizeFormContent() {
         >
           {/* ─── Section 1: Contact ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">Contact information</h2>
-            <p className="text-[13px] text-[#888] mb-6">Who should we reach out to?</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.contactTitle || "Contact information"}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.contactSubtitle || "Who should we reach out to?"}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
               <div><label className={labelClass}>Company{star}</label><input type="text" placeholder="Your company name" required className={inputClass} /></div>
               <div><label className={labelClass}>Contact person{star}</label><input type="text" placeholder="Full name" required className={inputClass} /></div>
@@ -127,8 +151,8 @@ export function CustomizeFormContent() {
 
           {/* ─── Section 2: Event basics ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">Event details</h2>
-            <p className="text-[13px] text-[#888] mb-6">Tell us about the event itself.</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.eventTitle || "Event details"}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.eventSubtitle || "Tell us about the event itself."}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
               <div><label className={labelClass}>Event name</label><input type="text" placeholder="E.g. Annual Sales Kick-off 2026" className={inputClass} /></div>
               <div>
@@ -156,8 +180,8 @@ export function CustomizeFormContent() {
 
           {/* ─── Section 3: Venue ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">Venue preferences</h2>
-            <p className="text-[13px] text-[#888] mb-6">What kind of space are you looking for?</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.venueTitle || "Venue preferences"}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.venueSubtitle || "What kind of space are you looking for?"}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label className={labelClass}>Venue type</label>
@@ -178,8 +202,8 @@ export function CustomizeFormContent() {
 
           {/* ─── Section 4: Catering ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">Catering</h2>
-            <p className="text-[13px] text-[#888] mb-6">What food & drink experience do you want?</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.cateringTitle || "Catering"}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.cateringSubtitle || "What food & drink experience do you want?"}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label className={labelClass}>Catering style</label>
@@ -196,8 +220,8 @@ export function CustomizeFormContent() {
 
           {/* ─── Section 5: Activities & services ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">Activities & services</h2>
-            <p className="text-[13px] text-[#888] mb-6">Select everything you&apos;re interested in.</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.activitiesTitle || "Activities & services"}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.activitiesSubtitle || "Select everything you're interested in."}</p>
             <div className="flex flex-wrap gap-2 mb-5">
               {ACTIVITY_OPTIONS.map((a) => (
                 <button
@@ -224,8 +248,8 @@ export function CustomizeFormContent() {
 
           {/* ─── Section 6: Message ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">Anything else?</h2>
-            <p className="text-[13px] text-[#888] mb-6">Tell us everything we should know to make your event perfect.</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.anythingElseTitle || "Anything else?"}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.anythingElseSubtitle || "Tell us everything we should know to make your event perfect."}</p>
             <textarea rows={5} placeholder="Special requests, theme ideas, inspiration, past experiences — anything helps..." className={`${inputClass} resize-none`} />
           </div>
 
@@ -238,9 +262,9 @@ export function CustomizeFormContent() {
             >
               <span className="relative z-10 flex items-center gap-3">
                 {submitted ? (
-                  <><CheckCircle className="w-5 h-5" />Thank you! We&apos;ll get back to you within 24h.</>
+                  <><CheckCircle className="w-5 h-5" />{cms?.successMessage || "Thank you! We'll get back to you within 24h."}</>
                 ) : (
-                  <>Send detailed inquiry<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" /></>
+                  <>{cms?.submitButton || "Send detailed inquiry"}<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" /></>
                 )}
               </span>
               <span className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
@@ -248,7 +272,7 @@ export function CustomizeFormContent() {
               </span>
             </button>
             <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#888]">
-              No obligations • Response within 24h • Completely free
+              {cms?.disclaimer || "No obligations • Response within 24h • Completely free"}
             </span>
           </div>
         </motion.form>

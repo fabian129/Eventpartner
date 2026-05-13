@@ -46,7 +46,12 @@ export const HOMEPAGE_QUERY = defineQuery(
     webshopLabel, webshopLabelRight, webshopHeadline, webshopHeadlineAccent,
     webshopDescription, webshopComingSoonTitle, webshopComingSoonDesc, webshopCtaText,
     // Video overlay text
-    videoBottomLabel, videoBottomText
+    videoBottomLabel, videoBottomText,
+    // VIP Teaser
+    vipLabel, vipHeadline, vipHeadlineMuted, vipBody1, vipBody2,
+    vipInclusions, vipCtaText, vipCtaSub,
+    // Logo Ticker
+    logoTickerLabel, logoTickerLogos
   }`
 );
 
@@ -143,7 +148,27 @@ export const AI_ASSISTANT_PAGE_QUERY = defineQuery(
 
 export const FAQ_PAGE_QUERY = defineQuery(
   `*[_type == "faqPage"][0]{
-    headline, description, faqs
+    // Hero
+    heroLabel, heroLabelRight, heroHeadline, heroHeadlineAccent, heroSubtitle,
+    // Content
+    headline, description, faqs,
+    // CTA
+    ctaHeadline, ctaDescription
+  }`
+);
+
+export const CUSTOMIZE_PAGE_QUERY = defineQuery(
+  `*[_type == "customizePage"][0]{
+    // Hero
+    heroLabel, heroLabelRight, heroHeadline, heroHeadlineAccent, heroDescription,
+    // Form
+    submitButton, successMessage, disclaimer, backLink,
+    contactTitle, contactSubtitle,
+    eventTitle, eventSubtitle,
+    venueTitle, venueSubtitle,
+    cateringTitle, cateringSubtitle,
+    activitiesTitle, activitiesSubtitle,
+    anythingElseTitle, anythingElseSubtitle
   }`
 );
 

@@ -66,7 +66,10 @@ export default async function Home() {
 
         {/* 3. Logo Banner — social proof */}
         <ScrollSection fadeOut={false}>
-          <LogoTicker />
+          <LogoTicker cms={data ? {
+            label: t(data.logoTickerLabel),
+            logos: data.logoTickerLogos,
+          } : undefined} />
         </ScrollSection>
 
 
@@ -116,7 +119,19 @@ export default async function Home() {
 
       {/* 7. Dark Zone: VIP */}
       <DarkZone>
-        <VIPTeaser />
+        <VIPTeaser cms={data ? {
+          label: t(data.vipLabel),
+          headline: t(data.vipHeadline),
+          headlineMuted: t(data.vipHeadlineMuted),
+          body1: t(data.vipBody1),
+          body2: t(data.vipBody2),
+          inclusions: data.vipInclusions?.map((item: any) => ({
+            text: t(item.text),
+            icon: item.icon,
+          })),
+          ctaText: t(data.vipCtaText),
+          ctaSub: t(data.vipCtaSub),
+        } : undefined} />
       </DarkZone>
 
       {/* 8. About */}

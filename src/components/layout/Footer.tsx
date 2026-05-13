@@ -92,13 +92,13 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
 
           {/* Newsletter signup */}
           <div className="text-center max-w-lg mx-auto">
-            <div className="flex items-center justify-center mb-6">
-              <div className="relative h-24 w-24 opacity-90">
+            <div className="flex items-center justify-center mb-3">
+              <div className="relative h-40 w-40 opacity-90">
                 <Image 
-                  src="/Images/logos/EVENT PARTNER 3.png" 
+                  src="/Images/logos/ep-icon-chrome.png" 
                   alt="EventPartner Symbol" 
                   fill 
-                  className="object-contain object-center invert brightness-0" 
+                  className="object-contain object-center" 
                 />
               </div>
             </div>
@@ -149,13 +149,13 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
 
             {/* Brand column */}
             <div className="col-span-2 md:col-span-3">
-              <Link href="/" className="inline-block mb-4 group">
-                <div className="relative h-8 w-32 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+              <Link href="/" className="inline-block mb-2 group">
+                <div className="relative h-24 w-24 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
                   <Image 
-                    src="/Images/logos/Primary logo EP.png" 
+                    src="/Images/logos/ep-icon-chrome.png" 
                     alt="EventPartner" 
                     fill 
-                    className="object-contain object-left scale-[1.7] origin-left invert brightness-0" 
+                    className="object-contain" 
                   />
                 </div>
               </Link>

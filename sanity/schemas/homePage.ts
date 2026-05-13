@@ -26,6 +26,8 @@ export const homePage = defineType({
     { name: "exitIntent", title: "Exit Intent Popup" },
     { name: "globe", title: "Globe Section" },
     { name: "webshop", title: "Webshop Teaser" },
+    { name: "vipTeaser", title: "VIP Teaser" },
+    { name: "logoTicker", title: "Logo Ticker" },
   ],
 
   fields: [
@@ -815,6 +817,97 @@ export const homePage = defineType({
       type: "localizedString",
       group: "video",
       description: "e.g. 'See how it works'",
+    }),
+
+    /* ─── VIP TEASER ─── */
+    defineField({
+      name: "vipLabel",
+      title: "VIP Label",
+      type: "localizedString",
+      group: "vipTeaser",
+    }),
+    defineField({
+      name: "vipHeadline",
+      title: "VIP Headline (white text)",
+      type: "localizedString",
+      group: "vipTeaser",
+    }),
+    defineField({
+      name: "vipHeadlineMuted",
+      title: "VIP Headline (muted part)",
+      type: "localizedString",
+      group: "vipTeaser",
+    }),
+    defineField({
+      name: "vipBody1",
+      title: "VIP Body Paragraph 1",
+      type: "localizedText",
+      group: "vipTeaser",
+    }),
+    defineField({
+      name: "vipBody2",
+      title: "VIP Body Paragraph 2",
+      type: "localizedText",
+      group: "vipTeaser",
+    }),
+    defineField({
+      name: "vipInclusions",
+      title: "VIP Inclusions",
+      type: "array",
+      group: "vipTeaser",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "text", title: "Inclusion Text", type: "localizedString" },
+            {
+              name: "icon",
+              title: "Icon",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Crown", value: "crown" },
+                  { title: "User Check", value: "userCheck" },
+                  { title: "Globe", value: "globe" },
+                  { title: "Eye", value: "eye" },
+                  { title: "Headphones", value: "headphones" },
+                  { title: "Chart", value: "chart" },
+                  { title: "Compass", value: "compass" },
+                  { title: "Palette", value: "palette" },
+                ],
+              },
+            },
+          ],
+          preview: { select: { title: "text.en" } },
+        },
+      ],
+    }),
+    defineField({
+      name: "vipCtaText",
+      title: "VIP CTA Button Text",
+      type: "localizedString",
+      group: "vipTeaser",
+    }),
+    defineField({
+      name: "vipCtaSub",
+      title: "VIP CTA Sub-text",
+      type: "localizedString",
+      group: "vipTeaser",
+    }),
+
+    /* ─── LOGO TICKER ─── */
+    defineField({
+      name: "logoTickerLabel",
+      title: "Logo Ticker Label",
+      type: "localizedString",
+      group: "logoTicker",
+    }),
+    defineField({
+      name: "logoTickerLogos",
+      title: "Logo Names",
+      type: "array",
+      group: "logoTicker",
+      of: [{ type: "string" }],
     }),
   ],
 
