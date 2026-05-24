@@ -401,11 +401,11 @@ export function Hero({ cms }: { cms?: HeroCMS }) {
           {/* Inline stats */}
           <div className="flex items-center gap-4 mt-4 ml-1">
             <span className="text-white/25 text-[13px]">
-              <span className="text-white/40 font-medium">360,000+</span> venues
+              <span className="text-white/40 font-medium">300,000+</span> venues
             </span>
             <span className="text-white/10">·</span>
             <span className="text-white/25 text-[13px]">
-              <span className="text-white/40 font-medium">36</span> countries
+              <span className="text-white/40 font-medium">175</span> countries
             </span>
             <span className="text-white/10">·</span>
             <span className="text-white/25 text-[13px]">

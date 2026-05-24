@@ -192,7 +192,7 @@ const SERVICES = [
   {
     number: "01",
     title: "Venue Sourcing",
-    description: "360,000+ venues i 36 länder. Vi hittar rätt lokal baserat på era krav — alltid minst 3 kurerade förslag inom 24 timmar.",
+    description: "300,000+ venues i 175 länder. Vi hittar rätt lokal baserat på era krav — alltid minst 3 kurerade förslag inom 24 timmar.",
     visual: PinPulse,
   },
   {

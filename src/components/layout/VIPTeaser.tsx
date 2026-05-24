@@ -11,7 +11,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const DEFAULT_INCLUSIONS = [
   { icon: Crown, text: "Priority access to Europe's most exclusive venues" },
   { icon: UserCheck, text: "Dedicated senior account manager" },
-  { icon: Globe, text: "Preferred rates across 36 countries" },
+  { icon: Globe, text: "Preferred rates across 175 countries" },
   { icon: Eye, text: "Complimentary site inspections" },
   { icon: Headphones, text: "24/7 concierge support during events" },
   { icon: BarChart3, text: "Quarterly strategy sessions" },
@@ -50,7 +50,7 @@ export function VIPTeaser({ cms }: { cms?: VIPTeaserCMS } = {}) {
 
         {/* LEFT bento column — fades toward center + top/bottom */}
         <div
-          className="absolute left-0 top-0 bottom-0 w-[28%] opacity-[0.18]"
+          className="absolute left-0 top-0 bottom-0 w-[28%] opacity-[0.18] hidden lg:block"
           style={{
             animation: "bentoDriftUp 45s linear infinite",
             maskImage: "linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
@@ -76,7 +76,7 @@ export function VIPTeaser({ cms }: { cms?: VIPTeaserCMS } = {}) {
 
         {/* RIGHT bento column — fades toward center + top/bottom */}
         <div
-          className="absolute right-0 top-0 bottom-0 w-[28%] opacity-[0.18]"
+          className="absolute right-0 top-0 bottom-0 w-[28%] opacity-[0.18] hidden lg:block"
           style={{
             animation: "bentoDriftDown 50s linear infinite",
             maskImage: "linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",

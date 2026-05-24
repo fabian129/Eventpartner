@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 import { useState } from "react";
-import { Send, CheckCircle, ArrowRight, ExternalLink, Calendar } from "lucide-react";
+import { Send, CheckCircle, ArrowRight, ExternalLink, Calendar, Loader2 } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import Link from "next/link";
 
@@ -28,14 +28,67 @@ export function RequestFormSection({ cms }: { cms?: {
   successMessage?: string;
 } }) {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [dateMode, setDateMode] = useState<'exact' | 'flexible'>('exact');
+  const [flexibility, setFlexibility] = useState('');
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Controlled form state
+  const [form, setForm] = useState({
+    company: '', contact: '', email: '', phone: '',
+    country: '', city: '', eventType: '', guests: '',
+    dateFrom: '', dateTo: '', dateMonth: '',
+    budget: '', responseTime: '', message: '',
+  });
+
+  const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    setForm(prev => ({ ...prev, [field]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted");
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setLoading(true);
+    setError('');
+
+    const datePayload = dateMode === 'exact'
+      ? { mode: 'exact', from: form.dateFrom, to: form.dateTo }
+      : { mode: 'flexible', month: form.dateMonth, flexibility };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'event-inquiry',
+          company: form.company,
+          contact: form.contact,
+          email: form.email,
+          phone: form.phone,
+          country: form.country,
+          city: form.city,
+          eventType: form.eventType,
+          guests: form.guests,
+          date: datePayload,
+          budget: form.budget,
+          responseTime: form.responseTime,
+          message: form.message,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      setSubmitted(true);
+      setForm({ company: '', contact: '', email: '', phone: '', country: '', city: '', eventType: '', guests: '', dateFrom: '', dateTo: '', dateMonth: '', budget: '', responseTime: '', message: '' });
+      setFlexibility('');
+    } catch (err: any) {
+      setError(err.message || 'Failed to send. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass = `w-full rounded-xl py-3.5 px-4 text-[14px] focus:outline-none focus:ring-2 focus:ring-tiffany/30 focus:border-tiffany/50 transition-all font-sans ${
@@ -47,7 +100,7 @@ export function RequestFormSection({ cms }: { cms?: {
   const requiredStar = <span className="text-tiffany ml-0.5">*</span>;
 
   return (
-    <section id="request" className="relative w-full px-6 md:px-10 py-20 md:py-32 overflow-hidden" style={{ background: isDark ? "#0A0A0A" : "#EAEAED" }}>
+    <section id="request" className="relative w-full px-6 md:px-10 py-20 md:py-32 overflow-x-hidden overflow-y-visible" style={{ background: isDark ? "#0A0A0A" : "#EAEAED" }}>
       {/* Decorative glows */}
       <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "var(--color-purple)" }} />
       <div className="absolute top-20 left-2/3 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.05]" style={{ background: "var(--color-tiffany)" }} />
@@ -73,10 +126,10 @@ export function RequestFormSection({ cms }: { cms?: {
 
           {/* Two-column: heading left, description right */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[1.05]">
+            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[1.05] pb-2">
               {cms?.headline || "Tell us what you need."}
               <br />
-              <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-purple via-purple-light to-tiffany">{cms?.headlineAccent || "We'll handle the rest."}</span>
+              <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-purple via-purple-light to-tiffany pb-2 inline-block">{cms?.headlineAccent || "We'll handle the rest."}</span>
             </h2>
             <p className="font-display text-[clamp(1rem,2vw,1.3rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-sm md:text-right">
               {cms?.description || "Fill in the form and we'll deliver tailored proposals within 24 hours. Completely free."}
@@ -112,15 +165,15 @@ export function RequestFormSection({ cms }: { cms?: {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
               <label className={labelClass}>Company{requiredStar}</label>
-              <input type="text" placeholder="Your company name" required className={inputClass} />
+              <input type="text" placeholder="Your company name" required className={inputClass} value={form.company} onChange={set('company')} />
             </div>
             <div>
               <label className={labelClass}>Contact person{requiredStar}</label>
-              <input type="text" placeholder="Name" required className={inputClass} />
+              <input type="text" placeholder="Name" required className={inputClass} value={form.contact} onChange={set('contact')} />
             </div>
             <div>
               <label className={labelClass}>Email{requiredStar}</label>
-              <input type="email" placeholder="you@company.com" required className={inputClass} />
+              <input type="email" placeholder="you@company.com" required className={inputClass} value={form.email} onChange={set('email')} />
             </div>
           </div>
 
@@ -128,15 +181,15 @@ export function RequestFormSection({ cms }: { cms?: {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
               <label className={labelClass}>Phone{requiredStar}</label>
-              <input type="tel" placeholder="+46 70 123 45 67" required className={inputClass} />
+              <input type="tel" placeholder="+46 70 123 45 67" required className={inputClass} value={form.phone} onChange={set('phone')} />
             </div>
             <div>
               <label className={labelClass}>Country{requiredStar}</label>
-              <input type="text" placeholder="E.g. Sweden, Spain, UK" required className={inputClass} />
+              <input type="text" placeholder="E.g. Sweden, Spain, UK" required className={inputClass} value={form.country} onChange={set('country')} />
             </div>
             <div>
               <label className={labelClass}>City</label>
-              <input type="text" placeholder="E.g. Stockholm, Barcelona" className={inputClass} />
+              <input type="text" placeholder="E.g. Stockholm, Barcelona" className={inputClass} value={form.city} onChange={set('city')} />
             </div>
           </div>
 
@@ -144,7 +197,7 @@ export function RequestFormSection({ cms }: { cms?: {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
               <label className={labelClass}>Event type</label>
-              <select className={inputClass}>
+              <select className={inputClass} value={form.eventType} onChange={set('eventType')}>
                 <option value="">Select type</option>
                 <option>Conference</option>
                 <option>Corporate Event</option>
@@ -163,15 +216,90 @@ export function RequestFormSection({ cms }: { cms?: {
                 min={1}
                 required
                 className={inputClass}
+                value={form.guests}
+                onChange={set('guests')}
               />
             </div>
             <div>
               <label className={labelClass}>Date</label>
-              <input
-                type="text"
-                placeholder="E.g. June 15-17, 2026 or Flexible"
-                className={inputClass}
-              />
+              {/* Tabs: Exact / Flexible */}
+              <div className="flex mb-2 rounded-lg overflow-hidden border border-black/[0.08]" style={{ background: isDark ? '#1a1a1a' : '#f5f5f6' }}>
+                <button
+                  type="button"
+                  onClick={() => setDateMode('exact')}
+                  className={`flex-1 py-2 text-[12px] font-medium transition-all ${
+                    dateMode === 'exact'
+                      ? isDark ? 'bg-white/10 text-white' : 'bg-white text-[#111] shadow-sm'
+                      : isDark ? 'text-white/40 hover:text-white/60' : 'text-black/35 hover:text-black/55'
+                  }`}
+                >
+                  Exact dates
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDateMode('flexible')}
+                  className={`flex-1 py-2 text-[12px] font-medium transition-all ${
+                    dateMode === 'flexible'
+                      ? isDark ? 'bg-white/10 text-white' : 'bg-white text-[#111] shadow-sm'
+                      : isDark ? 'text-white/40 hover:text-white/60' : 'text-black/35 hover:text-black/55'
+                  }`}
+                >
+                  Flexible dates
+                </button>
+              </div>
+
+              {dateMode === 'exact' ? (
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <span className="block font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-1">From</span>
+                    <input type="date" className={inputClass} value={form.dateFrom} onChange={set('dateFrom')} />
+                  </div>
+                  <div>
+                    <span className="block font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-1">To</span>
+                    <input type="date" className={inputClass} value={form.dateTo} onChange={set('dateTo')} />
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <select className={inputClass} value={form.dateMonth} onChange={set('dateMonth')}>
+                    <option value="">Select month...</option>
+                    <option>January 2026</option>
+                    <option>February 2026</option>
+                    <option>March 2026</option>
+                    <option>April 2026</option>
+                    <option>May 2026</option>
+                    <option>June 2026</option>
+                    <option>July 2026</option>
+                    <option>August 2026</option>
+                    <option>September 2026</option>
+                    <option>October 2026</option>
+                    <option>November 2026</option>
+                    <option>December 2026</option>
+                    <option>Q1 2027</option>
+                    <option>Q2 2027</option>
+                    <option>Q3 2027</option>
+                    <option>Q4 2027</option>
+                  </select>
+                  <div className="flex gap-1.5 flex-wrap">
+                    {['± 1 day', '± 3 days', '± 1 week', '± 2 weeks', 'Entirely flexible'].map((opt) => (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => setFlexibility(opt)}
+                        className={`px-3 py-1.5 rounded-lg text-[11px] font-medium border transition-all ${
+                          flexibility === opt
+                            ? 'bg-tiffany/10 border-tiffany/30 text-tiffany'
+                            : isDark
+                              ? 'border-white/[0.08] text-white/40 hover:border-white/20 hover:text-white/60'
+                              : 'border-black/[0.08] text-black/35 hover:border-black/15 hover:text-black/55'
+                        }`}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -179,7 +307,7 @@ export function RequestFormSection({ cms }: { cms?: {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
               <label className={labelClass}>Budget (approximate)</label>
-              <select className={inputClass}>
+              <select className={inputClass} value={form.budget} onChange={set('budget')}>
                 <option value="">Not specified</option>
                 <option>Under €5,000</option>
                 <option>€5,000 – €15,000</option>
@@ -188,12 +316,21 @@ export function RequestFormSection({ cms }: { cms?: {
                 <option>Over €100,000</option>
               </select>
             </div>
+            <div>
+              <label className={labelClass}>Response time</label>
+              <select className={inputClass} value={form.responseTime} onChange={set('responseTime')}>
+                <option value="">Select timeframe</option>
+                <option>Within 24 hours</option>
+                <option>Within 48 hours</option>
+                <option>Within 72 hours</option>
+              </select>
+            </div>
           </div>
 
           {/* Message */}
           <div className="mb-8">
             <label className={labelClass}>Message</label>
-            <textarea rows={4} placeholder="Tell us about your event — specific wishes, requirements, or anything else we should know..." className={`${inputClass} resize-none`} />
+            <textarea rows={4} placeholder="Tell us about your event — specific wishes, requirements, or anything else we should know..." className={`${inputClass} resize-none`} value={form.message} onChange={set('message')} />
           </div>
 
           {/* Extended inquiry link */}
@@ -219,19 +356,32 @@ export function RequestFormSection({ cms }: { cms?: {
             </div>
           </div>
 
+          {/* Error message */}
+          {error && (
+            <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center">
+              {error}
+            </div>
+          )}
+
           {/* Big submit button */}
           <div className="flex flex-col items-center gap-4">
             <button
               type="submit"
-              disabled={submitted}
-              className={`relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 text-[15px] font-semibold rounded-2xl transition-all duration-500 disabled:opacity-60 overflow-hidden group ${
-                isDark
-                  ? "text-[#0A0A0A] bg-white hover:bg-white/90"
-                  : "text-white bg-[#111] hover:bg-[#222]"
+              disabled={submitted || loading}
+              className={`relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 text-[15px] font-semibold rounded-2xl transition-all duration-500 overflow-hidden group ${
+                submitted
+                  ? "!opacity-100 bg-tiffany text-[#0A0A0A] cursor-default"
+                  : loading
+                    ? "opacity-60 cursor-wait " + (isDark ? "text-[#0A0A0A] bg-white" : "text-white bg-[#111]")
+                    : isDark
+                      ? "text-[#0A0A0A] bg-white hover:bg-white/90"
+                      : "text-white bg-[#111] hover:bg-[#222]"
               }`}
             >
               <span className="relative z-10 flex items-center gap-3">
-                {submitted ? (
+                {loading ? (
+                  <><Loader2 className="w-5 h-5 animate-spin" />Sending...</>
+                ) : submitted ? (
                   <><CheckCircle className="w-5 h-5" />{cms?.successMessage || "Thank you! We'll get back to you within 24h."}</>
                 ) : (
                   <>

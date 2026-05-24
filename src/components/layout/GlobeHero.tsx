@@ -150,10 +150,10 @@ export function GlobeHero({ cms }: { cms?: GlobeHeroCMS }) {
               {accent.split(" ").map((w, i) => <span key={`c${i}`} className="hero-word inline-block mr-[0.25em]">{w}</span>)}
             </span>
           </h1>
-          <div className="flex items-center gap-4 mt-6 ml-1">
-            <span className="text-white/25 text-[13px]"><span className="text-white/40 font-medium">360,000+</span> venues</span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-6 ml-1">
+            <span className="text-white/25 text-[13px]"><span className="text-white/40 font-medium">300,000+</span> venues</span>
             <span className="text-white/10">·</span>
-            <span className="text-white/25 text-[13px]"><span className="text-white/40 font-medium">36</span> countries</span>
+            <span className="text-white/25 text-[13px]"><span className="text-white/40 font-medium">175</span> countries</span>
             <span className="text-white/10">·</span>
             <span className="text-white/25 text-[13px]"><span className="text-white/40 font-medium">24h</span> response</span>
           </div>
@@ -344,13 +344,17 @@ function GlobeExplorer() {
     <section
       ref={sectionRef}
       id="globe-section"
-      className="relative w-full min-h-screen flex items-center overflow-hidden"
+      className="relative w-full lg:min-h-screen flex items-center overflow-hidden"
       style={{ background: "#0a0a0a" }}
     >
       {/* Top gradient */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#111] to-transparent z-0" />
 
-      <div className="relative z-10 w-full flex items-center px-6 md:px-12 lg:px-16 py-12">
+      {/* ── Mobile Venue Explorer (< lg) ── */}
+      <MobileVenueExplorer />
+
+      {/* ── Desktop Globe Layout (≥ lg) ── */}
+      <div className="relative z-10 w-full hidden lg:flex items-center px-6 md:px-12 lg:px-16 py-12">
 
         {/* LEFT: Images only — venue previews on hover */}
         <div className="hidden lg:flex flex-col justify-center w-[300px] xl:w-[360px] shrink-0 ml-10">
@@ -445,7 +449,7 @@ function GlobeExplorer() {
                   <span className="text-tiffany">event venue</span>
                 </h2>
                 <p className="text-[13px] text-white/35 leading-relaxed mb-5">
-                  Explore 360,000+ venues across 36 countries. Select a region to browse countries and discover venues tailored to your event.
+                  Explore 300,000+ venues across 175 countries. Select a region to browse countries and discover venues tailored to your event.
                 </p>
                 <div className="flex flex-col gap-2.5">
                   <div className="flex items-center gap-3">
@@ -482,7 +486,7 @@ function GlobeExplorer() {
                 <defs><path id="orb-hero" d="M 250,250 m -235,0 a 235,235 0 1,1 470,0 a 235,235 0 1,1 -470,0" fill="none" /></defs>
                 <circle cx="250" cy="250" r="235" fill="none" stroke="white" strokeWidth="0.3" opacity="0.08" />
                 <text fill="white" opacity="0.15" style={{ fontSize: "9px", fontFamily: "'JetBrains Mono',monospace", letterSpacing: "0.25em", textTransform: "uppercase" }}>
-                  <textPath href="#orb-hero" startOffset="0%">EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES • EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES •</textPath>
+                  <textPath href="#orb-hero" startOffset="0%">EVENTPARTNER • 300,000+ VENUES • 175 COUNTRIES • EVENTPARTNER • 300,000+ VENUES • 175 COUNTRIES •</textPath>
                 </text>
               </svg>
             </div>
@@ -579,6 +583,233 @@ const CONTINENT_GROUPS = [
   { id: 'asia-pacific', label: 'Asia Pacific', regionSlugs: ['asia-pacific'] },
   { id: 'americas',     label: 'Americas',     regionSlugs: ['north-america','south-america'] },
 ];
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE VENUE EXPLORER — touch-friendly replacement for globe
+   ══════════════════════════════════════════════════════════════ */
+function MobileVenueExplorer() {
+  const [level, setLevel] = useState<'continents' | 'regions' | 'countries'>('continents');
+  const [selectedContinent, setSelectedContinent] = useState<string | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const activeRegions = REGIONS.filter(r => r.status === 'active');
+
+  const selectedGroup = CONTINENT_GROUPS.find(c => c.id === selectedContinent);
+  const subRegions = selectedGroup
+    ? selectedGroup.regionSlugs.map(s => activeRegions.find(r => r.slug === s)).filter(Boolean) as Region[]
+    : [];
+  const selectedRegionData = selectedRegion ? REGIONS.find(r => r.slug === selectedRegion) : null;
+  const regionCountries = selectedRegionData
+    ? selectedRegionData.countrySlugs.map(s => COUNTRIES.find(c => c.slug === s)).filter(Boolean) as Country[]
+    : [];
+
+  const handleContinentTap = (group: typeof CONTINENT_GROUPS[0]) => {
+    if (group.regionSlugs.length === 1) {
+      setSelectedContinent(group.id);
+      setSelectedRegion(group.regionSlugs[0]);
+      setLevel('countries');
+    } else {
+      setSelectedContinent(group.id);
+      setLevel('regions');
+    }
+  };
+
+  const handleRegionTap = (slug: string) => {
+    setSelectedRegion(slug);
+    setLevel('countries');
+  };
+
+  const goBack = () => {
+    if (level === 'countries' && subRegions.length > 1) {
+      setSelectedRegion(null);
+      setLevel('regions');
+    } else {
+      setSelectedContinent(null);
+      setSelectedRegion(null);
+      setLevel('continents');
+    }
+  };
+
+  return (
+    <div className="relative z-10 w-full px-5 py-10 lg:hidden">
+      {/* Stats header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-8"
+      >
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tiffany/[0.08] border border-tiffany/[0.15] mb-5">
+          <Globe2 className="w-4 h-4 text-tiffany" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany">Venue Explorer</span>
+        </div>
+        <h2 className="font-display text-3xl font-medium text-white tracking-tight mb-3">
+          Find your perfect<br />
+          <span className="text-tiffany">event venue</span>
+        </h2>
+        <div className="flex justify-center gap-6 mt-4">
+          {[
+            { value: '300,000+', label: 'Venues' },
+            { value: '175', label: 'Countries' },
+            { value: '24h', label: 'Response' },
+          ].map(s => (
+            <div key={s.label} className="text-center">
+              <span className="font-display text-xl font-medium text-white block">{s.value}</span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Navigation */}
+      <AnimatePresence mode="wait">
+        {level === 'continents' ? (
+          /* ── Continent Grid ── */
+          <motion.div
+            key="m-continents"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25 }}
+          >
+            <div className="grid grid-cols-2 gap-2.5">
+              {CONTINENT_GROUPS.map((group, i) => {
+                const regions = group.regionSlugs.map(s => activeRegions.find(r => r.slug === s)).filter(Boolean) as Region[];
+                const totalCountries = regions.reduce((s, r) => s + r.countrySlugs.length, 0);
+                const flags = regions.flatMap(r => r.previewFlags).slice(0, 3);
+                const Icon = CONTINENT_ICONS[group.id] || Globe2;
+
+                return (
+                  <motion.button
+                    key={group.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.05, duration: 0.3 }}
+                    onClick={() => handleContinentTap(group)}
+                    className="relative flex flex-col items-start p-4 rounded-xl border border-white/[0.08] bg-white/[0.03] active:bg-white/[0.08] transition-all text-left"
+                  >
+                    <div className="w-9 h-9 rounded-lg bg-tiffany/[0.08] border border-tiffany/[0.12] flex items-center justify-center mb-3">
+                      <Icon className="w-4 h-4 text-tiffany/70" />
+                    </div>
+                    <span className="font-display text-[15px] font-medium text-white/80 mb-1">{group.label}</span>
+                    <div className="flex items-center gap-1.5 mb-2">
+                      {flags.map(code => (
+                        <div key={code} className="w-5 h-[14px] rounded-[2px] overflow-hidden border border-white/[0.1]">
+                          <Image src={`https://flagcdn.com/w40/${code}.png`} alt="" width={40} height={28} className="w-full h-full object-cover" unoptimized />
+                        </div>
+                      ))}
+                    </div>
+                    <span className="font-mono text-[10px] text-white/25">{totalCountries} countries</span>
+                    <ArrowRight className="absolute top-4 right-4 w-3.5 h-3.5 text-white/15" />
+                  </motion.button>
+                );
+              })}
+            </div>
+          </motion.div>
+
+        ) : level === 'regions' ? (
+          /* ── Sub-regions ── */
+          <motion.div
+            key="m-regions"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.25 }}
+          >
+            <button
+              onClick={goBack}
+              className="flex items-center gap-1.5 text-white/40 mb-4 active:text-tiffany transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.1em]">All Regions</span>
+            </button>
+
+            <div className="flex items-center gap-2 mb-4">
+              {(() => { const Icon = CONTINENT_ICONS[selectedGroup?.id || ''] || Globe2; return (
+                <div className="w-8 h-8 rounded-lg bg-tiffany/[0.08] border border-tiffany/[0.12] flex items-center justify-center">
+                  <Icon className="w-4 h-4 text-tiffany/70" />
+                </div>
+              ); })()}
+              <h3 className="font-display text-xl font-medium text-white">{selectedGroup?.label}</h3>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              {subRegions.map(region => (
+                <button
+                  key={region.slug}
+                  onClick={() => handleRegionTap(region.slug)}
+                  className="flex items-center gap-3 px-4 py-3.5 rounded-xl border border-white/[0.06] bg-white/[0.02] active:bg-white/[0.08] transition-all text-left"
+                >
+                  <div className="flex gap-1 shrink-0">
+                    {region.previewFlags.slice(0, 3).map(code => (
+                      <div key={code} className="w-7 h-5 rounded-[2px] overflow-hidden border border-white/10">
+                        <Image src={`https://flagcdn.com/w40/${code}.png`} alt="" width={40} height={28} className="w-full h-full object-cover" unoptimized />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-display text-[14px] font-medium text-white/75 block">{region.name}</span>
+                    <span className="font-mono text-[10px] text-white/25">{region.countrySlugs.length} countries · {region.totalVenues}</span>
+                  </div>
+                  <ArrowRight className="w-3.5 h-3.5 shrink-0 text-white/15" />
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+        ) : (
+          /* ── Country List ── */
+          <motion.div
+            key="m-countries"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.25 }}
+          >
+            <button
+              onClick={goBack}
+              className="flex items-center gap-1.5 text-white/40 mb-4 active:text-tiffany transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.1em]">
+                {subRegions.length > 1 ? selectedRegionData?.name || 'Back' : 'All Regions'}
+              </span>
+            </button>
+
+            {selectedRegionData && (
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="font-display text-xl font-medium text-white">{selectedRegionData.name}</h3>
+                  <span className="font-mono text-[10px] text-tiffany/50">
+                    {selectedRegionData.countrySlugs.length} countries · {selectedRegionData.totalVenues}
+                  </span>
+                </div>
+                <span className="w-2 h-2 rounded-full bg-tiffany animate-pulse" />
+              </div>
+            )}
+
+            <div className="flex flex-col gap-1.5 max-h-[55vh] overflow-y-auto">
+              {regionCountries.map(country => (
+                <Link href={`/land/${country.slug}`} key={country.slug}>
+                  <div className="flex items-center gap-3 px-3.5 py-3 rounded-xl border border-transparent active:bg-tiffany/[0.08] active:border-tiffany/15 transition-all">
+                    <div className="w-10 h-7 rounded-sm overflow-hidden border border-white/10 shrink-0">
+                      <Image src={`https://flagcdn.com/w80/${country.code}.png`} alt={country.name} width={80} height={56} className="w-full h-full object-cover" unoptimized />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="font-display text-[14px] font-medium text-white/80 block truncate">{country.name}</span>
+                      <span className="font-mono text-[10px] text-white/30">{country.venues}</span>
+                    </div>
+                    <ArrowRight className="w-3.5 h-3.5 shrink-0 text-white/15" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 /* ══════════════════════════════════════════════════════════════
    REGION EXPLORER — Two-level: Continents → Sub-regions

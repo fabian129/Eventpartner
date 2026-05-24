@@ -11,7 +11,7 @@ import { DotGrid } from "@/components/ui/DotGrid";
 const SLUG_MAP: Record<string, string> = {};
 COUNTRIES.forEach(c => { SLUG_MAP[c.code] = c.slug; });
 
-// Countries with venue counts — 36 European markets
+// Countries with venue counts — 175 global markets
 const COUNTRIES_ROW_1 = [
   { code: "se", name: "Sweden", venues: "420+" }, { code: "ie", name: "Ireland", venues: "180+" }, { code: "gb", name: "UK", venues: "1,200+" }, { code: "is", name: "Iceland", venues: "45+" },
   { code: "pt", name: "Portugal", venues: "260+" }, { code: "es", name: "Spain", venues: "540+" }, { code: "fr", name: "France", venues: "760+" },
@@ -128,7 +128,7 @@ export function CountryFlagsSection({ cms }: { cms?: FlagsCMS }) {
 
         {/* Heading + description stacked */}
         <h2 className="font-display text-[clamp(2rem,5vw,3.8rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6 whitespace-pre-wrap">
-          {cms?.headline || "36 countries.\n360,000+ venues."}
+          {cms?.headline || "175 countries.\n300,000+ venues."}
         </h2>
         <p className="font-display text-[clamp(1rem,2vw,1.2rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-lg">
           {cms?.description || "All of Europe — we source the perfect venue regardless of destination."}
@@ -178,8 +178,8 @@ function StatsBar({ metrics }: { metrics?: FlagsCMS["metrics"] }) {
         metrics.map((m, i) => renderMetric(m, i))
       ) : (
         <>
-          <StatCounter value={36} suffix="" label="Countries" active={isInView} />
-          <StatCounter value={360} suffix="K+" label="Venues" active={isInView} delay={0.15} />
+          <StatCounter value={175} suffix="" label="Countries" active={isInView} />
+          <StatCounter value={300} suffix="K+" label="Venues" active={isInView} delay={0.15} />
           <div className="text-center">
             <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">100%</span>
             <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">Europe</span>

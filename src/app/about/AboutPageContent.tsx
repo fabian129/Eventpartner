@@ -12,16 +12,15 @@ const STAT_ICONS = [MapPin, Calendar, Users, Award];
 // Team data comes from shared teamMembers.ts — single source of truth
 
 const DEFAULT_STATS = [
-  { value: "36", label: "Countries" },
-  { value: "2,048+", label: "Events delivered" },
-  { value: "2,400+", label: "Venue partners" },
-  { value: "94%", label: "Customer satisfaction" },
+  { value: "300,000+", label: "Venues worldwide" },
+  { value: "175", label: "Countries" },
+  { value: "10+", label: "Years of experience" },
 ];
 
 const DEFAULT_VALUES = [
   { icon: Heart, title: "Personal Service", description: "Every inquiry is handled by a real person, not a chatbot. We believe in relationships built on trust and genuine care." },
   { icon: Zap, title: "Speed & Reliability", description: "Proposals within 24 hours, always. We know that time-critical event planning doesn't wait for anyone." },
-  { icon: Globe, title: "Pan-European Reach", description: "One partner across 36 countries. No more juggling local agencies — we handle everything from Stockholm to Barcelona." },
+  { icon: Globe, title: "Pan-European Reach", description: "One partner across 175 countries. No more juggling local agencies — we handle everything from Stockholm to Barcelona." },
   { icon: Shield, title: "Transparency", description: "No hidden fees, clear pricing, and a comparison of at least 3 venue options for every single request." },
 ];
 
@@ -60,7 +59,7 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
           {cms?.heroHeadlineLine3 || "events."}
         </motion.h1>
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease: EASE }} className="text-[clamp(1rem,2vw,1.25rem)] text-[var(--text-secondary)] leading-[1.7] max-w-2xl">
-          {cms?.heroSubtitle || "EventPartner was founded on one idea: to make enterprise event planning as seamless as booking a hotel room. With a network spanning 36 European countries and deep industry expertise, we make it possible — every day."}
+          {cms?.heroSubtitle || "EventPartner was founded on one idea: to make enterprise event planning as seamless as booking a hotel room. With a network spanning 175 countries and deep industry expertise, we make it possible — every day."}
         </motion.p>
       </section>
 

@@ -38,7 +38,7 @@ const SERVICES = [
   },
   {
     title: "Venue Sourcing",
-    desc: "360,000+ venues in 36 countries. Always 3 proposals within 24h.",
+    desc: "300,000+ venues in 175 countries. Always 3 proposals within 24h.",
     image: "/Images/group-people-restaurant.webp",
     label: "04",
     icon: "globe" as const,
@@ -183,7 +183,7 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
               {cms?.label || "EventPartner — Services"}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">
-              {cms?.labelRight || "Full-service delivery\n36 countries"}
+              {cms?.labelRight || "Full-service delivery\n175 countries"}
             </span>
           </div>
 
@@ -197,8 +197,8 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[var(--border-default)] pt-5">
             {(cms?.stats || [
-              { label: "Venues", value: "360,000+" },
-              { label: "Countries", value: "36" },
+              { label: "Venues", value: "300,000+" },
+              { label: "Countries", value: "175" },
               { label: "Response time", value: "24h" },
               { label: "Partners", value: "2,400+" },
             ]).map((s) => (
@@ -234,7 +234,7 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.55, delay: 0.3, ease: EASE }}
-            className="md:col-span-2 aspect-[16/6] md:aspect-[16/5] relative group cursor-pointer overflow-hidden rounded-xl"
+            className="md:col-span-2 aspect-[4/3] md:aspect-[16/5] relative group cursor-pointer overflow-hidden rounded-xl"
           >
             <div className="relative w-full h-full">
               <Image

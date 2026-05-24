@@ -77,7 +77,7 @@ export function ServiceShowcase() {
                 Rätt venue, varje gång.
               </p>
               <p className="text-sm font-light text-[var(--text-muted)] leading-relaxed">
-                360,000+ venues i 36 länder. Alltid svar inom 24h med minst 3 kurerade förslag.
+                300,000+ venues i 175 länder. Alltid svar inom 24h med minst 3 kurerade förslag.
               </p>
             </div>
           </motion.div>
@@ -136,11 +136,11 @@ export function ServiceShowcase() {
                   <div className="space-y-5">
                     <div className="flex items-center gap-3.5">
                       <Globe className="w-5 h-5 text-white/50 stroke-[1.5]" />
-                      <span className="text-sm font-light text-white/90">36 länder, ett nätverk</span>
+                      <span className="text-sm font-light text-white/90">175 länder, ett nätverk</span>
                     </div>
                     <div className="flex items-center gap-3.5">
                       <MapPin className="w-5 h-5 text-white/50 stroke-[1.5]" />
-                      <span className="text-sm font-light text-white/90">360,000+ kurerade venues</span>
+                      <span className="text-sm font-light text-white/90">300,000+ kurerade venues</span>
                     </div>
                     <div className="flex items-center gap-3.5">
                       <Users className="w-5 h-5 text-white/50 stroke-[1.5]" />

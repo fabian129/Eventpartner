@@ -2,15 +2,25 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { getProducts, type ShopifyProduct } from "@/lib/shopify";
-import { ProductCard } from "@/components/shop/ProductCard";
-import { useCart } from "@/context/CartContext";
+import { PrintfulProductCard, type PrintfulProductData } from "@/components/shop/PrintfulProductCard";
+import { usePrintfulCart } from "@/context/PrintfulCartContext";
 import { VPPShowcase } from "@/components/shop/VPPShowcase";
-import { ShoppingBag, ArrowRight, Send, Package, Truck, Shield } from "lucide-react";
+import { ShoppingBag, ArrowRight, Package, Truck, Shield } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-
+/**
+ * Curated Printful catalog product IDs for EventPartner's shop.
+ * These map to the products previously synced via Printify → Shopify.
+ *
+ *  71 = Bella + Canvas 3001 (Unisex T-Shirt)
+ *  12 = Gildan 5000 (Classic T-Shirt)
+ *  57 = Gildan 2400 (Long Sleeve)
+ *  19 = White Glossy Mug
+ *  77 = Otto Cap Snapback
+ * 380 = Bella + Canvas 3901 (Crewneck Sweatshirt)
+ */
+const PRODUCT_IDS = [71, 12, 380, 57, 19, 77];
 
 interface ShopCMS {
   heroLabel?: string; heroLabelRight?: string;
@@ -27,34 +37,24 @@ interface ShopCMS {
 }
 
 export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+
+  const [products, setProducts] = useState<PrintfulProductData[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [productError, setProductError] = useState<string | null>(null);
-  const { totalQuantity, openCart } = useCart();
+  const { totalQuantity, openCart } = usePrintfulCart();
 
   useEffect(() => {
     async function fetchProducts() {
-      // Skip API call if credentials are missing or placeholder
-      if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || !process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN) {
-        setLoadingProducts(false);
-        return;
-      }
-      
       try {
         setLoadingProducts(true);
-        const shopifyProducts = await getProducts(20);
-        setProducts(shopifyProducts);
+        const res = await fetch(`/api/printful/products?ids=${PRODUCT_IDS.join(",")}`);
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const json = await res.json();
+        setProducts(json.data || []);
         setProductError(null);
-      } catch (err: any) {
-        // 401 = token invalid/expired — show empty store, not error
-        if (err?.message?.includes("401") || err?.message?.includes("UNAUTHORIZED")) {
-          console.warn("Shopify Storefront token invalid — showing empty store state. Re-create token in Shopify Admin > Settings > Apps > Headless.");
-          setProducts([]);
-        } else {
-          console.error("Failed to fetch Shopify products:", err);
-          setProductError("Unable to load products. Please try again later.");
-        }
+      } catch (err: unknown) {
+        console.error("Failed to fetch Printful products:", err);
+        setProductError("Unable to load products. Please try again later.");
       } finally {
         setLoadingProducts(false);
       }
@@ -62,26 +62,16 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
     fetchProducts();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
 
-  const headline = cms?.headline || "Everything for your event.";
-  const headlineAccent = cms?.headlineAccent || "Order online.";
-  const description = cms?.description || "Name badges, conference kits, décor and branded merchandise — all curated for professional events.";
-  const quoteTitle = cms?.quoteTitle || "Video Plus Print Quote";
-  const quoteButton = cms?.quoteButton || "Request Quote";
+
+  const headline = cms?.headline || "Custom merch for your event.";
+  const headlineAccent = cms?.headlineAccent || "Order in bulk.";
+  const description = cms?.description || "Upload your logo, pick sizes and quantities — we print and deliver directly to your venue.";
   const heroLabel = cms?.heroLabel || "EventPartner — Shop";
   const heroLabelRight = cms?.heroLabelRight || "Event Merchandise";
   const merchLabel = cms?.merchLabel || "Event Merchandise";
   const comingSoonTitle = cms?.comingSoonTitle || "Coming Soon";
   const comingSoonDesc = cms?.comingSoonDesc || "Our event merchandise catalog is being prepared. Check back soon for branded products and conference essentials.";
-  const vppHeadline = cms?.vppHeadline || "Premium video";
-  const vppHeadlineAccent = cms?.vppHeadlineAccent || "brochures.";
-  const vppDesc = cms?.vppDescription || "Stand out at your next event with our custom Video Plus Print brochures — a tangible, high-impact marketing tool that combines print with embedded video.";
-  const successTitle = cms?.successTitle || "Quote Request Sent";
-  const successDesc = cms?.successDescription || "We will get back to you with a custom Video Plus Print quote within 24 hours.";
   const ctaHeadline = cms?.ctaHeadline || "Need a custom solution?";
   const ctaDesc = cms?.ctaDescription || "Contact us for bulk orders, custom branding, or tailored merchandise packages.";
 
@@ -142,7 +132,7 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
         </div>
       </section>
 
-      {/* ─── Merchandise Products (Shopify / Printify) ─── */}
+      {/* ─── Merchandise Products (Printful) ─── */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="flex items-center gap-4 mb-10">
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany">{merchLabel}</span>
@@ -150,8 +140,8 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
         </motion.div>
 
         {loadingProducts ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(4)].map((_, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
               <div key={i} className="bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl overflow-hidden animate-pulse">
                 <div className="aspect-square bg-[var(--bg-primary)]" />
                 <div className="p-5 space-y-3">
@@ -177,66 +167,21 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
               <ShoppingBag className="w-8 h-8 text-[var(--text-secondary)] opacity-40" />
             </div>
             <h3 className="text-xl font-display font-semibold text-[var(--text-primary)] mb-2">{comingSoonTitle}</h3>
-            <p className="text-[var(--text-secondary)] max-w-md mx-auto">
-              {comingSoonDesc}
-            </p>
+            <p className="text-[var(--text-secondary)] max-w-md mx-auto">{comingSoonDesc}</p>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.map((product, i) => (
               <motion.div key={product.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.05 * i, ease: EASE }}>
-                <ProductCard product={product} />
+                <PrintfulProductCard product={product} />
               </motion.div>
             ))}
           </div>
         )}
       </section>
 
-      {/* ─── VPP Product Showcase ─── */}
+      {/* ─── VPP Product Showcase + Quote Form ─── */}
       <VPPShowcase />
-
-      {/* ─── VPP Quote Form ─── */}
-      <section id="vpp-quote" className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-          <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{quoteTitle}</span>
-            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{vppHeadline}<br />{vppHeadlineAccent}</h2>
-            <p className="text-[var(--text-secondary)] text-[15px] leading-[1.8] mt-6">{vppDesc}</p>
-          </motion.div>
-
-          <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
-            <div className="bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl p-8 lg:p-10">
-              {submitted ? (
-                <div className="flex flex-col items-center justify-center text-center py-12">
-                  <div className="w-16 h-16 bg-tiffany/10 text-tiffany rounded-full flex items-center justify-center mb-6 text-2xl">✓</div>
-                  <h3 className="text-2xl font-display font-semibold text-[var(--text-primary)] mb-2">{successTitle}</h3>
-                  <p className="text-[var(--text-secondary)]">{successDesc}</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-2 gap-5">
-                    <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">First Name</label><input type="text" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" /></div>
-                    <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Last Name</label><input type="text" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" /></div>
-                  </div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Email Address</label><input type="email" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" /></div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Company</label><input type="text" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" /></div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Estimated Quantity</label>
-                    <select required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors">
-                      <option value="">Select quantity...</option>
-                      <option value="50-100">50 - 100 units</option>
-                      <option value="100-500">100 - 500 units</option>
-                      <option value="500-1000">500 - 1000 units</option>
-                      <option value="1000+">1000+ units</option>
-                    </select>
-                  </div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Additional Details</label><textarea rows={3} className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors resize-none" placeholder="Tell us about your event and requirements..." /></div>
-                  <button type="submit" className="w-full bg-[#111] border border-[#333] text-white font-medium rounded-xl py-4 hover:bg-[#222] hover:border-[#444] transition-all flex items-center justify-center gap-2"><Send className="w-4 h-4" />{quoteButton}</button>
-                </form>
-              )}
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Bottom CTA */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10">

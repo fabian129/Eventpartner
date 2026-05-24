@@ -19,7 +19,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['sweden', 'norway', 'iceland', 'estonia', 'latvia', 'lithuania'],
     center: [61, 15],
     previewFlags: ['se', 'no', 'is'],
-    totalVenues: '450+',
+    totalVenues: '18,500+',
     status: 'active',
   },
   {
@@ -28,7 +28,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['uk', 'ireland', 'france', 'belgium', 'netherlands', 'luxembourg'],
     center: [49, 2],
     previewFlags: ['gb', 'fr', 'nl'],
-    totalVenues: '450+',
+    totalVenues: '32,000+',
     status: 'active',
   },
   {
@@ -37,7 +37,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['czech-republic', 'poland', 'slovakia', 'hungary', 'switzerland'],
     center: [49, 15],
     previewFlags: ['cz', 'pl', 'ch'],
-    totalVenues: '375+',
+    totalVenues: '24,000+',
     status: 'active',
   },
   {
@@ -46,7 +46,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['spain', 'portugal', 'italy', 'greece', 'malta'],
     center: [40, 10],
     previewFlags: ['es', 'it', 'gr'],
-    totalVenues: '375+',
+    totalVenues: '28,500+',
     status: 'active',
   },
   {
@@ -55,7 +55,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['croatia', 'slovenia', 'serbia', 'bosnia-herzegovina', 'montenegro', 'north-macedonia', 'romania'],
     center: [44, 19],
     previewFlags: ['hr', 'rs', 'ro'],
-    totalVenues: '525+',
+    totalVenues: '9,800+',
     status: 'active',
   },
 
@@ -66,7 +66,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['finland', 'denmark'],
     center: [60, 20],
     previewFlags: ['fi', 'dk'],
-    totalVenues: '200+',
+    totalVenues: '8,200+',
     status: 'active',
   },
   {
@@ -75,7 +75,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['germany', 'bulgaria', 'moldova', 'ukraine'],
     center: [50, 15],
     previewFlags: ['de', 'bg', 'ua'],
-    totalVenues: '400+',
+    totalVenues: '14,000+',
     status: 'active',
   },
   {
@@ -84,7 +84,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['albania', 'andorra', 'monaco', 'gibraltar', 'eswatini'],
     center: [42, 20],
     previewFlags: ['al', 'ad', 'mc'],
-    totalVenues: '150+',
+    totalVenues: '3,500+',
     status: 'active',
   },
 
@@ -95,7 +95,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['turkey', 'israel', 'jordan', 'lebanon', 'saudi-arabia', 'qatar', 'bahrain', 'kuwait', 'oman'],
     center: [28, 42],
     previewFlags: ['sa', 'ae', 'tr'],
-    totalVenues: '500+',
+    totalVenues: '18,000+',
     status: 'active',
   },
   {
@@ -104,7 +104,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['south-africa', 'egypt', 'nigeria', 'kenya', 'ethiopia', 'ghana', 'tanzania', 'morocco', 'tunisia', 'senegal', 'rwanda', 'uganda', 'cameroon', 'angola', 'mozambique', 'namibia', 'botswana', 'zambia', 'zimbabwe', 'madagascar', 'mauritius', 'seychelles', 'mali', 'niger', 'chad', 'guinea', 'guinea-bissau', 'sierra-leone', 'liberia', 'gambia', 'benin', 'togo', 'burkina-faso', 'central-african-republic', 'congo', 'eritrea', 'djibouti', 'somalia', 'sudan', 'south-sudan', 'lesotho', 'malawi', 'mauritania', 'cape-verde', 'equatorial-guinea', 'sao-tome-and-principe'],
     center: [5, 20],
     previewFlags: ['za', 'ng', 'ke'],
-    totalVenues: '1 000+',
+    totalVenues: '28,000+',
     status: 'active',
   },
   {
@@ -113,7 +113,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['japan', 'south-korea', 'china', 'india', 'australia', 'new-zealand', 'singapore', 'hong-kong', 'macau', 'malaysia', 'indonesia', 'thailand', 'vietnam', 'philippines', 'cambodia', 'laos', 'myanmar', 'bangladesh', 'nepal', 'sri-lanka', 'pakistan', 'afghanistan', 'kazakhstan', 'kyrgyzstan', 'uzbekistan', 'mongolia', 'brunei', 'fiji', 'samoa', 'tonga', 'vanuatu', 'palau', 'kiribati', 'micronesia', 'marshall-islands', 'nauru', 'tuvalu', 'maldives', 'bhutan', 'armenia', 'azerbaijan', 'georgia'],
     center: [25, 100],
     previewFlags: ['jp', 'au', 'sg'],
-    totalVenues: '2 000+',
+    totalVenues: '72,000+',
     status: 'active',
   },
   {
@@ -122,7 +122,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['canada', 'mexico', 'puerto-rico', 'bermuda', 'cayman-islands', 'jamaica', 'bahamas', 'barbados', 'dominican-republic', 'antigua-and-barbuda', 'saint-kitts-and-nevis', 'saint-lucia', 'saint-vincent-and-the-grenadines', 'grenada', 'dominica', 'belize', 'guatemala', 'honduras', 'el-salvador', 'nicaragua', 'costa-rica', 'panama'],
     center: [25, -80],
     previewFlags: ['ca', 'mx', 'jm'],
-    totalVenues: '1 500+',
+    totalVenues: '38,000+',
     status: 'active',
   },
   {
@@ -131,7 +131,7 @@ export const REGIONS: Region[] = [
     countrySlugs: ['brazil', 'argentina', 'chile', 'colombia', 'peru', 'ecuador', 'bolivia', 'paraguay', 'uruguay', 'aruba'],
     center: [-15, -60],
     previewFlags: ['br', 'ar', 'cl'],
-    totalVenues: '800+',
+    totalVenues: '24,000+',
     status: 'active',
   },
 ];

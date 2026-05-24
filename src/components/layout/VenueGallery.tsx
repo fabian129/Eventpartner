@@ -52,7 +52,7 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
                 transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
               >
                 <p className="text-xs font-medium tracking-[0.15em] uppercase text-white/60 mb-3">
-                  360,000+ venues
+                  300,000+ venues
                 </p>
                 <h3 className="text-2xl md:text-4xl font-medium tracking-tight text-white leading-tight">
                   Från intima middagar till<br className="hidden md:block" />
@@ -61,7 +61,7 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
               </motion.div>
               <div className="hidden md:flex items-center gap-6">
                 <div className="text-right">
-                  <p className="text-3xl font-medium text-white tracking-tight">36</p>
+                  <p className="text-3xl font-medium text-white tracking-tight">175</p>
                   <p className="text-xs text-white/50 uppercase tracking-wider">Länder</p>
                 </div>
                 <div className="w-[1px] h-10 bg-white/20" />

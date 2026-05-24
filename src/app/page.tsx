@@ -13,6 +13,7 @@ import { LogoTicker } from "@/components/layout/LogoTicker";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollSection } from "@/components/ui/ScrollSection";
 import { WebshopTeaser } from "@/components/layout/WebshopTeaser";
+import { VPPShowcase } from "@/components/shop/VPPShowcase";
 import { DarkZone } from "@/components/ui/DarkZone";
 import { HeroLightUpZone } from "@/components/ui/HeroLightUp";
 import { ExitIntentPopup } from "@/components/ui/ExitIntentPopup";
@@ -52,7 +53,7 @@ export default async function Home() {
 
       {/* The rest of the light page content wrapped in the LightUp zone */}
       <HeroLightUpZone>
-        {/* 2. Video + Partner banner — own section below hero */}
+        {/* 2. Video + Partner banner — TEMPORARILY HIDDEN (video not ready yet)
         <ScrollSection>
           <VideoSection cms={data ? {
             label: t(data.videoLabel),
@@ -63,14 +64,8 @@ export default async function Home() {
             bottomText: t(data.videoBottomText),
           } : undefined} />
         </ScrollSection>
+        */}
 
-        {/* 3. Logo Banner — social proof */}
-        <ScrollSection fadeOut={false}>
-          <LogoTicker cms={data ? {
-            label: t(data.logoTickerLabel),
-            logos: data.logoTickerLogos,
-          } : undefined} />
-        </ScrollSection>
 
 
 
@@ -165,8 +160,29 @@ export default async function Home() {
         placeholder: t(data.newsletterPlaceholder),
         button: t(data.newsletterButton),
       } : undefined} />
+      {/* ── EventPartner Shop ── */}
+      <section className="w-full px-6 md:px-10 pt-24 md:pt-32 pb-8" style={{ background: "#EAEAED" }}>
+        <div className="max-w-[1100px] mx-auto text-center">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-black/30 block mb-4">EventPartner — Shop</span>
+          <h2 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-medium tracking-tight text-[#111] leading-[1.05]">
+            EventPartner Shop
+          </h2>
+          <p className="mt-4 text-[clamp(1rem,2vw,1.2rem)] text-black/40 max-w-lg mx-auto">
+            Video products, branded merchandise & everything for your next event.
+          </p>
+        </div>
+      </section>
 
-      {/* 10. Webshop Teaser */}
+      {/* Logo Banner — social proof */}
+      <LogoTicker cms={data ? {
+        label: t(data.logoTickerLabel),
+      } : undefined} />
+
+      {/* 10. EventPartner Shop — VPP first, then Merch */}
+      <ScrollSection>
+        <VPPShowcase />
+      </ScrollSection>
+
       <ScrollSection>
         <WebshopTeaser cms={data ? {
           label: t(data.webshopLabel),

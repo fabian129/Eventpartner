@@ -19,7 +19,7 @@ const DEFAULT_FAQS = [
   },
   {
     question: "Which countries and cities do you cover?",
-    answer: "We have venues in 36 European countries — from Iceland to Cyprus, from Portugal to Finland. Over 360,000 venues in total. Whether you need a conference hotel in Stockholm or a gala venue in Barcelona, we'll find the right one.",
+    answer: "We have venues in 175 countries — from Iceland to Cyprus, from Portugal to Finland. Over 300,000 venues in total. Whether you need a conference hotel in Stockholm or a gala venue in Barcelona, we'll find the right one.",
   },
   {
     question: "Can you handle really large events?",

@@ -419,7 +419,7 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
             <span className="headline-word inline-block italic font-light text-tiffany">Anywhere in Europe.</span>
           </h2>
           <p className="headline-word text-white/35 text-[14px] font-sans max-w-2xl leading-relaxed">
-            <span className="text-white/50 font-medium">360,000+ venues</span> · <span className="text-white/50 font-medium">36 countries</span> · <span className="text-white/50 font-medium">24h response</span> · <span className="text-white/50 font-medium">3+ proposals</span> per inquiry. Select a region and browse venues to get started.
+            <span className="text-white/50 font-medium">300,000+ venues</span> · <span className="text-white/50 font-medium">175 countries</span> · <span className="text-white/50 font-medium">24h response</span> · <span className="text-white/50 font-medium">3+ proposals</span> per inquiry. Select a region and browse venues to get started.
           </p>
         </div>
 
@@ -450,7 +450,7 @@ export function GlobeSection({ cms }: { cms?: GlobeCMS }) {
                   <circle cx="250" cy="250" r="230" fill="none" stroke="white" strokeWidth="0.4" opacity="0.12" />
                   <text fill="white" opacity="0.25" style={{ fontSize: "10px", fontFamily: "'JetBrains Mono',monospace", letterSpacing: "0.2em", textTransform: "uppercase" }}>
                     <textPath href="#orb" startOffset="0%">
-                      EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES • EVENTPARTNER • 360,000+ VENUES • 36 COUNTRIES •
+                      EVENTPARTNER • 300,000+ VENUES • 175 COUNTRIES • EVENTPARTNER • 300,000+ VENUES • 175 COUNTRIES •
                     </textPath>
                   </text>
                 </svg>
@@ -1020,7 +1020,7 @@ function StatsBar({ metrics }: { metrics?: GlobeCMS["metrics"] }) {
       ) : (
         <>
           <Counter value={29} suffix="" label="Countries" go={inView} />
-          <Counter value={360} suffix="K+" label="Venues" go={inView} delay={0.15} />
+          <Counter value={300} suffix="K+" label="Venues" go={inView} delay={0.15} />
           <div className="text-center">
             <span className="font-display text-2xl md:text-3xl font-medium text-white block">100%</span>
             <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">Europe</span>

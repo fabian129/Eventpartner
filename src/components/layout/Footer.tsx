@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram, Linkedin, Facebook, Globe, ArrowRight, Mail } from "lucide-react";
+import { Instagram, Linkedin, Facebook, Globe, ArrowRight, Mail, ChevronDown, MapPin } from "lucide-react";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { REGIONS } from "@/data/regions";
+import { COUNTRIES } from "@/data/countries";
 
 const FOOTER_LINKS = {
   company: {
@@ -47,6 +49,30 @@ const INSPO_IMAGES = [
   "/Images/illuminated-footbridge-amidst-cherry-trees-night.webp",
 ];
 
+// Group regions into macro-groups for display
+const MACRO_REGIONS = [
+  {
+    label: "Europe",
+    regionSlugs: ["nordics", "nordic-extended", "western-europe", "central-europe", "central-europe-extended", "southern-europe", "balkans-southeast", "balkans-extended"],
+  },
+  {
+    label: "Middle East",
+    regionSlugs: ["middle-east"],
+  },
+  {
+    label: "Africa",
+    regionSlugs: ["africa"],
+  },
+  {
+    label: "Asia Pacific",
+    regionSlugs: ["asia-pacific"],
+  },
+  {
+    label: "Americas",
+    regionSlugs: ["north-america", "south-america"],
+  },
+];
+
 interface FooterCMS {
   brandDesc?: string;
   socialLabel?: string;
@@ -56,15 +82,102 @@ interface FooterCMS {
   columns?: { title: string; links: { label: string; href: string }[] }[];
 }
 
+function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: string[] }) {
+  const [open, setOpen] = useState(false);
+
+  // Collect all unique country slugs for these regions
+  const regions = regionSlugs
+    .map(slug => REGIONS.find(r => r.slug === slug))
+    .filter(Boolean) as typeof REGIONS;
+
+  const allCountrySlugs = [...new Set(regions.flatMap(r => r.countrySlugs))];
+
+  // Resolve to full country objects
+  const countries = allCountrySlugs
+    .map(slug => COUNTRIES.find(c => c.slug === slug))
+    .filter(Boolean)
+    .sort((a, b) => a!.name.localeCompare(b!.name));
+
+  const totalVenues = regions.reduce((sum, r) => {
+    const num = parseInt(r.totalVenues.replace(/[^\d]/g, "")) || 0;
+    return sum + num;
+  }, 0);
+
+  return (
+    <div className="border-b border-white/[0.06] last:border-b-0">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between py-3.5 group cursor-pointer"
+      >
+        <div className="flex items-center gap-3">
+          <Globe className="w-3.5 h-3.5 text-tiffany/60" />
+          <span className="text-[13px] text-white/60 group-hover:text-white/80 transition-colors font-medium">
+            {label}
+          </span>
+          <span className="text-[10px] font-mono text-white/20 tracking-wide">
+            {countries.length} countries · {totalVenues.toLocaleString()}+ venues
+          </span>
+        </div>
+        <motion.div
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+        >
+          <ChevronDown className="w-3.5 h-3.5 text-white/25 group-hover:text-white/40 transition-colors" />
+        </motion.div>
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="pb-4 pl-6.5 flex flex-wrap gap-x-1 gap-y-0.5">
+              {countries.map((country, i) => (
+                <span key={country!.slug} className="inline">
+                  <Link
+                    href={`/land/${country!.slug}`}
+                    className="text-[11px] text-white/30 hover:text-tiffany transition-colors duration-200"
+                  >
+                    {country!.name}
+                  </Link>
+                  {i < countries.length - 1 && (
+                    <span className="text-[11px] text-white/10 mx-0.5">·</span>
+                  )}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export function Footer({ cms }: { cms?: FooterCMS }) {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [subLoading, setSubLoading] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setEmail("");
+    if (!email.trim()) return;
+    setSubLoading(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'newsletter', email }),
+      });
+      if (res.ok) {
+        setSubscribed(true);
+        setEmail("");
+      }
+    } catch {} finally {
+      setSubLoading(false);
     }
   };
 
@@ -76,7 +189,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
         <div className="max-w-[1200px] mx-auto">
 
           {/* Inspiration image strip */}
-          <div className="grid grid-cols-4 gap-2 mb-10 rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-10 rounded-2xl overflow-hidden">
             {INSPO_IMAGES.map((src, i) => (
               <div key={i} className="relative aspect-[4/3] overflow-hidden">
                 <Image
@@ -84,7 +197,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                   alt="Event inspiration"
                   fill
                   className="object-cover grayscale brightness-[0.5] hover:grayscale-0 hover:brightness-[0.7] transition-all duration-700"
-                  sizes="25vw"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
               </div>
             ))}
@@ -160,7 +273,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                 </div>
               </Link>
               <p className="text-[13px] text-white/35 leading-relaxed max-w-xs mb-6">
-                {cms?.brandDesc || "Your complete partner for corporate events across Europe. 360,000+ venues, one platform."}
+                {cms?.brandDesc || "Your complete partner for corporate events across Europe. 300,000+ venues, one platform."}
               </p>
 
               {/* Social Links */}
@@ -206,6 +319,31 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
         </div>
       </div>
 
+      {/* Global Presence — Regions & Countries */}
+      <div className="mx-6 md:mx-10 border-t border-white/[0.06]" />
+      <div className="px-6 md:px-10 py-10">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex items-center gap-2.5 mb-5">
+            <MapPin className="w-3.5 h-3.5 text-tiffany/50" />
+            <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-tiffany">
+              Global Presence
+            </h4>
+            <span className="font-mono text-[10px] text-white/15 tracking-wide">
+              — 300,000+ venues across 175 countries
+            </span>
+          </div>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
+            {MACRO_REGIONS.map((macro) => (
+              <RegionAccordion
+                key={macro.label}
+                label={macro.label}
+                regionSlugs={macro.regionSlugs}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* CTA Banner */}
       <div className="mx-6 md:mx-10 mb-8">
         <div className="max-w-[1200px] mx-auto">
@@ -240,3 +378,4 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
     </footer>
   );
 }
+

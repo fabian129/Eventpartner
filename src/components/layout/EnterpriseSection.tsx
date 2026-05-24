@@ -19,8 +19,8 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  */
 
 const STATS = [
-  { value: 36, suffix: "", label: "länder" },
-  { value: 360000, suffix: "+", label: "venues globalt" },
+  { value: 175, suffix: "", label: "länder" },
+  { value: 300000, suffix: "+", label: "venues globalt" },
   { value: 24, suffix: "h", label: "svarstid" },
 ];
 
@@ -61,7 +61,7 @@ export function EnterpriseSection() {
           >
             Ledande företag använder EventPartner för att leverera
             konferenser, kickoffs och galor — från lokalsökning till
-            genomförande i 36 länder.
+            genomförande i 175 länder.
           </motion.p>
         </div>
       </div>
