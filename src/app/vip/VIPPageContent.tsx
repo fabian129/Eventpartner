@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Crown, Star, Shield, Users, Clock, Gift, ArrowRight, Check, Sparkles, Play } from "lucide-react";
+import { Crown, Star, Shield, Users, Clock, Gift, ArrowRight, Check, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -90,7 +90,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 pb-20 md:pb-32">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, ease: EASE }} className="flex justify-between items-start mb-10">
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.heroLabel || "EventPartner — VIP Programme"}</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">{cms?.heroLabelRight || "Exclusive access · 3:12"}</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">{cms?.heroLabelRight || "Exclusive access"}</span>
         </motion.div>
 
         <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 1, ease: EASE }} className="font-display text-[clamp(2.8rem,7vw,5.5rem)] font-medium tracking-[-0.04em] text-[var(--text-primary)] leading-[0.92] mb-16 md:mb-20">
@@ -109,24 +109,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
           ))}
         </motion.div>
 
-        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.4, duration: 0.9, ease: EASE }} className="font-display text-[clamp(1.3rem,2.5vw,2rem)] font-medium tracking-tight text-center mb-12 md:mb-16" style={{ background: "linear-gradient(135deg, #7851A9 0%, #9370C4 50%, #6AD8D2 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-          {cms?.heroAnchorText || "Welcome to the VIP Programme ↓"}
-        </motion.p>
 
-        <motion.div initial={{ opacity: 0, y: 50, scale: 0.93 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 2.6, duration: 1.2, ease: EASE }} className="relative w-full rounded-2xl overflow-hidden group cursor-pointer" style={{ aspectRatio: "16 / 9", boxShadow: "0 30px 80px -20px rgba(0,0,0,0.12)" }}>
-          <Image src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1920&auto=format&fit=crop" alt="VIP event experience" fill className="object-cover grayscale brightness-[0.75] group-hover:grayscale-0 group-hover:brightness-90 transition-all duration-700" sizes="100vw" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
-          <div className="absolute inset-0 flex items-center justify-center z-10">
-            <div className="relative">
-              <div className="absolute inset-0 w-20 h-20 md:w-24 md:h-24 rounded-full border border-white/20 animate-ping" style={{ animationDuration: "2.5s" }} />
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-purple/25 group-hover:border-purple/40"><Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="white" fillOpacity={0.9} /></div>
-            </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 px-6 py-5 z-10 flex justify-between items-end">
-            <div><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/50 mb-1">{cms?.videoLabel || "EventPartner \u2014 VIP Programme"}</p><p className="text-sm text-white/80 font-medium">{cms?.videoText || "Discover the VIP experience"}</p></div>
-            <p className="font-mono text-[11px] text-white/40">3:12</p>
-          </div>
-        </motion.div>
       </section>
 
       {/* Manifesto */}
