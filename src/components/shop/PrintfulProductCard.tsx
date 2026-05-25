@@ -2,8 +2,9 @@
 
 import { useState, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
-import { ShoppingBag, Upload } from "lucide-react";
+import { ShoppingBag, Upload, Paintbrush, Check } from "lucide-react";
 import { SizeQuantityMatrix } from "./SizeQuantityMatrix";
+import { PrintfulDesignMaker } from "./PrintfulDesignMaker";
 import { usePrintfulCart, type CartSizeEntry } from "@/context/PrintfulCartContext";
 
 // ─── Types (from API response) ──────────────────────────────────
@@ -48,6 +49,9 @@ export function PrintfulProductCard({
     { variantId: number; size: string; quantity: number }[]
   >([]);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [designerOpen, setDesignerOpen] = useState(false);
+  const [templateId, setTemplateId] = useState<number | null>(null);
+  const [designPreview, setDesignPreview] = useState<string | null>(null);
 
   // Filter variants by selected color
   const colorVariants = useMemo(
@@ -203,6 +207,22 @@ export function PrintfulProductCard({
             animate={{ opacity: 1, height: "auto" }}
             transition={{ duration: 0.3, ease: EASE }}
           >
+            {/* Customize button */}
+            <button
+              onClick={() => setDesignerOpen(true)}
+              className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border text-sm font-medium transition-all mb-3 ${
+                templateId
+                  ? "bg-tiffany/10 border-tiffany/30 text-tiffany"
+                  : "bg-purple/10 border-purple/30 text-purple hover:bg-purple/20"
+              }`}
+            >
+              {templateId ? (
+                <><Check className="w-4 h-4" /> Design saved</>
+              ) : (
+                <><Paintbrush className="w-4 h-4" /> Customize Design</>
+              )}
+            </button>
+
             {/* Size Quantity Matrix */}
             <div className="mb-4">
               <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-3 block">
@@ -234,6 +254,19 @@ export function PrintfulProductCard({
           </motion.div>
         )}
       </div>
+
+      {/* Printful Design Maker Modal */}
+      <PrintfulDesignMaker
+        productId={product.id}
+        productName={product.name}
+        isOpen={designerOpen}
+        onClose={() => setDesignerOpen(false)}
+        onDesignSaved={(result) => {
+          setTemplateId(result.templateId);
+          if (result.previewUrl) setDesignPreview(result.previewUrl);
+          setDesignerOpen(false);
+        }}
+      />
     </motion.div>
   );
 }
