@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from 'next-intl';
 import { ChevronDown } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import { DotGrid } from "@/components/ui/DotGrid";
@@ -11,7 +12,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const DEFAULT_FAQS = [
   {
     question: "What does it cost to use EventPartner?",
-    answer: "Sending an inquiry and receiving venue proposals is completely free. We charge a service fee only when you book — and it's always transparent and agreed upon in advance. No hidden costs.",
+    answer: "Sending an inquiry and receiving venue proposals is completely free. Our service is funded by the venues, meaning there are no hidden costs or fees for you.",
   },
   {
     question: "How quickly will I get a response?",
@@ -53,6 +54,7 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const t = useTranslations('faq');
 
   const faqs = cms?.items?.length ? cms.items : DEFAULT_FAQS;
 
@@ -71,7 +73,7 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
           {/* Mono labels */}
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {cms?.label || "Eventpartner \u2014 FAQ"}
+              {cms?.label || t('label')}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
               {cms?.labelRight || `${faqs.length} questions`}
@@ -80,12 +82,12 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
 
           {/* Big heading */}
           <h2 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
-            {cms?.headline || "Have questions?"}
+            {cms?.headline || t('fallbackTitle')}
           </h2>
 
           {/* Description */}
           <p className="font-display text-[clamp(1rem,2vw,1.3rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-xl">
-            {cms?.description || "Everything you need to know about working with EventPartner — from pricing to delivery time."}
+            {cms?.description || t('fallbackDescription')}
           </p>
         </motion.div>
 

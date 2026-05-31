@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -10,6 +11,10 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  * ExitIntentPopup — Triggered when user moves cursor toward browser close
  * or after scrolling 80% of page without taking action.
  * Collects email + name for lead capture.
+ *
+ * NOTE: No dedicated exit popup keys exist in en.json yet.
+ * CMS props are the primary override; inline defaults are kept as fallbacks.
+ * When exit popup keys are added to en.json, swap the fallback strings to t() calls.
  */
 
 interface ExitCMS {
@@ -25,6 +30,7 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
   const [show, setShow] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const tc = useTranslations('common');
 
   useEffect(() => {
     // Don't show if already dismissed this session

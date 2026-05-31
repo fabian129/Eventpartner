@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useTranslations } from 'next-intl';
 import createGlobe from "cobe";
 import { AnimatePresence, motion } from "framer-motion";
 import { gsap } from "@/lib/animation";
@@ -86,6 +87,7 @@ interface GlobeHeroCMS {
    No pinning. Normal scroll flow.
    ══════════════════════════════════════════════════════════════ */
 export function GlobeHero({ cms }: { cms?: GlobeHeroCMS }) {
+  const t = useTranslations('hero');
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const hasAnimated = useRef(false);
   const [currentImage, setCurrentImage] = useState(0);
@@ -104,9 +106,9 @@ export function GlobeHero({ cms }: { cms?: GlobeHeroCMS }) {
     gsap.to(words, { opacity: 1, y: 0, rotateX: 0, duration: 1.2, stagger: 0.1, ease: "power3.out", delay: 0.3 });
   }, []);
 
-  const h1 = cms?.headline || "The World's";
-  const h2 = cms?.headline ? "" : "Largest Selection";
-  const accent = cms?.headlineAccent || "of Venues";
+  const h1 = cms?.headline || t('headline');
+  const h2: string = cms?.headline ? "" : "";
+  const accent = cms?.headlineAccent || t('headlineAccent');
 
   return (
     <>

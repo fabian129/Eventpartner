@@ -6,6 +6,7 @@ import {
   useState,
   useCallback,
   useEffect,
+  useRef,
   type ReactNode,
 } from "react";
 
@@ -83,15 +84,19 @@ function saveCart(items: PrintfulCartItem[]) {
 export function PrintfulCartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<PrintfulCartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const hasLoaded = useRef(false);
 
-  // Load from localStorage on mount
+  // Load from localStorage on mount (client only — avoids SSR hydration mismatch)
   useEffect(() => {
     setItems(loadCart());
+    hasLoaded.current = true;
   }, []);
 
-  // Persist on change
+  // Persist on change (only after initial load to avoid wiping localStorage)
   useEffect(() => {
-    saveCart(items);
+    if (hasLoaded.current) {
+      saveCart(items);
+    }
   }, [items]);
 
   // Computed totals

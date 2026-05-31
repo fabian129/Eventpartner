@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 
 /**
  * POST /api/printful/nonce
+ * Body: { externalProductId: string }
  * Generates a nonce token for the Printful Embedded Design Maker.
- * Must be called from the backend to keep the API key secure.
  */
-export async function POST() {
+export async function POST(req: Request) {
   const apiKey = process.env.PRINTFUL_API_KEY;
 
   if (!apiKey) {
@@ -16,6 +16,9 @@ export async function POST() {
   }
 
   try {
+    const body = await req.json().catch(() => ({}));
+    const externalProductId = body.externalProductId || `ep-${Date.now()}`;
+
     const response = await fetch(
       "https://api.printful.com/embedded-designer/nonces",
       {
@@ -24,6 +27,9 @@ export async function POST() {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          external_product_id: externalProductId,
+        }),
       }
     );
 
@@ -37,9 +43,10 @@ export async function POST() {
     }
 
     const data = await response.json();
-    // The response shape may vary — handle both v1 and v2 formats
-    const nonce = data?.data?.nonce || data?.result?.nonce;
-    const expiresAt = data?.data?.expires_at || data?.result?.expires_at;
+    // Response shape: { result: { nonce: { nonce, expires_at, ... } } }
+    const nonceData = data?.result?.nonce || data?.data?.nonce;
+    const nonce = typeof nonceData === "string" ? nonceData : nonceData?.nonce;
+    const expiresAt = nonceData?.expires_at;
 
     if (!nonce) {
       console.error("Printful nonce: unexpected response shape", JSON.stringify(data).slice(0, 500));

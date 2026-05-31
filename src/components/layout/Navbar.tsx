@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import Image from "next/image";
+import { useLocale } from "next-intl";
+import { useRouter, usePathname } from "@/i18n/navigation";
 
 /* ── Service submenu items ── */
 const SERVICE_ITEMS = [
@@ -43,6 +45,14 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
   const [isDarkBg, setIsDarkBg] = useState(true); // start dark (hero)
   const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const switchLocale = useCallback(() => {
+    const next = locale === "en" ? "sv" : "en";
+    router.replace(pathname, { locale: next });
+  }, [locale, router, pathname]);
 
   /* ── Scroll detection ── */
   useEffect(() => {
@@ -240,7 +250,24 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
           {/* ════════════════════════════ */}
           {/* RIGHT: CTA button (desktop) */}
           {/* ════════════════════════════ */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2">
+            {/* Language toggle */}
+            <button
+              onClick={switchLocale}
+              className={`
+                flex items-center gap-1.5 text-[11px] font-medium rounded-full px-3 py-2
+                transition-all duration-300
+                ${isDarkBg
+                  ? "text-white/50 hover:text-white/80 hover:bg-white/[0.06]"
+                  : "text-[#888] hover:text-[#333] hover:bg-black/[0.04]"
+                }
+              `}
+              aria-label="Switch language"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              {locale === "en" ? "SV" : "EN"}
+            </button>
+
             <a
               href="#request"
               className={`

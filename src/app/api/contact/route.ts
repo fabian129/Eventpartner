@@ -8,10 +8,22 @@ function getResend() {
   return new Resend(key);
 }
 
+/** Escape user input for safe HTML interpolation */
+function esc(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // Target emails — where form submissions land (comma-separated)
-const TO_EMAILS = (process.env.CONTACT_EMAIL || 'info@eventpartner.io')
+const TO_EMAILS = (process.env.CONTACT_EMAIL || 'pontus@eventpartner.io,malin@eventpartner.io,joakim@eventpartner.io')
   .split(',')
   .map((e) => e.trim());
+
+const FROM_EMAIL = 'EventPartner <noreply@eventpartner.io>';
 
 export async function POST(req: NextRequest) {
   try {
@@ -22,6 +34,8 @@ export async function POST(req: NextRequest) {
       return handleEventInquiry(body);
     } else if (type === 'vpp-quote') {
       return handleVPPQuote(body);
+    } else if (type === 'merch-quote') {
+      return handleMerchQuote(body);
     } else if (type === 'newsletter') {
       return handleNewsletter(body);
     }
@@ -54,7 +68,7 @@ async function handleEventInquiry(data: Record<string, any>) {
     : date || 'Not specified';
 
   const { error } = await getResend().emails.send({
-    from: 'EventPartner <onboarding@resend.dev>',
+    from: FROM_EMAIL,
     to: TO_EMAILS,
     replyTo: email,
     subject: `🎯 New Event Inquiry — ${company}`,
@@ -131,7 +145,7 @@ async function handleVPPQuote(data: Record<string, any>) {
   }
 
   const { error } = await getResend().emails.send({
-    from: 'EventPartner <onboarding@resend.dev>',
+    from: FROM_EMAIL,
     to: TO_EMAILS,
     replyTo: email,
     subject: `📦 Video Brochure Quote — ${company || name}`,
@@ -177,6 +191,116 @@ async function handleVPPQuote(data: Record<string, any>) {
   return NextResponse.json({ success: true });
 }
 
+/* ── Merch / Printful Quote Request ── */
+async function handleMerchQuote(data: Record<string, any>) {
+  const { name, email, company, phone, message, items, totalQuantity, totalPrice, currency } = data;
+
+  if (!name || !email || !items?.length) {
+    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
+  }
+
+  // Build product rows HTML
+  const productRows = items.map((item: any) => {
+    const sizeBreakdown = item.sizes
+      .filter((s: any) => s.quantity > 0)
+      .map((s: any) => `${s.size}: ${s.quantity}st`)
+      .join(', ');
+    
+    const itemTotal = item.sizes.reduce((sum: number, s: any) => sum + s.quantity * s.price, 0);
+    const itemQty = item.sizes.reduce((sum: number, s: any) => sum + s.quantity, 0);
+
+    return `
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 16px 12px;">
+          <strong>${esc(item.productName || '')}</strong><br/>
+          <span style="color: #888; font-size: 12px;">Color: ${esc(item.color || '')} · ${itemQty} items</span><br/>
+          <span style="color: #666; font-size: 13px;">${esc(sizeBreakdown)}</span>
+          ${item.templateId ? `<br/><span style="color: #6AD8D2; font-size: 12px;">Template ID: ${item.templateId}</span>` : ''}
+        </td>
+        <td style="padding: 16px 12px; text-align: right; font-weight: 600; white-space: nowrap;">
+          ${new Intl.NumberFormat('sv-SE', { style: 'currency', currency: item.currency || 'USD', minimumFractionDigits: 0 }).format(itemTotal)}
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  const formattedTotal = new Intl.NumberFormat('sv-SE', {
+    style: 'currency',
+    currency: currency || 'USD',
+    minimumFractionDigits: 0,
+  }).format(totalPrice || 0);
+
+  const { error } = await getResend().emails.send({
+    from: FROM_EMAIL,
+    to: TO_EMAILS,
+    replyTo: email,
+    subject: `🛍️ Merch Quote Request — ${esc(company || name)} (${totalQuantity} items)`,
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+        <div style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px;">
+          <h1 style="color: #6AD8D2; font-size: 20px; margin: 0 0 4px;">Merch Quote Request</h1>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0;">Received via eventpartner.se/shop</p>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px;">
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 12px 0; color: #666; width: 120px;">Name</td>
+            <td style="padding: 12px 0; font-weight: 600;">${esc(name)}</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 12px 0; color: #666;">Email</td>
+            <td style="padding: 12px 0;"><a href="mailto:${esc(email)}" style="color: #6AD8D2;">${esc(email)}</a></td>
+          </tr>
+          ${company ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Company</td><td style="padding: 12px 0;">${esc(company)}</td></tr>` : ''}
+          ${phone ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Phone</td><td style="padding: 12px 0;">${esc(phone)}</td></tr>` : ''}
+        </table>
+
+        <h2 style="font-size: 16px; color: #333; margin: 24px 0 12px;">Order Details</h2>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; background: #f8f9fa; border-radius: 12px; overflow: hidden;">
+          <thead>
+            <tr style="background: #eee;">
+              <th style="padding: 12px; text-align: left; font-size: 12px; text-transform: uppercase; color: #666;">Product</th>
+              <th style="padding: 12px; text-align: right; font-size: 12px; text-transform: uppercase; color: #666;">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${productRows}
+          </tbody>
+          <tfoot>
+            <tr style="border-top: 2px solid #ddd;">
+              <td style="padding: 16px 12px; font-weight: 700; font-size: 15px;">${totalQuantity} items total</td>
+              <td style="padding: 16px 12px; text-align: right; font-weight: 700; font-size: 15px; color: #6AD8D2;">${formattedTotal}</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        ${message ? `
+          <div style="margin-top: 24px; padding: 20px; background: #f8f9fa; border-radius: 12px;">
+            <p style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 8px;">Message</p>
+            <p style="margin: 0; white-space: pre-wrap; line-height: 1.6;">${esc(message)}</p>
+          </div>
+        ` : ''}
+
+        <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee;">
+          <p style="color: #999; font-size: 12px; margin: 0;">Reply directly to this email to respond to ${esc(name)} at ${esc(email)}</p>
+        </div>
+      </div>
+    `,
+  });
+
+  if (error) {
+    console.error('Resend error:', error);
+    return NextResponse.json({ error: 'Failed to send quote request' }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true });
+}
+
 /* ── Newsletter Signup ── */
 async function handleNewsletter(data: Record<string, any>) {
   const { email } = data;
@@ -187,7 +311,7 @@ async function handleNewsletter(data: Record<string, any>) {
 
   // Send confirmation/welcome email
   const { error } = await getResend().emails.send({
-    from: 'EventPartner <onboarding@resend.dev>',
+    from: FROM_EMAIL,
     to: [email],
     subject: 'Welcome to EventPartner 🎉',
     html: `
@@ -205,7 +329,7 @@ async function handleNewsletter(data: Record<string, any>) {
 
   // Also notify the team
   await getResend().emails.send({
-    from: 'EventPartner <onboarding@resend.dev>',
+    from: FROM_EMAIL,
     to: TO_EMAILS,
     subject: `📬 New Newsletter Subscriber — ${email}`,
     html: `<p>New newsletter signup: <strong>${email}</strong></p>`,

@@ -44,51 +44,51 @@ export async function GET(req: Request) {
     // Fetch products (already sequential with delays in lib/printful.ts)
     const products = await getCatalogProducts(ids);
 
-    // Fetch variants + prices SEQUENTIALLY with generous delays
-    const enriched = [];
-    for (const product of products) {
-      let variants: PrintfulVariant[] = [];
-      let prices: Record<number, { price: string; currency: string }> = {};
+    // Fetch variants + prices in PARALLEL (one batch of concurrent requests)
+    const enriched = await Promise.all(
+      products.map(async (product) => {
+        let variants: PrintfulVariant[] = [];
+        let prices: Record<number, { price: string; currency: string }> = {};
 
-      try {
-        variants = await getCatalogVariants(product.id);
-        await delay(300);
-      } catch (err) {
-        console.warn(`Failed to fetch variants for product ${product.id}:`, err);
-      }
+        // Fetch variants and prices concurrently for each product
+        const [variantsResult, pricesResult] = await Promise.allSettled([
+          getCatalogVariants(product.id),
+          getCatalogPrices(product.id),
+        ]);
 
-      try {
-        prices = await getCatalogPrices(product.id);
-        await delay(300);
-      } catch (err) {
-        console.warn(`Failed to fetch prices for product ${product.id}:`, err);
-      }
+        if (variantsResult.status === "fulfilled") variants = variantsResult.value;
+        else console.warn(`Failed to fetch variants for product ${product.id}:`, variantsResult.reason);
 
-      // Merge prices into variants
-      const variantsWithPrices = variants.map((v) => ({
-        ...v,
-        price: prices[v.id]?.price || "0",
-        currency: prices[v.id]?.currency || "USD",
-      }));
+        if (pricesResult.status === "fulfilled") prices = pricesResult.value;
+        else console.warn(`Failed to fetch prices for product ${product.id}:`, pricesResult.reason);
 
-      // Extract unique colors from variants
-      const colorMap = new Map<string, { name: string; hex: string }>();
-      for (const v of variants) {
-        if (v.color && !colorMap.has(v.color)) {
-          colorMap.set(v.color, { name: v.color, hex: v.color_code || "#000" });
+        // Merge prices into variants — use base price as fallback
+        const basePrice = prices[-1] || { price: "0", currency: "USD" };
+        const variantsWithPrices = variants.map((v) => ({
+          ...v,
+          price: prices[v.id]?.price || basePrice.price,
+          currency: prices[v.id]?.currency || basePrice.currency,
+        }));
+
+        // Extract unique colors from variants
+        const colorMap = new Map<string, { name: string; hex: string }>();
+        for (const v of variants) {
+          if (v.color && !colorMap.has(v.color)) {
+            colorMap.set(v.color, { name: v.color, hex: v.color_code || "#000" });
+          }
         }
-      }
 
-      // Extract unique sizes
-      const sizes = [...new Set(variants.map((v) => v.size).filter(Boolean))];
+        // Extract unique sizes
+        const sizes = [...new Set(variants.map((v) => v.size).filter(Boolean))];
 
-      enriched.push({
-        ...product,
-        variants: variantsWithPrices,
-        availableColors: [...colorMap.values()],
-        availableSizes: sizes,
-      });
-    }
+        return {
+          ...product,
+          variants: variantsWithPrices,
+          availableColors: [...colorMap.values()],
+          availableSizes: sizes,
+        };
+      })
+    );
 
     // Store in cache
     cache = { data: enriched, timestamp: Date.now(), key: cacheKey };

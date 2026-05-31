@@ -1,0 +1,626 @@
+{
+  "nav": {
+    "logo": "EventPartner",
+    "links": {
+      "services": "Services",
+      "about": "About",
+      "shop": "Shop",
+      "vip": "VIP",
+      "security": "Security",
+      "aiAssistant": "AI Assistant"
+    },
+    "serviceItems": {
+      "conferences": "Conferences & Meetings",
+      "teamBuilding": "Team Building",
+      "corporateEvents": "Corporate Events",
+      "venues": "Venue Finding",
+      "eventProduction": "Event Production",
+      "virtualEvents": "Virtual & Hybrid Events"
+    },
+    "cta": "Get a Free Quote",
+    "mobileMenu": "Menu",
+    "close": "Close"
+  },
+
+  "footer": {
+    "brand": "EventPartner",
+    "tagline": "Europe's premier event partner — connecting you with extraordinary venues across 175 countries.",
+    "sections": {
+      "services": "Services",
+      "company": "Company",
+      "legal": "Legal",
+      "connect": "Connect"
+    },
+    "serviceLinks": {
+      "conferences": "Conferences",
+      "teamBuilding": "Team Building",
+      "corporateEvents": "Corporate Events",
+      "venueFinding": "Venue Finding",
+      "eventProduction": "Event Production"
+    },
+    "companyLinks": {
+      "about": "About Us",
+      "vip": "VIP Programme",
+      "shop": "Shop",
+      "security": "Security",
+      "aiAssistant": "AI Assistant"
+    },
+    "legalLinks": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy",
+      "gdpr": "GDPR"
+    },
+    "newsletter": {
+      "label": "Newsletter",
+      "placeholder": "Your work email",
+      "button": "Subscribe",
+      "subscribing": "Subscribing...",
+      "success": "You're subscribed! Check your inbox."
+    },
+    "regions": {
+      "label": "Regions",
+      "scandinavia": "Scandinavia",
+      "westernEurope": "Western Europe",
+      "southernEurope": "Southern Europe",
+      "centralEurope": "Central Europe",
+      "easternEurope": "Eastern Europe",
+      "baltics": "Baltics"
+    },
+    "copyright": "© {year} EventPartner Global AB. All rights reserved.",
+    "bottomLinks": {
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies"
+    }
+  },
+
+  "hero": {
+    "label": "EventPartner — Global Reach",
+    "labelRight": "175 Countries",
+    "headline": "Find your perfect",
+    "headlineAccent": "venue.",
+    "subtitle": "From intimate board dinners to 5,000-person conferences — we find, compare, and book the ideal venue. Anywhere in Europe.",
+    "cta": "Get a Free Quote",
+    "ctaSub": "Free · No obligations · Response within 24h",
+    "stats": {
+      "venues": { "value": "300,000+", "label": "Venues" },
+      "countries": { "value": "175", "label": "Countries" },
+      "response": { "value": "<24h", "label": "Response time" },
+      "proposals": { "value": "3+", "label": "Proposals per request" }
+    },
+    "scrollLabel": "Scroll to explore"
+  },
+
+  "requestForm": {
+    "label": "EventPartner — Request",
+    "labelRight": "Free quote",
+    "headline": "Tell us about your event.",
+    "headlineAccent": "We'll handle the rest.",
+    "description": "One inquiry — multiple venue proposals, tailored to your exact needs. Always free, always personal, always within 24 hours.",
+    "fields": {
+      "name": { "label": "Full Name", "placeholder": "Your full name" },
+      "email": { "label": "Email", "placeholder": "you@company.com" },
+      "company": { "label": "Company", "placeholder": "Company name" },
+      "phone": { "label": "Phone", "placeholder": "+46 70 123 45 67" },
+      "eventType": {
+        "label": "Event Type",
+        "placeholder": "Select event type...",
+        "options": {
+          "conference": "Conference / Meeting",
+          "teamBuilding": "Team Building",
+          "corporate": "Corporate Event",
+          "dinner": "Gala Dinner",
+          "product": "Product Launch",
+          "wedding": "Wedding",
+          "other": "Other"
+        }
+      },
+      "guests": {
+        "label": "Number of Guests",
+        "placeholder": "Select...",
+        "options": {
+          "10-50": "10 – 50",
+          "50-100": "50 – 100",
+          "100-300": "100 – 300",
+          "300-500": "300 – 500",
+          "500-1000": "500 – 1,000",
+          "1000+": "1,000+"
+        }
+      },
+      "location": {
+        "label": "Preferred Location",
+        "placeholder": "City, region, or country..."
+      },
+      "date": { "label": "Preferred Date", "placeholder": "Select date..." },
+      "budget": {
+        "label": "Budget Range",
+        "placeholder": "e.g. €20,000"
+      },
+      "message": {
+        "label": "Additional Details",
+        "placeholder": "Tell us about your event — requirements, preferences, special needs..."
+      }
+    },
+    "submit": "Send Request",
+    "submitting": "Sending...",
+    "success": {
+      "title": "Request Sent!",
+      "description": "We've received your inquiry. Our team will review it and get back to you within 24 hours with tailored venue proposals."
+    },
+    "disclaimer": "No obligations · Free service · Response within 24h",
+    "meetingSection": {
+      "label": "Direct contact",
+      "headline": "Prefer to talk?",
+      "description": "Book a 15-min call with Pontus to discuss your event.",
+      "cta": "Book meeting"
+    },
+    "infoCards": {
+      "card1": { "title": "Free Service", "label": "Always" },
+      "card2": { "title": "Response within 24h", "label": "Guaranteed" },
+      "card3": { "title": "3+ Venue Proposals", "label": "Per request" }
+    }
+  },
+
+  "about": {
+    "label": "EventPartner — About",
+    "fallbackTitle": "About EventPartner",
+    "fallbackDescription": "EventPartner is Europe's premier event venue booking platform, connecting enterprises with extraordinary venues across 175 countries."
+  },
+
+  "faq": {
+    "label": "EventPartner — FAQ",
+    "fallbackTitle": "Frequently Asked Questions",
+    "fallbackDescription": "Find answers to common questions about our services, pricing, and process."
+  },
+
+  "services": {
+    "label": "EventPartner — Services",
+    "fallbackTitle": "Our Services",
+    "fallbackDescription": "From venue finding to full event production — we handle every detail of your corporate event."
+  },
+
+  "serviceCards": {
+    "label": "EventPartner — Solutions",
+    "fallbackTitle": "Personal Event Solutions",
+    "fallbackDescription": "Tailored services for every type of event — from intimate gatherings to large-scale productions."
+  },
+
+  "vipTeaser": {
+    "label": "By invitation only",
+    "headline": "A different standard",
+    "headlineMuted": "for companies that refuse to compromise.",
+    "body1": "The EventPartner VIP Programme is reserved for organisations that expect precision, discretion, and flawless execution. Every detail — from venue selection to on-site coordination — is handled by your dedicated senior team.",
+    "body2": "Membership is by application only. We maintain a deliberately limited roster to ensure each client receives the attention their events demand.",
+    "inclusionsLabel": "What's included",
+    "inclusions": [
+      "Priority access to Europe's most exclusive venues",
+      "Dedicated senior account manager",
+      "Preferred rates across 175 countries",
+      "Always 33% extra discount on everything in our webshop",
+      "Annual comprehensive reporting & ESG / sustainability data",
+      "Enterprise governance aligned with CSRD, NIS2 & travel management",
+      "24/7 concierge support during events",
+      "Complimentary site inspections"
+    ],
+    "ctaText": "Apply for Membership",
+    "ctaSub": "Limited availability · Reviewed within 48h"
+  },
+
+  "webshopTeaser": {
+    "label": "EventPartner — Shop",
+    "labelRight": "Event Merchandise",
+    "headline": "Everything for your event.",
+    "headlineAccent": "Order online.",
+    "description": "Name badges, conference kits, décor and branded merchandise — all curated for professional events.",
+    "comingSoonTitle": "Coming soon.",
+    "comingSoonDesc": "Our webshop for event products launches soon. Contact us and we'll handle your order today.",
+    "ctaText": "Visit the shop",
+    "bestseller": "Bestseller"
+  },
+
+  "newsletter": {
+    "label": "Newsletter",
+    "headline": "Stay in the loop",
+    "description": "Event insights, new venues, and exclusive opportunities — delivered monthly.",
+    "placeholder": "Your work email",
+    "button": "Subscribe",
+    "subscribing": "Subscribing...",
+    "success": "You're subscribed! Check your inbox."
+  },
+
+  "cinematicQuote": {
+    "label": "EventPartner — Next Step",
+    "labelRight": "Free consultation",
+    "headline": "Create your next event.",
+    "subheadline": "Tell us what you're looking for — we'll handle the rest.",
+    "card1Title": "Talk to us",
+    "card1Desc": "Get answers to your questions.",
+    "card2Title": "Start your event",
+    "card2Headline": "Customize your event.",
+    "card2Sub": "Your way."
+  },
+
+  "countryFlags": {
+    "label": "EventPartner — Coverage",
+    "title": "175 Countries",
+    "subtitle": "We operate across all of Europe and beyond."
+  },
+
+  "shop": {
+    "heroLabel": "EventPartner — Shop",
+    "heroLabelRight": "Event Merchandise",
+    "headline": "Custom merch for your event.",
+    "headlineAccent": "Order in bulk.",
+    "description": "Upload your logo, pick sizes and quantities — we print and deliver directly to your venue.",
+    "merchLabel": "Event Merchandise",
+    "comingSoonTitle": "Coming Soon",
+    "comingSoonDesc": "Our event merchandise catalog is being prepared. Check back soon for branded products and conference essentials.",
+    "ctaHeadline": "Need a custom solution?",
+    "ctaDescription": "Contact us for bulk orders, custom branding, or tailored merchandise packages.",
+    "howItWorks": {
+      "label": "How it works",
+      "steps": [
+        { "step": "1", "title": "Choose a product", "desc": "Pick from t-shirts, hoodies, mugs & more" },
+        { "step": "2", "title": "Upload your design", "desc": "Add your logo or artwork in the designer" },
+        { "step": "3", "title": "Select sizes & quantities", "desc": "Choose how many of each size you need" },
+        { "step": "4", "title": "Request a quote", "desc": "We'll send pricing within 24 hours" }
+      ]
+    },
+    "cart": "Cart",
+    "productCard": {
+      "customize": "Customize",
+      "colors": "colors",
+      "sizes": "sizes"
+    }
+  },
+
+  "cart": {
+    "title": "Your Order",
+    "item": "item",
+    "items": "items",
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "Select products and choose quantities per size."
+    },
+    "selected": "selected",
+    "priceIncluded": "Price included in quote",
+    "bulkDiscountNote": "Final pricing includes bulk discounts. We'll respond within 24h.",
+    "requestQuote": "Request Quote",
+    "close": "Close cart",
+    "quoteForm": {
+      "title": "Request Quote",
+      "fields": {
+        "name": { "label": "Name *", "placeholder": "Your full name" },
+        "email": { "label": "Email *", "placeholder": "you@company.com" },
+        "company": { "label": "Company", "placeholder": "Company name" },
+        "phone": { "label": "Phone", "placeholder": "+46 70 123 45 67" },
+        "message": { "label": "Message", "placeholder": "Any special requirements, delivery date, etc." }
+      },
+      "nameEmailRequired": "Name and email are required.",
+      "submit": "Send Quote Request",
+      "sending": "Sending..."
+    },
+    "success": {
+      "title": "Quote Request Sent!",
+      "description": "We've received your merch order request. Our team will review it and get back to you within 24 hours with pricing and delivery details.",
+      "close": "Close"
+    },
+    "removeItem": "Remove item",
+    "priceOnRequest": "Price on request"
+  },
+
+  "designer": {
+    "title": "Design Your Product",
+    "loadingTitle": "Loading Design Maker...",
+    "loadingSub": "This may take a few seconds",
+    "errorTitle": "Failed to load designer",
+    "close": "Close",
+    "uploadHint": "Upload your design, then save to continue",
+    "uploadWarning": "Please upload a design before saving.",
+    "saveAndContinue": "Save & Continue",
+    "saving": "Saving...",
+    "dismiss": "Dismiss",
+    "sizesTitle": "Select Sizes & Quantities",
+    "designSaved": "Design saved",
+    "sizePrompt": "How many of each size do you need?",
+    "selectSizesAbove": "Select sizes above",
+    "addToCart": "Add to Cart",
+    "addedTitle": "Added to Cart!",
+    "addMoreProducts": "Add More Products",
+    "requestQuote": "Request Quote",
+    "item": "item",
+    "items": "items"
+  },
+
+  "sizeMatrix": {
+    "item": "item",
+    "items": "items",
+    "selected": "selected"
+  },
+
+  "vpp": {
+    "sectionLabel": "Video Brochures",
+    "sectionBadge": "Fully customizable & printable",
+    "viewDetails": "View Details",
+    "features": "Features",
+    "idealFor": "Ideal For",
+    "requestQuoteFor": "Request Quote for {productName}",
+    "trustedBy": "Trusted by 500+ global brands",
+    "quoteLabel": "Request a Quote",
+    "quoteHeadline": "Premium video\nbrochures.",
+    "quoteDescription": "Stand out at your next event with custom Video Brochure products — tangible, high-impact marketing tools that combine print with embedded video.",
+    "quotePoints": {
+      "customizable": { "label": "Fully Customizable", "desc": "Your design, your brand, your video" },
+      "delivery": { "label": "Global Delivery", "desc": "Ship anywhere in the world" },
+      "rechargeable": { "label": "Rechargeable", "desc": "USB-C charging, reusable content" }
+    },
+    "quoteForm": {
+      "fullName": "Full Name *",
+      "company": "Company *",
+      "email": "Email *",
+      "phone": "Phone",
+      "productType": "Product Type *",
+      "selectProduct": "Select product...",
+      "screenSize": "Screen Size *",
+      "selectSize": "Select size...",
+      "quantity": "Quantity *",
+      "selectQty": "Select qty...",
+      "paperType": "Paper Type",
+      "selectPaper": "Select paper...",
+      "finish": "Finish",
+      "selectFinish": "Select finish...",
+      "additionalDetails": "Additional Details",
+      "detailsPlaceholder": "Tell us about your event, timeline, design requirements...",
+      "submit": "Request Quote",
+      "sending": "Sending...",
+      "disclaimer": "No obligations • Response within 24h • Minimum order 50 units"
+    },
+    "quoteSuccess": {
+      "title": "Quote Request Sent",
+      "description": "We'll get back to you with a custom Video Brochure quote within 24 hours.",
+      "submitAnother": "Submit another request"
+    },
+    "meetingSection": {
+      "label": "Direct contact",
+      "headline": "Want to discuss your project?",
+      "description": "Book a 15-min call with Pontus to discuss your project.",
+      "cta": "Book meeting"
+    },
+    "products": {
+      "brochure": {
+        "name": "Video Brochure",
+        "tagline": "Print meets motion",
+        "description": "A custom-printed brochure with an embedded LCD screen that plays your video the moment it's opened. Perfect for sales pitches, product launches, and VIP invitations."
+      },
+      "mailer": {
+        "name": "Video Mailer",
+        "tagline": "Direct mail, redefined",
+        "description": "A branded mailer box containing a video brochure — designed for direct mail campaigns that demand attention and drive response rates up to 90%."
+      },
+      "box": {
+        "name": "Video Box",
+        "tagline": "Unboxing as experience",
+        "description": "Premium packaging with an embedded screen — perfect for luxury products, corporate gifts, and VIP experiences. Make unboxing unforgettable."
+      },
+      "folder": {
+        "name": "Video Folder",
+        "tagline": "Presentations that speak",
+        "description": "An A4/Letter-size folder with built-in screen, pockets for documents, and space for contracts or vouchers. The ultimate sales tool."
+      },
+      "businessCard": {
+        "name": "Video Business Card",
+        "tagline": "Leave an impression",
+        "description": "A pocket-sized card with a 2.4″ screen that plays your video introduction. Hand it over at events and never be forgotten."
+      },
+      "book": {
+        "name": "Video Book",
+        "tagline": "Stories come alive",
+        "description": "A multi-page hardcover book with one or more embedded screens. Perfect for brand stories, annual reports, and commemorative editions."
+      }
+    }
+  },
+
+  "vipPage": {
+    "heroLabel": "EventPartner — VIP Programme",
+    "heroLabelRight": "Exclusive access",
+    "heroHeadline": "Your partner,",
+    "heroHeadlineAccent": "not a vendor.",
+    "heroIntroText": "We connect ambitious companies with extraordinary venues — rejecting the ordinary, prioritising precision, and delivering events that genuinely elevate.",
+    "heroStats": [
+      { "value": "12h", "label": "Response time" },
+      { "value": "10%", "label": "Max discount" },
+      { "value": "36", "label": "Countries" },
+      { "value": "1:1", "label": "Dedicated manager" }
+    ],
+    "manifestoLabel": "EventPartner — VIP Benefits",
+    "manifestoHeadline": "Everything you need.",
+    "manifestoHeadlineAccent": "Nothing you don't.",
+    "manifestoQuote": "We don't treat every client the same — we treat every client as if they're the only one.",
+    "manifestoBody1": "Our VIP programme gives your team direct access to a dedicated account manager who understands your brand, your standards, and your history. Every inquiry is prioritised, every proposal is tailored, and every detail is handled with care.",
+    "manifestoBody2": "Whether you're planning 5 events per year or 50, VIP clients receive custom contract terms, exclusive venue access, and strategic support to optimise your entire event portfolio.",
+    "manifestoMotto": "Priority is not a perk — it's the standard.",
+    "manifestoStats": [
+      { "value": "< 12h", "label": "Response time" },
+      { "value": "Up to 10%", "label": "Discounts" },
+      { "value": "1:1", "label": "Account manager" },
+      { "value": "Custom", "label": "Contract terms" }
+    ],
+    "tiersLabel": "EventPartner — VIP Membership",
+    "tiersLabelRight": "Exclusive",
+    "tiersHeadline": "What you get.",
+    "tiersDescription": "Our VIP membership, designed around your needs. Includes a dedicated booking resource for booking and coordinating all your events. Everywhere.",
+    "tierCardTitle": "VIP-Partner",
+    "tierCardBadge": "999€ /month",
+    "tierCardPrice": "By Invitation",
+    "tierCardPriceSub": "Annual booking volume of at least €300,000 required",
+    "tierCardFeatures": [
+      "A dedicated booking resource for booking & coordinating",
+      "Negotiated VIP pricing & exclusive venue access",
+      "Up to 14% discount on all bookings",
+      "Always 33% extra discount on everything in our webshop",
+      "Annual comprehensive reporting & ESG / sustainability data",
+      "Aligned with enterprise governance: CSRD, ESG, NIS2 compliance",
+      "Advanced spend control & travel management integration",
+      "Access to the EventPartner AI Assistant",
+      "Priority response within 12h",
+      "Custom contract & billing terms"
+    ],
+    "tierCardCta": "Request Invitation",
+    "stepsLabel": "EventPartner — How to join",
+    "stepsLabelRight": "3 steps",
+    "stepsHeadline": "Three simple steps.",
+    "steps": [
+      { "step": "01", "title": "Apply", "desc": "Fill in your company details and event volume through the form below. Takes less than 2 minutes." },
+      { "step": "02", "title": "Qualify", "desc": "Our team reviews your profile and matches you with the right VIP tier based on your needs and volume." },
+      { "step": "03", "title": "Enjoy", "desc": "Start receiving priority service, exclusive pricing, and a dedicated account manager from day one." }
+    ],
+    "ctaCard1Title": "Questions?",
+    "ctaCard1Desc": "We'll tell you if you qualify.",
+    "ctaCard2Title": "Apply",
+    "ctaCard2Headline": "Request an invitation.",
+    "ctaCard2Sub": "Today."
+  },
+
+  "aboutPage": {
+    "heroLabel": "About EventPartner",
+    "heroLabelRight": "Est. 2024",
+    "heroHeadline": "People who",
+    "heroHeadlineAccent": "understand",
+    "heroHeadlineLine3": "events.",
+    "heroSubtitle": "EventPartner was founded on one idea: to make enterprise event planning as seamless as booking a hotel room. With a network spanning 175 countries and deep industry expertise, we make it possible — every day.",
+    "stats": [
+      { "value": "300,000+", "label": "Venues worldwide" },
+      { "value": "175", "label": "Countries" },
+      { "value": "10+", "label": "Years of experience" }
+    ],
+    "storyLabel": "Our Story",
+    "storyHeadline": "From idea to",
+    "storyHeadlineAccent": "industry leader.",
+    "storyQuote": "We believe every event is an opportunity to build something lasting. Not just a conference — a memory. Not just a dinner — a relationship.",
+    "storyBody1": "Founded in the Mediterranean but operating across all of Europe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
+    "storyBody2": "Our backgrounds span event production, hospitality, and technology. We combined all three to create a service that is personal, reliable, and remarkably efficient. One inquiry, multiple options, zero hassle.",
+    "valuesLabel": "What We Stand For",
+    "valuesHeadline": "Built on principles,",
+    "valuesHeadlineAccent": "not just promises.",
+    "values": [
+      { "icon": "heart", "title": "Personal Service", "description": "Every inquiry is handled by a real person, not a chatbot. We believe in relationships built on trust and genuine care." },
+      { "icon": "zap", "title": "Speed & Reliability", "description": "Proposals within 24 hours, always. We know that time-critical event planning doesn't wait for anyone." },
+      { "icon": "globe", "title": "Pan-European Reach", "description": "One partner across 175 countries. No more juggling local agencies — we handle everything from Stockholm to Barcelona." },
+      { "icon": "shield", "title": "Transparency", "description": "No hidden fees, clear pricing, and a comparison of at least 3 venue options for every single request." }
+    ],
+    "teamLabel": "The Team",
+    "teamIntro": "A small team with deep experience in event production, hospitality, and tech — treating every inquiry as their own.",
+    "ctaHeadline": "Ready to plan your next event?",
+    "ctaDescription": "Send us your inquiry — always free, always personal, always within 24 hours."
+  },
+
+  "aiAssistant": {
+    "heroLabel": "AI Assistant",
+    "heroLabelRight": "Beta",
+    "heroHeadline": "Your intelligent",
+    "heroHeadlineAccent": "event partner.",
+    "heroSubtitle": "Our AI assistant helps you explore venues, get instant answers, and streamline your event planning process — available 24/7 across all 36 European markets.",
+    "botTitle": "EP Assistant",
+    "botDescription": "Our AI assistant is being trained on thousands of venues and events. It will be available soon to help you plan your next event.",
+    "botStatus": "Training in progress...",
+    "botLaunchDate": "Expected launch Q3 2025",
+    "featuresLabel": "Capabilities",
+    "featuresHeadline": "What the assistant\nwill do for you.",
+    "features": [
+      { "icon": "zap", "title": "Instant Responses", "desc": "Get venue suggestions, pricing estimates, and availability checks in seconds — no waiting for business hours." },
+      { "icon": "globe", "title": "36-Country Knowledge", "desc": "Our AI has been trained on venue data across all 36 European markets we operate in." },
+      { "icon": "shield", "title": "Privacy-First", "desc": "Your conversations are encrypted and never shared. We take data protection seriously." },
+      { "icon": "chat", "title": "Natural Conversation", "desc": "Ask questions in plain language — our assistant understands context and follow-ups." }
+    ],
+    "ctaHeadline": "Can't wait for the AI?",
+    "ctaDescription": "Our human team responds within 24 hours — send us your event request now."
+  },
+
+  "securityPage": {
+    "heroLabel": "Security & Compliance",
+    "heroLabelRight": "GDPR · EU Data",
+    "heroBadge": "Enterprise-Grade Security",
+    "heroHeadline": "Your data",
+    "heroHeadlineAccent": "is sacred.",
+    "heroSubtitle": "We handle event data for some of Europe's largest organizations. That trust is earned through rigorous security practices, full GDPR compliance, and absolute transparency about how we protect your information.",
+    "pillarsLabel": "Security Foundations",
+    "pillarsHeadline": "Built on six",
+    "pillarsHeadlineAccent": "security pillars.",
+    "pillars": [
+      { "icon": "lock", "title": "Data Encryption", "description": "All data is encrypted in transit (TLS 1.3) and at rest (AES-256). We follow industry best practices for key management and rotation." },
+      { "icon": "server", "title": "EU-Based Infrastructure", "description": "All data is hosted on EU-based servers. We do not transfer personal data outside the European Economic Area without explicit safeguards." },
+      { "icon": "fileCheck", "title": "GDPR Compliant", "description": "EventPartner is fully GDPR compliant. We maintain a detailed data processing register and respond to data subject requests within 30 days." },
+      { "icon": "userCheck", "title": "Access Control", "description": "Role-based access control (RBAC) ensures that only authorized personnel can access sensitive information. All access is logged and auditable." },
+      { "icon": "eye", "title": "Transparency", "description": "We publish a clear privacy policy and maintain an open line of communication for any data protection concerns or questions." },
+      { "icon": "alertTriangle", "title": "Incident Response", "description": "We maintain a documented incident response plan with 72-hour notification commitment in accordance with GDPR Article 33." }
+    ],
+    "complianceLabel": "Compliance Framework",
+    "complianceHeadline": "Standards we",
+    "complianceHeadlineAccent": "hold ourselves to.",
+    "complianceSections": [
+      {
+        "category": "Data Protection",
+        "items": [
+          "GDPR (EU General Data Protection Regulation)",
+          "Swedish Data Protection Authority (IMY) guidelines",
+          "Data Processing Agreements (DPA) with all sub-processors",
+          "Privacy Impact Assessments (PIA) for new services"
+        ]
+      },
+      {
+        "category": "Security Standards",
+        "items": [
+          "TLS 1.3 encryption for all communications",
+          "AES-256 encryption for stored data",
+          "Regular third-party security audits",
+          "Vulnerability scanning and penetration testing"
+        ]
+      },
+      {
+        "category": "Organizational Measures",
+        "items": [
+          "Designated Data Protection Officer (DPO)",
+          "Staff training on data protection and security",
+          "Documented information security policies",
+          "Regular policy reviews and updates"
+        ]
+      }
+    ],
+    "rightsLabel": "Your Rights",
+    "rightsHeadline": "You are in",
+    "rightsHeadlineAccent": "control.",
+    "rightsIntro": "Under GDPR, you have extensive rights regarding your personal data. We make it easy to exercise them.",
+    "rights": [
+      { "right": "Right of Access", "desc": "Request a copy of all personal data we hold about you." },
+      { "right": "Right to Rectification", "desc": "Request correction of inaccurate or incomplete personal data." },
+      { "right": "Right to Erasure", "desc": "Request deletion of your personal data under certain conditions." },
+      { "right": "Right to Data Portability", "desc": "Receive your personal data in a machine-readable format." },
+      { "right": "Right to Object", "desc": "Object to the processing of your personal data for direct marketing." },
+      { "right": "Right to Restrict Processing", "desc": "Request limitation of the processing of your personal data." }
+    ],
+    "dpoTitle": "Data Protection Officer",
+    "dpoSubtitle": "For questions about data processing",
+    "dpoDescription": "If you have any questions about how we process your data, wish to exercise your rights, or want to report a data protection concern, please contact our Data Protection Officer.",
+    "dpoEmail": "privacy@eventpartner.io",
+    "ctaHeadline": "Questions about security?",
+    "ctaDescription": "We're happy to discuss our security practices in detail. Get in touch with our team."
+  },
+
+  "common": {
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "tryAgain": "Try again",
+    "required": "Required",
+    "optional": "Optional",
+    "linkedin": "LinkedIn"
+  }
+}

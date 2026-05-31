@@ -2,6 +2,8 @@
 
 import { Globe, HelpCircle, ArrowUp, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLocale } from 'next-intl';
+import { useRouter, usePathname } from '@/i18n/navigation';
 
 /**
  * SidebarNav — Fixed vertical icon sidebar (left edge)
@@ -22,7 +24,9 @@ const ITEMS = [
 
 export function SidebarNav() {
   const [visible, setVisible] = useState(false);
-  const [lang, setLang] = useState<"sv" | "en">("sv");
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 300);
@@ -39,7 +43,7 @@ export function SidebarNav() {
         document.getElementById("request")?.scrollIntoView({ behavior: "smooth" });
         break;
       case "language":
-        setLang(prev => prev === "sv" ? "en" : "sv");
+        router.replace(pathname, { locale: locale === "sv" ? "en" : "sv" });
         break;
       case "help":
         // Future: open help modal
@@ -63,7 +67,7 @@ export function SidebarNav() {
             <Icon className="w-4 h-4" />
             {/* Tooltip */}
             <span className="absolute left-12 bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-default)] text-[11px] font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none shadow-lg">
-              {action === "language" ? (lang === "sv" ? "English" : "Svenska") : label}
+              {action === "language" ? (locale === "sv" ? "English" : "Svenska") : label}
             </span>
           </button>
         ))}

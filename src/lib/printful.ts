@@ -175,7 +175,9 @@ export async function getCatalogVariants(
 
 /**
  * Fetch prices for a catalog product, grouped by variant.
- * Printful v2 returns: { data: { variants: [{ id, techniques: [{ technique_key, price }] }] } }
+ * Printful v2 returns: { data: { currency, variants: [{ id, techniques }], product: { placements } } }
+ * Note: prices endpoint may only return a subset of variants (paginated).
+ * We return whatever we get + a special __base entry with the first available price.
  */
 export async function getCatalogPrices(
   productId: number
@@ -186,11 +188,9 @@ export async function getCatalogPrices(
   );
 
   const priceMap: Record<number, { price: string; currency: string }> = {};
+  const currency = raw.data?.currency || "USD";
 
-  // Printful v2 returns different shapes — handle all known ones
-  // Shape A: { data: { variants: [...] } }
-  // Shape B: { data: [...] }  (array of variants directly)
-  // Shape C: { result: [...] }  (legacy v1 shape)
+  // Extract variant prices
   let variants: { id: number; techniques?: { price: string; discounted_price?: string }[] }[] = [];
 
   if (raw.data?.variants && Array.isArray(raw.data.variants)) {
@@ -201,21 +201,34 @@ export async function getCatalogPrices(
     variants = raw.result;
   }
 
-  if (variants.length === 0) {
-    console.warn(
-      `[Printful] No price variants found for product ${productId}. Response keys: ${JSON.stringify(Object.keys(raw))}, data keys: ${raw.data ? JSON.stringify(Object.keys(raw.data)).slice(0, 200) : "null"}`
-    );
+  // Find the base price from first variant's first technique (DTG preferred)
+  let basePrice = "0";
+  for (const variant of variants) {
+    if (variant.techniques && variant.techniques.length > 0) {
+      // Prefer DTG (direct-to-garment) as the default technique
+      const dtg = variant.techniques.find((t: any) => t.technique_key === "dtg");
+      const tech = dtg || variant.techniques[0];
+      const price = tech.discounted_price || tech.price;
+      if (price && price !== "0" && price !== "0.00") {
+        basePrice = price;
+        break;
+      }
+    }
   }
 
   for (const variant of variants) {
     if (variant.techniques && variant.techniques.length > 0) {
-      const tech = variant.techniques[0];
+      const dtg = variant.techniques.find((t: any) => t.technique_key === "dtg");
+      const tech = dtg || variant.techniques[0];
       priceMap[variant.id] = {
         price: tech.discounted_price || tech.price,
-        currency: "USD",
+        currency,
       };
     }
   }
+
+  // Store base price under a magic key so the route can use it as fallback
+  priceMap[-1] = { price: basePrice, currency };
 
   return priceMap;
 }

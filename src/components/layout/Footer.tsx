@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from 'next-intl';
 import Link from "next/link";
 import { Instagram, Linkedin, Facebook, Globe, ArrowRight, Mail, ChevronDown, MapPin } from "lucide-react";
 import { useState } from "react";
@@ -158,6 +159,7 @@ function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: s
 }
 
 export function Footer({ cms }: { cms?: FooterCMS }) {
+  const t = useTranslations('footer');
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [subLoading, setSubLoading] = useState(false);
@@ -225,7 +227,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-tiffany/10 border border-tiffany/20"
               >
-                <span className="text-tiffany text-sm font-medium">✓ Thank you! You're registered.</span>
+                <span className="text-tiffany text-sm font-medium">✓ {t('newsletter.success')}</span>
               </motion.div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex items-center gap-2 max-w-sm mx-auto">
@@ -235,7 +237,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email Address"
+                    placeholder={t('newsletter.placeholder')}
                     required
                     className="w-full py-3 pl-10 pr-4 rounded-xl bg-white/[0.05] border border-white/[0.1] text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-tiffany/40 focus:ring-1 focus:ring-tiffany/20 transition-all"
                   />
@@ -244,7 +246,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                   type="submit"
                   className="px-5 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-tiffany transition-all duration-300 shrink-0"
                 >
-                  Sign Up
+                  {t('newsletter.button')}
                 </button>
               </form>
             )}
@@ -273,7 +275,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                 </div>
               </Link>
               <p className="text-[13px] text-white/35 leading-relaxed max-w-xs mb-6">
-                {cms?.brandDesc || "Your complete partner for corporate events across Europe. 300,000+ venues, one platform."}
+                {cms?.brandDesc || t('tagline')}
               </p>
 
               {/* Social Links */}
@@ -366,12 +368,12 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
       <div className="px-6 md:px-10 py-5 border-t border-white/[0.04]">
         <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20">
-            © 2026 EventPartner AB. All rights reserved.
+            {t('copyright', { year: new Date().getFullYear() })}
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">Terms</Link>
-            <Link href="/security" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">GDPR</Link>
+            <Link href="/privacy" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.privacy')}</Link>
+            <Link href="/terms" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.terms')}</Link>
+            <Link href="/security" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.cookies')}</Link>
           </div>
         </div>
       </div>

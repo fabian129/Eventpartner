@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from 'next-intl';
+
 import Image from "next/image";
 
 import { motion } from "framer-motion";
@@ -34,6 +36,7 @@ export function RequestFormSection({ cms }: { cms?: {
   const [flexibility, setFlexibility] = useState('');
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const t = useTranslations('requestForm');
 
   // Controlled form state
   const [form, setForm] = useState({
@@ -117,22 +120,22 @@ export function RequestFormSection({ cms }: { cms?: {
           {/* Mono labels */}
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {cms?.inquiryLabel || "EventPartner — Inquiry"}
+              {cms?.inquiryLabel || t('label')}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {cms?.badge || "Free • 24h response"}
+              {cms?.badge || t('labelRight')}
             </span>
           </div>
 
           {/* Two-column: heading left, description right */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[1.05] pb-2">
-              {cms?.headline || "Tell us what you need."}
+              {cms?.headline || t('headline')}
               <br />
-              <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-purple via-purple-light to-tiffany pb-2 inline-block">{cms?.headlineAccent || "We'll handle the rest."}</span>
+              <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-purple via-purple-light to-tiffany pb-2 inline-block">{cms?.headlineAccent || t('headlineAccent')}</span>
             </h2>
             <p className="font-display text-[clamp(1rem,2vw,1.3rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-sm md:text-right">
-              {cms?.description || "Fill in the form and we'll deliver tailored proposals within 24 hours. Completely free."}
+              {cms?.description || t('description')}
             </p>
           </div>
         </motion.div>
@@ -164,41 +167,41 @@ export function RequestFormSection({ cms }: { cms?: {
           {/* Form fields — Row 1: Contact info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Company{requiredStar}</label>
-              <input type="text" placeholder="Your company name" required className={inputClass} value={form.company} onChange={set('company')} />
+              <label className={labelClass}>{t('fields.company.label')}{requiredStar}</label>
+              <input type="text" placeholder={t('fields.company.placeholder')} required className={inputClass} value={form.company} onChange={set('company')} />
             </div>
             <div>
-              <label className={labelClass}>Contact person{requiredStar}</label>
-              <input type="text" placeholder="Name" required className={inputClass} value={form.contact} onChange={set('contact')} />
+              <label className={labelClass}>{t('fields.name.label')}{requiredStar}</label>
+              <input type="text" placeholder={t('fields.name.placeholder')} required className={inputClass} value={form.contact} onChange={set('contact')} />
             </div>
             <div>
-              <label className={labelClass}>Email{requiredStar}</label>
-              <input type="email" placeholder="you@company.com" required className={inputClass} value={form.email} onChange={set('email')} />
+              <label className={labelClass}>{t('fields.email.label')}{requiredStar}</label>
+              <input type="email" placeholder={t('fields.email.placeholder')} required className={inputClass} value={form.email} onChange={set('email')} />
             </div>
           </div>
 
           {/* Row 2: Phone + Location */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Phone{requiredStar}</label>
-              <input type="tel" placeholder="+46 70 123 45 67" required className={inputClass} value={form.phone} onChange={set('phone')} />
+              <label className={labelClass}>{t('fields.phone.label')}{requiredStar}</label>
+              <input type="tel" placeholder={t('fields.phone.placeholder')} required className={inputClass} value={form.phone} onChange={set('phone')} />
             </div>
             <div>
-              <label className={labelClass}>Country{requiredStar}</label>
-              <input type="text" placeholder="E.g. Sweden, Spain, UK" required className={inputClass} value={form.country} onChange={set('country')} />
+              <label className={labelClass}>{t('fields.location.label')}{requiredStar}</label>
+              <input type="text" placeholder={t('fields.location.placeholder')} required className={inputClass} value={form.country} onChange={set('country')} />
             </div>
             <div>
-              <label className={labelClass}>City</label>
-              <input type="text" placeholder="E.g. Stockholm, Barcelona" className={inputClass} value={form.city} onChange={set('city')} />
+              <label className={labelClass}>{t('fields.location.label')}</label>
+              <input type="text" placeholder={t('fields.location.placeholder')} className={inputClass} value={form.city} onChange={set('city')} />
             </div>
           </div>
 
           {/* Row 3: Event details */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Event type</label>
+              <label className={labelClass}>{t('fields.eventType.label')}</label>
               <select className={inputClass} value={form.eventType} onChange={set('eventType')}>
-                <option value="">Select type</option>
+                <option value="">{t('fields.eventType.placeholder')}</option>
                 <option>Conference</option>
                 <option>Corporate Event</option>
                 <option>Team Building</option>
@@ -209,7 +212,7 @@ export function RequestFormSection({ cms }: { cms?: {
               </select>
             </div>
             <div>
-              <label className={labelClass}>Number of guests{requiredStar}</label>
+              <label className={labelClass}>{t('fields.guests.label')}{requiredStar}</label>
               <input
                 type="number"
                 placeholder="Enter exact number"
@@ -221,7 +224,7 @@ export function RequestFormSection({ cms }: { cms?: {
               />
             </div>
             <div>
-              <label className={labelClass}>Date</label>
+              <label className={labelClass}>{t('fields.date.label')}</label>
               {/* Tabs: Exact / Flexible */}
               <div className="flex mb-2 rounded-lg overflow-hidden border border-black/[0.08]" style={{ background: isDark ? '#1a1a1a' : '#f5f5f6' }}>
                 <button
@@ -306,15 +309,14 @@ export function RequestFormSection({ cms }: { cms?: {
           {/* Row 4: Budget */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
-              <label className={labelClass}>Budget (approximate)</label>
-              <select className={inputClass} value={form.budget} onChange={set('budget')}>
-                <option value="">Not specified</option>
-                <option>Under €5,000</option>
-                <option>€5,000 – €15,000</option>
-                <option>€15,000 – €50,000</option>
-                <option>€50,000 – €100,000</option>
-                <option>Over €100,000</option>
-              </select>
+              <label className={labelClass}>{t('fields.budget.label')}</label>
+              <input
+                type="text"
+                placeholder={t('fields.budget.placeholder')}
+                className={inputClass}
+                value={form.budget}
+                onChange={set('budget')}
+              />
             </div>
             <div>
               <label className={labelClass}>Response time</label>
@@ -329,8 +331,8 @@ export function RequestFormSection({ cms }: { cms?: {
 
           {/* Message */}
           <div className="mb-8">
-            <label className={labelClass}>Message</label>
-            <textarea rows={4} placeholder="Tell us about your event — specific wishes, requirements, or anything else we should know..." className={`${inputClass} resize-none`} value={form.message} onChange={set('message')} />
+            <label className={labelClass}>{t('fields.message.label')}</label>
+            <textarea rows={4} placeholder={t('fields.message.placeholder')} className={`${inputClass} resize-none`} value={form.message} onChange={set('message')} />
           </div>
 
           {/* Extended inquiry link */}
@@ -380,12 +382,12 @@ export function RequestFormSection({ cms }: { cms?: {
             >
               <span className="relative z-10 flex items-center gap-3">
                 {loading ? (
-                  <><Loader2 className="w-5 h-5 animate-spin" />Sending...</>
+                  <><Loader2 className="w-5 h-5 animate-spin" />{t('submitting')}</>
                 ) : submitted ? (
-                  <><CheckCircle className="w-5 h-5" />{cms?.successMessage || "Thank you! We'll get back to you within 24h."}</>
+                  <><CheckCircle className="w-5 h-5" />{cms?.successMessage || t('success.description')}</>
                 ) : (
                   <>
-                    {cms?.button || "Send free inquiry"}
+                    {cms?.button || t('submit')}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </>
                 )}
@@ -396,7 +398,7 @@ export function RequestFormSection({ cms }: { cms?: {
               </span>
             </button>
             <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--text-dim)]">
-              {cms?.disclaimer || "No obligations • Response within 24h"}
+              {cms?.disclaimer || t('disclaimer')}
             </span>
           </div>
         </motion.form>
@@ -422,10 +424,10 @@ export function RequestFormSection({ cms }: { cms?: {
               />
             </div>
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-purple mb-1">{cms?.meetingLabel || "Direct contact"}</p>
-              <h3 className="font-display text-lg md:text-xl font-medium text-[var(--text-primary)]">{cms?.meetingTitle || "Prefer a quick chat?"}</h3>
+              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-purple mb-1">{cms?.meetingLabel || t('meetingSection.label')}</p>
+              <h3 className="font-display text-lg md:text-xl font-medium text-[var(--text-primary)]">{cms?.meetingTitle || t('meetingSection.headline')}</h3>
               <p className="text-[13px] md:text-[14px] text-[var(--text-muted)] mt-0.5 leading-relaxed">
-                {cms?.meetingDesc || "Book a 15-min discovery call directly with Malin."}
+                {cms?.meetingDesc || t('meetingSection.description')}
               </p>
             </div>
           </div>
@@ -439,7 +441,7 @@ export function RequestFormSection({ cms }: { cms?: {
             }`}
           >
             <Calendar className="w-4 h-4" />
-            {cms?.meetingButton || "Book meeting"}
+            {cms?.meetingButton || t('meetingSection.cta')}
           </a>
         </motion.div>
       </div>

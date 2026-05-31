@@ -48,8 +48,8 @@ const SERVICES = [
   {
     title: "Middagar & galor",
     description: "Venues som gör intryck",
-    stat: "94%",
-    statLabel: "nöjda kunder",
+    stat: "100%",
+    statLabel: "skräddarsytt",
     image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.webp",
     span: "md:col-span-4", // Bottom right
   },

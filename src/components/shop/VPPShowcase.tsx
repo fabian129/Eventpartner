@@ -8,6 +8,7 @@ import {
   ArrowRight, ArrowLeft, X, Send, CheckCircle,
   ChevronLeft, ChevronRight, Monitor, Layers, Palette, Calendar,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -24,80 +25,84 @@ interface VPPProduct {
   useCases: string[];
 }
 
-const VPP_PRODUCTS: VPPProduct[] = [
-  {
-    id: "brochure",
-    name: "Video Brochure",
-    tagline: "Print meets motion",
-    description: "A custom-printed brochure with an embedded LCD screen that plays your video the moment it's opened. Perfect for sales pitches, product launches, and VIP invitations.",
-    images: ["/Images/vpp/vpp_brochure.png"],
-    icon: <Tv className="w-5 h-5" />,
-    screenSizes: ["4.3″", "5″", "7″", "10″"],
-    features: ["HD IPS LCD", "Built-in speaker", "USB-C rechargeable", "Navigation buttons", "Preloaded video"],
-    useCases: ["Sales & Marketing", "Product Launches", "Event Invitations", "Corporate Gifts"],
-  },
-  {
-    id: "mailer",
-    name: "Video Mailer",
-    tagline: "Direct mail, redefined",
-    description: "A branded mailer box containing a video brochure — designed for direct mail campaigns that demand attention and drive response rates up to 90%.",
-    images: ["/Images/vpp/vpp_mailer.png", "/Images/vpp/vpp_mailer_closed.png", "/Images/vpp/vpp_mailer_open.png"],
-    icon: <Mail className="w-5 h-5" />,
-    screenSizes: ["4.3″", "5″", "7″"],
-    features: ["Custom mailer box", "Auto-play on open", "Rechargeable battery", "Multiple video slots"],
-    useCases: ["Direct Mail Campaigns", "B2B Outreach", "Fundraising", "Product Samples"],
-  },
-  {
-    id: "box",
-    name: "Video Box",
-    tagline: "Unboxing as experience",
-    description: "Premium packaging with an embedded screen — perfect for luxury products, corporate gifts, and VIP experiences. Make unboxing unforgettable.",
-    images: ["/Images/vpp/vpp_box.png"],
-    icon: <Package className="w-5 h-5" />,
-    screenSizes: ["5″", "7″", "10″"],
-    features: ["Luxury packaging", "Product compartment", "Magnetic closure", "Foam insert option"],
-    useCases: ["Luxury Gifting", "Product Launches", "VIP Experiences", "Award Ceremonies"],
-  },
-  {
-    id: "folder",
-    name: "Video Folder",
-    tagline: "Presentations that speak",
-    description: "An A4/Letter-size folder with built-in screen, pockets for documents, and space for contracts or vouchers. The ultimate sales tool.",
-    images: ["/Images/vpp/vpp_folder.png", "/Images/vpp/vpp_folder_closed.png", "/Images/vpp/vpp_folder_open.png"],
-    icon: <FolderOpen className="w-5 h-5" />,
-    screenSizes: ["5″", "7″", "10″"],
-    features: ["Document pockets", "Business card slot", "Landscape/portrait", "Multi-page option"],
-    useCases: ["Sales Presentations", "Real Estate", "Corporate Reports", "Training Materials"],
-  },
-  {
-    id: "business-card",
-    name: "Video Business Card",
-    tagline: "Leave an impression",
-    description: "A pocket-sized card with a 2.4″ screen that plays your video introduction. Hand it over at events and never be forgotten.",
-    images: ["/Images/vpp/vpp_business_card.png"],
-    icon: <CreditCard className="w-5 h-5" />,
-    screenSizes: ["2.4″"],
-    features: ["Pocket-sized", "2.4″ screen", "Built-in speaker", "USB-C charging"],
-    useCases: ["Networking Events", "Trade Shows", "Executive Introductions", "Personal Branding"],
-  },
-  {
-    id: "book",
-    name: "Video Book",
-    tagline: "Stories come alive",
-    description: "A multi-page hardcover book with one or more embedded screens. Perfect for brand stories, annual reports, and commemorative editions.",
-    images: ["/Images/vpp/vpp_book.png"],
-    icon: <BookOpen className="w-5 h-5" />,
-    screenSizes: ["5″", "7″", "10″"],
-    features: ["Multi-page layout", "Hardcover binding", "Multiple screens possible", "Premium paper stock"],
-    useCases: ["Brand Stories", "Annual Reports", "Wedding Albums", "Commemorative Editions"],
-  },
-];
+function useVPPProducts(): VPPProduct[] {
+  const t = useTranslations('vpp');
+  return [
+    {
+      id: "brochure",
+      name: t('products.brochure.name'),
+      tagline: t('products.brochure.tagline'),
+      description: t('products.brochure.description'),
+      images: ["/Images/vpp/vpp_brochure.png"],
+      icon: <Tv className="w-5 h-5" />,
+      screenSizes: ["4.3″", "5″", "7″", "10″"],
+      features: ["HD IPS LCD", "Built-in speaker", "USB-C rechargeable", "Navigation buttons", "Preloaded video"],
+      useCases: ["Sales & Marketing", "Product Launches", "Event Invitations", "Corporate Gifts"],
+    },
+    {
+      id: "mailer",
+      name: t('products.mailer.name'),
+      tagline: t('products.mailer.tagline'),
+      description: t('products.mailer.description'),
+      images: ["/Images/vpp/vpp_mailer.png", "/Images/vpp/vpp_mailer_closed.png", "/Images/vpp/vpp_mailer_open.png"],
+      icon: <Mail className="w-5 h-5" />,
+      screenSizes: ["4.3″", "5″", "7″"],
+      features: ["Custom mailer box", "Auto-play on open", "Rechargeable battery", "Multiple video slots"],
+      useCases: ["Direct Mail Campaigns", "B2B Outreach", "Fundraising", "Product Samples"],
+    },
+    {
+      id: "box",
+      name: t('products.box.name'),
+      tagline: t('products.box.tagline'),
+      description: t('products.box.description'),
+      images: ["/Images/vpp/vpp_box.png"],
+      icon: <Package className="w-5 h-5" />,
+      screenSizes: ["5″", "7″", "10″"],
+      features: ["Luxury packaging", "Product compartment", "Magnetic closure", "Foam insert option"],
+      useCases: ["Luxury Gifting", "Product Launches", "VIP Experiences", "Award Ceremonies"],
+    },
+    {
+      id: "folder",
+      name: t('products.folder.name'),
+      tagline: t('products.folder.tagline'),
+      description: t('products.folder.description'),
+      images: ["/Images/vpp/vpp_folder.png", "/Images/vpp/vpp_folder_closed.png", "/Images/vpp/vpp_folder_open.png"],
+      icon: <FolderOpen className="w-5 h-5" />,
+      screenSizes: ["5″", "7″", "10″"],
+      features: ["Document pockets", "Business card slot", "Landscape/portrait", "Multi-page option"],
+      useCases: ["Sales Presentations", "Real Estate", "Corporate Reports", "Training Materials"],
+    },
+    {
+      id: "business-card",
+      name: t('products.businessCard.name'),
+      tagline: t('products.businessCard.tagline'),
+      description: t('products.businessCard.description'),
+      images: ["/Images/vpp/vpp_business_card.png"],
+      icon: <CreditCard className="w-5 h-5" />,
+      screenSizes: ["2.4″"],
+      features: ["Pocket-sized", "2.4″ screen", "Built-in speaker", "USB-C charging"],
+      useCases: ["Networking Events", "Trade Shows", "Executive Introductions", "Personal Branding"],
+    },
+    {
+      id: "book",
+      name: t('products.book.name'),
+      tagline: t('products.book.tagline'),
+      description: t('products.book.description'),
+      images: ["/Images/vpp/vpp_book.png"],
+      icon: <BookOpen className="w-5 h-5" />,
+      screenSizes: ["5″", "7″", "10″"],
+      features: ["Multi-page layout", "Hardcover binding", "Multiple screens possible", "Premium paper stock"],
+      useCases: ["Brand Stories", "Annual Reports", "Wedding Albums", "Commemorative Editions"],
+    },
+  ];
+}
 
 /* ─── Product Card ─── */
 function VPPProductCard({
   product, index, onSelect,
 }: { product: VPPProduct; index: number; onSelect: () => void }) {
   const [imgError, setImgError] = useState(false);
+  const t = useTranslations('vpp');
 
   return (
     <motion.div
@@ -143,7 +148,7 @@ function VPPProductCard({
             {product.tagline}
           </p>
           <button className="mt-4 w-full flex items-center justify-center gap-2 bg-[var(--bg-primary)] border border-[var(--border-default)] text-[var(--text-primary)] text-[13px] font-medium rounded-xl py-3 hover:border-tiffany/30 hover:text-tiffany transition-all duration-300">
-            View Details <ArrowRight className="w-3.5 h-3.5" />
+            {t('viewDetails')} <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
@@ -158,6 +163,7 @@ function ProductDetailModal({
   const [activeIndex, setActiveIndex] = useState(0);
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
   const hasMultipleImages = product.images.length > 1;
+  const t = useTranslations('vpp');
 
   const handleImageError = (index: number) => {
     setFailedImages((prev) => new Set(prev).add(index));
@@ -318,7 +324,7 @@ function ProductDetailModal({
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <Layers className="w-3.5 h-3.5 text-tiffany" />
-                <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Features</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--text-muted)]">{t('features')}</span>
               </div>
               <ul className="space-y-2">
                 {product.features.map((f) => (
@@ -332,7 +338,7 @@ function ProductDetailModal({
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <Palette className="w-3.5 h-3.5 text-tiffany" />
-                <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--text-muted)]">Ideal For</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[var(--text-muted)]">{t('idealFor')}</span>
               </div>
               <ul className="space-y-2">
                 {product.useCases.map((u) => (
@@ -348,7 +354,7 @@ function ProductDetailModal({
             onClick={() => { onQuote(product.name); onClose(); }}
             className="w-full bg-[#111] border border-[#333] text-white font-medium rounded-xl py-4 hover:bg-[#222] hover:border-[#444] transition-all flex items-center justify-center gap-2"
           >
-            <Send className="w-4 h-4" /> Request Quote for {product.name}
+            <Send className="w-4 h-4" /> {t('requestQuoteFor', { productName: product.name })}
           </button>
         </div>
       </motion.div>
@@ -373,10 +379,11 @@ const TRUSTED_LOGOS = [
 ];
 
 function TrustedByStrip() {
+  const t = useTranslations('vpp');
   return (
     <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2, ease: EASE }} className="mt-10 pt-8 border-t border-[var(--border-default)]">
       <div className="text-center mb-6">
-        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-dim)]">Trusted by 500+ global brands</span>
+        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[var(--text-dim)]">{t('trustedBy')}</span>
       </div>
       <div className="relative overflow-hidden">
         <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-r from-[var(--bg-card)] to-transparent" />
@@ -407,13 +414,12 @@ function TrustedByStrip() {
 }
 
 /* ─── Quote Form ─── */
-const PRODUCT_TYPES = VPP_PRODUCTS.map((p) => p.name);
 const SCREEN_SIZES = ["2.4″", "4.3″", "5″", "7″", "10″"];
 const PAPER_TYPES = ["350gsm Art Card", "400gsm C1S", "Standard"];
 const FINISH_OPTIONS = ["Matte Lamination", "Gloss Lamination", "Spot UV", "Soft Touch"];
 const QUANTITY_OPTIONS = ["50 – 100", "100 – 300", "300 – 500", "500 – 1,000", "1,000+"];
 
-function VPPQuoteForm({ preselectedProduct }: { preselectedProduct: string }) {
+function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct: string; productTypes: string[] }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -422,6 +428,7 @@ function VPPQuoteForm({ preselectedProduct }: { preselectedProduct: string }) {
     product: preselectedProduct, size: '', quantity: '',
     paper: '', finish: '', message: '',
   });
+  const t = useTranslations('vpp');
 
   // Update product when preselected changes
   useState(() => { setForm(prev => ({ ...prev, product: preselectedProduct })); });
@@ -464,25 +471,27 @@ function VPPQuoteForm({ preselectedProduct }: { preselectedProduct: string }) {
           <div className="w-16 h-16 bg-tiffany/10 text-tiffany rounded-full flex items-center justify-center mb-6">
             <CheckCircle className="w-8 h-8" />
           </div>
-          <h3 className="text-2xl font-display font-semibold text-[var(--text-primary)] mb-2">Quote Request Sent</h3>
-          <p className="text-[var(--text-secondary)] max-w-md">We&apos;ll get back to you with a custom Video Brochure quote within 24 hours.</p>
-          <button onClick={() => { setSubmitted(false); setForm({ name: '', company: '', email: '', phone: '', product: '', size: '', quantity: '', paper: '', finish: '', message: '' }); }} className="mt-6 text-tiffany text-sm font-medium hover:underline">Submit another request</button>
+          <h3 className="text-2xl font-display font-semibold text-[var(--text-primary)] mb-2">{t('quoteSuccess.title')}</h3>
+          <p className="text-[var(--text-secondary)] max-w-md">{t('quoteSuccess.description')}</p>
+          <button onClick={() => { setSubmitted(false); setForm({ name: '', company: '', email: '', phone: '', product: '', size: '', quantity: '', paper: '', finish: '', message: '' }); }} className="mt-6 text-tiffany text-sm font-medium hover:underline">{t('quoteSuccess.submitAnother')}</button>
         </div>
       </div>
     );
   }
+
+  const quotePoints = t.raw('quotePoints') as Record<string, { label: string; desc: string }>;
 
   return (
     <div className="bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl p-8 lg:p-10">
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Contact */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div><label className={labelClass}>Full Name *</label><input type="text" required placeholder="Your full name" className={inputClass} value={form.name} onChange={set('name')} /></div>
-          <div><label className={labelClass}>Company *</label><input type="text" required placeholder="Company name" className={inputClass} value={form.company} onChange={set('company')} /></div>
+          <div><label className={labelClass}>{t('quoteForm.fullName')}</label><input type="text" required placeholder="Your full name" className={inputClass} value={form.name} onChange={set('name')} /></div>
+          <div><label className={labelClass}>{t('quoteForm.company')}</label><input type="text" required placeholder="Company name" className={inputClass} value={form.company} onChange={set('company')} /></div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div><label className={labelClass}>Email *</label><input type="email" required placeholder="you@company.com" className={inputClass} value={form.email} onChange={set('email')} /></div>
-          <div><label className={labelClass}>Phone</label><input type="tel" placeholder="+1 234 567 890" className={inputClass} value={form.phone} onChange={set('phone')} /></div>
+          <div><label className={labelClass}>{t('quoteForm.email')}</label><input type="email" required placeholder="you@company.com" className={inputClass} value={form.email} onChange={set('email')} /></div>
+          <div><label className={labelClass}>{t('quoteForm.phone')}</label><input type="tel" placeholder="+1 234 567 890" className={inputClass} value={form.phone} onChange={set('phone')} /></div>
         </div>
 
         <div className="h-px bg-[var(--border-default)]" />
@@ -490,39 +499,39 @@ function VPPQuoteForm({ preselectedProduct }: { preselectedProduct: string }) {
         {/* Product specs */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label className={labelClass}>Product Type *</label>
+            <label className={labelClass}>{t('quoteForm.productType')}</label>
             <select required value={form.product} onChange={set('product')} className={inputClass}>
-              <option value="">Select product...</option>
-              {PRODUCT_TYPES.map((p) => <option key={p} value={p}>{p}</option>)}
+              <option value="">{t('quoteForm.selectProduct')}</option>
+              {productTypes.map((p) => <option key={p} value={p}>{p}</option>)}
             </select>
           </div>
           <div>
-            <label className={labelClass}>Screen Size *</label>
+            <label className={labelClass}>{t('quoteForm.screenSize')}</label>
             <select required className={inputClass} value={form.size} onChange={set('size')}>
-              <option value="">Select size...</option>
+              <option value="">{t('quoteForm.selectSize')}</option>
               {SCREEN_SIZES.map((s) => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           <div>
-            <label className={labelClass}>Quantity *</label>
+            <label className={labelClass}>{t('quoteForm.quantity')}</label>
             <select required className={inputClass} value={form.quantity} onChange={set('quantity')}>
-              <option value="">Select qty...</option>
+              <option value="">{t('quoteForm.selectQty')}</option>
               {QUANTITY_OPTIONS.map((q) => <option key={q} value={q}>{q}</option>)}
             </select>
           </div>
           <div>
-            <label className={labelClass}>Paper Type</label>
+            <label className={labelClass}>{t('quoteForm.paperType')}</label>
             <select className={inputClass} value={form.paper} onChange={set('paper')}>
-              <option value="">Select paper...</option>
+              <option value="">{t('quoteForm.selectPaper')}</option>
               {PAPER_TYPES.map((p) => <option key={p} value={p}>{p}</option>)}
             </select>
           </div>
           <div>
-            <label className={labelClass}>Finish</label>
+            <label className={labelClass}>{t('quoteForm.finish')}</label>
             <select className={inputClass} value={form.finish} onChange={set('finish')}>
-              <option value="">Select finish...</option>
+              <option value="">{t('quoteForm.selectFinish')}</option>
               {FINISH_OPTIONS.map((f) => <option key={f} value={f}>{f}</option>)}
             </select>
           </div>
@@ -532,8 +541,8 @@ function VPPQuoteForm({ preselectedProduct }: { preselectedProduct: string }) {
 
         {/* Message */}
         <div>
-          <label className={labelClass}>Additional Details</label>
-          <textarea rows={3} placeholder="Tell us about your event, timeline, design requirements..." className={`${inputClass} resize-none`} value={form.message} onChange={set('message')} />
+          <label className={labelClass}>{t('quoteForm.additionalDetails')}</label>
+          <textarea rows={3} placeholder={t('quoteForm.detailsPlaceholder')} className={`${inputClass} resize-none`} value={form.message} onChange={set('message')} />
         </div>
 
         {/* Error */}
@@ -545,14 +554,14 @@ function VPPQuoteForm({ preselectedProduct }: { preselectedProduct: string }) {
 
         <button type="submit" disabled={loading} className="w-full bg-[#111] border border-[#333] text-white font-medium rounded-xl py-4 hover:bg-[#222] hover:border-[#444] transition-all flex items-center justify-center gap-2 disabled:opacity-60">
           {loading ? (
-            <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Sending...</>
+            <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {t('quoteForm.sending')}</>
           ) : (
-            <><Send className="w-4 h-4" /> Request Quote</>
+            <><Send className="w-4 h-4" /> {t('quoteForm.submit')}</>
           )}
         </button>
 
         <p className="text-center font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">
-          No obligations • Response within 24h • Minimum order 50 units
+          {t('quoteForm.disclaimer')}
         </p>
       </form>
 
@@ -569,10 +578,10 @@ function VPPQuoteForm({ preselectedProduct }: { preselectedProduct: string }) {
             />
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-tiffany mb-1">Direct contact</p>
-            <h3 className="font-display text-lg md:text-xl font-medium text-[var(--text-primary)]">Want to discuss your project?</h3>
+            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-tiffany mb-1">{t('meetingSection.label')}</p>
+            <h3 className="font-display text-lg md:text-xl font-medium text-[var(--text-primary)]">{t('meetingSection.headline')}</h3>
             <p className="text-[13px] md:text-[14px] text-[var(--text-muted)] mt-0.5 leading-relaxed">
-              Book a 15-min call with Pontus to discuss your project.
+              {t('meetingSection.description')}
             </p>
           </div>
         </div>
@@ -582,7 +591,7 @@ function VPPQuoteForm({ preselectedProduct }: { preselectedProduct: string }) {
           className="w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors bg-black/5 hover:bg-black/10 text-[#111] border border-black/5"
         >
           <Calendar className="w-4 h-4" />
-          Book meeting
+          {t('meetingSection.cta')}
         </a>
       </div>
     </div>
@@ -591,9 +600,12 @@ function VPPQuoteForm({ preselectedProduct }: { preselectedProduct: string }) {
 
 /* ─── Main Export ─── */
 export function VPPShowcase() {
+  const VPP_PRODUCTS = useVPPProducts();
+  const PRODUCT_TYPES = VPP_PRODUCTS.map((p) => p.name);
   const [selectedProduct, setSelectedProduct] = useState<VPPProduct | null>(null);
   const [preselectedQuoteProduct, setPreselectedQuoteProduct] = useState("");
   const formRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations('vpp');
 
   const handleQuoteFromModal = (productName: string) => {
     setPreselectedQuoteProduct(productName);
@@ -602,14 +614,16 @@ export function VPPShowcase() {
     }, 100);
   };
 
+  const quotePoints = t.raw('quotePoints') as Record<string, { label: string; desc: string }>;
+
   return (
     <>
       {/* Product Grid */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="mb-10">
           <div className="flex items-center gap-4 mb-3">
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany">Video Brochures</span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/30 bg-black/[0.04] px-2.5 py-1 rounded-full">Fully customizable & printable</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany">{t('sectionLabel')}</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/30 bg-black/[0.04] px-2.5 py-1 rounded-full">{t('sectionBadge')}</span>
             <div className="h-px flex-1 bg-[var(--border-default)]" />
           </div>
         </motion.div>
@@ -627,19 +641,13 @@ export function VPPShowcase() {
       <section id="vpp-quote" ref={formRef} className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">Request a Quote</span>
-            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">
-              Premium video<br />brochures.
-            </h2>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{t('quoteLabel')}</span>
+            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]" dangerouslySetInnerHTML={{ __html: t('quoteHeadline').replace(/\n/g, '<br />') }} />
             <p className="text-[var(--text-secondary)] text-[15px] leading-[1.8] mt-6">
-              Stand out at your next event with custom Video Brochure products — tangible, high-impact marketing tools that combine print with embedded video.
+              {t('quoteDescription')}
             </p>
             <div className="mt-8 space-y-4">
-              {[
-                { label: "Fully Customizable", desc: "Your design, your brand, your video" },
-                { label: "Global Delivery", desc: "Ship anywhere in the world" },
-                { label: "Rechargeable", desc: "USB-C charging, reusable content" },
-              ].map((item) => (
+              {Object.values(quotePoints).map((item) => (
                 <div key={item.label} className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-tiffany mt-2 shrink-0" />
                   <div>
@@ -652,7 +660,7 @@ export function VPPShowcase() {
           </motion.div>
 
           <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
-            <VPPQuoteForm preselectedProduct={preselectedQuoteProduct} />
+            <VPPQuoteForm preselectedProduct={preselectedQuoteProduct} productTypes={PRODUCT_TYPES} />
           </motion.div>
         </div>
       </section>

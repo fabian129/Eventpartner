@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, ArrowRight, ExternalLink } from "lucide-react";
 import { getProducts, formatPrice, type ShopifyProduct } from "@/lib/shopify";
+import { useTranslations } from "next-intl";
 
 /**
  * WebshopTeaser — Live Shopify product preview on homepage
@@ -23,6 +24,7 @@ interface WebshopCMS {
 }
 
 export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
+  const t = useTranslations('webshopTeaser');
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -80,19 +82,19 @@ export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
         >
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {cms?.label || "EventPartner \u2014 Shop"}
+              {cms?.label || t('label')}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {cms?.labelRight || "Event Merchandise"}
+              {cms?.labelRight || t('labelRight')}
             </span>
           </div>
           <h2 className="font-display text-[clamp(2rem,5vw,3.8rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
-            {cms?.headline || "Everything for your event."}
+            {cms?.headline || t('headline')}
             <br />
-            <span className="italic font-light text-[var(--text-muted)]">{cms?.headlineAccent || "Order online."}</span>
+            <span className="italic font-light text-[var(--text-muted)]">{cms?.headlineAccent || t('headlineAccent')}</span>
           </h2>
           <p className="font-display text-[clamp(1rem,2vw,1.2rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-lg">
-            {cms?.description || "Name badges, conference kits, d\u00e9cor and branded merchandise \u2014 all curated for professional events."}
+            {cms?.description || t('description')}
           </p>
         </motion.div>
 
@@ -151,7 +153,7 @@ export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
                       {product.tags?.includes("bestseller") && (
                         <div className="absolute top-3 left-3">
                           <span className="text-[10px] font-semibold uppercase tracking-[0.08em] px-3 py-1.5 rounded-full bg-tiffany/90 text-white border border-tiffany">
-                            Bestseller
+                            {t('bestseller')}
                           </span>
                         </div>
                       )}
@@ -189,10 +191,10 @@ export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
                 <ShoppingBag className="w-7 h-7 text-tiffany" />
               </div>
               <h3 className="font-display text-2xl font-medium text-[#111] mb-3">
-                {cms?.comingSoonTitle || "Coming soon."}
+                {cms?.comingSoonTitle || t('comingSoonTitle')}
               </h3>
               <p className="text-[15px] text-[#666] leading-relaxed max-w-md mx-auto">
-                {cms?.comingSoonDesc || "Our webshop for event products launches soon. Contact us and we'll handle your order today."}
+                {cms?.comingSoonDesc || t('comingSoonDesc')}
               </p>
             </div>
           )}
@@ -212,7 +214,7 @@ export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#111] text-white text-sm font-semibold hover:bg-[#222] hover:shadow-[0_4px_24px_rgba(0,0,0,0.15)] transition-all duration-300"
             >
               <ShoppingBag className="w-4 h-4" />
-              {cms?.ctaText || "Visit the shop"}
+              {cms?.ctaText || t('ctaText')}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 
 // ─── Types ──────────────────────────────────────────────────────
 
@@ -19,8 +20,6 @@ interface SizeQuantity {
 interface SizeQuantityMatrixProps {
   sizes: SizeOption[];
   onChange: (sizes: SizeQuantity[]) => void;
-  unitPrice?: number;
-  currency?: string;
 }
 
 // ─── Component ──────────────────────────────────────────────────
@@ -28,9 +27,8 @@ interface SizeQuantityMatrixProps {
 export function SizeQuantityMatrix({
   sizes,
   onChange,
-  unitPrice,
-  currency = "USD",
 }: SizeQuantityMatrixProps) {
+  const t = useTranslations('sizeMatrix');
   const [quantities, setQuantities] = useState<Record<number, number>>(() => {
     const initial: Record<number, number> = {};
     sizes.forEach((s) => (initial[s.variantId] = 0));
@@ -55,7 +53,6 @@ export function SizeQuantityMatrix({
   );
 
   const totalQty = Object.values(quantities).reduce((a, b) => a + b, 0);
-  const totalPrice = unitPrice ? totalQty * unitPrice : null;
 
   return (
     <div>
@@ -94,17 +91,8 @@ export function SizeQuantityMatrix({
             <span className="font-semibold text-[var(--text-primary)]">
               {totalQty}
             </span>{" "}
-            {totalQty === 1 ? "item" : "items"}
+            {totalQty === 1 ? t('item') : t('items')} {t('selected')}
           </span>
-          {totalPrice !== null && (
-            <span className="text-sm font-semibold text-[var(--text-primary)]">
-              {new Intl.NumberFormat("sv-SE", {
-                style: "currency",
-                currency,
-                minimumFractionDigits: 0,
-              }).format(totalPrice)}
-            </span>
-          )}
         </div>
       )}
     </div>

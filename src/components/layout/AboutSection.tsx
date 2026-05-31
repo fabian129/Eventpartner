@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from 'next-intl';
 import Image from "next/image";
 import { MapPin, Users, Calendar, Award, Linkedin } from "lucide-react";
 import { TEAM_MEMBERS } from "@/lib/teamMembers";
@@ -44,6 +45,7 @@ interface AboutProps {
 }
 
 export function AboutSection({ cms, showTeam = true }: AboutProps) {
+  const t = useTranslations('about');
   const stats = cms?.stats?.length ? cms.stats : DEFAULT_STATS;
   return (
     <section id="about" className="relative w-full py-28 md:py-40 overflow-hidden">
@@ -77,7 +79,7 @@ export function AboutSection({ cms, showTeam = true }: AboutProps) {
           >
             <div className="flex justify-between items-start mb-8">
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-                {cms?.label || "EventPartner — About Us"}
+                {cms?.label || t('label')}
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
                 {cms?.labelRight || "Pan-European network"}
@@ -85,9 +87,9 @@ export function AboutSection({ cms, showTeam = true }: AboutProps) {
             </div>
 
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
-              {cms?.headline || "People who"}
+              {cms?.headline || t('fallbackTitle')}
               <br />
-              {cms?.headlineAccent || "understand events."}
+              {cms?.headlineAccent || ""}
             </h2>
 
             {/* Mini stats — woven into the sidebar */}
@@ -117,7 +119,7 @@ export function AboutSection({ cms, showTeam = true }: AboutProps) {
           >
             {/* Large manifesto statement */}
             <p className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.25] mb-10">
-              {cms?.quote || "We believe every event is an opportunity to build something lasting. Not just a conference — a memory. Not just a dinner — a relationship."}
+              {cms?.quote || t('fallbackDescription')}
             </p>
 
             {/* Smaller editorial copy */}
@@ -126,7 +128,7 @@ export function AboutSection({ cms, showTeam = true }: AboutProps) {
                 {cms?.body || "EventPartner was founded on a simple idea: to make enterprise event planning as smooth as booking a hotel room. With a network spanning all of Europe and a team with deep experience in the event industry, we make it possible."}
               </p>
               <p className="text-[16px] text-[var(--text-secondary)] leading-[1.8]">
-                {cms?.body2 || "We're based in the Mediterranean but work globally. Our team has backgrounds in event production, hospitality, and tech — and we combine it into a service that is fast, personal, and reliable."}
+                {cms?.body2 || "We're based in the Mediterranean and Scandinavia but work globally. Our team has backgrounds in event production, hospitality, and tech — and we combine it into a service that is fast, personal, and reliable."}
               </p>
               <p className="text-[20px] font-display font-medium text-[var(--text-primary)] leading-[1.4] mt-8 italic">
                 &ldquo;{cms?.motto || "Every inquiry is treated as if it's the only one."}&rdquo;

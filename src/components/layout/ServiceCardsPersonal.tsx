@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from 'next-intl';
 import Image from "next/image";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -164,6 +165,7 @@ interface ServicesCMS {
 }
 
 export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
+  const t = useTranslations('serviceCards');
   return (
     <section
       id="services"
@@ -180,7 +182,7 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
         >
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {cms?.label || "EventPartner — Services"}
+              {cms?.label || t('label')}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">
               {cms?.labelRight || "Full-service delivery\n175 countries"}
@@ -188,11 +190,11 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
           </div>
 
           <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6">
-            {cms?.headline || "What we do."}
+            {cms?.headline || t('fallbackTitle')}
           </h2>
 
           <p className="font-display text-[clamp(1.1rem,2.2vw,1.5rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-2xl mb-10">
-            {cms?.description || "From venue scouting to full-scale delivery. We create events that build your brand."}
+            {cms?.description || t('fallbackDescription')}
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[var(--border-default)] pt-5">

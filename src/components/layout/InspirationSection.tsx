@@ -51,8 +51,8 @@ const SERVICES = [
     icon: PartyPopper,
     title: "Middagar & galor",
     description: "Representationsmiddagar, jubileer och galor i venues som gör intryck. Helhetskoordinering från meny till platsplanering.",
-    stat: "94%",
-    statLabel: "nöjda kunder",
+    stat: "100%",
+    statLabel: "skräddarsytt",
     image: "/Images/wedding-reception-hall-with-elegant-table-setting-with-candles.webp",
   },
   {

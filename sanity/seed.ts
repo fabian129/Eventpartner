@@ -23,8 +23,8 @@ const homepage = {
 
   /* ─── HERO ─── */
   heroBadge: {
-    en: "36 Countries • 360,000+ Venues",
-    sv: "36 länder • 360 000+ venues",
+    en: "175 Countries • 300,000+ Venues",
+    sv: "175 länder • 300 000+ venues",
   },
   heroHeadline: {
     en: "The World's Largest Selection",
@@ -65,8 +65,8 @@ const homepage = {
       _key: "conferences",
       title: { en: "Conferences & Meetings", sv: "Konferenser & Möten" },
       desc: {
-        en: "Boardrooms, summits, and multi-day conferences. 360,000+ venues across 36 countries.",
-        sv: "Styrelsemöten, summits och flerdagarskonferenser. 360 000+ venues i 36 länder.",
+        en: "Boardrooms, summits, and multi-day conferences. 300,000+ venues across 175 countries.",
+        sv: "Styrelsemöten, summits och flerdagarskonferenser. 300 000+ venues i 175 länder.",
       },
       icon: "calendar",
     },
@@ -74,8 +74,8 @@ const homepage = {
       _key: "venues",
       title: { en: "Venue Sourcing", sv: "Venue Sourcing" },
       desc: {
-        en: "360,000+ venues in 36 countries. Always 3 proposals within 24h.",
-        sv: "360 000+ venues i 36 länder. Alltid 3 förslag inom 24h.",
+        en: "300,000+ venues in 175 countries. Always 3 proposals within 24h.",
+        sv: "300 000+ venues i 175 länder. Alltid 3 förslag inom 24h.",
       },
       icon: "globe",
     },
@@ -179,15 +179,15 @@ const homepage = {
     sv: "Vi tror att varje event är en möjlighet att bygga något bestående. Inte bara en konferens — en katalysator för förändring.",
   },
   aboutBody: {
-    en: "With 10+ years of experience and 2,000+ delivered events, EventPartner is the Nordic region's leading full-service event partner. We combine an unmatched venue network spanning 36 European countries with dedicated project management that handles everything from sourcing to delivery.",
-    sv: "Med 10+ års erfarenhet och 2 000+ levererade event är EventPartner Nordens ledande fullservice-eventpartner. Vi kombinerar ett oöverträffat venue-nätverk som sträcker sig över 36 europeiska länder med dedikerad projektledning som hanterar allt från sourcing till leverans.",
+    en: "With 10+ years of experience and 2,000+ delivered events, EventPartner is the Nordic region's leading full-service event partner. We combine an unmatched venue network spanning 175 countries with dedicated project management that handles everything from sourcing to delivery.",
+    sv: "Med 10+ års erfarenhet och 2 000+ levererade event är EventPartner Nordens ledande fullservice-eventpartner. Vi kombinerar ett oöverträffat venue-nätverk som sträcker sig över 175 länder med dedikerad projektledning som hanterar allt från sourcing till leverans.",
   },
   aboutStats: [
-    { _key: "venues", value: "360,000+", label: { en: "Venues worldwide", sv: "Venues världen över" } },
-    { _key: "countries", value: "36", label: { en: "European countries", sv: "Europeiska länder" } },
+    { _key: "venues", value: "300,000+", label: { en: "Venues worldwide", sv: "Venues världen över" } },
+    { _key: "countries", value: "175", label: { en: "European countries", sv: "Europeiska länder" } },
     { _key: "events", value: "2,048+", label: { en: "Events delivered", sv: "Events levererade" } },
     { _key: "experience", value: "10+", label: { en: "Years of experience", sv: "Års erfarenhet" } },
-    { _key: "satisfaction", value: "94%", label: { en: "Customer satisfaction", sv: "Nöjda kunder" } },
+    { _key: "satisfaction", value: "100%", label: { en: "Customized solutions", sv: "Skräddarsydda lösningar" } },
   ],
 
   /* ─── FAQ ─── */
@@ -207,8 +207,8 @@ const homepage = {
         sv: "Vad kostar det att använda EventPartner?",
       },
       answer: {
-        en: "Sending an inquiry and receiving venue proposals is completely free. We charge a service fee only when you book — and it's always transparent and agreed upon in advance. No hidden costs.",
-        sv: "Att skicka en förfrågan och få venue-förslag är helt kostnadsfritt. Vi tar en serviceavgift först när ni bokar — och den är alltid transparent och överenskommen i förväg. Inga dolda kostnader.",
+        en: "Sending an inquiry and receiving venue proposals is completely free. Our service is funded by the venues, meaning there are no hidden costs or fees for you.",
+        sv: "Att skicka en förfrågan och få venue-förslag är helt kostnadsfritt. Vår tjänst finansieras av lokalerna, vilket innebär att det inte tillkommer några dolda avgifter eller kostnader för er.",
       },
     },
     {
@@ -229,8 +229,8 @@ const homepage = {
         sv: "Vilka länder och städer täcker ni?",
       },
       answer: {
-        en: "We have venues in 36 European countries — from Iceland to Cyprus, from Portugal to Finland. Over 360,000 venues in total. Whether you need a conference hotel in Stockholm or a gala venue in Barcelona, we'll find the right one.",
-        sv: "Vi har venues i 36 europeiska länder — från Island till Cypern, från Portugal till Finland. Totalt över 360,000 venues. Oavsett om ni behöver ett konferenshotell i Stockholm eller en gala-venue i Barcelona, vi hittar rätt.",
+        en: "We have venues in 175 countries — from Iceland to Cyprus, from Portugal to Finland. Over 300,000 venues in total. Whether you need a conference hotel in Stockholm or a gala venue in Barcelona, we'll find the right one.",
+        sv: "Vi har venues i 175 länder — från Island till Cypern, från Portugal till Finland. Totalt över 300,000 venues. Oavsett om ni behöver ett konferenshotell i Stockholm eller en gala-venue i Barcelona, vi hittar rätt.",
       },
     },
     {
@@ -307,10 +307,10 @@ const homepage = {
   },
 
   /* ─── SERVICES (extensions) ─── */
-  servicesLabelRight: { en: "Full-service delivery\n36 countries", sv: "Fullservice leverans\n36 länder" },
+  servicesLabelRight: { en: "Full-service delivery\n175 countries", sv: "Fullservice leverans\n175 länder" },
   servicesStats: [
-    { _key: "venues", value: "360,000+", label: { en: "Venues", sv: "Venues" } },
-    { _key: "countries", value: "36", label: { en: "Countries", sv: "Länder" } },
+    { _key: "venues", value: "300,000+", label: { en: "Venues", sv: "Venues" } },
+    { _key: "countries", value: "175", label: { en: "Countries", sv: "Länder" } },
     { _key: "response", value: "24h", label: { en: "Response time", sv: "Svarstid" } },
     { _key: "partners", value: "2,400+", label: { en: "Partners", sv: "Partners" } },
   ],
@@ -322,11 +322,11 @@ const homepage = {
 
   /* ─── COUNTRY FLAGS ─── */
   flagsLabel: { en: "EventPartner — Network", sv: "Eventpartner — Nätverk" },
-  flagsLabelRight: { en: "100% Europe", sv: "100% Europa" },
-  flagsHeadline: { en: "36 countries. 360,000+ venues.", sv: "36 länder. 360 000+ venues." },
+  flagsLabelRight: { en: "Global coverage", sv: "Global täckning" },
+  flagsHeadline: { en: "175 countries. 300,000+ venues.", sv: "175 länder. 300 000+ venues." },
   flagsDescription: {
-    en: "All of Europe — we have venues that match your needs regardless of destination.",
-    sv: "Hela Europa — vi har venues som matchar era behov oavsett destination.",
+    en: "All of Europe and beyond — we have venues that match your needs regardless of destination.",
+    sv: "Hela Europa och resten av världen — vi har venues som matchar era behov oavsett destination.",
   },
 
   /* ─── CASE STORIES (extensions) ─── */
@@ -408,8 +408,8 @@ const homepage = {
 
   /* ─── FOOTER ─── */
   footerBrandDesc: {
-    en: "Your complete partner for corporate events across Europe. 360,000+ venues, one platform.",
-    sv: "Din kompletta partner för företagsevent i hela Europa. 360 000+ venues, en plattform.",
+    en: "Your complete partner for corporate events across Europe. 300,000+ venues, one platform.",
+    sv: "Din kompletta partner för företagsevent i hela Europa. 300 000+ venues, en plattform.",
   },
   footerSocialLabel: { en: "Follow us:", sv: "Följ oss:" },
   footerNewsletterDesc: {
@@ -492,19 +492,19 @@ const homepage = {
     sv: "EventPartner grundades på en enkel idé: att göra företagseventplanering lika smidigt som att boka ett hotellrum. Med ett nätverk som spänner över hela Europa och ett team med djup erfarenhet inom eventbranschen, gör vi det möjligt.",
   },
   aboutBody2: {
-    en: "We're based in the Mediterranean but work globally. Our team has backgrounds in event production, hospitality, and tech — and we combine it into a service that is fast, personal, and reliable.",
-    sv: "Vi är baserade i Medelhavet men arbetar globalt. Vårt team har bakgrund inom eventproduktion, hospitality och tech — och vi kombinerar det till en tjänst som är snabb, personlig och pålitlig.",
+    en: "We're based in the Mediterranean and Scandinavia but work globally. Our team has backgrounds in event production, hospitality, and tech — and we combine it into a service that is fast, personal, and reliable.",
+    sv: "Vi är baserade i Medelhavet och Skandinavien men arbetar globalt. Vårt team har bakgrund inom eventproduktion, hospitality och tech — och vi kombinerar det till en tjänst som är snabb, personlig och pålitlig.",
   },
   aboutMotto: {
     en: "Every inquiry is treated as if it's the only one.",
     sv: "Varje förfrågan behandlas som om det vore den enda.",
   },
   aboutStats: [
-    { _key: "s1", value: "360,000+", label: { en: "Venues worldwide", sv: "Venues världen över" } },
-    { _key: "s2", value: "36", label: { en: "Countries", sv: "Länder" } },
+    { _key: "s1", value: "300,000+", label: { en: "Venues worldwide", sv: "Venues världen över" } },
+    { _key: "s2", value: "175", label: { en: "Countries", sv: "Länder" } },
     { _key: "s3", value: "2,048+", label: { en: "Events delivered", sv: "Levererade event" } },
     { _key: "s4", value: "10+", label: { en: "Years of experience", sv: "Års erfarenhet" } },
-    { _key: "s5", value: "94%", label: { en: "Customer satisfaction", sv: "Kundnöjdhet" } },
+    { _key: "s5", value: "100%", label: { en: "Customized solutions", sv: "Skräddarsydda lösningar" } },
   ],
   aboutTeamLabel: { en: "The Team", sv: "Teamet" },
   aboutTeamIntro: {
@@ -528,14 +528,14 @@ const aboutPageData = {
   heroHeadlineAccent: { en: "understand", sv: "förstår" },
   heroHeadlineLine3: { en: "events.", sv: "event." },
   heroSubtitle: {
-    en: "EventPartner was founded on one idea: to make enterprise event planning as seamless as booking a hotel room. With a network spanning 36 European countries and deep industry expertise, we make it possible — every day.",
-    sv: "EventPartner grundades på en idé: att göra företagseventplanering lika smidigt som att boka ett hotellrum. Med ett nätverk som spänner över 36 europeiska länder och djup branschexpertis gör vi det möjligt — varje dag.",
+    en: "EventPartner was founded on one idea: to make enterprise event planning as seamless as booking a hotel room. With a network spanning 175 countries and deep industry expertise, we make it possible — every day.",
+    sv: "EventPartner grundades på en idé: att göra företagseventplanering lika smidigt som att boka ett hotellrum. Med ett nätverk som spänner över 175 länder och djup branschexpertis gör vi det möjligt — varje dag.",
   },
   stats: [
-    { _key: "s1", value: "36", label: { en: "Countries", sv: "Länder" } },
+    { _key: "s1", value: "175", label: { en: "Countries", sv: "Länder" } },
     { _key: "s2", value: "2,048+", label: { en: "Events delivered", sv: "Levererade event" } },
-    { _key: "s3", value: "2,400+", label: { en: "Venue partners", sv: "Venue-partners" } },
-    { _key: "s4", value: "94%", label: { en: "Customer satisfaction", sv: "Kundnöjdhet" } },
+    { _key: "s3", value: "300,000+", label: { en: "Venue partners", sv: "Venue-partners" } },
+    { _key: "s4", value: "100%", label: { en: "Customized solutions", sv: "Skräddarsydda lösningar" } },
   ],
   storyLabel: { en: "Our Story", sv: "Vår historia" },
   storyHeadline: { en: "From idea to", sv: "Från idé till" },
@@ -545,8 +545,8 @@ const aboutPageData = {
     sv: "Vi tror att varje event är en möjlighet att bygga något bestående. Inte bara en konferens — ett minne. Inte bara en middag — en relation.",
   },
   storyBody1: {
-    en: "Founded in the Mediterranean but operating across all of Europe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
-    sv: "Grundat i Medelhavet men verksamt i hela Europa, kopplar EventPartner samman företag med den perfekta venue:n för varje tillfälle. Från intima styrelsemiddagar till företagskonferenser med 5 000 deltagare, tar vårt erfarna team fram skräddarsydda förslag — snabbt.",
+    en: "Founded in the Mediterranean and Scandinavia, but operating across all of Europe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
+    sv: "Grundat i Medelhavet och Skandinavien, men verksamt i hela Europa, kopplar EventPartner samman företag med den perfekta venue:n för varje tillfälle. Från intima styrelsemiddagar till företagskonferenser med 5 000 deltagare, tar vårt erfarna team fram skräddarsydda förslag — snabbt.",
   },
   storyBody2: {
     en: "Our backgrounds span event production, hospitality, and technology. We combined all three to create a service that is personal, reliable, and remarkably efficient. One inquiry, multiple options, zero hassle.",
@@ -599,7 +599,7 @@ const securityPageData = {
     { _key: "p5", title: { en: "Transparency", sv: "Transparens" }, description: { en: "We publish a clear privacy policy and maintain open communication.", sv: "Vi publicerar en tydlig integritetspolicy och upprätthåller öppen kommunikation." }, icon: "eye" },
     { _key: "p6", title: { en: "Incident Response", sv: "Incidenthantering" }, description: { en: "We maintain a documented incident response plan with 72-hour notification.", sv: "Vi har en dokumenterad incidenthanteringsplan med 72-timmars notifiering." }, icon: "alertTriangle" },
   ],
-  dpoEmail: "dpo@eventpartner.se",
+  dpoEmail: "privacy@eventpartner.io",
   dpoTitle: { en: "Data Protection Officer", sv: "Dataskyddsombud" },
   dpoSubtitle: { en: "For questions about data processing", sv: "För frågor om databehandling" },
   dpoDescription: {
@@ -620,7 +620,7 @@ const vipPageData = {
   heroStats: [
     { _key: "s1", value: "12h", label: { en: "Response time", sv: "Svarstid" } },
     { _key: "s2", value: "10%", label: { en: "Max discount", sv: "Max rabatt" } },
-    { _key: "s3", value: "36", label: { en: "Countries", sv: "Länder" } },
+    { _key: "s3", value: "175", label: { en: "Countries", sv: "Länder" } },
     { _key: "s4", value: "1:1", label: { en: "Dedicated manager", sv: "Dedikerad kontakt" } },
   ],
   heroAnchorText: { en: "Welcome to the VIP Programme ↓", sv: "Välkommen till VIP-programmet ↓" },
@@ -652,7 +652,7 @@ const vipPageData = {
   tiersDescription: { en: "Two tiers, designed around your needs. Both include dedicated support — Gold adds enterprise-grade flexibility.", sv: "Två nivåer, utformade efter era behov. Båda inkluderar dedikerat stöd — Gold lägger till flexibilitet i företagsklass." },
   tierCards: [
     { _key: "silver", name: { en: "VIP Silver", sv: "VIP Silver" }, badge: { en: "Most Popular", sv: "Mest populär" }, price: { en: "Free", sv: "Gratis" }, priceSub: { en: "Volume-based qualification", sv: "Volymbaserad kvalificering" }, features: [{ en: "Dedicated account manager", sv: "Dedikerad kontaktperson" }, { en: "Priority response within 12h", sv: "Prioriterat svar inom 12h" }, { en: "5% discount on all bookings", sv: "5% rabatt på alla bokningar" }, { en: "Access to VIP-only venues", sv: "Tillgång till VIP-exklusiva venues" }, { en: "Quarterly event trend reports", sv: "Kvartalsvisa eventrapporter" }], cta: { en: "Apply Now", sv: "Ansök nu" }, highlight: false },
-    { _key: "gold", name: { en: "VIP Gold", sv: "VIP Gold" }, badge: { en: "Enterprise", sv: "Enterprise" }, price: { en: "By Invitation", sv: "Via inbjudan" }, priceSub: { en: "10+ events per year", sv: "10+ event per år" }, features: [{ en: "Everything in Silver", sv: "Allt i Silver" }, { en: "Personal event concierge", sv: "Personlig event-concierge" }, { en: "10% discount on all bookings", sv: "10% rabatt på alla bokningar" }, { en: "Complimentary site inspections", sv: "Kostnadsfria platsinspektioner" }, { en: "Custom contract & billing terms", sv: "Skräddarsydda avtals- & faktureringsvillkor" }, { en: "Exclusive event portfolio reviews", sv: "Exklusiva portfolio-genomgångar" }, { en: "Priority cancellation flexibility", sv: "Prioriterad avbokningsflexibilitet" }], cta: { en: "Request Invitation", sv: "Begär inbjudan" }, highlight: true },
+    { _key: "gold", name: { en: "VIP Gold", sv: "VIP Gold" }, badge: { en: "Enterprise", sv: "Enterprise" }, price: { en: "By Invitation", sv: "Via inbjudan" }, priceSub: { en: "10+ events per year", sv: "10+ event per år" }, features: [{ en: "Everything in Silver", sv: "Allt i Silver" }, { en: "10% discount on all bookings", sv: "10% rabatt på alla bokningar" }, { en: "Always 33% extra discount on everything in our webshop", sv: "Alltid 33 % extra rabatt på allt i vår webbshop" }, { en: "Annual comprehensive reporting & ESG / sustainability data", sv: "Årlig omfattande rapportering samt ESG- & hållbarhetsdata" }, { en: "Aligned with enterprise requirements (CSRD, NIS2 governance)", sv: "Anpassat för enterprise-krav (CSRD, NIS2-governance)" }, { en: "Advanced spend control & travel management integration", sv: "Avancerad kostnadskontroll & travel management" }, { en: "Custom contract & billing terms", sv: "Skräddarsydda avtals- & faktureringsvillkor" }], cta: { en: "Request Invitation", sv: "Begär inbjudan" }, highlight: true },
   ],
   stepsLabel: { en: "EventPartner — How to join", sv: "EventPartner — Så går du med" },
   stepsLabelRight: { en: "3 steps", sv: "3 steg" },
