@@ -27,16 +27,16 @@ const homepage = {
     sv: "175 länder • 300 000+ venues",
   },
   heroHeadline: {
-    en: "The World's Largest Selection",
-    sv: "Världens största urval",
+    en: "Everything your event needs.",
+    sv: "Allt ditt event behöver.",
   },
   heroHeadlineAccent: {
-    en: "of Venues",
-    sv: "av venues",
+    en: "One partner - EventPartner.",
+    sv: "En partner - EventPartner.",
   },
   heroSubheadline: {
-    en: "We match your brand with the right venue, the right format, and the right experience — seamlessly from inquiry to delivery.",
-    sv: "Vi matchar ert varumärke med rätt venue, rätt format och rätt upplevelse — sömlöst från förfrågan till leverans.",
+    en: "Tell us what you need. We'll source venues and event services, compare options, negotiate rates and manage the entire booking process.",
+    sv: "Beskriv ert event. Vi hittar de bästa lokalerna och leverantörerna, jämför alternativen, förhandlar priserna och hanterar hela bokningsprocessen från start till mål.",
   },
   heroCta1: {
     en: "Send inquiry →",
