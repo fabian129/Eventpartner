@@ -148,7 +148,7 @@ export function AiAssistantContent() {
             <p>{t('ctaP2')}</p>
           </div>
           
-          <a href="https://cal.eu/pontus-eventpartner" target="_blank" rel="noopener noreferrer" className="relative z-10 inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-black/80 hover:scale-105 transition-all duration-300 shadow-xl shadow-black/20">
+          <a href="https://cal.com/eventpartner/15min" target="_blank" rel="noopener noreferrer" className="relative z-10 inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-black/80 hover:scale-105 transition-all duration-300 shadow-xl shadow-black/20">
             {t('ctaButton')}
             <ArrowRight className="w-5 h-5" />
           </a>
