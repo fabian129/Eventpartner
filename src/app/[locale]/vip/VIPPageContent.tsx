@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Crown, Star, Shield, Users, Clock, Gift, ArrowRight, Check, Sparkles } from "lucide-react";
+import { Crown, Star, Shield, Users, Clock, Gift, ArrowRight, Check, Sparkles, X, Send, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
@@ -55,6 +56,54 @@ interface VIPCMS {
 
 export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
   const t = useTranslations('vipPage');
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    message: ""
+  });
+
+  const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm(prev => ({ ...prev, [field]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "vip-inquiry",
+          ...form
+        })
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to submit request.");
+      }
+
+      setSubmitted(true);
+      setForm({ name: "", email: "", company: "", phone: "", message: "" });
+      setTimeout(() => {
+        setSubmitted(false);
+        setIsModalOpen(false);
+      }, 3000);
+    } catch (err: any) {
+      setError(err.message || "Failed to submit. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const defaultHeroStats = t.raw('heroStats') as { value: string; label: string }[];
   const heroStats = cms?.heroStats || defaultHeroStats;
@@ -171,9 +220,13 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
               </ul>
 
               {/* CTA */}
-              <a href="/#request" className="inline-flex items-center gap-2 text-[13px] font-medium text-purple hover:text-purple-light transition-all duration-300">
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center gap-2 text-[13px] font-medium text-purple hover:text-purple-light transition-all duration-300"
+              >
                 {t('tierCardCta')} <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              </button>
             </div>
 
             {/* Subtle border — purple tint on hover */}
@@ -206,23 +259,163 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 pb-24 md:pb-32">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }}>
           <div className="max-w-[800px] grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-3 md:gap-4">
-            <Link href="/#request" className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[var(--text-muted)] transition-all duration-300 min-h-[130px]">
+            <a href="https://cal.com/eventpartner/15min" target="_blank" rel="noopener noreferrer" className="group text-left flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[var(--text-muted)] transition-all duration-300 min-h-[130px] w-full">
               <span className="text-[13px] font-semibold text-[var(--text-secondary)]">{cms?.ctaCard1Title || t('ctaCard1Title')}</span>
-              <div className="flex items-end justify-between mt-4">
+              <div className="flex items-end justify-between mt-4 w-full">
                 <p className="text-[15px] md:text-[17px] text-[var(--text-muted)] leading-snug max-w-[200px]">{cms?.ctaCard1Desc || t('ctaCard1Desc')}</p>
                 <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] group-hover:translate-x-0.5 transition-all duration-300 flex-shrink-0" />
               </div>
-            </Link>
-            <Link href="/#request" className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-purple hover:bg-[#6A47A0] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(120,81,169,0.15)]">
+            </a>
+            <button type="button" onClick={() => setIsModalOpen(true)} className="group text-left flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-purple hover:bg-[#6A47A0] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(120,81,169,0.15)] w-full">
               <span className="text-[13px] font-semibold text-white/50">{cms?.ctaCard2Title || t('ctaCard2Title')}</span>
-              <div className="flex items-end justify-between mt-4">
+              <div className="flex items-end justify-between mt-4 w-full">
                 <p className="text-[18px] md:text-[22px] text-white font-medium leading-snug max-w-[280px]">{cms?.ctaCard2Headline || t('ctaCard2Headline')}<br /><span className="text-white/50">{cms?.ctaCard2Sub || t('ctaCard2Sub')}</span></p>
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/15 transition-colors flex-shrink-0"><ArrowRight className="w-5 h-5 text-white group-hover:translate-x-0.5 transition-transform duration-300" /></div>
               </div>
-            </Link>
+            </button>
           </div>
         </motion.div>
       </section>
+
+      {/* VIP Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.97 }}
+              transition={{ duration: 0.4, ease: EASE }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-lg bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl p-8 md:p-10 shadow-[0_20px_50px_rgba(120,81,169,0.25)]"
+            >
+              {/* Close */}
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 z-10 w-9 h-9 rounded-xl bg-black/20 hover:bg-black/40 border border-white/10 flex items-center justify-center text-white/60 hover:text-white transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-purple/10 flex items-center justify-center text-purple">
+                  <Crown className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-display font-semibold text-[var(--text-primary)]">Apply for VIP</h3>
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-purple">Exclusive Member Network</span>
+                </div>
+              </div>
+
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center text-center py-10">
+                  <div className="w-14 h-14 bg-purple/10 text-purple rounded-full flex items-center justify-center mb-5">
+                    <CheckCircle className="w-8 h-8" />
+                  </div>
+                  <h4 className="text-lg font-display font-semibold text-[var(--text-primary)] mb-1">Application Received</h4>
+                  <p className="text-sm text-[var(--text-secondary)]">We will get back to you with membership details shortly.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4 mt-6">
+                  <div>
+                    <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Full Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Your full name"
+                      className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus:outline-none focus:border-purple transition-colors placeholder:text-[var(--text-muted)]"
+                      value={form.name}
+                      onChange={set('name')}
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Email *</label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="you@company.com"
+                        className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus:outline-none focus:border-purple transition-colors placeholder:text-[var(--text-muted)]"
+                        value={form.email}
+                        onChange={set('email')}
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Phone</label>
+                      <input
+                        type="tel"
+                        placeholder="+46..."
+                        className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus:outline-none focus:border-purple transition-colors placeholder:text-[var(--text-muted)]"
+                        value={form.phone}
+                        onChange={set('phone')}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Company</label>
+                    <input
+                      type="text"
+                      placeholder="Company name"
+                      className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus:outline-none focus:border-purple transition-colors placeholder:text-[var(--text-muted)]"
+                      value={form.company}
+                      onChange={set('company')}
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Special requirements / Preferences</label>
+                    <textarea
+                      rows={3}
+                      placeholder="E.g. Preferred destinations, number of corporate events per year..."
+                      className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus:outline-none focus:border-purple transition-colors resize-none placeholder:text-[var(--text-muted)]"
+                      value={form.message}
+                      onChange={set('message')}
+                    />
+                  </div>
+
+                  {error && (
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center">
+                      {error}
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-purple text-white font-medium rounded-xl py-4 hover:bg-[#6A47A0] transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-[0_4px_20px_rgba(120,81,169,0.2)]"
+                  >
+                    {loading ? (
+                      <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Submitting...</>
+                    ) : (
+                      <><Send className="w-4 h-4" /> Apply for Membership</>
+                    )}
+                  </button>
+
+                  <div className="text-center mt-5">
+                    <p className="text-xs text-[var(--text-muted)]">
+                      {t('modalMeetingText')}{" "}
+                      <a
+                        href="https://cal.com/eventpartner/15min"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple hover:text-purple-light transition-colors font-medium underline"
+                      >
+                        {t('modalMeetingLink')}
+                      </a>
+                    </p>
+                  </div>
+                </form>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

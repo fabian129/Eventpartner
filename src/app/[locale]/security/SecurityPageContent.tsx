@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Shield, Lock, Eye, FileCheck, Server, UserCheck, Globe, AlertTriangle, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { SecurityTicker } from "@/components/layout/SecurityTicker";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const ICON_MAP: Record<string, any> = { lock: Lock, server: Server, fileCheck: FileCheck, userCheck: UserCheck, eye: Eye, alertTriangle: AlertTriangle };
@@ -57,6 +58,9 @@ export function SecurityPageContent({ cms }: { cms?: SecurityCMS }) {
           {cms?.heroSubtitle || t('heroSubtitle')}
         </motion.p>
       </section>
+
+      {/* Scrolling Ticker */}
+      <SecurityTicker />
 
       {/* Pillars */}
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
@@ -131,15 +135,11 @@ export function SecurityPageContent({ cms }: { cms?: SecurityCMS }) {
         </motion.div>
       </section>
 
-      {/* Bottom CTA */}
       <section className="max-w-[1200px] mx-auto px-6 md:px-10">
-        <motion.a href={`mailto:${cms?.dpoEmail || t('dpoEmail')}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300">
-          <div>
-            <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">{cms?.ctaHeadline || t('ctaHeadline')}</p>
-            <p className="text-[var(--text-secondary)] text-sm">{cms?.ctaDescription || t('ctaDescription')}</p>
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-tiffany/10 border border-tiffany/20 flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-tiffany transition-all duration-300 shrink-0 ml-6"><ArrowRight className="w-5 h-5" /></div>
-        </motion.a>
+        {/* Fine print */}
+        <p className="text-[11px] text-[var(--text-muted)] text-center mt-12 opacity-55 max-w-xl mx-auto leading-relaxed font-sans">
+          {t('finePrint')}
+        </p>
       </section>
     </main>
   );

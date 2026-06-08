@@ -101,7 +101,7 @@ export const REGIONS: Region[] = [
   {
     slug: 'africa',
     name: 'Africa',
-    countrySlugs: ['south-africa', 'egypt', 'nigeria', 'kenya', 'ethiopia', 'ghana', 'tanzania', 'morocco', 'tunisia', 'senegal', 'rwanda', 'uganda', 'cameroon', 'angola', 'mozambique', 'namibia', 'botswana', 'zambia', 'zimbabwe', 'madagascar', 'mauritius', 'seychelles', 'mali', 'niger', 'chad', 'guinea', 'guinea-bissau', 'sierra-leone', 'liberia', 'gambia', 'benin', 'togo', 'burkina-faso', 'central-african-republic', 'congo', 'eritrea', 'djibouti', 'somalia', 'sudan', 'south-sudan', 'lesotho', 'malawi', 'mauritania', 'cape-verde', 'equatorial-guinea', 'sao-tome-and-principe'],
+    countrySlugs: ['south-africa', 'egypt', 'nigeria', 'kenya', 'ethiopia', 'ghana', 'tanzania', 'morocco', 'tunisia', 'senegal', 'rwanda', 'uganda', 'cameroon', 'angola', 'mozambique', 'namibia', 'botswana', 'zambia', 'zimbabwe', 'madagascar', 'mauritius', 'seychelles', 'mali', 'niger', 'chad', 'guinea', 'guinea-bissau', 'sierra-leone', 'liberia', 'gambia', 'benin', 'togo', 'burkina-faso', 'central-african-republic', 'congo', 'eritrea', 'djibouti', 'somalia', 'sudan', 'south-sudan', 'lesotho', 'malawi', 'mauritania', 'cape-verde', 'equatorial-guinea', 'sao-tome-and-principe', 'algeria'],
     center: [5, 20],
     previewFlags: ['za', 'ng', 'ke'],
     totalVenues: '28,000+',
@@ -119,7 +119,7 @@ export const REGIONS: Region[] = [
   {
     slug: 'north-america',
     name: 'North America',
-    countrySlugs: ['canada', 'mexico', 'puerto-rico', 'bermuda', 'cayman-islands', 'jamaica', 'bahamas', 'barbados', 'dominican-republic', 'antigua-and-barbuda', 'saint-kitts-and-nevis', 'saint-lucia', 'saint-vincent-and-the-grenadines', 'grenada', 'dominica', 'belize', 'guatemala', 'honduras', 'el-salvador', 'nicaragua', 'costa-rica', 'panama'],
+    countrySlugs: ['canada', 'mexico', 'puerto-rico', 'bermuda', 'cayman-islands', 'jamaica', 'bahamas', 'barbados', 'dominican-republic', 'antigua-and-barbuda', 'saint-kitts-and-nevis', 'saint-lucia', 'saint-vincent-and-the-grenadines', 'grenada', 'dominica', 'belize', 'guatemala', 'honduras', 'el-salvador', 'nicaragua', 'costa-rica', 'panama', 'united-states', 'cuba', 'haiti', 'martinique', 'guadeloupe'],
     center: [25, -80],
     previewFlags: ['ca', 'mx', 'jm'],
     totalVenues: '38,000+',

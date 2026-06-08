@@ -9,6 +9,7 @@ import {
   ChevronLeft, ChevronRight, Monitor, Layers, Palette, Calendar,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { SecurityTicker } from "@/components/layout/SecurityTicker";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -586,8 +587,9 @@ function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct
           </div>
         </div>
         <a
-          href="#book"
-          onClick={(e) => { e.preventDefault(); console.log("Open calendar modal"); }}
+          href="https://www.cal.eu/premium-videobrochures"
+          target="_blank"
+          rel="noopener noreferrer"
           className="w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors bg-black/5 hover:bg-black/10 text-[#111] border border-black/5"
         >
           <Calendar className="w-4 h-4" />
@@ -634,7 +636,7 @@ export function VPPShowcase() {
           ))}
         </div>
 
-        {/* TrustedByStrip removed — logos now in homepage LogoTicker */}
+        <SecurityTicker />
       </section>
 
       {/* Quote Form */}

@@ -13,7 +13,7 @@ const DEFAULT_FAQS = [
   },
   {
     question: "Which countries do you cover?",
-    answer: "We operate across 36 European countries with a network of 2,400+ venue partners. From Scandinavia to the Mediterranean, we can source the perfect venue for your event anywhere in Europe."
+    answer: "We operate across 175 countries with a network of 2,400+ venue partners. From Scandinavia to the Mediterranean, we can source the perfect venue for your event anywhere around the globe."
   },
   {
     question: "Is there a cost to use EventPartner's service?",
@@ -258,7 +258,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
       {/* Bottom CTA */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10">
         <motion.a
-          href="/#request"
+          href="/help"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

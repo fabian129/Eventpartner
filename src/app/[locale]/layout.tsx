@@ -39,8 +39,8 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "EventPartner — The World's Largest Selection of Event & Conference Venues",
   description:
-    "Your complete partner for enterprise event booking across 36 European countries. 10,000+ venues, one platform, zero friction.",
-  keywords: ["event venues", "conference booking", "B2B events", "Europe", "venue sourcing"],
+    "Your complete partner for enterprise event booking across 175 countries globally. 10,000+ venues, one platform, zero friction.",
+  keywords: ["event venues", "conference booking", "B2B events", "Global", "venue sourcing"],
 };
 
 export function generateStaticParams() {

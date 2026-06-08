@@ -11,7 +11,7 @@ import { localize, type Locale } from "@/../sanity/lib/locale";
 export const metadata: Metadata = {
   title: "About Us — EventPartner",
   description:
-    "Meet the team behind Europe's largest event booking platform. Learn about our mission, values, and the people making corporate events seamless across 36 countries.",
+    "Meet the team behind the world's largest event booking platform. Learn about our mission, values, and the people making corporate events seamless across 175 countries.",
 };
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {

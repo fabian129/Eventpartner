@@ -24,7 +24,7 @@
 
   "footer": {
     "brand": "EventPartner",
-    "tagline": "Europas ledande eventpartner — vi kopplar samman dig med extraordinära lokaler i 175 länder.",
+    "tagline": "Världens ledande eventpartner — vi kopplar samman dig med extraordinära lokaler i 175 länder.",
     "sections": {
       "services": "Tjänster",
       "company": "Företaget",
@@ -80,7 +80,7 @@
     "labelRight": "175 länder",
     "headline": "Hitta din perfekta",
     "headlineAccent": "lokal.",
-    "subtitle": "Från intima styrelsemiddagar till konferenser med 5 000 deltagare — vi hittar, jämför och bokar den ideala lokalen. Var som helst i Europa.",
+    "subtitle": "Från intima styrelsemiddagar till konferenser med 5 000 deltagare — vi hittar, jämför och bokar den ideala lokalen. Var som helst i världen.",
     "cta": "Få en gratis offert",
     "ctaSub": "Gratis · Inga förpliktelser · Svar inom 24h",
     "stats": {
@@ -132,7 +132,13 @@
         "label": "Önskad plats",
         "placeholder": "Stad, region eller land..."
       },
-      "date": { "label": "Önskat datum", "placeholder": "Välj datum..." },
+      "date": {
+        "label": "Önskat datum",
+        "placeholder": "Välj datum...",
+        "flexibility": "Flexibilitet",
+        "exact": "Exakta datum",
+        "entireMonth": "Hela månaden"
+      },
       "budget": {
         "label": "Budgetintervall",
         "placeholder": "t.ex. 200 000 kr"
@@ -165,7 +171,7 @@
   "about": {
     "label": "EventPartner — Om oss",
     "fallbackTitle": "Om EventPartner",
-    "fallbackDescription": "EventPartner är Europas ledande plattform för eventbokning — vi kopplar samman företag med extraordinära lokaler i 175 länder."
+    "fallbackDescription": "EventPartner är den ledande plattformen för eventbokning — vi kopplar samman företag med extraordinära lokaler i 175 länder."
   },
 
   "faq": {
@@ -190,11 +196,11 @@
     "label": "Endast på inbjudan",
     "headline": "En annan standard",
     "headlineMuted": "för företag som vägrar kompromissa.",
-    "body1": "EventPartner VIP-program är reserverat för organisationer som förväntar sig precision, diskretion och felfri genomförande. Varje detalj — från val av lokal till koordinering på plats — hanteras av ditt dedikerade seniorteam.",
+    "body1": "EventPartner VIP-program är reserverat för organisationer som ställer högsta krav på precision, diskretion och leverans i absolut toppklass. Varje detalj — från val av lokal till sista touchen på plats — hanteras av ditt dedikerade seniorteam.",
     "body2": "Medlemskap sker genom ansökan. Vi upprätthåller medvetet en begränsad krets för att säkerställa att varje kund får den uppmärksamhet deras event förtjänar.",
     "inclusionsLabel": "Vad som ingår",
     "inclusions": [
-      "Prioriterad tillgång till Europas mest exklusiva lokaler",
+      "Prioriterad tillgång till världens mest exklusiva lokaler",
       "Dedikerad senior account manager",
       "Förmånliga priser i 175 länder",
       "Alltid 33 % extra rabatt på allt i vår webbshop",
@@ -244,7 +250,7 @@
   "countryFlags": {
     "label": "EventPartner — Täckning",
     "title": "175 länder",
-    "subtitle": "Vi verkar i hela Europa och utanför."
+    "subtitle": "Vi verkar över hela världen."
   },
 
   "shop": {
@@ -342,6 +348,12 @@
   "vpp": {
     "sectionLabel": "Videobroschyrer",
     "sectionBadge": "Helt anpassningsbara & tryckbara",
+    "securityTicker": {
+      "gdpr": { "title": "GDPR-kompatibel", "desc": "Utformad med GDPR-principer" },
+      "iso": { "title": "ISO 27001-anpassad", "desc": "Säkerhetsramverk i linje med ISO" },
+      "soc": { "title": "SOC 2-riktlinjer", "desc": "Följer bästa praxis för säkerhet" },
+      "enterprise": { "title": "Företagsklassad säkerhet", "desc": "Ändpunkt-till-ändpunkt kryptering" }
+    },
     "viewDetails": "Visa detaljer",
     "features": "Funktioner",
     "idealFor": "Perfekt för",
@@ -349,7 +361,7 @@
     "trustedBy": "Betrodda av 500+ globala varumärken",
     "quoteLabel": "Begär offert",
     "quoteHeadline": "Premiumvideobroschyrer.",
-    "quoteDescription": "Sticka ut på ditt nästa event med anpassade videobroschyrprodukter — taktila, slagkraftiga marknadsföringsverktyg som kombinerar tryck med inbäddad video.",
+    "quoteDescription": "Marknadsför er smartare med anpassade videobroschyrer — ett taktilt och slagkraftigt verktyg som kombinerar fysiskt tryck med video.",
     "quotePoints": {
       "customizable": { "label": "Helt anpassningsbar", "desc": "Din design, ditt varumärke, din video" },
       "delivery": { "label": "Global leverans", "desc": "Leverans var som helst i världen" },
@@ -411,7 +423,7 @@
       "businessCard": {
         "name": "Videovisitskort",
         "tagline": "Lämna ett intryck",
-        "description": "Ett fickformat kort med en 2,4″-skärm som spelar din videopresentation. Dela ut på event och glöms aldrig bort."
+        "description": "Ett fickformat kort med en 2,4″-skärm som spelar din videopresentation. Dela ut på event och lämna ett bestående intryck."
       },
       "book": {
         "name": "Videobok",
@@ -426,11 +438,11 @@
     "heroLabelRight": "Exklusiv tillgång",
     "heroHeadline": "Din partner,",
     "heroHeadlineAccent": "inte en leverantör.",
-    "heroIntroText": "Vi kopplar samman ambitiösa företag med extraordinära lokaler — vi avvisar det ordinära, prioriterar precision och levererar event som genuint lyfter.",
+    "heroIntroText": "Vi kopplar samman ambitiösa företag med extraordinära lokaler. För oss handlar det om perfektion och att leverera event som skapar verkligt värde.",
     "heroStats": [
       { "value": "12h", "label": "Svarstid" },
-      { "value": "10%", "label": "Max rabatt" },
-      { "value": "36", "label": "Länder" },
+      { "value": "14%", "label": "Snittbesparing" },
+      { "value": "175", "label": "Länder" },
       { "value": "1:1", "label": "Dedikerad kontaktperson" }
     ],
     "manifestoLabel": "EventPartner — VIP-förmåner",
@@ -442,7 +454,7 @@
     "manifestoMotto": "Prioritet är inte en förmån — det är standarden.",
     "manifestoStats": [
       { "value": "< 12h", "label": "Svarstid" },
-      { "value": "Upp till 10%", "label": "Rabatter" },
+      { "value": "Upp till 14%", "label": "Rabatter" },
       { "value": "1:1", "label": "Account manager" },
       { "value": "Anpassat", "label": "Avtalsvillkor" }
     ],
@@ -475,11 +487,13 @@
       { "step": "02", "title": "Kvalificera", "desc": "Vårt team granskar din profil och matchar dig med rätt VIP-nivå baserat på dina behov och volym." },
       { "step": "03", "title": "Njut", "desc": "Börja ta emot prioriterad service, exklusiva priser och en dedikerad account manager från dag ett." }
     ],
-    "ctaCard1Title": "Frågor?",
-    "ctaCard1Desc": "Vi berättar om du kvalificerar dig.",
+    "ctaCard1Title": "Vill du ha mer info?",
+    "ctaCard1Desc": "Boka möte med oss!",
     "ctaCard2Title": "Ansök",
-    "ctaCard2Headline": "Begär en inbjudan.",
-    "ctaCard2Sub": "Idag."
+    "ctaCard2Headline": "Ansök om ditt VIP-medlemskap.",
+    "ctaCard2Sub": "idag.",
+    "modalMeetingText": "Vill du ha mer info?",
+    "modalMeetingLink": "Boka möte med oss!"
   },
 
   "aboutPage": {
@@ -498,7 +512,7 @@
     "storyHeadline": "Från idé till",
     "storyHeadlineAccent": "branschledare.",
     "storyQuote": "Vi tror att varje event är en möjlighet att skapa något bestående. Inte bara en konferens — ett minne. Inte bara en middag — en relation.",
-    "storyBody1": "Grundat i Medelhavsområdet men verksamt i hela Europa, kopplar EventPartner samman företag med den perfekta lokalen för varje tillfälle. Från intima styrelsemiddagar till företagskonferenser med 5 000 deltagare — vårt team av erfarna eventproffs skräddarsyr förslag snabbt.",
+    "storyBody1": "Baserade i Medelhavet och Skandinavien men verksamma över hela världen, kopplar EventPartner samman företag med den perfekta lokalen för varje tillfälle. Från intima styrelsemiddagar till företagskonferenser med 5 000 deltagare — vårt team av erfarna eventproffs skräddarsyr förslag snabbt.",
     "storyBody2": "Vår bakgrund spänner över eventproduktion, hotell & restaurang och teknologi. Vi kombinerade alla tre för att skapa en tjänst som är personlig, pålitlig och anmärkningsvärt effektiv. En förfrågan, flera alternativ, noll krångel.",
     "valuesLabel": "Vad vi står för",
     "valuesHeadline": "Byggt på principer,",
@@ -506,7 +520,7 @@
     "values": [
       { "icon": "heart", "title": "Personlig service", "description": "Varje förfrågan hanteras av en riktig person, inte en chatbot. Vi tror på relationer byggda på förtroende och genuin omsorg." },
       { "icon": "zap", "title": "Snabbhet & Pålitlighet", "description": "Förslag inom 24 timmar, alltid. Vi vet att tidskritisk eventplanering inte väntar på någon." },
-      { "icon": "globe", "title": "Paneuropeisk räckvidd", "description": "En partner i 175 länder. Slipp jonglera med lokala byråer — vi hanterar allt från Stockholm till Barcelona." },
+      { "icon": "globe", "title": "Global räckvidd", "description": "En partner i 175 länder. Slipp jonglera med lokala byråer — vi hanterar allt från Stockholm till Barcelona." },
       { "icon": "shield", "title": "Transparens", "description": "Inga dolda avgifter, tydlig prissättning och en jämförelse av minst 3 lokalalternativ för varje förfrågan." }
     ],
     "teamLabel": "Teamet",
@@ -517,24 +531,46 @@
 
   "aiAssistant": {
     "heroLabel": "AI-assistent",
-    "heroLabelRight": "Beta",
-    "heroHeadline": "Din intelligenta",
-    "heroHeadlineAccent": "eventpartner.",
-    "heroSubtitle": "Vår AI-assistent hjälper dig att utforska lokaler, få omedelbara svar och effektivisera din eventplanering — tillgänglig dygnet runt på alla 36 europeiska marknader.",
-    "botTitle": "EP-assistent",
-    "botDescription": "Vår AI-assistent tränas på tusentals lokaler och event. Den kommer snart att vara tillgänglig för att hjälpa dig planera ditt nästa event.",
-    "botStatus": "Träning pågår...",
-    "botLaunchDate": "Förväntad lansering Q3 2025",
-    "featuresLabel": "Funktioner",
-    "featuresHeadline": "Vad assistenten\nkommer göra för dig.",
-    "features": [
-      { "icon": "zap", "title": "Omedelbara svar", "desc": "Få lokalförslag, prisuppskattningar och tillgänglighetskontroller på sekunder — utan att vänta på kontorstid." },
-      { "icon": "globe", "title": "Kunskap om 36 länder", "desc": "Vår AI har tränats på lokaldata från alla 36 europeiska marknader vi verkar på." },
-      { "icon": "shield", "title": "Integritet först", "desc": "Dina konversationer är krypterade och delas aldrig. Vi tar dataskydd på allvar." },
-      { "icon": "chat", "title": "Naturlig konversation", "desc": "Ställ frågor på vanlig svenska — vår assistent förstår kontext och följdfrågor." }
+    "heroHeadline": "EventPartner AI",
+    "heroHeadlineAccent": "Event Assistant",
+    "heroIntro1": "Att arrangera ett event är enkelt jämfört med att få rätt personer att faktiskt närvara.",
+    "heroIntro2": "Oavsett om du arrangerar en kunddag, konferens, partnerträff, frukostseminarium eller intern kickoff avgör deltagarna i slutändan eventets värde.",
+    "heroIntro3": "Fel publik innebär ofta en kostnad. Rätt publik kan däremot skapa nya affärer, stärka relationer och generera avkastning långt över investeringen. Därför erbjuder EventPartner en AI-driven Event Assistant som hjälper dig att identifiera, bjuda in och kommunicera med rätt personer före, under och efter eventet.",
+    "roiTitle": "ROI börjar långt innan eventdagen",
+    "roiDescription": "Många företag lägger stora resurser på lokal, mat, innehåll och logistik – men betydligt mindre på själva deltagarrekryteringen.",
+    "roiListIntro": "Resultatet blir ofta att:",
+    "roiIssues": [
+      "Fel personer tackar ja",
+      "Nyckelbeslutsfattare uteblir",
+      "Inbjudningar glöms bort",
+      "Uppföljningen blir bristfällig",
+      "Eventet får lägre affärsvärde än det borde"
     ],
-    "ctaHeadline": "Kan du inte vänta på AI:n?",
-    "ctaDescription": "Vårt mänskliga team svarar inom 24 timmar — skicka din eventförfrågan nu."
+    "roiQuote": "Det spelar ingen roll hur bra eventet är om rätt personer inte är där.",
+    "roiStat": "Enligt flera branschundersökningar uppger över 70 % av B2B-marknadsförare att event är en av deras mest effektiva kanaler för att generera affärer. Samtidigt är deltagarrekrytering och uppföljning två av de största utmaningarna för att skapa faktisk ROI.",
+    "botTitle": "En virtuell eventassistent som arbetar dygnet runt",
+    "botStatus": "Aktiv dygnet runt",
+    "botSummary": "Vår AI Event Assistant hjälper dig att:",
+    "botFeatures": [
+      "Identifiera relevanta beslutsfattare och målgrupper",
+      "Bjuda in deltagare via LinkedIn och e-post",
+      "Följa upp automatiskt före eventet",
+      "Besvara vanliga frågor från deltagare",
+      "Skicka påminnelser vid rätt tidpunkt",
+      "Hantera intern kommunikation kring eventet",
+      "Säkerställa högre närvaro och bättre deltagarkvalitet",
+      "Fortsätta dialogen efter eventet"
+    ],
+    "foundersTitle": "Byggt av människor som kan försäljning",
+    "foundersP1": "EventPartners grundare har tillsammans över 30 års erfarenhet av B2B-försäljning, marknadsföring och affärsutveckling.",
+    "foundersP2": "Vi vet att ett event inte bara handlar om att fylla en lokal.",
+    "foundersP3": "Det handlar om att skapa affärsvärde. Det handlar om att få rätt personer på rätt plats vid rätt tidpunkt.",
+    "foundersP4": "Och det handlar om att säkerställa att varje investerad krona faktiskt bidrar till företagets mål.",
+    "ctaHeadline": "Fokusera på eventet – vi hjälper dig fylla det",
+    "ctaSub": "Med vår AI Event Assistant kan du fokusera på det som verkligen spelar roll: Att skapa ett fantastiskt event.",
+    "ctaP1": "Samtidigt arbetar vår assistent i bakgrunden med att identifiera, kontakta, följa upp och engagera rätt deltagare.",
+    "ctaP2": "Resultatet blir högre närvaro, bättre möten, fler affärsmöjligheter och ett betydligt starkare ROI från varje event du arrangerar. Vi ser fram emot att introducera ert företag till EP-assistant, och framtidens sätt att öka intäkterna från era event redan idag!",
+    "ctaButton": "Vill du ha mer info? Boka möte med oss!"
   },
 
   "securityPage": {
@@ -543,17 +579,17 @@
     "heroBadge": "Säkerhet på företagsnivå",
     "heroHeadline": "Din data",
     "heroHeadlineAccent": "är helig.",
-    "heroSubtitle": "Vi hanterar eventdata för några av Europas största organisationer. Det förtroendet förtjänas genom rigorösa säkerhetsrutiner, full GDPR-efterlevnad och absolut transparens kring hur vi skyddar din information.",
+    "heroSubtitle": "Vi hanterar eventdata för några av Europas största organisationer. Det förtroendet förtjänas genom rigorösa säkerhetsrutiner, ett målinriktat arbete för GDPR-efterlevnad och absolut transparens kring hur vi skyddar din information.",
     "pillarsLabel": "Säkerhetsgrunder",
     "pillarsHeadline": "Byggt på sex",
     "pillarsHeadlineAccent": "säkerhetspelare.",
     "pillars": [
       { "icon": "lock", "title": "Datakryptering", "description": "All data krypteras under transport (TLS 1.3) och i vila (AES-256). Vi följer branschens bästa praxis för nyckelhantering och rotation." },
       { "icon": "server", "title": "EU-baserad infrastruktur", "description": "All data lagras på EU-baserade servrar. Vi överför inte personuppgifter utanför Europeiska ekonomiska samarbetsområdet utan tydliga skyddsåtgärder." },
-      { "icon": "fileCheck", "title": "GDPR-kompatibel", "description": "EventPartner är fullt GDPR-kompatibelt. Vi upprätthåller ett detaljerat personuppgiftsregister och besvarar begäranden från registrerade inom 30 dagar." },
+      { "icon": "fileCheck", "title": "GDPR-kompatibel", "description": "EventPartner är utformat med GDPR-principer i åtanke. Vi upprätthåller ett detaljerat personuppgiftsregister och arbetar ständigt för att säkerställa efterlevnad i alla våra tjänster." },
       { "icon": "userCheck", "title": "Åtkomstkontroll", "description": "Rollbaserad åtkomstkontroll (RBAC) säkerställer att endast behörig personal kan komma åt känslig information. All åtkomst loggas och är granskningsbar." },
       { "icon": "eye", "title": "Transparens", "description": "Vi publicerar en tydlig integritetspolicy och upprätthåller öppen kommunikation för alla frågor eller funderingar kring dataskydd." },
-      { "icon": "alertTriangle", "title": "Incidenthantering", "description": "Vi har en dokumenterad incidenthanteringsplan med 72-timmars notifieringsåtagande i enlighet med GDPR artikel 33." }
+      { "icon": "alertTriangle", "title": "Incidenthantering", "description": "Vi har en dokumenterad incidenthanetringsplan med 72-timmars notifieringsåtagande i enlighet med GDPR artikel 33." }
     ],
     "complianceLabel": "Ramverk för regelefterlevnad",
     "complianceHeadline": "Standarder vi",
@@ -604,7 +640,60 @@
     "dpoDescription": "Om du har frågor om hur vi behandlar dina uppgifter, vill utöva dina rättigheter eller anmäla en dataskyddsfråga, kontakta vårt dataskyddsombud.",
     "dpoEmail": "privacy@eventpartner.io",
     "ctaHeadline": "Frågor om säkerhet?",
-    "ctaDescription": "Vi diskuterar gärna våra säkerhetsrutiner i detalj. Kontakta vårt team."
+    "ctaDescription": "Vi diskuterar gärna våra säkerhetsrutiner i detalj. Kontakta vårt team.",
+    "finePrint": "Säkerhets- och integritetspraxis är internt implementerade och förbättras ständigt utifrån branschens ramverk."
+  },
+
+  "helpPage": {
+    "heroLabel": "Hjälpcenter",
+    "heroLabelRight": "Support",
+    "heroHeadline": "Vi finns här",
+    "heroHeadlineAccent": "för er.",
+    "heroSubtitle": "Behöver du hjälp med ditt event eller har du en fråga om våra tjänster? Vårt dedikerade supportteam är alltid redo att hjälpa till.",
+    "stats": {
+      "response": "< 24t",
+      "responseLabel": "Genomsnittlig svarstid",
+      "countries": "175",
+      "countriesLabel": "Länder täckta",
+      "hours": "Mån–Fre",
+      "hoursLabel": "09:00–18:00 CET"
+    },
+    "channels": {
+      "emailTitle": "E-postsupport",
+      "emailDesc": "Detaljerade meddelanden — svar inom 24 timmar.",
+      "phoneTitle": "Telefonsupport",
+      "phoneDesc": "Prata direkt med vårt team.",
+      "chatTitle": "Livechatt",
+      "chatDesc": "Realtidshjälp för snabba frågor.",
+      "chatAction": "Kommer snart"
+    },
+    "form": {
+      "label": "Skicka ett meddelande",
+      "headline": "Berätta vad\ndu behöver.",
+      "description": "Fyll i formuläret så återkommer vårt team inom en arbetsdag.",
+      "name": "Namn",
+      "email": "E-post",
+      "subject": "Ämne",
+      "subjectSelect": "Välj ett ämne...",
+      "subjectBooking": "Lokalbokning",
+      "subjectVIP": "VIP-program",
+      "subjectBilling": "Fakturering",
+      "subjectOther": "Övrigt",
+      "message": "Meddelande",
+      "messagePlaceholder": "Berätta hur vi kan hjälpa till...",
+      "sending": "Skickar...",
+      "send": "Skicka meddelande",
+      "successTitle": "Meddelande skickat",
+      "successDesc": "Vi återkommer inom 24 timmar."
+    },
+    "meetingSection": {
+      "label": "Direktkontakt",
+      "headline": "Vill du diskutera ditt projekt?",
+      "description": "Boka ett 15-minuterssamtal med Pontus för att diskutera ditt projekt.",
+      "cta": "Boka möte"
+    },
+    "ctaHeadline": "Kontrollera vår FAQ först?",
+    "ctaDescription": "Många vanliga frågor är redan besvarade."
   },
 
   "common": {

@@ -10,7 +10,7 @@ import { localize, type Locale } from "@/../sanity/lib/locale";
 export const metadata: Metadata = {
   title: "AI Assistant — EventPartner",
   description:
-    "Meet EventPartner's AI-powered event planning assistant. Get instant venue suggestions, availability checks, and pricing estimates across 36 European countries.",
+    "Meet EventPartner's AI-powered event planning assistant. Get instant venue suggestions, availability checks, and pricing estimates across 175 countries globally.",
 };
 
 export default async function AiAssistantPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -30,22 +30,7 @@ export default async function AiAssistantPage({ params }: { params: Promise<{ lo
         })),
         cta: t(homeData.navCta),
       } : undefined} />
-      <AiAssistantContent cms={data ? {
-        heroLabel: t(data.heroLabel),
-        heroLabelRight: t(data.heroLabelRight),
-        heroHeadline: t(data.heroHeadline),
-        heroHeadlineAccent: t(data.heroHeadlineAccent),
-        heroSubtitle: t(data.heroSubtitle),
-        botTitle: t(data.botTitle),
-        botDescription: t(data.botDescription),
-        botStatus: t(data.botStatus),
-        botLaunchDate: t(data.botLaunchDate),
-        featuresLabel: t(data.featuresLabel),
-        featuresHeadline: t(data.featuresHeadline),
-        features: data.features?.map((f: any) => ({ title: t(f.title), desc: t(f.desc), icon: f.icon })),
-        ctaHeadline: t(data.ctaHeadline),
-        ctaDescription: t(data.ctaDescription),
-      } : undefined} />
+      <AiAssistantContent />
       <DarkZone exitToLight={false}>
         <Footer cms={homeData ? {
           brandDesc: t(homeData.footerBrandDesc),

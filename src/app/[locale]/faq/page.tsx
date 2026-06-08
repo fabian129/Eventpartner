@@ -10,7 +10,7 @@ import { localize, type Locale } from "@/../sanity/lib/locale";
 export const metadata: Metadata = {
   title: "FAQ — EventPartner",
   description:
-    "Find answers to frequently asked questions about EventPartner's venue sourcing, pricing, VIP programme, and how we help plan corporate events across 36 European countries.",
+    "Find answers to frequently asked questions about EventPartner's venue sourcing, pricing, VIP programme, and how we help plan corporate events across 175 countries globally.",
 };
 
 export default async function FaqPage({ params }: { params: Promise<{ locale: string }> }) {

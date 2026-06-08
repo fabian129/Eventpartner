@@ -69,8 +69,12 @@ const MACRO_REGIONS = [
     regionSlugs: ["asia-pacific"],
   },
   {
-    label: "Americas",
-    regionSlugs: ["north-america", "south-america"],
+    label: "North America",
+    regionSlugs: ["north-america"],
+  },
+  {
+    label: "South America",
+    regionSlugs: ["south-america"],
   },
 ];
 
@@ -160,6 +164,7 @@ function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: s
 
 export function Footer({ cms }: { cms?: FooterCMS }) {
   const t = useTranslations('footer');
+  const tVpp = useTranslations('vpp');
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [subLoading, setSubLoading] = useState(false);
@@ -366,14 +371,46 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
 
       {/* Bottom bar */}
       <div className="px-6 md:px-10 py-5 border-t border-white/[0.04]">
-        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20">
             {t('copyright', { year: new Date().getFullYear() })}
           </p>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.privacy')}</Link>
-            <Link href="/terms" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.terms')}</Link>
-            <Link href="/security" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.cookies')}</Link>
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            {/* Static compliance badges */}
+            <div className="flex flex-wrap justify-center gap-x-5 gap-y-1.5 opacity-25 hover:opacity-45 transition-opacity duration-300">
+              <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.1em] text-white select-none cursor-default">
+                <svg className="w-2.5 h-2.5 text-tiffany" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                {tVpp('securityTicker.gdpr.title')}
+              </span>
+              <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.1em] text-white select-none cursor-default">
+                <svg className="w-2.5 h-2.5 text-tiffany" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                {tVpp('securityTicker.iso.title')}
+              </span>
+              <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.1em] text-white select-none cursor-default">
+                <svg className="w-2.5 h-2.5 text-tiffany" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+                {tVpp('securityTicker.soc.title')}
+              </span>
+              <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.1em] text-white select-none cursor-default">
+                <svg className="w-2.5 h-2.5 text-tiffany" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                {tVpp('securityTicker.enterprise.title')}
+              </span>
+            </div>
+            {/* Divider on desktop */}
+            <div className="hidden md:block w-px h-3 bg-white/10" />
+            {/* Legal links */}
+            <div className="flex gap-6">
+              <Link href="/privacy" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.privacy')}</Link>
+              <Link href="/terms" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.terms')}</Link>
+              <Link href="/security" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.cookies')}</Link>
+            </div>
           </div>
         </div>
       </div>

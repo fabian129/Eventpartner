@@ -575,7 +575,8 @@ const CONTINENT_ICONS: Record<string, React.ComponentType<{ className?: string }
   'middle-east': Compass,
   'africa': Sun,
   'asia-pacific': Globe2,
-  'americas': TreePalm,
+  'north-america': TreePalm,
+  'south-america': TreePalm,
 };
 
 const CONTINENT_GROUPS = [
@@ -583,7 +584,8 @@ const CONTINENT_GROUPS = [
   { id: 'middle-east',  label: 'Middle East',  regionSlugs: ['middle-east'] },
   { id: 'africa',       label: 'Africa',       regionSlugs: ['africa'] },
   { id: 'asia-pacific', label: 'Asia Pacific', regionSlugs: ['asia-pacific'] },
-  { id: 'americas',     label: 'Americas',     regionSlugs: ['north-america','south-america'] },
+  { id: 'north-america', label: 'North America', regionSlugs: ['north-america'] },
+  { id: 'south-america', label: 'South America', regionSlugs: ['south-america'] },
 ];
 
 /* ══════════════════════════════════════════════════════════════

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { PrintfulProductCard, type PrintfulProductData } from "@/components/shop/PrintfulProductCard";
 import { usePrintfulCart } from "@/context/PrintfulCartContext";
 import { VPPShowcase } from "@/components/shop/VPPShowcase";
+import { LogoTicker } from "@/components/layout/LogoTicker";
 import { ShoppingBag, ArrowRight } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -39,6 +40,7 @@ interface ShopCMS {
 
 export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
   const t = useTranslations('shop');
+  const tVpp = useTranslations('vpp');
 
   const [products, setProducts] = useState<PrintfulProductData[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
@@ -117,6 +119,12 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
         </div>
       </section>
 
+      {/* Brand Logos */}
+      <LogoTicker cms={{ label: tVpp('trustedBy') }} />
+
+      {/* ─── VPP Product Showcase + Quote Form ─── */}
+      <VPPShowcase />
+
       {/* How It Works */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-16 md:mb-24">
         <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}>
@@ -194,9 +202,6 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
           </div>
         )}
       </section>
-
-      {/* ─── VPP Product Showcase + Quote Form ─── */}
-      <VPPShowcase />
 
       {/* Bottom CTA */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10">

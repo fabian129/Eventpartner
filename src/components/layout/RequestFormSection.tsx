@@ -32,7 +32,6 @@ export function RequestFormSection({ cms }: { cms?: {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [dateMode, setDateMode] = useState<'exact' | 'flexible'>('exact');
   const [flexibility, setFlexibility] = useState('');
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -54,9 +53,11 @@ export function RequestFormSection({ cms }: { cms?: {
     setLoading(true);
     setError('');
 
-    const datePayload = dateMode === 'exact'
-      ? { mode: 'exact', from: form.dateFrom, to: form.dateTo }
-      : { mode: 'flexible', month: form.dateMonth, flexibility };
+    const datePayload = {
+      from: form.dateFrom,
+      to: form.dateTo,
+      flexibility: flexibility || 'Exact'
+    };
 
     try {
       const res = await fetch('/api/contact', {
@@ -225,84 +226,40 @@ export function RequestFormSection({ cms }: { cms?: {
             </div>
             <div>
               <label className={labelClass}>{t('fields.date.label')}</label>
-              {/* Tabs: Exact / Flexible */}
-              <div className="flex mb-2 rounded-lg overflow-hidden border border-black/[0.08]" style={{ background: isDark ? '#1a1a1a' : '#f5f5f6' }}>
-                <button
-                  type="button"
-                  onClick={() => setDateMode('exact')}
-                  className={`flex-1 py-2 text-[12px] font-medium transition-all ${
-                    dateMode === 'exact'
-                      ? isDark ? 'bg-white/10 text-white' : 'bg-white text-[#111] shadow-sm'
-                      : isDark ? 'text-white/40 hover:text-white/60' : 'text-black/35 hover:text-black/55'
-                  }`}
-                >
-                  Exact dates
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setDateMode('flexible')}
-                  className={`flex-1 py-2 text-[12px] font-medium transition-all ${
-                    dateMode === 'flexible'
-                      ? isDark ? 'bg-white/10 text-white' : 'bg-white text-[#111] shadow-sm'
-                      : isDark ? 'text-white/40 hover:text-white/60' : 'text-black/35 hover:text-black/55'
-                  }`}
-                >
-                  Flexible dates
-                </button>
+              <div className="grid grid-cols-2 gap-2 mb-3">
+                <div>
+                  <span className="block font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-1">From / Från</span>
+                  <input type="date" className={inputClass} value={form.dateFrom} onChange={set('dateFrom')} />
+                </div>
+                <div>
+                  <span className="block font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-1">To / Till</span>
+                  <input type="date" className={inputClass} value={form.dateTo} onChange={set('dateTo')} />
+                </div>
               </div>
 
-              {dateMode === 'exact' ? (
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <span className="block font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-1">From</span>
-                    <input type="date" className={inputClass} value={form.dateFrom} onChange={set('dateFrom')} />
-                  </div>
-                  <div>
-                    <span className="block font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-1">To</span>
-                    <input type="date" className={inputClass} value={form.dateTo} onChange={set('dateTo')} />
-                  </div>
+              <div className="space-y-1.5">
+                <span className="block font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--text-dim)]">
+                  {t('fields.date.flexibility')}
+                </span>
+                <div className="flex gap-1.5 flex-wrap">
+                  {['Exact', '± 1 day', '± 3 days', '± 1 week', 'Entire month'].map((opt) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      onClick={() => setFlexibility(opt === 'Exact' ? '' : opt)}
+                      className={`px-3 py-1.5 rounded-lg text-[11px] font-medium border transition-all ${
+                        (opt === 'Exact' ? !flexibility : flexibility === opt)
+                          ? 'bg-tiffany/10 border-tiffany/30 text-tiffany shadow-[0_0_12px_rgba(74,222,210,0.1)]'
+                          : isDark
+                            ? 'border-white/[0.08] text-white/40 hover:border-white/20 hover:text-white/60'
+                            : 'border-black/[0.08] text-black/35 hover:border-black/15 hover:text-black/55'
+                      }`}
+                    >
+                      {opt === 'Exact' ? t('fields.date.exact') : opt === 'Entire month' ? t('fields.date.entireMonth') : opt}
+                    </button>
+                  ))}
                 </div>
-              ) : (
-                <div className="space-y-2">
-                  <select className={inputClass} value={form.dateMonth} onChange={set('dateMonth')}>
-                    <option value="">Select month...</option>
-                    <option>January 2026</option>
-                    <option>February 2026</option>
-                    <option>March 2026</option>
-                    <option>April 2026</option>
-                    <option>May 2026</option>
-                    <option>June 2026</option>
-                    <option>July 2026</option>
-                    <option>August 2026</option>
-                    <option>September 2026</option>
-                    <option>October 2026</option>
-                    <option>November 2026</option>
-                    <option>December 2026</option>
-                    <option>Q1 2027</option>
-                    <option>Q2 2027</option>
-                    <option>Q3 2027</option>
-                    <option>Q4 2027</option>
-                  </select>
-                  <div className="flex gap-1.5 flex-wrap">
-                    {['± 1 day', '± 3 days', '± 1 week', '± 2 weeks', 'Entirely flexible'].map((opt) => (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => setFlexibility(opt)}
-                        className={`px-3 py-1.5 rounded-lg text-[11px] font-medium border transition-all ${
-                          flexibility === opt
-                            ? 'bg-tiffany/10 border-tiffany/30 text-tiffany'
-                            : isDark
-                              ? 'border-white/[0.08] text-white/40 hover:border-white/20 hover:text-white/60'
-                              : 'border-black/[0.08] text-black/35 hover:border-black/15 hover:text-black/55'
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
           </div>
 
@@ -432,8 +389,9 @@ export function RequestFormSection({ cms }: { cms?: {
             </div>
           </div>
           <a
-            href="#book"
-            onClick={(e) => { e.preventDefault(); console.log("Open calendar modal"); }}
+            href="https://cal.com/eventpartner/15min"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors ${
               isDark 
                 ? 'bg-white/5 hover:bg-white/10 text-white border border-white/10' 

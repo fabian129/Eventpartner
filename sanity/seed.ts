@@ -57,8 +57,8 @@ const homepage = {
     sv: "Allt ni behöver. En partner.",
   },
   servicesDescription: {
-    en: "From intimate board dinners to large-scale international conferences — we deliver the complete event experience.",
-    sv: "Från intima styrelsemiddagar till storskaliga internationella konferenser — vi levererar hela eventupplevelsen.",
+    en: "From intimate board dinners to large-scale international conferences — One partner for all services connected to your event.",
+    sv: "Från intima styrelsemiddagar till storskaliga internationella konferenser — En partner för alla tjänster kopplade till ert event.",
   },
   serviceCards: [
     {
@@ -184,7 +184,7 @@ const homepage = {
   },
   aboutStats: [
     { _key: "venues", value: "300,000+", label: { en: "Venues worldwide", sv: "Venues världen över" } },
-    { _key: "countries", value: "175", label: { en: "European countries", sv: "Europeiska länder" } },
+    { _key: "countries", value: "175", label: { en: "the globean countries", sv: "the globeiska länder" } },
     { _key: "events", value: "2,048+", label: { en: "Events delivered", sv: "Events levererade" } },
     { _key: "experience", value: "10+", label: { en: "Years of experience", sv: "Års erfarenhet" } },
     { _key: "satisfaction", value: "100%", label: { en: "Customized solutions", sv: "Skräddarsydda lösningar" } },
@@ -325,8 +325,8 @@ const homepage = {
   flagsLabelRight: { en: "Global coverage", sv: "Global täckning" },
   flagsHeadline: { en: "175 countries. 300,000+ venues.", sv: "175 länder. 300 000+ venues." },
   flagsDescription: {
-    en: "All of Europe and beyond — we have venues that match your needs regardless of destination.",
-    sv: "Hela Europa och resten av världen — vi har venues som matchar era behov oavsett destination.",
+    en: "All of the globe and beyond — we have venues that match your needs regardless of destination.",
+    sv: "Hela världen och resten av världen — vi har venues som matchar era behov oavsett destination.",
   },
 
   /* ─── CASE STORIES (extensions) ─── */
@@ -335,7 +335,7 @@ const homepage = {
     {
       _key: "ericsson",
       client: "Ericsson",
-      event: { en: "European Leadership Summit 2024", sv: "European Leadership Summit 2024" },
+      event: { en: "the globean Leadership Summit 2024", sv: "the globean Leadership Summit 2024" },
       description: {
         en: "Three-day conference for 400 leaders from 12 countries. Full-service from venue sourcing in Stockholm to AV technology and gala evening.",
         sv: "Tre dagars konferens för 400 ledare från 12 länder. Fullservice från venue-sourcing i Stockholm till AV-teknik och galakväll.",
@@ -397,19 +397,19 @@ const homepage = {
 
   /* ─── REQUEST FORM ─── */
   formBadge: { en: "Free inquiry", sv: "Kostnadsfri förfrågan" },
-  formHeadline: { en: "Tell us what you need.", sv: "Berätta vad ni söker." },
-  formHeadlineAccent: { en: "We'll handle the rest.", sv: "Vi gör resten." },
+  formHeadline: { en: "Find inspiration for your next event", sv: "Hitta inspiration för ert nästa event" },
+  formHeadlineAccent: { en: "", sv: "" },
   formDescription: {
-    en: "Fill in the form below and we'll get back to you with tailored proposals within 24 hours. Completely free.",
-    sv: "Fyll i formuläret nedan så återkommer vi med skräddarsydda förslag inom 24 timmar. Helt kostnadsfritt.",
+    en: "Explore top venues across 175 countries and discover destinations, hotels, resorts, and meeting spaces from around the world. When you're ready, our team will help source the perfect venue for your event.",
+    sv: "Utforska topp-venues i 175 länder och upptäck destinationer, hotell, resorts och mötesplatser över hela världen. När ni är redo hjälper vårt team er att hitta den perfekta platsen för ert event.",
   },
   formButton: { en: "Send free inquiry", sv: "Skicka kostnadsfri förfrågan" },
   formDisclaimer: { en: "No obligations • Response within 24h", sv: "Inga förpliktelser • Svar inom 24h" },
 
   /* ─── FOOTER ─── */
   footerBrandDesc: {
-    en: "Your complete partner for corporate events across Europe. 300,000+ venues, one platform.",
-    sv: "Din kompletta partner för företagsevent i hela Europa. 300 000+ venues, en plattform.",
+    en: "Your complete partner for corporate events across the globe. 300,000+ venues, one platform.",
+    sv: "Din kompletta partner för företagsevent i hela världen. 300 000+ venues, en plattform.",
   },
   footerSocialLabel: { en: "Follow us:", sv: "Följ oss:" },
   footerNewsletterDesc: {
@@ -461,7 +461,7 @@ const homepage = {
         { _key: "dk", label: { en: "Denmark", sv: "Danmark" }, href: "/land/denmark" },
         { _key: "de", label: { en: "Germany", sv: "Tyskland" }, href: "/land/germany" },
         { _key: "gb", label: { en: "United Kingdom", sv: "Storbritannien" }, href: "/land/uk" },
-        { _key: "all", label: { en: "All 36 countries →", sv: "Alla 36 länder →" }, href: "#coverage" },
+        { _key: "all", label: { en: "All 175 countries →", sv: "Alla 175 länder →" }, href: "#coverage" },
       ],
     },
   ],
@@ -488,8 +488,8 @@ const homepage = {
     sv: "Vi tror att varje event är en möjlighet att bygga något bestående. Inte bara en konferens — en katalysator för förändring.",
   },
   aboutBody: {
-    en: "EventPartner was founded on a simple idea: to make enterprise event planning as smooth as booking a hotel room. With a network spanning all of Europe and a team with deep experience in the event industry, we make it possible.",
-    sv: "EventPartner grundades på en enkel idé: att göra företagseventplanering lika smidigt som att boka ett hotellrum. Med ett nätverk som spänner över hela Europa och ett team med djup erfarenhet inom eventbranschen, gör vi det möjligt.",
+    en: "EventPartner was founded on a simple idea: to make enterprise event planning as smooth as booking a hotel room. With a network spanning all of the globe and a team with deep experience in the event industry, we make it possible.",
+    sv: "EventPartner grundades på en enkel idé: att göra företagseventplanering lika smidigt som att boka ett hotellrum. Med ett nätverk som spänner över hela världen och ett team med djup erfarenhet inom eventbranschen, gör vi det möjligt.",
   },
   aboutBody2: {
     en: "We're based in the Mediterranean and Scandinavia but work globally. Our team has backgrounds in event production, hospitality, and tech — and we combine it into a service that is fast, personal, and reliable.",
@@ -545,8 +545,8 @@ const aboutPageData = {
     sv: "Vi tror att varje event är en möjlighet att bygga något bestående. Inte bara en konferens — ett minne. Inte bara en middag — en relation.",
   },
   storyBody1: {
-    en: "Founded in the Mediterranean and Scandinavia, but operating across all of Europe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
-    sv: "Grundat i Medelhavet och Skandinavien, men verksamt i hela Europa, kopplar EventPartner samman företag med den perfekta venue:n för varje tillfälle. Från intima styrelsemiddagar till företagskonferenser med 5 000 deltagare, tar vårt erfarna team fram skräddarsydda förslag — snabbt.",
+    en: "Founded in the Mediterranean and Scandinavia, but operating across all of the globe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
+    sv: "Grundat i Medelhavet och Skandinavien, men verksamt i hela världen, kopplar EventPartner samman företag med den perfekta venue:n för varje tillfälle. Från intima styrelsemiddagar till företagskonferenser med 5 000 deltagare, tar vårt erfarna team fram skräddarsydda förslag — snabbt.",
   },
   storyBody2: {
     en: "Our backgrounds span event production, hospitality, and technology. We combined all three to create a service that is personal, reliable, and remarkably efficient. One inquiry, multiple options, zero hassle.",
@@ -558,7 +558,7 @@ const aboutPageData = {
   valueCards: [
     { _key: "v1", title: { en: "Personal Service", sv: "Personlig service" }, description: { en: "Every inquiry is handled by a real person, not a chatbot. We believe in relationships built on trust and genuine care.", sv: "Varje förfrågan hanteras av en riktig person, inte en chatbot. Vi tror på relationer byggda på förtroende och genuin omsorg." }, icon: "heart" },
     { _key: "v2", title: { en: "Speed & Reliability", sv: "Snabbhet & pålitlighet" }, description: { en: "Proposals within 24 hours, always. We know that time-critical event planning doesn't wait for anyone.", sv: "Förslag inom 24 timmar, alltid. Vi vet att tidskritisk eventplanering inte väntar på någon." }, icon: "zap" },
-    { _key: "v3", title: { en: "Pan-European Reach", sv: "Paneuropeisk räckvidd" }, description: { en: "One partner across 36 countries. No more juggling local agencies — we handle everything from Stockholm to Barcelona.", sv: "En partner i 36 länder. Sluta jonglera lokala byråer — vi hanterar allt från Stockholm till Barcelona." }, icon: "globe" },
+    { _key: "v3", title: { en: "Pan-the globean Reach", sv: "Global räckvidd" }, description: { en: "One partner across 175 countries. No more juggling local agencies — we handle everything from Stockholm to Barcelona.", sv: "En partner i 175 länder. Sluta jonglera lokala byråer — vi hanterar allt från Stockholm till Barcelona." }, icon: "globe" },
     { _key: "v4", title: { en: "Transparency", sv: "Transparens" }, description: { en: "No hidden fees, clear pricing, and a comparison of at least 3 venue options for every single request.", sv: "Inga dolda avgifter, tydlig prissättning och jämförelse av minst 3 venue-alternativ för varje förfrågan." }, icon: "shield" },
   ],
   teamLabel: { en: "The Team", sv: "Teamet" },
@@ -585,8 +585,8 @@ const securityPageData = {
   heroHeadline: { en: "Your data", sv: "Er data" },
   heroHeadlineAccent: { en: "is sacred.", sv: "är helig." },
   heroSubtitle: {
-    en: "We handle event data for some of Europe's largest organizations. That trust is earned through rigorous security practices, full GDPR compliance, and absolute transparency about how we protect your information.",
-    sv: "Vi hanterar eventdata för några av Europas största organisationer. Det förtroendet förtjänas genom rigorösa säkerhetsrutiner, full GDPR-efterlevnad och absolut transparens kring hur vi skyddar er information.",
+    en: "We handle event data for some of the globe's largest organizations. That trust is earned through rigorous security practices, full GDPR compliance, and absolute transparency about how we protect your information.",
+    sv: "Vi hanterar eventdata för några av världens största organisationer. Det förtroendet förtjänas genom rigorösa säkerhetsrutiner, full GDPR-efterlevnad och absolut transparens kring hur vi skyddar er information.",
   },
   pillarsLabel: { en: "Security Foundations", sv: "Säkerhetsgrund" },
   pillarsHeadline: { en: "Built on six", sv: "Byggt på sex" },
@@ -665,8 +665,8 @@ const vipPageData = {
   ctaCard1Title: { en: "Talk to us", sv: "Prata med oss" },
   ctaCard1Desc: { en: "Get answers to your VIP questions.", sv: "Få svar på era VIP-frågor." },
   ctaCard2Title: { en: "Apply for VIP", sv: "Ansök om VIP" },
-  ctaCard2Headline: { en: "Start your VIP journey.", sv: "Starta er VIP-resa." },
-  ctaCard2Sub: { en: "Today.", sv: "Idag." },
+  ctaCard2Headline: { en: "Apply for your VIP membership.", sv: "Ansök om ditt VIP-medlemskap." },
+  ctaCard2Sub: { en: "today.", sv: "idag." },
 };
 
 async function seed() {

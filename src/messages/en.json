@@ -24,7 +24,7 @@
 
   "footer": {
     "brand": "EventPartner",
-    "tagline": "Europe's premier event partner — connecting you with extraordinary venues across 175 countries.",
+    "tagline": "The premier event partner — connecting you with extraordinary venues around the globe.",
     "sections": {
       "services": "Services",
       "company": "Company",
@@ -80,7 +80,7 @@
     "labelRight": "175 Countries",
     "headline": "Find your perfect",
     "headlineAccent": "venue.",
-    "subtitle": "From intimate board dinners to 5,000-person conferences — we find, compare, and book the ideal venue. Anywhere in Europe.",
+    "subtitle": "From intimate board dinners to 5,000-person conferences — we find, compare, and book the ideal venue. Anywhere around the globe.",
     "cta": "Get a Free Quote",
     "ctaSub": "Free · No obligations · Response within 24h",
     "stats": {
@@ -132,7 +132,13 @@
         "label": "Preferred Location",
         "placeholder": "City, region, or country..."
       },
-      "date": { "label": "Preferred Date", "placeholder": "Select date..." },
+      "date": {
+        "label": "Preferred Date",
+        "placeholder": "Select date...",
+        "flexibility": "Flexibility",
+        "exact": "Exact dates",
+        "entireMonth": "Entire month"
+      },
       "budget": {
         "label": "Budget Range",
         "placeholder": "e.g. €20,000"
@@ -165,7 +171,7 @@
   "about": {
     "label": "EventPartner — About",
     "fallbackTitle": "About EventPartner",
-    "fallbackDescription": "EventPartner is Europe's premier event venue booking platform, connecting enterprises with extraordinary venues across 175 countries."
+    "fallbackDescription": "EventPartner is the premier event venue booking platform, connecting enterprises with extraordinary venues around the globe."
   },
 
   "faq": {
@@ -190,11 +196,11 @@
     "label": "By invitation only",
     "headline": "A different standard",
     "headlineMuted": "for companies that refuse to compromise.",
-    "body1": "The EventPartner VIP Programme is reserved for organisations that expect precision, discretion, and flawless execution. Every detail — from venue selection to on-site coordination — is handled by your dedicated senior team.",
+    "body1": "The EventPartner VIP Programme is reserved for organisations that expect precision, discretion, and flawless execution. Every detail — from venue selection to final execution — is handled by your dedicated senior team.",
     "body2": "Membership is by application only. We maintain a deliberately limited roster to ensure each client receives the attention their events demand.",
     "inclusionsLabel": "What's included",
     "inclusions": [
-      "Priority access to Europe's most exclusive venues",
+      "Priority access to the world's most exclusive venues",
       "Dedicated senior account manager",
       "Preferred rates across 175 countries",
       "Always 33% extra discount on everything in our webshop",
@@ -244,7 +250,7 @@
   "countryFlags": {
     "label": "EventPartner — Coverage",
     "title": "175 Countries",
-    "subtitle": "We operate across all of Europe and beyond."
+    "subtitle": "We operate around the globe."
   },
 
   "shop": {
@@ -342,6 +348,12 @@
   "vpp": {
     "sectionLabel": "Video Brochures",
     "sectionBadge": "Fully customizable & printable",
+    "securityTicker": {
+      "gdpr": { "title": "GDPR Compliant", "desc": "Designed with GDPR principles" },
+      "iso": { "title": "ISO 27001 Aligned", "desc": "Security framework alignment" },
+      "soc": { "title": "SOC 2 Guidelines", "desc": "Following best practices" },
+      "enterprise": { "title": "Enterprise Grade", "desc": "End-to-end data encryption" }
+    },
     "viewDetails": "View Details",
     "features": "Features",
     "idealFor": "Ideal For",
@@ -429,8 +441,8 @@
     "heroIntroText": "We connect ambitious companies with extraordinary venues — rejecting the ordinary, prioritising precision, and delivering events that genuinely elevate.",
     "heroStats": [
       { "value": "12h", "label": "Response time" },
-      { "value": "10%", "label": "Max discount" },
-      { "value": "36", "label": "Countries" },
+      { "value": "14%", "label": "Avg. discount" },
+      { "value": "175", "label": "Countries" },
       { "value": "1:1", "label": "Dedicated manager" }
     ],
     "manifestoLabel": "EventPartner — VIP Benefits",
@@ -442,7 +454,7 @@
     "manifestoMotto": "Priority is not a perk — it's the standard.",
     "manifestoStats": [
       { "value": "< 12h", "label": "Response time" },
-      { "value": "Up to 10%", "label": "Discounts" },
+      { "value": "Up to 14%", "label": "Discounts" },
       { "value": "1:1", "label": "Account manager" },
       { "value": "Custom", "label": "Contract terms" }
     ],
@@ -475,11 +487,13 @@
       { "step": "02", "title": "Qualify", "desc": "Our team reviews your profile and matches you with the right VIP tier based on your needs and volume." },
       { "step": "03", "title": "Enjoy", "desc": "Start receiving priority service, exclusive pricing, and a dedicated account manager from day one." }
     ],
-    "ctaCard1Title": "Questions?",
-    "ctaCard1Desc": "We'll tell you if you qualify.",
+    "ctaCard1Title": "Need more info?",
+    "ctaCard1Desc": "Book a meeting with us!",
     "ctaCard2Title": "Apply",
-    "ctaCard2Headline": "Request an invitation.",
-    "ctaCard2Sub": "Today."
+    "ctaCard2Headline": "Apply for your VIP membership.",
+    "ctaCard2Sub": "today.",
+    "modalMeetingText": "Need more info?",
+    "modalMeetingLink": "Book a meeting with us!"
   },
 
   "aboutPage": {
@@ -498,7 +512,7 @@
     "storyHeadline": "From idea to",
     "storyHeadlineAccent": "industry leader.",
     "storyQuote": "We believe every event is an opportunity to build something lasting. Not just a conference — a memory. Not just a dinner — a relationship.",
-    "storyBody1": "Founded in the Mediterranean but operating across all of Europe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
+    "storyBody1": "Founded in the Mediterranean but operating around the globe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
     "storyBody2": "Our backgrounds span event production, hospitality, and technology. We combined all three to create a service that is personal, reliable, and remarkably efficient. One inquiry, multiple options, zero hassle.",
     "valuesLabel": "What We Stand For",
     "valuesHeadline": "Built on principles,",
@@ -506,7 +520,7 @@
     "values": [
       { "icon": "heart", "title": "Personal Service", "description": "Every inquiry is handled by a real person, not a chatbot. We believe in relationships built on trust and genuine care." },
       { "icon": "zap", "title": "Speed & Reliability", "description": "Proposals within 24 hours, always. We know that time-critical event planning doesn't wait for anyone." },
-      { "icon": "globe", "title": "Pan-European Reach", "description": "One partner across 175 countries. No more juggling local agencies — we handle everything from Stockholm to Barcelona." },
+      { "icon": "globe", "title": "Global Reach", "description": "One partner across 175 countries. No more juggling local agencies — we handle everything from Stockholm to Barcelona." },
       { "icon": "shield", "title": "Transparency", "description": "No hidden fees, clear pricing, and a comparison of at least 3 venue options for every single request." }
     ],
     "teamLabel": "The Team",
@@ -517,24 +531,46 @@
 
   "aiAssistant": {
     "heroLabel": "AI Assistant",
-    "heroLabelRight": "Beta",
-    "heroHeadline": "Your intelligent",
-    "heroHeadlineAccent": "event partner.",
-    "heroSubtitle": "Our AI assistant helps you explore venues, get instant answers, and streamline your event planning process — available 24/7 across all 36 European markets.",
-    "botTitle": "EP Assistant",
-    "botDescription": "Our AI assistant is being trained on thousands of venues and events. It will be available soon to help you plan your next event.",
-    "botStatus": "Training in progress...",
-    "botLaunchDate": "Expected launch Q3 2025",
-    "featuresLabel": "Capabilities",
-    "featuresHeadline": "What the assistant\nwill do for you.",
-    "features": [
-      { "icon": "zap", "title": "Instant Responses", "desc": "Get venue suggestions, pricing estimates, and availability checks in seconds — no waiting for business hours." },
-      { "icon": "globe", "title": "36-Country Knowledge", "desc": "Our AI has been trained on venue data across all 36 European markets we operate in." },
-      { "icon": "shield", "title": "Privacy-First", "desc": "Your conversations are encrypted and never shared. We take data protection seriously." },
-      { "icon": "chat", "title": "Natural Conversation", "desc": "Ask questions in plain language — our assistant understands context and follow-ups." }
+    "heroHeadline": "EventPartner AI",
+    "heroHeadlineAccent": "Event Assistant",
+    "heroIntro1": "Hosting an event is easy compared to getting the right people to actually attend.",
+    "heroIntro2": "Whether you're organizing a client day, conference, partner meetup, breakfast seminar, or internal kickoff, the attendees ultimately determine the event's value.",
+    "heroIntro3": "The wrong audience often means a cost. The right audience, however, can create new business, strengthen relationships, and generate a return far beyond the investment. That's why EventPartner offers an AI-driven Event Assistant to help you identify, invite, and communicate with the right people before, during, and after the event.",
+    "roiTitle": "ROI begins long before the event day",
+    "roiDescription": "Many companies allocate huge resources to venues, food, content, and logistics – but significantly less on actual attendee recruitment.",
+    "roiListIntro": "The result is often that:",
+    "roiIssues": [
+      "The wrong people accept",
+      "Key decision-makers don't show up",
+      "Invitations are forgotten",
+      "Follow-ups are inadequate",
+      "The event yields lower business value than it should"
     ],
-    "ctaHeadline": "Can't wait for the AI?",
-    "ctaDescription": "Our human team responds within 24 hours — send us your event request now."
+    "roiQuote": "It doesn't matter how great the event is if the right people aren't there.",
+    "roiStat": "According to multiple industry surveys, over 70% of B2B marketers state that events are one of their most effective channels for generating business. Yet, attendee recruitment and follow-up are two of the biggest challenges to creating actual ROI.",
+    "botTitle": "A virtual event assistant working around the clock",
+    "botStatus": "Active 24/7",
+    "botSummary": "Our AI Event Assistant helps you:",
+    "botFeatures": [
+      "Identify relevant decision-makers and target groups",
+      "Invite attendees via LinkedIn and email",
+      "Follow up automatically before the event",
+      "Answer common questions from attendees",
+      "Send reminders at the right time",
+      "Handle internal communication regarding the event",
+      "Ensure higher attendance and better attendee quality",
+      "Continue the dialogue after the event"
+    ],
+    "foundersTitle": "Built by people who know sales",
+    "foundersP1": "EventPartner's founders have a combined 30+ years of experience in B2B sales, marketing, and business development.",
+    "foundersP2": "We know an event isn't just about filling a room.",
+    "foundersP3": "It's about creating business value. It's about getting the right people in the right place at the right time.",
+    "foundersP4": "And it's about ensuring every invested dollar actually contributes to the company's goals.",
+    "ctaHeadline": "Focus on the event – we'll help you fill it",
+    "ctaSub": "With our AI Event Assistant, you can focus on what really matters: Creating a fantastic event.",
+    "ctaP1": "Meanwhile, our assistant works in the background to identify, contact, follow up, and engage the right attendees.",
+    "ctaP2": "The result is higher attendance, better meetings, more business opportunities, and a significantly stronger ROI from every event you host. We look forward to introducing your company to the EP-assistant, and the future way of increasing revenue from your events today!",
+    "ctaButton": "Want more info? Book a meeting with us!"
   },
 
   "securityPage": {
@@ -543,14 +579,14 @@
     "heroBadge": "Enterprise-Grade Security",
     "heroHeadline": "Your data",
     "heroHeadlineAccent": "is sacred.",
-    "heroSubtitle": "We handle event data for some of Europe's largest organizations. That trust is earned through rigorous security practices, full GDPR compliance, and absolute transparency about how we protect your information.",
+    "heroSubtitle": "We handle event data for some of Europe's largest organizations. That trust is earned through rigorous security practices, aligning with GDPR standards, and absolute transparency about how we protect your information.",
     "pillarsLabel": "Security Foundations",
     "pillarsHeadline": "Built on six",
     "pillarsHeadlineAccent": "security pillars.",
     "pillars": [
       { "icon": "lock", "title": "Data Encryption", "description": "All data is encrypted in transit (TLS 1.3) and at rest (AES-256). We follow industry best practices for key management and rotation." },
       { "icon": "server", "title": "EU-Based Infrastructure", "description": "All data is hosted on EU-based servers. We do not transfer personal data outside the European Economic Area without explicit safeguards." },
-      { "icon": "fileCheck", "title": "GDPR Compliant", "description": "EventPartner is fully GDPR compliant. We maintain a detailed data processing register and respond to data subject requests within 30 days." },
+      { "icon": "fileCheck", "title": "GDPR Compliant", "description": "EventPartner is designed with GDPR principles in mind. We maintain a detailed data processing register and continually work towards full compliance across all services." },
       { "icon": "userCheck", "title": "Access Control", "description": "Role-based access control (RBAC) ensures that only authorized personnel can access sensitive information. All access is logged and auditable." },
       { "icon": "eye", "title": "Transparency", "description": "We publish a clear privacy policy and maintain an open line of communication for any data protection concerns or questions." },
       { "icon": "alertTriangle", "title": "Incident Response", "description": "We maintain a documented incident response plan with 72-hour notification commitment in accordance with GDPR Article 33." }
@@ -604,7 +640,60 @@
     "dpoDescription": "If you have any questions about how we process your data, wish to exercise your rights, or want to report a data protection concern, please contact our Data Protection Officer.",
     "dpoEmail": "privacy@eventpartner.io",
     "ctaHeadline": "Questions about security?",
-    "ctaDescription": "We're happy to discuss our security practices in detail. Get in touch with our team."
+    "ctaDescription": "We're happy to discuss our security practices in detail. Get in touch with our team.",
+    "finePrint": "Security and privacy practices are internally implemented and continuously improved based on industry frameworks."
+  },
+
+  "helpPage": {
+    "heroLabel": "Help Center",
+    "heroLabelRight": "Support",
+    "heroHeadline": "We're here",
+    "heroHeadlineAccent": "to help.",
+    "heroSubtitle": "Need assistance with your event or have a question about our services? Our dedicated support team is always ready to help.",
+    "stats": {
+      "response": "< 24h",
+      "responseLabel": "Average response",
+      "countries": "175",
+      "countriesLabel": "Countries covered",
+      "hours": "Mon–Fri",
+      "hoursLabel": "09:00–18:00 CET"
+    },
+    "channels": {
+      "emailTitle": "Email Support",
+      "emailDesc": "Detailed message — response within 24h.",
+      "phoneTitle": "Phone Support",
+      "phoneDesc": "Speak directly with our team.",
+      "chatTitle": "Live Chat",
+      "chatDesc": "Real-time help for quick questions.",
+      "chatAction": "Coming soon"
+    },
+    "form": {
+      "label": "Send a Message",
+      "headline": "Tell us what\nyou need.",
+      "description": "Fill out the form and our team will get back to you within one business day.",
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "subjectSelect": "Select a topic...",
+      "subjectBooking": "Venue Booking",
+      "subjectVIP": "VIP Programme",
+      "subjectBilling": "Billing",
+      "subjectOther": "Other",
+      "message": "Message",
+      "messagePlaceholder": "Tell us how we can help...",
+      "sending": "Sending...",
+      "send": "Send Message",
+      "successTitle": "Message Sent",
+      "successDesc": "We'll be in touch within 24 hours."
+    },
+    "meetingSection": {
+      "label": "Direct contact",
+      "headline": "Want to discuss your project?",
+      "description": "Book a 15-min call with Pontus to discuss your project.",
+      "cta": "Book meeting"
+    },
+    "ctaHeadline": "Check our FAQ first?",
+    "ctaDescription": "Many common questions are already answered."
   },
 
   "common": {

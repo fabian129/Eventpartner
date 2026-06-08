@@ -10,7 +10,7 @@ import { localize, type Locale } from "@/../sanity/lib/locale";
 export const metadata: Metadata = {
   title: "Become a VIP — EventPartner",
   description:
-    "Join EventPartner's VIP programme for priority access, exclusive pricing, dedicated account management, and premium venue options across 36 European countries.",
+    "Join EventPartner's VIP programme for priority access, exclusive pricing, dedicated account management, and premium venue options across 175 countries.",
 };
 
 export default async function VIPPage({ params }: { params: Promise<{ locale: string }> }) {

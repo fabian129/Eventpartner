@@ -312,4 +312,64 @@ export const AMERICAS: Country[] = [
       { name: "Sofitel Montevideo Conference Centre", city: "Montevideo", capacity: "800", type: "Hotel & Conference" },
     ],
   },
+  {
+    slug: "united-states", code: "us", name: "United States", nameSv: "USA", venues: "500+",
+    topVenues: [
+      { name: "Jacob K. Javits Convention Center", city: "New York", capacity: "50 000+", type: "Convention center" },
+      { name: "McCormick Place", city: "Chicago", capacity: "100 000+", type: "Convention center" },
+      { name: "Las Vegas Convention Center", city: "Las Vegas", capacity: "100 000+", type: "Convention center" },
+      { name: "Los Angeles Convention Center", city: "Los Angeles", capacity: "25 000+", type: "Convention center" },
+      { name: "Miami Beach Convention Center", city: "Miami Beach", capacity: "20 000+", type: "Convention center" },
+    ],
+  },
+  {
+    slug: "el-salvador", code: "sv", name: "El Salvador", nameSv: "El Salvador", venues: "50+",
+    topVenues: [
+      { name: "Centro Internacional de Ferias y Convenciones", city: "San Salvador", capacity: "10 000", type: "Convention center" },
+      { name: "Sheraton Presidente Conference Centre", city: "San Salvador", capacity: "1 500", type: "Hotel & Conference" },
+      { name: "Crowne Plaza San Salvador Conference Hall", city: "San Salvador", capacity: "1 200", type: "Hotel & Conference" },
+      { name: "Barceló San Salvador Convention Centre", city: "San Salvador", capacity: "800", type: "Hotel & Conference" },
+      { name: "Real InterContinental San Salvador Hall", city: "San Salvador", capacity: "1 000", type: "Hotel & Conference" },
+    ],
+  },
+  {
+    slug: "cuba", code: "cu", name: "Cuba", nameSv: "Kuba", venues: "50+",
+    topVenues: [
+      { name: "Palacio de Convenciones de La Habana", city: "Havana", capacity: "3 000", type: "Convention center" },
+      { name: "Hotel Nacional de Cuba Conference Centre", city: "Havana", capacity: "500", type: "Hotel & Conference" },
+      { name: "Meliá Cohiba Convention Center", city: "Havana", capacity: "1 000", type: "Hotel & Conference" },
+      { name: "Iberostar Parque Central Conference Hall", city: "Havana", capacity: "400", type: "Hotel & Conference" },
+      { name: "Kempinski Gran Hotel Manzana Conference", city: "Havana", capacity: "300", type: "Hotel & Conference" },
+    ],
+  },
+  {
+    slug: "haiti", code: "ht", name: "Haiti", nameSv: "Haiti", venues: "50+",
+    topVenues: [
+      { name: "Karibe Hotel & Convention Center", city: "Port-au-Prince", capacity: "1 500", type: "Hotel & Conference" },
+      { name: "Oasis Hotel Conference Centre", city: "Pétion-Ville", capacity: "800", type: "Hotel & Conference" },
+      { name: "NH El Rancho Conference Hall", city: "Pétion-Ville", capacity: "500", type: "Hotel & Conference" },
+      { name: "Decameron Indigo Beach Conference", city: "Montrouis", capacity: "600", type: "Resort & Conference" },
+      { name: "Royal Decameron Indigo Hall", city: "Côte des Arcadins", capacity: "400", type: "Resort & Conference" },
+    ],
+  },
+  {
+    slug: "martinique", code: "mq", name: "Martinique", nameSv: "Martinique", venues: "50+",
+    topVenues: [
+      { name: "Madiana Palais des Congrès", city: "Schoelcher", capacity: "2 500", type: "Convention center" },
+      { name: "La Batelière Hotel Conference Centre", city: "Schoelcher", capacity: "600", type: "Hotel & Conference" },
+      { name: "Karibea Valmeniere Hotel Conference Hall", city: "Fort-de-France", capacity: "350", type: "Hotel & Conference" },
+      { name: "Club Med Les Boucaniers Conference Centre", city: "Sainte-Anne", capacity: "400", type: "Resort & Conference" },
+      { name: "Bakoua Hotel Conference Room", city: "Les Trois-Îlets", capacity: "250", type: "Hotel & Conference" },
+    ],
+  },
+  {
+    slug: "guadeloupe", code: "gp", name: "Guadeloupe", nameSv: "Guadeloupe", venues: "50+",
+    topVenues: [
+      { name: "World Trade Center Guadeloupe", city: "Baie-Mahault", capacity: "3 000", type: "Convention center" },
+      { name: "La Créole Beach Hotel Conference Centre", city: "Le Gosier", capacity: "600", type: "Hotel & Conference" },
+      { name: "Arawak Beach Resort Conference Hall", city: "Le Gosier", capacity: "400", type: "Resort & Conference" },
+      { name: "Langley Resort Fort Royal Conference", city: "Deshaies", capacity: "300", type: "Resort & Conference" },
+      { name: "Mahogany Hotel Residence Conference Hall", city: "Le Gosier", capacity: "250", type: "Hotel & Conference" },
+    ],
+  },
 ];

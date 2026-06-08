@@ -89,6 +89,14 @@
 | ⏳ | **Blanka framsidesmockups** | Hämta rena front-mockups från Printify |
 | ⏳ | **Byt placeholder-loggor** | Samsung, Volvo etc. → officiella eller bort |
 | ⏳ | **Video** | Planera in videoplacering (Hero / Case Stories / Om oss) |
+| ⏳ | **Svensk affärsordlista** | Ha en annan ordlista för Sverige som är bättre anpassad för professionellt affärsspråk (business Swedish) |
+| ⏳ | **Datumflexibilitet (± 2 veckor)** | Lägg till "± 2 veckor" (± 2 weeks) som ett alternativ i datumväljarens flexibilitetsrad i offertförfrågan |
+| ⏳ | **FAQ Layout-förbättring** | Skapa en tillhörande layoutsektion under FAQ-frågorna (det saknas en bra layout där nu) |
+| ✅ | **FAQ Botten-CTA länk** | Fixa botten-CTA i FAQ så att den går till Help Center (`/help`) istället för startsidan |
+| ⏳ | **Säkerhets-CTA borttagning** | Ta bort den stora säkerhets-CTA-knappen på säkerhetssidan |
+| ⏳ | **Verksamhetsområde text-uppdatering** | Ändra "verksamt i hela Europa" till "verksamt i 175 länder" |
+| ⏳ | **Uppdatera team-roller** | Ändra teammedlemmarnas roller: alla är medgrundare / co-founders (Pontus: VD, Malin: Managing Director, Joakim: CRO) |
+| ⏳ | **Shop "Så fungerar det" steg** | Uppdatera stegen på shop-sidan: Steg 4 ska vara "Lägg order", och lägg till Steg 5: "När fakturan är betald printas dina produkter och levereras till din adress" |
 
 ---
 

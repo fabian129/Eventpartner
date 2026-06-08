@@ -60,17 +60,59 @@ interface CustomizeCMS {
 
 export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
+  const [form, setForm] = useState({
+    company: "", contact: "", email: "", phone: "", country: "", city: "",
+    eventName: "", eventType: "", guests: "", startDate: "", endDate: "", budget: "",
+    venueType: "", preferredLocation: "", requirements: "",
+    cateringStyle: "", dietary: "", activitiesDetails: "", message: ""
+  });
 
   const toggleActivity = (a: string) =>
     setSelectedActivities((prev) =>
       prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a]
     );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    setForm(prev => ({ ...prev, [field]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "detailed-inquiry",
+          ...form,
+          activities: selectedActivities
+        })
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to submit request.");
+      }
+
+      setSubmitted(true);
+      setForm({
+        company: "", contact: "", email: "", phone: "", country: "", city: "",
+        eventName: "", eventType: "", guests: "", startDate: "", endDate: "", budget: "",
+        venueType: "", preferredLocation: "", requirements: "",
+        cateringStyle: "", dietary: "", activitiesDetails: "", message: ""
+      });
+      setSelectedActivities([]);
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err: any) {
+      setError(err.message || "Failed to submit. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass =
@@ -136,14 +178,14 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
             <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.contactTitle || "Contact information"}</h2>
             <p className="text-[13px] text-[#888] mb-6">{cms?.contactSubtitle || "Who should we reach out to?"}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
-              <div><label className={labelClass}>Company{star}</label><input type="text" placeholder="Your company name" required className={inputClass} /></div>
-              <div><label className={labelClass}>Contact person{star}</label><input type="text" placeholder="Full name" required className={inputClass} /></div>
-              <div><label className={labelClass}>Email{star}</label><input type="email" placeholder="you@company.com" required className={inputClass} /></div>
+              <div><label className={labelClass}>Company{star}</label><input type="text" placeholder="Your company name" required className={inputClass} value={form.company} onChange={set('company')} /></div>
+              <div><label className={labelClass}>Contact person{star}</label><input type="text" placeholder="Full name" required className={inputClass} value={form.contact} onChange={set('contact')} /></div>
+              <div><label className={labelClass}>Email{star}</label><input type="email" placeholder="you@company.com" required className={inputClass} value={form.email} onChange={set('email')} /></div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              <div><label className={labelClass}>Phone{star}</label><input type="tel" placeholder="+46 70 123 45 67" required className={inputClass} /></div>
-              <div><label className={labelClass}>Country{star}</label><input type="text" placeholder="E.g. Sweden, Spain, UK" required className={inputClass} /></div>
-              <div><label className={labelClass}>City</label><input type="text" placeholder="E.g. Stockholm, Barcelona" className={inputClass} /></div>
+              <div><label className={labelClass}>Phone{star}</label><input type="tel" placeholder="+46 70 123 45 67" required className={inputClass} value={form.phone} onChange={set('phone')} /></div>
+              <div><label className={labelClass}>Country{star}</label><input type="text" placeholder="E.g. Sweden, Spain, UK" required className={inputClass} value={form.country} onChange={set('country')} /></div>
+              <div><label className={labelClass}>City</label><input type="text" placeholder="E.g. Stockholm, Barcelona" className={inputClass} value={form.city} onChange={set('city')} /></div>
             </div>
           </div>
 
@@ -154,22 +196,22 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
             <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.eventTitle || "Event details"}</h2>
             <p className="text-[13px] text-[#888] mb-6">{cms?.eventSubtitle || "Tell us about the event itself."}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
-              <div><label className={labelClass}>Event name</label><input type="text" placeholder="E.g. Annual Sales Kick-off 2026" className={inputClass} /></div>
+              <div><label className={labelClass}>Event name</label><input type="text" placeholder="E.g. Annual Sales Kick-off 2026" className={inputClass} value={form.eventName} onChange={set('eventName')} /></div>
               <div>
                 <label className={labelClass}>Event type{star}</label>
-                <select required className={inputClass}>
+                <select required className={inputClass} value={form.eventType} onChange={set('eventType')}>
                   <option value="">Select type</option>
-                  {EVENT_TYPES.map((t) => <option key={t}>{t}</option>)}
+                  {EVENT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
-              <div><label className={labelClass}>Number of guests{star}</label><input type="number" placeholder="Enter exact number" min={1} required className={inputClass} /></div>
+              <div><label className={labelClass}>Number of guests{star}</label><input type="number" placeholder="Enter exact number" min={1} required className={inputClass} value={form.guests} onChange={set('guests')} /></div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              <div><label className={labelClass}>Start date{star}</label><input type="date" required className={inputClass} /></div>
-              <div><label className={labelClass}>End date</label><input type="date" className={inputClass} /></div>
+              <div><label className={labelClass}>Start date{star}</label><input type="date" required className={inputClass} value={form.startDate} onChange={set('startDate')} /></div>
+              <div><label className={labelClass}>End date</label><input type="date" className={inputClass} value={form.endDate} onChange={set('endDate')} /></div>
               <div>
                 <label className={labelClass}>Budget (approximate)</label>
-                <input type="text" placeholder="E.g. €20,000" className={inputClass} />
+                <input type="text" placeholder="E.g. €20,000" className={inputClass} value={form.budget} onChange={set('budget')} />
               </div>
             </div>
           </div>
@@ -183,16 +225,16 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label className={labelClass}>Venue type</label>
-                <select className={inputClass}>
+                <select className={inputClass} value={form.venueType} onChange={set('venueType')}>
                   <option value="">Select preference</option>
-                  {VENUE_TYPES.map((v) => <option key={v}>{v}</option>)}
+                  {VENUE_TYPES.map((v) => <option key={v} value={v}>{v}</option>)}
                 </select>
               </div>
-              <div><label className={labelClass}>Preferred location / area</label><input type="text" placeholder="E.g. Central Stockholm, Costa del Sol" className={inputClass} /></div>
+              <div><label className={labelClass}>Preferred location / area</label><input type="text" placeholder="E.g. Central Stockholm, Costa del Sol" className={inputClass} value={form.preferredLocation} onChange={set('preferredLocation')} /></div>
             </div>
             <div>
               <label className={labelClass}>Special venue requirements</label>
-              <textarea rows={3} placeholder="E.g. wheelchair accessible, outdoor space, sea view, breakout rooms..." className={`${inputClass} resize-none`} />
+              <textarea rows={3} placeholder="E.g. wheelchair accessible, outdoor space, sea view, breakout rooms..." className={`${inputClass} resize-none`} value={form.requirements} onChange={set('requirements')} />
             </div>
           </div>
 
@@ -205,12 +247,12 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label className={labelClass}>Catering style</label>
-                <select className={inputClass}>
+                <select className={inputClass} value={form.cateringStyle} onChange={set('cateringStyle')}>
                   <option value="">Select style</option>
-                  {CATERING_OPTIONS.map((c) => <option key={c}>{c}</option>)}
+                  {CATERING_OPTIONS.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
-              <div><label className={labelClass}>Dietary requirements</label><input type="text" placeholder="E.g. vegan options, halal, gluten-free" className={inputClass} /></div>
+              <div><label className={labelClass}>Dietary requirements</label><input type="text" placeholder="E.g. vegan options, halal, gluten-free" className={inputClass} value={form.dietary} onChange={set('dietary')} /></div>
             </div>
           </div>
 
@@ -238,7 +280,7 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
             </div>
             <div>
               <label className={labelClass}>Additional details about activities</label>
-              <textarea rows={3} placeholder="Describe any specific activities, entertainment or services you have in mind..." className={`${inputClass} resize-none`} />
+              <textarea rows={3} placeholder="Describe any specific activities, entertainment or services you have in mind..." className={`${inputClass} resize-none`} value={form.activitiesDetails} onChange={set('activitiesDetails')} />
             </div>
           </div>
 
@@ -248,19 +290,28 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
           <div className="mb-10">
             <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.anythingElseTitle || "Anything else?"}</h2>
             <p className="text-[13px] text-[#888] mb-6">{cms?.anythingElseSubtitle || "Tell us everything we should know to make your event perfect."}</p>
-            <textarea rows={5} placeholder="Special requests, theme ideas, inspiration, past experiences — anything helps..." className={`${inputClass} resize-none`} />
+            <textarea rows={5} placeholder="Special requests, theme ideas, inspiration, past experiences — anything helps..." className={`${inputClass} resize-none`} value={form.message} onChange={set('message')} />
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 text-sm text-center">
+              {error}
+            </div>
+          )}
 
           {/* Submit */}
           <div className="flex flex-col items-center gap-4">
             <button
               type="submit"
-              disabled={submitted}
+              disabled={loading || submitted}
               className="relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 text-[15px] font-semibold rounded-2xl transition-all duration-500 disabled:opacity-60 overflow-hidden group text-white bg-[#111] hover:bg-[#222]"
             >
               <span className="relative z-10 flex items-center gap-3">
                 {submitted ? (
                   <><CheckCircle className="w-5 h-5" />{cms?.successMessage || "Thank you! We'll get back to you within 24h."}</>
+                ) : loading ? (
+                  <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Sending...</>
                 ) : (
                   <>{cms?.submitButton || "Send detailed inquiry"}<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" /></>
                 )}

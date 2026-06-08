@@ -531,10 +531,16 @@ const CONTINENTS: Continent[] = [
     regionSlugs: ['asia-pacific'],
   },
   {
-    id: 'americas',
-    label: 'Americas',
+    id: 'north-america',
+    label: 'North America',
     emoji: '🌎',
-    regionSlugs: ['north-america', 'south-america'],
+    regionSlugs: ['north-america'],
+  },
+  {
+    id: 'south-america',
+    label: 'South America',
+    emoji: '🌎',
+    regionSlugs: ['south-america'],
   },
 ];
 

@@ -19,13 +19,57 @@ interface CareersCMS {
 const ICON_MAP: Record<string, any> = { globe: Globe, users: Users, briefcase: Briefcase };
 
 const DEFAULT_PERKS = [
-  { icon: "globe", title: "Remote-Friendly", desc: "Work from anywhere in Europe with flexible hours." },
+  { icon: "globe", title: "Remote-Friendly", desc: "Work from anywhere in the world with flexible hours." },
   { icon: "users", title: "Small Team Impact", desc: "Your work matters — every team member shapes the product." },
-  { icon: "briefcase", title: "Growth Industry", desc: "Be part of the fastest-growing event platform in Europe." },
+  { icon: "briefcase", title: "Growth Industry", desc: "Be part of the fastest-growing event platform globally." },
 ];
 
 export function CareersContent({ cms }: { cms?: CareersCMS }) {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    linkedIn: "",
+    message: ""
+  });
+
+  const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm(prev => ({ ...prev, [field]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "career-application",
+          name: form.name,
+          email: form.email,
+          phone: form.linkedIn, // Send LinkedIn URL as phone parameter
+          role: "Open Application",
+          message: form.message
+        })
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to submit application.");
+      }
+
+      setSubmitted(true);
+      setForm({ name: "", email: "", linkedIn: "", message: "" });
+    } catch (err: any) {
+      setError(err.message || "Failed to submit. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const headline = cms?.headline || "Join the team";
   const description = cms?.description || "We're always looking for passionate people to join us on our mission to revolutionize event experiences globally.";
@@ -41,7 +85,7 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: EASE }} className="flex justify-between items-center mb-10">
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.heroLabel || "Careers"}</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.heroLabelRight || "We\u0027re hiring"}</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.heroLabelRight || "We're hiring"}</span>
         </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE }} className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[0.88] mb-10">
           {headline}
@@ -72,7 +116,7 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{openAppTitle}</span>
-            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{cms?.formHeadline || "Show us what\nyou\u0027ve got."}</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{cms?.formHeadline || "Show us what\nyou've got."}</h2>
             <p className="text-[var(--text-secondary)] text-[15px] leading-[1.8] mt-6">{openAppDesc}</p>
           </motion.div>
           <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
@@ -81,15 +125,28 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
                 <div className="flex flex-col items-center justify-center text-center py-12">
                   <div className="w-16 h-16 bg-tiffany/10 text-tiffany rounded-full flex items-center justify-center mb-6 text-2xl">✓</div>
                   <h3 className="text-2xl font-display font-semibold text-[var(--text-primary)] mb-2">{cms?.successTitle || "Application Received"}</h3>
-                  <p className="text-[var(--text-secondary)]">{cms?.successDesc || "Thank you for your interest. We\u0027ll be in touch soon."}</p>
+                  <p className="text-[var(--text-secondary)]">{cms?.successDesc || "Thank you for your interest. We'll be in touch soon."}</p>
                 </div>
               ) : (
-                <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-5">
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Full Name</label><input type="text" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="John Doe" /></div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Email Address</label><input type="email" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="john@example.com" /></div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">LinkedIn Profile URL</label><input type="url" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="https://linkedin.com/in/johndoe" /></div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Cover Letter / Message</label><textarea rows={4} required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors resize-none" placeholder="Tell us why you'd be a great fit..." /></div>
-                  <button type="submit" className="w-full bg-[#111] border border-[#333] text-white font-medium rounded-xl py-4 hover:bg-[#222] hover:border-[#444] transition-all flex items-center justify-center gap-2"><Send className="w-4 h-4" />Submit Application</button>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Full Name</label><input type="text" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="John Doe" value={form.name} onChange={set('name')} /></div>
+                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Email Address</label><input type="email" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="john@example.com" value={form.email} onChange={set('email')} /></div>
+                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">LinkedIn Profile URL</label><input type="url" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="https://linkedin.com/in/johndoe" value={form.linkedIn} onChange={set('linkedIn')} /></div>
+                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Cover Letter / Message</label><textarea rows={4} required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors resize-none" placeholder="Tell us why you'd be a great fit..." value={form.message} onChange={set('message')} /></div>
+                  
+                  {error && (
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center">
+                      {error}
+                    </div>
+                  )}
+
+                  <button type="submit" disabled={loading} className="w-full bg-[#111] border border-[#333] text-white font-medium rounded-xl py-4 hover:bg-[#222] hover:border-[#444] transition-all flex items-center justify-center gap-2 disabled:opacity-60">
+                    {loading ? (
+                      <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Submitting...</>
+                    ) : (
+                      <><Send className="w-4 h-4" />Submit Application</>
+                    )}
+                  </button>
                 </form>
               )}
             </div>

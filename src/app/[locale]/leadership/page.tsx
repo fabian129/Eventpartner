@@ -12,7 +12,7 @@ import { LeadershipContent } from "./LeadershipContent";
 export const metadata: Metadata = {
   title: "Leadership — EventPartner",
   description:
-    "Meet the leadership team behind EventPartner — Europe's largest event booking platform connecting enterprises with 2,400+ venues across 36 countries.",
+    "Meet the leadership team behind EventPartner — the world's largest event booking platform connecting enterprises with 2,400+ venues across 175 countries.",
 };
 
 export default async function LeadershipPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -10,7 +10,7 @@ import { localize, type Locale } from "@/../sanity/lib/locale";
 export const metadata: Metadata = {
   title: "Security & Compliance — EventPartner",
   description:
-    "Learn about EventPartner's security practices, GDPR compliance, data protection policies, and commitment to keeping your event data safe across all 36 European markets.",
+    "Learn about EventPartner's security practices, GDPR compliance, data protection policies, and commitment to keeping your event data safe across all 175 global markets.",
 };
 
 export default async function SecurityPage({ params }: { params: Promise<{ locale: string }> }) {

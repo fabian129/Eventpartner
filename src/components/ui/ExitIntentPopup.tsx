@@ -138,7 +138,7 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
                       <span className="italic font-light text-white/50">{cms?.headlineAccent || "perfect venue."}</span>
                     </h3>
                     <p className="text-[14px] text-white/40 leading-relaxed">
-                      {cms?.description || "Leave your details and we'll contact you with tailored proposals — within 24 hours."}
+                      {cms?.description || "Leave your details and we'll contact you within 24 hours."}
                     </p>
                   </div>
 

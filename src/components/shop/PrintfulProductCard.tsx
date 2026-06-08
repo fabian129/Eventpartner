@@ -26,8 +26,10 @@ export interface PrintfulProductData {
   image: string;
   description: string;
   variants: PrintfulProductVariant[];
-  availableColors: { name: string; hex: string }[];
-  availableSizes: string[];
+  availableColors?: { name: string; hex: string }[];
+  colors?: { name: string; value: string }[];
+  availableSizes?: string[];
+  sizes?: string[];
 }
 
 // ─── Component ──────────────────────────────────────────────────
@@ -40,12 +42,15 @@ export function PrintfulProductCard({
   const t = useTranslations('shop');
   const [designerOpen, setDesignerOpen] = useState(false);
 
-  // Use first color as default
-  const defaultColor = product.availableColors[0];
+  const colors = product.availableColors || product.colors || [];
+  const defaultColor = colors[0] as { name: string; hex?: string; value?: string } | undefined;
+  const defaultColorHex = defaultColor?.hex || defaultColor?.value || "#000000";
+
+  const sizes = product.availableSizes || product.sizes || [];
 
   // Build size options for all variants of the default color
   const defaultColorVariants = useMemo(
-    () => product.variants.filter((v) => v.color === defaultColor?.name),
+    () => product.variants?.filter((v) => v.color === defaultColor?.name) || [],
     [product.variants, defaultColor?.name]
   );
 
@@ -107,7 +112,7 @@ export function PrintfulProductCard({
             {displayName}
           </h3>
           <p className="text-xs text-[var(--text-dim)]">
-            {product.availableColors.length} {t('productCard.colors')} · {product.availableSizes.length} {t('productCard.sizes')}
+            {colors.length} {t('productCard.colors')} · {sizes.length} {t('productCard.sizes')}
           </p>
         </div>
       </div>
@@ -118,7 +123,7 @@ export function PrintfulProductCard({
         productName={displayName}
         productImage={displayImage}
         colorName={defaultColor?.name}
-        colorHex={defaultColor?.hex}
+        colorHex={defaultColorHex}
         sizeOptions={sizeOptions}
         unitPrice={unitPrice}
         currency={currency}

@@ -2,18 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag, ArrowRight, ExternalLink } from "lucide-react";
-import { getProducts, formatPrice, type ShopifyProduct } from "@/lib/shopify";
+import { ShoppingBag, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { PrintfulProductCard, type PrintfulProductData } from "@/components/shop/PrintfulProductCard";
 
 /**
- * WebshopTeaser — Live Shopify product preview on homepage
+ * WebshopTeaser — Live Printful B2B event merchandise preview on homepage
  *
- * Fetches real products from Shopify Storefront API and displays
- * them in a premium grid. Links through to /shop for full experience.
+ * Fetches products from the local Printful API and displays
+ * them in a premium grid. Clicking them opens the designer directly.
  */
+
+const PRODUCT_IDS = [71, 12, 380, 57, 19, 77];
 
 interface WebshopCMS {
   label?: string; labelRight?: string;
@@ -25,20 +26,19 @@ interface WebshopCMS {
 
 export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
   const t = useTranslations('webshopTeaser');
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [products, setProducts] = useState<PrintfulProductData[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProducts() {
-      if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || !process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN) {
-        setLoading(false);
-        return;
-      }
       try {
-        const shopifyProducts = await getProducts(6);
-        setProducts(shopifyProducts);
+        setLoading(true);
+        const res = await fetch(`/api/printful/products?ids=${PRODUCT_IDS.join(",")}`);
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const json = await res.json();
+        setProducts(json.data || []);
       } catch (err) {
-        console.error("Failed to fetch Shopify products:", err);
+        console.error("Failed to fetch Printful products:", err);
       } finally {
         setLoading(false);
       }
@@ -114,7 +114,7 @@ export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
               ))}
             </div>
           ) : products.length > 0 ? (
-            /* Real Shopify products */
+            /* Real Printful B2B products */
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
               {products.slice(0, 6).map((product, i) => (
                 <motion.div
@@ -124,63 +124,7 @@ export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.07 }}
                 >
-                  <Link
-                    href={`/shop`}
-                    className="group block bg-white rounded-2xl border border-black/[0.05] overflow-hidden hover:shadow-lg hover:border-tiffany/20 transition-all duration-300"
-                  >
-                    {/* Product image */}
-                    <div className="aspect-square relative overflow-hidden bg-[#F8F8FA]">
-                      {product.featuredImage ? (
-                        <Image
-                          src={product.featuredImage.url}
-                          alt={product.featuredImage.altText || product.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-700"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <ShoppingBag className="w-12 h-12 text-[#ccc]" />
-                        </div>
-                      )}
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                        <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                          <ExternalLink className="w-4 h-4 text-[#111]" />
-                        </div>
-                      </div>
-                      {product.tags?.includes("bestseller") && (
-                        <div className="absolute top-3 left-3">
-                          <span className="text-[10px] font-semibold uppercase tracking-[0.08em] px-3 py-1.5 rounded-full bg-tiffany/90 text-white border border-tiffany">
-                            {t('bestseller')}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Product info */}
-                    <div className="p-4 md:p-5">
-                      {product.productType && (
-                        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-tiffany mb-1 block">
-                          {product.productType}
-                        </span>
-                      )}
-                      <h4 className="font-display text-[15px] font-medium text-[#111] tracking-tight mb-2 line-clamp-2">
-                        {product.title}
-                      </h4>
-                      <div className="flex items-baseline gap-1">
-                        <span className="font-display text-lg font-semibold text-[#111]">
-                          {formatPrice(product.priceRange.minVariantPrice)}
-                        </span>
-                        {product.priceRange.maxVariantPrice.amount !== product.priceRange.minVariantPrice.amount && (
-                          <span className="text-[11px] text-[#999]">
-                            – {formatPrice(product.priceRange.maxVariantPrice)}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
+                  <PrintfulProductCard product={product} />
                 </motion.div>
               ))}
             </div>
