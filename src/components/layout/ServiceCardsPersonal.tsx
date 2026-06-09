@@ -39,7 +39,7 @@ const SERVICES = [
   },
   {
     title: "Venue Sourcing",
-    desc: "300,000+ venues in 175 countries. Always 3 proposals within 24h.",
+    desc: "340,000+ venues in 175 countries. Always 3 proposals within 24h.",
     image: "/Images/group-people-restaurant.webp",
     label: "04",
     icon: "globe" as const,
@@ -199,10 +199,10 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[var(--border-default)] pt-5">
             {(cms?.stats || [
-              { label: "Venues", value: "300,000+" },
+              { label: "Venues", value: "340,000+" },
               { label: "Countries", value: "175" },
               { label: "Response time", value: "24h" },
-              { label: "Partners", value: "2,400+" },
+              { label: "Proposals", value: "3+" },
             ]).map((s) => (
               <div key={s.label}>
                 <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] block mb-1">{s.label}</span>

@@ -8,9 +8,9 @@ import { AI_ASSISTANT_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries
 import { localize, type Locale } from "@/../sanity/lib/locale";
 
 export const metadata: Metadata = {
-  title: "AI Assistant — EventPartner",
+  title: "EventPartner AI – Event Assistant",
   description:
-    "Meet EventPartner's AI-powered event planning assistant. Get instant venue suggestions, availability checks, and pricing estimates across 175 countries globally.",
+    "EventPartner's AI-powered Event Assistant identifies, invites and follows up with the right attendees — automatically. Higher attendance, better meetings, stronger ROI from every event.",
 };
 
 export default async function AiAssistantPage({ params }: { params: Promise<{ locale: string }> }) {

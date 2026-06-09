@@ -148,15 +148,6 @@ export function ServicesSection() {
                 Varje kund får en dedikerad kontaktperson som känner er verksamhet. Ingen generisk kundtjänst.
               </p>
             </div>
-
-            <div className="relative z-10 mt-8">
-              <div className="flex justify-between text-[10px] text-[var(--text-dim)] mb-2 font-mono uppercase tracking-wide">
-                <span>Satisfaction</span><span>97%</span>
-              </div>
-              <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)" }}>
-                <motion.div initial={{ width: 0 }} whileInView={{ width: "97%" }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 1.5, ease: "easeOut" }} className="h-full rounded-full" style={{ background: "linear-gradient(to right, #6AD8D2, #6B3FA0)" }} />
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

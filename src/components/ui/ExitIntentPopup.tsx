@@ -30,6 +30,8 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
   const [show, setShow] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const tc = useTranslations('common');
 
   useEffect(() => {
@@ -73,12 +75,34 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
     sessionStorage.setItem("ep_popup_dismissed", "1");
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      handleDismiss();
-    }, 2000);
+    const fd = new FormData(e.currentTarget);
+    const payload = {
+      type: "popup-lead",
+      name: String(fd.get("name") || ""),
+      email: String(fd.get("email") || ""),
+      company: String(fd.get("company") || ""),
+      source: "eventpartner.io exit-intent popup",
+    };
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+      setTimeout(() => {
+        handleDismiss();
+      }, 2500);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -165,10 +189,16 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
                     />
                     <button
                       type="submit"
-                      className="w-full py-3 rounded-xl bg-tiffany text-[#0A0A0A] font-medium text-[14px] hover:bg-[#5EC4BA] transition-colors duration-200 mt-2"
+                      disabled={loading}
+                      className="w-full py-3 rounded-xl bg-tiffany text-[#0A0A0A] font-medium text-[14px] hover:bg-[#5EC4BA] transition-colors duration-200 mt-2 disabled:opacity-60"
                     >
-                      {cms?.button || "Send inquiry →"}
+                      {loading ? "Sending…" : cms?.button || "Send inquiry →"}
                     </button>
+                    {error && (
+                      <p className="text-[12px] text-red-400 text-center">
+                        Something went wrong — please try again.
+                      </p>
+                    )}
                   </form>
 
                   <p className="text-[11px] text-white/20 text-center mt-4">

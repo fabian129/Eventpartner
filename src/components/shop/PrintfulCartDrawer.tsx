@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { usePrintfulCart } from "@/context/PrintfulCartContext";
+import { COUNTRIES } from "@/data/countries";
 import { Trash2, ShoppingBag, Send, CheckCircle, Loader2, ArrowLeft } from "lucide-react";
 
 type DrawerView = "cart" | "quote" | "success";
@@ -219,9 +220,30 @@ function QuoteFormView({
   onSuccess: () => void;
 }) {
   const t = useTranslations('cart');
-  const [form, setForm] = useState({ name: "", email: "", company: "", phone: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    address1: "",
+    address2: "",
+    city: "",
+    zip: "",
+    stateCode: "",
+    countryCode: "",
+    message: "",
+  });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  // Country options for the shipping address (ISO alpha-2, uppercase for Printful)
+  const countryOptions = useMemo(
+    () =>
+      [...COUNTRIES]
+        .map((c) => ({ code: c.code.toUpperCase(), name: c.name }))
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    []
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -229,6 +251,11 @@ function QuoteFormView({
 
     if (!form.name.trim() || !form.email.trim()) {
       setError(t('quoteForm.nameEmailRequired'));
+      return;
+    }
+
+    if (!form.address1.trim() || !form.city.trim() || !form.zip.trim() || !form.countryCode) {
+      setError(t('quoteForm.addressRequired'));
       return;
     }
 
@@ -345,6 +372,105 @@ function QuoteFormView({
               placeholder={t('quoteForm.fields.phone.placeholder')}
               className={inputClass}
             />
+          </div>
+
+          {/* Shipping address — used to create the Printful draft order */}
+          <div className="pt-2">
+            <p className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-secondary)] mb-1">
+              {t('quoteForm.shippingHeading')}
+            </p>
+            <p className="text-[11px] text-[var(--text-dim)] leading-relaxed">
+              {t('quoteForm.shippingNote')}
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2">
+              {t('quoteForm.fields.address1.label')}
+            </label>
+            <input
+              type="text"
+              required
+              value={form.address1}
+              onChange={(e) => setForm((f) => ({ ...f, address1: e.target.value }))}
+              placeholder={t('quoteForm.fields.address1.placeholder')}
+              className={inputClass}
+            />
+          </div>
+
+          <div>
+            <label className="block text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2">
+              {t('quoteForm.fields.address2.label')}
+            </label>
+            <input
+              type="text"
+              value={form.address2}
+              onChange={(e) => setForm((f) => ({ ...f, address2: e.target.value }))}
+              placeholder={t('quoteForm.fields.address2.placeholder')}
+              className={inputClass}
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2">
+                {t('quoteForm.fields.city.label')}
+              </label>
+              <input
+                type="text"
+                required
+                value={form.city}
+                onChange={(e) => setForm((f) => ({ ...f, city: e.target.value }))}
+                placeholder={t('quoteForm.fields.city.placeholder')}
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2">
+                {t('quoteForm.fields.zip.label')}
+              </label>
+              <input
+                type="text"
+                required
+                value={form.zip}
+                onChange={(e) => setForm((f) => ({ ...f, zip: e.target.value }))}
+                placeholder={t('quoteForm.fields.zip.placeholder')}
+                className={inputClass}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2">
+                {t('quoteForm.fields.country.label')}
+              </label>
+              <select
+                required
+                value={form.countryCode}
+                onChange={(e) => setForm((f) => ({ ...f, countryCode: e.target.value }))}
+                className={inputClass}
+              >
+                <option value="">{t('quoteForm.fields.country.placeholder')}</option>
+                {countryOptions.map((c, i) => (
+                  <option key={`${c.code}-${i}`} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2">
+                {t('quoteForm.fields.state.label')}
+              </label>
+              <input
+                type="text"
+                value={form.stateCode}
+                onChange={(e) => setForm((f) => ({ ...f, stateCode: e.target.value }))}
+                placeholder={t('quoteForm.fields.state.placeholder')}
+                className={inputClass}
+              />
+            </div>
           </div>
 
           <div>

@@ -128,7 +128,7 @@ export function CountryFlagsSection({ cms }: { cms?: FlagsCMS }) {
 
         {/* Heading + description stacked */}
         <h2 className="font-display text-[clamp(2rem,5vw,3.8rem)] font-medium tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6 whitespace-pre-wrap">
-          {cms?.headline || "175 countries.\n300,000+ venues."}
+          {cms?.headline || "175 countries.\n340,000+ venues."}
         </h2>
         <p className="font-display text-[clamp(1rem,2vw,1.2rem)] font-normal tracking-tight text-[var(--text-secondary)] leading-[1.45] max-w-lg">
           {cms?.description || "All of Europe — we source the perfect venue regardless of destination."}

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Crown, Star, Shield, Users, Clock, Gift, ArrowRight, Check, Sparkles, X, Send, CheckCircle } from "lucide-react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -56,6 +56,7 @@ interface VIPCMS {
 
 export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
   const t = useTranslations('vipPage');
+  const sv = useLocale() === 'sv';
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -217,6 +218,22 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                     <span className="text-[13px] leading-relaxed text-white/45">{f}</span>
                   </li>
                 ))}
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 mt-0.5 shrink-0 text-purple/60" />
+                  <span className="text-[13px] leading-relaxed text-white/45">
+                    {sv
+                      ? "33% medlemsrabatt i vår webshop — på allt."
+                      : "33% members' discount in our webshop — on everything."}
+                  </span>
+                </li>
+                <li className="flex items-start gap-3 md:col-span-2">
+                  <Check className="w-4 h-4 mt-0.5 shrink-0 text-purple/60" />
+                  <span className="text-[13px] leading-relaxed text-white/45">
+                    {sv
+                      ? "Omfattande årlig ESG- och hållbarhetsrapportering. Vi är vana att arbeta med större enterprise-kunder som har krav kring ESG, CSRD, NIS2-liknande governance, sustainability procurement och travel management."
+                      : "Comprehensive annual ESG & sustainability reporting. We're used to working with enterprise clients with requirements around ESG, CSRD, NIS2-style governance, sustainability procurement and travel management."}
+                  </span>
+                </li>
               </ul>
 
               {/* CTA */}

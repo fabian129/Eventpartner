@@ -73,7 +73,7 @@ export function HelpCenterContent({ cms }: { cms?: HelpCMS }) {
   const stats = cms?.stats || defaultStats;
 
   const defaultChannels = [
-    { icon: "mail", title: t('channels.emailTitle'), desc: t('channels.emailDesc'), action: "support@eventpartner.com", href: "mailto:support@eventpartner.com" },
+    { icon: "mail", title: t('channels.emailTitle'), desc: t('channels.emailDesc'), action: "support@eventpartner.io", href: "mailto:support@eventpartner.io" },
     { icon: "phone", title: t('channels.phoneTitle'), desc: t('channels.phoneDesc'), action: "+46 8 123 456 78", href: "tel:+468123456" },
     { icon: "chat", title: t('channels.chatTitle'), desc: t('channels.chatDesc'), action: t('channels.chatAction'), href: "#" },
   ];

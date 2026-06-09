@@ -52,7 +52,7 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
                 transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
               >
                 <p className="text-xs font-medium tracking-[0.15em] uppercase text-white/60 mb-3">
-                  300,000+ venues
+                  340,000+ venues
                 </p>
                 <h3 className="text-2xl md:text-4xl font-medium tracking-tight text-white leading-tight">
                   Från intima middagar till<br className="hidden md:block" />

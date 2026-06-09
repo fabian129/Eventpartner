@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
+import { useSmoothScroll } from "@/components/utils/SmoothScroll";
 
 /* ── Service submenu items ── */
 const SERVICE_ITEMS = [
@@ -48,6 +49,18 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const lenis = useSmoothScroll();
+
+  // "Book Event" → the homepage request form. Smooth-scroll if it's on the
+  // current page (Lenis-aware), otherwise let href="/#request" navigate home.
+  const scrollToRequest = useCallback((e: React.MouseEvent) => {
+    const el = document.getElementById("request");
+    if (el) {
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(el as HTMLElement, { offset: -16 });
+      else el.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [lenis]);
 
   const switchLocale = useCallback(() => {
     const next = locale === "en" ? "sv" : "en";
@@ -269,7 +282,8 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             </button>
 
             <a
-              href="#request"
+              href="/#request"
+              onClick={scrollToRequest}
               className={`
                 relative text-[12.5px] font-semibold rounded-full px-5 py-2.5
                 transition-all duration-500 overflow-hidden group
@@ -366,8 +380,8 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
 
             {/* Mobile CTA */}
             <motion.a
-              href="#request"
-              onClick={() => setIsOpen(false)}
+              href="/#request"
+              onClick={(e) => { setIsOpen(false); scrollToRequest(e); }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.4 }}

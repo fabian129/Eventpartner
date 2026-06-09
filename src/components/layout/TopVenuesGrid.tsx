@@ -63,7 +63,7 @@ const IMAGE_COUNTS: Record<string, number> = {
   'south-africa': 15, 'south-korea': 15, 'south-sudan': 11, 'spain': 15,
   'sri-lanka': 15, 'sudan': 14, 'sweden': 15, 'switzerland': 15, 'tanzania': 15,
   'thailand': 15, 'togo': 14, 'tonga': 15, 'tunisia': 15, 'turkey': 15,
-  'tuvalu': 14, 'uganda': 15, 'uk': 15, 'ukraine': 14, 'uruguay': 14,
+  'tuvalu': 14, 'uganda': 15, 'uk': 15, 'united-states': 15, 'ukraine': 14, 'uruguay': 14,
   'uzbekistan': 14, 'vanuatu': 15, 'vietnam': 15, 'zambia': 15, 'zimbabwe': 15,
 };
 

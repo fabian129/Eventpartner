@@ -1,4 +1,4 @@
-// Americas — 31 countries
+// Americas — 37 countries
 import type { Country } from './types';
 
 export const AMERICAS: Country[] = [

@@ -84,7 +84,7 @@
     "cta": "Get a Free Quote",
     "ctaSub": "Free · No obligations · Response within 24h",
     "stats": {
-      "venues": { "value": "300,000+", "label": "Venues" },
+      "venues": { "value": "340,000+", "label": "Venues" },
       "countries": { "value": "175", "label": "Countries" },
       "response": { "value": "<24h", "label": "Response time" },
       "proposals": { "value": "3+", "label": "Proposals per request" }
@@ -130,7 +130,11 @@
       },
       "location": {
         "label": "Preferred Location",
-        "placeholder": "City, region, or country..."
+        "placeholder": "Country or region..."
+      },
+      "city": {
+        "label": "City",
+        "placeholder": "City..."
       },
       "date": {
         "label": "Preferred Date",
@@ -301,9 +305,18 @@
         "email": { "label": "Email *", "placeholder": "you@company.com" },
         "company": { "label": "Company", "placeholder": "Company name" },
         "phone": { "label": "Phone", "placeholder": "+46 70 123 45 67" },
+        "address1": { "label": "Address *", "placeholder": "Street address" },
+        "address2": { "label": "Address line 2", "placeholder": "Apartment, suite, etc. (optional)" },
+        "city": { "label": "City *", "placeholder": "City" },
+        "zip": { "label": "Postal code *", "placeholder": "ZIP / postal code" },
+        "state": { "label": "State / Province", "placeholder": "State code, e.g. CA (if applicable)" },
+        "country": { "label": "Country *", "placeholder": "Select country" },
         "message": { "label": "Message", "placeholder": "Any special requirements, delivery date, etc." }
       },
+      "shippingHeading": "Shipping address",
+      "shippingNote": "Used to prepare your order. We confirm all details with you before anything is produced.",
       "nameEmailRequired": "Name and email are required.",
+      "addressRequired": "Please fill in the shipping address (address, city, postal code and country).",
       "submit": "Send Quote Request",
       "sending": "Sending..."
     },
@@ -504,7 +517,7 @@
     "heroHeadlineLine3": "events.",
     "heroSubtitle": "EventPartner was founded on one idea: to make enterprise event planning as seamless as booking a hotel room. With a network spanning 175 countries and deep industry expertise, we make it possible — every day.",
     "stats": [
-      { "value": "300,000+", "label": "Venues worldwide" },
+      { "value": "340,000+", "label": "Venues worldwide" },
       { "value": "175", "label": "Countries" },
       { "value": "10+", "label": "Years of experience" }
     ],
@@ -512,7 +525,7 @@
     "storyHeadline": "From idea to",
     "storyHeadlineAccent": "industry leader.",
     "storyQuote": "We believe every event is an opportunity to build something lasting. Not just a conference — a memory. Not just a dinner — a relationship.",
-    "storyBody1": "Founded in the Mediterranean but operating around the globe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
+    "storyBody1": "Based in the Mediterranean and Scandinavia but operating around the globe, EventPartner connects enterprises with the perfect venue for any occasion. From intimate board dinners to 5,000-person corporate conferences, our team of seasoned event professionals curates tailored proposals — fast.",
     "storyBody2": "Our backgrounds span event production, hospitality, and technology. We combined all three to create a service that is personal, reliable, and remarkably efficient. One inquiry, multiple options, zero hassle.",
     "valuesLabel": "What We Stand For",
     "valuesHeadline": "Built on principles,",

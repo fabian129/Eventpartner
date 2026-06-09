@@ -322,6 +322,28 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
               </div>
             ))}
 
+            {/* Compliance — security/GDPR badges the client wants to show */}
+            <div className="md:col-span-2">
+              <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-tiffany mb-5">
+                Compliance
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  tVpp('securityTicker.gdpr.title'),
+                  tVpp('securityTicker.iso.title'),
+                  tVpp('securityTicker.soc.title'),
+                  tVpp('securityTicker.enterprise.title'),
+                ].map((title) => (
+                  <li key={title} className="flex items-center gap-2 text-[13px] text-white/40">
+                    <svg className="w-3.5 h-3.5 text-tiffany/70 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    {title}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
         </div>
       </div>
@@ -336,7 +358,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
               Global Presence
             </h4>
             <span className="font-mono text-[10px] text-white/15 tracking-wide">
-              — 300,000+ venues across 175 countries
+              — 340,000+ venues across 175 countries
             </span>
           </div>
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
@@ -355,7 +377,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
       <div className="mx-6 md:mx-10 mb-8">
         <div className="max-w-[1200px] mx-auto">
           <a
-            href="#request"
+            href="/#request"
             className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-gradient-to-r from-tiffany/10 to-[#6B3FA0]/10 border border-white/[0.06] hover:border-tiffany/20 transition-all duration-300"
           >
             <div>
@@ -376,39 +398,10 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
             {t('copyright', { year: new Date().getFullYear() })}
           </p>
           <div className="flex flex-col md:flex-row items-center gap-6">
-            {/* Static compliance badges */}
-            <div className="flex flex-wrap justify-center gap-x-5 gap-y-1.5 opacity-25 hover:opacity-45 transition-opacity duration-300">
-              <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.1em] text-white select-none cursor-default">
-                <svg className="w-2.5 h-2.5 text-tiffany" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                {tVpp('securityTicker.gdpr.title')}
-              </span>
-              <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.1em] text-white select-none cursor-default">
-                <svg className="w-2.5 h-2.5 text-tiffany" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                {tVpp('securityTicker.iso.title')}
-              </span>
-              <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.1em] text-white select-none cursor-default">
-                <svg className="w-2.5 h-2.5 text-tiffany" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-                {tVpp('securityTicker.soc.title')}
-              </span>
-              <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.1em] text-white select-none cursor-default">
-                <svg className="w-2.5 h-2.5 text-tiffany" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-                {tVpp('securityTicker.enterprise.title')}
-              </span>
-            </div>
-            {/* Divider on desktop */}
-            <div className="hidden md:block w-px h-3 bg-white/10" />
             {/* Legal links */}
             <div className="flex gap-6">
-              <Link href="/privacy" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.privacy')}</Link>
-              <Link href="/terms" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.terms')}</Link>
+              <Link href="/security" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.privacy')}</Link>
+              <Link href="/security" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.terms')}</Link>
               <Link href="/security" className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/20 hover:text-white/40 transition-colors">{t('bottomLinks.cookies')}</Link>
             </div>
           </div>

@@ -12,11 +12,54 @@ import type { Country } from "@/data/countries";
 
 export function CountryPageClient({ country }: { country: Country }) {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [form, setForm] = useState({
+    company: "",
+    contact: "",
+    email: "",
+    phone: "",
+    city: "",
+    guests: "",
+    eventType: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const update = (key: keyof typeof form, value: string) =>
+    setForm((f) => ({ ...f, [key]: value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "event-inquiry",
+          ...form,
+          country: country.name,
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+      setForm({
+        company: "",
+        contact: "",
+        email: "",
+        phone: "",
+        city: "",
+        guests: "",
+        eventType: "",
+        message: "",
+      });
+      setTimeout(() => setSubmitted(false), 6000);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass = "w-full rounded-xl py-3.5 px-4 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#81D8D0]/30 focus:border-[#81D8D0]/50 transition-all font-sans bg-white border border-black/[0.08] text-[#111] placeholder-[#94A3B8]";
@@ -120,26 +163,31 @@ export function CountryPageClient({ country }: { country: Country }) {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div>
                       <label className={labelClass}>Company</label>
-                      <input type="text" placeholder="Your company name" className={inputClass} required />
+                      <input type="text" placeholder="Your company name" className={inputClass} required
+                        value={form.company} onChange={(e) => update("company", e.target.value)} />
                     </div>
                     <div>
                       <label className={labelClass}>Contact person</label>
-                      <input type="text" placeholder="Name" className={inputClass} required />
+                      <input type="text" placeholder="Name" className={inputClass} required
+                        value={form.contact} onChange={(e) => update("contact", e.target.value)} />
                     </div>
                     <div>
                       <label className={labelClass}>Email</label>
-                      <input type="email" placeholder="you@company.com" className={inputClass} required />
+                      <input type="email" placeholder="you@company.com" className={inputClass} required
+                        value={form.email} onChange={(e) => update("email", e.target.value)} />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div>
-                      <label className={labelClass}>City / Region</label>
-                      <input type="text" placeholder={`e.g. ${country.topVenues[0]?.city || "Capital"}`} className={inputClass} />
+                      <label className={labelClass}>Phone</label>
+                      <input type="tel" placeholder="+46 ..." className={inputClass} required
+                        value={form.phone} onChange={(e) => update("phone", e.target.value)} />
                     </div>
                     <div>
                       <label className={labelClass}>Number of guests</label>
-                      <select className={inputClass}>
+                      <select className={inputClass} required
+                        value={form.guests} onChange={(e) => update("guests", e.target.value)}>
                         <option value="">Select</option>
                         <option>10-50</option>
                         <option>50-100</option>
@@ -150,7 +198,8 @@ export function CountryPageClient({ country }: { country: Country }) {
                     </div>
                     <div>
                       <label className={labelClass}>Event type</label>
-                      <select className={inputClass}>
+                      <select className={inputClass}
+                        value={form.eventType} onChange={(e) => update("eventType", e.target.value)}>
                         <option value="">Select type</option>
                         <option>Conference</option>
                         <option>Kick-off</option>
@@ -163,20 +212,32 @@ export function CountryPageClient({ country }: { country: Country }) {
                   </div>
 
                   <div>
+                    <label className={labelClass}>City / Region</label>
+                    <input type="text" placeholder={`e.g. ${country.topVenues[0]?.city || "Capital"}`} className={inputClass}
+                      value={form.city} onChange={(e) => update("city", e.target.value)} />
+                  </div>
+
+                  <div>
                     <label className={labelClass}>Describe your event</label>
                     <textarea
                       rows={3}
                       placeholder="Tell us briefly about your event — date, purpose, special requirements..."
                       className={`${inputClass} resize-none`}
+                      value={form.message} onChange={(e) => update("message", e.target.value)}
                     />
                   </div>
 
+                  {error && (
+                    <p className="text-sm text-red-500">Something went wrong — please try again.</p>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full md:w-auto px-8 py-4 rounded-xl bg-[#111] text-white font-medium text-sm hover:bg-[#81D8D0] hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
+                    disabled={loading}
+                    className="w-full md:w-auto px-8 py-4 rounded-xl bg-[#111] text-white font-medium text-sm hover:bg-[#81D8D0] hover:text-black transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60"
                   >
                     <Send className="w-4 h-4" />
-                    Submit inquiry
+                    {loading ? "Submitting…" : "Submit inquiry"}
                   </button>
                 </form>
               )}

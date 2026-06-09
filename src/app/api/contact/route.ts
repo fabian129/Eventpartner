@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
+import { createOrder, type PrintfulOrderItem, type PrintfulRecipient } from '@/lib/printful';
 
 // Lazy-init — avoid crash at build time when env var is missing
 function getResend() {
@@ -46,6 +47,8 @@ export async function POST(req: NextRequest) {
       return handleMerchQuote(body);
     } else if (type === 'newsletter') {
       return handleNewsletter(body);
+    } else if (type === 'popup-lead') {
+      return handlePopupLead(body);
     }
 
     return NextResponse.json({ error: 'Invalid form type' }, { status: 400 });
@@ -212,6 +215,57 @@ async function handleMerchQuote(data: Record<string, any>) {
     return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
   }
 
+  // ── Create a Printful DRAFT order on the EP account ──
+  // No payment is taken. The EP team finalises and confirms the order in Printful,
+  // then sends the customer a quote/invoice. Degrades gracefully: if draft creation
+  // fails we STILL send the quote email so the lead is never lost.
+  const { address1, address2, city, zip, stateCode, countryCode } = data;
+
+  const orderItems: PrintfulOrderItem[] = (items as any[]).flatMap((item) =>
+    (item.sizes || [])
+      .filter((s: any) => s.quantity > 0 && s.variantId)
+      .map((s: any) => ({
+        catalog_variant_id: s.variantId,
+        quantity: s.quantity,
+        ...(item.templateId ? { product_template_id: item.templateId } : {}),
+      }))
+  );
+
+  let draftOrderId: number | null = null;
+  let draftError: string | null = null;
+
+  const hasShipping = Boolean(address1 && city && zip && countryCode);
+  if (hasShipping && orderItems.length > 0) {
+    try {
+      const recipient: PrintfulRecipient = {
+        name,
+        company: company || undefined,
+        address1,
+        address2: address2 || undefined,
+        city,
+        state_code: stateCode || undefined,
+        country_code: String(countryCode).toUpperCase(),
+        zip,
+        phone: phone || undefined,
+        email,
+      };
+      const order = await createOrder(recipient, orderItems, {
+        externalId: `EP-QUOTE-${Date.now()}`,
+        confirm: false,
+      });
+      draftOrderId = order.id;
+    } catch (err) {
+      draftError = String(err);
+      console.error('Printful draft creation failed:', err);
+    }
+  }
+
+  const shipToLine = address1
+    ? [address1, address2, [zip, city].filter(Boolean).join(' '), stateCode, countryCode]
+        .filter(Boolean)
+        .join(', ')
+    : '';
+
   // Build product rows HTML
   const productRows = items.map((item: any) => {
     const sizeBreakdown = item.sizes
@@ -255,6 +309,16 @@ async function handleMerchQuote(data: Record<string, any>) {
           <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0;">Received via eventpartner.io/shop</p>
         </div>
 
+        ${draftOrderId ? `
+          <div style="margin: 0 0 24px; padding: 14px 18px; background: #ecfdf5; border: 1px solid #6AD8D2; border-radius: 12px;">
+            <p style="margin: 0; font-size: 13px; color: #0f766e; line-height: 1.5;">✅ Printful draft order <strong>#${draftOrderId}</strong> created on your account. Open <strong>Printful → Orders</strong> to review the design, complete shipping and place it, then send the customer a quote/invoice.</p>
+          </div>
+        ` : draftError ? `
+          <div style="margin: 0 0 24px; padding: 14px 18px; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 12px;">
+            <p style="margin: 0; font-size: 13px; color: #b91c1c; line-height: 1.5;">⚠️ The Printful draft could not be created automatically — please create it manually from the details below. Reason: ${esc(draftError)}</p>
+          </div>
+        ` : ''}
+
         <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px;">
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666; width: 120px;">Name</td>
@@ -266,6 +330,7 @@ async function handleMerchQuote(data: Record<string, any>) {
           </tr>
           ${company ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Company</td><td style="padding: 12px 0;">${esc(company)}</td></tr>` : ''}
           ${phone ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Phone</td><td style="padding: 12px 0;">${esc(phone)}</td></tr>` : ''}
+          ${shipToLine ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Ship to</td><td style="padding: 12px 0;">${esc(shipToLine)}</td></tr>` : ''}
         </table>
 
         <h2 style="font-size: 16px; color: #333; margin: 24px 0 12px;">Order Details</h2>
@@ -306,7 +371,7 @@ async function handleMerchQuote(data: Record<string, any>) {
     return NextResponse.json({ error: 'Failed to send quote request' }, { status: 500 });
   }
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, draftOrderId, draftError });
 }
 
 /* ── Newsletter Signup ── */
@@ -565,6 +630,56 @@ async function handleVIPInquiry(data: Record<string, any>) {
   if (error) {
     console.error('Resend error:', error);
     return NextResponse.json({ error: 'Failed to send VIP application' }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true });
+}
+
+/* ── Exit-Intent / Lead-Capture Popup ── */
+async function handlePopupLead(data: Record<string, any>) {
+  const { name, email, company, message, source } = data;
+
+  if (!name || !email) {
+    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
+  }
+
+  const { error } = await getResend().emails.send({
+    from: FROM_EMAIL,
+    to: TO_EMAILS,
+    replyTo: email,
+    subject: `✨ New Lead — ${esc(company || name)}`,
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+        <div style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px;">
+          <h1 style="color: #6AD8D2; font-size: 20px; margin: 0 0 4px;">New Lead</h1>
+          <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0;">Captured via ${esc(source || 'eventpartner.io popup')}</p>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666; width: 140px;">Name</td><td style="padding: 12px 0; font-weight: 600;">${esc(name)}</td></tr>
+          <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Email</td><td style="padding: 12px 0;"><a href="mailto:${esc(email)}" style="color: #6AD8D2;">${esc(email)}</a></td></tr>
+          <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Company</td><td style="padding: 12px 0;">${esc(company || 'Not provided')}</td></tr>
+        </table>
+        ${message ? `
+          <div style="margin-top: 24px; padding: 20px; background: #f8f9fa; border-radius: 12px;">
+            <p style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 8px;">Message</p>
+            <p style="margin: 0; white-space: pre-wrap; line-height: 1.6;">${esc(message)}</p>
+          </div>
+        ` : ''}
+        <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee;">
+          <p style="color: #999; font-size: 12px; margin: 0;">Reply directly to this email to respond to ${esc(name)} at ${esc(email)}</p>
+        </div>
+      </div>
+    `,
+  });
+
+  if (error) {
+    console.error('Resend error:', error);
+    return NextResponse.json({ error: 'Failed to send lead' }, { status: 500 });
   }
 
   return NextResponse.json({ success: true });

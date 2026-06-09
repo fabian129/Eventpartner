@@ -67,7 +67,7 @@ const IMAGE_COUNTS: Record<string, number> = {
   'south-africa': 15, 'south-korea': 15, 'south-sudan': 11, 'spain': 15,
   'sri-lanka': 15, 'sudan': 14, 'sweden': 15, 'switzerland': 15, 'tanzania': 15,
   'thailand': 15, 'togo': 14, 'tonga': 15, 'tunisia': 15, 'turkey': 15,
-  'tuvalu': 14, 'uganda': 15, 'uk': 15, 'ukraine': 14, 'uruguay': 14,
+  'tuvalu': 14, 'uganda': 15, 'uk': 15, 'united-states': 15, 'ukraine': 14, 'uruguay': 14,
   'uzbekistan': 14, 'vanuatu': 15, 'vietnam': 15, 'zambia': 15, 'zimbabwe': 15,
 };
 
@@ -133,32 +133,30 @@ export function GlobeHero({ cms }: { cms?: GlobeHeroCMS }) {
             </motion.div>
           </AnimatePresence>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.3)_0%,transparent_60%)]" />
+          {/* Scrim — darkens the left where the copy block sits */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-transparent" />
           <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black/60 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
         </div>
 
-        {/* Headline */}
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6">
+        {/* Hero copy — one left-aligned stack, anchored lower-left (reference layout) */}
+        <div className="absolute z-10 bottom-[18%] md:bottom-[20%] inset-x-0 px-6 md:px-10 lg:pl-[13%] lg:pr-14">
           <h1
             ref={headlineRef}
-            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[7.5rem] font-medium leading-[0.9] tracking-[-0.03em] text-white drop-shadow-xl max-w-4xl"
+            className="font-display text-5xl sm:text-6xl md:text-[4.5rem] lg:text-[5.75rem] font-light leading-[0.95] tracking-[-0.02em] text-white drop-shadow-xl max-w-3xl"
             style={{ perspective: "600px" }}
             suppressHydrationWarning
           >
             {h1.split(" ").map((w, i) => <span key={`a${i}`} className="hero-word inline-block mr-[0.25em]">{w}</span>)}
             <br />
             {h2 && h2.split(" ").map((w, i) => <span key={`b${i}`} className="hero-word inline-block mr-[0.25em]">{w}</span>)}
-            <span className="italic font-light text-tiffany block mt-2">
-              {accent.split(" ").map((w, i) => <span key={`c${i}`} className="hero-word inline-block mr-[0.25em]">{w}</span>)}
+            <span className="font-light text-white block mt-2">
+              {accent.split(" ").filter((w) => w !== "—" && w !== "-").map((w, i) => <span key={`c${i}`} className={`hero-word inline-block mr-[0.25em] ${/EventPartner/i.test(w) ? "text-tiffany italic" : ""}`}>{w}</span>)}
             </span>
           </h1>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-6 ml-1">
-            <span className="text-white/25 text-[13px]"><span className="text-white/40 font-medium">300,000+</span> venues</span>
-            <span className="text-white/10">·</span>
-            <span className="text-white/25 text-[13px]"><span className="text-white/40 font-medium">175</span> countries</span>
-            <span className="text-white/10">·</span>
-            <span className="text-white/25 text-[13px]"><span className="text-white/40 font-medium">24h</span> response</span>
-          </div>
+          <p className="mt-7 max-w-[520px] text-white/80 text-base md:text-lg font-light leading-relaxed drop-shadow-lg">
+            {cms?.subheadline || t('subtitle')}
+          </p>
         </div>
 
         {/* CTA — scrolls to globe */}
@@ -451,7 +449,7 @@ function GlobeExplorer() {
                   <span className="text-tiffany">event venue</span>
                 </h2>
                 <p className="text-[13px] text-white/35 leading-relaxed mb-5">
-                  Explore 300,000+ venues across 175 countries. Select a region to browse countries and discover venues tailored to your event.
+                  Explore 340,000+ venues across 175 countries. Select a region to browse countries and discover venues tailored to your event.
                 </p>
                 <div className="flex flex-col gap-2.5">
                   <div className="flex items-center gap-3">
@@ -488,7 +486,7 @@ function GlobeExplorer() {
                 <defs><path id="orb-hero" d="M 250,250 m -235,0 a 235,235 0 1,1 470,0 a 235,235 0 1,1 -470,0" fill="none" /></defs>
                 <circle cx="250" cy="250" r="235" fill="none" stroke="white" strokeWidth="0.3" opacity="0.08" />
                 <text fill="white" opacity="0.15" style={{ fontSize: "9px", fontFamily: "'JetBrains Mono',monospace", letterSpacing: "0.25em", textTransform: "uppercase" }}>
-                  <textPath href="#orb-hero" startOffset="0%">EVENTPARTNER • 300,000+ VENUES • 175 COUNTRIES • EVENTPARTNER • 300,000+ VENUES • 175 COUNTRIES •</textPath>
+                  <textPath href="#orb-hero" startOffset="0%">EVENTPARTNER • 340,000+ VENUES • 175 COUNTRIES • EVENTPARTNER • 340,000+ VENUES • 175 COUNTRIES •</textPath>
                 </text>
               </svg>
             </div>
@@ -520,7 +518,7 @@ function GlobeExplorer() {
                 </div>
 
                 {/* Country list — scrollable */}
-                <div className="flex flex-col gap-1.5 max-h-[60vh] overflow-y-auto pr-1">
+                <div className="flex flex-col gap-1.5 max-h-[60vh] overflow-y-auto overscroll-contain pr-1" data-lenis-prevent>
                   {regionCountries.map(country => (
                     <Link href={`/land/${country.slug}`} key={country.slug}>
                       <div
@@ -653,7 +651,7 @@ function MobileVenueExplorer() {
         </h2>
         <div className="flex justify-center gap-6 mt-4">
           {[
-            { value: '300,000+', label: 'Venues' },
+            { value: '340,000+', label: 'Venues' },
             { value: '175', label: 'Countries' },
             { value: '24h', label: 'Response' },
           ].map(s => (
@@ -792,7 +790,7 @@ function MobileVenueExplorer() {
               </div>
             )}
 
-            <div className="flex flex-col gap-1.5 max-h-[55vh] overflow-y-auto">
+            <div className="flex flex-col gap-1.5 max-h-[55vh] overflow-y-auto overscroll-contain" data-lenis-prevent>
               {regionCountries.map(country => (
                 <Link href={`/land/${country.slug}`} key={country.slug}>
                   <div className="flex items-center gap-3 px-3.5 py-3 rounded-xl border border-transparent active:bg-tiffany/[0.08] active:border-tiffany/15 transition-all">

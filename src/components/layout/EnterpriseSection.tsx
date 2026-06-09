@@ -20,7 +20,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const STATS = [
   { value: 175, suffix: "", label: "länder" },
-  { value: 300000, suffix: "+", label: "venues globalt" },
+  { value: 340000, suffix: "+", label: "venues globalt" },
   { value: 24, suffix: "h", label: "svarstid" },
 ];
 

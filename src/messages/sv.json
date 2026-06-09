@@ -84,7 +84,7 @@
     "cta": "Få en gratis offert",
     "ctaSub": "Gratis · Inga förpliktelser · Svar inom 24h",
     "stats": {
-      "venues": { "value": "300 000+", "label": "Lokaler" },
+      "venues": { "value": "340 000+", "label": "Lokaler" },
       "countries": { "value": "175", "label": "Länder" },
       "response": { "value": "<24h", "label": "Svarstid" },
       "proposals": { "value": "3+", "label": "Förslag per förfrågan" }
@@ -130,7 +130,11 @@
       },
       "location": {
         "label": "Önskad plats",
-        "placeholder": "Stad, region eller land..."
+        "placeholder": "Land eller region..."
+      },
+      "city": {
+        "label": "Stad",
+        "placeholder": "Stad..."
       },
       "date": {
         "label": "Önskat datum",
@@ -301,9 +305,18 @@
         "email": { "label": "E-post *", "placeholder": "du@foretag.se" },
         "company": { "label": "Företag", "placeholder": "Företagsnamn" },
         "phone": { "label": "Telefon", "placeholder": "+46 70 123 45 67" },
+        "address1": { "label": "Adress *", "placeholder": "Gatuadress" },
+        "address2": { "label": "Adressrad 2", "placeholder": "Lägenhet, c/o etc. (valfritt)" },
+        "city": { "label": "Stad *", "placeholder": "Stad" },
+        "zip": { "label": "Postnummer *", "placeholder": "Postnummer" },
+        "state": { "label": "Delstat / region", "placeholder": "Delstatskod, t.ex. CA (om tillämpligt)" },
+        "country": { "label": "Land *", "placeholder": "Välj land" },
         "message": { "label": "Meddelande", "placeholder": "Eventuella specialönskemål, leveransdatum etc." }
       },
+      "shippingHeading": "Leveransadress",
+      "shippingNote": "Används för att förbereda din order. Vi bekräftar alla detaljer med dig innan något produceras.",
       "nameEmailRequired": "Namn och e-post krävs.",
+      "addressRequired": "Fyll i leveransadressen (adress, stad, postnummer och land).",
       "submit": "Skicka offertförfrågan",
       "sending": "Skickar..."
     },
@@ -504,7 +517,7 @@
     "heroHeadlineLine3": "event.",
     "heroSubtitle": "EventPartner grundades på en idé: att göra företagseventplanering lika smidigt som att boka ett hotellrum. Med ett nätverk som sträcker sig över 175 länder och djup branschexpertis gör vi det möjligt — varje dag.",
     "stats": [
-      { "value": "300 000+", "label": "Lokaler världen över" },
+      { "value": "340 000+", "label": "Lokaler världen över" },
       { "value": "175", "label": "Länder" },
       { "value": "10+", "label": "Års erfarenhet" }
     ],

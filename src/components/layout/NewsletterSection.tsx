@@ -18,11 +18,27 @@ export function NewsletterSection() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [focused, setFocused] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
+    if (!email.trim()) return;
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "newsletter", email }),
+      });
+      if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);
+      setEmail("");
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -98,9 +114,10 @@ export function NewsletterSection() {
                 />
                 <button
                   type="submit"
-                  className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#111] text-white text-sm font-medium hover:bg-tiffany hover:text-[#0a0a0a] hover:scale-[1.02] hover:shadow-lg transition-all duration-300 shrink-0"
+                  disabled={loading}
+                  className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#111] text-white text-sm font-medium hover:bg-tiffany hover:text-[#0a0a0a] hover:scale-[1.02] hover:shadow-lg transition-all duration-300 shrink-0 disabled:opacity-60 disabled:hover:scale-100"
                 >
-                  Prenumerera
+                  {loading ? "Skickar…" : "Prenumerera"}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </motion.form>
@@ -119,6 +136,12 @@ export function NewsletterSection() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {error && (
+            <p className="mt-3 text-[12px] text-red-500">
+              Något gick fel — försök igen.
+            </p>
+          )}
 
           <p className="mt-4 text-[11px] text-[#bbb] tracking-[0.2em]">
             EVENTPARTNER

@@ -9,7 +9,6 @@ import {
   ChevronLeft, ChevronRight, Monitor, Layers, Palette, Calendar,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { SecurityTicker } from "@/components/layout/SecurityTicker";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -590,9 +589,9 @@ function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct
           href="https://www.cal.eu/premium-videobrochures"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors bg-black/5 hover:bg-black/10 text-[#111] border border-black/5"
+          className="w-full md:w-auto shrink-0 whitespace-nowrap inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors bg-black/5 hover:bg-black/10 text-[#111] border border-black/5"
         >
-          <Calendar className="w-4 h-4" />
+          <Calendar className="w-4 h-4 shrink-0" />
           {t('meetingSection.cta')}
         </a>
       </div>
@@ -635,8 +634,6 @@ export function VPPShowcase() {
             <VPPProductCard key={product.id} product={product} index={i} onSelect={() => setSelectedProduct(product)} />
           ))}
         </div>
-
-        <SecurityTicker />
       </section>
 
       {/* Quote Form */}

@@ -1,4 +1,4 @@
-// Europe — 39 countries
+// Europe — 41 countries
 import type { Country } from './types';
 
 export const EUROPE: Country[] = [
@@ -390,6 +390,26 @@ export const EUROPE: Country[] = [
       { name: "NSC Olimpiyskiy Convention Centre", city: "Kyiv", capacity: "5 000", type: "Convention center" },
       { name: "InterContinental Kyiv Conference Centre", city: "Kyiv", capacity: "1 500", type: "Hotel & Conference" },
       { name: "Hilton Kyiv Conference Centre", city: "Kyiv", capacity: "1 200", type: "Hotel & Conference" },
+    ],
+  },
+  {
+    slug: "austria", code: "at", name: "Austria", nameSv: "Österrike", venues: "75+",
+    topVenues: [
+      { name: "Messe Wien Exhibition & Congress Center", city: "Vienna", capacity: "25 000+", type: "Exhibition center" },
+      { name: "Austria Center Vienna", city: "Vienna", capacity: "22 000", type: "Convention center" },
+      { name: "Stadthalle Wien", city: "Vienna", capacity: "16 000", type: "Event Venue" },
+      { name: "Salzburg Congress", city: "Salzburg", capacity: "3 000", type: "Convention center" },
+      { name: "Congress Graz", city: "Graz", capacity: "2 700", type: "Convention center" },
+    ],
+  },
+  {
+    slug: "cyprus", code: "cy", name: "Cyprus", nameSv: "Cypern", venues: "75+",
+    topVenues: [
+      { name: "Filoxenia Conference Centre", city: "Nicosia", capacity: "1 200", type: "Convention center" },
+      { name: "Parklane Resort & Spa Convention Centre", city: "Limassol", capacity: "2 000", type: "Hotel & Conference" },
+      { name: "Elias Beach Hotel Conference Centre", city: "Limassol", capacity: "1 000", type: "Hotel & Conference" },
+      { name: "Amathus Beach Hotel Conference Centre", city: "Limassol", capacity: "800", type: "Hotel & Conference" },
+      { name: "Hilton Nicosia Conference Centre", city: "Nicosia", capacity: "1 500", type: "Hotel & Conference" },
     ],
   },
 ];

@@ -19,7 +19,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  */
 
 const DEFAULT_STATS = [
-  { value: "300,000+", label: "Venues worldwide" },
+  { value: "340,000+", label: "Venues worldwide" },
   { value: "175", label: "Countries" },
   { value: "10+", label: "Years of experience" },
 ];

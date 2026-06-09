@@ -7,20 +7,21 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "algeria": [36.75, 3.04],
   "andorra": [42.51, 1.52],
   "angola": [-8.84, 13.23],
-
+  "antigua-and-barbuda": [17.12, -61.85],
   "argentina": [-34.6, -58.38],
   "armenia": [40.18, 44.51],
   "aruba": [12.51, -69.97],
   "australia": [-33.87, 151.21],
   "azerbaijan": [40.41, 49.87],
+  "austria": [48.21, 16.37],
   "bahamas": [25.05, -77.34],
   "bahrain": [26.23, 50.59],
   "bangladesh": [23.81, 90.41],
-
+  "barbados": [13.1, -59.62],
   "belgium": [50.85, 4.35],
   "belize": [17.5, -88.2],
   "benin": [6.37, 2.43],
-
+  "bermuda": [32.29, -64.78],
   "bhutan": [27.47, 89.64],
   "bolivia": [-16.5, -68.15],
   "bosnia-herzegovina": [43.86, 18.41],
@@ -32,6 +33,7 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "cambodia": [11.56, 104.93],
   "cameroon": [3.87, 11.52],
   "canada": [45.42, -75.7],
+  "cape-verde": [14.93, -23.51],
 
   "cayman-islands": [19.29, -81.38],
   "central-african-republic": [4.36, 18.56],
@@ -41,11 +43,14 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "colombia": [4.71, -74.07],
   "congo": [-4.27, 15.28],
   "costa-rica": [9.93, -84.08],
+  "cuba": [23.13, -82.38],
+  "cyprus": [35.17, 33.37],
   "croatia": [45.81, 15.98],
   "czech-republic": [50.08, 14.44],
   "denmark": [55.68, 12.57],
   "djibouti": [11.59, 43.15],
 
+  "dominica": [15.3, -61.39],
   "dominican-republic": [18.49, -69.93],
   "ecuador": [-0.18, -78.47],
   "egypt": [30.04, 31.24],
@@ -55,8 +60,7 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "estonia": [59.44, 24.75],
   "eswatini": [-26.32, 31.13],
   "ethiopia": [9.02, 38.75],
-  // fiji, kiribati, marshall-islands, micronesia, nauru, palau, samoa, tonga, tuvalu, vanuatu
-  // — removed from globe overlay (Pacific dots look misplaced)
+  "fiji": [-18.14, 178.44],
   "finland": [60.17, 24.94],
   "france": [48.86, 2.35],
   "gambia": [13.45, -16.58],
@@ -66,9 +70,12 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "gibraltar": [36.14, -5.35],
   "greece": [37.98, 23.73],
 
+  "grenada": [12.06, -61.75],
+  "guadeloupe": [16.24, -61.54],
   "guatemala": [14.63, -90.51],
   "guinea": [9.64, -13.58],
   "guinea-bissau": [11.86, -15.6],
+  "haiti": [18.54, -72.34],
   "honduras": [14.07, -87.19],
   "hong-kong": [22.32, 114.17],
   "hungary": [47.5, 19.04],
@@ -83,7 +90,7 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "jordan": [31.95, 35.93],
   "kazakhstan": [51.17, 71.45],
   "kenya": [-1.29, 36.82],
-
+  "kiribati": [1.33, 172.98],
   "kuwait": [29.38, 47.99],
   "kyrgyzstan": [42.87, 74.59],
   "laos": [17.97, 102.63],
@@ -94,16 +101,18 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "lithuania": [54.69, 25.28],
   "luxembourg": [49.61, 6.13],
   "macau": [22.2, 113.55],
-
+  "madagascar": [-18.91, 47.54],
   "malawi": [-13.96, 33.79],
   "malaysia": [3.14, 101.69],
-
+  "maldives": [4.17, 73.51],
   "mali": [12.64, -8],
   "malta": [35.9, 14.51],
-
+  "marshall-islands": [7.09, 171.38],
+  "martinique": [14.61, -61.06],
   "mauritania": [18.09, -15.98],
-
+  "mauritius": [-20.16, 57.5],
   "mexico": [19.43, -99.13],
+  "micronesia": [6.92, 158.16],
 
   "moldova": [47.01, 28.86],
   "monaco": [43.73, 7.42],
@@ -113,10 +122,10 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "mozambique": [-25.97, 32.57],
   "myanmar": [16.87, 96.2],
   "namibia": [-22.56, 17.08],
-
+  "nauru": [-0.53, 166.92],
   "nepal": [27.72, 85.32],
   "netherlands": [52.37, 4.9],
-
+  "new-zealand": [-41.29, 174.78],
   "nicaragua": [12.11, -86.24],
   "niger": [13.51, 2.13],
   "nigeria": [9.06, 7.49],
@@ -124,7 +133,7 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "norway": [59.91, 10.75],
   "oman": [23.59, 58.54],
   "pakistan": [33.69, 73.04],
-
+  "palau": [7.5, 134.62],
   "panama": [8.98, -79.52],
   "paraguay": [-25.26, -57.58],
   "peru": [-12.05, -77.04],
@@ -135,15 +144,15 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "qatar": [25.29, 51.53],
   "romania": [44.43, 26.1],
   "rwanda": [-1.94, 29.87],
-
-
-
-
-
+  "saint-kitts-and-nevis": [17.3, -62.72],
+  "saint-lucia": [13.99, -60.99],
+  "saint-vincent-and-the-grenadines": [13.16, -61.22],
+  "samoa": [-13.83, -171.77],
+  "sao-tome-and-principe": [0.34, 6.73],
   "saudi-arabia": [24.71, 46.68],
   "senegal": [14.69, -17.44],
   "serbia": [44.79, 20.45],
-
+  "seychelles": [-4.62, 55.45],
   "sierra-leone": [8.48, -13.23],
   "singapore": [1.35, 103.82],
   "slovakia": [48.15, 17.11],
@@ -160,16 +169,17 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   "tanzania": [-6.79, 39.28],
   "thailand": [13.76, 100.5],
   "togo": [6.17, 1.23],
-
+  "tonga": [-21.13, -175.2],
   "tunisia": [36.81, 10.18],
   "turkey": [39.93, 32.85],
-
+  "tuvalu": [-8.52, 179.2],
   "uganda": [0.35, 32.58],
   "uk": [51.51, -0.13],
   "ukraine": [50.45, 30.52],
+  "united-states": [38.9, -77.04],
   "uruguay": [-34.9, -56.19],
   "uzbekistan": [41.3, 69.24],
-
+  "vanuatu": [-17.73, 168.32],
   "vietnam": [21.03, 105.85],
   "zambia": [-15.39, 28.32],
   "zimbabwe": [-17.83, 31.05],

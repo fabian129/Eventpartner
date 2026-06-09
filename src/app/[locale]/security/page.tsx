@@ -4,18 +4,17 @@ import { DarkZone } from "@/components/ui/DarkZone";
 import { SecurityPageContent } from "./SecurityPageContent";
 import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
-import { SECURITY_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
+import { HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
 
 export const metadata: Metadata = {
-  title: "Security & Compliance — EventPartner",
+  title: "Security & Privacy — EventPartner",
   description:
-    "Learn about EventPartner's security practices, GDPR compliance, data protection policies, and commitment to keeping your event data safe across all 175 global markets.",
+    "Learn about EventPartner's security and privacy practices, GDPR compliance, data protection policies, and our commitment to handling your personal data responsibly.",
 };
 
 export default async function SecurityPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const { data } = await sanityFetch({ query: SECURITY_PAGE_QUERY });
   const { data: homeData } = await sanityFetch({ query: HOMEPAGE_QUERY });
 
   const t = (field: { en?: string; sv?: string } | undefined | null) =>
@@ -30,43 +29,7 @@ export default async function SecurityPage({ params }: { params: Promise<{ local
         })),
         cta: t(homeData.navCta),
       } : undefined} />
-      <SecurityPageContent cms={data ? {
-        heroLabel: t(data.heroLabel),
-        heroLabelRight: t(data.heroLabelRight),
-        heroBadge: t(data.heroBadge),
-        heroHeadline: t(data.heroHeadline),
-        heroHeadlineAccent: t(data.heroHeadlineAccent),
-        heroSubtitle: t(data.heroSubtitle),
-        pillarsLabel: t(data.pillarsLabel),
-        pillarsHeadline: t(data.pillarsHeadline),
-        pillarsHeadlineAccent: t(data.pillarsHeadlineAccent),
-        pillarCards: data.pillarCards?.map((p: any) => ({
-          title: t(p.title),
-          description: t(p.description),
-          icon: p.icon,
-        })),
-        complianceLabel: t(data.complianceLabel),
-        complianceHeadline: t(data.complianceHeadline),
-        complianceHeadlineAccent: t(data.complianceHeadlineAccent),
-        complianceSections: data.complianceSections?.map((s: any) => ({
-          category: t(s.category),
-          items: s.items?.map((item: any) => t(item)),
-        })),
-        rightsLabel: t(data.rightsLabel),
-        rightsHeadline: t(data.rightsHeadline),
-        rightsHeadlineAccent: t(data.rightsHeadlineAccent),
-        rightsIntro: t(data.rightsIntro),
-        rightsList: data.rightsList?.map((r: any) => ({
-          right: t(r.right),
-          desc: t(r.description),
-        })),
-        dpoTitle: t(data.dpoTitle),
-        dpoSubtitle: t(data.dpoSubtitle),
-        dpoDescription: t(data.dpoDescription),
-        dpoEmail: data.dpoEmail,
-        ctaHeadline: t(data.ctaHeadline),
-        ctaDescription: t(data.ctaDescription),
-      } : undefined} />
+      <SecurityPageContent />
       <DarkZone exitToLight={false}>
         <Footer cms={homeData ? {
           brandDesc: t(homeData.footerBrandDesc),

@@ -192,8 +192,8 @@ export function RequestFormSection({ cms }: { cms?: {
               <input type="text" placeholder={t('fields.location.placeholder')} required className={inputClass} value={form.country} onChange={set('country')} />
             </div>
             <div>
-              <label className={labelClass}>{t('fields.location.label')}</label>
-              <input type="text" placeholder={t('fields.location.placeholder')} className={inputClass} value={form.city} onChange={set('city')} />
+              <label className={labelClass}>{t('fields.city.label')}</label>
+              <input type="text" placeholder={t('fields.city.placeholder')} className={inputClass} value={form.city} onChange={set('city')} />
             </div>
           </div>
 

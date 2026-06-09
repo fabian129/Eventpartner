@@ -17,7 +17,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  */
 
 const STATS = [
-  { value: 300000, suffix: "+", label: "Venues", delay: 0 },
+  { value: 340000, suffix: "+", label: "Venues", delay: 0 },
   { value: 175, suffix: "", label: "Länder", delay: 0.2 },
   { value: 500, suffix: "+", label: "Events", delay: 0.4 },
 ];
