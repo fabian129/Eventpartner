@@ -11,18 +11,10 @@ import { ShoppingBag, ArrowRight } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/**
- * Curated Printful catalog product IDs for EventPartner's shop.
- * These map to the products previously synced via Printify → Shopify.
- *
- *  71 = Bella + Canvas 3001 (Unisex T-Shirt)
- *  12 = Gildan 5000 (Classic T-Shirt)
- *  57 = Gildan 2400 (Long Sleeve)
- *  19 = White Glossy Mug
- *  77 = Otto Cap Snapback
- * 380 = Bella + Canvas 3901 (Crewneck Sweatshirt)
- */
-const PRODUCT_IDS = [71, 12, 380, 57, 19, 77];
+// Shop catalog is driven by EventPartner's published Printful store products
+// (?source=store): Malin publishes a product in Printful → it appears here, no
+// code change. Falls back to a curated catalog server-side if none are
+// published yet, so the grid is never empty.
 
 interface ShopCMS {
   heroLabel?: string; heroLabelRight?: string;
@@ -51,7 +43,7 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
     async function fetchProducts() {
       try {
         setLoadingProducts(true);
-        const res = await fetch(`/api/printful/products?ids=${PRODUCT_IDS.join(",")}`);
+        const res = await fetch(`/api/printful/products?source=store`);
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const json = await res.json();
         setProducts(json.data || []);

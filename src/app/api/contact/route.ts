@@ -204,7 +204,7 @@ async function handleVPPQuote(data: Record<string, any>) {
 
 /* ── Merch / Printful Quote Request ── */
 async function handleMerchQuote(data: Record<string, any>) {
-  const { name, email, company, phone, message, items, totalQuantity, totalPrice, currency } = data;
+  const { name, email, company, phone, message, items, totalQuantity, totalPrice, currency, locale } = data;
 
   if (!name || !email || !items?.length) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -369,6 +369,45 @@ async function handleMerchQuote(data: Record<string, any>) {
   if (error) {
     console.error('Resend error:', error);
     return NextResponse.json({ error: 'Failed to send quote request' }, { status: 500 });
+  }
+
+  // Customer thank-you / confirmation email (best-effort — never blocks the response)
+  try {
+    const sv = locale === 'sv';
+    await getResend().emails.send({
+      from: FROM_EMAIL,
+      to: email,
+      subject: sv ? 'Tack för din beställning — EventPartner' : 'Thank you for your order — EventPartner',
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+          <div style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px; text-align: center;">
+            <h1 style="color: #6AD8D2; font-size: 22px; margin: 0 0 6px;">${sv ? 'Tack för din beställning!' : 'Thank you for your order!'}</h1>
+            <p style="color: rgba(255,255,255,0.55); font-size: 13px; margin: 0;">EventPartner</p>
+          </div>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">${sv ? `Hej ${esc(name)},` : `Hi ${esc(name)},`}</p>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">
+            ${sv
+              ? `Tack för din beställning hos EventPartner! Vi har tagit emot din förfrågan på <strong>${totalQuantity} ${totalQuantity === 1 ? 'artikel' : 'artiklar'}</strong> och vårt team granskar den nu.`
+              : `Thank you for your order with EventPartner! We've received your request for <strong>${totalQuantity} ${totalQuantity === 1 ? 'item' : 'items'}</strong> and our team is reviewing it now.`}
+          </p>
+          <div style="margin: 24px 0; padding: 16px 18px; background: #ecfdf5; border: 1px solid #6AD8D2; border-radius: 12px;">
+            <p style="margin: 0; font-size: 14px; color: #0f766e; line-height: 1.6;">
+              ${sv
+                ? '⏱️ Vi återkommer inom <strong>24 timmar</strong> med priser, bekräftelse och nästa steg.'
+                : "⏱️ We'll get back to you within <strong>24 hours</strong> with pricing, confirmation and next steps."}
+            </p>
+          </div>
+          <p style="font-size: 14px; line-height: 1.7; color: #555;">
+            ${sv ? 'Har du frågor under tiden? Svara bara på detta mejl.' : 'Questions in the meantime? Just reply to this email.'}
+          </p>
+          <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 12px; margin: 0;">${sv ? 'Med vänliga hälsningar,' : 'Best regards,'}<br/>EventPartner · eventpartner.io</p>
+          </div>
+        </div>
+      `,
+    });
+  } catch (e) {
+    console.error('Customer confirmation email failed:', e);
   }
 
   return NextResponse.json({ success: true, draftOrderId, draftError });

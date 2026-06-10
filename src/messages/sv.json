@@ -79,7 +79,7 @@
     "label": "EventPartner — Global räckvidd",
     "labelRight": "175 länder",
     "headline": "Allt ditt event behöver.",
-    "headlineAccent": "En partner - EventPartner.",
+    "headlineAccent": "En partner, EventPartner.",
     "subtitle": "Beskriv ert event. Vi hittar de bästa lokalerna och leverantörerna, jämför alternativen, förhandlar priserna och hanterar hela bokningsprocessen från start till mål.",
     "cta": "Få en gratis offert",
     "ctaSub": "Gratis · Inga förpliktelser · Svar inom 24h",
@@ -317,12 +317,14 @@
       "shippingNote": "Används för att förbereda din order. Vi bekräftar alla detaljer med dig innan något produceras.",
       "nameEmailRequired": "Namn och e-post krävs.",
       "addressRequired": "Fyll i leveransadressen (adress, stad, postnummer och land).",
+      "terms": { "text": "Jag godkänner villkoren och behandlingen av mina uppgifter.", "link": "Villkor & integritet" },
+      "termsRequired": "Godkänn villkoren för att fortsätta.",
       "submit": "Skicka offertförfrågan",
       "sending": "Skickar..."
     },
     "success": {
-      "title": "Offertförfrågan skickad!",
-      "description": "Vi har tagit emot din beställningsförfrågan. Vårt team granskar den och återkommer inom 24 timmar med priser och leveransdetaljer.",
+      "title": "Tack för din beställning!",
+      "description": "Vi har tagit emot din förfrågan och skickat en bekräftelse till din e-post. Vårt team återkommer inom 24 timmar med priser och nästa steg.",
       "close": "Stäng"
     },
     "removeItem": "Ta bort artikel",

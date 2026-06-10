@@ -25,6 +25,8 @@ export interface PrintfulProductData {
   name: string;
   image: string;
   description: string;
+  /** For store (sync) products: the underlying catalog product id the EDM designer needs. */
+  catalog_product_id?: number | null;
   variants: PrintfulProductVariant[];
   availableColors?: { name: string; hex: string }[];
   colors?: { name: string; value: string }[];
@@ -119,7 +121,7 @@ export function PrintfulProductCard({
 
       {/* Design Maker Modal — full flow: design → sizes → cart */}
       <PrintfulDesignMaker
-        productId={product.id}
+        productId={product.catalog_product_id ?? product.id}
         productName={displayName}
         productImage={displayImage}
         colorName={defaultColor?.name}

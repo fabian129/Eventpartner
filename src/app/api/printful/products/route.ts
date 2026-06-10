@@ -5,8 +5,12 @@ import {
   getCatalogProducts,
   getCatalogVariants,
   getCatalogPrices,
+  getStoreSyncProducts,
   type PrintfulVariant,
 } from "@/lib/printful";
+
+/** Curated catalog fallback (used before any store product is published). */
+const CURATED_IDS = [71, 12, 380, 57, 19, 77];
 
 /**
  * GET /api/printful/products
@@ -27,14 +31,39 @@ interface CachedData {
 let cache: CachedData | null = null;
 const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
+// Separate short-lived cache for store (sync) products so we don't hit the
+// Printful API on every shop page load (each call fans out to ~3 requests).
+let storeCache: { data: unknown[]; timestamp: number } | null = null;
+const STORE_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const idsParam = searchParams.get("ids");
+    const source = searchParams.get("source");
     const revalidate = searchParams.get("revalidate") === "true";
-    const ids = idsParam
+    let ids = idsParam
       ? idsParam.split(",").map((id) => parseInt(id.trim(), 10))
       : undefined;
+
+    // ─── Store products: mirror EventPartner's published Printful products ───
+    if (source === "store" && !revalidate) {
+      if (storeCache && storeCache.timestamp > Date.now() - STORE_CACHE_TTL) {
+        return NextResponse.json({ data: storeCache.data, source: "store", cached: true });
+      }
+      try {
+        const storeProducts = await getStoreSyncProducts();
+        if (storeProducts.length > 0) {
+          storeCache = { data: storeProducts, timestamp: Date.now() };
+          return NextResponse.json({ data: storeProducts, source: "store" });
+        }
+        console.warn("No published store products yet — falling back to curated catalog.");
+      } catch (e) {
+        console.warn("Store products fetch failed, falling back to curated catalog:", e);
+      }
+      // Fallback so the shop is never empty before the first product is published.
+      ids = CURATED_IDS;
+    }
 
     // 1. Try to read from committed JSON cache to load instantly (if NOT revalidating)
     if (!revalidate) {
@@ -67,8 +96,7 @@ export async function GET(req: Request) {
 
     // 3. Fallback to live API Fetch (Slow)
     // If revalidating, we always fetch all curated products to completely refresh the cache file.
-    const curatedIds = [71, 12, 380, 57, 19, 77];
-    const fetchIds = revalidate ? curatedIds : ids;
+    const fetchIds = revalidate ? CURATED_IDS : ids;
     const products = await getCatalogProducts(fetchIds);
 
     // Fetch variants + prices in PARALLEL (one batch of concurrent requests)

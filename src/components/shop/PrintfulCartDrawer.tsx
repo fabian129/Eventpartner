@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePrintfulCart } from "@/context/PrintfulCartContext";
 import { COUNTRIES } from "@/data/countries";
 import { Trash2, ShoppingBag, Send, CheckCircle, Loader2, ArrowLeft } from "lucide-react";
@@ -220,6 +220,8 @@ function QuoteFormView({
   onSuccess: () => void;
 }) {
   const t = useTranslations('cart');
+  const locale = useLocale();
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -259,6 +261,11 @@ function QuoteFormView({
       return;
     }
 
+    if (!agreedToTerms) {
+      setError(t('quoteForm.termsRequired'));
+      return;
+    }
+
     setSubmitting(true);
     try {
       const res = await fetch("/api/contact", {
@@ -266,6 +273,7 @@ function QuoteFormView({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "merch-quote",
+          locale,
           ...form,
           items: items.map((item) => ({
             productName: item.productName,
@@ -493,11 +501,28 @@ function QuoteFormView({
           </div>
         )}
 
+        {/* Terms & agreement */}
+        <label className="mt-5 flex items-start gap-3 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={agreedToTerms}
+            onChange={(e) => setAgreedToTerms(e.target.checked)}
+            className="mt-0.5 w-4 h-4 shrink-0 accent-tiffany cursor-pointer"
+          />
+          <span className="text-[12px] text-[var(--text-secondary)] leading-relaxed">
+            {t('quoteForm.terms.text')}{" "}
+            <a href="/security" target="_blank" rel="noopener noreferrer" className="text-tiffany hover:underline">
+              {t('quoteForm.terms.link')}
+            </a>
+            .
+          </span>
+        </label>
+
         {/* Submit inside form for native validation */}
-        <div className="mt-6 pt-5 border-t border-[var(--border-default)]">
+        <div className="mt-5 pt-5 border-t border-[var(--border-default)]">
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || !agreedToTerms}
             className="w-full bg-tiffany text-black font-semibold rounded-xl py-4 hover:bg-tiffany/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {submitting ? (

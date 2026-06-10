@@ -319,6 +319,161 @@ export async function createOrder(
   return data.data;
 }
 
+// ─── Store / sync products (v1 — not available in API v2) ───────
+//
+// Printful's published "store products" (the ones EventPartner designs in
+// "My products" and clicks Publish on) live ONLY in the v1 API. The shop
+// catalog is driven by these so Malin controls the product range from
+// Printful — no code change needed to add/remove a product.
+
+export interface StoreProductVariant {
+  /** Catalog variant id — used by the EDM designer + as the order line. */
+  id: number;
+  /** Sync variant id — used to order the saved EP design as-is. */
+  sync_variant_id: number;
+  /** Underlying catalog product id. */
+  product_id: number;
+  name: string;
+  size: string;
+  color: string;
+  color_code: string;
+  image: string;
+  /** Retail price set on the product in Printful. */
+  price: string;
+  currency: string;
+  in_stock: boolean;
+}
+
+export interface StoreProduct {
+  /** Sync (store) product id. */
+  id: number;
+  name: string;
+  /** EP design mockup thumbnail. */
+  image: string;
+  description: string;
+  /** Catalog product id the design sits on (for the EDM designer). */
+  catalog_product_id: number | null;
+  variants: StoreProductVariant[];
+  availableColors: PrintfulColor[];
+  availableSizes: string[];
+}
+
+interface V1SyncListItem {
+  id: number;
+  name: string;
+  thumbnail_url: string;
+  variants: number;
+  synced: number;
+  is_ignored: boolean;
+}
+
+interface V1SyncVariant {
+  id: number;
+  variant_id: number; // catalog variant id
+  retail_price: string | null;
+  currency?: string;
+  name: string;
+  size?: string;
+  color?: string;
+  product?: { variant_id: number; product_id: number; image: string; name: string };
+  files?: { type: string; preview_url?: string }[];
+}
+
+/**
+ * Fetch EventPartner's published store products (v1 sync products), mapped to
+ * the same shape the shop UI already consumes. Cross-references catalog
+ * variants for clean size/colour/image data and keeps the EP mockup as the
+ * card image.
+ */
+export async function getStoreSyncProducts(): Promise<StoreProduct[]> {
+  const list = await printfulFetch<{ result: V1SyncListItem[] }>(
+    "/store/products?limit=100"
+  );
+  const items = (list.result || []).filter((p) => !p.is_ignored);
+
+  const products = await Promise.all(
+    items.map(async (item): Promise<StoreProduct | null> => {
+      try {
+        const detail = await printfulFetch<{
+          result: { sync_product: V1SyncListItem; sync_variants: V1SyncVariant[] };
+        }>(`/store/products/${item.id}`);
+
+        const syncVariants = detail.result?.sync_variants || [];
+        const catalogProductId = syncVariants[0]?.product?.product_id ?? null;
+
+        // Cross-reference catalog variants for clean size/colour/image.
+        let catalogMap = new Map<number, PrintfulVariant>();
+        if (catalogProductId) {
+          try {
+            const cv = await getCatalogVariants(catalogProductId);
+            catalogMap = new Map(cv.map((v) => [v.id, v]));
+          } catch {
+            /* fall back to sync data below */
+          }
+        }
+
+        const variants: StoreProductVariant[] = syncVariants
+          .filter((sv) => sv.variant_id)
+          .map((sv) => {
+            const cat = catalogMap.get(sv.variant_id);
+            // Prefer the generated mockup (garment WITH the EP design) over the
+            // blank catalog photo. The mockup is the "preview"-type file.
+            const previewFile =
+              sv.files?.find((f) => f.type === "preview" && f.preview_url) ||
+              sv.files?.find((f) => f.preview_url);
+            return {
+              id: sv.variant_id,
+              sync_variant_id: sv.id,
+              product_id: catalogProductId ?? 0,
+              name: sv.name,
+              size: sv.size || cat?.size || sv.name.split("/").pop()?.trim() || "",
+              color: sv.color || cat?.color || "",
+              color_code: cat?.color_code || "#0e0e0e",
+              image: previewFile?.preview_url || cat?.image || sv.product?.image || "",
+              price: sv.retail_price || cat?.price || "0",
+              currency: sv.currency || "USD",
+              in_stock: true,
+            };
+          });
+
+        const colorMap = new Map<string, PrintfulColor>();
+        for (const v of variants) {
+          if (v.color && !colorMap.has(v.color)) {
+            colorMap.set(v.color, { name: v.color, hex: v.color_code });
+          }
+        }
+        const sizes = [...new Set(variants.map((v) => v.size).filter(Boolean))];
+
+        return {
+          id: item.id,
+          name: item.name,
+          // Prefer the product's primary thumbnail (the image Printful shows in
+          // "My products" — a clean flat/ghost for standard garments). The list
+          // endpoint's thumbnail can be null right after publish, so read the
+          // detail endpoint's value first.
+          image:
+            detail.result?.sync_product?.thumbnail_url ||
+            item.thumbnail_url ||
+            variants[0]?.image ||
+            "",
+          description: "",
+          catalog_product_id: catalogProductId,
+          variants,
+          availableColors: [...colorMap.values()],
+          availableSizes: sizes,
+        };
+      } catch (e) {
+        console.warn(`Failed to load sync product ${item.id}:`, e);
+        return null;
+      }
+    })
+  );
+
+  return products.filter(
+    (p): p is StoreProduct => p !== null && p.variants.length > 0
+  );
+}
+
 // ─── Helpers ────────────────────────────────────────────────────
 
 export function formatPrintfulPrice(
