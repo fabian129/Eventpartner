@@ -73,6 +73,17 @@ async function handleEventInquiry(data: Record<string, any>) {
     return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
   }
 
+  // Server-side guard: past dates are invalid (client request P12).
+  const todayStr = new Date().toISOString().split('T')[0];
+  if (typeof date === 'object' && date !== null) {
+    if ((date.from && date.from < todayStr) || (date.to && date.to < todayStr)) {
+      return NextResponse.json(
+        { error: locale === 'sv' ? 'Datumet kan inte ligga bakåt i tiden.' : 'The date cannot be in the past.' },
+        { status: 400 }
+      );
+    }
+  }
+
   // The form sends { from, to, flexibility } — show the dates whenever present.
   const dateInfo = typeof date === 'object' && date !== null
     ? (date.from || date.to)
@@ -545,11 +556,20 @@ async function handleDetailedInquiry(data: Record<string, any>) {
     cateringStyle, dietary,
     activities, activitiesDetails,
     singleRooms, doubleRooms,
-    message
+    message, locale
   } = data;
 
   if (!company || !contact || !email || !phone || !country || !eventType || !guests || !startDate) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  }
+
+  // Server-side guard: past dates are invalid (client request P12).
+  const todayIso = new Date().toISOString().split('T')[0];
+  if ((startDate && startDate < todayIso) || (endDate && endDate < todayIso)) {
+    return NextResponse.json(
+      { error: locale === 'sv' ? 'Datumet kan inte ligga bakåt i tiden.' : 'The date cannot be in the past.' },
+      { status: 400 }
+    );
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

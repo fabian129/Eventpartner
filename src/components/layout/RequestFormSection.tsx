@@ -56,6 +56,20 @@ export function RequestFormSection({ cms }: { cms?: {
     setLoading(true);
     setError('');
 
+    // Past dates must give a clear error (client request P12) — the picker's
+    // min attribute doesn't stop manually typed dates.
+    const today = new Date().toISOString().split('T')[0];
+    if ((form.dateFrom && form.dateFrom < today) || (form.dateTo && form.dateTo < today)) {
+      setError(sv ? 'Datumet kan inte ligga bakåt i tiden.' : 'The date cannot be in the past.');
+      setLoading(false);
+      return;
+    }
+    if (form.dateFrom && form.dateTo && form.dateTo < form.dateFrom) {
+      setError(sv ? 'Slutdatumet kan inte vara före startdatumet.' : 'The end date cannot be before the start date.');
+      setLoading(false);
+      return;
+    }
+
     const datePayload = {
       from: form.dateFrom,
       to: form.dateTo,

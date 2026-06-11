@@ -114,12 +114,26 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
     setLoading(true);
     setError("");
 
+    // Past dates must error clearly (client request P12).
+    const today = new Date().toISOString().split('T')[0];
+    if ((form.startDate && form.startDate < today) || (form.endDate && form.endDate < today)) {
+      setError(sv ? 'Datumet kan inte ligga bakåt i tiden.' : 'The date cannot be in the past.');
+      setLoading(false);
+      return;
+    }
+    if (form.startDate && form.endDate && form.endDate < form.startDate) {
+      setError(sv ? 'Slutdatumet kan inte vara före startdatumet.' : 'The end date cannot be before the start date.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "detailed-inquiry",
+          locale,
           ...form,
           activities: selectedActivities
         })
