@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { ChevronDown } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import { DotGrid } from "@/components/ui/DotGrid";
@@ -55,6 +55,7 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const t = useTranslations('faq');
+  const sv = useLocale() === 'sv';
 
   const faqs = cms?.items?.length ? cms.items : DEFAULT_FAQS;
 
@@ -76,7 +77,7 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
               {cms?.label || t('label')}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-              {cms?.labelRight || `${faqs.length} questions`}
+              {cms?.labelRight || `${faqs.length} ${sv ? "frågor" : "questions"}`}
             </span>
           </div>
 

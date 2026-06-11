@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from "next/image";
 import { MapPin, Users, Calendar, Award, Linkedin } from "lucide-react";
 import { TEAM_MEMBERS } from "@/lib/teamMembers";
@@ -46,6 +46,7 @@ interface AboutProps {
 
 export function AboutSection({ cms, showTeam = true }: AboutProps) {
   const t = useTranslations('about');
+  const sv = useLocale() === 'sv';
   const stats = cms?.stats?.length ? cms.stats : DEFAULT_STATS;
   return (
     <section id="about" className="relative w-full py-28 md:py-40 overflow-hidden">
@@ -82,7 +83,7 @@ export function AboutSection({ cms, showTeam = true }: AboutProps) {
                 {cms?.label || t('label')}
               </span>
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-                {cms?.labelRight || "Pan-European network"}
+                {cms?.labelRight || (sv ? "Globalt nätverk" : "Global network")}
               </span>
             </div>
 

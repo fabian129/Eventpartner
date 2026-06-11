@@ -510,7 +510,7 @@ function GlobeExplorer() {
                 <defs><path id="orb-hero" d="M 250,250 m -235,0 a 235,235 0 1,1 470,0 a 235,235 0 1,1 -470,0" fill="none" /></defs>
                 <circle cx="250" cy="250" r="235" fill="none" stroke="white" strokeWidth="0.3" opacity="0.08" />
                 <text fill="white" opacity="0.15" style={{ fontSize: "9px", fontFamily: "'JetBrains Mono',monospace", letterSpacing: "0.25em", textTransform: "uppercase" }}>
-                  <textPath href="#orb-hero" startOffset="0%">EVENTPARTNER • 340,000+ VENUES • 175 COUNTRIES • EVENTPARTNER • 340,000+ VENUES • 175 COUNTRIES •</textPath>
+                  <textPath href="#orb-hero" startOffset="0%">{geSv ? "EVENTPARTNER • 340 000+ VENUES • 175 LÄNDER • EVENTPARTNER • 340 000+ VENUES • 175 LÄNDER •" : "EVENTPARTNER • 340,000+ VENUES • 175 COUNTRIES • EVENTPARTNER • 340,000+ VENUES • 175 COUNTRIES •"}</textPath>
                 </text>
               </svg>
             </div>

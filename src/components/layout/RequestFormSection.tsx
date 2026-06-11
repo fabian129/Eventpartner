@@ -38,6 +38,7 @@ export function RequestFormSection({ cms }: { cms?: {
   const isDark = theme === "dark";
   const t = useTranslations('requestForm');
   const locale = useLocale();
+  const sv = locale === 'sv';
 
   // Controlled form state
   const [form, setForm] = useState({
@@ -156,11 +157,15 @@ export function RequestFormSection({ cms }: { cms?: {
         >
           {/* Stats bar */}
           <div className="flex items-center justify-center gap-8 mb-10 pb-8 border-b border-[var(--border-default)]">
-            {[
+            {(sv ? [
+              { value: "24h", label: "Svarstid" },
+              { value: "3", label: "Matchade förslag" },
+              { value: "Gratis", label: "Kostnad" },
+            ] : [
               { value: "24h", label: "Response time" },
               { value: "3", label: "Matched proposals" },
               { value: "Free", label: "Cost" },
-            ].map((stat) => (
+            ]).map((stat) => (
               <div key={stat.label} className="text-center">
                 <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">{stat.value}</span>
                 <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">{stat.label}</span>
@@ -255,7 +260,7 @@ export function RequestFormSection({ cms }: { cms?: {
                             : 'border-black/[0.08] text-black/35 hover:border-black/15 hover:text-black/55'
                       }`}
                     >
-                      {opt === 'Exact' ? t('fields.date.exact') : opt === 'Entire month' ? t('fields.date.entireMonth') : opt}
+                      {opt === 'Exact' ? t('fields.date.exact') : opt === 'Entire month' ? t('fields.date.entireMonth') : (sv ? opt.replace('days', 'dagar').replace('day', 'dag').replace('week', 'vecka') : opt)}
                     </button>
                   ))}
                 </div>
@@ -276,12 +281,10 @@ export function RequestFormSection({ cms }: { cms?: {
               />
             </div>
             <div>
-              <label className={labelClass}>Response time</label>
+              <label className={labelClass}>{sv ? "Önskad svarstid" : "Response time"}</label>
               <select className={inputClass} value={form.responseTime} onChange={set('responseTime')}>
-                <option value="">Select timeframe</option>
-                <option>Within 24 hours</option>
-                <option>Within 48 hours</option>
-                <option>Within 72 hours</option>
+                <option value="">{sv ? "Välj tidsram" : "Select timeframe"}</option>
+                {(sv ? ["Inom 24 timmar", "Inom 48 timmar", "Inom 72 timmar"] : ["Within 24 hours", "Within 48 hours", "Within 72 hours"]).map(o => <option key={o}>{o}</option>)}
               </select>
             </div>
           </div>
@@ -300,16 +303,16 @@ export function RequestFormSection({ cms }: { cms?: {
               </div>
               <div>
                 <p className="text-[14px] text-[var(--text-primary)] font-medium mb-1">
-                  {cms?.extendedTitle || "Is your event larger or more complex?"}
+                  {cms?.extendedTitle || (sv ? "Är ert event större eller mer komplext?" : "Is your event larger or more complex?")}
                 </p>
                 <p className="text-[13px] text-[var(--text-muted)] leading-relaxed mb-2">
-                  {cms?.extendedDesc || "Fill in our extended form to give us more detailed information — venue requirements, catering, activities, and more."}
+                  {cms?.extendedDesc || (sv ? "Fyll i vårt utökade formulär och berätta mer — lokalkrav, catering, aktiviteter och annat som spelar roll." : "Fill in our extended form to give us more detailed information — venue requirements, catering, activities, and more.")}
                 </p>
                 <Link
-                  href="/customize"
+                  href={`/${locale}/customize`}
                   className="inline-flex items-center gap-1.5 text-[13px] font-medium text-purple hover:text-purple-light transition-colors duration-300"
                 >
-                  {cms?.extendedLink || "Customize your event →"}
+                  {cms?.extendedLink || (sv ? "Skräddarsy ert event →" : "Customize your event →")}
                 </Link>
               </div>
             </div>
