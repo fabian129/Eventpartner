@@ -3,7 +3,7 @@ import type { Country } from './types';
 
 export const AFRICA: Country[] = [
   {
-    slug: "algeria", code: "dz", name: "Algeria", nameSv: "Algeriet", venues: "50+",
+    slug: "algeria", code: "dz", name: "Algeria", nameSv: "Algeriet", venues: "700+",
     topVenues: [
       { name: "Centre International de Conférences Abdelatif Rahal", city: "Algiers", capacity: "6 000", type: "Convention center" },
       { name: "Palais des Expositions SAFEX", city: "Algiers", capacity: "20 000+", type: "Exhibition center" },
@@ -13,7 +13,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "angola", code: "ao", name: "Angola", nameSv: "Angola", venues: "50+",
+    slug: "angola", code: "ao", name: "Angola", nameSv: "Angola", venues: "500+",
     topVenues: [
       { name: "Centro de Convenções de Talatona", city: "Luanda", capacity: "4 000", type: "Convention center" },
       { name: "Epic Sana Luanda Hotel Conference Centre", city: "Luanda", capacity: "1 500", type: "Hotel & Conference" },
@@ -23,7 +23,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "benin", code: "bj", name: "Benin", nameSv: "Benin", venues: "50+",
+    slug: "benin", code: "bj", name: "Benin", nameSv: "Benin", venues: "500+",
     topVenues: [
       { name: "Palais des Congrès de Cotonou", city: "Cotonou", capacity: "3 000", type: "Convention center" },
       { name: "Golden Tulip Le Diplomate Conference Centre", city: "Cotonou", capacity: "800", type: "Hotel & Conference" },
@@ -33,7 +33,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "botswana", code: "bw", name: "Botswana", nameSv: "Botswana", venues: "50+",
+    slug: "botswana", code: "bw", name: "Botswana", nameSv: "Botswana", venues: "500+",
     topVenues: [
       { name: "Gaborone International Convention Centre", city: "Gaborone", capacity: "5 000", type: "Convention center" },
       { name: "Avani Gaborone Resort Conference Centre", city: "Gaborone", capacity: "1 200", type: "Hotel & Conference" },
@@ -43,7 +43,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "burkina-faso", code: "bf", name: "Burkina Faso", nameSv: "Burkina Faso", venues: "50+",
+    slug: "burkina-faso", code: "bf", name: "Burkina Faso", nameSv: "Burkina Faso", venues: "500+",
     topVenues: [
       { name: "SIAO International Fair Centre", city: "Ouagadougou", capacity: "5 000+", type: "Exhibition center" },
       { name: "Ouaga 2000 Conference Centre", city: "Ouagadougou", capacity: "2 000", type: "Convention center" },
@@ -53,7 +53,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "cameroon", code: "cm", name: "Cameroon", nameSv: "Kamerun", venues: "50+",
+    slug: "cameroon", code: "cm", name: "Cameroon", nameSv: "Kamerun", venues: "500+",
     topVenues: [
       { name: "Palais des Congrès de Yaoundé", city: "Yaoundé", capacity: "5 000", type: "Convention center" },
       { name: "Hilton Yaoundé Conference Centre", city: "Yaoundé", capacity: "2 000", type: "Hotel & Conference" },
@@ -63,7 +63,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "cape-verde", code: "cv", name: "Cape Verde", nameSv: "Kap Verde", venues: "50+",
+    slug: "cape-verde", code: "cv", name: "Cape Verde", nameSv: "Kap Verde", venues: "200+",
     topVenues: [
       { name: "Centro de Convenções e Cultura de Praia", city: "Praia", capacity: "2 000", type: "Convention center" },
       { name: "Hotel Pestana Tropico Conference Centre", city: "Praia", capacity: "600", type: "Hotel & Conference" },
@@ -73,7 +73,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "central-african-republic", code: "cf", name: "Central African Republic", nameSv: "Centralafrikanska republiken", venues: "50+",
+    slug: "central-african-republic", code: "cf", name: "Central African Republic", nameSv: "Centralafrikanska republiken", venues: "500+",
     topVenues: [
       { name: "Palais de la CEMAC", city: "Bangui", capacity: "2 000", type: "Convention center" },
       { name: "Ledger Plaza Bangui Conference Centre", city: "Bangui", capacity: "800", type: "Hotel & Conference" },
@@ -83,7 +83,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "chad", code: "td", name: "Chad", nameSv: "Tchad", venues: "50+",
+    slug: "chad", code: "td", name: "Chad", nameSv: "Tchad", venues: "500+",
     topVenues: [
       { name: "Centre de Conférences de N'Djamena", city: "N'Djamena", capacity: "3 000", type: "Convention center" },
       { name: "Hilton N'Djamena Conference Centre", city: "N'Djamena", capacity: "1 500", type: "Hotel & Conference" },
@@ -93,7 +93,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "congo", code: "cg", name: "Congo", nameSv: "Kongo", venues: "50+",
+    slug: "congo", code: "cg", name: "Congo", nameSv: "Kongo", venues: "500+",
     topVenues: [
       { name: "Palais des Congrès de Brazzaville", city: "Brazzaville", capacity: "3 000", type: "Convention center" },
       { name: "Radisson Blu M'Bamou Palace Conference", city: "Brazzaville", capacity: "1 000", type: "Hotel & Conference" },
@@ -103,7 +103,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "djibouti", code: "dj", name: "Djibouti", nameSv: "Djibouti", venues: "50+",
+    slug: "djibouti", code: "dj", name: "Djibouti", nameSv: "Djibouti", venues: "200+",
     topVenues: [
       { name: "Palais du Peuple Conference Centre", city: "Djibouti City", capacity: "2 000", type: "Convention center" },
       { name: "Djibouti Palace Kempinski Conference Centre", city: "Djibouti City", capacity: "1 000", type: "Hotel & Conference" },
@@ -113,7 +113,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "egypt", code: "eg", name: "Egypt", nameSv: "Egypten", venues: "200+",
+    slug: "egypt", code: "eg", name: "Egypt", nameSv: "Egypten", venues: "1,900+",
     topVenues: [
       { name: "Egypt International Exhibition Center (EIEC)", city: "Cairo", capacity: "40 000+", type: "Exhibition center" },
       { name: "Cairo International Convention Centre", city: "Cairo", capacity: "10 000", type: "Convention center" },
@@ -123,7 +123,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "equatorial-guinea", code: "gq", name: "Equatorial Guinea", nameSv: "Ekvatorialguinea", venues: "50+",
+    slug: "equatorial-guinea", code: "gq", name: "Equatorial Guinea", nameSv: "Ekvatorialguinea", venues: "200+",
     topVenues: [
       { name: "Sipopo Conference Centre", city: "Sipopo", capacity: "3 000", type: "Convention center" },
       { name: "Sofitel Malabo Sipopo Le Golf Conference", city: "Malabo", capacity: "1 000", type: "Hotel & Conference" },
@@ -133,7 +133,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "eritrea", code: "er", name: "Eritrea", nameSv: "Eritrea", venues: "50+",
+    slug: "eritrea", code: "er", name: "Eritrea", nameSv: "Eritrea", venues: "500+",
     topVenues: [
       { name: "Asmara Palace Hotel Conference Centre", city: "Asmara", capacity: "800", type: "Hotel & Conference" },
       { name: "Crystal Hotel Conference Centre", city: "Asmara", capacity: "500", type: "Hotel & Conference" },
@@ -143,7 +143,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "eswatini", code: "sz", name: "Eswatini", nameSv: "Eswatini", venues: "50+",
+    slug: "eswatini", code: "sz", name: "Eswatini", nameSv: "Eswatini", venues: "450+",
     topVenues: [
       { name: "Ezulwini International Convention Centre", city: "Ezulwini", capacity: "2 500", type: "Convention center" },
       { name: "Royal Swazi Spa Convention Centre", city: "Ezulwini", capacity: "1 500", type: "Hotel & Conference" },
@@ -153,7 +153,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "ethiopia", code: "et", name: "Ethiopia", nameSv: "Etiopien", venues: "50+",
+    slug: "ethiopia", code: "et", name: "Ethiopia", nameSv: "Etiopien", venues: "500+",
     topVenues: [
       { name: "African Union Conference Centre", city: "Addis Ababa", capacity: "6 000", type: "Convention center" },
       { name: "United Nations Conference Centre (UNECA)", city: "Addis Ababa", capacity: "3 000", type: "Convention center" },
@@ -163,7 +163,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "gambia", code: "gm", name: "Gambia", nameSv: "Gambia", venues: "50+",
+    slug: "gambia", code: "gm", name: "Gambia", nameSv: "Gambia", venues: "200+",
     topVenues: [
       { name: "Sir Dawda Kairaba Jawara International Conference Centre", city: "Bijilo", capacity: "2 000", type: "Convention center" },
       { name: "Kairaba Beach Hotel Conference Centre", city: "Kololi", capacity: "800", type: "Hotel & Conference" },
@@ -173,7 +173,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "ghana", code: "gh", name: "Ghana", nameSv: "Ghana", venues: "100+",
+    slug: "ghana", code: "gh", name: "Ghana", nameSv: "Ghana", venues: "500+",
     topVenues: [
       { name: "Accra International Conference Centre", city: "Accra", capacity: "6 000", type: "Convention center" },
       { name: "Ghana National Theatre Conference Centre", city: "Accra", capacity: "3 000", type: "Convention center" },
@@ -183,7 +183,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "guinea", code: "gn", name: "Guinea", nameSv: "Guinea", venues: "50+",
+    slug: "guinea", code: "gn", name: "Guinea", nameSv: "Guinea", venues: "500+",
     topVenues: [
       { name: "Palais du Peuple de Conakry", city: "Conakry", capacity: "3 000", type: "Convention center" },
       { name: "Noom Hotel Conakry Conference Centre", city: "Conakry", capacity: "1 000", type: "Hotel & Conference" },
@@ -193,7 +193,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "guinea-bissau", code: "gw", name: "Guinea-Bissau", nameSv: "Guinea-Bissau", venues: "50+",
+    slug: "guinea-bissau", code: "gw", name: "Guinea-Bissau", nameSv: "Guinea-Bissau", venues: "200+",
     topVenues: [
       { name: "Azalai Hotel 24 de Setembro Conference", city: "Bissau", capacity: "500", type: "Hotel & Conference" },
       { name: "Ledger Plaza Bissau Conference Centre", city: "Bissau", capacity: "400", type: "Hotel & Conference" },
@@ -203,7 +203,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "kenya", code: "ke", name: "Kenya", nameSv: "Kenya", venues: "100+",
+    slug: "kenya", code: "ke", name: "Kenya", nameSv: "Kenya", venues: "1,900+",
     topVenues: [
       { name: "Kenyatta International Convention Centre (KICC)", city: "Nairobi", capacity: "6 000", type: "Convention center" },
       { name: "Sarit Expo Centre", city: "Nairobi", capacity: "10 000+", type: "Exhibition center" },
@@ -213,7 +213,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "lesotho", code: "ls", name: "Lesotho", nameSv: "Lesotho", venues: "50+",
+    slug: "lesotho", code: "ls", name: "Lesotho", nameSv: "Lesotho", venues: "200+",
     topVenues: [
       { name: "Manthabiseng Convention Centre", city: "Maseru", capacity: "2 500", type: "Convention center" },
       { name: "Avani Maseru Hotel Conference Centre", city: "Maseru", capacity: "800", type: "Hotel & Conference" },
@@ -223,7 +223,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "liberia", code: "lr", name: "Liberia", nameSv: "Liberia", venues: "50+",
+    slug: "liberia", code: "lr", name: "Liberia", nameSv: "Liberia", venues: "500+",
     topVenues: [
       { name: "Samuel Kanyon Doe Sports Complex Conference", city: "Monrovia", capacity: "3 000", type: "Event Venue" },
       { name: "RLJ Kendeja Resort Conference Centre", city: "Monrovia", capacity: "800", type: "Hotel & Conference" },
@@ -233,7 +233,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "madagascar", code: "mg", name: "Madagascar", nameSv: "Madagaskar", venues: "50+",
+    slug: "madagascar", code: "mg", name: "Madagascar", nameSv: "Madagaskar", venues: "500+",
     topVenues: [
       { name: "Centre de Conférences Internationales d'Ivato", city: "Antananarivo", capacity: "3 000", type: "Convention center" },
       { name: "Carlton Hotel Conference Centre", city: "Antananarivo", capacity: "1 000", type: "Hotel & Conference" },
@@ -243,7 +243,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "malawi", code: "mw", name: "Malawi", nameSv: "Malawi", venues: "50+",
+    slug: "malawi", code: "mw", name: "Malawi", nameSv: "Malawi", venues: "500+",
     topVenues: [
       { name: "Bingu International Convention Centre", city: "Lilongwe", capacity: "5 000", type: "Convention center" },
       { name: "Sunbird Capital Hotel Conference Centre", city: "Lilongwe", capacity: "1 000", type: "Hotel & Conference" },
@@ -253,7 +253,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "mali", code: "ml", name: "Mali", nameSv: "Mali", venues: "50+",
+    slug: "mali", code: "ml", name: "Mali", nameSv: "Mali", venues: "500+",
     topVenues: [
       { name: "Centre International de Conférences de Bamako", city: "Bamako", capacity: "4 000", type: "Convention center" },
       { name: "Laico L'Amitié Hotel Conference Centre", city: "Bamako", capacity: "1 500", type: "Hotel & Conference" },
@@ -263,7 +263,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "mauritania", code: "mr", name: "Mauritania", nameSv: "Mauretanien", venues: "50+",
+    slug: "mauritania", code: "mr", name: "Mauritania", nameSv: "Mauretanien", venues: "500+",
     topVenues: [
       { name: "Palais des Congrès de Nouakchott", city: "Nouakchott", capacity: "3 000", type: "Convention center" },
       { name: "Mauricenter Conference Hall", city: "Nouakchott", capacity: "1 000", type: "Convention center" },
@@ -273,7 +273,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "mauritius", code: "mu", name: "Mauritius", nameSv: "Mauritius", venues: "50+",
+    slug: "mauritius", code: "mu", name: "Mauritius", nameSv: "Mauritius", venues: "200+",
     topVenues: [
       { name: "Swami Vivekananda International Convention Centre", city: "Pailles", capacity: "5 000", type: "Convention center" },
       { name: "One&Only Le Saint Géran Conference", city: "Belle Mare", capacity: "1 000", type: "Resort & Conference" },
@@ -283,7 +283,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "morocco", code: "ma", name: "Morocco", nameSv: "Marocko", venues: "50+",
+    slug: "morocco", code: "ma", name: "Morocco", nameSv: "Marocko", venues: "1,900+",
     topVenues: [
       { name: "Office des Foires et Expositions de Casablanca", city: "Casablanca", capacity: "30 000+", type: "Exhibition center" },
       { name: "Palais des Congrès de Marrakech", city: "Marrakech", capacity: "6 000", type: "Convention center" },
@@ -293,7 +293,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "mozambique", code: "mz", name: "Mozambique", nameSv: "Moçambique", venues: "50+",
+    slug: "mozambique", code: "mz", name: "Mozambique", nameSv: "Moçambique", venues: "500+",
     topVenues: [
       { name: "Centro Internacional de Conferências Joaquim Chissano", city: "Maputo", capacity: "4 000", type: "Convention center" },
       { name: "FACIM – Maputo International Fair", city: "Maputo", capacity: "10 000+", type: "Exhibition center" },
@@ -303,7 +303,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "namibia", code: "na", name: "Namibia", nameSv: "Namibia", venues: "50+",
+    slug: "namibia", code: "na", name: "Namibia", nameSv: "Namibia", venues: "500+",
     topVenues: [
       { name: "Windhoek Country Club Resort Conference Centre", city: "Windhoek", capacity: "2 000", type: "Hotel & Conference" },
       { name: "Safari Court Hotel Convention Centre", city: "Windhoek", capacity: "1 500", type: "Hotel & Conference" },
@@ -313,7 +313,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "niger", code: "ne", name: "Niger", nameSv: "Niger", venues: "50+",
+    slug: "niger", code: "ne", name: "Niger", nameSv: "Niger", venues: "500+",
     topVenues: [
       { name: "Palais des Congrès de Niamey", city: "Niamey", capacity: "3 000", type: "Convention center" },
       { name: "Radisson Blu Hotel Conference Centre", city: "Niamey", capacity: "800", type: "Hotel & Conference" },
@@ -323,7 +323,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "nigeria", code: "ng", name: "Nigeria", nameSv: "Nigeria", venues: "200+",
+    slug: "nigeria", code: "ng", name: "Nigeria", nameSv: "Nigeria", venues: "1,900+",
     topVenues: [
       { name: "Abuja International Conference Centre", city: "Abuja", capacity: "6 000", type: "Convention center" },
       { name: "Eko Convention Center", city: "Lagos", capacity: "5 000", type: "Convention center" },
@@ -333,7 +333,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "rwanda", code: "rw", name: "Rwanda", nameSv: "Rwanda", venues: "100+",
+    slug: "rwanda", code: "rw", name: "Rwanda", nameSv: "Rwanda", venues: "500+",
     topVenues: [
       { name: "Kigali Convention Centre", city: "Kigali", capacity: "5 000", type: "Convention center" },
       { name: "Radisson Blu Hotel & Convention Centre Kigali", city: "Kigali", capacity: "2 500", type: "Hotel & Conference" },
@@ -343,7 +343,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "sao-tome-and-principe", code: "st", name: "São Tomé and Príncipe", nameSv: "São Tomé och Príncipe", venues: "50+",
+    slug: "sao-tome-and-principe", code: "st", name: "São Tomé and Príncipe", nameSv: "São Tomé och Príncipe", venues: "200+",
     topVenues: [
       { name: "Pestana São Tomé Conference Centre", city: "São Tomé", capacity: "500", type: "Hotel & Conference" },
       { name: "Omali São Tomé Conference Centre", city: "São Tomé", capacity: "300", type: "Hotel & Conference" },
@@ -353,7 +353,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "senegal", code: "sn", name: "Senegal", nameSv: "Senegal", venues: "50+",
+    slug: "senegal", code: "sn", name: "Senegal", nameSv: "Senegal", venues: "500+",
     topVenues: [
       { name: "Centre International de Conférences Abdou Diouf", city: "Dakar/Diamniadio", capacity: "6 000", type: "Convention center" },
       { name: "King Fahd Palace Conference Centre", city: "Dakar", capacity: "3 000", type: "Hotel & Conference" },
@@ -363,7 +363,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "seychelles", code: "sc", name: "Seychelles", nameSv: "Seychellerna", venues: "50+",
+    slug: "seychelles", code: "sc", name: "Seychelles", nameSv: "Seychellerna", venues: "200+",
     topVenues: [
       { name: "Savoy Seychelles Resort Conference Centre", city: "Beau Vallon", capacity: "800", type: "Resort & Conference" },
       { name: "ICCS – International Conference Centre Seychelles", city: "Victoria", capacity: "1 500", type: "Convention center" },
@@ -373,7 +373,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "sierra-leone", code: "sl", name: "Sierra Leone", nameSv: "Sierra Leone", venues: "50+",
+    slug: "sierra-leone", code: "sl", name: "Sierra Leone", nameSv: "Sierra Leone", venues: "500+",
     topVenues: [
       { name: "Bintumani Conference Centre", city: "Freetown", capacity: "3 000", type: "Convention center" },
       { name: "Radisson Blu Mammy Yoko Conference", city: "Freetown", capacity: "1 000", type: "Hotel & Conference" },
@@ -383,7 +383,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "somalia", code: "so", name: "Somalia", nameSv: "Somalia", venues: "50+",
+    slug: "somalia", code: "so", name: "Somalia", nameSv: "Somalia", venues: "500+",
     topVenues: [
       { name: "Mogadishu International Conference Centre", city: "Mogadishu", capacity: "2 000", type: "Convention center" },
       { name: "Jazeera Palace Hotel Conference Centre", city: "Mogadishu", capacity: "800", type: "Hotel & Conference" },
@@ -393,7 +393,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "south-africa", code: "za", name: "South Africa", nameSv: "Sydafrika", venues: "200+",
+    slug: "south-africa", code: "za", name: "South Africa", nameSv: "Sydafrika", venues: "1,900+",
     topVenues: [
       { name: "Cape Town International Convention Centre", city: "Cape Town", capacity: "10 000", type: "Convention center" },
       { name: "Sandton Convention Centre", city: "Johannesburg", capacity: "8 000", type: "Convention center" },
@@ -403,7 +403,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "south-sudan", code: "ss", name: "South Sudan", nameSv: "Sydsudan", venues: "50+",
+    slug: "south-sudan", code: "ss", name: "South Sudan", nameSv: "Sydsudan", venues: "500+",
     topVenues: [
       { name: "Juba Grand Hotel Conference Centre", city: "Juba", capacity: "500", type: "Hotel & Conference" },
       { name: "Terrain Hotel Conference Centre", city: "Juba", capacity: "400", type: "Hotel & Conference" },
@@ -413,7 +413,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "sudan", code: "sd", name: "Sudan", nameSv: "Sudan", venues: "50+",
+    slug: "sudan", code: "sd", name: "Sudan", nameSv: "Sudan", venues: "500+",
     topVenues: [
       { name: "Friendship Hall Conference Centre", city: "Khartoum", capacity: "5 000", type: "Convention center" },
       { name: "Corinthia Hotel Khartoum Conference Centre", city: "Khartoum", capacity: "2 000", type: "Hotel & Conference" },
@@ -423,7 +423,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "tanzania", code: "tz", name: "Tanzania", nameSv: "Tanzania", venues: "100+",
+    slug: "tanzania", code: "tz", name: "Tanzania", nameSv: "Tanzania", venues: "500+",
     topVenues: [
       { name: "Julius Nyerere International Convention Centre", city: "Dar es Salaam", capacity: "6 000", type: "Convention center" },
       { name: "AICC – Arusha International Conference Centre", city: "Arusha", capacity: "3 000", type: "Convention center" },
@@ -433,7 +433,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "togo", code: "tg", name: "Togo", nameSv: "Togo", venues: "50+",
+    slug: "togo", code: "tg", name: "Togo", nameSv: "Togo", venues: "500+",
     topVenues: [
       { name: "Palais des Congrès de Lomé", city: "Lomé", capacity: "3 000", type: "Convention center" },
       { name: "Hotel 2 Février Conference Centre", city: "Lomé", capacity: "1 500", type: "Hotel & Conference" },
@@ -443,7 +443,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "tunisia", code: "tn", name: "Tunisia", nameSv: "Tunisien", venues: "50+",
+    slug: "tunisia", code: "tn", name: "Tunisia", nameSv: "Tunisien", venues: "500+",
     topVenues: [
       { name: "Palais des Congrès de Tunis", city: "Tunis", capacity: "5 000", type: "Convention center" },
       { name: "Parc des Expositions du Kram", city: "Tunis", capacity: "20 000+", type: "Exhibition center" },
@@ -453,7 +453,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "uganda", code: "ug", name: "Uganda", nameSv: "Uganda", venues: "50+",
+    slug: "uganda", code: "ug", name: "Uganda", nameSv: "Uganda", venues: "500+",
     topVenues: [
       { name: "Speke Resort & Conference Centre", city: "Kampala", capacity: "5 000", type: "Hotel & Conference" },
       { name: "Kampala Serena Hotel Conference Centre", city: "Kampala", capacity: "2 000", type: "Hotel & Conference" },
@@ -463,7 +463,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "zambia", code: "zm", name: "Zambia", nameSv: "Zambia", venues: "50+",
+    slug: "zambia", code: "zm", name: "Zambia", nameSv: "Zambia", venues: "500+",
     topVenues: [
       { name: "Mulungushi International Conference Centre", city: "Lusaka", capacity: "5 000", type: "Convention center" },
       { name: "Avani Victoria Falls Resort Conference", city: "Livingstone", capacity: "1 000", type: "Resort & Conference" },
@@ -473,7 +473,7 @@ export const AFRICA: Country[] = [
     ],
   },
   {
-    slug: "zimbabwe", code: "zw", name: "Zimbabwe", nameSv: "Zimbabwe", venues: "50+",
+    slug: "zimbabwe", code: "zw", name: "Zimbabwe", nameSv: "Zimbabwe", venues: "500+",
     topVenues: [
       { name: "Harare International Conference Centre", city: "Harare", capacity: "5 000", type: "Convention center" },
       { name: "Rainbow Towers Conference Centre", city: "Harare", capacity: "3 000", type: "Hotel & Conference" },

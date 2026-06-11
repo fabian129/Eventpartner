@@ -19,7 +19,12 @@
     },
     "cta": "Get a Free Quote",
     "mobileMenu": "Menu",
-    "close": "Close"
+    "close": "Close",
+    "vip": "VIP",
+    "customize": "Customize",
+    "shop": "Shop",
+    "about": "About",
+    "bookEvent": "Book Event →"
   },
 
   "footer": {
@@ -97,7 +102,7 @@
     "labelRight": "Free quote",
     "headline": "Tell us about your event.",
     "headlineAccent": "We'll handle the rest.",
-    "description": "One inquiry — multiple venue proposals, tailored to your exact needs. Always free, always personal, always within 24 hours.",
+    "description": "Want help with your next event? Enter your details and we'll get back to you within 24 hours.",
     "fields": {
       "name": { "label": "Full Name", "placeholder": "Your full name" },
       "email": { "label": "Email", "placeholder": "you@company.com" },
@@ -144,7 +149,7 @@
         "entireMonth": "Entire month"
       },
       "budget": {
-        "label": "Budget Range",
+        "label": "Budget",
         "placeholder": "e.g. €20,000"
       },
       "message": {
@@ -197,7 +202,7 @@
   },
 
   "vipTeaser": {
-    "label": "By invitation only",
+    "label": "Apply today",
     "headline": "A different standard",
     "headlineMuted": "for companies that refuse to compromise.",
     "body1": "The EventPartner VIP Programme is reserved for organisations that expect precision, discretion, and flawless execution. Every detail — from venue selection to final execution — is handled by your dedicated senior team.",
@@ -210,7 +215,9 @@
       "Always 33% extra discount on everything in our webshop",
       "Annual comprehensive reporting & ESG / sustainability data",
       "Enterprise governance aligned with CSRD, NIS2 & travel management",
-      "24/7 concierge support during events",
+      "Reports",
+      "Response time from 12h",
+      "On average 14% discount",
       "Complimentary site inspections"
     ],
     "ctaText": "Apply for Membership",
@@ -244,8 +251,6 @@
     "labelRight": "Free consultation",
     "headline": "Create your next event.",
     "subheadline": "Tell us what you're looking for — we'll handle the rest.",
-    "card1Title": "Talk to us",
-    "card1Desc": "Get answers to your questions.",
     "card2Title": "Start your event",
     "card2Headline": "Customize your event.",
     "card2Sub": "Your way."
@@ -274,7 +279,7 @@
         { "step": "1", "title": "Choose a product", "desc": "Pick from t-shirts, hoodies, mugs & more" },
         { "step": "2", "title": "Upload your design", "desc": "Add your logo or artwork in the designer" },
         { "step": "3", "title": "Select sizes & quantities", "desc": "Choose how many of each size you need" },
-        { "step": "4", "title": "Request a quote", "desc": "We'll send pricing within 24 hours" }
+        { "step": "4", "title": "Invoice & print", "desc": "We send you a complete invoice and order summary. Approve and pay, and your products go to print!" }
       ]
     },
     "cart": "Cart",
@@ -363,10 +368,11 @@
   "vpp": {
     "sectionLabel": "Video Brochures",
     "sectionBadge": "Fully customizable & printable",
+    "priceHint": "From €15 ex shipping & tax",
     "securityTicker": {
       "gdpr": { "title": "GDPR Compliant", "desc": "Designed with GDPR principles" },
       "iso": { "title": "ISO 27001 Aligned", "desc": "Security framework alignment" },
-      "soc": { "title": "SOC 2 Guidelines", "desc": "Following best practices" },
+      "soc": { "title": "Privacy by Design", "desc": "Privacy embedded from the start" },
       "enterprise": { "title": "Enterprise Grade", "desc": "End-to-end data encryption" }
     },
     "viewDetails": "View Details",
@@ -405,7 +411,7 @@
     },
     "quoteSuccess": {
       "title": "Quote Request Sent",
-      "description": "We'll get back to you with a custom Video Brochure quote within 24 hours.",
+      "description": "A confirmation email has been sent to your inbox. We'll get back to you with a custom Video Brochure quote within 24 hours.",
       "submitAnother": "Submit another request"
     },
     "meetingSection": {
@@ -453,7 +459,7 @@
     "heroLabelRight": "Exclusive access",
     "heroHeadline": "Your partner,",
     "heroHeadlineAccent": "not a vendor.",
-    "heroIntroText": "We connect ambitious companies with extraordinary venues — rejecting the ordinary, prioritising precision, and delivering events that genuinely elevate.",
+    "heroIntroText": "We connect companies with the right venues and suppliers. We negotiate on your behalf and make sure your event is memorable and creates real value. External events and internal gatherings have never been easier to create than with EventPartner VIP.",
     "heroStats": [
       { "value": "12h", "label": "Response time" },
       { "value": "14%", "label": "Avg. discount" },
@@ -479,8 +485,8 @@
     "tiersDescription": "Our VIP membership, designed around your needs. Includes a dedicated booking resource for booking and coordinating all your events. Everywhere.",
     "tierCardTitle": "VIP-Partner",
     "tierCardBadge": "999€ /month",
-    "tierCardPrice": "By Invitation",
-    "tierCardPriceSub": "Annual booking volume of at least €300,000 required",
+    "tierCardPrice": "Apply today",
+    "tierCardPriceSub": "Minimum booking volume: €100,000 / 1,000,000 SEK per year",
     "tierCardFeatures": [
       "A dedicated booking resource for booking & coordinating",
       "Negotiated VIP pricing & exclusive venue access",
@@ -493,13 +499,13 @@
       "Priority response within 12h",
       "Custom contract & billing terms"
     ],
-    "tierCardCta": "Request Invitation",
+    "tierCardCta": "Apply today",
     "stepsLabel": "EventPartner — How to join",
     "stepsLabelRight": "3 steps",
     "stepsHeadline": "Three simple steps.",
     "steps": [
       { "step": "01", "title": "Apply", "desc": "Fill in your company details and event volume through the form below. Takes less than 2 minutes." },
-      { "step": "02", "title": "Qualify", "desc": "Our team reviews your profile and matches you with the right VIP tier based on your needs and volume." },
+      { "step": "02", "title": "Qualify", "desc": "Our team reviews your application and event volume. You'll hear back within 48 hours." },
       { "step": "03", "title": "Enjoy", "desc": "Start receiving priority service, exclusive pricing, and a dedicated account manager from day one." }
     ],
     "ctaCard1Title": "Need more info?",

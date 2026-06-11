@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, Clock, Globe, Shield, MessageCircle, ArrowRight, Send } from "lucide-react";
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -23,6 +23,7 @@ const ICON_MAP: Record<string, any> = { mail: Mail, phone: Phone, chat: MessageC
 
 export function HelpCenterContent({ cms }: { cms?: HelpCMS }) {
   const t = useTranslations('helpPage');
+  const sv = useLocale() === 'sv';
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -74,10 +75,11 @@ export function HelpCenterContent({ cms }: { cms?: HelpCMS }) {
 
   const defaultChannels = [
     { icon: "mail", title: t('channels.emailTitle'), desc: t('channels.emailDesc'), action: "support@eventpartner.io", href: "mailto:support@eventpartner.io" },
-    { icon: "phone", title: t('channels.phoneTitle'), desc: t('channels.phoneDesc'), action: "+46 8 123 456 78", href: "tel:+468123456" },
-    { icon: "chat", title: t('channels.chatTitle'), desc: t('channels.chatDesc'), action: t('channels.chatAction'), href: "#" },
   ];
-  const channels = cms?.channels || defaultChannels;
+  // Phone + live chat hidden until the AI receptionist is live (client request).
+  const channels = (cms?.channels || defaultChannels).filter(
+    (c) => c.icon !== "phone" && c.icon !== "chat"
+  );
 
   return (
     <main className="relative w-full pt-32 md:pt-44 pb-20 md:pb-32 overflow-hidden">
@@ -188,7 +190,7 @@ export function HelpCenterContent({ cms }: { cms?: HelpCMS }) {
         </div>
       </section>
 
-      {/* Booking Card */}
+      {/* Support Email Card */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-12">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
@@ -198,31 +200,30 @@ export function HelpCenterContent({ cms }: { cms?: HelpCMS }) {
           className="bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6"
           style={{ boxShadow: "0 4px 40px rgba(0,0,0,0.04)" }}
         >
-          <div className="flex items-center gap-5 w-full md:w-auto">
-            <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 border border-[var(--border-default)]">
-              <img
-                src="/Images/Team/pontus.webp"
-                alt="Pontus — EventPartner"
-                className="w-full h-full object-cover"
-              />
+          <div className="flex items-center gap-5 w-full">
+            <div className="w-12 h-12 rounded-xl bg-tiffany/10 flex items-center justify-center shrink-0">
+              <Mail className="w-5 h-5 text-tiffany" />
             </div>
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-tiffany mb-1">{cms?.meetingLabel || t('meetingSection.label')}</p>
-              <h3 className="font-display text-lg md:text-xl font-medium text-[var(--text-primary)]">{cms?.meetingTitle || t('meetingSection.headline')}</h3>
-              <p className="text-[13px] md:text-[14px] text-[var(--text-muted)] mt-0.5 leading-relaxed">
-                {cms?.meetingDesc || t('meetingSection.description')}
+              <p className="text-[15px] md:text-[16px] text-[var(--text-secondary)] leading-relaxed">
+                {sv ? (
+                  <>
+                    Maila oss på{" "}
+                    <a href="mailto:support@eventpartner.io" className="text-tiffany hover:underline font-medium">
+                      support@eventpartner.io
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    Email us at{" "}
+                    <a href="mailto:support@eventpartner.io" className="text-tiffany hover:underline font-medium">
+                      support@eventpartner.io
+                    </a>
+                  </>
+                )}
               </p>
             </div>
           </div>
-          <a
-            href="https://cal.com/eventpartner/15min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 text-[var(--text-primary)] border border-black/5 dark:border-white/10 shrink-0"
-          >
-            <Clock className="w-4 h-4 text-tiffany" />
-            {cms?.meetingButton || t('meetingSection.cta')}
-          </a>
         </motion.div>
       </section>
 

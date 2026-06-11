@@ -5,12 +5,20 @@ import { useState } from "react";
 import { Send, CheckCircle, ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
+import { useLocale } from "next-intl";
+
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const EVENT_TYPES = [
   "Conference", "Corporate Event", "Team Building", "Product Launch",
   "Gala / Dinner", "Kick-off", "Exhibition", "Incentive Travel",
   "Wedding", "Festival", "Other",
+];
+
+const EVENT_TYPES_SV = [
+  "Konferens", "Företagsevent", "Teambuilding", "Produktlansering",
+  "Gala / Middag", "Kickoff", "Mässa", "Incentiveresa",
+  "Bröllop", "Festival", "Annat",
 ];
 
 const BUDGET_OPTIONS = [
@@ -23,15 +31,31 @@ const VENUE_TYPES = [
   "Castle / Manor", "Rooftop", "Beach Club", "Unique / Unconventional", "No preference",
 ];
 
+const VENUE_TYPES_SV = [
+  "Hotell / Resort", "Konferensanläggning", "Restaurang", "Utomhus / Trädgård",
+  "Slott / Herrgård", "Takterrass", "Beach club", "Unikt / Okonventionellt", "Ingen preferens",
+];
+
 const CATERING_OPTIONS = [
   "Sit-down dinner", "Buffet", "Cocktail / Finger food", "Food trucks",
   "Wine tasting", "Breakfast / Brunch", "No catering needed", "Other",
+];
+
+const CATERING_OPTIONS_SV = [
+  "Sittande middag", "Buffé", "Cocktail / Plockmat", "Food trucks",
+  "Vinprovning", "Frukost / Brunch", "Ingen catering behövs", "Annat",
 ];
 
 const ACTIVITY_OPTIONS = [
   "Live music / DJ", "Keynote speakers", "Team activities", "Workshops",
   "Entertainment / Show", "Photo / Video", "Decorations / Styling",
   "Transport / Logistics", "AV / Tech setup", "Other",
+];
+
+const ACTIVITY_OPTIONS_SV = [
+  "Livemusik / DJ", "Talare / Keynotes", "Teamaktiviteter", "Workshops",
+  "Underhållning / Show", "Foto / Video", "Dekor / Styling",
+  "Transport / Logistik", "AV / Teknik", "Annat",
 ];
 
 interface CustomizeCMS {
@@ -59,6 +83,12 @@ interface CustomizeCMS {
 }
 
 export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
+  const locale = useLocale();
+  const sv = locale === 'sv';
+  const eventTypes = sv ? EVENT_TYPES_SV : EVENT_TYPES;
+  const venueTypes = sv ? VENUE_TYPES_SV : VENUE_TYPES;
+  const cateringOptions = sv ? CATERING_OPTIONS_SV : CATERING_OPTIONS;
+  const activityOptions = sv ? ACTIVITY_OPTIONS_SV : ACTIVITY_OPTIONS;
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -67,7 +97,8 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
     company: "", contact: "", email: "", phone: "", country: "", city: "",
     eventName: "", eventType: "", guests: "", startDate: "", endDate: "", budget: "",
     venueType: "", preferredLocation: "", requirements: "",
-    cateringStyle: "", dietary: "", activitiesDetails: "", message: ""
+    cateringStyle: "", dietary: "", activitiesDetails: "", message: "",
+    singleRooms: "", doubleRooms: ""
   });
 
   const toggleActivity = (a: string) =>
@@ -104,7 +135,8 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
         company: "", contact: "", email: "", phone: "", country: "", city: "",
         eventName: "", eventType: "", guests: "", startDate: "", endDate: "", budget: "",
         venueType: "", preferredLocation: "", requirements: "",
-        cateringStyle: "", dietary: "", activitiesDetails: "", message: ""
+        cateringStyle: "", dietary: "", activitiesDetails: "", message: "",
+        singleRooms: "", doubleRooms: ""
       });
       setSelectedActivities([]);
       setTimeout(() => setSubmitted(false), 5000);
@@ -131,7 +163,7 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
         {/* Breadcrumb */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mb-8">
           <Link href="/" className="text-[12px] font-mono text-[#888] hover:text-[#555] transition-colors">
-            {cms?.backLink || "← Back to home"}
+            {cms?.backLink || (sv ? "← Tillbaka till startsidan" : "← Back to home")}
           </Link>
         </motion.div>
 
@@ -145,21 +177,21 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
         >
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#888]">
-              {cms?.heroLabel || "EventPartner — Customize"}
+              {cms?.heroLabel || (sv ? "EventPartner — Skräddarsy" : "EventPartner — Customize")}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#888]">
-              {cms?.heroLabelRight || "Extended form"}
+              {cms?.heroLabelRight || (sv ? "Utökat formulär" : "Extended form")}
             </span>
           </div>
           <h1 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-medium tracking-tight text-[#111] leading-[1.05] mb-4">
-            {cms?.heroHeadline || "Customize your event."}
+            {cms?.heroHeadline || (sv ? "Skräddarsy ert event." : "Customize your event.")}
             <br />
             <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-[#6AD8D2]">
-              {cms?.heroHeadlineAccent || "Every detail matters."}
+              {cms?.heroHeadlineAccent || (sv ? "Varje detalj räknas." : "Every detail matters.")}
             </span>
           </h1>
           <p className="font-display text-[clamp(1rem,2vw,1.2rem)] font-normal text-[#666] leading-[1.5] max-w-lg">
-            {cms?.heroDescription || "The more you tell us, the better we can match you with the perfect venues and services. All fields marked with * are required."}
+            {cms?.heroDescription || (sv ? "Ju mer ni berättar, desto bättre kan vi matcha er med rätt lokaler och tjänster. Alla fält markerade med * är obligatoriska." : "The more you tell us, the better we can match you with the perfect venues and services. All fields marked with * are required.")}
           </p>
         </motion.div>
 
@@ -175,17 +207,17 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
         >
           {/* ─── Section 1: Contact ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.contactTitle || "Contact information"}</h2>
-            <p className="text-[13px] text-[#888] mb-6">{cms?.contactSubtitle || "Who should we reach out to?"}</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.contactTitle || (sv ? "Kontaktuppgifter" : "Contact information")}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.contactSubtitle || (sv ? "Vem ska vi kontakta?" : "Who should we reach out to?")}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
-              <div><label className={labelClass}>Company{star}</label><input type="text" placeholder="Your company name" required className={inputClass} value={form.company} onChange={set('company')} /></div>
-              <div><label className={labelClass}>Contact person{star}</label><input type="text" placeholder="Full name" required className={inputClass} value={form.contact} onChange={set('contact')} /></div>
-              <div><label className={labelClass}>Email{star}</label><input type="email" placeholder="you@company.com" required className={inputClass} value={form.email} onChange={set('email')} /></div>
+              <div><label className={labelClass}>{sv ? "Företag" : "Company"}{star}</label><input type="text" placeholder={sv ? "Ert företagsnamn" : "Your company name"} required className={inputClass} value={form.company} onChange={set('company')} /></div>
+              <div><label className={labelClass}>{sv ? "Kontaktperson" : "Contact person"}{star}</label><input type="text" placeholder={sv ? "För- och efternamn" : "Full name"} required className={inputClass} value={form.contact} onChange={set('contact')} /></div>
+              <div><label className={labelClass}>{sv ? "E-post" : "Email"}{star}</label><input type="email" placeholder={sv ? "du@foretag.se" : "you@company.com"} required className={inputClass} value={form.email} onChange={set('email')} /></div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              <div><label className={labelClass}>Phone{star}</label><input type="tel" placeholder="+46 70 123 45 67" required className={inputClass} value={form.phone} onChange={set('phone')} /></div>
-              <div><label className={labelClass}>Country{star}</label><input type="text" placeholder="E.g. Sweden, Spain, UK" required className={inputClass} value={form.country} onChange={set('country')} /></div>
-              <div><label className={labelClass}>City</label><input type="text" placeholder="E.g. Stockholm, Barcelona" className={inputClass} value={form.city} onChange={set('city')} /></div>
+              <div><label className={labelClass}>{sv ? "Telefon" : "Phone"}{star}</label><input type="tel" placeholder="+46 70 123 45 67" required className={inputClass} value={form.phone} onChange={set('phone')} /></div>
+              <div><label className={labelClass}>{sv ? "Land" : "Country"}{star}</label><input type="text" placeholder={sv ? "t.ex. Sverige, Spanien, UK" : "E.g. Sweden, Spain, UK"} required className={inputClass} value={form.country} onChange={set('country')} /></div>
+              <div><label className={labelClass}>{sv ? "Stad" : "City"}</label><input type="text" placeholder={sv ? "t.ex. Stockholm, Barcelona" : "E.g. Stockholm, Barcelona"} className={inputClass} value={form.city} onChange={set('city')} /></div>
             </div>
           </div>
 
@@ -193,25 +225,25 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
 
           {/* ─── Section 2: Event basics ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.eventTitle || "Event details"}</h2>
-            <p className="text-[13px] text-[#888] mb-6">{cms?.eventSubtitle || "Tell us about the event itself."}</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.eventTitle || (sv ? "Eventdetaljer" : "Event details")}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.eventSubtitle || (sv ? "Berätta om själva eventet." : "Tell us about the event itself.")}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
-              <div><label className={labelClass}>Event name</label><input type="text" placeholder="E.g. Annual Sales Kick-off 2026" className={inputClass} value={form.eventName} onChange={set('eventName')} /></div>
+              <div><label className={labelClass}>{sv ? "Eventnamn" : "Event name"}</label><input type="text" placeholder={sv ? "t.ex. Årlig kickoff 2026" : "E.g. Annual Sales Kick-off 2026"} className={inputClass} value={form.eventName} onChange={set('eventName')} /></div>
               <div>
-                <label className={labelClass}>Event type{star}</label>
+                <label className={labelClass}>{sv ? "Eventtyp" : "Event type"}{star}</label>
                 <select required className={inputClass} value={form.eventType} onChange={set('eventType')}>
-                  <option value="">Select type</option>
-                  {EVENT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
+                  <option value="">{sv ? "Välj typ" : "Select type"}</option>
+                  {eventTypes.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
-              <div><label className={labelClass}>Number of guests{star}</label><input type="number" placeholder="Enter exact number" min={1} required className={inputClass} value={form.guests} onChange={set('guests')} /></div>
+              <div><label className={labelClass}>{sv ? "Antal gäster" : "Number of guests"}{star}</label><input type="number" placeholder={sv ? "Ange exakt antal" : "Enter exact number"} min={1} required className={inputClass} value={form.guests} onChange={set('guests')} /></div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              <div><label className={labelClass}>Start date{star}</label><input type="date" required className={inputClass} value={form.startDate} onChange={set('startDate')} /></div>
-              <div><label className={labelClass}>End date</label><input type="date" className={inputClass} value={form.endDate} onChange={set('endDate')} /></div>
+              <div><label className={labelClass}>{sv ? "Startdatum" : "Start date"}{star}</label><input type="date" min={new Date().toISOString().split('T')[0]} required className={inputClass} value={form.startDate} onChange={set('startDate')} /></div>
+              <div><label className={labelClass}>{sv ? "Slutdatum" : "End date"}</label><input type="date" min={new Date().toISOString().split('T')[0]} className={inputClass} value={form.endDate} onChange={set('endDate')} /></div>
               <div>
-                <label className={labelClass}>Budget (approximate)</label>
-                <input type="text" placeholder="E.g. €20,000" className={inputClass} value={form.budget} onChange={set('budget')} />
+                <label className={labelClass}>{sv ? "Budget (ungefärlig)" : "Budget (approximate)"}</label>
+                <input type="text" placeholder={sv ? "t.ex. 200 000 kr" : "E.g. €20,000"} className={inputClass} value={form.budget} onChange={set('budget')} />
               </div>
             </div>
           </div>
@@ -220,21 +252,53 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
 
           {/* ─── Section 3: Venue ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.venueTitle || "Venue preferences"}</h2>
-            <p className="text-[13px] text-[#888] mb-6">{cms?.venueSubtitle || "What kind of space are you looking for?"}</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.venueTitle || (sv ? "Lokalönskemål" : "Venue preferences")}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.venueSubtitle || (sv ? "Vilken typ av lokal söker ni?" : "What kind of space are you looking for?")}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
-                <label className={labelClass}>Venue type</label>
+                <label className={labelClass}>{sv ? "Typ av lokal" : "Venue type"}</label>
                 <select className={inputClass} value={form.venueType} onChange={set('venueType')}>
-                  <option value="">Select preference</option>
-                  {VENUE_TYPES.map((v) => <option key={v} value={v}>{v}</option>)}
+                  <option value="">{sv ? "Välj önskemål" : "Select preference"}</option>
+                  {venueTypes.map((v) => <option key={v} value={v}>{v}</option>)}
                 </select>
               </div>
-              <div><label className={labelClass}>Preferred location / area</label><input type="text" placeholder="E.g. Central Stockholm, Costa del Sol" className={inputClass} value={form.preferredLocation} onChange={set('preferredLocation')} /></div>
+              <div><label className={labelClass}>{sv ? "Önskad plats / område" : "Preferred location / area"}</label><input type="text" placeholder={sv ? "t.ex. centrala Stockholm, Costa del Sol" : "E.g. Central Stockholm, Costa del Sol"} className={inputClass} value={form.preferredLocation} onChange={set('preferredLocation')} /></div>
             </div>
             <div>
-              <label className={labelClass}>Special venue requirements</label>
-              <textarea rows={3} placeholder="E.g. wheelchair accessible, outdoor space, sea view, breakout rooms..." className={`${inputClass} resize-none`} value={form.requirements} onChange={set('requirements')} />
+              <label className={labelClass}>{sv ? "Särskilda lokalkrav" : "Special venue requirements"}</label>
+              <textarea rows={3} placeholder={sv ? "t.ex. rullstolsanpassat, utomhusyta, havsutsikt, grupprum..." : "E.g. wheelchair accessible, outdoor space, sea view, breakout rooms..."} className={`${inputClass} resize-none`} value={form.requirements} onChange={set('requirements')} />
+            </div>
+          </div>
+
+          <div className="h-px bg-black/[0.06] mb-10" />
+
+          {/* ─── Section 3.5: Accommodation ─── */}
+          <div className="mb-10">
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{sv ? "Boende & Övernattning" : "Accommodation"}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{sv ? "Behöver ni boka hotellrum eller boende för era gäster?" : "Do you need to book hotel rooms or lodging for your guests?"}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className={labelClass}>{sv ? "Enkelrum (antal)" : "Single rooms (quantity)"}</label>
+                <input
+                  type="number"
+                  min={0}
+                  placeholder="0"
+                  className={inputClass}
+                  value={form.singleRooms}
+                  onChange={set('singleRooms')}
+                />
+              </div>
+              <div>
+                <label className={labelClass}>{sv ? "Dubbelrum (antal)" : "Double rooms (quantity)"}</label>
+                <input
+                  type="number"
+                  min={0}
+                  placeholder="0"
+                  className={inputClass}
+                  value={form.doubleRooms}
+                  onChange={set('doubleRooms')}
+                />
+              </div>
             </div>
           </div>
 
@@ -243,16 +307,16 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
           {/* ─── Section 4: Catering ─── */}
           <div className="mb-10">
             <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.cateringTitle || "Catering"}</h2>
-            <p className="text-[13px] text-[#888] mb-6">{cms?.cateringSubtitle || "What food & drink experience do you want?"}</p>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.cateringSubtitle || (sv ? "Vilken mat- & dryckesupplevelse vill ni ha?" : "What food & drink experience do you want?")}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
-                <label className={labelClass}>Catering style</label>
+                <label className={labelClass}>{sv ? "Cateringstil" : "Catering style"}</label>
                 <select className={inputClass} value={form.cateringStyle} onChange={set('cateringStyle')}>
-                  <option value="">Select style</option>
-                  {CATERING_OPTIONS.map((c) => <option key={c} value={c}>{c}</option>)}
+                  <option value="">{sv ? "Välj stil" : "Select style"}</option>
+                  {cateringOptions.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
-              <div><label className={labelClass}>Dietary requirements</label><input type="text" placeholder="E.g. vegan options, halal, gluten-free" className={inputClass} value={form.dietary} onChange={set('dietary')} /></div>
+              <div><label className={labelClass}>{sv ? "Kostbehov" : "Dietary requirements"}</label><input type="text" placeholder={sv ? "t.ex. veganskt, halal, glutenfritt" : "E.g. vegan options, halal, gluten-free"} className={inputClass} value={form.dietary} onChange={set('dietary')} /></div>
             </div>
           </div>
 
@@ -260,10 +324,10 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
 
           {/* ─── Section 5: Activities & services ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.activitiesTitle || "Activities & services"}</h2>
-            <p className="text-[13px] text-[#888] mb-6">{cms?.activitiesSubtitle || "Select everything you're interested in."}</p>
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.activitiesTitle || (sv ? "Aktiviteter & tjänster" : "Activities & services")}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.activitiesSubtitle || (sv ? "Välj allt ni är intresserade av." : "Select everything you're interested in.")}</p>
             <div className="flex flex-wrap gap-2 mb-5">
-              {ACTIVITY_OPTIONS.map((a) => (
+              {activityOptions.map((a) => (
                 <button
                   key={a}
                   type="button"
@@ -279,8 +343,8 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
               ))}
             </div>
             <div>
-              <label className={labelClass}>Additional details about activities</label>
-              <textarea rows={3} placeholder="Describe any specific activities, entertainment or services you have in mind..." className={`${inputClass} resize-none`} value={form.activitiesDetails} onChange={set('activitiesDetails')} />
+              <label className={labelClass}>{sv ? "Mer om aktiviteterna" : "Additional details about activities"}</label>
+              <textarea rows={3} placeholder={sv ? "Beskriv aktiviteter, underhållning eller tjänster ni har i åtanke..." : "Describe any specific activities, entertainment or services you have in mind..."} className={`${inputClass} resize-none`} value={form.activitiesDetails} onChange={set('activitiesDetails')} />
             </div>
           </div>
 
@@ -288,9 +352,9 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
 
           {/* ─── Section 6: Message ─── */}
           <div className="mb-10">
-            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.anythingElseTitle || "Anything else?"}</h2>
-            <p className="text-[13px] text-[#888] mb-6">{cms?.anythingElseSubtitle || "Tell us everything we should know to make your event perfect."}</p>
-            <textarea rows={5} placeholder="Special requests, theme ideas, inspiration, past experiences — anything helps..." className={`${inputClass} resize-none`} value={form.message} onChange={set('message')} />
+            <h2 className="font-display text-lg font-medium text-[#111] mb-1">{cms?.anythingElseTitle || (sv ? "Något mer?" : "Anything else?")}</h2>
+            <p className="text-[13px] text-[#888] mb-6">{cms?.anythingElseSubtitle || (sv ? "Berätta allt vi bör veta för att göra ert event perfekt." : "Tell us everything we should know to make your event perfect.")}</p>
+            <textarea rows={5} placeholder={sv ? "Särskilda önskemål, tema, inspiration, tidigare erfarenheter — allt hjälper..." : "Special requests, theme ideas, inspiration, past experiences — anything helps..."} className={`${inputClass} resize-none`} value={form.message} onChange={set('message')} />
           </div>
 
           {/* Error Message */}
@@ -309,11 +373,11 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
             >
               <span className="relative z-10 flex items-center gap-3">
                 {submitted ? (
-                  <><CheckCircle className="w-5 h-5" />{cms?.successMessage || "Thank you! We'll get back to you within 24h."}</>
+                  <><CheckCircle className="w-5 h-5" />{cms?.successMessage || (sv ? "Tack! Vi återkommer inom 24h." : "Thank you! We'll get back to you within 24h.")}</>
                 ) : loading ? (
-                  <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Sending...</>
+                  <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {sv ? "Skickar..." : "Sending..."}</>
                 ) : (
-                  <>{cms?.submitButton || "Send detailed inquiry"}<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" /></>
+                  <>{cms?.submitButton || (sv ? "Skicka detaljerad förfrågan" : "Send detailed inquiry")}<ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" /></>
                 )}
               </span>
               <span className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
@@ -321,7 +385,7 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
               </span>
             </button>
             <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#888]">
-              {cms?.disclaimer || "No obligations • Response within 24h • Completely free"}
+              {cms?.disclaimer || (sv ? "Inga förpliktelser • Svar inom 24h • Helt kostnadsfritt" : "No obligations • Response within 24h • Completely free")}
             </span>
           </div>
         </motion.form>

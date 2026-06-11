@@ -1,28 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Crown, UserCheck, Globe, Eye, Headphones, BarChart3, Compass, Palette } from "lucide-react";
+import { ArrowRight, Crown, UserCheck, Globe, Eye, BarChart3, Compass, Palette, Clock, Percent, Gift, Shield, FileText } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/* ── What's included in the VIP programme ── */
-const DEFAULT_INCLUSIONS = [
-  { icon: Crown, text: "Priority access to Europe's most exclusive venues" },
-  { icon: UserCheck, text: "Dedicated senior account manager" },
-  { icon: Globe, text: "Preferred rates across 175 countries" },
-  { icon: Eye, text: "Complimentary site inspections" },
-  { icon: Headphones, text: "24/7 concierge support during events" },
-  { icon: BarChart3, text: "Quarterly strategy sessions" },
-  { icon: Compass, text: "Early access to new destinations" },
-  { icon: Palette, text: "Custom branding packages included" },
-];
+/* Icons for the localized inclusions list (vipTeaser.inclusions in messages),
+   matched by index — texts live in i18n so the grid is sv/en aware. */
+const INCLUSION_ICONS = [Crown, UserCheck, Globe, Gift, BarChart3, Shield, FileText, Clock, Percent, Eye];
 
 const ICON_MAP: Record<string, any> = {
   crown: Crown, userCheck: UserCheck, globe: Globe, eye: Eye,
-  headphones: Headphones, chart: BarChart3, compass: Compass, palette: Palette,
+  chart: BarChart3, compass: Compass, palette: Palette,
+  clock: Clock, percent: Percent,
 };
 
 interface VIPTeaserCMS {
@@ -43,7 +36,10 @@ export function VIPTeaser({ cms }: { cms?: VIPTeaserCMS } = {}) {
         icon: ICON_MAP[item.icon || "crown"] || Crown,
         text: item.text,
       }))
-    : DEFAULT_INCLUSIONS;
+    : (t.raw('inclusions') as string[]).map((text, i) => ({
+        icon: INCLUSION_ICONS[i] || Crown,
+        text,
+      }));
   return (
     <section className="relative w-full py-28 md:py-40 px-6 md:px-10 overflow-hidden">
 
@@ -199,7 +195,7 @@ export function VIPTeaser({ cms }: { cms?: VIPTeaserCMS } = {}) {
           transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
           className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
         >
-          <Link href="/vip">
+          <Link href="/vip#apply">
             <span className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full font-display text-[14px] font-medium text-white/90 hover:text-white transition-all duration-500 cursor-pointer"
               style={{ boxShadow: "0 0 20px rgba(120,81,169,0.15), 0 0 40px rgba(106,216,210,0.08)" }}
             >

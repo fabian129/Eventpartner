@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import createGlobe from "cobe";
 import { AnimatePresence, motion } from "framer-motion";
 import { gsap } from "@/lib/animation";
@@ -821,6 +821,7 @@ function RegionExplorer({ activeRegions, onSelectRegion, onHoverRegion }: {
   onSelectRegion: (slug: string) => void;
   onHoverRegion: (slug: string | null) => void;
 }) {
+  const svLocale = useLocale() === 'sv';
   const [drillContinent, setDrillContinent] = useState<string | null>(null);
 
   const selectedGroup = CONTINENT_GROUPS.find(c => c.id === drillContinent);
@@ -849,8 +850,8 @@ function RegionExplorer({ activeRegions, onSelectRegion, onHoverRegion }: {
           transition={{ duration: 0.25 }}
         >
           <div className="px-1 pb-3 border-b border-white/[0.08] mb-4">
-            <h3 className="font-display text-[20px] font-semibold text-white/90 mb-1">Explore by Region</h3>
-            <p className="text-[13px] text-white/30 leading-snug">Select a continent to discover venues worldwide</p>
+            <h3 className="font-display text-[20px] font-semibold text-white/90 mb-1">{svLocale ? "Utforska per region" : "Explore by Region"}</h3>
+            <p className="text-[13px] text-white/30 leading-snug">{svLocale ? "Välj en kontinent och upptäck lokaler världen över" : "Select a continent to discover venues worldwide"}</p>
           </div>
 
           <div className="flex flex-col gap-2.5">

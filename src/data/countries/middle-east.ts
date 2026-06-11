@@ -3,7 +3,7 @@ import type { Country } from './types';
 
 export const MIDDLE_EAST: Country[] = [
   {
-    slug: "bahrain", code: "bh", name: "Bahrain", nameSv: "Bahrain", venues: "100+",
+    slug: "bahrain", code: "bh", name: "Bahrain", nameSv: "Bahrain", venues: "325+",
     topVenues: [
       { name: "Bahrain International Exhibition & Convention Centre", city: "Manama", capacity: "10 000+", type: "Convention center" },
       { name: "Gulf Hotel Convention Centre", city: "Manama", capacity: "2 000", type: "Hotel & Conference" },
@@ -13,7 +13,7 @@ export const MIDDLE_EAST: Country[] = [
     ],
   },
   {
-    slug: "israel", code: "il", name: "Israel", nameSv: "Israel", venues: "200+",
+    slug: "israel", code: "il", name: "Israel", nameSv: "Israel", venues: "3,025+",
     topVenues: [
       { name: "Tel Aviv Convention Center – Expo Tel Aviv", city: "Tel Aviv", capacity: "20 000+", type: "Convention center" },
       { name: "Jerusalem International Convention Center (ICC)", city: "Jerusalem", capacity: "10 000", type: "Convention center" },
@@ -23,7 +23,7 @@ export const MIDDLE_EAST: Country[] = [
     ],
   },
   {
-    slug: "jordan", code: "jo", name: "Jordan", nameSv: "Jordanien", venues: "100+",
+    slug: "jordan", code: "jo", name: "Jordan", nameSv: "Jordanien", venues: "800+",
     topVenues: [
       { name: "King Hussein Bin Talal Convention Centre", city: "Dead Sea", capacity: "5 000", type: "Convention center" },
       { name: "Amman International Conference Centre", city: "Amman", capacity: "3 000", type: "Convention center" },
@@ -33,7 +33,7 @@ export const MIDDLE_EAST: Country[] = [
     ],
   },
   {
-    slug: "kuwait", code: "kw", name: "Kuwait", nameSv: "Kuwait", venues: "100+",
+    slug: "kuwait", code: "kw", name: "Kuwait", nameSv: "Kuwait", venues: "800+",
     topVenues: [
       { name: "Kuwait International Fair Ground", city: "Mishref", capacity: "20 000+", type: "Exhibition center" },
       { name: "Arraya Ballroom Convention Centre", city: "Kuwait City", capacity: "3 000", type: "Convention center" },
@@ -43,7 +43,7 @@ export const MIDDLE_EAST: Country[] = [
     ],
   },
   {
-    slug: "lebanon", code: "lb", name: "Lebanon", nameSv: "Libanon", venues: "100+",
+    slug: "lebanon", code: "lb", name: "Lebanon", nameSv: "Libanon", venues: "800+",
     topVenues: [
       { name: "Forum de Beyrouth", city: "Beirut", capacity: "5 000", type: "Convention center" },
       { name: "BIEL – Beirut International Exhibition Centre", city: "Beirut", capacity: "20 000+", type: "Exhibition center" },
@@ -53,7 +53,7 @@ export const MIDDLE_EAST: Country[] = [
     ],
   },
   {
-    slug: "oman", code: "om", name: "Oman", nameSv: "Oman", venues: "100+",
+    slug: "oman", code: "om", name: "Oman", nameSv: "Oman", venues: "825+",
     topVenues: [
       { name: "Oman Convention & Exhibition Centre", city: "Muscat", capacity: "20 000+", type: "Convention center" },
       { name: "Al Bustan Palace Ritz-Carlton Conference", city: "Muscat", capacity: "2 500", type: "Hotel & Conference" },
@@ -63,7 +63,7 @@ export const MIDDLE_EAST: Country[] = [
     ],
   },
   {
-    slug: "qatar", code: "qa", name: "Qatar", nameSv: "Qatar", venues: "200+",
+    slug: "qatar", code: "qa", name: "Qatar", nameSv: "Qatar", venues: "3,025+",
     topVenues: [
       { name: "Qatar National Convention Centre", city: "Doha", capacity: "40 000+", type: "Convention center" },
       { name: "Doha Exhibition and Convention Center", city: "Doha", capacity: "30 000+", type: "Exhibition center" },
@@ -73,7 +73,7 @@ export const MIDDLE_EAST: Country[] = [
     ],
   },
   {
-    slug: "saudi-arabia", code: "sa", name: "Saudi Arabia", nameSv: "Saudiarabien", venues: "200+",
+    slug: "saudi-arabia", code: "sa", name: "Saudi Arabia", nameSv: "Saudiarabien", venues: "3,025+",
     topVenues: [
       { name: "Riyadh International Convention & Exhibition Center", city: "Riyadh", capacity: "50 000+", type: "Convention center" },
       { name: "Jeddah Centre for Forums & Events", city: "Jeddah", capacity: "10 000", type: "Convention center" },
@@ -83,7 +83,7 @@ export const MIDDLE_EAST: Country[] = [
     ],
   },
   {
-    slug: "turkey", code: "tr", name: "Turkey", nameSv: "Turkiet", venues: "200+",
+    slug: "turkey", code: "tr", name: "Turkey", nameSv: "Turkiet", venues: "5,375+",
     topVenues: [
       { name: "Istanbul Congress Center (ICC)", city: "Istanbul", capacity: "10 000", type: "Convention center" },
       { name: "Istanbul Expo Center (IFM)", city: "Istanbul", capacity: "60 000+", type: "Exhibition center" },

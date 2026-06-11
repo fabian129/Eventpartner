@@ -158,7 +158,7 @@ export function PrintfulDesignMaker({
             onDesignSavedRef.current({ templateId: tid, productId });
           },
           onProductChanged: (newProductId: number) => {
-            console.log("EDM product changed:", newProductId);
+            // product changed
           },
           onError: (data: unknown) => {
             console.warn("EDM error:", data);

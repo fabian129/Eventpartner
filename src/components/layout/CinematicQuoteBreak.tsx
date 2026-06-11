@@ -17,8 +17,6 @@ interface CtaCMS {
   labelRight?: string;
   headline?: string;
   subheadline?: string;
-  card1Title?: string;
-  card1Desc?: string;
   card2Title?: string;
   card2Headline?: string;
   card2Sub?: string;
@@ -83,24 +81,8 @@ export function CinematicQuoteBreak({ cms }: { cms?: CtaCMS }) {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
         >
-          <div className="max-w-[800px] grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-3 md:gap-4">
-            {/* Left: glass card */}
-            <Link
-              href="#request"
-              className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300 min-h-[130px]"
-            >
-              <span className="text-[13px] font-semibold text-white/70">
-                {cms?.card1Title || t('card1Title')}
-              </span>
-              <div className="flex items-end justify-between mt-4">
-                <p className="text-[15px] md:text-[17px] text-white/40 leading-snug max-w-[200px]">
-                  {cms?.card1Desc || t('card1Desc')}
-                </p>
-                <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300 flex-shrink-0" />
-              </div>
-            </Link>
-
-            {/* Right: tiffany accent */}
+          <div className="max-w-[800px] grid grid-cols-1 gap-3 md:gap-4">
+            {/* Tiffany accent card */}
             <Link
               href="/skraddarsy"
               className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-tiffany hover:bg-[#74CCC4] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(106,216,210,0.15)]"

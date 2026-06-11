@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from "next/image";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -18,28 +18,36 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const SERVICES = [
   {
     title: "Conferences & Meetings",
+    titleSv: "Konferenser & möten",
     desc: "From boardroom meetings to large-scale conferences.",
+    descSv: "Från styrelsemöten till storskaliga konferenser.",
     image: "/Images/speaker-giving-talk-conference-hall-business-event-rear-view-unrecognizable-people.webp",
     label: "01",
     icon: "mic" as const,
   },
   {
     title: "Kick-offs & Team Building",
+    titleSv: "Kickoffer & teambuilding",
     desc: "Experiences that set the tone for the entire year.",
+    descSv: "Upplevelser som sätter tonen för hela året.",
     image: "/Images/man-walking-street-night-time.webp",
     label: "02",
     icon: "users" as const,
   },
   {
     title: "Dinners & Galas",
+    titleSv: "Middagar & galor",
     desc: "Representational dinners at venues that make an impression.",
+    descSv: "Representationsmiddagar i lokaler som gör intryck.",
     image: "/Images/decorated-hall-wedding-is-ready-celebration.webp",
     label: "03",
     icon: "glass" as const,
   },
   {
     title: "Venue Sourcing",
+    titleSv: "Lokalbokning",
     desc: "340,000+ venues in 175 countries. Always 3 proposals within 24h.",
+    descSv: "340 000+ lokaler i 175 länder. Alltid 3 förslag inom 24h.",
     image: "/Images/group-people-restaurant.webp",
     label: "04",
     icon: "globe" as const,
@@ -166,6 +174,7 @@ interface ServicesCMS {
 
 export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
   const t = useTranslations('serviceCards');
+  const sv = useLocale() === 'sv';
   return (
     <section
       id="services"
@@ -185,7 +194,7 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
               {cms?.label || t('label')}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">
-              {cms?.labelRight || "Full-service delivery\n175 countries"}
+              {cms?.labelRight || (sv ? "Helhetsleverans\n175 länder" : "Full-service delivery\n175 countries")}
             </span>
           </div>
 
@@ -199,10 +208,10 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[var(--border-default)] pt-5">
             {(cms?.stats || [
-              { label: "Venues", value: "340,000+" },
-              { label: "Countries", value: "175" },
-              { label: "Response time", value: "24h" },
-              { label: "Proposals", value: "3+" },
+              { label: sv ? "Lokaler" : "Venues", value: sv ? "340 000+" : "340,000+" },
+              { label: sv ? "Länder" : "Countries", value: "175" },
+              { label: sv ? "Svarstid" : "Response time", value: "24h" },
+              { label: sv ? "Förslag" : "Proposals", value: "3+" },
             ]).map((s) => (
               <div key={s.label}>
                 <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] block mb-1">{s.label}</span>
@@ -218,11 +227,16 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
           {/* Top 4 cards — square-ish */}
           {SERVICES.map((service, i) => {
             const cmsCard = cms?.cards?.[i];
-            const merged = cmsCard ? {
+            const fallback = {
               ...service,
-              title: cmsCard.title || service.title,
-              desc: cmsCard.desc || service.desc,
-            } : service;
+              title: sv ? service.titleSv : service.title,
+              desc: sv ? service.descSv : service.desc,
+            };
+            const merged = cmsCard ? {
+              ...fallback,
+              title: cmsCard.title || fallback.title,
+              desc: cmsCard.desc || fallback.desc,
+            } : fallback;
             return (
               <div key={service.title} className="aspect-[4/3] md:aspect-[3/2]">
                 <ServiceCard service={merged} index={i} />
@@ -268,10 +282,10 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
                 <div>
                   <h3 className="font-display text-[28px] md:text-[38px] font-medium text-white tracking-tight leading-[1.05] mb-2
                                  [text-shadow:0_1px_4px_rgba(0,0,0,0.4)]">
-                    {cms?.fullserviceTitle || "Full-Service Delivery"}
+                    {cms?.fullserviceTitle || (sv ? "Helhetsleverans" : "Full-Service Delivery")}
                   </h3>
                   <p className="text-[12px] md:text-[13px] text-white/35 leading-relaxed max-w-md">
-                    {cms?.fullserviceDesc || "Venues, technology, catering, and accommodation — one contact, zero hassle."}
+                    {cms?.fullserviceDesc || (sv ? "Lokaler, teknik, catering och boende — en kontakt, noll krångel." : "Venues, technology, catering, and accommodation — one contact, zero hassle.")}
                   </p>
                 </div>
               </div>

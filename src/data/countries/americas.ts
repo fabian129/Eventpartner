@@ -3,7 +3,7 @@ import type { Country } from './types';
 
 export const AMERICAS: Country[] = [
   {
-    slug: "antigua-and-barbuda", code: "ag", name: "Antigua and Barbuda", nameSv: "Antigua och Barbuda", venues: "50+",
+    slug: "antigua-and-barbuda", code: "ag", name: "Antigua and Barbuda", nameSv: "Antigua och Barbuda", venues: "400+",
     topVenues: [
       { name: "Sandals Grande Antigua Resort & Spa Conference", city: "St. John's", capacity: "500", type: "Resort & Conference" },
       { name: "Antigua & Barbuda Convention Centre", city: "St. John's", capacity: "800", type: "Convention center" },
@@ -13,7 +13,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "argentina", code: "ar", name: "Argentina", nameSv: "Argentina", venues: "100+",
+    slug: "argentina", code: "ar", name: "Argentina", nameSv: "Argentina", venues: "3,375+",
     topVenues: [
       { name: "La Rural – Predio Ferial de Buenos Aires", city: "Buenos Aires", capacity: "45 000+", type: "Exhibition center" },
       { name: "Centro de Exposiciones y Convenciones Buenos Aires", city: "Buenos Aires", capacity: "10 000", type: "Convention center" },
@@ -23,7 +23,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "aruba", code: "aw", name: "Aruba", nameSv: "Aruba", venues: "50+",
+    slug: "aruba", code: "aw", name: "Aruba", nameSv: "Aruba", venues: "900+",
     topVenues: [
       { name: "Aruba Marriott Resort Conference Centre", city: "Palm Beach", capacity: "800", type: "Resort & Conference" },
       { name: "Hyatt Regency Aruba Conference Centre", city: "Palm Beach", capacity: "600", type: "Resort & Conference" },
@@ -33,7 +33,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "bahamas", code: "bs", name: "Bahamas", nameSv: "Bahamas", venues: "50+",
+    slug: "bahamas", code: "bs", name: "Bahamas", nameSv: "Bahamas", venues: "975+",
     topVenues: [
       { name: "Atlantis Paradise Island Conference Centre", city: "Nassau", capacity: "5 000", type: "Resort & Conference" },
       { name: "Baha Mar Convention Centre", city: "Nassau", capacity: "4 000", type: "Convention center" },
@@ -43,7 +43,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "barbados", code: "bb", name: "Barbados", nameSv: "Barbados", venues: "50+",
+    slug: "barbados", code: "bb", name: "Barbados", nameSv: "Barbados", venues: "400+",
     topVenues: [
       { name: "Lloyd Erskine Sandiford Centre", city: "Bridgetown", capacity: "3 000", type: "Convention center" },
       { name: "Hilton Barbados Conference Centre", city: "Bridgetown", capacity: "1 500", type: "Hotel & Conference" },
@@ -53,7 +53,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "belize", code: "bz", name: "Belize", nameSv: "Belize", venues: "50+",
+    slug: "belize", code: "bz", name: "Belize", nameSv: "Belize", venues: "400+",
     topVenues: [
       { name: "Belize Biltmore Plaza Conference Centre", city: "Belize City", capacity: "800", type: "Hotel & Conference" },
       { name: "Radisson Fort George Hotel Conference", city: "Belize City", capacity: "600", type: "Hotel & Conference" },
@@ -63,7 +63,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "bermuda", code: "bm", name: "Bermuda", nameSv: "Bermuda", venues: "50+",
+    slug: "bermuda", code: "bm", name: "Bermuda", nameSv: "Bermuda", venues: "975+",
     topVenues: [
       { name: "Fairmont Southampton Conference Centre", city: "Southampton", capacity: "1 000", type: "Resort & Conference" },
       { name: "Hamilton Princess Conference Centre", city: "Hamilton", capacity: "800", type: "Hotel & Conference" },
@@ -73,7 +73,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "bolivia", code: "bo", name: "Bolivia", nameSv: "Bolivia", venues: "50+",
+    slug: "bolivia", code: "bo", name: "Bolivia", nameSv: "Bolivia", venues: "900+",
     topVenues: [
       { name: "Campo Ferial Chuquiago Marka", city: "La Paz", capacity: "5 000", type: "Exhibition center" },
       { name: "Centro de Convenciones de Santa Cruz", city: "Santa Cruz", capacity: "3 000", type: "Convention center" },
@@ -83,7 +83,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "brazil", code: "br", name: "Brazil", nameSv: "Brasilien", venues: "200+",
+    slug: "brazil", code: "br", name: "Brazil", nameSv: "Brasilien", venues: "6,000+",
     topVenues: [
       { name: "São Paulo Expo Exhibition & Convention Center", city: "São Paulo", capacity: "100 000+", type: "Exhibition center" },
       { name: "Riocentro Convention Center", city: "Rio de Janeiro", capacity: "100 000+", type: "Convention center" },
@@ -93,7 +93,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "canada", code: "ca", name: "Canada", nameSv: "Kanada", venues: "200+",
+    slug: "canada", code: "ca", name: "Canada", nameSv: "Kanada", venues: "6,450+",
     topVenues: [
       { name: "Metro Toronto Convention Centre", city: "Toronto", capacity: "50 000+", type: "Convention center" },
       { name: "Vancouver Convention Centre", city: "Vancouver", capacity: "30 000+", type: "Convention center" },
@@ -103,7 +103,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "cayman-islands", code: "ky", name: "Cayman Islands", nameSv: "Caymanöarna", venues: "50+",
+    slug: "cayman-islands", code: "ky", name: "Cayman Islands", nameSv: "Caymanöarna", venues: "975+",
     topVenues: [
       { name: "Kimpton Seafire Resort Conference Centre", city: "Seven Mile Beach", capacity: "800", type: "Resort & Conference" },
       { name: "Grand Cayman Marriott Conference Centre", city: "George Town", capacity: "600", type: "Hotel & Conference" },
@@ -113,7 +113,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "chile", code: "cl", name: "Chile", nameSv: "Chile", venues: "100+",
+    slug: "chile", code: "cl", name: "Chile", nameSv: "Chile", venues: "3,375+",
     topVenues: [
       { name: "Espacio Riesco Convention Center", city: "Santiago", capacity: "12 000", type: "Convention center" },
       { name: "CasaPiedra Centro de Eventos", city: "Santiago", capacity: "5 000", type: "Event Venue" },
@@ -123,7 +123,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "colombia", code: "co", name: "Colombia", nameSv: "Colombia", venues: "100+",
+    slug: "colombia", code: "co", name: "Colombia", nameSv: "Colombia", venues: "3,375+",
     topVenues: [
       { name: "Corferias – Centro de Convenciones", city: "Bogotá", capacity: "50 000+", type: "Convention center" },
       { name: "Centro de Convenciones Cartagena de Indias", city: "Cartagena", capacity: "6 000", type: "Convention center" },
@@ -133,7 +133,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "costa-rica", code: "cr", name: "Costa Rica", nameSv: "Costa Rica", venues: "50+",
+    slug: "costa-rica", code: "cr", name: "Costa Rica", nameSv: "Costa Rica", venues: "975+",
     topVenues: [
       { name: "Centro de Convenciones de Costa Rica", city: "San José", capacity: "4 000", type: "Convention center" },
       { name: "Hotel Real InterContinental Conference", city: "San José", capacity: "2 000", type: "Hotel & Conference" },
@@ -143,7 +143,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "dominica", code: "dm", name: "Dominica", nameSv: "Dominica", venues: "50+",
+    slug: "dominica", code: "dm", name: "Dominica", nameSv: "Dominica", venues: "400+",
     topVenues: [
       { name: "Fort Young Hotel Conference Centre", city: "Roseau", capacity: "400", type: "Hotel & Conference" },
       { name: "Dominica State House Conference Hall", city: "Roseau", capacity: "600", type: "Convention center" },
@@ -153,7 +153,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "dominican-republic", code: "do", name: "Dominican Republic", nameSv: "Dominikanska republiken", venues: "50+",
+    slug: "dominican-republic", code: "do", name: "Dominican Republic", nameSv: "Dominikanska republiken", venues: "975+",
     topVenues: [
       { name: "Centro de Convenciones de Punta Cana", city: "Punta Cana", capacity: "5 000", type: "Convention center" },
       { name: "JW Marriott Santo Domingo Conference", city: "Santo Domingo", capacity: "2 000", type: "Hotel & Conference" },
@@ -163,7 +163,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "ecuador", code: "ec", name: "Ecuador", nameSv: "Ecuador", venues: "50+",
+    slug: "ecuador", code: "ec", name: "Ecuador", nameSv: "Ecuador", venues: "900+",
     topVenues: [
       { name: "Centro de Exposiciones Quito", city: "Quito", capacity: "10 000+", type: "Exhibition center" },
       { name: "Centro de Convenciones Simón Bolívar", city: "Guayaquil", capacity: "5 000", type: "Convention center" },
@@ -173,7 +173,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "grenada", code: "gd", name: "Grenada", nameSv: "Grenada", venues: "50+",
+    slug: "grenada", code: "gd", name: "Grenada", nameSv: "Grenada", venues: "400+",
     topVenues: [
       { name: "Radisson Grenada Beach Resort Conference", city: "Grand Anse", capacity: "600", type: "Resort & Conference" },
       { name: "Royalton Grenada Conference Centre", city: "St. George's", capacity: "500", type: "Resort & Conference" },
@@ -183,7 +183,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "guatemala", code: "gt", name: "Guatemala", nameSv: "Guatemala", venues: "50+",
+    slug: "guatemala", code: "gt", name: "Guatemala", nameSv: "Guatemala", venues: "975+",
     topVenues: [
       { name: "Centro de Convenciones del Hotel Camino Real", city: "Guatemala City", capacity: "2 000", type: "Hotel & Conference" },
       { name: "Foro Majadas Convention Center", city: "Guatemala City", capacity: "3 000", type: "Convention center" },
@@ -193,7 +193,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "honduras", code: "hn", name: "Honduras", nameSv: "Honduras", venues: "50+",
+    slug: "honduras", code: "hn", name: "Honduras", nameSv: "Honduras", venues: "975+",
     topVenues: [
       { name: "Centro de Convenciones de San Pedro Sula", city: "San Pedro Sula", capacity: "3 000", type: "Convention center" },
       { name: "Intercontinental Real Tegucigalpa Conference", city: "Tegucigalpa", capacity: "1 500", type: "Hotel & Conference" },
@@ -203,7 +203,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "jamaica", code: "jm", name: "Jamaica", nameSv: "Jamaica", venues: "50+",
+    slug: "jamaica", code: "jm", name: "Jamaica", nameSv: "Jamaica", venues: "975+",
     topVenues: [
       { name: "Montego Bay Convention Centre", city: "Montego Bay", capacity: "5 000", type: "Convention center" },
       { name: "Jamaica Pegasus Hotel Conference Centre", city: "Kingston", capacity: "1 500", type: "Hotel & Conference" },
@@ -213,7 +213,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "mexico", code: "mx", name: "Mexico", nameSv: "Mexiko", venues: "200+",
+    slug: "mexico", code: "mx", name: "Mexico", nameSv: "Mexiko", venues: "6,450+",
     topVenues: [
       { name: "Centro Citibanamex", city: "Mexico City", capacity: "40 000+", type: "Convention center" },
       { name: "Expo Guadalajara", city: "Guadalajara", capacity: "50 000+", type: "Exhibition center" },
@@ -223,7 +223,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "nicaragua", code: "ni", name: "Nicaragua", nameSv: "Nicaragua", venues: "50+",
+    slug: "nicaragua", code: "ni", name: "Nicaragua", nameSv: "Nicaragua", venues: "975+",
     topVenues: [
       { name: "INCAE Business School Conference Centre", city: "Managua", capacity: "1 000", type: "Convention center" },
       { name: "Hotel Real InterContinental Managua Conference", city: "Managua", capacity: "1 500", type: "Hotel & Conference" },
@@ -233,7 +233,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "panama", code: "pa", name: "Panama", nameSv: "Panama", venues: "50+",
+    slug: "panama", code: "pa", name: "Panama", nameSv: "Panama", venues: "975+",
     topVenues: [
       { name: "ATLAPA Convention Center", city: "Panama City", capacity: "10 000", type: "Convention center" },
       { name: "Panama Convention Center", city: "Panama City", capacity: "25 000+", type: "Convention center" },
@@ -243,7 +243,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "paraguay", code: "py", name: "Paraguay", nameSv: "Paraguay", venues: "50+",
+    slug: "paraguay", code: "py", name: "Paraguay", nameSv: "Paraguay", venues: "900+",
     topVenues: [
       { name: "Centro de Convenciones Conmebol", city: "Asunción", capacity: "5 000", type: "Convention center" },
       { name: "Crowne Plaza Asunción Conference Centre", city: "Asunción", capacity: "1 500", type: "Hotel & Conference" },
@@ -253,7 +253,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "peru", code: "pe", name: "Peru", nameSv: "Peru", venues: "100+",
+    slug: "peru", code: "pe", name: "Peru", nameSv: "Peru", venues: "3,375+",
     topVenues: [
       { name: "Lima Convention Centre (LCC)", city: "Lima", capacity: "10 000", type: "Convention center" },
       { name: "Centro de Exposiciones Jockey", city: "Lima", capacity: "15 000+", type: "Exhibition center" },
@@ -263,7 +263,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "puerto-rico", code: "pr", name: "Puerto Rico", nameSv: "Puerto Rico", venues: "50+",
+    slug: "puerto-rico", code: "pr", name: "Puerto Rico", nameSv: "Puerto Rico", venues: "975+",
     topVenues: [
       { name: "Puerto Rico Convention Center", city: "San Juan", capacity: "30 000+", type: "Convention center" },
       { name: "Caribe Hilton Conference Centre", city: "San Juan", capacity: "2 000", type: "Hotel & Conference" },
@@ -273,7 +273,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "saint-kitts-and-nevis", code: "kn", name: "Saint Kitts and Nevis", nameSv: "Saint Kitts och Nevis", venues: "50+",
+    slug: "saint-kitts-and-nevis", code: "kn", name: "Saint Kitts and Nevis", nameSv: "Saint Kitts och Nevis", venues: "400+",
     topVenues: [
       { name: "St. Kitts Marriott Resort Conference Centre", city: "Frigate Bay", capacity: "1 000", type: "Resort & Conference" },
       { name: "Park Hyatt St. Kitts Conference Centre", city: "Christophe Harbour", capacity: "600", type: "Resort & Conference" },
@@ -283,7 +283,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "saint-lucia", code: "lc", name: "Saint Lucia", nameSv: "Saint Lucia", venues: "50+",
+    slug: "saint-lucia", code: "lc", name: "Saint Lucia", nameSv: "Saint Lucia", venues: "400+",
     topVenues: [
       { name: "Royalton Saint Lucia Conference Centre", city: "Gros Islet", capacity: "600", type: "Resort & Conference" },
       { name: "Sandals Grande St. Lucian Conference", city: "Gros Islet", capacity: "500", type: "Resort & Conference" },
@@ -293,7 +293,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "saint-vincent-and-the-grenadines", code: "vc", name: "Saint Vincent and the Grenadines", nameSv: "Saint Vincent och Grenadinerna", venues: "50+",
+    slug: "saint-vincent-and-the-grenadines", code: "vc", name: "Saint Vincent and the Grenadines", nameSv: "Saint Vincent och Grenadinerna", venues: "400+",
     topVenues: [
       { name: "NIS Conference Centre", city: "Kingstown", capacity: "600", type: "Convention center" },
       { name: "Beachcombers Hotel Conference Centre", city: "Kingstown", capacity: "300", type: "Hotel & Conference" },
@@ -303,7 +303,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "uruguay", code: "uy", name: "Uruguay", nameSv: "Uruguay", venues: "50+",
+    slug: "uruguay", code: "uy", name: "Uruguay", nameSv: "Uruguay", venues: "900+",
     topVenues: [
       { name: "Centro de Convenciones de Punta del Este", city: "Punta del Este", capacity: "5 000", type: "Convention center" },
       { name: "LATU Parque Tecnológico Convention Centre", city: "Montevideo", capacity: "3 000", type: "Convention center" },
@@ -313,7 +313,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "united-states", code: "us", name: "United States", nameSv: "USA", venues: "500+",
+    slug: "united-states", code: "us", name: "United States", nameSv: "USA", venues: "6,450+",
     topVenues: [
       { name: "Jacob K. Javits Convention Center", city: "New York", capacity: "50 000+", type: "Convention center" },
       { name: "McCormick Place", city: "Chicago", capacity: "100 000+", type: "Convention center" },
@@ -323,7 +323,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "el-salvador", code: "sv", name: "El Salvador", nameSv: "El Salvador", venues: "50+",
+    slug: "el-salvador", code: "sv", name: "El Salvador", nameSv: "El Salvador", venues: "975+",
     topVenues: [
       { name: "Centro Internacional de Ferias y Convenciones", city: "San Salvador", capacity: "10 000", type: "Convention center" },
       { name: "Sheraton Presidente Conference Centre", city: "San Salvador", capacity: "1 500", type: "Hotel & Conference" },
@@ -333,7 +333,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "cuba", code: "cu", name: "Cuba", nameSv: "Kuba", venues: "50+",
+    slug: "cuba", code: "cu", name: "Cuba", nameSv: "Kuba", venues: "975+",
     topVenues: [
       { name: "Palacio de Convenciones de La Habana", city: "Havana", capacity: "3 000", type: "Convention center" },
       { name: "Hotel Nacional de Cuba Conference Centre", city: "Havana", capacity: "500", type: "Hotel & Conference" },
@@ -343,7 +343,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "haiti", code: "ht", name: "Haiti", nameSv: "Haiti", venues: "50+",
+    slug: "haiti", code: "ht", name: "Haiti", nameSv: "Haiti", venues: "975+",
     topVenues: [
       { name: "Karibe Hotel & Convention Center", city: "Port-au-Prince", capacity: "1 500", type: "Hotel & Conference" },
       { name: "Oasis Hotel Conference Centre", city: "Pétion-Ville", capacity: "800", type: "Hotel & Conference" },
@@ -353,7 +353,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "martinique", code: "mq", name: "Martinique", nameSv: "Martinique", venues: "50+",
+    slug: "martinique", code: "mq", name: "Martinique", nameSv: "Martinique", venues: "975+",
     topVenues: [
       { name: "Madiana Palais des Congrès", city: "Schoelcher", capacity: "2 500", type: "Convention center" },
       { name: "La Batelière Hotel Conference Centre", city: "Schoelcher", capacity: "600", type: "Hotel & Conference" },
@@ -363,7 +363,7 @@ export const AMERICAS: Country[] = [
     ],
   },
   {
-    slug: "guadeloupe", code: "gp", name: "Guadeloupe", nameSv: "Guadeloupe", venues: "50+",
+    slug: "guadeloupe", code: "gp", name: "Guadeloupe", nameSv: "Guadeloupe", venues: "825+",
     topVenues: [
       { name: "World Trade Center Guadeloupe", city: "Baie-Mahault", capacity: "3 000", type: "Convention center" },
       { name: "La Créole Beach Hotel Conference Centre", city: "Le Gosier", capacity: "600", type: "Hotel & Conference" },

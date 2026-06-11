@@ -11,6 +11,7 @@ import { notFound } from "next/navigation";
 import { SmoothScroll } from "@/components/utils/SmoothScroll";
 import { SidebarNav } from "@/components/layout/SidebarNav";
 import { ShopProvider } from "@/components/shop/ShopProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
@@ -39,7 +40,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "EventPartner — The World's Largest Selection of Event & Conference Venues",
   description:
-    "Your complete partner for enterprise event booking across 175 countries globally. 10,000+ venues, one platform, zero friction.",
+    "Your complete partner for enterprise event booking across 175 countries globally. 340,000+ venues, one platform, zero friction.",
   keywords: ["event venues", "conference booking", "B2B events", "Global", "venue sourcing"],
 };
 
@@ -80,6 +81,7 @@ export default async function LocaleLayout({
           </ThemeProvider>
         </NextIntlClientProvider>
         {isDraftMode && <VisualEditing />}
+        <Analytics />
       </body>
     </html>
   );

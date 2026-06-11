@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Globe, Heart, Shield, Zap, Users, MapPin, Calendar, Award, ArrowRight, Linkedin } from "lucide-react";
-import { TEAM_MEMBERS } from "@/lib/teamMembers";
+import { Globe, Heart, Shield, Zap, Users, MapPin, Calendar, Award, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -40,8 +39,11 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
   }));
   const values = cms?.valueCards?.map(v => ({ icon: ICON_MAP[v.icon || "heart"] || Heart, title: v.title, description: v.description })) || defaultValues;
 
-  const roleMap = new Map(cms?.teamRoles?.map(t => [t.name, t.role]));
-  const team = TEAM_MEMBERS.map(m => ({ ...m, role: roleMap.get(m.name) || m.role }));
+  // Per client request (Malin 2026-06-10): no individual portraits on About —
+  // the team lives on /leadership; About shows one group photo instead.
+  // TODO: set to "/Images/Team/group.webp" once the group photo from Malin's
+  // mail is downloaded (attachment 3ffbf9c0-...png). Until then the section is hidden.
+  const TEAM_GROUP_IMAGE: string | null = null;
 
   const tc = useTranslations('common');
 
@@ -110,40 +112,24 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{cms?.teamLabel || t('teamLabel')}</span>
-          <p className="font-display text-[clamp(1.3rem,2.5vw,2rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.3] mb-14 max-w-3xl">{cms?.teamIntro || t('teamIntro')}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {team.map((member, i) => (
-              <motion.div key={member.name} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: EASE }}>
-                <div className="aspect-[4/5] rounded-2xl bg-[#1a1a1a] relative overflow-hidden mb-4 group">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
-                <h4 className="text-[16px] font-medium text-[var(--text-primary)] leading-tight mb-0.5">{member.name}</h4>
-                <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)] block">{member.role}</span>
-                {member.bio && (
-                  <p className="text-[12px] text-[var(--text-muted)] leading-[1.6] mt-2">{member.bio}</p>
-                )}
-                {member.linkedin && (
-                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-2 text-[11px] font-medium text-tiffany hover:text-[#5EC4BA] transition-colors">
-                    <Linkedin className="w-3 h-3" />
-                    {tc('linkedin')}
-                  </a>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
+      {/* Team — one group photo (individual portraits live on /leadership) */}
+      {TEAM_GROUP_IMAGE && (
+        <section className="max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{cms?.teamLabel || t('teamLabel')}</span>
+            <p className="font-display text-[clamp(1.3rem,2.5vw,2rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.3] mb-14 max-w-3xl">{cms?.teamIntro || t('teamIntro')}</p>
+            <div className="aspect-[16/9] rounded-2xl bg-[#1a1a1a] relative overflow-hidden group">
+              <Image
+                src={TEAM_GROUP_IMAGE}
+                alt="The EventPartner team"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                sizes="(max-width: 1200px) 100vw, 1200px"
+              />
+            </div>
+          </motion.div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="max-w-[1200px] mx-auto px-6 md:px-10">

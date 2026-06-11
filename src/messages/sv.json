@@ -19,7 +19,12 @@
     },
     "cta": "Få en gratis offert",
     "mobileMenu": "Meny",
-    "close": "Stäng"
+    "close": "Stäng",
+    "vip": "VIP",
+    "customize": "Skräddarsy",
+    "shop": "Shop",
+    "about": "Om oss",
+    "bookEvent": "Boka Event →"
   },
 
   "footer": {
@@ -97,7 +102,7 @@
     "labelRight": "Gratis offert",
     "headline": "Berätta om ditt event.",
     "headlineAccent": "Vi tar hand om resten.",
-    "description": "En förfrågan — flera lokalförslag, skräddarsydda efter dina exakta behov. Alltid gratis, alltid personligt, alltid inom 24 timmar.",
+    "description": "Vill du ha hjälp med ditt nästa event? Skriv in dina uppgifter så hör vi av oss inom 24 timmar.",
     "fields": {
       "name": { "label": "Fullständigt namn", "placeholder": "Ditt fullständiga namn" },
       "email": { "label": "E-post", "placeholder": "du@foretag.se" },
@@ -144,7 +149,7 @@
         "entireMonth": "Hela månaden"
       },
       "budget": {
-        "label": "Budgetintervall",
+        "label": "Budget",
         "placeholder": "t.ex. 200 000 kr"
       },
       "message": {
@@ -197,10 +202,10 @@
   },
 
   "vipTeaser": {
-    "label": "Endast på inbjudan",
+    "label": "Ansök idag",
     "headline": "En annan standard",
     "headlineMuted": "för företag som vägrar kompromissa.",
-    "body1": "EventPartner VIP-program är reserverat för organisationer som ställer högsta krav på precision, diskretion och leverans i absolut toppklass. Varje detalj — från val av lokal till sista touchen på plats — hanteras av ditt dedikerade seniorteam.",
+    "body1": "EventPartner VIP är reserverat för organisationer som ställer högsta krav på precision, diskretion och leverans i toppklass. Varje detalj — från val av lokal till sista detaljen på plats — hanteras av ert dedikerade seniorteam.",
     "body2": "Medlemskap sker genom ansökan. Vi upprätthåller medvetet en begränsad krets för att säkerställa att varje kund får den uppmärksamhet deras event förtjänar.",
     "inclusionsLabel": "Vad som ingår",
     "inclusions": [
@@ -210,7 +215,9 @@
       "Alltid 33 % extra rabatt på allt i vår webbshop",
       "Årlig omfattande rapportering samt ESG- & hållbarhetsdata",
       "Enterprise-governance anpassad för CSRD, NIS2 & travel management",
-      "24/7 concierge-support under event",
+      "Rapporter",
+      "Svarstid från 12h",
+      "I snitt 14% rabatt",
       "Kostnadsfria platsbesiktningar"
     ],
     "ctaText": "Ansök om medlemskap",
@@ -244,8 +251,6 @@
     "labelRight": "Gratis konsultation",
     "headline": "Skapa ditt nästa event.",
     "subheadline": "Berätta vad du letar efter — vi tar hand om resten.",
-    "card1Title": "Prata med oss",
-    "card1Desc": "Få svar på dina frågor.",
     "card2Title": "Starta ditt event",
     "card2Headline": "Anpassa ditt event.",
     "card2Sub": "På ditt sätt."
@@ -274,7 +279,7 @@
         { "step": "1", "title": "Välj en produkt", "desc": "Välj bland t-shirts, hoodies, muggar och mer" },
         { "step": "2", "title": "Ladda upp din design", "desc": "Lägg till din logotyp eller grafik i designverktyget" },
         { "step": "3", "title": "Välj storlekar & antal", "desc": "Ange hur många av varje storlek du behöver" },
-        { "step": "4", "title": "Begär offert", "desc": "Vi skickar priser inom 24 timmar" }
+        { "step": "4", "title": "Faktura & tryck", "desc": "Vi skickar en färdig faktura och sammanställning på din beställning. Godkänn och betala, så går dina produkter till tryck!" }
       ]
     },
     "cart": "Varukorg",
@@ -363,10 +368,11 @@
   "vpp": {
     "sectionLabel": "Videobroschyrer",
     "sectionBadge": "Helt anpassningsbara & tryckbara",
+    "priceHint": "Från 150 kr ex moms och frakt",
     "securityTicker": {
       "gdpr": { "title": "GDPR-kompatibel", "desc": "Utformad med GDPR-principer" },
       "iso": { "title": "ISO 27001-anpassad", "desc": "Säkerhetsramverk i linje med ISO" },
-      "soc": { "title": "SOC 2-riktlinjer", "desc": "Följer bästa praxis för säkerhet" },
+      "soc": { "title": "Privacy by Design", "desc": "Integritet inbyggt från start" },
       "enterprise": { "title": "Företagsklassad säkerhet", "desc": "Ändpunkt-till-ändpunkt kryptering" }
     },
     "viewDetails": "Visa detaljer",
@@ -405,7 +411,7 @@
     },
     "quoteSuccess": {
       "title": "Offertförfrågan skickad",
-      "description": "Vi återkommer med en anpassad offert för videobroschyrer inom 24 timmar.",
+      "description": "Ett bekräftelsemail har skickats till din e-post. Vi återkommer med en anpassad offert för videobroschyrer inom 24 timmar.",
       "submitAnother": "Skicka en ny förfrågan"
     },
     "meetingSection": {
@@ -453,7 +459,7 @@
     "heroLabelRight": "Exklusiv tillgång",
     "heroHeadline": "Din partner,",
     "heroHeadlineAccent": "inte en leverantör.",
-    "heroIntroText": "Vi kopplar samman ambitiösa företag med extraordinära lokaler. För oss handlar det om perfektion och att leverera event som skapar verkligt värde.",
+    "heroIntroText": "Vi kopplar samman företag med rätt lokaler och leverantörer. Vi förhandlar åt er, och ser till att ert event blir minnesvärt och skapar värde. Både externa event och interna sammankomster har aldrig varit enklare att skapa än med EventPartner VIP.",
     "heroStats": [
       { "value": "12h", "label": "Svarstid" },
       { "value": "14%", "label": "Snittbesparing" },
@@ -479,8 +485,8 @@
     "tiersDescription": "Vårt VIP-medlemskap, utformat efter dina behov. Inkluderar en dedikerad bokningsresurs för att boka och koordinera alla dina event. Överallt.",
     "tierCardTitle": "VIP-Partner",
     "tierCardBadge": "999€ /månad",
-    "tierCardPrice": "På inbjudan",
-    "tierCardPriceSub": "Årlig bokningsvolym på minst €300 000 krävs",
+    "tierCardPrice": "Ansök idag",
+    "tierCardPriceSub": "Minsta bokningsvolym: 100 000 EUR / 1 000 000 SEK per år",
     "tierCardFeatures": [
       "En dedikerad bokningsresurs för bokning & koordinering",
       "Förhandlade VIP-priser & exklusiv tillgång till lokaler",
@@ -493,13 +499,13 @@
       "Prioriterad svarstid inom 12h",
       "Anpassade avtals- & faktureringsvillkor"
     ],
-    "tierCardCta": "Begär inbjudan",
+    "tierCardCta": "Ansök idag",
     "stepsLabel": "EventPartner — Så går du med",
     "stepsLabelRight": "3 steg",
     "stepsHeadline": "Tre enkla steg.",
     "steps": [
       { "step": "01", "title": "Ansök", "desc": "Fyll i dina företagsuppgifter och eventvolym via formuläret nedan. Tar mindre än 2 minuter." },
-      { "step": "02", "title": "Kvalificera", "desc": "Vårt team granskar din profil och matchar dig med rätt VIP-nivå baserat på dina behov och volym." },
+      { "step": "02", "title": "Kvalificera", "desc": "Vårt team granskar er ansökan och er eventvolym. Ni får besked inom 48 timmar." },
       { "step": "03", "title": "Njut", "desc": "Börja ta emot prioriterad service, exklusiva priser och en dedikerad account manager från dag ett." }
     ],
     "ctaCard1Title": "Vill du ha mer info?",

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Briefcase, Globe, Users, Send } from "lucide-react";
+import { useLocale } from "next-intl";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -25,6 +26,7 @@ const DEFAULT_PERKS = [
 ];
 
 export function CareersContent({ cms }: { cms?: CareersCMS }) {
+  const sv = useLocale() === 'sv';
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -51,7 +53,7 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
           type: "career-application",
           name: form.name,
           email: form.email,
-          phone: form.linkedIn, // Send LinkedIn URL as phone parameter
+          linkedIn: form.linkedIn,
           role: "Open Application",
           message: form.message
         })
@@ -132,7 +134,7 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
                   <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Full Name</label><input type="text" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="John Doe" value={form.name} onChange={set('name')} /></div>
                   <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Email Address</label><input type="email" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="john@example.com" value={form.email} onChange={set('email')} /></div>
                   <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">LinkedIn Profile URL</label><input type="url" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="https://linkedin.com/in/johndoe" value={form.linkedIn} onChange={set('linkedIn')} /></div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Cover Letter / Message</label><textarea rows={4} required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors resize-none" placeholder="Tell us why you'd be a great fit..." value={form.message} onChange={set('message')} /></div>
+                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">{sv ? "Berätta varför du skulle passa hos oss" : "Tell us why you'd be a great fit"}</label><textarea rows={4} required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors resize-none" placeholder={sv ? "Berätta varför du skulle passa hos oss..." : "Tell us why you'd be a great fit..."} value={form.message} onChange={set('message')} /></div>
                   
                   {error && (
                     <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center">

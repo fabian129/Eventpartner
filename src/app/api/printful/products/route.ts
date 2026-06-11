@@ -145,12 +145,10 @@ export async function GET(req: Request) {
       })
     );
 
-    // Write the complete dataset to filesystem cache if revalidating
     if (revalidate) {
       try {
         const cachePath = path.join(process.cwd(), "src/data/printful-products-cache.json");
         await fs.writeFile(cachePath, JSON.stringify({ data: enriched }, null, 2), "utf-8");
-        console.log("Printful products cache file refreshed successfully.");
       } catch (writeError) {
         console.warn("Failed to write Printful products cache file:", writeError);
       }

@@ -9,9 +9,9 @@ function getResend() {
   return new Resend(key);
 }
 
-/** Escape user input for safe HTML interpolation */
-function esc(str: string): string {
-  return str
+/** Escape user input for safe HTML interpolation (null-safe) */
+function esc(str: unknown): string {
+  return String(str ?? '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -20,11 +20,12 @@ function esc(str: string): string {
 }
 
 // Target emails — where form submissions land (comma-separated)
-const TO_EMAILS = (process.env.CONTACT_EMAIL || 'pontus@eventpartner.io,malin@eventpartner.io,joakim@eventpartner.io')
+const TO_EMAILS = (process.env.CONTACT_EMAIL || 'pontus@eventpartner.io,malin@eventpartner.io,joakim@eventpartner.io,bookings@eventpartner.io')
   .split(',')
   .map((e) => e.trim());
 
 const FROM_EMAIL = 'EventPartner <noreply@eventpartner.io>';
+const CUSTOMER_FROM = 'EventPartner <bookings@eventpartner.io>';
 
 export async function POST(req: NextRequest) {
   try {
@@ -60,7 +61,7 @@ export async function POST(req: NextRequest) {
 
 /* ── Event Inquiry Form ── */
 async function handleEventInquiry(data: Record<string, any>) {
-  const { company, contact, email, phone, country, city, eventType, guests, date, budget, responseTime, message } = data;
+  const { company, contact, email, phone, country, city, eventType, guests, date, budget, responseTime, message, locale } = data;
 
   // Validation
   if (!company || !contact || !email || !phone || !country || !guests) {
@@ -72,9 +73,10 @@ async function handleEventInquiry(data: Record<string, any>) {
     return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
   }
 
-  const dateInfo = typeof date === 'object'
-    ? date.mode === 'exact'
-      ? `${date.from || '—'} → ${date.to || '—'}`
+  // The form sends { from, to, flexibility } — show the dates whenever present.
+  const dateInfo = typeof date === 'object' && date !== null
+    ? (date.from || date.to)
+      ? `${date.from || '—'} → ${date.to || '—'}${date.flexibility && date.flexibility !== 'Exact' ? ` (${date.flexibility})` : ''}`
       : `${date.month || '—'} (${date.flexibility || 'not specified'})`
     : date || 'Not specified';
 
@@ -82,7 +84,7 @@ async function handleEventInquiry(data: Record<string, any>) {
     from: FROM_EMAIL,
     to: TO_EMAILS,
     replyTo: email,
-    subject: `🎯 New Event Inquiry — ${company}`,
+    subject: `🎯 New Event Inquiry — ${esc(company)}`,
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <div style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px;">
@@ -93,47 +95,47 @@ async function handleEventInquiry(data: Record<string, any>) {
         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666; width: 140px;">Company</td>
-            <td style="padding: 12px 0; font-weight: 600;">${company}</td>
+            <td style="padding: 12px 0; font-weight: 600;">${esc(company)}</td>
           </tr>
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666;">Contact</td>
-            <td style="padding: 12px 0;">${contact}</td>
+            <td style="padding: 12px 0;">${esc(contact)}</td>
           </tr>
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666;">Email</td>
-            <td style="padding: 12px 0;"><a href="mailto:${email}" style="color: #6AD8D2;">${email}</a></td>
+            <td style="padding: 12px 0;"><a href="mailto:${esc(email)}" style="color: #6AD8D2;">${esc(email)}</a></td>
           </tr>
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666;">Phone</td>
-            <td style="padding: 12px 0;">${phone}</td>
+            <td style="padding: 12px 0;">${esc(phone)}</td>
           </tr>
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666;">Country</td>
-            <td style="padding: 12px 0;">${country}</td>
+            <td style="padding: 12px 0;">${esc(country)}</td>
           </tr>
-          ${city ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">City</td><td style="padding: 12px 0;">${city}</td></tr>` : ''}
-          ${eventType ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Event Type</td><td style="padding: 12px 0;">${eventType}</td></tr>` : ''}
+          ${city ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">City</td><td style="padding: 12px 0;">${esc(city)}</td></tr>` : ''}
+          ${eventType ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Event Type</td><td style="padding: 12px 0;">${esc(eventType)}</td></tr>` : ''}
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666;">Guests</td>
-            <td style="padding: 12px 0; font-weight: 600;">${guests}</td>
+            <td style="padding: 12px 0; font-weight: 600;">${esc(String(guests))}</td>
           </tr>
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666;">Date</td>
-            <td style="padding: 12px 0;">${dateInfo}</td>
+            <td style="padding: 12px 0;">${esc(dateInfo)}</td>
           </tr>
-          ${budget ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Budget</td><td style="padding: 12px 0;">${budget}</td></tr>` : ''}
-          ${responseTime ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Response Time</td><td style="padding: 12px 0;">${responseTime}</td></tr>` : ''}
+          ${budget ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Budget</td><td style="padding: 12px 0;">${esc(budget)}</td></tr>` : ''}
+          ${responseTime ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Response Time</td><td style="padding: 12px 0;">${esc(responseTime)}</td></tr>` : ''}
         </table>
 
         ${message ? `
           <div style="margin-top: 24px; padding: 20px; background: #f8f9fa; border-radius: 12px;">
             <p style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 8px;">Message</p>
-            <p style="margin: 0; white-space: pre-wrap; line-height: 1.6;">${message}</p>
+            <p style="margin: 0; white-space: pre-wrap; line-height: 1.6;">${esc(message)}</p>
           </div>
         ` : ''}
 
         <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee;">
-          <p style="color: #999; font-size: 12px; margin: 0;">Reply directly to this email to respond to ${contact} at ${email}</p>
+          <p style="color: #999; font-size: 12px; margin: 0;">Reply directly to this email to respond to ${esc(contact)} at ${esc(email)}</p>
         </div>
       </div>
     `,
@@ -144,12 +146,51 @@ async function handleEventInquiry(data: Record<string, any>) {
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
   }
 
+  // Customer autoresponse
+  try {
+    const sv = locale === 'sv';
+    await getResend().emails.send({
+      from: CUSTOMER_FROM,
+      to: email,
+      subject: sv ? 'Tack för din förfrågan — EventPartner' : 'Thank you for your inquiry — EventPartner',
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+          <div style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px; text-align: center;">
+            <h1 style="color: #6AD8D2; font-size: 22px; margin: 0 0 6px;">${sv ? 'Tack för din förfrågan!' : 'Thank you for your inquiry!'}</h1>
+            <p style="color: rgba(255,255,255,0.55); font-size: 13px; margin: 0;">EventPartner</p>
+          </div>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">${sv ? `Hej ${esc(contact)},` : `Hi ${esc(contact)},`}</p>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">
+            ${sv
+              ? `Tack för att du hörde av dig till oss gällande ett event för <strong>${esc(company)}</strong>. Vi har tagit emot din förfrågan och vårt team har redan börjat titta på den.`
+              : `Thank you for reaching out to us regarding an event for <strong>${esc(company)}</strong>. We have received your inquiry and our team is already looking into it.`}
+          </p>
+          <div style="margin: 24px 0; padding: 16px 18px; background: #ecfdf5; border: 1px solid #6AD8D2; border-radius: 12px;">
+            <p style="margin: 0; font-size: 14px; color: #0f766e; line-height: 1.6;">
+              ${sv
+                ? '⏱️ Vi återkommer till dig så snart som möjligt med mer information.'
+                : "⏱️ We'll get back to you as soon as possible with more information."}
+            </p>
+          </div>
+          <p style="font-size: 14px; line-height: 1.7; color: #555;">
+            ${sv ? 'Har du frågor under tiden? Svara bara på detta mejl.' : 'Questions in the meantime? Just reply to this email.'}
+          </p>
+          <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 12px; margin: 0;">${sv ? 'Med vänliga hälsningar,' : 'Best regards,'}<br/>EventPartner · eventpartner.io</p>
+          </div>
+        </div>
+      `,
+    });
+  } catch (e) {
+    console.error('Customer confirmation email failed:', e);
+  }
+
   return NextResponse.json({ success: true });
 }
 
 /* ── VPP / Video Brochure Quote ── */
 async function handleVPPQuote(data: Record<string, any>) {
-  const { name, email, company, product, size, quantity, paper, finish, message } = data;
+  const { name, email, company, product, size, quantity, finish, message, address, country, locale } = data;
 
   if (!name || !email) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -159,7 +200,7 @@ async function handleVPPQuote(data: Record<string, any>) {
     from: FROM_EMAIL,
     to: TO_EMAILS,
     replyTo: email,
-    subject: `📦 Video Brochure Quote — ${company || name}`,
+    subject: `📦 Video Brochure Quote — ${esc(company || name)}`,
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <div style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px;">
@@ -170,24 +211,25 @@ async function handleVPPQuote(data: Record<string, any>) {
         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666; width: 140px;">Name</td>
-            <td style="padding: 12px 0; font-weight: 600;">${name}</td>
+            <td style="padding: 12px 0; font-weight: 600;">${esc(name)}</td>
           </tr>
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666;">Email</td>
-            <td style="padding: 12px 0;"><a href="mailto:${email}" style="color: #6AD8D2;">${email}</a></td>
+            <td style="padding: 12px 0;"><a href="mailto:${esc(email)}" style="color: #6AD8D2;">${esc(email)}</a></td>
           </tr>
-          ${company ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Company</td><td style="padding: 12px 0;">${company}</td></tr>` : ''}
-          ${product ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Product</td><td style="padding: 12px 0; font-weight: 600;">${product}</td></tr>` : ''}
-          ${size ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Size</td><td style="padding: 12px 0;">${size}</td></tr>` : ''}
-          ${quantity ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Quantity</td><td style="padding: 12px 0;">${quantity}</td></tr>` : ''}
-          ${paper ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Paper Type</td><td style="padding: 12px 0;">${paper}</td></tr>` : ''}
-          ${finish ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Finish</td><td style="padding: 12px 0;">${finish}</td></tr>` : ''}
+          ${company ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Company</td><td style="padding: 12px 0;">${esc(company)}</td></tr>` : ''}
+          ${product ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Product</td><td style="padding: 12px 0; font-weight: 600;">${esc(product)}</td></tr>` : ''}
+          ${size ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Size</td><td style="padding: 12px 0;">${esc(size)}</td></tr>` : ''}
+          ${quantity ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Quantity</td><td style="padding: 12px 0;">${esc(String(quantity))}</td></tr>` : ''}
+          ${finish ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Finish</td><td style="padding: 12px 0;">${esc(finish)}</td></tr>` : ''}
+          ${address ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Address</td><td style="padding: 12px 0;">${esc(address)}</td></tr>` : ''}
+          ${country ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Country</td><td style="padding: 12px 0;">${esc(country)}</td></tr>` : ''}
         </table>
 
         ${message ? `
           <div style="margin-top: 24px; padding: 20px; background: #f8f9fa; border-radius: 12px;">
             <p style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 8px;">Additional Details</p>
-            <p style="margin: 0; white-space: pre-wrap; line-height: 1.6;">${message}</p>
+            <p style="margin: 0; white-space: pre-wrap; line-height: 1.6;">${esc(message)}</p>
           </div>
         ` : ''}
       </div>
@@ -197,6 +239,45 @@ async function handleVPPQuote(data: Record<string, any>) {
   if (error) {
     console.error('Resend error:', error);
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+  }
+
+  // Customer autoresponse
+  try {
+    const sv = locale === 'sv';
+    await getResend().emails.send({
+      from: CUSTOMER_FROM,
+      to: email,
+      subject: sv ? 'Tack för din beställning — EventPartner' : 'Thank you for your order — EventPartner',
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+          <div style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px; text-align: center;">
+            <h1 style="color: #6AD8D2; font-size: 22px; margin: 0 0 6px;">${sv ? 'Tack för din förfrågan!' : 'Thank you for your inquiry!'}</h1>
+            <p style="color: rgba(255,255,255,0.55); font-size: 13px; margin: 0;">EventPartner</p>
+          </div>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">${sv ? `Hej ${esc(name)},` : `Hi ${esc(name)},`}</p>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">
+            ${sv
+              ? `Tack för din prisförfrågan gällande <strong>${esc(product)}</strong>. Vi har tagit emot din förfrågan och vårt team granskar den nu.`
+              : `Thank you for your price inquiry regarding <strong>${esc(product)}</strong>. We have received your request and our team is currently reviewing it.`}
+          </p>
+          <div style="margin: 24px 0; padding: 16px 18px; background: #ecfdf5; border: 1px solid #6AD8D2; border-radius: 12px;">
+            <p style="margin: 0; font-size: 14px; color: #0f766e; line-height: 1.6;">
+              ${sv
+                ? '⏱️ Vi återkommer till dig inom kort med en offert.'
+                : "⏱️ We will get back to you shortly with a quote."}
+            </p>
+          </div>
+          <p style="font-size: 14px; line-height: 1.7; color: #555;">
+            ${sv ? 'Har du frågor under tiden? Svara bara på detta mejl.' : 'Questions in the meantime? Just reply to this email.'}
+          </p>
+          <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 12px; margin: 0;">${sv ? 'Med vänliga hälsningar,' : 'Best regards,'}<br/>EventPartner · eventpartner.io</p>
+          </div>
+        </div>
+      `,
+    });
+  } catch (e) {
+    console.error('Customer confirmation email failed:', e);
   }
 
   return NextResponse.json({ success: true });
@@ -463,6 +544,7 @@ async function handleDetailedInquiry(data: Record<string, any>) {
     venueType, preferredLocation, requirements,
     cateringStyle, dietary,
     activities, activitiesDetails,
+    singleRooms, doubleRooms,
     message
   } = data;
 
@@ -502,6 +584,8 @@ async function handleDetailedInquiry(data: Record<string, any>) {
         <tr style="border-bottom: 1px solid #eee;"><td style="padding: 10px 0; color: #666;">Guests</td><td style="padding: 10px 0; font-weight: 600;">${esc(String(guests))}</td></tr>
         <tr style="border-bottom: 1px solid #eee;"><td style="padding: 10px 0; color: #666;">Dates</td><td style="padding: 10px 0;">${esc(startDate)}${endDate ? ` → ${esc(endDate)}` : ''}</td></tr>
         ${budget ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 10px 0; color: #666;">Budget</td><td style="padding: 10px 0;">${esc(budget)}</td></tr>` : ''}
+        ${singleRooms ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 10px 0; color: #666;">Single Rooms</td><td style="padding: 10px 0;">${esc(String(singleRooms))}</td></tr>` : ''}
+        ${doubleRooms ? `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 10px 0; color: #666;">Double Rooms</td><td style="padding: 10px 0;">${esc(String(doubleRooms))}</td></tr>` : ''}
       </table>
 
       <h2 style="font-size: 16px; color: #333; margin: 24px 0 12px; border-bottom: 2px solid #6AD8D2; padding-bottom: 6px;">Preferences & Requirements</h2>
@@ -550,11 +634,18 @@ async function handleDetailedInquiry(data: Record<string, any>) {
 
 /* ── Career Application ── */
 async function handleCareerApplication(data: Record<string, any>) {
-  const { name, email, phone, role, message } = data;
+  const { name, email, phone, role, message, linkedIn } = data;
 
   if (!name || !email || !role) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
+
+  const linkVal = linkedIn || phone || '';
+  const linkedInVal = linkVal
+    ? linkVal.startsWith('http') || linkVal.includes('linkedin.com')
+      ? `<a href="${esc(linkVal)}" style="color: #6AD8D2;">${esc(linkVal)}</a>`
+      : esc(linkVal)
+    : 'Not provided';
 
   const { error } = await getResend().emails.send({
     from: FROM_EMAIL,
@@ -570,7 +661,7 @@ async function handleCareerApplication(data: Record<string, any>) {
         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
           <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666; width: 140px;">Applicant Name</td><td style="padding: 12px 0; font-weight: 600;">${esc(name)}</td></tr>
           <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Email</td><td style="padding: 12px 0;"><a href="mailto:${esc(email)}" style="color: #6AD8D2;">${esc(email)}</a></td></tr>
-          <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Phone</td><td style="padding: 12px 0;">${esc(phone || 'Not provided')}</td></tr>
+          <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">LinkedIn</td><td style="padding: 12px 0;">${linkedInVal}</td></tr>
           <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Role Applied For</td><td style="padding: 12px 0; font-weight: 600; color: #6AD8D2;">${esc(role)}</td></tr>
         </table>
         ${message ? `
@@ -633,7 +724,7 @@ async function handleSupportInquiry(data: Record<string, any>) {
 
 /* ── VIP Member Application ── */
 async function handleVIPInquiry(data: Record<string, any>) {
-  const { name, email, company, phone, message } = data;
+  const { name, email, company, phone, message, locale } = data;
 
   if (!name || !email) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -669,6 +760,45 @@ async function handleVIPInquiry(data: Record<string, any>) {
   if (error) {
     console.error('Resend error:', error);
     return NextResponse.json({ error: 'Failed to send VIP application' }, { status: 500 });
+  }
+
+  // Customer autoresponse
+  try {
+    const sv = locale === 'sv';
+    await getResend().emails.send({
+      from: CUSTOMER_FROM,
+      to: email,
+      subject: sv ? 'Tack för din ansökan — EventPartner VIP' : 'Thank you for your application — EventPartner VIP',
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+          <div style="background: linear-gradient(135deg, #7851A9 0%, #111 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px; text-align: center;">
+            <h1 style="color: #fff; font-size: 22px; margin: 0 0 6px;">${sv ? 'Tack för din ansökan!' : 'Thank you for your application!'}</h1>
+            <p style="color: rgba(255,255,255,0.7); font-size: 13px; margin: 0;">EventPartner VIP</p>
+          </div>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">${sv ? `Hej ${esc(name)},` : `Hi ${esc(name)},`}</p>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">
+            ${sv
+              ? `Tack för din ansökan till EventPartner VIP. Vi har tagit emot din ansökan och vårt team granskar den nu.`
+              : `Thank you for your application to EventPartner VIP. We have received your application and our team is currently reviewing it.`}
+          </p>
+          <div style="margin: 24px 0; padding: 16px 18px; background: #ecfdf5; border: 1px solid #7851A9; border-radius: 12px;">
+            <p style="margin: 0; font-size: 14px; color: #7851A9; line-height: 1.6;">
+              ${sv
+                ? '⏱️ Vi återkommer till dig så snart som möjligt med besked om ditt medlemskap.'
+                : "⏱️ We'll get back to you as soon as possible regarding your membership."}
+            </p>
+          </div>
+          <p style="font-size: 14px; line-height: 1.7; color: #555;">
+            ${sv ? 'Har du frågor under tiden? Svara bara på detta mejl.' : 'Questions in the meantime? Just reply to this email.'}
+          </p>
+          <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 12px; margin: 0;">${sv ? 'Med vänliga hälsningar,' : 'Best regards,'}<br/>EventPartner VIP · eventpartner.io</p>
+          </div>
+        </div>
+      `,
+    });
+  } catch (e) {
+    console.error('Customer confirmation email failed:', e);
   }
 
   return NextResponse.json({ success: true });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from "next/link";
 import { Instagram, Linkedin, Facebook, Globe, ArrowRight, Mail, ChevronDown, MapPin } from "lucide-react";
 import { useState } from "react";
@@ -32,6 +32,33 @@ const FOOTER_LINKS = {
       { label: "FAQ", href: "/faq" },
       { label: "Help center", href: "/help" },
       { label: "Security & Privacy", href: "/security" },
+    ],
+  },
+};
+
+const FOOTER_LINKS_SV: typeof FOOTER_LINKS = {
+  company: {
+    title: "Företaget",
+    links: [
+      { label: "Om oss", href: "/about" },
+      { label: "Ledning", href: "/leadership" },
+      { label: "Karriär", href: "/careers" },
+    ],
+  },
+  services: {
+    title: "Tjänster",
+    links: [
+      { label: "VIP", href: "/vip" },
+      { label: "Webshop", href: "/shop" },
+      { label: "AI-assistent", href: "/ai-assistant" },
+    ],
+  },
+  support: {
+    title: "Support",
+    links: [
+      { label: "FAQ", href: "/faq" },
+      { label: "Hjälpcenter", href: "/help" },
+      { label: "Säkerhet & integritet", href: "/security" },
     ],
   },
 };
@@ -165,6 +192,7 @@ function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: s
 export function Footer({ cms }: { cms?: FooterCMS }) {
   const t = useTranslations('footer');
   const tVpp = useTranslations('vpp');
+  const footerLinks = useLocale() === 'sv' ? FOOTER_LINKS_SV : FOOTER_LINKS;
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [subLoading, setSubLoading] = useState(false);
@@ -302,7 +330,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
             </div>
 
             {/* Link columns */}
-            {Object.values(FOOTER_LINKS).map((section) => (
+            {Object.values(footerLinks).map((section) => (
               <div key={section.title} className="md:col-span-2 md:first:col-start-5">
                 <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-tiffany mb-5">
                   {section.title}

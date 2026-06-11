@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocale } from "next-intl";
 import { ChevronDown, MessageCircle, ArrowRight, HelpCircle, Search } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -13,7 +14,7 @@ const DEFAULT_FAQS = [
   },
   {
     question: "Which countries do you cover?",
-    answer: "We operate across 175 countries with a network of 2,400+ venue partners. From Scandinavia to the Mediterranean, we can source the perfect venue for your event anywhere around the globe."
+    answer: "We operate across 175 countries with access to 340,000+ venues. From Scandinavia to the Mediterranean, we can source the perfect venue for your event anywhere around the globe."
   },
   {
     question: "Is there a cost to use EventPartner's service?",
@@ -37,7 +38,7 @@ const DEFAULT_FAQS = [
   },
   {
     question: "How do I become a VIP member?",
-    answer: "VIP membership is available by invitation or application. Visit our VIP page to learn more about the tiers and benefits, or contact our team directly to discuss your event volume and needs."
+    answer: "VIP membership is available by application. Visit our VIP page to learn more about the programme and its benefits, or contact our team directly to discuss your event volume and needs."
   },
 ];
 
@@ -59,10 +60,11 @@ function AccordionItem({ faq, index, isOpen, onToggle }: { faq: { question: stri
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: 0.05 * index, ease: EASE }}
+      className="bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl hover:border-tiffany/20 transition-colors duration-300 overflow-hidden"
     >
       <button
         onClick={onToggle}
-        className="w-full flex items-start justify-between gap-6 p-6 md:p-8 bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl hover:border-tiffany/20 transition-all duration-300 text-left group"
+        className="w-full flex items-start justify-between gap-6 p-6 md:p-8 text-left group"
       >
         <div className="flex items-start gap-4 min-w-0">
           <span className="font-mono text-[10px] text-tiffany mt-1.5 shrink-0">
@@ -102,6 +104,7 @@ function AccordionItem({ faq, index, isOpen, onToggle }: { faq: { question: stri
 }
 
 export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
+  const sv = useLocale() === 'sv';
   const faqs = cms?.faqs || DEFAULT_FAQS;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [searchQuery, setSearchQuery] = useState("");
@@ -128,7 +131,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
           className="flex justify-between items-center mb-10"
         >
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
-            {cms?.heroLabel || "Frequently Asked Questions"}
+            {cms?.heroLabel || (sv ? "Vanliga frågor" : "Frequently Asked Questions")}
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">
             {cms?.heroLabelRight || "Support"}
@@ -141,8 +144,8 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
           transition={{ duration: 0.9, ease: EASE }}
           className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[0.88] mb-10"
         >
-          {cms?.heroHeadline || "Got"}<br />
-          <span className="text-tiffany">{cms?.heroHeadlineAccent || "questions?"}</span>
+          {cms?.heroHeadline || (sv ? "Har du" : "Got")}<br />
+          <span className="text-tiffany">{cms?.heroHeadlineAccent || (sv ? "frågor?" : "questions?")}</span>
         </motion.h1>
 
         <motion.p
@@ -151,7 +154,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
           transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
           className="text-[clamp(1rem,2vw,1.25rem)] text-[var(--text-secondary)] leading-[1.7] max-w-2xl"
         >
-          {cms?.heroSubtitle || "Everything you need to know about working with EventPartner. Can't find your answer? Our team is always just a message away."}
+          {cms?.heroSubtitle || (sv ? "Allt du behöver veta om att jobba med EventPartner. Hittar du inte svaret? Vårt team är aldrig längre än ett meddelande bort." : "Everything you need to know about working with EventPartner. Can't find your answer? Our team is always just a message away.")}
         </motion.p>
       </section>
 
@@ -168,7 +171,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search questions..."
+            placeholder={sv ? "Sök bland frågorna..." : "Search questions..."}
             className="w-full bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl pl-12 pr-4 py-4 text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-tiffany/40 transition-colors"
           />
         </motion.div>
@@ -194,8 +197,8 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
               className="text-center py-16"
             >
               <HelpCircle className="w-12 h-12 text-[var(--text-muted)] mx-auto mb-4 opacity-40" />
-              <p className="text-[var(--text-secondary)] text-lg">No matching questions found.</p>
-              <p className="text-[var(--text-muted)] text-sm mt-1">Try a different search or contact our team directly.</p>
+              <p className="text-[var(--text-secondary)] text-lg">{sv ? "Inga matchande frågor hittades." : "No matching questions found."}</p>
+              <p className="text-[var(--text-muted)] text-sm mt-1">{sv ? "Prova en annan sökning eller kontakta vårt team direkt." : "Try a different search or contact our team directly."}</p>
             </motion.div>
           )}
         </div>
@@ -220,10 +223,10 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
               </div>
               <div>
                 <p className="text-lg font-display font-medium text-[var(--text-primary)] mb-0.5">
-                  Contact Support
+                  {sv ? "Kontakta supporten" : "Contact Support"}
                 </p>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Reach out to our team for personalized help.
+                  {sv ? "Hör av dig till vårt team för personlig hjälp." : "Reach out to our team for personalized help."}
                 </p>
               </div>
             </div>
@@ -241,10 +244,10 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
               </div>
               <div>
                 <p className="text-lg font-display font-medium text-[var(--text-primary)] mb-0.5">
-                  VIP Programme
+                  {sv ? "VIP-programmet" : "VIP Programme"}
                 </p>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Priority support with dedicated account management.
+                  {sv ? "Prioriterad support med dedikerad kontaktperson." : "Priority support with dedicated account management."}
                 </p>
               </div>
             </div>
@@ -267,10 +270,10 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
         >
           <div>
             <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">
-              {cms?.ctaHeadline || "Still have questions?"}
+              {cms?.ctaHeadline || (sv ? "Har du fler frågor?" : "Still have questions?")}
             </p>
             <p className="text-[var(--text-secondary)] text-sm">
-              {cms?.ctaDescription || "Send us your inquiry and we'll get back to you within 24 hours."}
+              {cms?.ctaDescription || (sv ? "Skicka din fråga så återkommer vi inom 24 timmar." : "Send us your inquiry and we'll get back to you within 24 hours.")}
             </p>
           </div>
           <div className="w-12 h-12 rounded-xl bg-tiffany/10 border border-tiffany/20 flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-tiffany transition-all duration-300 shrink-0 ml-6">

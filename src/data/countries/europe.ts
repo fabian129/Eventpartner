@@ -3,7 +3,7 @@ import type { Country } from './types';
 
 export const EUROPE: Country[] = [
   {
-    slug: "belgium", code: "be", name: "Belgium", nameSv: "Belgien", venues: "75+",
+    slug: "belgium", code: "be", name: "Belgium", nameSv: "Belgien", venues: "4,800+",
     topVenues: [
       { name: "SQUARE Brussels Meeting Centre", city: "Brussels", capacity: "2 200", type: "Conference center" },
       { name: "Flanders Expo", city: "Ghent", capacity: "19 000+", type: "Event Venue" },
@@ -13,7 +13,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "bosnia-herzegovina", code: "ba", name: "Bosnia and Herzegovina", nameSv: "Bosnien och Hercegovina", venues: "75+",
+    slug: "bosnia-herzegovina", code: "ba", name: "Bosnia and Herzegovina", nameSv: "Bosnien och Hercegovina", venues: "1,075+",
     topVenues: [
       { name: "Sarajevo Fair & Congress Center (Skenderija)", city: "Sarajevo", capacity: "10 000+", type: "Event Venue" },
       { name: "Hills Hotel Sarajevo Congress Centre", city: "Sarajevo", capacity: "3 500", type: "Event Venue" },
@@ -23,7 +23,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "croatia", code: "hr", name: "Croatia", nameSv: "Kroatien", venues: "75+",
+    slug: "croatia", code: "hr", name: "Croatia", nameSv: "Kroatien", venues: "1,075+",
     topVenues: [
       { name: "Zagreb Fair Congress Center", city: "Zagreb", capacity: "20 000+", type: "Event Venue" },
       { name: "Dubrovnik Valamar Lacroma Conference Centre", city: "Dubrovnik", capacity: "1 200", type: "Event Venue" },
@@ -33,7 +33,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "czech-republic", code: "cz", name: "Czech Republic", nameSv: "Tjeckien", venues: "75+",
+    slug: "czech-republic", code: "cz", name: "Czech Republic", nameSv: "Tjeckien", venues: "5,625+",
     topVenues: [
       { name: "O2 universum Prague", city: "Prague", capacity: "10 000", type: "Event Venue" },
       { name: "PVA EXPO PRAHA", city: "Prague", capacity: "5 000", type: "Event Venue" },
@@ -43,7 +43,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "estonia", code: "ee", name: "Estonia", nameSv: "Estland", venues: "75+",
+    slug: "estonia", code: "ee", name: "Estonia", nameSv: "Estland", venues: "2,225+",
     topVenues: [
       { name: "Tallinn Creative Hub (Kultuurikatel)", city: "Tallinn", capacity: "6 000", type: "Event Venue" },
       { name: "Eesti Näituste Fair Centre", city: "Tallinn", capacity: "10 000+", type: "Event Venue" },
@@ -53,7 +53,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "france", code: "fr", name: "France", nameSv: "Frankrike", venues: "75+",
+    slug: "france", code: "fr", name: "France", nameSv: "Frankrike", venues: "8,525+",
     topVenues: [
       { name: "Paris Expo Porte de Versailles", city: "Paris", capacity: "200 000+", type: "Event Venue" },
       { name: "Palais des Congrès de Paris", city: "Paris", capacity: "3 700", type: "Event Venue" },
@@ -63,7 +63,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "greece", code: "gr", name: "Greece", nameSv: "Grekland", venues: "75+",
+    slug: "greece", code: "gr", name: "Greece", nameSv: "Grekland", venues: "5,025+",
     topVenues: [
       { name: "Metropolitan Expo Athens", city: "Athens", capacity: "50 000+", type: "Event Venue" },
       { name: "Megaron Athens International Conference Centre", city: "Athens", capacity: "6 000", type: "Event Venue" },
@@ -73,7 +73,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "hungary", code: "hu", name: "Hungary", nameSv: "Ungern", venues: "75+",
+    slug: "hungary", code: "hu", name: "Hungary", nameSv: "Ungern", venues: "5,625+",
     topVenues: [
       { name: "Hungexpo Budapest Congress and Exhibition Center", city: "Budapest", capacity: "36 000+", type: "Event Venue" },
       { name: "Budapest Congress Center", city: "Budapest", capacity: "3 000", type: "Event Venue" },
@@ -83,7 +83,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "iceland", code: "is", name: "Iceland", nameSv: "Island", venues: "75+",
+    slug: "iceland", code: "is", name: "Iceland", nameSv: "Island", venues: "925+",
     topVenues: [
       { name: "Harpa Concert Hall & Conference Centre", city: "Reykjavik", capacity: "3 500+", type: "Event Venue" },
       { name: "Hilton Reykjavik Nordica Conference Centre", city: "Reykjavik", capacity: "2 000", type: "Event Venue" },
@@ -93,7 +93,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "ireland", code: "ie", name: "Ireland", nameSv: "Irland", venues: "75+",
+    slug: "ireland", code: "ie", name: "Ireland", nameSv: "Irland", venues: "4,800+",
     topVenues: [
       { name: "Convention Centre Dublin", city: "Dublin", capacity: "8 000", type: "Event Venue" },
       { name: "RDS Dublin (Royal Dublin Society)", city: "Dublin", capacity: "15 000+", type: "Event Venue" },
@@ -103,7 +103,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "italy", code: "it", name: "Italy", nameSv: "Italien", venues: "75+",
+    slug: "italy", code: "it", name: "Italy", nameSv: "Italien", venues: "8,950+",
     topVenues: [
       { name: "Fiera Milano", city: "Milano", capacity: "100 000+", type: "Event Venue" },
       { name: "Rome Convention Center La Nuvola", city: "Rome", capacity: "8 000", type: "Event Venue" },
@@ -113,7 +113,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "latvia", code: "lv", name: "Latvia", nameSv: "Lettland", venues: "75+",
+    slug: "latvia", code: "lv", name: "Latvia", nameSv: "Lettland", venues: "2,225+",
     topVenues: [
       { name: "Kipsala International Exhibition Centre", city: "Riga", capacity: "15 000+", type: "Event Venue" },
       { name: "ATTA Centre Riga", city: "Riga", capacity: "5 500", type: "Event Venue" },
@@ -123,7 +123,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "lithuania", code: "lt", name: "Lithuania", nameSv: "Litauen", venues: "75+",
+    slug: "lithuania", code: "lt", name: "Lithuania", nameSv: "Litauen", venues: "2,275+",
     topVenues: [
       { name: "Litexpo – Lithuanian Exhibition and Congress Centre", city: "Vilnius", capacity: "15 000+", type: "Event Venue" },
       { name: "LITEXPO Congress Centre", city: "Vilnius", capacity: "5 000", type: "Event Venue" },
@@ -133,7 +133,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "luxembourg", code: "lu", name: "Luxembourg", nameSv: "Luxemburg", venues: "75+",
+    slug: "luxembourg", code: "lu", name: "Luxembourg", nameSv: "Luxemburg", venues: "550+",
     topVenues: [
       { name: "Luxexpo The Box", city: "Luxemburg City", capacity: "20 000+", type: "Event Venue" },
       { name: "European Convention Center Luxembourg (ECCL)", city: "Luxemburg City", capacity: "2 500", type: "Event Venue" },
@@ -143,7 +143,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "malta", code: "mt", name: "Malta", nameSv: "Malta", venues: "75+",
+    slug: "malta", code: "mt", name: "Malta", nameSv: "Malta", venues: "550+",
     topVenues: [
       { name: "Malta Fairs & Conventions Centre (MFCC)", city: "Ta’ Qali", capacity: "10 000+", type: "Event Venue" },
       { name: "Mediterranean Conference Centre", city: "Valletta", capacity: "1 400", type: "Event Venue" },
@@ -153,7 +153,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "montenegro", code: "me", name: "Montenegro", nameSv: "Montenegro", venues: "75+",
+    slug: "montenegro", code: "me", name: "Montenegro", nameSv: "Montenegro", venues: "450+",
     topVenues: [
       { name: "Porto Montenegro Conference & Event Centre", city: "Tivat", capacity: "3 000+", type: "Event Venue" },
       { name: "Hilton Podgorica Conference Centre", city: "Podgorica", capacity: "1 500", type: "Event Venue" },
@@ -163,7 +163,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "netherlands", code: "nl", name: "Netherlands", nameSv: "Nederländerna", venues: "75+",
+    slug: "netherlands", code: "nl", name: "Netherlands", nameSv: "Nederländerna", venues: "4,800+",
     topVenues: [
       { name: "RAI Amsterdam", city: "Amsterdam", capacity: "50 000+", type: "Event Venue" },
       { name: "Jaarbeurs Utrecht", city: "Utrecht", capacity: "30 000+", type: "Event Venue" },
@@ -173,7 +173,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "north-macedonia", code: "mk", name: "North Macedonia", nameSv: "Nordmakedonien", venues: "75+",
+    slug: "north-macedonia", code: "mk", name: "North Macedonia", nameSv: "Nordmakedonien", venues: "1,075+",
     topVenues: [
       { name: "Boris Trajkovski Sports Center & Congress Hall", city: "Skopje", capacity: "10 000+", type: "Event Venue" },
       { name: "Aleksandar Palace Congress Center", city: "Skopje", capacity: "1 500", type: "Event Venue" },
@@ -183,7 +183,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "norway", code: "no", name: "Norway", nameSv: "Norge", venues: "75+",
+    slug: "norway", code: "no", name: "Norway", nameSv: "Norge", venues: "8,375+",
     topVenues: [
       { name: "Oslofjord Convention Center", city: "Melsomvik", capacity: "9 000+", type: "Event Venue" },
       { name: "NOVA Spektrum", city: "Lillestrøm", capacity: "20 000+", type: "Event Venue" },
@@ -193,7 +193,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "poland", code: "pl", name: "Poland", nameSv: "Polen", venues: "75+",
+    slug: "poland", code: "pl", name: "Poland", nameSv: "Polen", venues: "5,625+",
     topVenues: [
       { name: "Katowice International Conference Centre", city: "Katowice", capacity: "15 000", type: "Event Venue" },
       { name: "Expo (EXPO Kraków)", city: "Kraków", capacity: "5 000–7 000", type: "Convention center" },
@@ -203,7 +203,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "portugal", code: "pt", name: "Portugal", nameSv: "Portugal", venues: "75+",
+    slug: "portugal", code: "pt", name: "Portugal", nameSv: "Portugal", venues: "5,025+",
     topVenues: [
       { name: "FIL – Feira Internacional de Lisboa", city: "Lisbon", capacity: "20 000+", type: "Event Venue" },
       { name: "Lisbon Congress Centre (CCL)", city: "Lisbon", capacity: "8 000", type: "Event Venue" },
@@ -213,7 +213,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "romania", code: "ro", name: "Romania", nameSv: "Rumänien", venues: "75+",
+    slug: "romania", code: "ro", name: "Romania", nameSv: "Rumänien", venues: "3,975+",
     topVenues: [
       { name: "Romexpo Exhibition & Convention Center", city: "Bucharest", capacity: "40 000+", type: "Event Venue" },
       { name: "Palace of the Parliament Conference Center", city: "Bucharest", capacity: "5 000+", type: "Event Venue" },
@@ -223,7 +223,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "serbia", code: "rs", name: "Serbia", nameSv: "Serbien", venues: "75+",
+    slug: "serbia", code: "rs", name: "Serbia", nameSv: "Serbien", venues: "1,075+",
     topVenues: [
       { name: "Sava Center", city: "Belgrad", capacity: "7 000+", type: "Event Venue" },
       { name: "Belgrade Fair", city: "Belgrad", capacity: "30 000+", type: "Event Venue" },
@@ -233,7 +233,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "slovakia", code: "sk", name: "Slovakia", nameSv: "Slovakien", venues: "75+",
+    slug: "slovakia", code: "sk", name: "Slovakia", nameSv: "Slovakien", venues: "1,500+",
     topVenues: [
       { name: "Incheba Expo Bratislava", city: "Bratislava", capacity: "15 000+", type: "Event Venue" },
       { name: "x-bionic sphere", city: "Šamorín", capacity: "10 000", type: "Event Venue" },
@@ -243,7 +243,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "slovenia", code: "si", name: "Slovenia", nameSv: "Slovenien", venues: "75+",
+    slug: "slovenia", code: "si", name: "Slovenia", nameSv: "Slovenien", venues: "1,075+",
     topVenues: [
       { name: "Ljubljana Exhibition and Convention Centre (GR – Gospodarsko Razstavišče)", city: "Ljubljana", capacity: "12 000+", type: "Event Venue" },
       { name: "Cankarjev dom", city: "Ljubljana", capacity: "2 000+", type: "Event Venue" },
@@ -253,7 +253,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "spain", code: "es", name: "Spain", nameSv: "Spanien", venues: "75+",
+    slug: "spain", code: "es", name: "Spain", nameSv: "Spanien", venues: "8,950+",
     topVenues: [
       { name: "IFEMA Madrid", city: "Madrid", capacity: "100 000+", type: "Event Venue" },
       { name: "Fira Barcelona", city: "Barcelona", capacity: "120 000+", type: "Event Venue" },
@@ -263,7 +263,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "sweden", code: "se", name: "Sweden", nameSv: "Sverige", venues: "75+",
+    slug: "sweden", code: "se", name: "Sweden", nameSv: "Sverige", venues: "2,475+",
     topVenues: [
       { name: "Stockholmsmässan", city: "Stockholm", capacity: "30 000+", type: "Event Venue" },
       { name: "Svenska Mässan Gothia Towers", city: "Gothenburg", capacity: "18 000+", type: "Event Venue" },
@@ -273,7 +273,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "switzerland", code: "ch", name: "Switzerland", nameSv: "Schweiz", venues: "75+",
+    slug: "switzerland", code: "ch", name: "Switzerland", nameSv: "Schweiz", venues: "5,625+",
     topVenues: [
       { name: "Palexpo Geneva", city: "Geneva", capacity: "50 000+", type: "Event Venue" },
       { name: "Messe Zürich", city: "Zurich", capacity: "20 000+", type: "Event Venue" },
@@ -283,7 +283,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "uk", code: "gb", name: "United Kingdom", nameSv: "Storbritannien", venues: "75+",
+    slug: "uk", code: "gb", name: "United Kingdom", nameSv: "Storbritannien", venues: "8,525+",
     topVenues: [
       { name: "ExCeL London", city: "London", capacity: "68 000+", type: "Event Venue" },
       { name: "ICC Birmingham", city: "Birmingham", capacity: "10 000", type: "Event Venue" },
@@ -293,7 +293,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "albania", code: "al", name: "Albania", nameSv: "Albanien", venues: "50+",
+    slug: "albania", code: "al", name: "Albania", nameSv: "Albanien", venues: "1,075+",
     topVenues: [
       { name: "Palace of Congresses Tirana", city: "Tirana", capacity: "2 000", type: "Convention center" },
       { name: "Tirana International Hotel & Conference Centre", city: "Tirana", capacity: "1 500", type: "Hotel & Conference" },
@@ -303,7 +303,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "andorra", code: "ad", name: "Andorra", nameSv: "Andorra", venues: "50+",
+    slug: "andorra", code: "ad", name: "Andorra", nameSv: "Andorra", venues: "450+",
     topVenues: [
       { name: "Centre de Congressos d'Andorra la Vella", city: "Andorra la Vella", capacity: "1 000", type: "Convention center" },
       { name: "Andorra Park Hotel Conference Centre", city: "Andorra la Vella", capacity: "500", type: "Hotel & Conference" },
@@ -313,7 +313,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "bulgaria", code: "bg", name: "Bulgaria", nameSv: "Bulgarien", venues: "100+",
+    slug: "bulgaria", code: "bg", name: "Bulgaria", nameSv: "Bulgarien", venues: "1,450+",
     topVenues: [
       { name: "National Palace of Culture (NDK)", city: "Sofia", capacity: "8 000", type: "Convention center" },
       { name: "Inter Expo Center Sofia", city: "Sofia", capacity: "6 000", type: "Exhibition center" },
@@ -323,7 +323,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "denmark", code: "dk", name: "Denmark", nameSv: "Danmark", venues: "100+",
+    slug: "denmark", code: "dk", name: "Denmark", nameSv: "Danmark", venues: "4,100+",
     topVenues: [
       { name: "Bella Center Copenhagen", city: "Copenhagen", capacity: "20 000+", type: "Convention center" },
       { name: "Tivoli Hotel & Congress Center", city: "Copenhagen", capacity: "3 000", type: "Convention center" },
@@ -333,7 +333,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "finland", code: "fi", name: "Finland", nameSv: "Finland", venues: "100+",
+    slug: "finland", code: "fi", name: "Finland", nameSv: "Finland", venues: "4,100+",
     topVenues: [
       { name: "Messukeskus Helsinki Expo & Convention Centre", city: "Helsinki", capacity: "20 000+", type: "Convention center" },
       { name: "Finlandia Hall", city: "Helsinki", capacity: "3 500", type: "Convention center" },
@@ -343,7 +343,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "germany", code: "de", name: "Germany", nameSv: "Tyskland", venues: "200+",
+    slug: "germany", code: "de", name: "Germany", nameSv: "Tyskland", venues: "9,650+",
     topVenues: [
       { name: "Messe Frankfurt", city: "Frankfurt", capacity: "300 000+", type: "Exhibition center" },
       { name: "Messe München", city: "Munich", capacity: "200 000+", type: "Exhibition center" },
@@ -353,7 +353,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "gibraltar", code: "gi", name: "Gibraltar", nameSv: "Gibraltar", venues: "50+",
+    slug: "gibraltar", code: "gi", name: "Gibraltar", nameSv: "Gibraltar", venues: "1,075+",
     topVenues: [
       { name: "John Mackintosh Hall Conference Centre", city: "Gibraltar", capacity: "800", type: "Convention center" },
       { name: "Sunborn Gibraltar Conference Centre", city: "Gibraltar", capacity: "500", type: "Hotel & Conference" },
@@ -363,7 +363,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "moldova", code: "md", name: "Moldova", nameSv: "Moldavien", venues: "50+",
+    slug: "moldova", code: "md", name: "Moldova", nameSv: "Moldavien", venues: "1,450+",
     topVenues: [
       { name: "Moldexpo Exhibition Centre", city: "Chișinău", capacity: "10 000+", type: "Exhibition center" },
       { name: "Radisson Blu Leogrand Conference Centre", city: "Chișinău", capacity: "1 500", type: "Hotel & Conference" },
@@ -373,7 +373,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "monaco", code: "mc", name: "Monaco", nameSv: "Monaco", venues: "50+",
+    slug: "monaco", code: "mc", name: "Monaco", nameSv: "Monaco", venues: "450+",
     topVenues: [
       { name: "Grimaldi Forum Monaco", city: "Monaco", capacity: "3 000", type: "Convention center" },
       { name: "Monte-Carlo Bay Hotel Conference Centre", city: "Monaco", capacity: "1 500", type: "Hotel & Conference" },
@@ -383,7 +383,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "ukraine", code: "ua", name: "Ukraine", nameSv: "Ukraina", venues: "100+",
+    slug: "ukraine", code: "ua", name: "Ukraine", nameSv: "Ukraina", venues: "1,450+",
     topVenues: [
       { name: "Kyiv International Exhibition Centre (KyivExpoPlaza)", city: "Kyiv", capacity: "30 000+", type: "Exhibition center" },
       { name: "Ukrainian House Conference Centre", city: "Kyiv", capacity: "3 000", type: "Convention center" },
@@ -393,7 +393,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "austria", code: "at", name: "Austria", nameSv: "Österrike", venues: "75+",
+    slug: "austria", code: "at", name: "Austria", nameSv: "Österrike", venues: "4,200+",
     topVenues: [
       { name: "Messe Wien Exhibition & Congress Center", city: "Vienna", capacity: "25 000+", type: "Exhibition center" },
       { name: "Austria Center Vienna", city: "Vienna", capacity: "22 000", type: "Convention center" },
@@ -403,7 +403,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "cyprus", code: "cy", name: "Cyprus", nameSv: "Cypern", venues: "75+",
+    slug: "cyprus", code: "cy", name: "Cyprus", nameSv: "Cypern", venues: "850+",
     topVenues: [
       { name: "Filoxenia Conference Centre", city: "Nicosia", capacity: "1 200", type: "Convention center" },
       { name: "Parklane Resort & Spa Convention Centre", city: "Limassol", capacity: "2 000", type: "Hotel & Conference" },

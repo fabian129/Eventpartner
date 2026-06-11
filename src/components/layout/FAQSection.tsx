@@ -167,7 +167,7 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
             {cms?.ctaText || "Can't find the answer you're looking for?"}
           </p>
           <a
-            href="#request"
+            href="mailto:support@eventpartner.io"
             className="inline-flex items-center gap-2 text-[14px] font-medium text-tiffany hover:text-[#A3E4DE] transition-colors duration-300"
           >
             {cms?.ctaLink || "Contact us directly →"}

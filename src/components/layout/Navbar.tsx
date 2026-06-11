@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import Image from "next/image";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { useSmoothScroll } from "@/components/utils/SmoothScroll";
 
@@ -30,16 +30,15 @@ interface NavCMS {
   cta?: string;
 }
 
-const DEFAULT_LINKS: NavLink[] = [
-  { label: "VIP", href: "/vip" },
-  { label: "Customize", href: "/customize" },
-  { label: "Shop", href: "/shop" },
-  { label: "About", href: "/about" },
-];
-
 export function Navbar({ cms }: { cms?: NavCMS }) {
-  const NAV_LINKS = DEFAULT_LINKS;
-  const ctaText = cms?.cta || "Book Event →";
+  const t = useTranslations('nav');
+  const NAV_LINKS: NavLink[] = [
+    { label: t('vip'), href: "/vip" },
+    { label: t('customize'), href: "/customize" },
+    { label: t('shop'), href: "/shop" },
+    { label: t('about'), href: "/about" },
+  ];
+  const ctaText = cms?.cta || t('bookEvent');
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);

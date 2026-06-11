@@ -220,8 +220,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           labelRight: t(data.ctaLabelRight),
           headline: t(data.ctaHeadline),
           subheadline: t(data.ctaSubheadline),
-          card1Title: t(data.ctaCard1Title),
-          card1Desc: t(data.ctaCard1Desc),
           card2Title: t(data.ctaCard2Title),
           card2Headline: t(data.ctaCard2Headline),
           card2Sub: t(data.ctaCard2Sub),

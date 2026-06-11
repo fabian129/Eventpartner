@@ -8,7 +8,8 @@ import {
   ArrowRight, ArrowLeft, X, Send, CheckCircle,
   ChevronLeft, ChevronRight, Monitor, Layers, Palette, Calendar,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { BOOKING_LINKS } from "@/lib/bookingLinks";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -415,20 +416,21 @@ function TrustedByStrip() {
 
 /* ─── Quote Form ─── */
 const SCREEN_SIZES = ["2.4″", "4.3″", "5″", "7″", "10″"];
-const PAPER_TYPES = ["350gsm Art Card", "400gsm C1S", "Standard"];
-const FINISH_OPTIONS = ["Matte Lamination", "Gloss Lamination", "Spot UV", "Soft Touch"];
-const QUANTITY_OPTIONS = ["50 – 100", "100 – 300", "300 – 500", "500 – 1,000", "1,000+"];
+const FINISH_OPTIONS = ["Matte", "Glossy"];
 
 function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct: string; productTypes: string[] }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const t = useTranslations('vpp');
+  const locale = useLocale();
+  const sv = locale === 'sv';
+
   const [form, setForm] = useState({
     name: '', company: '', email: '', phone: '',
     product: preselectedProduct, size: '', quantity: '',
-    paper: '', finish: '', message: '',
+    finish: '', message: '', address: '', country: '',
   });
-  const t = useTranslations('vpp');
 
   // Update product when preselected changes
   useState(() => { setForm(prev => ({ ...prev, product: preselectedProduct })); });
@@ -445,7 +447,7 @@ function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'vpp-quote', ...form }),
+        body: JSON.stringify({ type: 'vpp-quote', locale, ...form }),
       });
 
       if (!res.ok) {
@@ -473,7 +475,7 @@ function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct
           </div>
           <h3 className="text-2xl font-display font-semibold text-[var(--text-primary)] mb-2">{t('quoteSuccess.title')}</h3>
           <p className="text-[var(--text-secondary)] max-w-md">{t('quoteSuccess.description')}</p>
-          <button onClick={() => { setSubmitted(false); setForm({ name: '', company: '', email: '', phone: '', product: '', size: '', quantity: '', paper: '', finish: '', message: '' }); }} className="mt-6 text-tiffany text-sm font-medium hover:underline">{t('quoteSuccess.submitAnother')}</button>
+          <button onClick={() => { setSubmitted(false); setForm({ name: '', company: '', email: '', phone: '', product: '', size: '', quantity: '', finish: '', message: '', address: '', country: '' }); }} className="mt-6 text-tiffany text-sm font-medium hover:underline">{t('quoteSuccess.submitAnother')}</button>
         </div>
       </div>
     );
@@ -492,6 +494,10 @@ function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div><label className={labelClass}>{t('quoteForm.email')}</label><input type="email" required placeholder="you@company.com" className={inputClass} value={form.email} onChange={set('email')} /></div>
           <div><label className={labelClass}>{t('quoteForm.phone')}</label><input type="tel" placeholder="+1 234 567 890" className={inputClass} value={form.phone} onChange={set('phone')} /></div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div><label className={labelClass}>{sv ? "Adress" : "Address"}</label><input type="text" placeholder={sv ? "Gatuadress" : "Street address"} className={inputClass} value={form.address} onChange={set('address')} /></div>
+          <div><label className={labelClass}>{sv ? "Land" : "Country"}</label><input type="text" placeholder={sv ? "Land" : "Country"} className={inputClass} value={form.country} onChange={set('country')} /></div>
         </div>
 
         <div className="h-px bg-[var(--border-default)]" />
@@ -513,20 +519,19 @@ function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct
             </select>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
             <label className={labelClass}>{t('quoteForm.quantity')}</label>
-            <select required className={inputClass} value={form.quantity} onChange={set('quantity')}>
-              <option value="">{t('quoteForm.selectQty')}</option>
-              {QUANTITY_OPTIONS.map((q) => <option key={q} value={q}>{q}</option>)}
-            </select>
-          </div>
-          <div>
-            <label className={labelClass}>{t('quoteForm.paperType')}</label>
-            <select className={inputClass} value={form.paper} onChange={set('paper')}>
-              <option value="">{t('quoteForm.selectPaper')}</option>
-              {PAPER_TYPES.map((p) => <option key={p} value={p}>{p}</option>)}
-            </select>
+            <input
+              type="number"
+              min={1}
+              step={1}
+              placeholder="200"
+              required
+              className={inputClass}
+              value={form.quantity}
+              onChange={set('quantity')}
+            />
           </div>
           <div>
             <label className={labelClass}>{t('quoteForm.finish')}</label>
@@ -586,7 +591,7 @@ function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct
           </div>
         </div>
         <a
-          href="https://www.cal.eu/premium-videobrochures"
+          href={BOOKING_LINKS.vpp}
           target="_blank"
           rel="noopener noreferrer"
           className="w-full md:w-auto shrink-0 whitespace-nowrap inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors bg-black/5 hover:bg-black/10 text-[#111] border border-black/5"
@@ -642,6 +647,7 @@ export function VPPShowcase() {
           <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{t('quoteLabel')}</span>
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]" dangerouslySetInnerHTML={{ __html: t('quoteHeadline').replace(/\n/g, '<br />') }} />
+            <p className="font-mono text-[11px] text-tiffany mt-3">{t('priceHint')}</p>
             <p className="text-[var(--text-secondary)] text-[15px] leading-[1.8] mt-6">
               {t('quoteDescription')}
             </p>

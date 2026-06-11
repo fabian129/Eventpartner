@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Crown, Star, Shield, Users, Clock, Gift, ArrowRight, Check, Sparkles, X, Send, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
+import { BOOKING_LINKS } from "@/lib/bookingLinks";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -56,7 +57,8 @@ interface VIPCMS {
 
 export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
   const t = useTranslations('vipPage');
-  const sv = useLocale() === 'sv';
+  const locale = useLocale();
+  const sv = locale === 'sv';
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -84,6 +86,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "vip-inquiry",
+          locale,
           ...form
         })
       });
@@ -125,7 +128,6 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 pb-20 md:pb-32">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, ease: EASE }} className="flex justify-between items-start mb-10">
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.heroLabel || t('heroLabel')}</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)] text-right">{cms?.heroLabelRight || t('heroLabelRight')}</span>
         </motion.div>
 
         <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 1, ease: EASE }} className="font-display text-[clamp(2.8rem,7vw,5.5rem)] font-medium tracking-[-0.04em] text-[var(--text-primary)] leading-[0.92] mb-16 md:mb-20">
@@ -174,7 +176,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
       </section>
 
       {/* Tiers — Single VIP Card */}
-      <section className="max-w-[1400px] mx-auto px-6 md:px-10 py-24 md:py-32">
+      <section id="apply" className="max-w-[1400px] mx-auto px-6 md:px-10 py-24 md:py-32 scroll-mt-24">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }} className="mb-14">
           <div className="flex justify-between items-start mb-10">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.tiersLabel || t('tiersLabel')}</span>
@@ -218,14 +220,6 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                     <span className="text-[13px] leading-relaxed text-white/45">{f}</span>
                   </li>
                 ))}
-                <li className="flex items-start gap-3">
-                  <Check className="w-4 h-4 mt-0.5 shrink-0 text-purple/60" />
-                  <span className="text-[13px] leading-relaxed text-white/45">
-                    {sv
-                      ? "33% medlemsrabatt i vår webshop — på allt."
-                      : "33% members' discount in our webshop — on everything."}
-                  </span>
-                </li>
                 <li className="flex items-start gap-3 md:col-span-2">
                   <Check className="w-4 h-4 mt-0.5 shrink-0 text-purple/60" />
                   <span className="text-[13px] leading-relaxed text-white/45">
@@ -276,7 +270,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 pb-24 md:pb-32">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }}>
           <div className="max-w-[800px] grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-3 md:gap-4">
-            <a href="https://cal.com/eventpartner/15min" target="_blank" rel="noopener noreferrer" className="group text-left flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[var(--text-muted)] transition-all duration-300 min-h-[130px] w-full">
+            <a href={BOOKING_LINKS.vip} target="_blank" rel="noopener noreferrer" className="group text-left flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[var(--text-muted)] transition-all duration-300 min-h-[130px] w-full">
               <span className="text-[13px] font-semibold text-[var(--text-secondary)]">{cms?.ctaCard1Title || t('ctaCard1Title')}</span>
               <div className="flex items-end justify-between mt-4 w-full">
                 <p className="text-[15px] md:text-[17px] text-[var(--text-muted)] leading-snug max-w-[200px]">{cms?.ctaCard1Desc || t('ctaCard1Desc')}</p>
@@ -418,7 +412,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                     <p className="text-xs text-[var(--text-muted)]">
                       {t('modalMeetingText')}{" "}
                       <a
-                        href="https://cal.com/eventpartner/15min"
+                        href={BOOKING_LINKS.vip}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-purple hover:text-purple-light transition-colors font-medium underline"

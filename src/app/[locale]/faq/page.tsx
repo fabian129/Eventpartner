@@ -31,11 +31,11 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
         cta: t(homeData.navCta),
       } : undefined} />
       <FaqPageContent cms={data ? {
-        heroLabel: t(data.heroLabel),
+        heroLabel: t(data.headline),
         heroLabelRight: t(data.heroLabelRight),
         heroHeadline: t(data.heroHeadline),
         heroHeadlineAccent: t(data.heroHeadlineAccent),
-        heroSubtitle: t(data.heroSubtitle),
+        heroSubtitle: t(data.description),
         faqs: data.faqs?.map((faq: any) => ({
           question: t(faq.question),
           answer: t(faq.answer),

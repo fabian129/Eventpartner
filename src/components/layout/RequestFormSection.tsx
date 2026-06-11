@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 import Image from "next/image";
 
@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Send, CheckCircle, ArrowRight, ExternalLink, Calendar, Loader2 } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import Link from "next/link";
+import { BOOKING_LINKS } from "@/lib/bookingLinks";
 
 export function RequestFormSection({ cms }: { cms?: {
   badge?: string;
@@ -36,6 +37,7 @@ export function RequestFormSection({ cms }: { cms?: {
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const t = useTranslations('requestForm');
+  const locale = useLocale();
 
   // Controlled form state
   const [form, setForm] = useState({
@@ -65,6 +67,7 @@ export function RequestFormSection({ cms }: { cms?: {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           type: 'event-inquiry',
+          locale,
           company: form.company,
           contact: form.contact,
           email: form.email,
@@ -203,20 +206,17 @@ export function RequestFormSection({ cms }: { cms?: {
               <label className={labelClass}>{t('fields.eventType.label')}</label>
               <select className={inputClass} value={form.eventType} onChange={set('eventType')}>
                 <option value="">{t('fields.eventType.placeholder')}</option>
-                <option>Conference</option>
-                <option>Corporate Event</option>
-                <option>Team Building</option>
-                <option>Product Launch</option>
-                <option>Gala / Dinner</option>
-                <option>Kick-off</option>
-                <option>Other</option>
+                {(locale === 'sv'
+                  ? ["Konferens", "Företagsevent", "Teambuilding", "Produktlansering", "Gala / Middag", "Kickoff", "Annat"]
+                  : ["Conference", "Corporate Event", "Team Building", "Product Launch", "Gala / Dinner", "Kick-off", "Other"]
+                ).map((o) => <option key={o}>{o}</option>)}
               </select>
             </div>
             <div>
               <label className={labelClass}>{t('fields.guests.label')}{requiredStar}</label>
               <input
                 type="number"
-                placeholder="Enter exact number"
+                placeholder={locale === 'sv' ? 'Ange exakt antal' : 'Enter exact number'}
                 min={1}
                 required
                 className={inputClass}
@@ -229,11 +229,11 @@ export function RequestFormSection({ cms }: { cms?: {
               <div className="grid grid-cols-2 gap-2 mb-3">
                 <div>
                   <span className="block font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-1">From / Från</span>
-                  <input type="date" className={inputClass} value={form.dateFrom} onChange={set('dateFrom')} />
+                  <input type="date" min={new Date().toISOString().split('T')[0]} className={inputClass} value={form.dateFrom} onChange={set('dateFrom')} />
                 </div>
                 <div>
                   <span className="block font-mono text-[8px] uppercase tracking-[0.12em] text-[var(--text-dim)] mb-1">To / Till</span>
-                  <input type="date" className={inputClass} value={form.dateTo} onChange={set('dateTo')} />
+                  <input type="date" min={new Date().toISOString().split('T')[0]} className={inputClass} value={form.dateTo} onChange={set('dateTo')} />
                 </div>
               </div>
 
@@ -389,7 +389,7 @@ export function RequestFormSection({ cms }: { cms?: {
             </div>
           </div>
           <a
-            href="https://cal.com/eventpartner/15min"
+            href={BOOKING_LINKS.requestForm}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors ${

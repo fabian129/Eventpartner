@@ -3,7 +3,7 @@ import type { Country } from './types';
 
 export const ASIA_PACIFIC: Country[] = [
   {
-    slug: "afghanistan", code: "af", name: "Afghanistan", nameSv: "Afghanistan", venues: "50+",
+    slug: "afghanistan", code: "af", name: "Afghanistan", nameSv: "Afghanistan", venues: "900+",
     topVenues: [
       { name: "Inter-Continental Kabul", city: "Kabul", capacity: "800", type: "Hotel & Conference" },
       { name: "Kabul Serena Hotel Conference Centre", city: "Kabul", capacity: "600", type: "Hotel & Conference" },
@@ -13,7 +13,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "armenia", code: "am", name: "Armenia", nameSv: "Armenien", venues: "50+",
+    slug: "armenia", code: "am", name: "Armenia", nameSv: "Armenien", venues: "900+",
     topVenues: [
       { name: "Karen Demirchyan Sports & Concerts Complex", city: "Yerevan", capacity: "8 000", type: "Event Venue" },
       { name: "Yerevan Expo Center", city: "Yerevan", capacity: "5 000", type: "Exhibition center" },
@@ -23,7 +23,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "australia", code: "au", name: "Australia", nameSv: "Australien", venues: "200+",
+    slug: "australia", code: "au", name: "Australia", nameSv: "Australien", venues: "6,075+",
     topVenues: [
       { name: "ICC Sydney", city: "Sydney", capacity: "12 000", type: "Convention center" },
       { name: "Melbourne Convention & Exhibition Centre", city: "Melbourne", capacity: "5 500", type: "Convention center" },
@@ -33,7 +33,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "azerbaijan", code: "az", name: "Azerbaijan", nameSv: "Azerbajdzjan", venues: "50+",
+    slug: "azerbaijan", code: "az", name: "Azerbaijan", nameSv: "Azerbajdzjan", venues: "900+",
     topVenues: [
       { name: "Baku Expo Center", city: "Baku", capacity: "20 000+", type: "Exhibition center" },
       { name: "Heydar Aliyev Center", city: "Baku", capacity: "3 000", type: "Convention center" },
@@ -43,7 +43,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "bangladesh", code: "bd", name: "Bangladesh", nameSv: "Bangladesh", venues: "100+",
+    slug: "bangladesh", code: "bd", name: "Bangladesh", nameSv: "Bangladesh", venues: "900+",
     topVenues: [
       { name: "Bangabandhu International Conference Centre", city: "Dhaka", capacity: "8 000", type: "Convention center" },
       { name: "International Convention City Bashundhara", city: "Dhaka", capacity: "12 000", type: "Convention center" },
@@ -53,7 +53,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "bhutan", code: "bt", name: "Bhutan", nameSv: "Bhutan", venues: "50+",
+    slug: "bhutan", code: "bt", name: "Bhutan", nameSv: "Bhutan", venues: "375+",
     topVenues: [
       { name: "Bhutan International Convention Centre", city: "Thimphu", capacity: "1 500", type: "Convention center" },
       { name: "Le Méridien Thimphu Conference Centre", city: "Thimphu", capacity: "500", type: "Hotel & Conference" },
@@ -63,7 +63,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "brunei", code: "bn", name: "Brunei", nameSv: "Brunei", venues: "50+",
+    slug: "brunei", code: "bn", name: "Brunei", nameSv: "Brunei", venues: "375+",
     topVenues: [
       { name: "International Convention Centre Brunei", city: "Bandar Seri Begawan", capacity: "5 000", type: "Convention center" },
       { name: "The Empire Hotel & Country Club Conference Centre", city: "Jerudong", capacity: "2 000", type: "Hotel & Conference" },
@@ -73,7 +73,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "cambodia", code: "kh", name: "Cambodia", nameSv: "Kambodja", venues: "50+",
+    slug: "cambodia", code: "kh", name: "Cambodia", nameSv: "Kambodja", venues: "900+",
     topVenues: [
       { name: "Sokha Phnom Penh Hotel & Residence Convention", city: "Phnom Penh", capacity: "5 000", type: "Hotel & Conference" },
       { name: "Diamond Island Convention & Exhibition Centre", city: "Phnom Penh", capacity: "8 000", type: "Convention center" },
@@ -83,7 +83,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "china", code: "cn", name: "China", nameSv: "Kina", venues: "200+",
+    slug: "china", code: "cn", name: "China", nameSv: "Kina", venues: "6,075+",
     topVenues: [
       { name: "China National Convention Center", city: "Beijing", capacity: "50 000+", type: "Convention center" },
       { name: "Shanghai National Exhibition and Convention Center", city: "Shanghai", capacity: "500 000+", type: "Exhibition center" },
@@ -93,7 +93,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "fiji", code: "fj", name: "Fiji", nameSv: "Fiji", venues: "50+",
+    slug: "fiji", code: "fj", name: "Fiji", nameSv: "Fiji", venues: "375+",
     topVenues: [
       { name: "Grand Pacific Hotel Conference Centre", city: "Suva", capacity: "800", type: "Hotel & Conference" },
       { name: "Sofitel Fiji Resort Conference Centre", city: "Denarau Island", capacity: "1 500", type: "Resort & Conference" },
@@ -103,7 +103,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "georgia", code: "ge", name: "Georgia", nameSv: "Georgien", venues: "100+",
+    slug: "georgia", code: "ge", name: "Georgia", nameSv: "Georgien", venues: "1,025+",
     topVenues: [
       { name: "Expo Georgia Exhibition Center", city: "Tbilisi", capacity: "10 000+", type: "Exhibition center" },
       { name: "Tbilisi Concert Hall & Convention Center", city: "Tbilisi", capacity: "3 000", type: "Convention center" },
@@ -113,7 +113,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "hong-kong", code: "hk", name: "Hong Kong", nameSv: "Hongkong", venues: "200+",
+    slug: "hong-kong", code: "hk", name: "Hong Kong", nameSv: "Hongkong", venues: "900+",
     topVenues: [
       { name: "Hong Kong Convention & Exhibition Centre", city: "Wan Chai", capacity: "70 000+", type: "Convention center" },
       { name: "AsiaWorld-Expo", city: "Lantau Island", capacity: "70 000+", type: "Exhibition center" },
@@ -123,7 +123,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "india", code: "in", name: "India", nameSv: "Indien", venues: "200+",
+    slug: "india", code: "in", name: "India", nameSv: "Indien", venues: "6,075+",
     topVenues: [
       { name: "India Expo Mart", city: "Greater Noida", capacity: "100 000+", type: "Exhibition center" },
       { name: "Bombay Exhibition Centre", city: "Mumbai", capacity: "50 000+", type: "Exhibition center" },
@@ -133,7 +133,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "indonesia", code: "id", name: "Indonesia", nameSv: "Indonesien", venues: "200+",
+    slug: "indonesia", code: "id", name: "Indonesia", nameSv: "Indonesien", venues: "3,425+",
     topVenues: [
       { name: "Jakarta Convention Center", city: "Jakarta", capacity: "10 000", type: "Convention center" },
       { name: "Indonesia Convention Exhibition (ICE BSD)", city: "Tangerang", capacity: "50 000+", type: "Convention center" },
@@ -143,7 +143,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "japan", code: "jp", name: "Japan", nameSv: "Japan", venues: "200+",
+    slug: "japan", code: "jp", name: "Japan", nameSv: "Japan", venues: "6,075+",
     topVenues: [
       { name: "Tokyo Big Sight", city: "Tokyo", capacity: "115 000+", type: "Exhibition center" },
       { name: "Makuhari Messe", city: "Chiba", capacity: "72 000+", type: "Convention center" },
@@ -153,7 +153,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "kazakhstan", code: "kz", name: "Kazakhstan", nameSv: "Kazakhstan", venues: "100+",
+    slug: "kazakhstan", code: "kz", name: "Kazakhstan", nameSv: "Kazakhstan", venues: "900+",
     topVenues: [
       { name: "Astana EXPO International Exhibition Centre", city: "Astana", capacity: "50 000+", type: "Exhibition center" },
       { name: "Kazakhstan Central Concert Hall", city: "Astana", capacity: "3 500", type: "Convention center" },
@@ -163,7 +163,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "kiribati", code: "ki", name: "Kiribati", nameSv: "Kiribati", venues: "50+",
+    slug: "kiribati", code: "ki", name: "Kiribati", nameSv: "Kiribati", venues: "375+",
     topVenues: [
       { name: "Betio Convention Centre", city: "Tarawa", capacity: "500", type: "Convention center" },
       { name: "Otintaai Hotel Conference Centre", city: "Tarawa", capacity: "200", type: "Hotel & Conference" },
@@ -173,7 +173,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "kyrgyzstan", code: "kg", name: "Kyrgyzstan", nameSv: "Kirgizistan", venues: "50+",
+    slug: "kyrgyzstan", code: "kg", name: "Kyrgyzstan", nameSv: "Kirgizistan", venues: "900+",
     topVenues: [
       { name: "Ala-Too International Conference Centre", city: "Bishkek", capacity: "3 000", type: "Convention center" },
       { name: "Hyatt Regency Bishkek Conference Centre", city: "Bishkek", capacity: "1 500", type: "Hotel & Conference" },
@@ -183,7 +183,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "laos", code: "la", name: "Laos", nameSv: "Laos", venues: "50+",
+    slug: "laos", code: "la", name: "Laos", nameSv: "Laos", venues: "900+",
     topVenues: [
       { name: "National Convention Centre Vientiane", city: "Vientiane", capacity: "4 000", type: "Convention center" },
       { name: "Lao International Trade Exhibition Centre", city: "Vientiane", capacity: "5 000+", type: "Exhibition center" },
@@ -193,7 +193,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "macau", code: "mo", name: "Macau", nameSv: "Macau", venues: "50+",
+    slug: "macau", code: "mo", name: "Macau", nameSv: "Macau", venues: "900+",
     topVenues: [
       { name: "The Venetian Macao Convention & Exhibition Centre", city: "Cotai", capacity: "75 000+", type: "Convention center" },
       { name: "Galaxy International Convention Center", city: "Cotai", capacity: "16 000", type: "Convention center" },
@@ -203,7 +203,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "malaysia", code: "my", name: "Malaysia", nameSv: "Malaysia", venues: "200+",
+    slug: "malaysia", code: "my", name: "Malaysia", nameSv: "Malaysia", venues: "3,425+",
     topVenues: [
       { name: "Kuala Lumpur Convention Centre", city: "Kuala Lumpur", capacity: "12 000", type: "Convention center" },
       { name: "Malaysia International Trade & Exhibition Centre", city: "Kuala Lumpur", capacity: "22 000+", type: "Exhibition center" },
@@ -213,7 +213,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "maldives", code: "mv", name: "Maldives", nameSv: "Maldiverna", venues: "50+",
+    slug: "maldives", code: "mv", name: "Maldives", nameSv: "Maldiverna", venues: "375+",
     topVenues: [
       { name: "Dharubaaruge Convention Centre", city: "Malé", capacity: "2 000", type: "Convention center" },
       { name: "Kurumba Maldives Convention Centre", city: "North Malé Atoll", capacity: "600", type: "Resort & Conference" },
@@ -223,7 +223,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "marshall-islands", code: "mh", name: "Marshall Islands", nameSv: "Marshallöarna", venues: "50+",
+    slug: "marshall-islands", code: "mh", name: "Marshall Islands", nameSv: "Marshallöarna", venues: "375+",
     topVenues: [
       { name: "International Conference Center Majuro", city: "Majuro", capacity: "500", type: "Convention center" },
       { name: "Marshall Islands Resort Conference Centre", city: "Majuro", capacity: "300", type: "Hotel & Conference" },
@@ -233,7 +233,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "micronesia", code: "fm", name: "Micronesia", nameSv: "Mikronesien", venues: "50+",
+    slug: "micronesia", code: "fm", name: "Micronesia", nameSv: "Mikronesien", venues: "375+",
     topVenues: [
       { name: "FSM National Convention Center", city: "Palikir", capacity: "500", type: "Convention center" },
       { name: "Cliff Rainbow Hotel Conference", city: "Chuuk", capacity: "200", type: "Hotel & Conference" },
@@ -243,7 +243,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "mongolia", code: "mn", name: "Mongolia", nameSv: "Mongoliet", venues: "50+",
+    slug: "mongolia", code: "mn", name: "Mongolia", nameSv: "Mongoliet", venues: "900+",
     topVenues: [
       { name: "Misheel Expo Centre", city: "Ulaanbaatar", capacity: "5 000+", type: "Exhibition center" },
       { name: "Shangri-La Hotel Ulaanbaatar Conference", city: "Ulaanbaatar", capacity: "1 500", type: "Hotel & Conference" },
@@ -253,7 +253,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "myanmar", code: "mm", name: "Myanmar", nameSv: "Myanmar", venues: "50+",
+    slug: "myanmar", code: "mm", name: "Myanmar", nameSv: "Myanmar", venues: "900+",
     topVenues: [
       { name: "Myanmar Convention Centre (MCC)", city: "Yangon", capacity: "5 000", type: "Convention center" },
       { name: "Myanmar Event Park", city: "Yangon", capacity: "10 000+", type: "Event Venue" },
@@ -263,7 +263,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "nauru", code: "nr", name: "Nauru", nameSv: "Nauru", venues: "50+",
+    slug: "nauru", code: "nr", name: "Nauru", nameSv: "Nauru", venues: "375+",
     topVenues: [
       { name: "Nauru Island Conference Centre", city: "Yaren", capacity: "400", type: "Convention center" },
       { name: "Menen Hotel Conference Centre", city: "Menen", capacity: "200", type: "Hotel & Conference" },
@@ -273,7 +273,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "nepal", code: "np", name: "Nepal", nameSv: "Nepal", venues: "100+",
+    slug: "nepal", code: "np", name: "Nepal", nameSv: "Nepal", venues: "900+",
     topVenues: [
       { name: "Soaltee Crowne Plaza Convention Centre", city: "Kathmandu", capacity: "3 000", type: "Hotel & Conference" },
       { name: "Hyatt Regency Kathmandu Conference Centre", city: "Kathmandu", capacity: "2 000", type: "Hotel & Conference" },
@@ -283,7 +283,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "new-zealand", code: "nz", name: "New Zealand", nameSv: "Nya Zeeland", venues: "50+",
+    slug: "new-zealand", code: "nz", name: "New Zealand", nameSv: "Nya Zeeland", venues: "3,425+",
     topVenues: [
       { name: "Aotea Centre", city: "Auckland", capacity: "3 000", type: "Convention center" },
       { name: "Te Pae – Christchurch Convention Centre", city: "Christchurch", capacity: "2 500", type: "Convention center" },
@@ -293,7 +293,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "pakistan", code: "pk", name: "Pakistan", nameSv: "Pakistan", venues: "100+",
+    slug: "pakistan", code: "pk", name: "Pakistan", nameSv: "Pakistan", venues: "900+",
     topVenues: [
       { name: "Expo Centre Lahore", city: "Lahore", capacity: "20 000+", type: "Exhibition center" },
       { name: "Jinnah Convention Centre", city: "Islamabad", capacity: "5 000", type: "Convention center" },
@@ -303,7 +303,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "palau", code: "pw", name: "Palau", nameSv: "Palau", venues: "50+",
+    slug: "palau", code: "pw", name: "Palau", nameSv: "Palau", venues: "375+",
     topVenues: [
       { name: "Palau National Convention Centre", city: "Ngerulmud", capacity: "800", type: "Convention center" },
       { name: "Palau Royal Resort Conference Centre", city: "Koror", capacity: "400", type: "Hotel & Conference" },
@@ -313,7 +313,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "philippines", code: "ph", name: "Philippines", nameSv: "Filippinerna", venues: "100+",
+    slug: "philippines", code: "ph", name: "Philippines", nameSv: "Filippinerna", venues: "3,425+",
     topVenues: [
       { name: "Philippine International Convention Center", city: "Manila", capacity: "10 000", type: "Convention center" },
       { name: "SMX Convention Center Manila", city: "Manila", capacity: "12 000", type: "Convention center" },
@@ -323,7 +323,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "samoa", code: "ws", name: "Samoa", nameSv: "Samoa", venues: "50+",
+    slug: "samoa", code: "ws", name: "Samoa", nameSv: "Samoa", venues: "375+",
     topVenues: [
       { name: "Taumeasina Island Resort Conference Centre", city: "Apia", capacity: "1 000", type: "Resort & Conference" },
       { name: "Sheraton Samoa Aggie Grey's Conference", city: "Apia", capacity: "600", type: "Hotel & Conference" },
@@ -333,7 +333,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "singapore", code: "sg", name: "Singapore", nameSv: "Singapore", venues: "200+",
+    slug: "singapore", code: "sg", name: "Singapore", nameSv: "Singapore", venues: "3,425+",
     topVenues: [
       { name: "Sands Expo & Convention Centre", city: "Marina Bay", capacity: "45 000+", type: "Convention center" },
       { name: "Singapore EXPO", city: "Changi", capacity: "100 000+", type: "Exhibition center" },
@@ -343,7 +343,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "south-korea", code: "kr", name: "South Korea", nameSv: "Sydkorea", venues: "200+",
+    slug: "south-korea", code: "kr", name: "South Korea", nameSv: "Sydkorea", venues: "3,425+",
     topVenues: [
       { name: "COEX – Convention & Exhibition Center", city: "Seoul", capacity: "36 000+", type: "Convention center" },
       { name: "KINTEX – Korea International Exhibition Center", city: "Goyang", capacity: "108 000+", type: "Exhibition center" },
@@ -353,7 +353,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "sri-lanka", code: "lk", name: "Sri Lanka", nameSv: "Sri Lanka", venues: "100+",
+    slug: "sri-lanka", code: "lk", name: "Sri Lanka", nameSv: "Sri Lanka", venues: "900+",
     topVenues: [
       { name: "Bandaranaike Memorial International Conference Hall (BMICH)", city: "Colombo", capacity: "5 000", type: "Convention center" },
       { name: "Shangri-La Hotel Colombo Conference Centre", city: "Colombo", capacity: "2 000", type: "Hotel & Conference" },
@@ -363,7 +363,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "thailand", code: "th", name: "Thailand", nameSv: "Thailand", venues: "200+",
+    slug: "thailand", code: "th", name: "Thailand", nameSv: "Thailand", venues: "3,425+",
     topVenues: [
       { name: "IMPACT Exhibition & Convention Center", city: "Bangkok", capacity: "140 000+", type: "Convention center" },
       { name: "Queen Sirikit National Convention Center", city: "Bangkok", capacity: "10 000", type: "Convention center" },
@@ -373,7 +373,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "tonga", code: "to", name: "Tonga", nameSv: "Tonga", venues: "50+",
+    slug: "tonga", code: "to", name: "Tonga", nameSv: "Tonga", venues: "375+",
     topVenues: [
       { name: "Tonga National Centre Conference Hall", city: "Nuku'alofa", capacity: "500", type: "Convention center" },
       { name: "Tanoa International Dateline Hotel Conference", city: "Nuku'alofa", capacity: "300", type: "Hotel & Conference" },
@@ -383,7 +383,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "tuvalu", code: "tv", name: "Tuvalu", nameSv: "Tuvalu", venues: "50+",
+    slug: "tuvalu", code: "tv", name: "Tuvalu", nameSv: "Tuvalu", venues: "375+",
     topVenues: [
       { name: "Tuvalu Convention Hall", city: "Funafuti", capacity: "300", type: "Convention center" },
       { name: "Vaiaku Lagi Hotel Conference Centre", city: "Funafuti", capacity: "150", type: "Hotel & Conference" },
@@ -393,7 +393,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "uzbekistan", code: "uz", name: "Uzbekistan", nameSv: "Uzbekistan", venues: "50+",
+    slug: "uzbekistan", code: "uz", name: "Uzbekistan", nameSv: "Uzbekistan", venues: "900+",
     topVenues: [
       { name: "Tashkent Congress Hall", city: "Tashkent", capacity: "6 000", type: "Convention center" },
       { name: "Uzexpocenter", city: "Tashkent", capacity: "15 000+", type: "Exhibition center" },
@@ -403,7 +403,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "vanuatu", code: "vu", name: "Vanuatu", nameSv: "Vanuatu", venues: "50+",
+    slug: "vanuatu", code: "vu", name: "Vanuatu", nameSv: "Vanuatu", venues: "375+",
     topVenues: [
       { name: "National Convention Centre Port Vila", city: "Port Vila", capacity: "1 000", type: "Convention center" },
       { name: "Holiday Inn Resort Vanuatu Conference Centre", city: "Port Vila", capacity: "500", type: "Resort & Conference" },
@@ -413,7 +413,7 @@ export const ASIA_PACIFIC: Country[] = [
     ],
   },
   {
-    slug: "vietnam", code: "vn", name: "Vietnam", nameSv: "Vietnam", venues: "100+",
+    slug: "vietnam", code: "vn", name: "Vietnam", nameSv: "Vietnam", venues: "3,425+",
     topVenues: [
       { name: "National Convention Center (NCC Hanoi)", city: "Hanoi", capacity: "7 000", type: "Convention center" },
       { name: "Saigon Exhibition & Convention Center", city: "Ho Chi Minh City", capacity: "15 000+", type: "Convention center" },
