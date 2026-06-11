@@ -16,10 +16,10 @@ import { useRouter, usePathname } from '@/i18n/navigation';
  */
 
 const ITEMS = [
-  { icon: Globe, label: "Språk", action: "language" },
-  { icon: HelpCircle, label: "Hjälp", action: "help" },
-  { icon: MessageCircle, label: "Kontakt", action: "contact" },
-  { icon: ArrowUp, label: "Till toppen", action: "top" },
+  { icon: Globe, label: "Språk", labelEn: "Language", action: "language" },
+  { icon: HelpCircle, label: "Hjälpcenter", labelEn: "Help center", action: "help" },
+  { icon: MessageCircle, label: "Kontakta oss", labelEn: "Contact us", action: "contact" },
+  { icon: ArrowUp, label: "Till toppen", labelEn: "Back to top", action: "top" },
 ] as const;
 
 export function SidebarNav() {
@@ -40,13 +40,13 @@ export function SidebarNav() {
         window.scrollTo({ top: 0, behavior: "smooth" });
         break;
       case "contact":
-        document.getElementById("request")?.scrollIntoView({ behavior: "smooth" });
+        window.location.href = "mailto:support@eventpartner.io";
         break;
       case "language":
         router.replace(pathname, { locale: locale === "sv" ? "en" : "sv" });
         break;
       case "help":
-        // Future: open help modal
+        router.push("/help");
         break;
     }
   };
@@ -58,7 +58,7 @@ export function SidebarNav() {
       }`}
     >
       <div className="flex flex-col gap-1.5 bg-white/[0.06] border border-white/[0.08] rounded-full p-1.5 backdrop-blur-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04),0_8px_32px_rgba(0,0,0,0.12)]">
-        {ITEMS.map(({ icon: Icon, label, action }) => (
+        {ITEMS.map(({ icon: Icon, label, labelEn, action }) => (
           <button
             key={action}
             onClick={() => handleClick(action)}
@@ -67,7 +67,7 @@ export function SidebarNav() {
             <Icon className="w-4 h-4" />
             {/* Tooltip */}
             <span className="absolute left-12 bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-default)] text-[11px] font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none shadow-lg">
-              {action === "language" ? (locale === "sv" ? "English" : "Svenska") : label}
+              {action === "language" ? (locale === "sv" ? "English" : "Svenska") : (locale === "sv" ? label : labelEn)}
             </span>
           </button>
         ))}

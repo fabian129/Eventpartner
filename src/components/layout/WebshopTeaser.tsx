@@ -14,7 +14,8 @@ import { PrintfulProductCard, type PrintfulProductData } from "@/components/shop
  * them in a premium grid. Clicking them opens the designer directly.
  */
 
-const PRODUCT_IDS = [71, 12, 380, 57, 19, 77];
+// Mirrors the same published Printful store products as /shop (?source=store
+// with curated-catalog fallback server-side) — one source of truth.
 
 interface WebshopCMS {
   label?: string; labelRight?: string;
@@ -33,7 +34,7 @@ export function WebshopTeaser({ cms }: { cms?: WebshopCMS }) {
     async function fetchProducts() {
       try {
         setLoading(true);
-        const res = await fetch(`/api/printful/products?ids=${PRODUCT_IDS.join(",")}`);
+        const res = await fetch(`/api/printful/products?source=store`);
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const json = await res.json();
         setProducts(json.data || []);
