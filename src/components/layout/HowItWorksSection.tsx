@@ -137,7 +137,7 @@ export function HowItWorksSection() {
   return (
     <section id="how-it-works" className="relative w-full py-28 md:py-36 overflow-x-hidden overflow-y-visible" style={{ background: "#0e0e14" }}>
       {/* Subtle ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[200px] pointer-events-none bg-purple/[0.06]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none" style={{ background: "radial-gradient(circle closest-side, rgba(120,81,169,0.06), transparent)" }} />
 
       <div className="max-w-[1300px] mx-auto px-6 md:px-12 relative z-10">
         {/* Header */}

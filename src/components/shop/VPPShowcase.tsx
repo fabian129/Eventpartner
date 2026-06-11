@@ -134,7 +134,7 @@ function VPPProductCard({
               <span className="text-[11px] text-white/15 font-medium">{product.name}</span>
             </div>
           )}
-          <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm border border-white/10 rounded-full px-2.5 py-1">
+          <div className="absolute top-3 right-3 bg-black/65 border border-white/10 rounded-full px-2.5 py-1">
             <span className="text-[9px] font-mono uppercase tracking-wider text-white/60">
               {product.screenSizes.join(" · ")}
             </span>
@@ -241,13 +241,13 @@ function ProductDetailModal({
               <>
                 <button
                   onClick={goPrev}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/70 transition-all"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/65 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/70 transition-all"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={goNext}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/70 transition-all"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-black/65 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/70 transition-all"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>

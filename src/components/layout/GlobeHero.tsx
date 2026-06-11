@@ -129,10 +129,13 @@ export function GlobeHero({ cms }: { cms?: GlobeHeroCMS }) {
               <Image
                 src={HERO_IMAGES[currentImage]} alt="Premium Event" fill
                 priority={currentImage === 0}
-                className="object-cover brightness-[0.45] contrast-[1.15] saturate-[0.85]"
+                className="object-cover"
               />
             </motion.div>
           </AnimatePresence>
+          {/* Darkening overlay instead of CSS filters on the image — filters on a
+              full-screen image are a major mobile GPU cost. */}
+          <div className="absolute inset-0 bg-black/50" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.3)_0%,transparent_60%)]" />
           {/* Scrim — darkens the left where the copy block sits */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-transparent" />

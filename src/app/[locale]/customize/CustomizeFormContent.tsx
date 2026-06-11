@@ -156,8 +156,8 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
   return (
     <section className="relative w-full px-6 md:px-10 pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden" style={{ background: "#EAEAED" }}>
       {/* Glows */}
-      <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "#8B5CF6" }} />
-      <div className="absolute top-20 left-2/3 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.05]" style={{ background: "#6AD8D2" }} />
+      <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[700px] h-[700px] pointer-events-none" style={{ background: "radial-gradient(circle closest-side, rgba(139,92,246,0.06), transparent)" }} />
+      <div className="absolute top-20 left-2/3 w-[700px] h-[700px] pointer-events-none" style={{ background: "radial-gradient(circle closest-side, rgba(106,216,210,0.05), transparent)" }} />
 
       <div className="max-w-[900px] mx-auto relative z-10">
         {/* Breadcrumb */}

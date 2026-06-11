@@ -109,8 +109,8 @@ export function RequestFormSection({ cms }: { cms?: {
   return (
     <section id="request" className="relative w-full px-6 md:px-10 py-20 md:py-32 overflow-x-hidden overflow-y-visible" style={{ background: isDark ? "#0A0A0A" : "#EAEAED" }}>
       {/* Decorative glows */}
-      <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.06]" style={{ background: "var(--color-purple)" }} />
-      <div className="absolute top-20 left-2/3 w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none opacity-[0.05]" style={{ background: "var(--color-tiffany)" }} />
+      <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[700px] h-[700px] pointer-events-none" style={{ background: "radial-gradient(circle closest-side, rgba(120,81,169,0.06), transparent)" }} />
+      <div className="absolute top-20 left-2/3 w-[700px] h-[700px] pointer-events-none" style={{ background: "radial-gradient(circle closest-side, rgba(106,216,210,0.05), transparent)" }} />
 
       <div className="max-w-[1100px] mx-auto relative z-10">
         {/* Big headline */}

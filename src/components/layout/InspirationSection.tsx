@@ -120,8 +120,8 @@ export function InspirationSection() {
     <section className="relative w-full py-24 md:py-32 overflow-hidden" style={{ background: "#0c0e12" }}>
       {/* Subtle glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[200px] opacity-[0.04] pointer-events-none"
-        style={{ background: "var(--color-tiffany)" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[800px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse closest-side, rgba(106,216,210,0.04), transparent)" }}
       />
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 relative z-10">

@@ -10,6 +10,10 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     const [lenis, setLenis] = useState<Lenis | null>(null);
 
     useEffect(() => {
+        // Skip Lenis entirely on touch devices: it doesn't smooth touch scrolling
+        // (native stays native) but its rAF loop + scroll/resize handling costs
+        // every frame. Phones get pure native scroll; consumers fall back when null.
+        if (window.matchMedia("(pointer: coarse)").matches) return;
         // Use native window scroll (no DOM wrapping) to prevent hydration mismatch
         const instance = new Lenis({
             duration: 1.2,
