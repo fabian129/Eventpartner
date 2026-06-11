@@ -374,7 +374,7 @@ export function RequestFormSection({ cms }: { cms?: {
               {/* Real Malin picture */}
               <Image 
                 src="/Images/Team/malin-color-real.webp" 
-                alt="Malin Eriksson — EventPartner" 
+                alt="Malin Berlin — EventPartner"
                 width={80} 
                 height={80} 
                 className="w-full h-full object-cover"

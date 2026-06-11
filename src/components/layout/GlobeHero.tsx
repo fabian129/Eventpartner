@@ -88,6 +88,7 @@ interface GlobeHeroCMS {
    ══════════════════════════════════════════════════════════════ */
 export function GlobeHero({ cms }: { cms?: GlobeHeroCMS }) {
   const t = useTranslations('hero');
+  const svHero = useLocale() === 'sv';
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const hasAnimated = useRef(false);
   const [currentImage, setCurrentImage] = useState(0);
@@ -166,7 +167,7 @@ export function GlobeHero({ cms }: { cms?: GlobeHeroCMS }) {
         >
           <span className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/[0.08] border border-white/[0.12] backdrop-blur-md hover:bg-tiffany/15 hover:border-tiffany/30 transition-all duration-400 group-hover:shadow-[0_0_30px_rgba(74,222,210,0.12)]">
             <span className="font-display text-[15px] font-medium text-white/80 group-hover:text-white transition-colors tracking-wide">
-              Explore Venues
+              {svHero ? "Utforska lokaler" : "Explore Venues"}
             </span>
             <svg width="16" height="16" viewBox="0 0 16 16" className="text-tiffany"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </span>
@@ -190,6 +191,8 @@ export function GlobeHero({ cms }: { cms?: GlobeHeroCMS }) {
    Left panel: 2 large venue images on country hover
    ══════════════════════════════════════════════════════════════ */
 function GlobeExplorer() {
+  const geLocale = useLocale();
+  const geSv = geLocale === 'sv';
   const hostRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLCanvasElement>(null);
   const phiRef = useRef(PHI_START);
@@ -270,6 +273,10 @@ function GlobeExplorer() {
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return;
+    // The globe panel is display:none below lg — but CSS-hiding does NOT stop
+    // WebGL + rAF work. Never initialize the globe on mobile (it tanks phones).
+    if (window.matchMedia("(max-width: 1023px)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const canvas = document.createElement("canvas");
     canvas.className = "w-full h-full opacity-0 transition-opacity duration-[1200ms]";
     host.appendChild(canvas);
@@ -325,14 +332,28 @@ function GlobeExplorer() {
           GLOBAL_COORDS.forEach(([lat, lng]) => drawDot(lat, lng, 7, false, !!hovRegion));
         }
       }
-      raf = requestAnimationFrame(loop);
+      if (running) raf = requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
+    // Pause rendering when the globe is offscreen or the tab is hidden —
+    // a free-running WebGL loop wastes battery/GPU for no visible benefit.
+    let running = false;
+    const start = () => { if (!running) { running = true; raf = requestAnimationFrame(loop); } };
+    const stop = () => { running = false; cancelAnimationFrame(raf); };
+    start();
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !document.hidden) start();
+      else stop();
+    }, { threshold: 0 });
+    io.observe(host);
+    const onVisibility = () => { if (document.hidden) stop(); else start(); };
+    document.addEventListener("visibilitychange", onVisibility);
     setTimeout(() => { canvas.style.opacity = "1"; }, 300);
     const onResize = () => { w = host.offsetWidth; if (ov) { ov.width = w * 2; ov.height = w * 2; } };
     window.addEventListener("resize", onResize);
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
       globe.destroy();
       window.removeEventListener("resize", onResize);
       try { if (canvas.parentNode === host) host.removeChild(canvas); } catch { /* React cleanup */ }
@@ -400,7 +421,7 @@ function GlobeExplorer() {
                 transition={{ duration: 0.25 }}
               >
                 <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany/50 block mb-1">
-                  {previewRegionForImages.countrySlugs.length} countries · {previewRegionForImages.totalVenues}
+                  {previewRegionForImages.countrySlugs.length} {geSv ? "länder" : "countries"} · {previewRegionForImages.totalVenues}
                 </span>
                 <h2 className="font-display text-xl xl:text-2xl font-medium text-white leading-tight mb-2.5">{previewRegionForImages.name}</h2>
                 <div className="grid grid-cols-2 gap-1.5">
@@ -417,7 +438,7 @@ function GlobeExplorer() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                         <div className="absolute bottom-1.5 left-2 flex items-center gap-1">
                           <Image src={`https://flagcdn.com/w40/${country.code}.png`} alt="" width={14} height={10} className="rounded-[1px]" unoptimized />
-                          <span className="font-display text-[10px] font-medium text-white drop-shadow-md">{country.name}</span>
+                          <span className="font-display text-[10px] font-medium text-white drop-shadow-md">{geSv ? (country.nameSv || country.name) : country.name}</span>
                         </div>
                       </div>
                     );
@@ -425,7 +446,7 @@ function GlobeExplorer() {
                 </div>
                 {previewCountrySlugs.length > 4 && (
                   <span className="font-mono text-[10px] text-white/20 block text-center mt-2">
-                    +{previewCountrySlugs.length - 4} more countries
+                    {geSv ? `+${previewCountrySlugs.length - 4} länder till` : `+${previewCountrySlugs.length - 4} more countries`}
                   </span>
                 )}
               </motion.div>
@@ -442,33 +463,33 @@ function GlobeExplorer() {
                   <div className="w-8 h-8 rounded-lg bg-tiffany/10 border border-tiffany/20 flex items-center justify-center">
                     <Globe2 className="w-4 h-4 text-tiffany" />
                   </div>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany/60">Interactive Venue Explorer</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany/60">{geSv ? "Interaktiv lokal-utforskare" : "Interactive Venue Explorer"}</span>
                 </div>
                 <h2 className="font-display text-2xl xl:text-3xl font-medium text-white leading-[1.2] mb-3">
-                  Find your perfect<br />
-                  <span className="text-tiffany">event venue</span>
+                  {geSv ? "Hitta er perfekta" : "Find your perfect"}<br />
+                  <span className="text-tiffany">{geSv ? "eventlokal" : "event venue"}</span>
                 </h2>
                 <p className="text-[13px] text-white/35 leading-relaxed mb-5">
-                  Explore 340,000+ venues across 175 countries. Select a region to browse countries and discover venues tailored to your event.
+                  {geSv ? "Utforska 340 000+ venues i 175 länder. Välj en region för att bläddra bland länder och hitta lokaler som passar ert event." : "Explore 340,000+ venues across 175 countries. Select a region to browse countries and discover venues tailored to your event."}
                 </p>
                 <div className="flex flex-col gap-2.5">
                   <div className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0">
                       <span className="text-[10px] text-white/40 font-mono">1</span>
                     </div>
-                    <span className="text-[12px] text-white/30">Select a region from the list</span>
+                    <span className="text-[12px] text-white/30">{geSv ? "Välj en region i listan" : "Select a region from the list"}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0">
                       <span className="text-[10px] text-white/40 font-mono">2</span>
                     </div>
-                    <span className="text-[12px] text-white/30">Browse countries & preview venues</span>
+                    <span className="text-[12px] text-white/30">{geSv ? "Bläddra bland länder & se lokaler" : "Browse countries & preview venues"}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center shrink-0">
                       <span className="text-[10px] text-white/40 font-mono">3</span>
                     </div>
-                    <span className="text-[12px] text-white/30">Click a country to start booking</span>
+                    <span className="text-[12px] text-white/30">{geSv ? "Klicka på ett land för att börja boka" : "Click a country to start booking"}</span>
                   </div>
                 </div>
               </motion.div>
@@ -509,7 +530,7 @@ function GlobeExplorer() {
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
                   <button onClick={onBack} className="flex items-center gap-1.5 text-white/40 hover:text-tiffany transition-colors group">
                     <ChevronLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-                    <span className="font-mono text-[11px] uppercase tracking-[0.1em]">All Regions</span>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.1em]">{geSv ? "Alla regioner" : "All Regions"}</span>
                   </button>
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-tiffany animate-pulse" />
@@ -520,7 +541,7 @@ function GlobeExplorer() {
                 {/* Country list — scrollable */}
                 <div className="flex flex-col gap-1.5 max-h-[60vh] overflow-y-auto overscroll-contain pr-1" data-lenis-prevent>
                   {regionCountries.map(country => (
-                    <Link href={`/land/${country.slug}`} key={country.slug}>
+                    <Link href={`/${geLocale}/land/${country.slug}`} key={country.slug}>
                       <div
                         className={`group flex items-center gap-3 px-3.5 py-3 rounded-xl border transition-all duration-200 cursor-pointer ${
                           hoveredCountry === country.slug
@@ -536,7 +557,7 @@ function GlobeExplorer() {
                         <div className="flex-1 min-w-0">
                           <span className={`font-display text-[14px] font-medium block truncate transition-colors ${
                             hoveredCountry === country.slug ? "text-tiffany" : "text-white/80"
-                          }`}>{country.name}</span>
+                          }`}>{geSv ? (country.nameSv || country.name) : country.name}</span>
                           <span className="font-mono text-[10px] text-white/30">{country.venues}</span>
                         </div>
                         <ArrowRight className={`w-3.5 h-3.5 shrink-0 transition-all duration-200 ${
@@ -578,18 +599,20 @@ const CONTINENT_ICONS: Record<string, React.ComponentType<{ className?: string }
 };
 
 const CONTINENT_GROUPS = [
-  { id: 'europe',       label: 'Europe',       regionSlugs: ['nordics','western-europe','central-europe','southern-europe','balkans-southeast','nordic-extended','central-europe-extended','balkans-extended'] },
-  { id: 'middle-east',  label: 'Middle East',  regionSlugs: ['middle-east'] },
-  { id: 'africa',       label: 'Africa',       regionSlugs: ['africa'] },
-  { id: 'asia-pacific', label: 'Asia Pacific', regionSlugs: ['asia-pacific'] },
-  { id: 'north-america', label: 'North America', regionSlugs: ['north-america'] },
-  { id: 'south-america', label: 'South America', regionSlugs: ['south-america'] },
+  { id: 'europe',       label: 'Europe',        labelSv: 'Europa',                    regionSlugs: ['nordics','western-europe','central-europe','southern-europe','balkans-southeast','nordic-extended','central-europe-extended','balkans-extended'] },
+  { id: 'middle-east',  label: 'Middle East',   labelSv: 'Mellanöstern',              regionSlugs: ['middle-east'] },
+  { id: 'africa',       label: 'Africa',        labelSv: 'Afrika',                    regionSlugs: ['africa'] },
+  { id: 'asia-pacific', label: 'Asia Pacific',  labelSv: 'Asien & Stillahavsområdet', regionSlugs: ['asia-pacific'] },
+  { id: 'north-america', label: 'North America', labelSv: 'Nordamerika',              regionSlugs: ['north-america'] },
+  { id: 'south-america', label: 'South America', labelSv: 'Sydamerika',               regionSlugs: ['south-america'] },
 ];
 
 /* ══════════════════════════════════════════════════════════════
    MOBILE VENUE EXPLORER — touch-friendly replacement for globe
    ══════════════════════════════════════════════════════════════ */
 function MobileVenueExplorer() {
+  const mvLocale = useLocale();
+  const mvSv = mvLocale === 'sv';
   const [level, setLevel] = useState<'continents' | 'regions' | 'countries'>('continents');
   const [selectedContinent, setSelectedContinent] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -643,18 +666,22 @@ function MobileVenueExplorer() {
       >
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tiffany/[0.08] border border-tiffany/[0.15] mb-5">
           <Globe2 className="w-4 h-4 text-tiffany" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany">Venue Explorer</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany">{mvSv ? "Utforska lokaler" : "Venue Explorer"}</span>
         </div>
         <h2 className="font-display text-3xl font-medium text-white tracking-tight mb-3">
-          Find your perfect<br />
-          <span className="text-tiffany">event venue</span>
+          {mvSv ? "Hitta er perfekta" : "Find your perfect"}<br />
+          <span className="text-tiffany">{mvSv ? "eventlokal" : "event venue"}</span>
         </h2>
         <div className="flex justify-center gap-6 mt-4">
-          {[
+          {(mvSv ? [
+            { value: '340 000+', label: 'Venues' },
+            { value: '175', label: 'Länder' },
+            { value: '24h', label: 'Svarstid' },
+          ] : [
             { value: '340,000+', label: 'Venues' },
             { value: '175', label: 'Countries' },
             { value: '24h', label: 'Response' },
-          ].map(s => (
+          ]).map(s => (
             <div key={s.label} className="text-center">
               <span className="font-display text-xl font-medium text-white block">{s.value}</span>
               <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-white/30">{s.label}</span>
@@ -693,7 +720,7 @@ function MobileVenueExplorer() {
                     <div className="w-9 h-9 rounded-lg bg-tiffany/[0.08] border border-tiffany/[0.12] flex items-center justify-center mb-3">
                       <Icon className="w-4 h-4 text-tiffany/70" />
                     </div>
-                    <span className="font-display text-[15px] font-medium text-white/80 mb-1">{group.label}</span>
+                    <span className="font-display text-[15px] font-medium text-white/80 mb-1">{mvSv ? group.labelSv : group.label}</span>
                     <div className="flex items-center gap-1.5 mb-2">
                       {flags.map(code => (
                         <div key={code} className="w-5 h-[14px] rounded-[2px] overflow-hidden border border-white/[0.1]">
@@ -701,7 +728,7 @@ function MobileVenueExplorer() {
                         </div>
                       ))}
                     </div>
-                    <span className="font-mono text-[10px] text-white/25">{totalCountries} countries</span>
+                    <span className="font-mono text-[10px] text-white/25">{totalCountries} {mvSv ? "länder" : "countries"}</span>
                     <ArrowRight className="absolute top-4 right-4 w-3.5 h-3.5 text-white/15" />
                   </motion.button>
                 );
@@ -723,7 +750,7 @@ function MobileVenueExplorer() {
               className="flex items-center gap-1.5 text-white/40 mb-4 active:text-tiffany transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.1em]">All Regions</span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.1em]">{mvSv ? "Alla regioner" : "All Regions"}</span>
             </button>
 
             <div className="flex items-center gap-2 mb-4">
@@ -732,7 +759,7 @@ function MobileVenueExplorer() {
                   <Icon className="w-4 h-4 text-tiffany/70" />
                 </div>
               ); })()}
-              <h3 className="font-display text-xl font-medium text-white">{selectedGroup?.label}</h3>
+              <h3 className="font-display text-xl font-medium text-white">{mvSv ? selectedGroup?.labelSv : selectedGroup?.label}</h3>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -751,7 +778,7 @@ function MobileVenueExplorer() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="font-display text-[14px] font-medium text-white/75 block">{region.name}</span>
-                    <span className="font-mono text-[10px] text-white/25">{region.countrySlugs.length} countries · {region.totalVenues}</span>
+                    <span className="font-mono text-[10px] text-white/25">{region.countrySlugs.length} {mvSv ? "länder" : "countries"} · {region.totalVenues}</span>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 shrink-0 text-white/15" />
                 </button>
@@ -774,7 +801,7 @@ function MobileVenueExplorer() {
             >
               <ChevronLeft className="w-4 h-4" />
               <span className="font-mono text-[11px] uppercase tracking-[0.1em]">
-                {subRegions.length > 1 ? selectedRegionData?.name || 'Back' : 'All Regions'}
+                {subRegions.length > 1 ? selectedRegionData?.name || (mvSv ? 'Tillbaka' : 'Back') : (mvSv ? 'Alla regioner' : 'All Regions')}
               </span>
             </button>
 
@@ -783,7 +810,7 @@ function MobileVenueExplorer() {
                 <div>
                   <h3 className="font-display text-xl font-medium text-white">{selectedRegionData.name}</h3>
                   <span className="font-mono text-[10px] text-tiffany/50">
-                    {selectedRegionData.countrySlugs.length} countries · {selectedRegionData.totalVenues}
+                    {selectedRegionData.countrySlugs.length} {mvSv ? "länder" : "countries"} · {selectedRegionData.totalVenues}
                   </span>
                 </div>
                 <span className="w-2 h-2 rounded-full bg-tiffany animate-pulse" />
@@ -792,13 +819,13 @@ function MobileVenueExplorer() {
 
             <div className="flex flex-col gap-1.5 max-h-[55vh] overflow-y-auto overscroll-contain" data-lenis-prevent>
               {regionCountries.map(country => (
-                <Link href={`/land/${country.slug}`} key={country.slug}>
+                <Link href={`/${mvLocale}/land/${country.slug}`} key={country.slug}>
                   <div className="flex items-center gap-3 px-3.5 py-3 rounded-xl border border-transparent active:bg-tiffany/[0.08] active:border-tiffany/15 transition-all">
                     <div className="w-10 h-7 rounded-sm overflow-hidden border border-white/10 shrink-0">
                       <Image src={`https://flagcdn.com/w80/${country.code}.png`} alt={country.name} width={80} height={56} className="w-full h-full object-cover" unoptimized />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className="font-display text-[14px] font-medium text-white/80 block truncate">{country.name}</span>
+                      <span className="font-display text-[14px] font-medium text-white/80 block truncate">{mvSv ? (country.nameSv || country.name) : country.name}</span>
                       <span className="font-mono text-[10px] text-white/30">{country.venues}</span>
                     </div>
                     <ArrowRight className="w-3.5 h-3.5 shrink-0 text-white/15" />
@@ -880,7 +907,7 @@ function RegionExplorer({ activeRegions, onSelectRegion, onHoverRegion }: {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
                       <span className="font-display text-[15px] font-medium text-white/75 group-hover:text-white transition-colors">
-                        {group.label}
+                        {svLocale ? group.labelSv : group.label}
                       </span>
                       <ArrowRight className="w-3.5 h-3.5 text-white/10 group-hover:text-white/30 group-hover:translate-x-0.5 transition-all shrink-0" />
                     </div>
@@ -892,8 +919,8 @@ function RegionExplorer({ activeRegions, onSelectRegion, onHoverRegion }: {
                           </div>
                         ))}
                       </div>
-                      <span className="font-mono text-[10px] text-white/25">{totalCountries} countries</span>
-                      <span className="font-mono text-[10px] text-tiffany/40">{totalVenues.toLocaleString()}+</span>
+                      <span className="font-mono text-[10px] text-white/25">{totalCountries} {svLocale ? "länder" : "countries"}</span>
+                      <span className="font-mono text-[10px] text-tiffany/40">{totalVenues.toLocaleString(svLocale ? "sv-SE" : "en-US")}+</span>
                     </div>
                   </div>
                 </motion.div>
@@ -924,7 +951,7 @@ function RegionExplorer({ activeRegions, onSelectRegion, onHoverRegion }: {
                   <Icon className="w-3.5 h-3.5 text-tiffany/70" />
                 </div>
               ); })()}
-              <span className="font-display text-[14px] font-medium text-white/90">{selectedGroup?.label}</span>
+              <span className="font-display text-[14px] font-medium text-white/90">{svLocale ? selectedGroup?.labelSv : selectedGroup?.label}</span>
             </div>
           </div>
 

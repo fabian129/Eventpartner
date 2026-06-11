@@ -164,12 +164,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       {/* ── EventPartner Shop ── */}
       <section className="w-full px-6 md:px-10 pt-24 md:pt-32 pb-8" style={{ background: "#EAEAED" }}>
         <div className="max-w-[1100px] mx-auto text-center">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-black/30 block mb-4">EventPartner — Shop</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-black/30 block mb-4">{locale === 'sv' ? 'EventPartner — Webshop' : 'EventPartner — Shop'}</span>
           <h2 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-medium tracking-tight text-[#111] leading-[1.05]">
-            EventPartner Shop
+            {locale === 'sv' ? 'EventPartner Webshop' : 'EventPartner Shop'}
           </h2>
           <p className="mt-4 text-[clamp(1rem,2vw,1.2rem)] text-black/40 max-w-lg mx-auto">
-            Video products, branded merchandise & everything for your next event.
+            {locale === 'sv'
+              ? 'Videoprodukter, profilprodukter & allt till ert nästa event.'
+              : 'Video products, branded merchandise & everything for your next event.'}
           </p>
         </div>
       </section>

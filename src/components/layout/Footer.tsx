@@ -81,26 +81,32 @@ const INSPO_IMAGES = [
 const MACRO_REGIONS = [
   {
     label: "Europe",
+    labelSv: "Europa",
     regionSlugs: ["nordics", "nordic-extended", "western-europe", "central-europe", "central-europe-extended", "southern-europe", "balkans-southeast", "balkans-extended"],
   },
   {
     label: "Middle East",
+    labelSv: "Mellanöstern",
     regionSlugs: ["middle-east"],
   },
   {
     label: "Africa",
+    labelSv: "Afrika",
     regionSlugs: ["africa"],
   },
   {
     label: "Asia Pacific",
+    labelSv: "Asien & Stillahavsområdet",
     regionSlugs: ["asia-pacific"],
   },
   {
     label: "North America",
+    labelSv: "Nordamerika",
     regionSlugs: ["north-america"],
   },
   {
     label: "South America",
+    labelSv: "Sydamerika",
     regionSlugs: ["south-america"],
   },
 ];
@@ -115,6 +121,8 @@ interface FooterCMS {
 }
 
 function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: string[] }) {
+  const locale = useLocale();
+  const sv = locale === 'sv';
   const [open, setOpen] = useState(false);
 
   // Collect all unique country slugs for these regions
@@ -147,7 +155,7 @@ function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: s
             {label}
           </span>
           <span className="text-[10px] font-mono text-white/20 tracking-wide">
-            {countries.length} countries · {totalVenues.toLocaleString()}+ venues
+            {countries.length} {sv ? "länder" : "countries"} · {totalVenues.toLocaleString(sv ? "sv-SE" : "en-US")}+ venues
           </span>
         </div>
         <motion.div
@@ -171,10 +179,10 @@ function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: s
               {countries.map((country, i) => (
                 <span key={country!.slug} className="inline">
                   <Link
-                    href={`/land/${country!.slug}`}
+                    href={`/${locale}/land/${country!.slug}`}
                     className="text-[11px] text-white/30 hover:text-tiffany transition-colors duration-200"
                   >
-                    {country!.name}
+                    {sv ? (country!.nameSv || country!.name) : country!.name}
                   </Link>
                   {i < countries.length - 1 && (
                     <span className="text-[11px] text-white/10 mx-0.5">·</span>
@@ -192,7 +200,8 @@ function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: s
 export function Footer({ cms }: { cms?: FooterCMS }) {
   const t = useTranslations('footer');
   const tVpp = useTranslations('vpp');
-  const footerLinks = useLocale() === 'sv' ? FOOTER_LINKS_SV : FOOTER_LINKS;
+  const svLocale = useLocale() === 'sv';
+  const footerLinks = svLocale ? FOOTER_LINKS_SV : FOOTER_LINKS;
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [subLoading, setSubLoading] = useState(false);
@@ -383,17 +392,17 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
           <div className="flex items-center gap-2.5 mb-5">
             <MapPin className="w-3.5 h-3.5 text-tiffany/50" />
             <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-tiffany">
-              Global Presence
+              {svLocale ? "Global närvaro" : "Global Presence"}
             </h4>
             <span className="font-mono text-[10px] text-white/15 tracking-wide">
-              — 340,000+ venues across 175 countries
+              {svLocale ? "— 340 000+ venues i 175 länder" : "— 340,000+ venues across 175 countries"}
             </span>
           </div>
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
             {MACRO_REGIONS.map((macro) => (
               <RegionAccordion
                 key={macro.label}
-                label={macro.label}
+                label={svLocale ? macro.labelSv : macro.label}
                 regionSlugs={macro.regionSlugs}
               />
             ))}

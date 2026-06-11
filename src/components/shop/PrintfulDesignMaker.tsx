@@ -73,6 +73,14 @@ export function PrintfulDesignMaker({
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [saving, setSaving] = useState(false);
+
+  // Safety: never leave the save button locked forever (e.g. if the EDM waits
+  // on a dialog the user dismissed, or silently fails without onError).
+  useEffect(() => {
+    if (!saving) return;
+    const timer = setTimeout(() => setSaving(false), 45000);
+    return () => clearTimeout(timer);
+  }, [saving]);
   const [warning, setWarning] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>("design");
   const [templateId, setTemplateId] = useState<number | null>(null);
@@ -293,7 +301,10 @@ export function PrintfulDesignMaker({
                   <style>{`
                     #${elemId} { position: relative; width: 100%; height: 100%; }
                     #${elemId} iframe { width: 100% !important; height: 100% !important; border: none; }
-                    #${elemId} .overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.8); z-index: 5; }
+                    /* EDM injects this overlay while saving. It must NOT block the
+                       iframe's own dialogs (e.g. "Select a stitch color") — a solid
+                       click-blocking overlay deadlocks the save flow. */
+                    #${elemId} .overlay { position: absolute; inset: 0; display: flex; align-items: flex-start; justify-content: flex-end; padding: 16px; background: transparent; z-index: 5; pointer-events: none; }
                     #${elemId} .overlay .spinner { width: 32px; height: 32px; border: 3px solid #e5e5e5; border-top-color: #6AD8D2; border-radius: 50%; animation: pf-spin 0.8s linear infinite; }
                     @keyframes pf-spin { to { transform: rotate(360deg); } }
                   `}</style>
@@ -357,7 +368,7 @@ export function PrintfulDesignMaker({
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto flex items-start justify-center">
+                <div data-lenis-prevent className="flex-1 overflow-y-auto flex items-start justify-center">
                   <div className="max-w-md w-full px-6 py-10">
                     {/* Product summary */}
                     {productImage && (

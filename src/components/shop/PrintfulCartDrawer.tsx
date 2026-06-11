@@ -152,7 +152,7 @@ function CartView({
       </div>
 
       {/* Cart Items */}
-      <div className="flex-1 overflow-y-auto px-6 py-4">
+      <div data-lenis-prevent className="flex-1 overflow-y-auto px-6 py-4">
         {items.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <div className="w-20 h-20 bg-[var(--bg-card)] border border-[var(--border-default)] rounded-full flex items-center justify-center mb-6">
@@ -326,7 +326,7 @@ function QuoteFormView({
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 py-6">
+      <form data-lenis-prevent onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 py-6">
         <div className="space-y-4">
           <div>
             <label className="block text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2">

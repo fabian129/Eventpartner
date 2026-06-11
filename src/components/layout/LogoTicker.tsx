@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useLocale } from "next-intl";
 
 /**
  * LogoTicker — Trusted-by partner logos.
@@ -11,22 +12,22 @@ interface LogoTickerCMS {
   label?: string;
 }
 
-/* Logo entries — mix of real SVG files and text fallbacks */
+/* Logo entries — ONLY verified Video Plus Print reference customers
+   (cross-checked against videoplusprint.com 2026-06-11, per client request P34).
+   Swap text entries for real logo files when Pontus's approved files land. */
 const LOGOS = [
   { name: "Volvo", src: "/Images/logos/partners/volvo.svg" },
   { name: "Samsung", src: "/Images/logos/partners/samsung.svg" },
-  { name: "Ericsson", src: "/Images/logos/partners/ericsson.svg" },
+  { name: "Google", text: "Google", font: "'Product Sans', 'Helvetica Neue', sans-serif", weight: "500" },
   { name: "PwC", text: "PwC", font: "'Georgia', serif", weight: "700" },
-  { name: "H&M", text: "H&M", font: "'Didot', 'Times New Roman', serif", weight: "700" },
   { name: "LEGO", text: "LEGO", font: "'Arial Black', sans-serif", weight: "900" },
-  { name: "Spotify", src: "/Images/logos/partners/spotify.svg" },
+  { name: "Microsoft", text: "Microsoft", font: "'Segoe UI', sans-serif", weight: "600" },
   { name: "BMW", src: "/Images/logos/partners/bmw.svg" },
-  { name: "IKEA", src: "/Images/logos/partners/ikea.svg" },
-  { name: "Sandvik", text: "SANDVIK", font: "'Helvetica Neue', sans-serif", weight: "700" },
-  { name: "Atlas Copco", text: "Atlas Copco", font: "'Helvetica Neue', sans-serif", weight: "700" },
-  { name: "SEB", text: "SEB", font: "'Arial Black', sans-serif", weight: "900" },
-  { name: "Klarna", src: "/Images/logos/partners/klarna.svg" },
-  { name: "Telia", text: "Telia", font: "'Helvetica Neue', sans-serif", weight: "700" },
+  { name: "Disney", text: "Disney", font: "'Georgia', serif", weight: "400" },
+  { name: "Porsche", text: "PORSCHE", font: "'Helvetica Neue', sans-serif", weight: "700" },
+  { name: "Volkswagen", text: "Volkswagen", font: "'Helvetica Neue', sans-serif", weight: "700" },
+  { name: "Unilever", text: "Unilever", font: "'Helvetica Neue', sans-serif", weight: "600" },
+  { name: "BBC", text: "BBC", font: "'Arial', sans-serif", weight: "900" },
 ];
 
 function LogoItem({ logo }: { logo: typeof LOGOS[number] }) {
@@ -51,12 +52,13 @@ function LogoItem({ logo }: { logo: typeof LOGOS[number] }) {
 }
 
 export function LogoTicker({ cms }: { cms?: LogoTickerCMS } = {}) {
+  const sv = useLocale() === 'sv';
   return (
     <section className="relative w-full py-12 md:py-16 overflow-hidden" style={{ background: "#EAEAED" }}>
       {/* Label */}
       <div className="text-center mb-8">
         <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-black/30">
-          {cms?.label || "Trusted by leading companies"}
+          {cms?.label || (sv ? "Betrodda av ledande företag" : "Trusted by leading companies")}
         </span>
       </div>
 

@@ -118,7 +118,7 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{openAppTitle}</span>
-            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{cms?.formHeadline || "Show us what\nyou've got."}</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{cms?.formHeadline || (sv ? "Ansökan om jobb" : "Apply Now")}</h2>
             <p className="text-[var(--text-secondary)] text-[15px] leading-[1.8] mt-6">{openAppDesc}</p>
           </motion.div>
           <motion.div className="lg:col-span-7 lg:col-start-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }}>
@@ -126,14 +126,14 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
               {submitted ? (
                 <div className="flex flex-col items-center justify-center text-center py-12">
                   <div className="w-16 h-16 bg-tiffany/10 text-tiffany rounded-full flex items-center justify-center mb-6 text-2xl">✓</div>
-                  <h3 className="text-2xl font-display font-semibold text-[var(--text-primary)] mb-2">{cms?.successTitle || "Application Received"}</h3>
-                  <p className="text-[var(--text-secondary)]">{cms?.successDesc || "Thank you for your interest. We'll be in touch soon."}</p>
+                  <h3 className="text-2xl font-display font-semibold text-[var(--text-primary)] mb-2">{cms?.successTitle || (sv ? "Ansökan mottagen" : "Application Received")}</h3>
+                  <p className="text-[var(--text-secondary)]">{cms?.successDesc || (sv ? "Tack för ditt intresse. Vi hör av oss inom kort." : "Thank you for your interest. We'll be in touch soon.")}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Full Name</label><input type="text" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="John Doe" value={form.name} onChange={set('name')} /></div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Email Address</label><input type="email" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="john@example.com" value={form.email} onChange={set('email')} /></div>
-                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">LinkedIn Profile URL</label><input type="url" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="https://linkedin.com/in/johndoe" value={form.linkedIn} onChange={set('linkedIn')} /></div>
+                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">{sv ? "Fullständigt namn" : "Full Name"}</label><input type="text" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder={sv ? "Anna Andersson" : "John Doe"} value={form.name} onChange={set('name')} /></div>
+                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">{sv ? "E-postadress" : "Email Address"}</label><input type="email" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder={sv ? "anna@exempel.se" : "john@example.com"} value={form.email} onChange={set('email')} /></div>
+                  <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">{sv ? "LinkedIn-profil (URL)" : "LinkedIn Profile URL"}</label><input type="url" required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors" placeholder="https://linkedin.com/in/dittnamn" value={form.linkedIn} onChange={set('linkedIn')} /></div>
                   <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">{sv ? "Berätta varför du skulle passa hos oss" : "Tell us why you'd be a great fit"}</label><textarea rows={4} required className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-tiffany transition-colors resize-none" placeholder={sv ? "Berätta varför du skulle passa hos oss..." : "Tell us why you'd be a great fit..."} value={form.message} onChange={set('message')} /></div>
                   
                   {error && (
@@ -144,9 +144,9 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
 
                   <button type="submit" disabled={loading} className="w-full bg-[#111] border border-[#333] text-white font-medium rounded-xl py-4 hover:bg-[#222] hover:border-[#444] transition-all flex items-center justify-center gap-2 disabled:opacity-60">
                     {loading ? (
-                      <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Submitting...</>
+                      <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {sv ? "Skickar..." : "Submitting..."}</>
                     ) : (
-                      <><Send className="w-4 h-4" />Submit Application</>
+                      <><Send className="w-4 h-4" />{sv ? "Skicka ansökan" : "Submit Application"}</>
                     )}
                   </button>
                 </form>

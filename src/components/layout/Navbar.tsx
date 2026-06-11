@@ -11,11 +11,11 @@ import { useSmoothScroll } from "@/components/utils/SmoothScroll";
 
 /* ── Service submenu items ── */
 const SERVICE_ITEMS = [
-  { label: "Conferences", href: "/#services", desc: "Large-scale events & summits" },
-  { label: "Corporate Events", href: "/#services", desc: "Team building & company gatherings" },
-  { label: "Gala Dinners", href: "/#services", desc: "Premium dining experiences" },
-  { label: "Incentive Travel", href: "/#services", desc: "Reward & motivation trips" },
-  { label: "Exhibitions", href: "/#services", desc: "Trade shows & product launches" },
+  { label: "Conferences", labelSv: "Konferenser", href: "/#services", desc: "Large-scale events & summits", descSv: "Storskaliga event & summits" },
+  { label: "Corporate Events", labelSv: "Företagsevent", href: "/#services", desc: "Team building & company gatherings", descSv: "Teambuilding & företagssammankomster" },
+  { label: "Gala Dinners", labelSv: "Galamiddagar", href: "/#services", desc: "Premium dining experiences", descSv: "Middagsupplevelser i toppklass" },
+  { label: "Incentive Travel", labelSv: "Incentiveresor", href: "/#services", desc: "Reward & motivation trips", descSv: "Belönings- & motivationsresor" },
+  { label: "Exhibitions", labelSv: "Mässor", href: "/#services", desc: "Trade shows & product launches", descSv: "Mässor & produktlanseringar" },
 ];
 
 interface NavLink {
@@ -214,12 +214,12 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
                               <span className={`text-[13px] font-medium ${
                                 isDarkBg ? "text-white/90 group-hover:text-white" : "text-[#222] group-hover:text-[#111]"
                               }`}>
-                                {item.label}
+                                {locale === 'sv' ? item.labelSv : item.label}
                               </span>
                               <span className={`text-[11px] mt-0.5 ${
                                 isDarkBg ? "text-white/40 group-hover:text-white/50" : "text-[#999] group-hover:text-[#666]"
                               }`}>
-                                {item.desc}
+                                {locale === 'sv' ? item.descSv : item.desc}
                               </span>
                             </a>
                           ))}
@@ -372,7 +372,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
                   className="text-[11px] text-white/30 px-3 py-1.5 rounded-full border border-white/[0.06]
                     hover:text-white/60 hover:border-white/[0.12] transition-all"
                 >
-                  {item.label}
+                  {locale === 'sv' ? item.labelSv : item.label}
                 </a>
               ))}
             </div>
