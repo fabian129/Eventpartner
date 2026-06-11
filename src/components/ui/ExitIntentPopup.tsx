@@ -35,8 +35,12 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
   const tc = useTranslations('common');
 
   useEffect(() => {
+    // Exit-intent is a desktop pattern (cursor leaving the viewport). On touch
+    // devices the full-screen overlay traps scrolling and feels like the page
+    // froze — never arm the popup there.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
     // Don't show if already dismissed this session
-    if (typeof window !== "undefined" && sessionStorage.getItem("ep_popup_dismissed")) {
+    if (sessionStorage.getItem("ep_popup_dismissed")) {
       setDismissed(true);
       return;
     }
@@ -49,8 +53,10 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
     };
 
     // Fallback: show after scrolling 80% of page
+    // (documentElement, not body — body.scrollHeight can report the viewport
+    // height in some layouts, which would fire this on the first scroll)
     const handleScroll = () => {
-      const scrollPercent = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+      const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
       if (scrollPercent > 0.8 && !dismissed) {
         setShow(true);
       }
