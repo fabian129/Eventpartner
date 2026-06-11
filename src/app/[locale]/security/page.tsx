@@ -6,12 +6,15 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
 import { HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Security & Privacy — EventPartner",
-  description:
-    "Learn about EventPartner's security and privacy practices, GDPR compliance, data protection policies, and our commitment to handling your personal data responsibly.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  return pageMetadata({ locale, path: "/security",
+    title: sv ? "Säkerhet & integritet" : "Security & Privacy",
+    description: sv ? "Så skyddar EventPartner din data — GDPR-efterlevnad, dataminimering och säkerhetsarbete i linje med ISO 27001-principer." : "How EventPartner protects your data — GDPR compliance, data minimisation and security aligned with ISO 27001 principles." });
+}
 
 export default async function SecurityPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -28,12 +28,37 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   const { data } = await sanityFetch({ query: HOMEPAGE_QUERY });
 
+  // Organization JSON-LD (wb-seo §5) — only verifiable facts, no fabricated data.
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "EventPartner",
+    legalName: "EventPartner Global AB",
+    url: "https://eventpartner.io",
+    logo: "https://eventpartner.io/icon.png",
+    description:
+      locale === "sv"
+        ? "Komplett partner för företagsevent — 340 000+ venues i 175 länder. Lokaler, leverantörer och förhandling, hanterat från start till mål."
+        : "Complete partner for corporate events — 340,000+ venues across 175 countries. Sourcing, suppliers and negotiation handled end to end.",
+    areaServed: "Worldwide",
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "bookings@eventpartner.io",
+      contactType: "sales",
+      availableLanguage: ["Swedish", "English"],
+    },
+  };
+
   // Helper: localize a field using the current URL locale
   const t = (field: { en?: string; sv?: string } | undefined | null) =>
     localize(field, locale as Locale);
 
   return (
     <div id="page-root" style={{ backgroundColor: "#111" }} suppressHydrationWarning>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+      />
       <Navbar cms={data ? {
         links: data.navLinks?.map((l: any) => ({
           label: t(l.label),

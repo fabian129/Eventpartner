@@ -6,13 +6,16 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
 import { ABOUT_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
+import { pageMetadata } from "@/lib/seo";
 
 
-export const metadata: Metadata = {
-  title: "About Us — EventPartner",
-  description:
-    "Meet the team behind the world's largest event booking platform. Learn about our mission, values, and the people making corporate events seamless across 175 countries.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  return pageMetadata({ locale, path: "/about",
+    title: sv ? "Om oss" : "About Us",
+    description: sv ? "EventPartner gör företagseventplanering lika smidig som en hotellbokning — 340 000+ venues i 175 länder och 30+ års samlad erfarenhet." : "EventPartner makes corporate event planning as easy as booking a hotel — 340,000+ venues across 175 countries and 30+ years of combined experience." });
+}
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

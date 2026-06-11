@@ -37,12 +37,46 @@ const playfair = Playfair_Display({
   style: ["normal", "italic"],
 });
 
-export const metadata: Metadata = {
-  title: "EventPartner — The World's Largest Selection of Event & Conference Venues",
-  description:
-    "Your complete partner for enterprise event booking across 175 countries globally. 340,000+ venues, one platform, zero friction.",
-  keywords: ["event venues", "conference booking", "B2B events", "Global", "venue sourcing"],
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  const title = sv
+    ? "EventPartner — Allt ditt event behöver. En partner."
+    : "EventPartner — Everything Your Event Needs. One Partner.";
+  const description = sv
+    ? "Er kompletta partner för företagsevent i 175 länder. 340 000+ venues, en plattform — lokaler, leverantörer och förhandling, hanterat från start till mål."
+    : "Your complete partner for corporate events across 175 countries. 340,000+ venues, one platform — sourcing, suppliers and negotiation handled end to end.";
+  return {
+    metadataBase: new URL("https://eventpartner.io"),
+    title: { default: title, template: "%s — EventPartner" },
+    description,
+    keywords: sv
+      ? ["eventlokaler", "konferensbokning", "företagsevent", "venue sourcing", "eventpartner"]
+      : ["event venues", "conference booking", "corporate events", "venue sourcing", "event partner"],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+    },
+    alternates: {
+      canonical: `/${locale}`,
+      languages: { en: "/en", sv: "/sv", "x-default": "/en" },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}`,
+      siteName: "EventPartner",
+      type: "website",
+      locale: sv ? "sv_SE" : "en_US",
+    },
+    twitter: { card: "summary_large_image", title, description },
+    icons: {
+      icon: [{ url: "/icon.png", type: "image/png", sizes: "512x512" }],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

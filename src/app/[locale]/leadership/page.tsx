@@ -8,12 +8,15 @@ import { LEADERSHIP_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
 import { TEAM_MEMBERS } from "@/lib/teamMembers";
 import { LeadershipContent } from "./LeadershipContent";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Leadership — EventPartner",
-  description:
-    "Meet the leadership team behind EventPartner — the world's largest event booking platform connecting enterprises with 2,400+ venues across 175 countries.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  return pageMetadata({ locale, path: "/leadership",
+    title: sv ? "Ledning & team" : "Leadership & Team",
+    description: sv ? "Möt teamet bakom EventPartner — decenniers samlad erfarenhet inom event, möten, försäljning, AI och teknik." : "Meet the team behind EventPartner — decades of combined experience in events, meetings, sales, AI and technology." });
+}
 
 export default async function LeadershipPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

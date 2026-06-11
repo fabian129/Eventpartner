@@ -6,12 +6,15 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
 import { CAREERS_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Careers — EventPartner",
-  description:
-    "Join EventPartner and help shape the future of corporate events around the globe. Explore open positions or send an open application.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  return pageMetadata({ locale, path: "/careers",
+    title: sv ? "Karriär" : "Careers",
+    description: sv ? "Bygg framtidens event med oss. Se lediga roller eller skicka en spontanansökan — vi är alltid intresserade av exceptionell talang." : "Build the future of events with us. See open roles or send an open application — we are always interested in exceptional talent." });
+}
 
 export default async function CareersPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

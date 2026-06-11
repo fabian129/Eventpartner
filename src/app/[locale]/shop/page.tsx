@@ -6,12 +6,15 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
 import { HOMEPAGE_QUERY, WEBSHOP_PAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Shop — EventPartner",
-  description:
-    "Browse EventPartner's curated event merchandise and request a quote for premium Video Plus Print brochures. Print-on-demand with fast EU delivery.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  return pageMetadata({ locale, path: "/shop",
+    title: sv ? "Shop & profilprodukter" : "Shop & Branded Merchandise",
+    description: sv ? "Designa egna profilprodukter till ert event — tröjor, hoodies och mer med er logga. Begär offert, vi sköter tryck och leverans." : "Design custom branded merchandise for your event — tees, hoodies and more with your logo. Request a quote; we handle print and delivery." });
+}
 
 export default async function ShopPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -6,12 +6,15 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
 import { VIP_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Become a VIP — EventPartner",
-  description:
-    "Join EventPartner's VIP programme for priority access, exclusive pricing, dedicated account management, and premium venue options across 175 countries.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  return pageMetadata({ locale, path: "/vip",
+    title: sv ? "VIP-program" : "VIP Programme",
+    description: sv ? "EventPartner VIP — dedikerad kontaktperson, förhandlade priser, i snitt 14 % rabatt och prioriterad service för organisationer med höga krav." : "EventPartner VIP — dedicated account management, negotiated rates, 14% average discount and priority service for demanding organisations." });
+}
 
 export default async function VIPPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

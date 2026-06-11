@@ -6,12 +6,15 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
 import { HELP_CENTER_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Help Center — EventPartner",
-  description:
-    "Get support from EventPartner's dedicated team. Contact us via email, phone, or our contact form for assistance with venue bookings, VIP membership, and event planning.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  return pageMetadata({ locale, path: "/help",
+    title: sv ? "Hjälpcenter" : "Help Center",
+    description: sv ? "Behöver du hjälp? Kontakta EventPartners support — svar inom en arbetsdag på allt om bokningar, offerter och tjänster." : "Need help? Contact EventPartner support — replies within one business day on bookings, quotes and services." });
+}
 
 export default async function HelpCenterPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

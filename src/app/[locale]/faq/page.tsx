@@ -6,12 +6,15 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
 import { FAQ_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "FAQ — EventPartner",
-  description:
-    "Find answers to frequently asked questions about EventPartner's venue sourcing, pricing, VIP programme, and how we help plan corporate events across 175 countries globally.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  return pageMetadata({ locale, path: "/faq",
+    title: sv ? "Vanliga frågor" : "FAQ",
+    description: sv ? "Svar på vanliga frågor om EventPartner — kostnad, svarstid, 340 000+ venues i 175 länder och hur bokningsprocessen fungerar." : "Answers to common questions about EventPartner — pricing, response times, 340,000+ venues across 175 countries and how booking works." });
+}
 
 export default async function FaqPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -6,12 +6,15 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/../sanity/lib/live";
 import { AI_ASSISTANT_PAGE_QUERY, HOMEPAGE_QUERY } from "@/../sanity/lib/queries";
 import { localize, type Locale } from "@/../sanity/lib/locale";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "EventPartner AI – Event Assistant",
-  description:
-    "EventPartner's AI-powered Event Assistant identifies, invites and follows up with the right attendees — automatically. Higher attendance, better meetings, stronger ROI from every event.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const sv = locale === "sv";
+  return pageMetadata({ locale, path: "/ai-assistant",
+    title: sv ? "AI-assistent" : "AI Assistant",
+    description: sv ? "EventPartner AI identifierar, bjuder in och följer upp rätt deltagare — automatiskt. Högre närvaro och starkare ROI från varje event." : "EventPartner AI identifies, invites and follows up with the right attendees — automatically. Higher attendance and stronger ROI from every event." });
+}
 
 export default async function AiAssistantPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
