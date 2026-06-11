@@ -18,6 +18,16 @@ const SERVICE_ITEMS = [
   { label: "Exhibitions", labelSv: "Mässor", href: "/#services", desc: "Trade shows & product launches", descSv: "Mässor & produktlanseringar" },
 ];
 
+/* ── Mobile menu pills — mirrors the footer's real pages ── */
+const MENU_PILLS = [
+  { label: "FAQ", labelSv: "FAQ", href: "/faq" },
+  { label: "Help center", labelSv: "Hjälpcenter", href: "/help" },
+  { label: "Leadership", labelSv: "Ledning", href: "/leadership" },
+  { label: "Careers", labelSv: "Karriär", href: "/careers" },
+  { label: "AI Assistant", labelSv: "AI-assistent", href: "/ai-assistant" },
+  { label: "Security & Privacy", labelSv: "Säkerhet & integritet", href: "/security" },
+];
+
 interface NavLink {
   label: string;
   href: string;
@@ -51,7 +61,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
   const lenis = useSmoothScroll();
 
   // "Book Event" → the homepage request form. Smooth-scroll if it's on the
-  // current page (Lenis-aware), otherwise let href="/#request" navigate home.
+  // current page (Lenis-aware), otherwise let href={`/${locale}#request`} navigate home.
   const scrollToRequest = useCallback((e: React.MouseEvent) => {
     const el = document.getElementById("request");
     if (el) {
@@ -165,7 +175,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
                   onMouseLeave={link.hasDropdown ? closeDropdown : undefined}
                 >
                   <a
-                    href={link.href}
+                    href={`/${locale}${link.href}`}
                     className={`
                       relative text-[13px] font-medium px-3.5 py-2 rounded-full
                       transition-all duration-300 flex items-center gap-1.5
@@ -203,7 +213,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
                           {SERVICE_ITEMS.map((item) => (
                             <a
                               key={item.label}
-                              href={item.href}
+                              href={`/${locale}${item.href}`}
                               className={`flex flex-col px-3.5 py-2.5 rounded-xl
                                 transition-all duration-200 group
                                 ${isDarkBg
@@ -281,7 +291,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             </button>
 
             <a
-              href="/#request"
+              href={`/${locale}#request`}
               onClick={scrollToRequest}
               className={`
                 relative text-[12.5px] font-semibold rounded-full px-5 py-2.5
@@ -325,33 +335,14 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 bg-[#0a0a0a]/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-1"
           >
-            {/* Close button */}
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-5 right-6 p-2 text-white/60 hover:text-white transition-colors"
-              aria-label="Close menu"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            {/* Logo in mobile menu */}
-            <div className="absolute top-5 left-6 flex items-center gap-1">
-              <div className="relative h-[75px] w-[75px]">
-                <Image
-                  src="/Images/logos/ep-icon-chrome.png"
-                  alt="EventPartner"
-                  fill
-                  className="object-contain invert brightness-0"
-                />
-              </div>
-              <span className="text-[11px] font-semibold tracking-tight text-white/90">EventPartner</span>
-            </div>
+            {/* No own close button or logo here — the navbar stays visible above
+                the overlay and already shows the logo + an X (hamburger toggles). */}
 
             {/* Mobile nav links */}
             {NAV_LINKS.map((link, i) => (
               <motion.a
                 key={link.label}
-                href={link.href}
+                href={`/${locale}${link.href}`}
                 onClick={() => setIsOpen(false)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -362,12 +353,12 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
               </motion.a>
             ))}
 
-            {/* Mobile service sub-items */}
+            {/* Mobile secondary links — mirrors the footer (real pages, not service anchors) */}
             <div className="mt-2 mb-4 flex flex-wrap justify-center gap-2 px-8 max-w-sm">
-              {SERVICE_ITEMS.map((item) => (
+              {MENU_PILLS.map((item) => (
                 <a
                   key={item.label}
-                  href={item.href}
+                  href={`/${locale}${item.href}`}
                   onClick={() => setIsOpen(false)}
                   className="text-[11px] text-white/30 px-3 py-1.5 rounded-full border border-white/[0.06]
                     hover:text-white/60 hover:border-white/[0.12] transition-all"
@@ -379,7 +370,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
 
             {/* Mobile CTA */}
             <motion.a
-              href="/#request"
+              href={`/${locale}#request`}
               onClick={(e) => { setIsOpen(false); scrollToRequest(e); }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
