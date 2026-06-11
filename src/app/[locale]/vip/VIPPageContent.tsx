@@ -320,8 +320,8 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                   <Crown className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-display font-semibold text-[var(--text-primary)]">Apply for VIP</h3>
-                  <span className="font-mono text-[9px] uppercase tracking-wider text-purple">Exclusive Member Network</span>
+                  <h3 className="text-xl font-display font-semibold text-[var(--text-primary)]">{sv ? "Ansök om VIP" : "Apply for VIP"}</h3>
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-purple">{sv ? "Exklusivt medlemsnätverk" : "Exclusive Member Network"}</span>
                 </div>
               </div>
 
@@ -330,17 +330,17 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                   <div className="w-14 h-14 bg-purple/10 text-purple rounded-full flex items-center justify-center mb-5">
                     <CheckCircle className="w-8 h-8" />
                   </div>
-                  <h4 className="text-lg font-display font-semibold text-[var(--text-primary)] mb-1">Application Received</h4>
-                  <p className="text-sm text-[var(--text-secondary)]">We will get back to you with membership details shortly.</p>
+                  <h4 className="text-lg font-display font-semibold text-[var(--text-primary)] mb-1">{sv ? "Ansökan mottagen" : "Application Received"}</h4>
+                  <p className="text-sm text-[var(--text-secondary)]">{sv ? "Ett bekräftelsemail har skickats till din e-post. Vi återkommer med besked om ditt medlemskap inom kort." : "A confirmation email has been sent to your inbox. We'll get back to you with membership details shortly."}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 mt-6">
                   <div>
-                    <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Full Name *</label>
+                    <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">{sv ? "Fullständigt namn *" : "Full Name *"}</label>
                     <input
                       type="text"
                       required
-                      placeholder="Your full name"
+                      placeholder={sv ? "Ditt fullständiga namn" : "Your full name"}
                       className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus:outline-none focus:border-purple transition-colors placeholder:text-[var(--text-muted)]"
                       value={form.name}
                       onChange={set('name')}
@@ -348,18 +348,18 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Email *</label>
+                      <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">{sv ? "E-post *" : "Email *"}</label>
                       <input
                         type="email"
                         required
-                        placeholder="you@company.com"
+                        placeholder={sv ? "du@foretag.se" : "you@company.com"}
                         className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus:outline-none focus:border-purple transition-colors placeholder:text-[var(--text-muted)]"
                         value={form.email}
                         onChange={set('email')}
                       />
                     </div>
                     <div>
-                      <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Phone</label>
+                      <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">{sv ? "Telefon" : "Phone"}</label>
                       <input
                         type="tel"
                         placeholder="+46..."
@@ -370,20 +370,20 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                     </div>
                   </div>
                   <div>
-                    <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Company</label>
+                    <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">{sv ? "Företag" : "Company"}</label>
                     <input
                       type="text"
-                      placeholder="Company name"
+                      placeholder={sv ? "Företagsnamn" : "Company name"}
                       className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus:outline-none focus:border-purple transition-colors placeholder:text-[var(--text-muted)]"
                       value={form.company}
                       onChange={set('company')}
                     />
                   </div>
                   <div>
-                    <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">Special requirements / Preferences</label>
+                    <label className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mb-1.5">{sv ? "Särskilda önskemål / Preferenser" : "Special requirements / Preferences"}</label>
                     <textarea
                       rows={3}
-                      placeholder="E.g. Preferred destinations, number of corporate events per year..."
+                      placeholder={sv ? "t.ex. önskade destinationer, antal företagsevent per år..." : "E.g. Preferred destinations, number of corporate events per year..."}
                       className="w-full bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus:outline-none focus:border-purple transition-colors resize-none placeholder:text-[var(--text-muted)]"
                       value={form.message}
                       onChange={set('message')}
@@ -402,9 +402,9 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                     className="w-full bg-purple text-white font-medium rounded-xl py-4 hover:bg-[#6A47A0] transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-[0_4px_20px_rgba(120,81,169,0.2)]"
                   >
                     {loading ? (
-                      <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Submitting...</>
+                      <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {sv ? "Skickar..." : "Submitting..."}</>
                     ) : (
-                      <><Send className="w-4 h-4" /> Apply for Membership</>
+                      <><Send className="w-4 h-4" /> {sv ? "Ansök om medlemskap" : "Apply for Membership"}</>
                     )}
                   </button>
 

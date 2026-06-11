@@ -457,8 +457,8 @@
   "vipPage": {
     "heroLabel": "EventPartner — VIP-program",
     "heroLabelRight": "Exklusiv tillgång",
-    "heroHeadline": "Din partner,",
-    "heroHeadlineAccent": "inte en leverantör.",
+    "heroHeadline": "Er partner,",
+    "heroHeadlineAccent": "EventPartner.",
     "heroIntroText": "Vi kopplar samman företag med rätt lokaler och leverantörer. Vi förhandlar åt er, och ser till att ert event blir minnesvärt och skapar värde. Både externa event och interna sammankomster har aldrig varit enklare att skapa än med EventPartner VIP.",
     "heroStats": [
       { "value": "12h", "label": "Svarstid" },

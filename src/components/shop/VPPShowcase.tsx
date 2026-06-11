@@ -318,7 +318,8 @@ function ProductDetailModal({
             </div>
           </div>
 
-          <p className="text-[var(--text-secondary)] text-[15px] leading-[1.7] mb-6">{product.description}</p>
+          <p className="text-[var(--text-secondary)] text-[15px] leading-[1.7] mb-2">{product.description}</p>
+          <p className="font-mono text-[11px] text-tiffany mb-6">{t('priceHint')}</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
             {/* Features */}
