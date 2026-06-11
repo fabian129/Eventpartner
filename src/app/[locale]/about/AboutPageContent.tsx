@@ -41,9 +41,7 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
 
   // Per client request (Malin 2026-06-10): no individual portraits on About —
   // the team lives on /leadership; About shows one group photo instead.
-  // TODO: set to "/Images/Team/group.webp" once the group photo from Malin's
-  // mail is downloaded (attachment 3ffbf9c0-...png). Until then the section is hidden.
-  const TEAM_GROUP_IMAGE: string | null = null;
+  const TEAM_GROUP_IMAGE: string | null = "/Images/Team/group.webp";
 
   const tc = useTranslations('common');
 
@@ -118,13 +116,14 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{cms?.teamLabel || t('teamLabel')}</span>
             <p className="font-display text-[clamp(1.3rem,2.5vw,2rem)] font-normal tracking-tight text-[var(--text-primary)] leading-[1.3] mb-14 max-w-3xl">{cms?.teamIntro || t('teamIntro')}</p>
-            <div className="aspect-[16/9] rounded-2xl bg-[#1a1a1a] relative overflow-hidden group">
+            <div className="max-w-3xl mx-auto rounded-2xl bg-[#1a1a1a] overflow-hidden group">
               <Image
                 src={TEAM_GROUP_IMAGE}
                 alt="The EventPartner team"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                sizes="(max-width: 1200px) 100vw, 1200px"
+                width={1402}
+                height={1122}
+                className="w-full h-auto transition-transform duration-700 group-hover:scale-[1.02]"
+                sizes="(max-width: 768px) 100vw, 768px"
               />
             </div>
           </motion.div>
