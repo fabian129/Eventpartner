@@ -15,7 +15,7 @@ export const REGIONS: Region[] = [
   // ── Active European sub-regions ──
   {
     slug: 'nordics',
-    name: 'Nordics',
+    name: 'Nordic countries',
     countrySlugs: ['sweden', 'norway', 'iceland', 'estonia', 'latvia', 'lithuania'],
     center: [61, 15],
     previewFlags: ['se', 'no', 'is'],

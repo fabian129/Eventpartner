@@ -22,7 +22,6 @@ const SERVICE_ITEMS = [
 const MENU_PILLS = [
   { label: "FAQ", labelSv: "FAQ", href: "/faq" },
   { label: "Help center", labelSv: "Hjälpcenter", href: "/help" },
-  { label: "Leadership", labelSv: "Ledning", href: "/leadership" },
   { label: "Careers", labelSv: "Karriär", href: "/careers" },
   { label: "AI Assistant", labelSv: "AI-assistent", href: "/ai-assistant" },
   { label: "Security & Privacy", labelSv: "Säkerhet & integritet", href: "/security" },
@@ -47,6 +46,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
     { label: t('customize'), href: "/customize" },
     { label: t('shop'), href: "/shop" },
     { label: t('about'), href: "/about" },
+    { label: t('leadership'), href: "/leadership" },
   ];
   const ctaText = cms?.cta || t('bookEvent');
   const [isOpen, setIsOpen] = useState(false);

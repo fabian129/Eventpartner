@@ -24,6 +24,7 @@
     "customize": "Customize",
     "shop": "Shop",
     "about": "About",
+    "leadership": "Leadership",
     "bookEvent": "Book Event →"
   },
 
@@ -384,7 +385,7 @@
     "trustedBy": "Trusted by 500+ global brands",
     "quoteLabel": "Request a Quote",
     "quoteHeadline": "Premium video\nbrochures.",
-    "quoteDescription": "Stand out at your next event with custom Video Brochure products — tangible, high-impact marketing tools that combine print with embedded video.",
+    "quoteDescription": "Send event invitations and stand out at your next event with custom Video Brochure products — tangible, high-impact tools that combine print with embedded video.",
     "quotePoints": {
       "customizable": { "label": "Fully Customizable", "desc": "Your design, your brand, your video" },
       "delivery": { "label": "Global Delivery", "desc": "Ship anywhere in the world" },

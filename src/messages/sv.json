@@ -24,6 +24,7 @@
     "customize": "Skräddarsy",
     "shop": "Shop",
     "about": "Om oss",
+    "leadership": "Ledning",
     "bookEvent": "Boka Event →"
   },
 
@@ -384,7 +385,7 @@
     "trustedBy": "Betrodda av 500+ globala varumärken",
     "quoteLabel": "Begär offert",
     "quoteHeadline": "Premiumvideobroschyrer.",
-    "quoteDescription": "Marknadsför er smartare med anpassade videobroschyrer — ett taktilt och slagkraftigt verktyg som kombinerar fysiskt tryck med video.",
+    "quoteDescription": "Skicka inbjudningar till event och marknadsför er smartare med anpassade videobroschyrer — ett taktilt och slagkraftigt verktyg som kombinerar fysiskt tryck med video.",
     "quotePoints": {
       "customizable": { "label": "Helt anpassningsbar", "desc": "Din design, ditt varumärke, din video" },
       "delivery": { "label": "Global leverans", "desc": "Leverans var som helst i världen" },
