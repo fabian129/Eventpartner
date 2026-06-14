@@ -142,7 +142,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[0.88] mb-10"
+          className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[1.0] mb-10"
         >
           {cms?.heroHeadline || (sv ? "Har du" : "Got")}<br />
           <span className="text-tiffany">{cms?.heroHeadlineAccent || (sv ? "frågor?" : "questions?")}</span>

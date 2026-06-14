@@ -53,7 +53,7 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.heroLabel || t('heroLabel')}</span>
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-dim)]">{cms?.heroLabelRight || t('heroLabelRight')}</span>
         </motion.div>
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE }} className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[0.88] mb-10">
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE }} className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[1.0] mb-10">
           {cms?.heroHeadline || t('heroHeadline')}<br />
           <span className="text-tiffany">{cms?.heroHeadlineAccent || t('heroHeadlineAccent')}</span><br />
           {cms?.heroHeadlineLine3 || t('heroHeadlineLine3')}

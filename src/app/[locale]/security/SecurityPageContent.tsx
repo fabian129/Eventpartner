@@ -198,7 +198,7 @@ export function SecurityPageContent() {
               {COPY.heroBadge[l]}
             </span>
           </div>
-          <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[0.88]">
+          <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase tracking-[-0.02em] text-[var(--text-primary)] leading-[1.0]">
             {COPY.heroHeadline[l]}<br />
             <span className="text-tiffany">{COPY.heroAccent[l]}</span>
           </h1>
