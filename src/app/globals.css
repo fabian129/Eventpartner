@@ -73,6 +73,11 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Dark root so iOS rubber-band/overscroll past the top (dark hero) and bottom
+       (always-dark footer) shows the brand black instead of a white flash. */
+    background-color: #0A0A0A;
+    /* Prevent the overscroll bounce/scroll-chaining glow where supported. */
+    overscroll-behavior: none;
   }
 
   body {
@@ -81,6 +86,7 @@
     font-family: var(--font-sans);
     line-height: 1.7;
     overflow-x: hidden;
+    overscroll-behavior: none;
     transition: background-color 0.5s ease, color 0.5s ease;
     @apply antialiased;
   }

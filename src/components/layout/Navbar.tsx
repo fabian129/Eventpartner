@@ -253,20 +253,30 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             </nav>
           </div>
 
-          {/* Mobile logo */}
-          <div className="md:hidden shrink-0">
-            <Link href="/" className="flex items-center gap-1">
-              <div className="relative h-[75px] w-[75px]">
+          {/* Mobile slim pill — logo + hamburger inside one backdrop pill so page
+              content scrolls cleanly UNDER it (logo no longer bleeds into the text). */}
+          <div className={`md:hidden flex items-center justify-between gap-2 w-full rounded-full border transition-all duration-500 ${pillBg} pl-3 pr-1.5 py-1`}>
+            <Link href="/" className="flex items-center gap-1.5 shrink-0">
+              <div className="relative h-9 w-9">
                 <Image
                   src="/Images/logos/ep-icon-chrome.png"
                   alt="EventPartner"
                   fill
-                  className="object-contain transition-all duration-500"
+                  className="object-contain"
                   priority
                 />
               </div>
-              <span className={`text-[12px] font-semibold tracking-tight transition-colors duration-500 ${isDarkBg ? 'text-white/90' : 'text-[#111]'}`}>EventPartner</span>
+              <span className={`text-[13px] font-semibold tracking-tight transition-colors duration-500 ${isDarkBg ? 'text-white/90' : 'text-[#111]'}`}>EventPartner</span>
             </Link>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className={`p-2 rounded-full transition-colors ${
+                isDarkBg ? "hover:bg-white/10 text-white" : "hover:bg-black/5 text-[#111]"
+              }`}
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
 
           {/* ════════════════════════════ */}
@@ -308,18 +318,6 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             </a>
           </div>
 
-          {/* Mobile hamburger */}
-          <div className="md:hidden flex items-center shrink-0 ml-auto">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-full transition-colors ${
-                isDarkBg ? "hover:bg-white/10 text-white" : "hover:bg-black/5 text-[#111]"
-              }`}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
         </div>
       </nav>
 
