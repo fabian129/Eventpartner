@@ -379,14 +379,6 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                   </li>
                 ))}
               </ul>
-              <div className="relative h-[48px] w-[116px] opacity-65 hover:opacity-95 transition-opacity duration-300">
-                <Image
-                  src="/Images/compliance-badge.jpg"
-                  alt="Compliance Badges"
-                  fill
-                  className="object-contain rounded"
-                />
-              </div>
             </div>
 
           </div>

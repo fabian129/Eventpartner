@@ -192,17 +192,6 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
                     )}
                   </a>
 
-                  {link.href === "/about" && (
-                    <div className="relative h-[22px] w-[53px] shrink-0 ml-1.5 mr-2 opacity-85 hover:opacity-100 transition-opacity">
-                      <Image
-                        src="/Images/compliance-badge.jpg"
-                        alt="Compliance Badges"
-                        fill
-                        className="object-contain rounded"
-                      />
-                    </div>
-                  )}
-
                   {/* Services dropdown */}
                   {link.hasDropdown && (
                     <AnimatePresence>
