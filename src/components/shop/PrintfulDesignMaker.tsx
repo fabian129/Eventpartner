@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { X, Loader2, AlertCircle, Save, Check, ShoppingBag, Plus, ArrowRight } from "lucide-react";
@@ -84,6 +85,11 @@ export function PrintfulDesignMaker({
   const [warning, setWarning] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>("design");
   const [templateId, setTemplateId] = useState<number | null>(null);
+  // Portal target — render the fixed-position modal on document.body so it escapes
+  // any transformed ancestor (e.g. the homepage's framer-motion ScrollSection), which
+  // would otherwise break `position: fixed` and misalign the whole designer.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const elemId = `pf-designer-${productId}`;
   const externalProductId = useRef(`ep-${productId}-${Date.now()}`);
 
@@ -237,7 +243,9 @@ export function PrintfulDesignMaker({
     setPhase("added");
   }, [totalQty, sizeQuantities, unitPrice, productId, productName, productImage, colorName, colorHex, currency, templateId, addBulkItem]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <>
@@ -469,6 +477,7 @@ export function PrintfulDesignMaker({
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
