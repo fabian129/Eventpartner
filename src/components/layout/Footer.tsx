@@ -95,8 +95,8 @@ const MACRO_REGIONS = [
     regionSlugs: ["africa"],
   },
   {
-    label: "Asia Pacific",
-    labelSv: "Asien & Stillahavsområdet",
+    label: "Asia",
+    labelSv: "Asien",
     regionSlugs: ["asia-pacific"],
   },
   {
@@ -175,7 +175,7 @@ function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: s
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <div className="pb-4 pl-6.5 flex flex-wrap gap-x-1 gap-y-0.5">
+            <div className="pb-4 pl-6.5 pr-4 flex flex-wrap gap-x-3 gap-y-2">
               {countries.map((country, i) => (
                 <span key={country!.slug} className="inline">
                   <Link
@@ -185,7 +185,7 @@ function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: s
                     {sv ? (country!.nameSv || country!.name) : country!.name}
                   </Link>
                   {i < countries.length - 1 && (
-                    <span className="text-[11px] text-white/10 mx-0.5">·</span>
+                    <span className="text-[11px] text-white/10 mx-1.5">·</span>
                   )}
                 </span>
               ))}
@@ -364,7 +364,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
               <h4 className="font-mono text-[10px] uppercase tracking-[0.12em] text-tiffany mb-5">
                 Compliance
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-3 mb-5">
                 {[
                   tVpp('securityTicker.gdpr.title'),
                   tVpp('securityTicker.iso.title'),
@@ -379,6 +379,14 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                   </li>
                 ))}
               </ul>
+              <div className="relative h-[48px] w-[116px] opacity-65 hover:opacity-95 transition-opacity duration-300">
+                <Image
+                  src="/Images/compliance-badge.jpg"
+                  alt="Compliance Badges"
+                  fill
+                  className="object-contain rounded"
+                />
+              </div>
             </div>
 
           </div>

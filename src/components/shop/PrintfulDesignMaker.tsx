@@ -386,6 +386,12 @@ export function PrintfulDesignMaker({
                       </div>
                     )}
 
+                    {/* Clarify the mockup shows the customer's OWN design, not EP merch (P R2-4) */}
+                    <div className="mb-6 flex items-start gap-2.5 p-3 rounded-xl bg-tiffany/10 border border-tiffany/20">
+                      <Check className="w-4 h-4 text-tiffany shrink-0 mt-0.5" />
+                      <p className="text-xs text-gray-600 leading-relaxed">{t('previewNote')}</p>
+                    </div>
+
                     {/* Size matrix */}
                     <div className="bg-white rounded-2xl">
                       <p className="text-sm font-medium text-gray-700 mb-4">{t('sizePrompt')}</p>

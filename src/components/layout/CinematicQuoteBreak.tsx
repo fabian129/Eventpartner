@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -24,6 +24,7 @@ interface CtaCMS {
 
 export function CinematicQuoteBreak({ cms }: { cms?: CtaCMS }) {
   const t = useTranslations('cinematicQuote');
+  const locale = useLocale();
   return (
     <section
       className="relative w-full overflow-hidden py-20 md:py-28"
@@ -84,7 +85,7 @@ export function CinematicQuoteBreak({ cms }: { cms?: CtaCMS }) {
           <div className="max-w-[800px] grid grid-cols-1 gap-3 md:gap-4">
             {/* Tiffany accent card */}
             <Link
-              href="/skraddarsy"
+              href={`/${locale}/customize`}
               className="group flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-tiffany hover:bg-[#74CCC4] transition-all duration-300 min-h-[130px] shadow-[0_8px_32px_rgba(106,216,210,0.15)]"
             >
               <span className="text-[13px] font-semibold text-[#0A0A0A]/50">

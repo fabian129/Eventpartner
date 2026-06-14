@@ -198,7 +198,16 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
 
       {/* Bottom CTA */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10">
-        <motion.a href={`/${locale}/help`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300">
+        <motion.a
+          href="https://cal.com/eventpartner/15min"
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300"
+        >
           <div>
             <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">{ctaHeadline}</p>
             <p className="text-[var(--text-secondary)] text-sm">{ctaDesc}</p>

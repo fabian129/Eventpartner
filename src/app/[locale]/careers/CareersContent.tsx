@@ -95,6 +95,12 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease: EASE }} className="text-[clamp(1rem,2vw,1.25rem)] text-[var(--text-secondary)] leading-[1.7] max-w-2xl">
           {description}
         </motion.p>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25, ease: EASE }} className="mt-10">
+          <a href="#apply" className="group inline-flex items-center gap-2 rounded-xl bg-tiffany px-7 py-4 text-[15px] font-semibold text-black hover:bg-tiffany/90 transition-all">
+            {sv ? "Ansök nu" : "Apply now"}
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+        </motion.div>
       </section>
 
       {/* Perks */}
@@ -114,7 +120,7 @@ export function CareersContent({ cms }: { cms?: CareersCMS }) {
       </section>
 
       {/* Application Form */}
-      <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
+      <section id="apply" className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           <motion.div className="lg:col-span-4" initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE }}>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{openAppTitle}</span>

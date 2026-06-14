@@ -68,6 +68,13 @@ async function handleEventInquiry(data: Record<string, any>) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
+  if (parseInt(guests) < 50) {
+    return NextResponse.json(
+      { error: locale === 'sv' ? 'Minsta antal deltagare är 50.' : 'Minimum number of guests is 50.' },
+      { status: 400 }
+    );
+  }
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
@@ -85,11 +92,26 @@ async function handleEventInquiry(data: Record<string, any>) {
   }
 
   // The form sends { from, to, flexibility } — show the dates whenever present.
-  const dateInfo = typeof date === 'object' && date !== null
-    ? (date.from || date.to)
-      ? `${date.from || '—'} → ${date.to || '—'}${date.flexibility && date.flexibility !== 'Exact' ? ` (${date.flexibility})` : ''}`
-      : `${date.month || '—'} (${date.flexibility || 'not specified'})`
-    : date || 'Not specified';
+  let dateInfo = 'Not specified';
+  if (typeof date === 'object' && date !== null) {
+    if (date.from || date.to) {
+      if (date.flexibility === 'Entire month') {
+        try {
+          const d = new Date(date.from || date.to);
+          const monthStr = d.toLocaleDateString(locale === 'sv' ? 'sv-SE' : 'en-US', { month: 'long', year: 'numeric' });
+          dateInfo = `${monthStr} (${locale === 'sv' ? 'hela månaden' : 'entire month'})`;
+        } catch {
+          dateInfo = `${date.from || '—'} → ${date.to || '—'} (${date.flexibility})`;
+        }
+      } else {
+        dateInfo = `${date.from || '—'} → ${date.to || '—'}${date.flexibility && date.flexibility !== 'Exact' ? ` (${date.flexibility})` : ''}`;
+      }
+    } else {
+      dateInfo = `${date.month || '—'} (${date.flexibility || 'not specified'})`;
+    }
+  } else if (date) {
+    dateInfo = String(date);
+  }
 
   const { error } = await getResend().emails.send({
     from: FROM_EMAIL,
@@ -205,6 +227,14 @@ async function handleVPPQuote(data: Record<string, any>) {
 
   if (!name || !email) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  }
+
+  // Video brochures are produced in batches — minimum order is 50 units.
+  if (Number(quantity) < 50) {
+    return NextResponse.json(
+      { error: locale === 'sv' ? 'Minsta beställning är 50 enheter.' : 'Minimum order is 50 units.' },
+      { status: 400 }
+    );
   }
 
   const { error } = await getResend().emails.send({
@@ -362,7 +392,7 @@ async function handleMerchQuote(data: Record<string, any>) {
   const productRows = items.map((item: any) => {
     const sizeBreakdown = item.sizes
       .filter((s: any) => s.quantity > 0)
-      .map((s: any) => `${s.size}: ${s.quantity}st`)
+      .map((s: any) => `${s.size}: ${s.quantity}st${s.variantId ? ` (variant ${s.variantId})` : ''}`)
       .join(', ');
     
     const itemTotal = item.sizes.reduce((sum: number, s: any) => sum + s.quantity * s.price, 0);
@@ -405,11 +435,11 @@ async function handleMerchQuote(data: Record<string, any>) {
           <div style="margin: 0 0 24px; padding: 14px 18px; background: #ecfdf5; border: 1px solid #6AD8D2; border-radius: 12px;">
             <p style="margin: 0; font-size: 13px; color: #0f766e; line-height: 1.5;">✅ Printful draft order <strong>#${draftOrderId}</strong> created on your account. Open <strong>Printful → Orders</strong> to review the design, complete shipping and place it, then send the customer a quote/invoice.</p>
           </div>
-        ` : draftError ? `
-          <div style="margin: 0 0 24px; padding: 14px 18px; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 12px;">
-            <p style="margin: 0; font-size: 13px; color: #b91c1c; line-height: 1.5;">⚠️ The Printful draft could not be created automatically — please create it manually from the details below. Reason: ${esc(draftError)}</p>
+        ` : `
+          <div style="margin: 0 0 24px; padding: 14px 18px; background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 12px;">
+            <p style="margin: 0; font-size: 13px; color: #334155; line-height: 1.5;">📋 New order request — create it in <strong>Printful → Orders</strong> using the design template &amp; variant details below, then send the customer a quote/invoice.</p>
           </div>
-        ` : ''}
+        `}
 
         <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px;">
           <tr style="border-bottom: 1px solid #eee;">
@@ -563,6 +593,13 @@ async function handleDetailedInquiry(data: Record<string, any>) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
+  if (parseInt(guests) < 50) {
+    return NextResponse.json(
+      { error: locale === 'sv' ? 'Minsta antal deltagare är 50.' : 'Minimum number of guests is 50.' },
+      { status: 400 }
+    );
+  }
+
   // Server-side guard: past dates are invalid (client request P12).
   const todayIso = new Date().toISOString().split('T')[0];
   if ((startDate && startDate < todayIso) || (endDate && endDate < todayIso)) {
@@ -647,6 +684,45 @@ async function handleDetailedInquiry(data: Record<string, any>) {
   if (error) {
     console.error('Resend error:', error);
     return NextResponse.json({ error: 'Failed to send detailed inquiry' }, { status: 500 });
+  }
+
+  // Customer autoresponse
+  try {
+    const sv = locale === 'sv';
+    await getResend().emails.send({
+      from: CUSTOMER_FROM,
+      to: email,
+      subject: sv ? 'Tack för din förfrågan — EventPartner' : 'Thank you for your inquiry — EventPartner',
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+          <div style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px; text-align: center;">
+            <h1 style="color: #6AD8D2; font-size: 22px; margin: 0 0 6px;">${sv ? 'Tack för din förfrågan!' : 'Thank you for your inquiry!'}</h1>
+            <p style="color: rgba(255,255,255,0.55); font-size: 13px; margin: 0;">EventPartner</p>
+          </div>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">${sv ? `Hej ${esc(contact)},` : `Hi ${esc(contact)},`}</p>
+          <p style="font-size: 15px; line-height: 1.7; color: #222;">
+            ${sv
+              ? `Tack för att du hörde av dig till oss gällande ett event för <strong>${esc(company)}</strong>. Vi har tagit emot din förfrågan och vårt team har redan börjat titta på den.`
+              : `Thank you for reaching out to us regarding an event for <strong>${esc(company)}</strong>. We have received your inquiry and our team is already looking into it.`}
+          </p>
+          <div style="margin: 24px 0; padding: 16px 18px; background: #ecfdf5; border: 1px solid #6AD8D2; border-radius: 12px;">
+            <p style="margin: 0; font-size: 14px; color: #0f766e; line-height: 1.6;">
+              ${sv
+                ? '⏱️ Vi återkommer till dig så snart som möjligt med mer information.'
+                : "⏱️ We'll get back to you as soon as possible with more information."}
+            </p>
+          </div>
+          <p style="font-size: 14px; line-height: 1.7; color: #555;">
+            ${sv ? 'Har du frågor under tiden? Svara bara på detta mejl.' : 'Questions in the meantime? Just reply to this email.'}
+          </p>
+          <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 12px; margin: 0;">${sv ? 'Med vänliga hälsningar,' : 'Best regards,'}<br/>EventPartner · eventpartner.io</p>
+          </div>
+        </div>
+      `,
+    });
+  } catch (e) {
+    console.error('Customer confirmation email failed:', e);
   }
 
   return NextResponse.json({ success: true });

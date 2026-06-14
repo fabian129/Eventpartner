@@ -19,7 +19,13 @@ const regions = regionBlocks.map((m) => ({
 }));
 
 // ── Size weights (bigger market = more venues) ──────────────────
-const PINNED = { sweden: 2475 };
+const PINNED = {
+  sweden: 2475,
+  norway: 1125,
+  finland: 325,
+  denmark: 224,
+  iceland: 45
+};
 const MAJOR = ['uk', 'france', 'germany', 'italy', 'spain', 'turkey', 'united-states', 'china', 'india', 'japan', 'australia', 'brazil', 'mexico', 'canada'];
 const LARGE = ['netherlands', 'poland', 'switzerland', 'austria', 'portugal', 'greece', 'czech-republic', 'ireland', 'belgium', 'hungary', 'romania', 'denmark', 'finland', 'norway', 'israel', 'united-arab-emirates', 'uae', 'saudi-arabia', 'qatar', 'singapore', 'south-korea', 'thailand', 'indonesia', 'malaysia', 'vietnam', 'philippines', 'new-zealand', 'argentina', 'chile', 'colombia', 'peru', 'south-africa', 'egypt', 'morocco', 'nigeria', 'kenya'];
 const MICRO = ['iceland', 'malta', 'luxembourg', 'montenegro', 'monaco', 'andorra', 'liechtenstein', 'san-marino', 'brunei', 'maldives', 'seychelles', 'mauritius', 'bahrain', 'fiji', 'bhutan', 'comoros', 'sao-tome-and-principe', 'cape-verde', 'djibouti', 'eswatini', 'lesotho', 'gambia', 'guinea-bissau', 'equatorial-guinea', 'antigua-and-barbuda', 'barbados', 'saint-lucia', 'grenada', 'dominica', 'saint-kitts-and-nevis', 'saint-vincent-and-the-grenadines', 'samoa', 'tonga', 'vanuatu', 'palau', 'micronesia', 'kiribati', 'tuvalu', 'nauru', 'marshall-islands', 'solomon-islands', 'timor-leste', 'belize', 'suriname', 'guyana'];

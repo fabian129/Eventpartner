@@ -43,7 +43,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "estonia", code: "ee", name: "Estonia", nameSv: "Estland", venues: "2,225+",
+    slug: "estonia", code: "ee", name: "Estonia", nameSv: "Estland", venues: "4,950+",
     topVenues: [
       { name: "Tallinn Creative Hub (Kultuurikatel)", city: "Tallinn", capacity: "6 000", type: "Event Venue" },
       { name: "Eesti Näituste Fair Centre", city: "Tallinn", capacity: "10 000+", type: "Event Venue" },
@@ -83,7 +83,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "iceland", code: "is", name: "Iceland", nameSv: "Island", venues: "925+",
+    slug: "iceland", code: "is", name: "Iceland", nameSv: "Island", venues: "45+",
     topVenues: [
       { name: "Harpa Concert Hall & Conference Centre", city: "Reykjavik", capacity: "3 500+", type: "Event Venue" },
       { name: "Hilton Reykjavik Nordica Conference Centre", city: "Reykjavik", capacity: "2 000", type: "Event Venue" },
@@ -113,7 +113,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "latvia", code: "lv", name: "Latvia", nameSv: "Lettland", venues: "2,225+",
+    slug: "latvia", code: "lv", name: "Latvia", nameSv: "Lettland", venues: "4,950+",
     topVenues: [
       { name: "Kipsala International Exhibition Centre", city: "Riga", capacity: "15 000+", type: "Event Venue" },
       { name: "ATTA Centre Riga", city: "Riga", capacity: "5 500", type: "Event Venue" },
@@ -123,7 +123,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "lithuania", code: "lt", name: "Lithuania", nameSv: "Litauen", venues: "2,275+",
+    slug: "lithuania", code: "lt", name: "Lithuania", nameSv: "Litauen", venues: "4,950+",
     topVenues: [
       { name: "Litexpo – Lithuanian Exhibition and Congress Centre", city: "Vilnius", capacity: "15 000+", type: "Event Venue" },
       { name: "LITEXPO Congress Centre", city: "Vilnius", capacity: "5 000", type: "Event Venue" },
@@ -183,7 +183,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "norway", code: "no", name: "Norway", nameSv: "Norge", venues: "8,375+",
+    slug: "norway", code: "no", name: "Norway", nameSv: "Norge", venues: "1,125+",
     topVenues: [
       { name: "Oslofjord Convention Center", city: "Melsomvik", capacity: "9 000+", type: "Event Venue" },
       { name: "NOVA Spektrum", city: "Lillestrøm", capacity: "20 000+", type: "Event Venue" },
@@ -323,7 +323,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "denmark", code: "dk", name: "Denmark", nameSv: "Danmark", venues: "4,100+",
+    slug: "denmark", code: "dk", name: "Denmark", nameSv: "Danmark", venues: "224+",
     topVenues: [
       { name: "Bella Center Copenhagen", city: "Copenhagen", capacity: "20 000+", type: "Convention center" },
       { name: "Tivoli Hotel & Congress Center", city: "Copenhagen", capacity: "3 000", type: "Convention center" },
@@ -333,7 +333,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "finland", code: "fi", name: "Finland", nameSv: "Finland", venues: "4,100+",
+    slug: "finland", code: "fi", name: "Finland", nameSv: "Finland", venues: "325+",
     topVenues: [
       { name: "Messukeskus Helsinki Expo & Convention Centre", city: "Helsinki", capacity: "20 000+", type: "Convention center" },
       { name: "Finlandia Hall", city: "Helsinki", capacity: "3 500", type: "Convention center" },

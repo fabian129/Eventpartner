@@ -525,7 +525,7 @@ function VPPQuoteForm({ preselectedProduct, productTypes }: { preselectedProduct
             <label className={labelClass}>{t('quoteForm.quantity')}</label>
             <input
               type="number"
-              min={1}
+              min={50}
               step={1}
               placeholder="200"
               required

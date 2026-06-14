@@ -213,7 +213,7 @@
       "Dedikerad senior account manager",
       "Förmånliga priser i 175 länder",
       "Alltid 33 % extra rabatt på allt i vår webbshop",
-      "Årlig omfattande rapportering samt ESG- & hållbarhetsdata",
+      "Kvartalsvis omfattande rapportering samt ESG- & hållbarhetsdata",
       "Enterprise-governance anpassad för CSRD, NIS2 & travel management",
       "Rapporter",
       "Svarstid från 12h",
@@ -301,6 +301,7 @@
     "selected": "valda",
     "priceIncluded": "Pris ingår i offerten",
     "bulkDiscountNote": "Slutpriset inkluderar bulkrabatter. Vi svarar inom 24h.",
+    "bulkDiscountTiersLabel": "Mängdrabatter",
     "requestQuote": "Begär offert",
     "close": "Stäng varukorg",
     "quoteForm": {
@@ -322,7 +323,7 @@
       "shippingNote": "Används för att förbereda din order. Vi bekräftar alla detaljer med dig innan något produceras.",
       "nameEmailRequired": "Namn och e-post krävs.",
       "addressRequired": "Fyll i leveransadressen (adress, stad, postnummer och land).",
-      "terms": { "text": "Jag godkänner villkoren och behandlingen av mina uppgifter.", "link": "Villkor & integritet" },
+      "terms": { "text": "Samtliga produkter tillverkas på beställning enligt kundens specifika önskemål och design. När beställningen har godkänts och produktionen påbörjats kan den därför inte avbeställas, returneras eller återbetalas. Returer och återköp accepteras endast om produkten är felaktig, skadad vid leverans eller om produktionen inte överensstämmer med den godkända beställningen. Kunden ansvarar för att kontrollera att design, texter, bilder, färger och övriga uppgifter är korrekta innan beställningen godkänns. Jag godkänner dessa villkor samt", "link": "köpvillkor & integritetspolicy" },
       "termsRequired": "Godkänn villkoren för att fortsätta.",
       "submit": "Skicka offertförfrågan",
       "sending": "Skickar..."
@@ -349,6 +350,7 @@
     "dismiss": "Avfärda",
     "sizesTitle": "Välj storlekar & antal",
     "designSaved": "Design sparad",
+    "previewNote": "Förhandsvisningen visar din egen design på produkten – inte EventPartners eget sortiment.",
     "sizePrompt": "Hur många av varje storlek behöver du?",
     "selectSizesAbove": "Välj storlekar ovan",
     "addToCart": "Lägg i varukorg",
@@ -417,7 +419,7 @@
     "meetingSection": {
       "label": "Direktkontakt",
       "headline": "Vill du diskutera ditt projekt?",
-      "description": "Boka ett 15-minuterssamtal med Malin för att diskutera ditt projekt.",
+      "description": "Boka ett 15-minuterssamtal med Pontus för att diskutera ditt projekt.",
       "cta": "Boka möte"
     },
     "products": {
@@ -475,7 +477,7 @@
     "manifestoMotto": "Prioritet är inte en förmån — det är standarden.",
     "manifestoStats": [
       { "value": "< 12h", "label": "Svarstid" },
-      { "value": "Upp till 14%", "label": "Rabatter" },
+      { "value": "I snitt 14%", "label": "Rabatter" },
       { "value": "1:1", "label": "Account manager" },
       { "value": "Anpassat", "label": "Avtalsvillkor" }
     ],
@@ -490,9 +492,9 @@
     "tierCardFeatures": [
       "En dedikerad bokningsresurs för bokning & koordinering",
       "Förhandlade VIP-priser & exklusiv tillgång till lokaler",
-      "Upp till 14 % rabatt på alla bokningar",
+      "I snitt 14 % rabatt på alla bokningar",
       "Alltid 33 % extra rabatt på allt i vår webbshop",
-      "Årlig omfattande rapportering samt ESG- & hållbarhetsdata",
+      "Kvartalsvis omfattande rapportering samt ESG- & hållbarhetsdata",
       "Anpassat för enterprise-krav: CSRD, ESG och NIS2-governance",
       "Avancerad kostnadskontroll & travel management",
       "Tillgång till EventPartner AI-assistent",
@@ -533,7 +535,7 @@
     "storyHeadline": "Från idé till",
     "storyHeadlineAccent": "branschledare.",
     "storyQuote": "Vi tror att varje event är en möjlighet att skapa något bestående. Inte bara en konferens — ett minne. Inte bara en middag — en relation.",
-    "storyBody1": "Baserade i Medelhavet och Skandinavien men verksamma över hela världen, kopplar EventPartner samman företag med den perfekta lokalen för varje tillfälle. Från intima styrelsemiddagar till företagskonferenser med 5 000 deltagare — vårt team av erfarna eventproffs skräddarsyr förslag snabbt.",
+    "storyBody1": "Baserade i Medelhavet och Skandinavien men verksamma över hela världen, kopplar EventPartner samman företag med den perfekta lokalen för varje tillfälle. Från intima styrelsemiddagar till företagskonferenser med tusentals deltagare — vårt team av erfarna eventproffs skräddarsyr förslag snabbt.",
     "storyBody2": "Vår bakgrund spänner över eventproduktion, hotell & restaurang och teknologi. Vi kombinerade alla tre för att skapa en tjänst som är personlig, pålitlig och anmärkningsvärt effektiv. En förfrågan, flera alternativ, noll krångel.",
     "valuesLabel": "Vad vi står för",
     "valuesHeadline": "Byggt på principer,",
@@ -680,6 +682,8 @@
       "hoursLabel": "09:00–18:00 CET"
     },
     "channels": {
+      "label": "Supportkanaler",
+      "headline": "Välj hur du vill nå oss.",
       "emailTitle": "E-postsupport",
       "emailDesc": "Detaljerade meddelanden — svar inom 24 timmar.",
       "phoneTitle": "Telefonsupport",

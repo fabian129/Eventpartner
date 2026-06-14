@@ -18,16 +18,16 @@ interface LogoTickerCMS {
 const LOGOS = [
   { name: "Volvo", src: "/Images/logos/partners/volvo.svg" },
   { name: "Samsung", src: "/Images/logos/partners/samsung.svg" },
-  { name: "Google", text: "Google", font: "'Product Sans', 'Helvetica Neue', sans-serif", weight: "500" },
-  { name: "PwC", text: "PwC", font: "'Georgia', serif", weight: "700" },
-  { name: "LEGO", text: "LEGO", font: "'Arial Black', sans-serif", weight: "900" },
-  { name: "Microsoft", text: "Microsoft", font: "'Segoe UI', sans-serif", weight: "600" },
+  { name: "Google", text: "Google", font: "'Product Sans', 'Helvetica Neue', sans-serif", weight: "500", color: "#4285F4" },
+  { name: "PwC", text: "PwC", font: "'Georgia', serif", weight: "700", color: "#D04A02" },
+  { name: "LEGO", text: "LEGO", font: "'Arial Black', sans-serif", weight: "900", color: "#E3000B" },
+  { name: "Microsoft", text: "Microsoft", font: "'Segoe UI', sans-serif", weight: "600", color: "#737373" },
   { name: "BMW", src: "/Images/logos/partners/bmw.svg" },
-  { name: "Disney", text: "Disney", font: "'Georgia', serif", weight: "400" },
-  { name: "Porsche", text: "PORSCHE", font: "'Helvetica Neue', sans-serif", weight: "700" },
-  { name: "Volkswagen", text: "Volkswagen", font: "'Helvetica Neue', sans-serif", weight: "700" },
-  { name: "Unilever", text: "Unilever", font: "'Helvetica Neue', sans-serif", weight: "600" },
-  { name: "BBC", text: "BBC", font: "'Arial', sans-serif", weight: "900" },
+  { name: "Disney", text: "Disney", font: "'Georgia', serif", weight: "400", color: "#1A3673" },
+  { name: "Porsche", text: "PORSCHE", font: "'Helvetica Neue', sans-serif", weight: "700", color: "#1A1A1A" },
+  { name: "Volkswagen", text: "Volkswagen", font: "'Helvetica Neue', sans-serif", weight: "700", color: "#001E50" },
+  { name: "Unilever", text: "Unilever", font: "'Helvetica Neue', sans-serif", weight: "600", color: "#1F36C7" },
+  { name: "BBC", text: "BBC", font: "'Arial', sans-serif", weight: "900", color: "#1A1A1A" },
 ];
 
 function LogoItem({ logo }: { logo: typeof LOGOS[number] }) {
@@ -38,15 +38,15 @@ function LogoItem({ logo }: { logo: typeof LOGOS[number] }) {
         alt={logo.name}
         width={160}
         height={48}
-        className="h-8 md:h-10 w-auto object-contain grayscale opacity-25 hover:grayscale-0 hover:opacity-60 transition-all duration-500"
+        className="h-8 md:h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500 cursor-pointer"
       />
     );
   }
 
   return (
     <span
-      className="text-[18px] md:text-[22px] whitespace-nowrap opacity-20 hover:opacity-50 transition-opacity duration-500 select-none"
-      style={{ fontFamily: logo.font, fontWeight: logo.weight, color: "#000", letterSpacing: "0.08em" }}
+      className="text-[18px] md:text-[22px] whitespace-nowrap opacity-90 hover:opacity-100 transition-opacity duration-500 select-none cursor-pointer"
+      style={{ fontFamily: logo.font, fontWeight: logo.weight, color: logo.color || "#1A1A1A", letterSpacing: "0.08em" }}
     >{logo.text}</span>
   );
 }
@@ -71,7 +71,7 @@ export function LogoTicker({ cms }: { cms?: LogoTickerCMS } = {}) {
           style={{ background: "linear-gradient(to left, #EAEAED, transparent)" }} />
 
         {/* Scrolling track */}
-        <div className="flex animate-[marquee_40s_linear_infinite] hover:[animation-play-state:paused]" style={{ willChange: 'transform' }}>
+        <div className="flex animate-[marquee_14s_linear_infinite] hover:[animation-play-state:paused]" style={{ willChange: 'transform' }}>
           {[...LOGOS, ...LOGOS].map((logo, i) => (
             <div
               key={`${logo.name}-${i}`}

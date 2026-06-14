@@ -118,8 +118,8 @@ export function HelpCenterContent({ cms }: { cms?: HelpCMS }) {
       {/* Channels */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-24 md:mb-36">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="mb-14">
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{cms?.channelsLabel || t('form.label')}</span>
-          <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{cms?.channelsHeadline || t('form.headline')}</h2>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany block mb-6">{cms?.channelsLabel || t('channels.label')}</span>
+          <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-[var(--text-primary)] leading-[0.95]">{cms?.channelsHeadline || t('channels.headline')}</h2>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {channels.map((ch, i) => {
@@ -164,7 +164,7 @@ export function HelpCenterContent({ cms }: { cms?: HelpCMS }) {
                       <option value="">{t('form.subjectSelect')}</option>
                       <option value="Venue Booking">{t('form.subjectBooking')}</option>
                       <option value="VIP Programme">{t('form.subjectVIP')}</option>
-                      <option value="Billing">{t('form.subjectBooking')}</option>
+                      <option value="Billing">{t('form.subjectBilling')}</option>
                       <option value="Other">{t('form.subjectOther')}</option>
                     </select>
                   </div>

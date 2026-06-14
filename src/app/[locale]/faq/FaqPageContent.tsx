@@ -26,7 +26,7 @@ const DEFAULT_FAQS = [
   },
   {
     question: "What types of events do you handle?",
-    answer: "We handle everything from intimate board dinners (10 guests) to large-scale corporate conferences (5,000+ attendees). Our expertise covers conferences, team-building events, product launches, galas, incentive trips, and more."
+    answer: "We handle everything from intimate board dinners (10 guests) to large-scale corporate conferences (thousands of attendees). Our expertise covers conferences, team-building events, product launches, galas, incentive trips, and more."
   },
   {
     question: "Can I visit venues before booking?",

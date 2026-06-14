@@ -189,6 +189,18 @@ function CartView({
           <p className="text-xs text-[var(--text-secondary)] opacity-70">
             {t('bulkDiscountNote')}
           </p>
+          {/* Volume discount tiers — shown clearly per client request (R2 Pontus) */}
+          <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border-default)] p-3">
+            <p className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2">{t('bulkDiscountTiersLabel')}</p>
+            <div className="grid grid-cols-3 gap-x-3 gap-y-1.5 text-xs">
+              {([['10+', '10%'], ['25+', '15%'], ['50+', '20%'], ['100+', '33%'], ['250+', '40%'], ['500+', '50%']] as const).map(([q, d]) => (
+                <div key={q} className="flex items-center justify-between">
+                  <span className="text-[var(--text-secondary)]">{q}</span>
+                  <span className="font-semibold text-tiffany">−{d}</span>
+                </div>
+              ))}
+            </div>
+          </div>
           <button
             onClick={onRequestQuote}
             className="w-full bg-tiffany text-black text-center font-semibold rounded-xl py-4 hover:bg-tiffany/90 transition-all flex items-center justify-center gap-2"
@@ -501,29 +513,28 @@ function QuoteFormView({
           </div>
         )}
 
-        {/* Terms & agreement */}
-        <label className="mt-5 flex items-start gap-3 cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={agreedToTerms}
-            onChange={(e) => setAgreedToTerms(e.target.checked)}
-            className="mt-0.5 w-4 h-4 shrink-0 accent-tiffany cursor-pointer"
-          />
-          <span className="text-[12px] text-[var(--text-secondary)] leading-relaxed">
-            {t('quoteForm.terms.text')}{" "}
-            <a href="/security" target="_blank" rel="noopener noreferrer" className="text-tiffany hover:underline">
-              {t('quoteForm.terms.link')}
-            </a>
-            .
-          </span>
-        </label>
+        {/* Sticky footer — terms + submit stay visible so "send" is never lost below the fold (P37) */}
+        <div className="sticky bottom-0 -mx-6 mt-5 px-6 pt-4 pb-2 bg-[var(--bg-primary)] border-t border-[var(--border-default)]">
+          <label className="flex items-start gap-3 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={agreedToTerms}
+              onChange={(e) => setAgreedToTerms(e.target.checked)}
+              className="mt-0.5 w-4 h-4 shrink-0 accent-tiffany cursor-pointer"
+            />
+            <span className="text-[12px] text-[var(--text-secondary)] leading-relaxed">
+              {t('quoteForm.terms.text')}{" "}
+              <a href="/security" target="_blank" rel="noopener noreferrer" className="text-tiffany hover:underline">
+                {t('quoteForm.terms.link')}
+              </a>
+              .
+            </span>
+          </label>
 
-        {/* Submit inside form for native validation */}
-        <div className="mt-5 pt-5 border-t border-[var(--border-default)]">
           <button
             type="submit"
             disabled={submitting || !agreedToTerms}
-            className="w-full bg-tiffany text-black font-semibold rounded-xl py-4 hover:bg-tiffany/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mt-4 w-full bg-tiffany text-black font-semibold rounded-xl py-4 hover:bg-tiffany/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {submitting ? (
               <>
@@ -570,6 +581,25 @@ function SuccessView({ onClose }: { onClose: () => void }) {
 
 // ─── Cart Item Card ──────────────────────────────────────────────
 
+function getProductMockupImage(item: import("@/context/PrintfulCartContext").PrintfulCartItem) {
+  if (!item.templateId) {
+    return item.productImage;
+  }
+  const name = item.productName.toLowerCase();
+  const isDark = item.colorHex === "#000000" || item.color?.toLowerCase().includes("black") || item.color?.toLowerCase().includes("navy") || item.color?.toLowerCase().includes("dark");
+  
+  if (name.includes("mug")) {
+    return "/mockups/mug-white.png";
+  }
+  if (name.includes("bag") || name.includes("tote")) {
+    return "/mockups/tote-bag.png";
+  }
+  if (isDark) {
+    return "/mockups/tshirt-black.png";
+  }
+  return "/mockups/tshirt-white.png";
+}
+
 function CartItemCard({
   item,
   onRemove,
@@ -585,17 +615,18 @@ function CartItemCard({
     0
   );
   const itemQty = item.sizes.reduce((sum, s) => sum + s.quantity, 0);
+  const mockupImage = getProductMockupImage(item);
 
   return (
     <div className="bg-[var(--bg-card)] border border-[var(--border-default)] rounded-2xl p-4">
       <div className="flex gap-4">
         {/* Product Image */}
         <div className="w-20 h-20 flex-shrink-0 bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl overflow-hidden">
-          {item.productImage ? (
+          {mockupImage ? (
             <img
-              src={item.productImage}
+              src={mockupImage}
               alt={item.productName}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain p-1"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">

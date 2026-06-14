@@ -45,3 +45,12 @@ sanity_doc_dump.json
 next-env.d.ts
 
 .vercel
+
+# Privat klientmejl + bilagor (committa ALDRIG)
+.feedback_images/
+gmail_att_result.json
+mail_dump*
+.feedback_mob/
+gmail_att_mob.json
+.wf_*.js
+MALIN_FEEDBACK_PLAN.md

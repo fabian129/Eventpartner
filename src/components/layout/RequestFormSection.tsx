@@ -56,6 +56,12 @@ export function RequestFormSection({ cms }: { cms?: {
     setLoading(true);
     setError('');
 
+    if (form.guests && parseInt(form.guests, 10) < 50) {
+      setError(sv ? 'Minsta antal deltagare är 50.' : 'Minimum number of guests is 50.');
+      setLoading(false);
+      return;
+    }
+
     // Past dates must give a clear error (client request P12) — the picker's
     // min attribute doesn't stop manually typed dates.
     const today = new Date().toISOString().split('T')[0];
@@ -235,8 +241,8 @@ export function RequestFormSection({ cms }: { cms?: {
               <label className={labelClass}>{t('fields.guests.label')}{requiredStar}</label>
               <input
                 type="number"
-                placeholder={locale === 'sv' ? 'Ange exakt antal' : 'Enter exact number'}
-                min={1}
+                placeholder={locale === 'sv' ? 'Ange exakt antal (minst 50)' : 'Enter exact number (min 50)'}
+                min={50}
                 required
                 className={inputClass}
                 value={form.guests}

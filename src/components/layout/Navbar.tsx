@@ -170,7 +170,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
               {NAV_LINKS.map((link) => (
                 <div
                   key={link.label}
-                  className="relative"
+                  className="relative flex items-center"
                   onMouseEnter={link.hasDropdown ? openDropdown : undefined}
                   onMouseLeave={link.hasDropdown ? closeDropdown : undefined}
                 >
@@ -191,6 +191,17 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
                       />
                     )}
                   </a>
+
+                  {link.href === "/about" && (
+                    <div className="relative h-[22px] w-[53px] shrink-0 ml-1.5 mr-2 opacity-85 hover:opacity-100 transition-opacity">
+                      <Image
+                        src="/Images/compliance-badge.jpg"
+                        alt="Compliance Badges"
+                        fill
+                        className="object-contain rounded"
+                      />
+                    </div>
+                  )}
 
                   {/* Services dropdown */}
                   {link.hasDropdown && (
@@ -354,7 +365,7 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
             ))}
 
             {/* Mobile secondary links — mirrors the footer (real pages, not service anchors) */}
-            <div className="mt-2 mb-4 flex flex-wrap justify-center gap-2 px-8 max-w-sm">
+            <div className="mt-2 mb-2 flex flex-wrap justify-center gap-2 px-8 max-w-sm">
               {MENU_PILLS.map((item) => (
                 <a
                   key={item.label}
@@ -367,6 +378,19 @@ export function Navbar({ cms }: { cms?: NavCMS }) {
                 </a>
               ))}
             </div>
+
+            {/* Mobile Language Toggle */}
+            <motion.button
+              onClick={switchLocale}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+              className="flex items-center gap-1.5 text-[11px] font-medium text-white/50 hover:text-white/80 border border-white/[0.08] hover:border-white/20 rounded-full px-4.5 py-2 my-2 transition-all"
+              aria-label="Switch language"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              {locale === "en" ? "SV / EN" : "EN / SV"}
+            </motion.button>
 
             {/* Mobile CTA */}
             <motion.a
