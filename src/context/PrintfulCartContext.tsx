@@ -113,12 +113,14 @@ export function PrintfulCartProvider({ children }: { children: ReactNode }) {
     0
   );
 
-  // Add a bulk item (product + color + sizes[])
+  // Add a bulk item (product + color + sizes[]).
+  // Do NOT auto-open the cart here: the design maker shows its own "added" confirmation
+  // and opens the cart on "Begär offert". Auto-opening made both layers overlap (the
+  // designer stayed open behind the cart/success view).
   const addBulkItem = useCallback(
     (newItem: Omit<PrintfulCartItem, "id">) => {
       const id = `pf-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
       setItems((prev) => [...prev, { ...newItem, id }]);
-      setIsOpen(true);
     },
     []
   );
