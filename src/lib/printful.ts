@@ -7,19 +7,16 @@
 
 const PRINTFUL_API = "https://api.printful.com";
 
-function headers(path = ""): Record<string, string> {
+function headers(): Record<string, string> {
   const key = process.env.PRINTFUL_API_KEY;
   if (!key) throw new Error("PRINTFUL_API_KEY is not configured");
-  // X-PF-Store-Id is REQUIRED for the V1 /store/* endpoints (sync-product mirroring),
-  // but it BREAKS V2 order creation + EDM design templates: the EDM template is created
-  // without a store context (see /api/printful/nonce), so scoping the order to a store
-  // makes Printful fail to resolve the template's variants ("no saved design for variant").
-  // → only attach the store header for /store/* calls.
-  const needsStore = path.startsWith("/store/") || path.startsWith("/store?");
+  // X-PF-Store-Id is REQUIRED on V2 order creation ("This endpoint requires store_id!").
+  // The EDM design template must therefore be created in the SAME store — see
+  // /api/printful/nonce, which now also sends this header so template + order align.
   return {
     Authorization: `Bearer ${key}`,
     "Content-Type": "application/json",
-    ...(needsStore && process.env.PRINTFUL_STORE_ID
+    ...(process.env.PRINTFUL_STORE_ID
       ? { "X-PF-Store-Id": process.env.PRINTFUL_STORE_ID }
       : {}),
   };
@@ -104,7 +101,7 @@ async function printfulFetch<T>(
   for (let attempt = 0; attempt <= retries; attempt++) {
     const res = await fetch(url, {
       ...options,
-      headers: { ...headers(path), ...options?.headers },
+      headers: { ...headers(), ...options?.headers },
     });
 
     if (res.status === 429 && attempt < retries) {

@@ -26,6 +26,12 @@ export async function POST(req: Request) {
         headers: {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
+          // Create the design template in the SAME store the order is placed in,
+          // otherwise V2 order creation can't resolve the template's variants
+          // ("template doesn't have saved design for variant").
+          ...(process.env.PRINTFUL_STORE_ID
+            ? { "X-PF-Store-Id": process.env.PRINTFUL_STORE_ID }
+            : {}),
         },
         body: JSON.stringify({
           external_product_id: externalProductId,
