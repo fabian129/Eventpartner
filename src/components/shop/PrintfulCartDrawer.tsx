@@ -96,6 +96,21 @@ export function PrintfulCartDrawer() {
   );
 }
 
+// ─── Volume discount tiers (per client pricing) ──────────────────
+const VOLUME_TIERS = [
+  { label: '10+', min: 10, pct: 10 },
+  { label: '25+', min: 25, pct: 15 },
+  { label: '50+', min: 50, pct: 20 },
+  { label: '100+', min: 100, pct: 33 },
+  { label: '250+', min: 250, pct: 40 },
+  { label: '500+', min: 500, pct: 50 },
+] as const;
+function volumeDiscountPct(qty: number): number {
+  let pct = 0;
+  for (const t of VOLUME_TIERS) if (qty >= t.min) pct = t.pct;
+  return pct;
+}
+
 // ─── Cart View ───────────────────────────────────────────────────
 
 function CartView({
@@ -118,6 +133,10 @@ function CartView({
   onRequestQuote: () => void;
 }) {
   const t = useTranslations('cart');
+  const discountPct = volumeDiscountPct(totalQuantity);
+  const fmtPrice = (n: number) =>
+    new Intl.NumberFormat('sv-SE', { style: 'currency', currency: currency || 'USD', minimumFractionDigits: 0 }).format(n);
+  const discountedTotal = totalPrice * (1 - discountPct / 100);
   return (
     <>
       {/* Header */}
@@ -184,21 +203,32 @@ function CartView({
         <div className="border-t border-[var(--border-default)] px-6 py-5 space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-[var(--text-secondary)]">{totalQuantity} {totalQuantity === 1 ? t('item') : t('items')} {t('selected')}</span>
-            <span className="text-sm font-medium text-tiffany/80">{t('priceIncluded')}</span>
+            <div className="text-right">
+              {discountPct > 0 && (
+                <span className="text-xs text-[var(--text-dim)] line-through mr-2">{fmtPrice(totalPrice)}</span>
+              )}
+              <span className="text-base font-semibold text-[var(--text-primary)]">{fmtPrice(discountedTotal)}</span>
+              {discountPct > 0 && (
+                <span className="ml-1.5 text-xs font-semibold text-tiffany">−{discountPct}%</span>
+              )}
+            </div>
           </div>
           <p className="text-xs text-[var(--text-secondary)] opacity-70">
             {t('bulkDiscountNote')}
           </p>
-          {/* Volume discount tiers — shown clearly per client request (R2 Pontus) */}
+          {/* Volume discount tiers — active tier highlighted (per client pricing) */}
           <div className="rounded-xl bg-[var(--bg-card)] border border-[var(--border-default)] p-3">
             <p className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2">{t('bulkDiscountTiersLabel')}</p>
             <div className="grid grid-cols-3 gap-x-3 gap-y-1.5 text-xs">
-              {([['10+', '10%'], ['25+', '15%'], ['50+', '20%'], ['100+', '33%'], ['250+', '40%'], ['500+', '50%']] as const).map(([q, d]) => (
-                <div key={q} className="flex items-center justify-between">
-                  <span className="text-[var(--text-secondary)]">{q}</span>
-                  <span className="font-semibold text-tiffany">−{d}</span>
-                </div>
-              ))}
+              {VOLUME_TIERS.map((tier) => {
+                const active = discountPct === tier.pct;
+                return (
+                  <div key={tier.label} className={`flex items-center justify-between rounded px-1 ${active ? 'bg-tiffany/15' : ''}`}>
+                    <span className={active ? 'text-[var(--text-primary)] font-semibold' : 'text-[var(--text-secondary)]'}>{tier.label}</span>
+                    <span className={`font-semibold ${active ? 'text-tiffany' : 'text-tiffany/70'}`}>−{tier.pct}%</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <button

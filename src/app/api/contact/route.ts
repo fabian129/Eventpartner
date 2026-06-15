@@ -355,30 +355,49 @@ async function handleMerchQuote(data: Record<string, any>) {
 
   let draftOrderId: number | null = null;
   let draftError: string | null = null;
+  // True when a draft was created WITHOUT the design template (template/variant
+  // mismatch) — the team must attach the saved design manually in Printful.
+  let designNeedsManualAttach = false;
+  const designTemplateIds = [...new Set((items as any[]).map((i) => i.templateId).filter(Boolean))];
 
   const hasShipping = Boolean(address1 && city && zip && countryCode);
   if (hasShipping && orderItems.length > 0) {
+    const recipient: PrintfulRecipient = {
+      name,
+      company: company || undefined,
+      address1,
+      address2: address2 || undefined,
+      city,
+      state_code: stateCode || undefined,
+      country_code: String(countryCode).toUpperCase(),
+      zip,
+      phone: phone || undefined,
+      email,
+    };
     try {
-      const recipient: PrintfulRecipient = {
-        name,
-        company: company || undefined,
-        address1,
-        address2: address2 || undefined,
-        city,
-        state_code: stateCode || undefined,
-        country_code: String(countryCode).toUpperCase(),
-        zip,
-        phone: phone || undefined,
-        email,
-      };
       const order = await createOrder(recipient, orderItems, {
         externalId: `EP-QUOTE-${Date.now()}`,
         confirm: false,
       });
       draftOrderId = order.id;
     } catch (err) {
+      // The design template doesn't cover every ordered variant (e.g. multiple
+      // sizes designed on one). Retry as a plain catalog order so a draft is
+      // STILL created with the right products/sizes/qty/shipping — the team then
+      // attaches the saved design (template id is in the email) before placing it.
       draftError = String(err);
-      console.error('Printful draft creation failed:', err);
+      console.error('Printful templated draft failed, retrying as catalog-only:', err);
+      try {
+        const catalogItems = orderItems.map(({ product_template_id, ...rest }) => rest);
+        const order = await createOrder(recipient, catalogItems, {
+          externalId: `EP-QUOTE-${Date.now()}`,
+          confirm: false,
+        });
+        draftOrderId = order.id;
+        designNeedsManualAttach = designTemplateIds.length > 0;
+      } catch (err2) {
+        console.error('Printful catalog-only draft also failed:', err2);
+      }
     }
   }
 
@@ -413,11 +432,16 @@ async function handleMerchQuote(data: Record<string, any>) {
     `;
   }).join('');
 
-  const formattedTotal = new Intl.NumberFormat('sv-SE', {
+  const fmtCur = (n: number) => new Intl.NumberFormat('sv-SE', {
     style: 'currency',
     currency: currency || 'USD',
     minimumFractionDigits: 0,
-  }).format(totalPrice || 0);
+  }).format(n);
+  const formattedTotal = fmtCur(totalPrice || 0);
+  // Volume discount the customer was shown in the cart (per client pricing).
+  // VIP discount is applied separately by the team in the final quote.
+  const volPct = totalQuantity >= 500 ? 50 : totalQuantity >= 250 ? 40 : totalQuantity >= 100 ? 33 : totalQuantity >= 50 ? 20 : totalQuantity >= 25 ? 15 : totalQuantity >= 10 ? 10 : 0;
+  const formattedDiscounted = fmtCur((totalPrice || 0) * (1 - volPct / 100));
 
   const { error } = await getResend().emails.send({
     from: FROM_EMAIL,
@@ -431,11 +455,15 @@ async function handleMerchQuote(data: Record<string, any>) {
           <p style="color: rgba(255,255,255,0.5); font-size: 13px; margin: 0;">Received via eventpartner.io/shop</p>
         </div>
 
-        ${draftOrderId ? `
+        ${draftOrderId ? (designNeedsManualAttach ? `
+          <div style="margin: 0 0 24px; padding: 14px 18px; background: #fffbeb; border: 1px solid #fcd34d; border-radius: 12px;">
+            <p style="margin: 0; font-size: 13px; color: #92400e; line-height: 1.5;">✅ Draft order <strong>#${draftOrderId}</strong> created with the correct products, sizes &amp; shipping — but the saved design wasn't auto-attached${designTemplateIds.length ? ` (design template <strong>${designTemplateIds.join(', ')}</strong>)` : ''}. Open <strong>Printful → Orders</strong>, attach the design, then place it and send the customer a quote.</p>
+          </div>
+        ` : `
           <div style="margin: 0 0 24px; padding: 14px 18px; background: #ecfdf5; border: 1px solid #6AD8D2; border-radius: 12px;">
             <p style="margin: 0; font-size: 13px; color: #0f766e; line-height: 1.5;">✅ Printful draft order <strong>#${draftOrderId}</strong> created on your account. Open <strong>Printful → Orders</strong> to review the design, complete shipping and place it, then send the customer a quote/invoice.</p>
           </div>
-        ` : `
+        `) : `
           <div style="margin: 0 0 24px; padding: 14px 18px; background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 12px;">
             <p style="margin: 0; font-size: 13px; color: #334155; line-height: 1.5;">📋 New order request — create it in <strong>Printful → Orders</strong> using the design template &amp; variant details below, then send the customer a quote/invoice.</p>
           </div>
@@ -467,10 +495,21 @@ async function handleMerchQuote(data: Record<string, any>) {
             ${productRows}
           </tbody>
           <tfoot>
-            <tr style="border-top: 2px solid #ddd;">
-              <td style="padding: 16px 12px; font-weight: 700; font-size: 15px;">${totalQuantity} items total</td>
-              <td style="padding: 16px 12px; text-align: right; font-weight: 700; font-size: 15px; color: #6AD8D2;">${formattedTotal}</td>
+            ${volPct > 0 ? `
+            <tr>
+              <td style="padding: 10px 12px 0; font-size: 13px; color: #666;">Subtotal</td>
+              <td style="padding: 10px 12px 0; text-align: right; font-size: 13px; color: #666; text-decoration: line-through;">${formattedTotal}</td>
             </tr>
+            <tr>
+              <td style="padding: 2px 12px; font-size: 13px; color: #666;">Volume discount (${volPct}%) — customer-facing estimate</td>
+              <td style="padding: 2px 12px; text-align: right; font-size: 13px; color: #0f766e;">−${volPct}%</td>
+            </tr>
+            ` : ''}
+            <tr style="border-top: 2px solid #ddd;">
+              <td style="padding: 16px 12px; font-weight: 700; font-size: 15px;">${totalQuantity} items${volPct > 0 ? ' (after volume discount)' : ' total'}</td>
+              <td style="padding: 16px 12px; text-align: right; font-weight: 700; font-size: 15px; color: #6AD8D2;">${volPct > 0 ? formattedDiscounted : formattedTotal}</td>
+            </tr>
+            ${volPct > 0 ? `<tr><td colspan="2" style="padding: 0 12px 12px; font-size: 11px; color: #999;">VIP discount (if applicable) to be applied separately in the final quote.</td></tr>` : ''}
           </tfoot>
         </table>
 
