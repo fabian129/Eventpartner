@@ -149,8 +149,10 @@ export function PrintfulCartProvider({ children }: { children: ReactNode }) {
   );
 
   const clearCart = useCallback(() => {
+    // Only empty the cart — do NOT close the drawer. After a successful quote
+    // submit the drawer must stay open to show the success ("thank you") view;
+    // closing here made it flash and reset to an empty cart instead.
     setItems([]);
-    setIsOpen(false);
   }, []);
 
   return (
