@@ -583,8 +583,9 @@ function GlobeExplorer() {
         </div>
       </div>
 
-      {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-[#0a0a0a] to-[#111] z-20 pointer-events-none" />
+      {/* Bottom gradient — desktop globe fade only. On mobile it sat on top of the
+          last two continent cards (North/South America) and faded them out. */}
+      <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-[#0a0a0a] to-[#111] z-20 pointer-events-none" />
     </section>
   );
 }
