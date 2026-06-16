@@ -82,7 +82,7 @@ const MACRO_REGIONS = [
   {
     label: "Europe",
     labelSv: "Europa",
-    regionSlugs: ["nordics", "nordic-extended", "western-europe", "central-europe", "central-europe-extended", "southern-europe", "balkans-southeast", "balkans-extended"],
+    regionSlugs: ["nordics", "baltics", "western-europe", "central-europe", "central-europe-extended", "southern-europe", "balkans-southeast", "balkans-extended"],
   },
   {
     label: "Middle East",

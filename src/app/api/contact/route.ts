@@ -941,7 +941,7 @@ async function handleVIPInquiry(data: Record<string, any>) {
 
 /* ── Exit-Intent / Lead-Capture Popup ── */
 async function handlePopupLead(data: Record<string, any>) {
-  const { name, email, company, message, source } = data;
+  const { name, email, company, message, whatAbout, source } = data;
 
   if (!name || !email) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -968,6 +968,12 @@ async function handlePopupLead(data: Record<string, any>) {
           <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Email</td><td style="padding: 12px 0;"><a href="mailto:${esc(email)}" style="color: #6AD8D2;">${esc(email)}</a></td></tr>
           <tr style="border-bottom: 1px solid #eee;"><td style="padding: 12px 0; color: #666;">Company</td><td style="padding: 12px 0;">${esc(company || 'Not provided')}</td></tr>
         </table>
+        ${whatAbout ? `
+          <div style="margin-top: 24px; padding: 20px; background: #f8f9fa; border-radius: 12px;">
+            <p style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 8px;">What this is about</p>
+            <p style="margin: 0; white-space: pre-wrap; line-height: 1.6;">${esc(whatAbout)}</p>
+          </div>
+        ` : ''}
         ${message ? `
           <div style="margin-top: 24px; padding: 20px; background: #f8f9fa; border-radius: 12px;">
             <p style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 8px;">Message</p>

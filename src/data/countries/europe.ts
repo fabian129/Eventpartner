@@ -43,7 +43,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "estonia", code: "ee", name: "Estonia", nameSv: "Estland", venues: "4,950+",
+    slug: "estonia", code: "ee", name: "Estonia", nameSv: "Estland", venues: "220+",
     topVenues: [
       { name: "Tallinn Creative Hub (Kultuurikatel)", city: "Tallinn", capacity: "6 000", type: "Event Venue" },
       { name: "Eesti Näituste Fair Centre", city: "Tallinn", capacity: "10 000+", type: "Event Venue" },
@@ -113,7 +113,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "latvia", code: "lv", name: "Latvia", nameSv: "Lettland", venues: "4,950+",
+    slug: "latvia", code: "lv", name: "Latvia", nameSv: "Lettland", venues: "185+",
     topVenues: [
       { name: "Kipsala International Exhibition Centre", city: "Riga", capacity: "15 000+", type: "Event Venue" },
       { name: "ATTA Centre Riga", city: "Riga", capacity: "5 500", type: "Event Venue" },
@@ -123,7 +123,7 @@ export const EUROPE: Country[] = [
     ],
   },
   {
-    slug: "lithuania", code: "lt", name: "Lithuania", nameSv: "Litauen", venues: "4,950+",
+    slug: "lithuania", code: "lt", name: "Lithuania", nameSv: "Litauen", venues: "245+",
     topVenues: [
       { name: "Litexpo – Lithuanian Exhibition and Congress Centre", city: "Vilnius", capacity: "15 000+", type: "Event Venue" },
       { name: "LITEXPO Congress Centre", city: "Vilnius", capacity: "5 000", type: "Event Venue" },

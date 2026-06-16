@@ -56,15 +56,17 @@ export function PrintfulProductCard({
     [product.variants, defaultColor?.name]
   );
 
-  const sizeOptions = useMemo(
-    () =>
-      defaultColorVariants.map((v) => ({
-        variantId: v.id,
-        size: v.size,
-        available: v.in_stock !== false,
-      })),
-    [defaultColorVariants]
-  );
+  // Some products (e.g. laptop sleeve, mugs) have no colour match and/or no size.
+  // Fall back to all variants and label missing sizes "One Size" so they STILL get
+  // a quantity field — otherwise the matrix is empty and you can't order them (Ramón/Printful).
+  const sizeOptions = useMemo(() => {
+    const variants = defaultColorVariants.length > 0 ? defaultColorVariants : (product.variants || []);
+    return variants.map((v) => ({
+      variantId: v.id,
+      size: v.size || "One Size",
+      available: v.in_stock !== false,
+    }));
+  }, [defaultColorVariants, product.variants]);
 
   const unitPrice = defaultColorVariants[0]
     ? parseFloat(defaultColorVariants[0].price)

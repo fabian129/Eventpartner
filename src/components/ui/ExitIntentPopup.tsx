@@ -24,6 +24,7 @@ interface ExitCMS {
   description?: string;
   button?: string;
   privacy?: string;
+  whatAboutPlaceholder?: string;
 }
 
 export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
@@ -89,6 +90,7 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
       name: String(fd.get("name") || ""),
       email: String(fd.get("email") || ""),
       company: String(fd.get("company") || ""),
+      whatAbout: String(fd.get("whatAbout") || ""),
       source: "eventpartner.io exit-intent popup",
     };
     setLoading(true);
@@ -192,6 +194,12 @@ export function ExitIntentPopup({ cms }: { cms?: ExitCMS }) {
                       name="company"
                       placeholder="Company (optional)"
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-tiffany/30 transition-colors duration-200"
+                    />
+                    <textarea
+                      name="whatAbout"
+                      rows={3}
+                      placeholder={cms?.whatAboutPlaceholder || "Tell us briefly how we can help"}
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-[14px] placeholder:text-white/25 focus:outline-none focus:border-tiffany/30 transition-colors duration-200 resize-none"
                     />
                     <button
                       type="submit"

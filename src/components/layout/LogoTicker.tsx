@@ -19,14 +19,14 @@ const LOGOS = [
   { name: "Volvo", src: "/Images/logos/partners/volvo.svg" },
   { name: "Samsung", src: "/Images/logos/partners/samsung.svg" },
   { name: "Google", text: "Google", font: "'Product Sans', 'Helvetica Neue', sans-serif", weight: "500", color: "#4285F4" },
-  { name: "PwC", text: "PwC", font: "'Georgia', serif", weight: "700", color: "#D04A02" },
+  { name: "PwC", text: "PwC", font: "'Georgia', serif", weight: "700", color: "#FF6900" },
   { name: "LEGO", text: "LEGO", font: "'Arial Black', sans-serif", weight: "900", color: "#E3000B" },
-  { name: "Microsoft", text: "Microsoft", font: "'Segoe UI', sans-serif", weight: "600", color: "#737373" },
+  { name: "Microsoft", text: "Microsoft", font: "'Segoe UI', sans-serif", weight: "600", color: "#0078D4" },
   { name: "BMW", src: "/Images/logos/partners/bmw.svg" },
-  { name: "Disney", text: "Disney", font: "'Georgia', serif", weight: "400", color: "#1A3673" },
+  { name: "Disney", text: "Disney", font: "'Georgia', serif", weight: "400", color: "#113CCF" },
   { name: "Porsche", text: "PORSCHE", font: "'Helvetica Neue', sans-serif", weight: "700", color: "#1A1A1A" },
   { name: "Volkswagen", text: "Volkswagen", font: "'Helvetica Neue', sans-serif", weight: "700", color: "#001E50" },
-  { name: "Unilever", text: "Unilever", font: "'Helvetica Neue', sans-serif", weight: "600", color: "#1F36C7" },
+  { name: "Unilever", text: "Unilever", font: "'Helvetica Neue', sans-serif", weight: "600", color: "#003DA5" },
   { name: "BBC", text: "BBC", font: "'Arial', sans-serif", weight: "900", color: "#1A1A1A" },
 ];
 

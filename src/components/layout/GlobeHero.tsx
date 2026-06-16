@@ -368,7 +368,7 @@ function GlobeExplorer() {
     <section
       ref={sectionRef}
       id="globe-section"
-      className="relative w-full lg:min-h-screen flex items-center overflow-hidden"
+      className="relative w-full lg:min-h-screen flex flex-col lg:flex-row lg:items-center overflow-visible lg:overflow-hidden"
       style={{ background: "#0a0a0a" }}
     >
       {/* Top gradient */}
@@ -602,7 +602,7 @@ const CONTINENT_ICONS: Record<string, React.ComponentType<{ className?: string }
 };
 
 const CONTINENT_GROUPS = [
-  { id: 'europe',       label: 'Europe',        labelSv: 'Europa',                    regionSlugs: ['nordics','western-europe','central-europe','southern-europe','balkans-southeast','nordic-extended','central-europe-extended','balkans-extended'] },
+  { id: 'europe',       label: 'Europe',        labelSv: 'Europa',                    regionSlugs: ['nordics','western-europe','central-europe','southern-europe','balkans-southeast','baltics','central-europe-extended','balkans-extended'] },
   { id: 'middle-east',  label: 'Middle East',   labelSv: 'Mellanöstern',              regionSlugs: ['middle-east'] },
   { id: 'africa',       label: 'Africa',        labelSv: 'Afrika',                    regionSlugs: ['africa'] },
   { id: 'asia-pacific', label: 'Asia',  labelSv: 'Asien', regionSlugs: ['asia-pacific'] },

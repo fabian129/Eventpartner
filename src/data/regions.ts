@@ -16,10 +16,10 @@ export const REGIONS: Region[] = [
   {
     slug: 'nordics',
     name: 'Nordic countries',
-    countrySlugs: ['sweden', 'norway', 'iceland', 'estonia', 'latvia', 'lithuania'],
+    countrySlugs: ['sweden', 'norway', 'denmark', 'finland', 'iceland'],
     center: [61, 15],
-    previewFlags: ['se', 'no', 'is'],
-    totalVenues: '18,500+',
+    previewFlags: ['se', 'no', 'dk'],
+    totalVenues: '4,194+',
     status: 'active',
   },
   {
@@ -61,12 +61,12 @@ export const REGIONS: Region[] = [
 
   // ── Additional European ──
   {
-    slug: 'nordic-extended',
-    name: 'Nordic Extended',
-    countrySlugs: ['finland', 'denmark'],
-    center: [60, 20],
-    previewFlags: ['fi', 'dk'],
-    totalVenues: '8,200+',
+    slug: 'baltics',
+    name: 'Baltics',
+    countrySlugs: ['estonia', 'latvia', 'lithuania'],
+    center: [57, 24],
+    previewFlags: ['ee', 'lv', 'lt'],
+    totalVenues: '650+',
     status: 'active',
   },
   {
