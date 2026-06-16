@@ -39,6 +39,12 @@ export function ScrollSection({
   useEffect(() => {
     if (!ref.current) return;
 
+    // Touch devices run pure native scroll (Lenis is disabled there). The scrubbed
+    // fade-in/out is a desktop-only cinematic effect — on a tall section + small
+    // mobile viewport its fade-OUT leaves the CTA/products stuck semi-transparent
+    // ("faded to white, never finishes"). Skip it on touch: content stays fully visible.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const el = ref.current;
 
     // Set initial state for entrance
