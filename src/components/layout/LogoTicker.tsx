@@ -21,7 +21,7 @@ const LOGOS = [
   { name: "Google", src: "/Images/logos/partners/google.svg" },
   { name: "PwC", text: "PwC", font: "'Georgia', serif", weight: "700", color: "#FF6900" },
   { name: "LEGO", text: "LEGO", font: "'Arial Black', sans-serif", weight: "900", color: "#E3000B" },
-  { name: "Microsoft", text: "Microsoft", font: "'Segoe UI', sans-serif", weight: "600", color: "#0078D4" },
+  { name: "Microsoft", text: "Microsoft", font: "'Segoe UI', sans-serif", weight: "600", color: "#737373" },
   { name: "BMW", src: "/Images/logos/partners/bmw.svg" },
   { name: "Disney", text: "Disney", font: "'Georgia', serif", weight: "400", color: "#113CCF" },
   { name: "Porsche", src: "/Images/logos/partners/porsche.svg" },
