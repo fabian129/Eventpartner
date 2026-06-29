@@ -4,7 +4,9 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  turbopack: {},
+  turbopack: {
+    root: __dirname,
+  },
   webpack: (config) => {
     config.externals.push({
       "utf-8-validate": "commonjs utf-8-validate",
