@@ -19,15 +19,15 @@ const LOGOS = [
   { name: "Volvo", src: "/Images/logos/partners/volvo.svg" },
   { name: "Samsung", src: "/Images/logos/partners/samsung.svg" },
   { name: "Google", src: "/Images/logos/partners/google.svg" },
-  { name: "PwC", text: "PwC", font: "'Georgia', serif", weight: "700" },
-  { name: "LEGO", text: "LEGO", font: "'Arial Black', sans-serif", weight: "900" },
-  { name: "Microsoft", text: "Microsoft", font: "'Segoe UI', sans-serif", weight: "600" },
+  { name: "PwC", text: "PwC", font: "'Georgia', serif", weight: "700", color: "#FF6900" },
+  { name: "LEGO", text: "LEGO", font: "'Arial Black', sans-serif", weight: "900", color: "#E3000B" },
+  { name: "Microsoft", text: "Microsoft", font: "'Segoe UI', sans-serif", weight: "600", color: "#0078D4" },
   { name: "BMW", src: "/Images/logos/partners/bmw.svg" },
-  { name: "Disney", text: "Disney", font: "'Georgia', serif", weight: "400" },
+  { name: "Disney", text: "Disney", font: "'Georgia', serif", weight: "400", color: "#113CCF" },
   { name: "Porsche", src: "/Images/logos/partners/porsche.svg" },
   { name: "Volkswagen", src: "/Images/logos/partners/volkswagen.svg" },
   { name: "Unilever", src: "/Images/logos/partners/unilever.svg" },
-  { name: "BBC", text: "BBC", font: "'Arial', sans-serif", weight: "900" },
+  { name: "BBC", text: "BBC", font: "'Arial', sans-serif", weight: "900", color: "#1A1A1A" },
 ];
 
 function LogoItem({ logo }: { logo: typeof LOGOS[number] }) {
@@ -38,15 +38,15 @@ function LogoItem({ logo }: { logo: typeof LOGOS[number] }) {
         alt={logo.name}
         width={160}
         height={48}
-        className="h-8 md:h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-all duration-500 cursor-pointer grayscale hover:grayscale-0"
+        className="h-8 md:h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500 cursor-pointer"
       />
     );
   }
 
   return (
     <span
-      className="text-[18px] md:text-[22px] whitespace-nowrap opacity-50 hover:opacity-90 transition-opacity duration-500 select-none cursor-pointer"
-      style={{ fontFamily: logo.font, fontWeight: logo.weight, color: "#1A1A1A", letterSpacing: "0.08em" }}
+      className="text-[18px] md:text-[22px] whitespace-nowrap opacity-90 hover:opacity-100 transition-opacity duration-500 select-none cursor-pointer"
+      style={{ fontFamily: logo.font, fontWeight: logo.weight, color: logo.color || "#1A1A1A", letterSpacing: "0.08em" }}
     >{logo.text}</span>
   );
 }
