@@ -1,13 +1,14 @@
 "use client";
 
 import { useTranslations, useLocale } from 'next-intl';
-import Link from "next/link";
+import { Link, usePathname } from '@/i18n/navigation';
 import { Instagram, Linkedin, Facebook, Globe, ArrowRight, Mail, ChevronDown, MapPin } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { REGIONS } from "@/data/regions";
 import { COUNTRIES } from "@/data/countries";
+import { useSmoothScroll } from "@/components/utils/SmoothScroll";
 
 const FOOTER_LINKS = {
   company: {
@@ -202,9 +203,25 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
   const tVpp = useTranslations('vpp');
   const svLocale = useLocale() === 'sv';
   const footerLinks = svLocale ? FOOTER_LINKS_SV : FOOTER_LINKS;
+  const pathname = usePathname();
+  const lenis = useSmoothScroll();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [subLoading, setSubLoading] = useState(false);
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // If it's an anchor on the same page, let browser handle it or scroll home
+    if (href.startsWith('/#') || href.startsWith('#')) return;
+
+    if (pathname === href) {
+      if (lenis) {
+        e.preventDefault();
+        lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -349,6 +366,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                     <li key={link.label}>
                       <Link
                         href={link.href}
+                        onClick={(e) => handleLinkClick(e, link.href)}
                         className="text-[13px] text-white/40 hover:text-tiffany transition-colors duration-300 inline-flex items-center gap-1"
                       >
                         {link.label}
@@ -419,7 +437,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
           >
             <div>
               <p className="text-white text-sm md:text-base font-medium mb-1">{cms?.ctaTitle || "Send your inquiry today"}</p>
-              <p className="text-white/35 text-xs md:text-sm">{cms?.ctaDesc || "Always a response within 24h with at least 3 proposals matching your needs."}</p>
+              <p className="text-white/35 text-xs md:text-sm">{cms?.ctaDesc || (svLocale ? "Snitt-svarstid 23h med minst 3 kurerade förslag som matchar era behov." : "Average response rate 23h with at least 3 curated proposals matching your needs.")}</p>
             </div>
             <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-tiffany group-hover:border-tiffany group-hover:text-black text-white/40 transition-all duration-300 shrink-0 ml-4">
               <ArrowRight className="w-4 h-4" />

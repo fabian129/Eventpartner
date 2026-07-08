@@ -680,11 +680,11 @@ function MobileVenueExplorer() {
           {(mvSv ? [
             { value: '340 000+', label: 'Venues' },
             { value: '175', label: 'Länder' },
-            { value: '24h', label: 'Svarstid' },
+            { value: '23h', label: mvSv ? 'Snitt-svarstid' : 'Avg. Response' },
           ] : [
             { value: '340,000+', label: 'Venues' },
             { value: '175', label: 'Countries' },
-            { value: '24h', label: 'Response' },
+            { value: '23h', label: 'Avg. Response' },
           ]).map(s => (
             <div key={s.label} className="text-center">
               <span className="font-display text-xl font-medium text-white block">{s.value}</span>

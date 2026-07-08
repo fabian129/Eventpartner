@@ -393,7 +393,7 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
             >
               <span className="relative z-10 flex items-center gap-3">
                 {submitted ? (
-                  <><CheckCircle className="w-5 h-5" />{cms?.successMessage || (sv ? "Tack! Vi återkommer inom 24h." : "Thank you! We'll get back to you within 24h.")}</>
+                  <><CheckCircle className="w-5 h-5" />{cms?.successMessage || (sv ? "Tack! Vi återkommer så snart som möjligt." : "Thank you! We'll get back to you as soon as possible.")}</>
                 ) : loading ? (
                   <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> {sv ? "Skickar..." : "Sending..."}</>
                 ) : (
@@ -405,7 +405,7 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
               </span>
             </button>
             <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#888]">
-              {cms?.disclaimer || (sv ? "Inga förpliktelser • Svar inom 24h • Helt kostnadsfritt" : "No obligations • Response within 24h • Completely free")}
+              {cms?.disclaimer || (sv ? "Inga förpliktelser • Snabb leverans av förslag • Helt kostnadsfritt" : "No obligations • Fast Proposal Delivery • Completely free")}
             </span>
           </div>
         </motion.form>

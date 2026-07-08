@@ -196,7 +196,7 @@ export function ServiceBento() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="mt-8 text-center text-[13px] text-[var(--text-dim)] font-sans"
         >
-          Varje förfrågan hanteras av ett dedikerat team — ni får minst 3 kurerade förslag inom 24 timmar.
+          Varje förfrågan hanteras av ett dedikerat team — ni får minst 3 kurerade förslag med snabb leverans.
         </motion.p>
       </div>
     </section>

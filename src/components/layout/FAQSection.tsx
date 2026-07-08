@@ -9,36 +9,7 @@ import { DotGrid } from "@/components/ui/DotGrid";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const DEFAULT_FAQS = [
-  {
-    question: "What does it cost to use EventPartner?",
-    answer: "Sending an inquiry and receiving venue proposals is completely free. Our service is funded by the venues, meaning there are no hidden costs or fees for you.",
-  },
-  {
-    question: "How quickly will I get a response?",
-    answer: "We always respond within 24 hours with tailored proposals matching your needs. For urgent matters, we can often deliver faster — contact us directly and we'll prioritize you.",
-  },
-  {
-    question: "Which countries and cities do you cover?",
-    answer: "We have venues in 175 countries — from Iceland to Cyprus, from Portugal to Finland. Over 340,000 venues in total. Whether you need a conference hotel in Stockholm or a gala venue in Barcelona, we'll find the right one.",
-  },
-  {
-    question: "Can you handle really large events?",
-    answer: "Absolutely. We handle everything from intimate board meetings with 10 people to large-scale conferences with thousands of attendees. Our project management and supplier network scales to your needs.",
-  },
-  {
-    question: "What happens if I need to change or cancel?",
-    answer: "We handle all communication with venues and suppliers on your behalf, including changes and cancellations. Terms vary depending on venue and agreement, but we always ensure full transparency regarding your booking.",
-  },
-  {
-    question: "How does EventPartner differ from booking directly?",
-    answer: "Three things: we save you time by handling all research and negotiation, we get better prices thanks to our volume, and we give you access to venues and packages not always publicly available. Plus you get a dedicated contact person throughout the entire process.",
-  },
-  {
-    question: "Do you only work with large companies?",
-    answer: "No — we help companies of all sizes. From startups planning their first kick-off to global corporations with ongoing event needs. The process is the same: you tell us what you're looking for, we deliver.",
-  },
-];
+
 
 interface FaqCMS {
   label?: string;
@@ -57,7 +28,46 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
   const t = useTranslations('faq');
   const sv = useLocale() === 'sv';
 
-  const faqs = cms?.items?.length ? cms.items : DEFAULT_FAQS;
+  const DEFAULT_FAQS = [
+    {
+      question: sv ? "Vad kostar det att använda EventPartner?" : "What does it cost to use EventPartner?",
+      answer: sv ? "Att skicka en förfrågan och ta emot lokalförslag är helt gratis. Vår tjänst finansieras av lokalerna, vilket innebär att det inte finns några dolda kostnader eller avgifter för er." : "Sending an inquiry and receiving venue proposals is completely free. Our service is funded by the venues, meaning there are no hidden costs or fees for you.",
+    },
+    {
+      question: sv ? "Hur snabbt får jag svar?" : "How quickly will I get a response?",
+      answer: sv ? "Vår genomsnittliga svarstid är 23h, men vi återkommer alltid från 48 timmar. För brådskande ärenden kan vi ofta leverera förslag ännu snabbare — kontakta oss direkt så prioriterar vi er." : "Our average response rate is 23h, but we always respond from 48 hours. For urgent matters, we can often deliver proposals even faster — contact us directly and we'll prioritize you.",
+    },
+    {
+      question: sv ? "Vilka länder och städer täcker ni?" : "Which countries and cities do you cover?",
+      answer: sv ? "Vi har lokaler i 175 länder — från Island till Cypern, från Portugal till Finland. Totalt över 340 000 venues. Oavsett om ni behöver ett konferenshotell i Stockholm eller en galalokal i Barcelona, hittar vi rätt." : "We have venues in 175 countries — from Iceland to Cyprus, from Portugal to Finland. Over 340,000 venues in total. Whether you need a conference hotel in Stockholm or a gala venue in Barcelona, we'll find the right one.",
+    },
+    {
+      question: sv ? "Kan ni hantera riktigt stora event?" : "Can you handle really large events?",
+      answer: sv ? "Absolut. Vi hanterar allt från styrelsemöten med 10 personer till stora internationella konferenser med tusentals deltagare. Vår projektledning och nätverk av leverantörer skalar efter era behov." : "Absolutely. We handle everything from intimate board meetings with 10 people to large-scale conferences with thousands of attendees. Our project management and supplier network scales to your needs.",
+    },
+    {
+      question: sv ? "Vad händer om jag behöver ändra eller avboka?" : "What happens if I need to change or cancel?",
+      answer: sv ? "Vi hanterar all kommunikation med lokaler och leverantörer åt er, inklusive ändringar och avbokningar. Villkoren varierar beroende på lokal och avtal, men vi säkerställer alltid full transparens gällande bokningen." : "We handle all communication with venues and suppliers on your behalf, including changes and cancellations. Terms vary depending on venue and agreement, but we always ensure full transparency regarding your booking.",
+    },
+    {
+      question: sv ? "Hur skiljer sig EventPartner från att boka direkt?" : "How does EventPartner differ from booking directly?",
+      answer: sv ? "Tre saker: vi sparar er tid genom att sköta all research och förhandling, vi får bättre priser tack vare vår volym, och vi ger er tillgång till lokaler och paket som inte alltid är publika. Dessutom får ni en dedikerad kontaktperson under hela processen." : "Three things: we save you time by handling all research and negotiation, we get better prices thanks to our volume, and we give you access to venues and packages not always publicly available. Plus you get a dedicated contact person throughout the entire process.",
+    },
+    {
+      question: sv ? "Jobbar ni bara med stora företag?" : "Do you only work with large companies?",
+      answer: sv ? "Nej — vi hjälper företag i alla storlekar. Från startups som planerar sin första kickoff till globala koncerner med löpande eventbehov. Processen är densamma: ni berättar vad ni söker, vi levererar." : "No — we help companies of all sizes. From startups planning their first kick-off to global corporations with ongoing event needs. The process is the same: you tell us what you're looking for, we deliver.",
+    },
+  ];
+
+  const rawFaqs = cms?.items?.length ? cms.items : DEFAULT_FAQS;
+  const faqs = rawFaqs.map(faq => ({
+    ...faq,
+    answer: faq.answer
+      .replace(/within 24 hours/gi, "from 48 hours")
+      .replace(/inom 24 timmar/gi, "från 48 timmar")
+      .replace(/24h/gi, "48h")
+      .replace(/24 timmar/gi, "48 timmar")
+  }));
 
   return (
     <section id="faq" className="relative w-full py-24 md:py-32">

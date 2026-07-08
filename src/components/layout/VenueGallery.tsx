@@ -66,8 +66,8 @@ export function VenueGallery(_props?: { venues?: any[]; countryName?: string }) 
                 </div>
                 <div className="w-[1px] h-10 bg-white/20" />
                 <div className="text-right">
-                  <p className="text-3xl font-medium text-white tracking-tight">24h</p>
-                  <p className="text-xs text-white/50 uppercase tracking-wider">Svar</p>
+                  <p className="text-3xl font-medium text-white tracking-tight">23h</p>
+                  <p className="text-xs text-white/50 uppercase tracking-wider">Snitt-svar</p>
                 </div>
               </div>
             </div>

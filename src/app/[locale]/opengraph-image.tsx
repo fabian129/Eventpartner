@@ -72,12 +72,12 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
             ? [
                 ["340 000+", "Venues"],
                 ["175", "Länder"],
-                ["24h", "Svarstid"],
+                ["Snabb", "Leverans"],
               ]
             : [
                 ["340,000+", "Venues"],
                 ["175", "Countries"],
-                ["24h", "Response"],
+                ["Fast", "Delivery"],
               ]
           ).map(([value, label]) => (
             <div key={label} style={{ display: "flex", flexDirection: "column" }}>

@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 import { useState } from "react";
-import { Send, CheckCircle, ArrowRight, ExternalLink, Calendar, Loader2 } from "lucide-react";
+import { Send, CheckCircle, ArrowRight, ExternalLink, Calendar, Loader2, Clock } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import Link from "next/link";
 import { BOOKING_LINKS } from "@/lib/bookingLinks";
@@ -45,7 +45,7 @@ export function RequestFormSection({ cms }: { cms?: {
     company: '', contact: '', email: '', phone: '',
     country: '', city: '', eventType: '', guests: '',
     dateFrom: '', dateTo: '', dateMonth: '',
-    budget: '', responseTime: '', message: '',
+    budget: '', message: '',
   });
 
   const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
@@ -99,7 +99,6 @@ export function RequestFormSection({ cms }: { cms?: {
           guests: form.guests,
           date: datePayload,
           budget: form.budget,
-          responseTime: form.responseTime,
           message: form.message,
         }),
       });
@@ -110,7 +109,7 @@ export function RequestFormSection({ cms }: { cms?: {
       }
 
       setSubmitted(true);
-      setForm({ company: '', contact: '', email: '', phone: '', country: '', city: '', eventType: '', guests: '', dateFrom: '', dateTo: '', dateMonth: '', budget: '', responseTime: '', message: '' });
+      setForm({ company: '', contact: '', email: '', phone: '', country: '', city: '', eventType: '', guests: '', dateFrom: '', dateTo: '', dateMonth: '', budget: '', message: '' });
       setFlexibility('');
     } catch (err: any) {
       setError(err.message || 'Failed to send. Please try again.');
@@ -178,16 +177,22 @@ export function RequestFormSection({ cms }: { cms?: {
           {/* Stats bar */}
           <div className="flex items-center justify-center gap-8 mb-10 pb-8 border-b border-[var(--border-default)]">
             {(sv ? [
-              { value: "24h", label: "Svarstid" },
+              { value: t('infoCards.card2.title'), label: t('infoCards.card2.label') },
               { value: "3", label: "Matchade förslag" },
               { value: "Gratis", label: "Kostnad" },
             ] : [
-              { value: "24h", label: "Response time" },
+              { value: t('infoCards.card2.title'), label: t('infoCards.card2.label') },
               { value: "3", label: "Matched proposals" },
               { value: "Free", label: "Cost" },
             ]).map((stat) => (
               <div key={stat.label} className="text-center">
-                <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">{stat.value}</span>
+                {stat.value === "CLOCK_ICON" ? (
+                  <div className="flex justify-center mb-1">
+                    <Clock className="w-8 h-8 md:w-9 md:h-9 text-[var(--text-primary)]" />
+                  </div>
+                ) : (
+                  <span className="font-display text-2xl md:text-3xl font-medium text-[var(--text-primary)] block">{stat.value}</span>
+                )}
                 <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)]">{stat.label}</span>
               </div>
             ))}
@@ -300,12 +305,10 @@ export function RequestFormSection({ cms }: { cms?: {
                 onChange={set('budget')}
               />
             </div>
-            <div>
-              <label className={labelClass}>{sv ? "Önskad svarstid" : "Response time"}</label>
-              <select className={inputClass} value={form.responseTime} onChange={set('responseTime')}>
-                <option value="">{sv ? "Välj tidsram" : "Select timeframe"}</option>
-                {(sv ? ["Inom 24 timmar", "Inom 48 timmar", "Inom 72 timmar"] : ["Within 24 hours", "Within 48 hours", "Within 72 hours"]).map(o => <option key={o}>{o}</option>)}
-              </select>
+            <div className="flex flex-col justify-end pb-1">
+               <span className="text-[13px] text-[var(--text-muted)] italic">
+                 {t('fields.responseTime.label')}
+               </span>
             </div>
           </div>
 

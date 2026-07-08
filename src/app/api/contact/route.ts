@@ -554,8 +554,8 @@ async function handleMerchQuote(data: Record<string, any>) {
           <div style="margin: 24px 0; padding: 16px 18px; background: #ecfdf5; border: 1px solid #6AD8D2; border-radius: 12px;">
             <p style="margin: 0; font-size: 14px; color: #0f766e; line-height: 1.6;">
               ${sv
-                ? '⏱️ Vi återkommer inom <strong>24 timmar</strong> med priser, bekräftelse och nästa steg.'
-                : "⏱️ We'll get back to you within <strong>24 hours</strong> with pricing, confirmation and next steps."}
+                ? '⏱️ Vi återkommer så snart som möjligt med priser, bekräftelse och nästa steg.'
+                : "⏱️ We'll get back to you as soon as possible with pricing, confirmation and next steps."}
             </p>
           </div>
           <p style="font-size: 14px; line-height: 1.7; color: #555;">

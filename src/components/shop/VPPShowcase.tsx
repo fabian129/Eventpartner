@@ -78,7 +78,7 @@ function useVPPProducts(): VPPProduct[] {
       name: t('products.businessCard.name'),
       tagline: t('products.businessCard.tagline'),
       description: t('products.businessCard.description'),
-      images: ["/Images/vpp/vpp_business_card.png"],
+      images: ["/Images/vpp/sothebys_cards_on_slate_1783434005267.png"],
       icon: <CreditCard className="w-5 h-5" />,
       screenSizes: ["2.4″"],
       features: ["Pocket-sized", "2.4″ screen", "Built-in speaker", "USB-C charging"],

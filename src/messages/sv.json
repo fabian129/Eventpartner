@@ -88,11 +88,11 @@
     "headlineAccent": "En partner, EventPartner.",
     "subtitle": "Beskriv ert event. Vi hittar de bästa lokalerna och leverantörerna, jämför alternativen, förhandlar priserna och hanterar hela bokningsprocessen från start till mål.",
     "cta": "Få en gratis offert",
-    "ctaSub": "Gratis · Inga förpliktelser · Svar inom 24h",
+    "ctaSub": "Gratis · Inga förpliktelser · Snabb leverans av förslag",
     "stats": {
       "venues": { "value": "340 000+", "label": "Lokaler" },
       "countries": { "value": "175", "label": "Länder" },
-      "response": { "value": "<24h", "label": "Svarstid" },
+      "response": { "value": "23h", "label": "Snitt-svarstid" },
       "proposals": { "value": "3+", "label": "Förslag per förfrågan" }
     },
     "scrollLabel": "Scrolla för att utforska"
@@ -103,7 +103,7 @@
     "labelRight": "Gratis offert",
     "headline": "Berätta om ditt event.",
     "headlineAccent": "Vi tar hand om resten.",
-    "description": "Vill du ha hjälp med ditt nästa event? Skriv in dina uppgifter så hör vi av oss inom 24 timmar.",
+    "description": "Vill du ha hjälp med ditt nästa event? Skriv in dina uppgifter så återkommer vi så snart som möjligt.",
     "fields": {
       "name": { "label": "Fullständigt namn", "placeholder": "Ditt fullständiga namn" },
       "email": { "label": "E-post", "placeholder": "du@foretag.se" },
@@ -153,6 +153,15 @@
         "label": "Budget",
         "placeholder": "t.ex. 200 000 kr"
       },
+      "responseTime": {
+        "label": "Genomsnittlig svarstid 23 timmar",
+        "placeholder": "",
+        "options": {
+          "48h": "Inom 48 timmar",
+          "72h": "Inom 72 timmar",
+          "thisWeek": "Denna vecka"
+        }
+      },
       "message": {
         "label": "Övriga detaljer",
         "placeholder": "Berätta om ditt event — krav, önskemål, speciella behov..."
@@ -162,9 +171,9 @@
     "submitting": "Skickar...",
     "success": {
       "title": "Förfrågan skickad!",
-      "description": "Vi har tagit emot din förfrågan. Vårt team granskar den och återkommer inom 24 timmar med skräddarsydda lokalförslag."
+      "description": "Vi har tagit emot din förfrågan. Vårt team granskar den och återkommer med skräddarsydda lokalförslag."
     },
-    "disclaimer": "Inga förpliktelser · Gratis tjänst · Svar inom 24h",
+    "disclaimer": "Inga förpliktelser · Gratis tjänst · Snitt-svarstid 23h",
     "meetingSection": {
       "label": "Direktkontakt",
       "headline": "Föredrar du att prata?",
@@ -173,7 +182,7 @@
     },
     "infoCards": {
       "card1": { "title": "Gratis tjänst", "label": "Alltid" },
-      "card2": { "title": "Svar inom 24h", "label": "Garanterat" },
+      "card2": { "title": "23h", "label": "Snitt-svarstid" },
       "card3": { "title": "3+ lokalförslag", "label": "Per förfrågan" }
     }
   },
@@ -217,7 +226,7 @@
       "Kvartalsvis omfattande rapportering samt ESG- & hållbarhetsdata",
       "Enterprise-governance anpassad för CSRD, NIS2 & travel management",
       "Rapporter",
-      "Svarstid från 12h",
+      "Prioriterat svar inom 48h",
       "I snitt 14% rabatt",
       "Ansvarsförsäkring upp till 100 000 000 SEK / €10 000 000",
       "Kostnadsfria platsbesiktningar"
@@ -302,7 +311,7 @@
     },
     "selected": "valda",
     "priceIncluded": "Pris ingår i offerten",
-    "bulkDiscountNote": "Slutpriset inkluderar bulkrabatter. Vi svarar inom 24h.",
+    "bulkDiscountNote": "Slutpriset inkluderar bulkrabatter. Vi svarar så snart som möjligt.",
     "bulkDiscountTiersLabel": "Mängdrabatter",
     "requestQuote": "Begär offert",
     "close": "Stäng varukorg",
@@ -332,7 +341,7 @@
     },
     "success": {
       "title": "Tack för din beställning!",
-      "description": "Vi har tagit emot din förfrågan och skickat en bekräftelse till din e-post. Vårt team återkommer inom 24 timmar med priser och nästa steg.",
+      "description": "Vi har tagit emot din förfrågan och skickat en bekräftelse till din e-post. Vårt team återkommer så snart som möjligt med priser och nästa steg.",
       "close": "Stäng"
     },
     "removeItem": "Ta bort artikel",
@@ -411,11 +420,11 @@
       "detailsPlaceholder": "Berätta om ditt event, tidsplan, designkrav...",
       "submit": "Begär offert",
       "sending": "Skickar...",
-      "disclaimer": "Inga förpliktelser • Svar inom 24h • Minsta beställning 50 enheter"
+      "disclaimer": "Inga förpliktelser • Snabb leverans av förslag • Minsta beställning 50 enheter"
     },
     "quoteSuccess": {
       "title": "Offertförfrågan skickad",
-      "description": "Ett bekräftelsemail har skickats till din e-post. Vi återkommer med en anpassad offert för videobroschyrer inom 24 timmar.",
+      "description": "Ett bekräftelsemail har skickats till din e-post. Vi återkommer med en anpassad offert för videobroschyrer.",
       "submitAnother": "Skicka en ny förfrågan"
     },
     "meetingSection": {
@@ -465,7 +474,7 @@
     "heroHeadlineAccent": "EventPartner.",
     "heroIntroText": "Vi kopplar samman företag med rätt lokaler och leverantörer. Vi förhandlar åt er, och ser till att ert event blir minnesvärt och skapar värde. Både externa event och interna sammankomster har aldrig varit enklare att skapa än med EventPartner VIP.",
     "heroStats": [
-      { "value": "12h", "label": "Svarstid" },
+      { "value": "48h", "label": "Prioriterat svar" },
       { "value": "14%", "label": "Snittbesparing" },
       { "value": "175", "label": "Länder" },
       { "value": "1:1", "label": "Dedikerad kontaktperson" }
@@ -478,7 +487,7 @@
     "manifestoBody2": "Oavsett om du planerar 5 event per år eller 50, får VIP-kunder anpassade avtalsvillkor, exklusiv tillgång till lokaler och strategiskt stöd för att optimera hela din eventportfölj.",
     "manifestoMotto": "Prioritet är inte en förmån — det är standarden.",
     "manifestoStats": [
-      { "value": "< 12h", "label": "Svarstid" },
+      { "value": "48h", "label": "Prioriterat svar" },
       { "value": "I snitt 14%", "label": "Rabatter" },
       { "value": "1:1", "label": "Account manager" },
       { "value": "Anpassat", "label": "Avtalsvillkor" }
@@ -500,7 +509,7 @@
       "Anpassat för enterprise-krav: CSRD, ESG och NIS2-governance",
       "Avancerad kostnadskontroll & travel management",
       "Tillgång till EventPartner AI-assistent",
-      "Prioriterad svarstid inom 12h",
+      "Prioriterat svar inom 48h",
       "Ansvarsförsäkring upp till 100 000 000 SEK / €10 000 000",
       "Anpassade avtals- & faktureringsvillkor"
     ],
@@ -545,14 +554,14 @@
     "valuesHeadlineAccent": "inte bara löften.",
     "values": [
       { "icon": "heart", "title": "Personlig service", "description": "Varje förfrågan hanteras av en riktig person, inte en chatbot. Vi tror på relationer byggda på förtroende och genuin omsorg." },
-      { "icon": "zap", "title": "Snabbhet & Pålitlighet", "description": "Förslag inom 24 timmar, alltid. Vi vet att tidskritisk eventplanering inte väntar på någon." },
+      { "icon": "zap", "title": "Snabbhet & Pålitlighet", "description": "Snitt-svarstid 23h. Vi vet att tidskritisk eventplanering inte väntar på någon." },
       { "icon": "globe", "title": "Global räckvidd", "description": "En partner i 175 länder. Slipp jonglera med lokala byråer — vi hanterar allt från Stockholm till Barcelona." },
       { "icon": "shield", "title": "Transparens", "description": "Inga dolda avgifter, tydlig prissättning och en jämförelse av minst 3 lokalalternativ för varje förfrågan." }
     ],
     "teamLabel": "Teamet",
     "teamIntro": "Ett litet team med djup erfarenhet inom eventproduktion, hotell & restaurang och teknik — som behandlar varje förfrågan som sin egen.",
     "ctaHeadline": "Redo att planera ditt nästa event?",
-    "ctaDescription": "Skicka din förfrågan — alltid gratis, alltid personligt, alltid inom 24 timmar."
+    "ctaDescription": "Skicka din förfrågan — alltid gratis, alltid personligt, med snitt-svarstid 23h."
   },
 
   "aiAssistant": {
@@ -677,8 +686,8 @@
     "heroHeadlineAccent": "för er.",
     "heroSubtitle": "Behöver du hjälp med ditt event eller har du en fråga om våra tjänster? Vårt dedikerade supportteam är alltid redo att hjälpa till.",
     "stats": {
-      "response": "< 24t",
-      "responseLabel": "Genomsnittlig svarstid",
+      "response": "23h",
+      "responseLabel": "Snitt-svarstid",
       "countries": "175",
       "countriesLabel": "Länder täckta",
       "hours": "Mån–Fre",
@@ -688,7 +697,7 @@
       "label": "Supportkanaler",
       "headline": "Välj hur du vill nå oss.",
       "emailTitle": "E-postsupport",
-      "emailDesc": "Detaljerade meddelanden — svar inom 24 timmar.",
+      "emailDesc": "Detaljerade meddelanden — snabbt svar.",
       "phoneTitle": "Telefonsupport",
       "phoneDesc": "Prata direkt med vårt team.",
       "chatTitle": "Livechatt",
@@ -698,7 +707,7 @@
     "form": {
       "label": "Skicka ett meddelande",
       "headline": "Berätta vad\ndu behöver.",
-      "description": "Fyll i formuläret så återkommer vårt team inom en arbetsdag.",
+      "description": "Fyll i formuläret så återkommer vårt team så snart som möjligt.",
       "name": "Namn",
       "email": "E-post",
       "subject": "Ämne",
@@ -712,7 +721,7 @@
       "sending": "Skickar...",
       "send": "Skicka meddelande",
       "successTitle": "Meddelande skickat",
-      "successDesc": "Vi återkommer inom 24 timmar."
+      "successDesc": "Vi återkommer så snart som möjligt."
     },
     "meetingSection": {
       "label": "Direktkontakt",

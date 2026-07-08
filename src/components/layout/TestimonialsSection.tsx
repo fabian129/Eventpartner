@@ -49,7 +49,7 @@ const TESTIMONIALS_ROW_2 = [
     company: "Forte Group",
   },
   {
-    quote: "De förstod direkt vad vi ville ha. Tre förslag inom 24 timmar, alla relevanta. Vi valde det första.",
+    quote: "De förstod direkt vad vi ville ha. Tre förslag levererade snabbt, alla relevanta. Vi valde det första.",
     name: "Johan Andersson",
     title: "Head of Procurement",
     company: "Nexus Industries",

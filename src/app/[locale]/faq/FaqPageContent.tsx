@@ -1,46 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "next-intl";
 import { ChevronDown, MessageCircle, ArrowRight, HelpCircle, Search } from "lucide-react";
+import { useSmoothScroll } from "@/components/utils/SmoothScroll";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const DEFAULT_FAQS = [
-  {
-    question: "How does EventPartner work?",
-    answer: "Simply submit your event requirements through our request form. Within 24 hours, our team will provide you with a curated selection of at least 3 venue options, complete with pricing, availability, and our personal recommendations — all tailored to your specific needs."
-  },
-  {
-    question: "Which countries do you cover?",
-    answer: "We operate across 175 countries with access to 340,000+ venues. From Scandinavia to the Mediterranean, we can source the perfect venue for your event anywhere around the globe."
-  },
-  {
-    question: "Is there a cost to use EventPartner's service?",
-    answer: "Our venue sourcing and proposal service is completely free for event planners. We earn our commission from the venue side, which means you get expert guidance and multiple options at no additional cost."
-  },
-  {
-    question: "How quickly can I get venue proposals?",
-    answer: "We guarantee a response within 24 hours. For urgent requests, we often deliver proposals within a few hours. Our team understands that event planning is time-sensitive, and we prioritize speed without sacrificing quality."
-  },
-  {
-    question: "What types of events do you handle?",
-    answer: "We handle everything from intimate board dinners (10 guests) to large-scale corporate conferences (thousands of attendees). Our expertise covers conferences, team-building events, product launches, galas, incentive trips, and more."
-  },
-  {
-    question: "Can I visit venues before booking?",
-    answer: "Absolutely. We arrange site visits and virtual tours for shortlisted venues. Our local contacts can facilitate walkthroughs, and we provide detailed photo galleries and 360° views to help you make an informed decision."
-  },
-  {
-    question: "What is the VIP Programme?",
-    answer: "Our VIP Programme offers priority service, exclusive pricing, dedicated account management, and access to premium venues not available through standard channels. It's designed for companies that host frequent events and want a long-term partnership."
-  },
-  {
-    question: "How do I become a VIP member?",
-    answer: "VIP membership is available by application. Visit our VIP page to learn more about the programme and its benefits, or contact our team directly to discuss your event volume and needs."
-  },
-];
+
 
 interface FaqCMS {
   heroLabel?: string;
@@ -105,9 +73,60 @@ function AccordionItem({ faq, index, isOpen, onToggle }: { faq: { question: stri
 
 export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
   const sv = useLocale() === 'sv';
-  const faqs = cms?.faqs || DEFAULT_FAQS;
+  const DEFAULT_FAQS = [
+    {
+      question: sv ? "Hur fungerar EventPartner?" : "How does EventPartner work?",
+      answer: sv ? "Skicka in era önskemål via vårt formulär. Vår genomsnittliga svarstid är 23h, men vi återkommer alltid från 48 timmar med skräddarsydda förslag." : "Simply submit your event requirements through our request form. Our average response rate is 23h, but we always get back to you from 48 hours with tailored proposals."
+    },
+    {
+      question: sv ? "Vilka länder täcker ni?" : "Which countries do you cover?",
+      answer: sv ? "Vi arbetar i 175 länder med tillgång till 340 000+ lokaler. Från Skandinavien till Medelhavet kan vi hitta den perfekta lokalen för ert event var som helst i världen." : "We operate across 175 countries with access to 340,000+ venues. From Scandinavia to the Mediterranean, we can source the perfect venue for your event anywhere around the globe."
+    },
+    {
+      question: sv ? "Kostar det något att använda EventPartners tjänst?" : "Is there a cost to use EventPartner's service?",
+      answer: sv ? "Vår tjänst för lokalsökning och förslag är helt kostnadsfri för eventplanerare. Vi får vår provision från lokalsidan, vilket innebär att ni får expertvägledning och flera alternativ utan extra kostnad." : "Our venue sourcing and proposal service is completely free for event planners. We earn our commission from the venue side, which means you get expert guidance and multiple options at no additional cost."
+    },
+    {
+      question: sv ? "Hur snabbt kan jag få lokalförslag?" : "How quickly can I get venue proposals?",
+      answer: sv ? "Vår genomsnittliga svarstid är 23h, men vi återkommer alltid från 48 timmar. Vid brådskande ärenden kan vi ofta leverera förslag ännu snabbare — kontakta oss direkt så prioriterar vi er." : "Our average response rate is 23h, but we always respond from 48 hours. For urgent requests, we can often deliver proposals even faster — contact us directly and we'll prioritize you."
+    },
+    {
+      question: sv ? "Vilka typer av evenemang hanterar ni?" : "What types of events do you handle?",
+      answer: sv ? "Vi hanterar allt från intima styrelsemiddagar (10 gäster) till storskaliga företagskonferenser (tusentals deltagare). Vår expertis täcker konferenser, teambuilding-events, produktlanseringar, galor, incitamentsresor och mer." : "We handle everything from intimate board dinners (10 guests) to large-scale corporate conferences (thousands of attendees). Our expertise covers conferences, team-building events, product launches, galas, incentive trips, and more."
+    },
+    {
+      question: sv ? "Kan jag besöka lokaler innan jag bokar?" : "Can I visit venues before booking?",
+      answer: sv ? "Absolut. Vi arrangerar platsbesök och virtuella turer för utvalda lokaler. Våra lokala kontakter kan underlätta visningar, och vi tillhandahåller detaljerade fotogallerier och 360°-vyer för att hjälpa er att fatta ett välgrundat beslut." : "Absolutely. We arrange site visits and virtual tours for shortlisted venues. Our local contacts can facilitate walkthroughs, and we provide detailed photo galleries and 360° views to help you make an informed decision."
+    },
+    {
+      question: sv ? "Vad är VIP-programmet?" : "What is the VIP Programme?",
+      answer: sv ? "Vårt VIP-program erbjuder prioriterad service, exklusiva priser, dedikerad account management och tillgång till premiumlokaler som inte är tillgängliga via standardkanaler. Det är utformat för företag som anordnar frekventa events och vill ha ett långsiktigt partnerskap." : "Our VIP Programme offers priority service, exclusive pricing, dedicated account management, and access to premium venues not available through standard channels. It's designed for companies that host frequent events and want a long-term partnership."
+    },
+    {
+      question: sv ? "Hur blir jag VIP-medlem?" : "How do I become a VIP member?",
+      answer: sv ? "VIP-medlemskap är tillgängligt via ansökan. Besök vår VIP-sida för att lära dig mer om programmet och dess fördelar, eller kontakta vårt team direkt för att diskutera er eventvolym och behov." : "VIP membership is available by application. Visit our VIP page to learn more about the programme and its benefits, or contact our team directly to discuss your event volume and needs."
+    },
+  ];
+  const rawFaqs = cms?.faqs || DEFAULT_FAQS;
+  const faqs = rawFaqs.map(faq => ({
+    ...faq,
+    answer: faq.answer
+      .replace(/within 24 hours/gi, "from 48 hours")
+      .replace(/inom 24 timmar/gi, "från 48 timmar")
+      .replace(/24h/gi, "48h")
+      .replace(/24 timmar/gi, "48 timmar")
+  }));
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const lenis = useSmoothScroll();
+
+  useEffect(() => {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [lenis]);
 
   const filteredFaqs = searchQuery
     ? faqs.filter(
@@ -273,7 +292,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
               {cms?.ctaHeadline || (sv ? "Har du fler frågor?" : "Still have questions?")}
             </p>
             <p className="text-[var(--text-secondary)] text-sm">
-              {cms?.ctaDescription || (sv ? "Skicka din fråga så återkommer vi inom 24 timmar." : "Send us your inquiry and we'll get back to you within 24 hours.")}
+              {cms?.ctaDescription || (sv ? "Skicka din fråga så återkommer vi inom 23 timmar." : "Send us your inquiry and we'll get back to you within 23 hours.")}
             </p>
           </div>
           <div className="w-12 h-12 rounded-xl bg-tiffany/10 border border-tiffany/20 flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-tiffany transition-all duration-300 shrink-0 ml-6">

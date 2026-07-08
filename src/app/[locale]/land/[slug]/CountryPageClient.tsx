@@ -130,7 +130,7 @@ export function CountryPageClient({ country }: { country: Country }) {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-base md:text-lg text-[var(--text-muted)] max-w-lg leading-relaxed"
             >
-              Submit your inquiry for events in {country.name} — we'll get back to you within 24h with at least 3 curated proposals.
+              Submit your inquiry for events in {country.name} — we'll get back to you with Fast Proposal Delivery and at least 3 curated proposals.
             </motion.p>
           </div>
         </section>
@@ -156,7 +156,7 @@ export function CountryPageClient({ country }: { country: Country }) {
                 >
                   <CheckCircle className="w-12 h-12 text-[#81D8D0]" />
                   <p className="font-display text-xl font-medium text-[var(--text-primary)]">Thank you for your inquiry!</p>
-                  <p className="text-sm text-[var(--text-muted)]">We'll get back to you within 24 hours with at least 3 curated proposals.</p>
+                  <p className="text-sm text-[var(--text-muted)]">We'll get back to you with Fast Proposal Delivery and at least 3 curated proposals.</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -262,7 +262,7 @@ export function CountryPageClient({ country }: { country: Country }) {
               </h2>
               <p className="text-[var(--text-muted)] text-sm mb-8 max-w-md mx-auto">
                 Submit your inquiry and we'll match you with the perfect venue. 
-                Always a response within 24h with at least 3 proposals.
+                Fast Proposal Delivery with at least 3 proposals.
               </p>
               <a
                 href="#"

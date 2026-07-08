@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CountUp } from "@/components/ui/CountUp";
+import { useLocale } from 'next-intl';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -19,12 +20,13 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  */
 
 const STATS = [
-  { value: 175, suffix: "", label: "länder" },
-  { value: 340000, suffix: "+", label: "venues globalt" },
-  { value: 24, suffix: "h", label: "svarstid" },
+  { value: 175, suffix: "", labelEn: "countries", labelSv: "länder" },
+  { value: 340000, suffix: "+", labelEn: "venues globally", labelSv: "venues globalt" },
+  { value: 23, suffix: "h", labelEn: "avg. response", labelSv: "snitt-svar" },
 ];
 
 export function EnterpriseSection() {
+  const sv = useLocale() === 'sv';
   return (
     <section className="relative w-full bg-[var(--bg-primary)] overflow-hidden">
       {/* Top: Headline + description */}
@@ -38,15 +40,18 @@ export function EnterpriseSection() {
             className="md:max-w-[50%]"
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-[2.8rem] font-medium tracking-tight text-[var(--text-primary)] leading-[1.15]">
-              Eventleverans i<br />
-              <span className="italic font-light text-purple">världsklass.</span>
+              {sv ? (
+                <>Eventleverans i<br /><span className="italic font-light text-purple">världsklass.</span></>
+              ) : (
+                <>World-class<br /><span className="italic font-light text-purple">event delivery.</span></>
+              )}
             </h2>
             <div className="mt-6">
               <Link
                 href="#request"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-tiffany hover:bg-[#74CCC4] text-[#0A0A0A] font-semibold text-[14px] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(129,216,208,0.2)]"
               >
-                Boka Event
+                {sv ? "Boka Event" : "Book Event"}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -59,9 +64,7 @@ export function EnterpriseSection() {
             transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
             className="text-[15px] text-[var(--text-muted)] leading-relaxed md:max-w-[380px]"
           >
-            Ledande företag använder EventPartner för att leverera
-            konferenser, kickoffs och galor — från lokalsökning till
-            genomförande i 175 länder.
+            {sv ? "Ledande företag använder EventPartner för att leverera konferenser, kickoffs och galor — från lokalsökning till genomförande i 175 länder." : "Leading companies use EventPartner to deliver conferences, kick-offs and galas — from venue sourcing to execution in 175 countries."}
           </motion.p>
         </div>
       </div>
@@ -80,14 +83,14 @@ export function EnterpriseSection() {
               <span className="text-[var(--bg-primary)] font-bold text-[13px]">E</span>
             </div>
             <p className="text-[14px] text-[var(--text-primary)] font-medium">
-              Ericsson levererar konferenser med EventPartner.
+              {sv ? "Ericsson levererar konferenser med EventPartner." : "Ericsson delivers conferences with EventPartner."}
             </p>
           </div>
           <Link
             href="#"
             className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--border-default)] text-[13px] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--text-dim)] transition-all duration-300"
           >
-            Läs berättelsen
+            {sv ? "Läs berättelsen" : "Read the story"}
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -115,12 +118,12 @@ export function EnterpriseSection() {
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-6 md:py-8">
         <div className="flex items-center justify-start gap-12 md:gap-20">
           {STATS.map((stat) => (
-            <div key={stat.label} className="flex items-baseline gap-1.5">
+            <div key={stat.labelEn} className="flex items-baseline gap-1.5">
               <span className="text-[15px] md:text-[16px] font-display font-semibold text-[var(--text-primary)]">
                 <CountUp value={stat.value} suffix={stat.suffix} duration={2} />
               </span>
               <span className="text-[13px] text-[var(--text-muted)]">
-                {stat.label}
+                {sv ? stat.labelSv : stat.labelEn}
               </span>
             </div>
           ))}

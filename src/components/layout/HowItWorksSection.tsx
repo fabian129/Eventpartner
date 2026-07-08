@@ -240,7 +240,7 @@ export function HowItWorksSection() {
           >
             <div>
               <p className="text-[15px] font-semibold text-white">Skicka in din förfrågan idag</p>
-              <p className="text-[13px] text-white/35 mt-0.5">Alltid svar inom max 24h med minst 3 offerter som passar era önskemål.</p>
+              <p className="text-[13px] text-white/35 mt-0.5">Alltid svar inom 48h med minst 3 offerter som passar era önskemål.</p>
             </div>
             <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-purple/20 border border-purple/20 group-hover:bg-purple/30 group-hover:border-purple/40 flex items-center justify-center transition-all duration-300 ml-6">
               <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />

@@ -18,11 +18,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
  * Team images are ALWAYS from local files — never from CMS.
  */
 
-const DEFAULT_STATS = [
-  { value: "340,000+", label: "Venues worldwide" },
-  { value: "175", label: "Countries" },
-  { value: "10+", label: "Years of experience" },
-];
+
 
 interface AboutCMS {
   label?: string;
@@ -47,6 +43,13 @@ interface AboutProps {
 export function AboutSection({ cms, showTeam = true }: AboutProps) {
   const t = useTranslations('about');
   const sv = useLocale() === 'sv';
+
+  const DEFAULT_STATS = [
+    { value: sv ? "340 000+" : "340,000+", label: sv ? "Venues världen över" : "Venues worldwide" },
+    { value: "175", label: sv ? "Länder" : "Countries" },
+    { value: "10+", label: sv ? "Års erfarenhet" : "Years of experience" },
+  ];
+
   const stats = cms?.stats?.length ? cms.stats : DEFAULT_STATS;
   return (
     <section id="about" className="relative w-full py-28 md:py-40 overflow-hidden">

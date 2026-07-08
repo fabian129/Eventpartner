@@ -88,11 +88,11 @@
     "headlineAccent": "One partner, EventPartner.",
     "subtitle": "Tell us what you need. We'll source venues and event services, compare options, negotiate rates and manage the entire booking process.",
     "cta": "Get a Free Quote",
-    "ctaSub": "Free · No obligations · Response within 24h",
+    "ctaSub": "Free · No obligations · Fast Proposal Delivery",
     "stats": {
       "venues": { "value": "340,000+", "label": "Venues" },
       "countries": { "value": "175", "label": "Countries" },
-      "response": { "value": "<24h", "label": "Response time" },
+      "response": { "value": "23h", "label": "Avg. response rate" },
       "proposals": { "value": "3+", "label": "Proposals per request" }
     },
     "scrollLabel": "Scroll to explore"
@@ -103,7 +103,7 @@
     "labelRight": "Free quote",
     "headline": "Tell us about your event.",
     "headlineAccent": "We'll handle the rest.",
-    "description": "Want help with your next event? Enter your details and we will get back to you within 24 hours.",
+    "description": "Want help with your next event? Enter your details and we will get back to you as soon as possible.",
     "fields": {
       "name": { "label": "Full Name", "placeholder": "Your full name" },
       "email": { "label": "Email", "placeholder": "you@company.com" },
@@ -153,6 +153,15 @@
         "label": "Budget",
         "placeholder": "e.g. €20,000"
       },
+      "responseTime": {
+        "label": "Average response rate 23 hours",
+        "placeholder": "",
+        "options": {
+          "48h": "Within 48 hours",
+          "72h": "Within 72 hours",
+          "thisWeek": "This week"
+        }
+      },
       "message": {
         "label": "Additional Details",
         "placeholder": "Tell us about your event — requirements, preferences, special needs..."
@@ -162,9 +171,9 @@
     "submitting": "Sending...",
     "success": {
       "title": "Request Sent!",
-      "description": "We've received your inquiry. Our team will review it and get back to you within 24 hours with tailored venue proposals."
+      "description": "We've received your inquiry. Our team will review it and get back to you with tailored venue proposals."
     },
-    "disclaimer": "No obligations · Free service · Response within 24h",
+    "disclaimer": "No obligations · Free service · Avg. response 23h",
     "meetingSection": {
       "label": "Direct contact",
       "headline": "Prefer to talk?",
@@ -173,7 +182,7 @@
     },
     "infoCards": {
       "card1": { "title": "Free Service", "label": "Always" },
-      "card2": { "title": "Response within 24h", "label": "Guaranteed" },
+      "card2": { "title": "23h", "label": "Avg. response rate" },
       "card3": { "title": "3+ Venue Proposals", "label": "Per request" }
     }
   },
@@ -217,7 +226,7 @@
       "Quarterly comprehensive reporting & ESG / sustainability data",
       "Enterprise governance aligned with CSRD, NIS2 & travel management",
       "Reports",
-      "Response time from 12h",
+      "Priority response within 48h",
       "On average 14% discount",
       "Liability insurance up to €10,000,000 / 100,000,000 SEK",
       "Complimentary site inspections"
@@ -302,7 +311,7 @@
     },
     "selected": "selected",
     "priceIncluded": "Price included in quote",
-    "bulkDiscountNote": "Final pricing includes bulk discounts. We'll respond within 24h.",
+    "bulkDiscountNote": "Final pricing includes bulk discounts. We'll respond as soon as possible.",
     "bulkDiscountTiersLabel": "Volume discounts",
     "requestQuote": "Request Quote",
     "close": "Close cart",
@@ -332,7 +341,7 @@
     },
     "success": {
       "title": "Thank you for your order!",
-      "description": "We've received your request and sent a confirmation to your email. Our team will get back to you within 24 hours with pricing and next steps.",
+      "description": "We've received your request and sent a confirmation to your email. Our team will get back to you as soon as possible with pricing and next steps.",
       "close": "Close"
     },
     "removeItem": "Remove item",
@@ -411,11 +420,11 @@
       "detailsPlaceholder": "Tell us about your event, timeline, design requirements...",
       "submit": "Request Quote",
       "sending": "Sending...",
-      "disclaimer": "No obligations • Response within 24h • Minimum order 50 units"
+      "disclaimer": "No obligations • Fast Proposal Delivery • Minimum order 50 units"
     },
     "quoteSuccess": {
       "title": "Quote Request Sent",
-      "description": "A confirmation email has been sent to your inbox. We'll get back to you with a custom Video Brochure quote within 24 hours.",
+      "description": "A confirmation email has been sent to your inbox. We'll get back to you with a custom Video Brochure quote.",
       "submitAnother": "Submit another request"
     },
     "meetingSection": {
@@ -465,7 +474,7 @@
     "heroHeadlineAccent": "EventPartner.",
     "heroIntroText": "We connect companies with the right venues and suppliers. We negotiate on your behalf and make sure your event is memorable and creates real value. External events and internal gatherings have never been easier to create than with EventPartner VIP.",
     "heroStats": [
-      { "value": "12h", "label": "Response time" },
+      { "value": "from 48h", "label": "Priority response" },
       { "value": "14%", "label": "Avg. discount" },
       { "value": "175", "label": "Countries" },
       { "value": "1:1", "label": "Dedicated manager" }
@@ -478,7 +487,7 @@
     "manifestoBody2": "Whether you're planning 5 events per year or 50, VIP clients receive custom contract terms, exclusive venue access, and strategic support to optimise your entire event portfolio.",
     "manifestoMotto": "Priority is not a perk — it's the standard.",
     "manifestoStats": [
-      { "value": "< 12h", "label": "Response time" },
+      { "value": "from 48h", "label": "Priority response" },
       { "value": "Avg. 14%", "label": "Discounts" },
       { "value": "1:1", "label": "Account manager" },
       { "value": "Custom", "label": "Contract terms" }
@@ -500,7 +509,7 @@
       "Aligned with enterprise governance: CSRD, ESG, NIS2 compliance",
       "Advanced spend control & travel management integration",
       "Access to the EventPartner AI Assistant",
-      "Priority response within 12h",
+      "Priority response within 48h",
       "Liability insurance up to €10,000,000 / 100,000,000 SEK",
       "Custom contract & billing terms"
     ],
@@ -545,14 +554,14 @@
     "valuesHeadlineAccent": "not just promises.",
     "values": [
       { "icon": "heart", "title": "Personal Service", "description": "Every inquiry is handled by a real person, not a chatbot. We believe in relationships built on trust and genuine care." },
-      { "icon": "zap", "title": "Speed & Reliability", "description": "Proposals within 24 hours, always. We know that time-critical event planning doesn't wait for anyone." },
+      { "icon": "zap", "title": "Speed & Reliability", "description": "Avg. response rate 23h. We know that time-critical event planning doesn't wait for anyone." },
       { "icon": "globe", "title": "Global Reach", "description": "One partner across 175 countries. No more juggling local agencies — we handle everything from Stockholm to Barcelona." },
       { "icon": "shield", "title": "Transparency", "description": "No hidden fees, clear pricing, and a comparison of at least 3 venue options for every single request." }
     ],
     "teamLabel": "The Team",
     "teamIntro": "A small team with deep experience in event production, hospitality, and tech — treating every inquiry as their own.",
     "ctaHeadline": "Ready to plan your next event?",
-    "ctaDescription": "Send us your inquiry — always free, always personal, always within 24 hours."
+    "ctaDescription": "Send us your inquiry — always free, always personal, with Avg. response 23h."
   },
 
   "aiAssistant": {
@@ -677,8 +686,8 @@
     "heroHeadlineAccent": "to help.",
     "heroSubtitle": "Need assistance with your event or have a question about our services? Our dedicated support team is always ready to help.",
     "stats": {
-      "response": "< 24h",
-      "responseLabel": "Average response",
+      "response": "23h",
+      "responseLabel": "Avg. response rate",
       "countries": "175",
       "countriesLabel": "Countries covered",
       "hours": "Mon–Fri",
@@ -688,7 +697,7 @@
       "label": "Support Channels",
       "headline": "Choose how to reach us.",
       "emailTitle": "Email Support",
-      "emailDesc": "Detailed message — response within 24h.",
+      "emailDesc": "Detailed message — fast response.",
       "phoneTitle": "Phone Support",
       "phoneDesc": "Speak directly with our team.",
       "chatTitle": "Live Chat",
@@ -698,7 +707,7 @@
     "form": {
       "label": "Send a Message",
       "headline": "Tell us what\nyou need.",
-      "description": "Fill out the form and our team will get back to you within one business day.",
+      "description": "Fill out the form and our team will get back to you as soon as possible.",
       "name": "Name",
       "email": "Email",
       "subject": "Subject",
@@ -712,7 +721,7 @@
       "sending": "Sending...",
       "send": "Send Message",
       "successTitle": "Message Sent",
-      "successDesc": "We'll be in touch within 24 hours."
+      "successDesc": "We'll be in touch as soon as possible."
     },
     "meetingSection": {
       "label": "Direct contact",

@@ -77,7 +77,7 @@ export function ServiceShowcase() {
                 Rätt venue, varje gång.
               </p>
               <p className="text-sm font-light text-[var(--text-muted)] leading-relaxed">
-                340,000+ venues i 175 länder. Alltid svar inom 24h med minst 3 kurerade förslag.
+                340,000+ venues i 175 länder. Alltid svar med minst 3 kurerade förslag och snabb leverans.
               </p>
             </div>
           </motion.div>
@@ -168,7 +168,7 @@ export function ServiceShowcase() {
           >
             <div>
               <p className="text-[15px] font-medium text-[var(--text-primary)]">Skicka in din förfrågan</p>
-              <p className="text-[13px] text-[var(--text-muted)] mt-0.5">Vi matchar er med rätt venue inom 24h.</p>
+              <p className="text-[13px] text-[var(--text-muted)] mt-0.5">Vi matchar er med rätt venue med snabb leverans.</p>
             </div>
             <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-default)] group-hover:bg-tiffany/10 group-hover:border-tiffany/20 flex items-center justify-center transition-all duration-300 ml-6">
               <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-tiffany transition-colors" />

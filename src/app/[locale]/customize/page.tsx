@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const sv = locale === "sv";
   return pageMetadata({ locale, path: "/customize",
     title: sv ? "Skräddarsy ert event" : "Customize Your Event",
-    description: sv ? "Berätta allt om ert event — lokalkrav, catering, aktiviteter och boende — så återkommer vi med skräddarsydda förslag inom 24 timmar." : "Tell us everything about your event — venue needs, catering, activities and accommodation — and get tailored proposals within 24 hours." });
+    description: sv ? "Berätta allt om ert event — lokalkrav, catering, aktiviteter och boende — så återkommer vi med skräddarsydda förslag med snabb leverans." : "Tell us everything about your event — venue needs, catering, activities and accommodation — and get tailored proposals with Fast Proposal Delivery." });
 }
 
 export default async function CustomizePage({ params }: { params: Promise<{ locale: string }> }) {

@@ -170,7 +170,7 @@ export function InspirationSection() {
           className="mt-14 md:mt-20 flex items-center justify-between border-t border-white/[0.06] pt-8"
         >
           <p className="text-[13px] text-white/25 font-sans max-w-md">
-            Varje förfrågan hanteras av ett dedikerat team. Ni får alltid minst 3 kurerade förslag — inom 24 timmar.
+            Varje förfrågan hanteras av ett dedikerat team. Ni får alltid minst 3 kurerade förslag med snabb leverans.
           </p>
           <div className="hidden md:flex items-center gap-6">
             <div className="text-right">
@@ -179,7 +179,7 @@ export function InspirationSection() {
             </div>
             <div className="w-[1px] h-8 bg-white/[0.06]" />
             <div className="text-right">
-              <span className="font-display text-2xl font-medium text-white block leading-none">24h</span>
+              <span className="font-display text-2xl font-medium text-white block leading-none">from 48h</span>
               <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-white/25">max svarstid</span>
             </div>
             <div className="w-[1px] h-8 bg-white/[0.06]" />
