@@ -242,6 +242,18 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
     }
   };
 
+  const ctaDescText = (() => {
+    const rawDesc = cms?.ctaDesc || (svLocale
+      ? "Alltid 3 skräddarsydda förslag som matchar era behov, från 48 timmar efter att vi mottagit er förfrågan."
+      : "Always 3 tailored proposals matching your needs, from 48 hours after we receive your inquiry.");
+    if (rawDesc.includes("24") || rawDesc.includes("23")) {
+      return svLocale
+        ? "Alltid 3 skräddarsydda förslag som matchar era behov, från 48 timmar efter att vi mottagit er förfrågan."
+        : "Always 3 tailored proposals matching your needs, from 48 hours after we receive your inquiry.";
+    }
+    return rawDesc;
+  })();
+
   return (
     <footer className="relative w-full bg-[#0A0A0A] border-t border-white/[0.06]">
 
@@ -437,7 +449,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
           >
             <div>
               <p className="text-white text-sm md:text-base font-medium mb-1">{cms?.ctaTitle || "Send your inquiry today"}</p>
-              <p className="text-white/35 text-xs md:text-sm">{cms?.ctaDesc || (svLocale ? "Snitt-svarstid 23h med minst 3 kurerade förslag som matchar era behov." : "Average response rate 23h with at least 3 curated proposals matching your needs.")}</p>
+              <p className="text-white/35 text-xs md:text-sm">{ctaDescText}</p>
             </div>
             <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-tiffany group-hover:border-tiffany group-hover:text-black text-white/40 transition-all duration-300 shrink-0 ml-4">
               <ArrowRight className="w-4 h-4" />
