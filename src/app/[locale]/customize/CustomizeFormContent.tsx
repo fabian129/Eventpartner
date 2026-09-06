@@ -11,14 +11,14 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const EVENT_TYPES = [
   "Conference", "Corporate Event", "Team Building", "Product Launch",
-  "Gala / Dinner", "Kick-off", "Exhibition", "Incentive Travel",
-  "Wedding", "Festival", "Other",
+  "Gala", "Dinner", "Christmas Dinner", "Kick-off", "Exhibition",
+  "Wedding", "Other",
 ];
 
 const EVENT_TYPES_SV = [
   "Konferens", "Företagsevent", "Teambuilding", "Produktlansering",
-  "Gala / Middag", "Kickoff", "Mässa", "Incentiveresa",
-  "Bröllop", "Festival", "Annat",
+  "Gala", "Middag", "Julbord", "Kickoff", "Mässa",
+  "Bröllop", "Annat",
 ];
 
 const BUDGET_OPTIONS = [

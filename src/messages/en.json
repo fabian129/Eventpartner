@@ -116,7 +116,9 @@
           "conference": "Conference / Meeting",
           "teamBuilding": "Team Building",
           "corporate": "Corporate Event",
-          "dinner": "Gala Dinner",
+          "gala": "Gala",
+          "dinner": "Dinner",
+          "christmas": "Christmas Dinner",
           "product": "Product Launch",
           "wedding": "Wedding",
           "other": "Other"

@@ -13,6 +13,7 @@ import { LogoTicker } from "@/components/layout/LogoTicker";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollSection } from "@/components/ui/ScrollSection";
 import { WebshopTeaser } from "@/components/layout/WebshopTeaser";
+import { HelioPartnerSection } from "@/components/layout/HelioPartnerSection";
 import { VPPShowcase } from "@/components/shop/VPPShowcase";
 import { DarkZone } from "@/components/ui/DarkZone";
 import { HeroLightUpZone } from "@/components/ui/HeroLightUp";
@@ -222,6 +223,11 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           comingSoonDesc: t(data.webshopComingSoonDesc),
           ctaText: t(data.webshopCtaText),
         } : undefined} />
+      </ScrollSection>
+
+      {/* 10b. Preferred Partner — HELIO */}
+      <ScrollSection>
+        <HelioPartnerSection />
       </ScrollSection>
 
       {/* 11. FAQ */}

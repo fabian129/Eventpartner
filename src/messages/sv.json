@@ -116,7 +116,9 @@
           "conference": "Konferens / Möte",
           "teamBuilding": "Teambuilding",
           "corporate": "Företagsevent",
-          "dinner": "Galamiddag",
+          "gala": "Gala",
+          "dinner": "Middag",
+          "christmas": "Julbord",
           "product": "Produktlansering",
           "wedding": "Bröllop",
           "other": "Annat"

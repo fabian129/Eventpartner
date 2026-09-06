@@ -201,8 +201,11 @@ export function CountryPageClient({ country }: { country: Country }) {
                         value={form.eventType} onChange={(e) => update("eventType", e.target.value)}>
                         <option value="">Select type</option>
                         <option>Conference</option>
+                        <option>Corporate Event</option>
                         <option>Kick-off</option>
+                        <option>Gala</option>
                         <option>Dinner</option>
+                        <option>Christmas Dinner</option>
                         <option>Team building</option>
                         <option>Exhibition</option>
                         <option>Other</option>

@@ -237,8 +237,8 @@ export function RequestFormSection({ cms }: { cms?: {
               <select className={inputClass} value={form.eventType} onChange={set('eventType')}>
                 <option value="">{t('fields.eventType.placeholder')}</option>
                 {(locale === 'sv'
-                  ? ["Konferens", "Företagsevent", "Teambuilding", "Produktlansering", "Gala / Middag", "Kickoff", "Annat"]
-                  : ["Conference", "Corporate Event", "Team Building", "Product Launch", "Gala / Dinner", "Kick-off", "Other"]
+                  ? ["Konferens", "Företagsevent", "Teambuilding", "Produktlansering", "Gala", "Middag", "Julbord", "Kickoff", "Annat"]
+                  : ["Conference", "Corporate Event", "Team Building", "Product Launch", "Gala", "Dinner", "Christmas Dinner", "Kick-off", "Other"]
                 ).map((o) => <option key={o}>{o}</option>)}
               </select>
             </div>
