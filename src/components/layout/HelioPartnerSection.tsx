@@ -8,14 +8,13 @@ import { ArrowRight, Building2 } from "lucide-react";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const HELIO_LOCATIONS = [
-  "Hötorget",
-  "GT30 Grev Turegatan",
-  "Hornstull",
-  "Kista",
-  "Slussen",
-  "Sundbyberg",
-  "Kungsholmen",
-  "Malmö",
+  "Helio Sundbyberg",
+  "Helio Slussen",
+  "Helio Slottsbacken",
+  "Helio Hornstull",
+  "Helio Frösundavik",
+  "Helio GT30 Grev Ture",
+  "Helio Stockholm City",
 ];
 
 export function HelioPartnerSection() {
@@ -67,57 +66,28 @@ export function HelioPartnerSection() {
             <h3 className="font-display text-[clamp(1.5rem,3.2vw,2.5rem)] font-medium tracking-tight text-white leading-[1.15] max-w-4xl">
               {sv ? (
                 <>
-                  Alltid minst <span className="text-[#D03834] font-semibold">10% rabatt</span> på konferens, event & möten hos Helios 8 anläggningar via EventPartner.
+                  Alltid minst <span className="text-[#D03834] font-semibold">10% rabatt</span> på konferens, event & möten hos Helios 7 anläggningar via EventPartner.
                 </>
               ) : (
                 <>
-                  Always at least <span className="text-[#D03834] font-semibold">10% discount</span> on conferences, events & meetings across Helio&apos;s 8 venues via EventPartner.
+                  Always at least <span className="text-[#D03834] font-semibold">10% discount</span> on conferences, events & meetings across Helio&apos;s 7 venues via EventPartner.
                 </>
               )}
             </h3>
 
             {/* Bottom row: Locations left, Action rectangle right */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pt-6 md:pt-7 border-t border-white/[0.08]">
-              {/* Locations chips: Inverted pyramid layout (3, 3, 2) */}
-              <div className="flex flex-col gap-2 max-w-2xl">
-                {/* Row 1: 3 locations */}
-                <div className="flex flex-wrap items-center gap-2">
-                  {HELIO_LOCATIONS.slice(0, 3).map((loc) => (
-                    <span
-                      key={loc}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono border border-white/[0.08] bg-white/[0.03] text-white/85"
-                    >
-                      <Building2 className="w-3.5 h-3.5 text-white/60 stroke-[1.5] flex-shrink-0" />
-                      {loc}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Row 2: 3 locations */}
-                <div className="flex flex-wrap items-center gap-2">
-                  {HELIO_LOCATIONS.slice(3, 6).map((loc) => (
-                    <span
-                      key={loc}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono border border-white/[0.08] bg-white/[0.03] text-white/85"
-                    >
-                      <Building2 className="w-3.5 h-3.5 text-white/60 stroke-[1.5] flex-shrink-0" />
-                      {loc}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Row 3: 2 locations */}
-                <div className="flex flex-wrap items-center gap-2">
-                  {HELIO_LOCATIONS.slice(6, 8).map((loc) => (
-                    <span
-                      key={loc}
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono border border-white/[0.08] bg-white/[0.03] text-white/85"
-                    >
-                      <Building2 className="w-3.5 h-3.5 text-white/60 stroke-[1.5] flex-shrink-0" />
-                      {loc}
-                    </span>
-                  ))}
-                </div>
+              {/* Locations chips */}
+              <div className="flex flex-wrap items-center gap-2 max-w-2xl">
+                {HELIO_LOCATIONS.map((loc) => (
+                  <span
+                    key={loc}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono border border-white/[0.08] bg-white/[0.03] text-white/85"
+                  >
+                    <Building2 className="w-3.5 h-3.5 text-white/60 stroke-[1.5] flex-shrink-0" />
+                    {loc}
+                  </span>
+                ))}
               </div>
 
               {/* Action rectangle: Centered in its corner, shifted down 'un dedo' */}
