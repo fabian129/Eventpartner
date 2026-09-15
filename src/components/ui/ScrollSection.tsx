@@ -72,16 +72,16 @@ export function ScrollSection({
       });
     }
 
-    // Steady state: 15% → 80%
-    tl.to(el, { duration: 0.65 });
+    // Steady state: 15% → 92% (keeps section 100% visible while in viewport)
+    tl.to(el, { duration: 0.77 });
 
-    // Exit: 80% → 100%
+    // Exit: 92% → 100% (fade-out only begins when section is leaving the very top of the viewport)
     if (fadeOut) {
       tl.to(el, {
         opacity: exitOpacity,
         y: exitY,
         scale: exitScale,
-        duration: 0.2,
+        duration: 0.08,
         ease: "power2.in",
       });
     }
