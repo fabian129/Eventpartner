@@ -80,13 +80,18 @@ export function HelioPartnerSection() {
               {/* Locations chips */}
               <div className="flex flex-wrap items-center gap-2 max-w-2xl">
                 {HELIO_LOCATIONS.map((loc) => (
-                  <span
+                  <button
                     key={loc}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono border border-white/[0.08] bg-white/[0.03] text-white/85"
+                    type="button"
+                    onClick={() => {
+                      window.dispatchEvent(new CustomEvent("ep:select-partner", { detail: { partner: "helio", venue: loc } }));
+                      document.getElementById("request")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono border border-white/[0.08] bg-white/[0.03] text-white/85 hover:border-[#ED3A33]/50 hover:bg-white/[0.08] hover:text-white transition-all cursor-pointer text-left"
                   >
                     <Building2 className="w-3.5 h-3.5 text-white/60 stroke-[1.5] flex-shrink-0" />
                     {loc}
-                  </span>
+                  </button>
                 ))}
               </div>
 
@@ -94,6 +99,9 @@ export function HelioPartnerSection() {
               <div className="flex-shrink-0 flex items-center translate-y-3">
                 <a
                   href="#request"
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent("ep:select-partner", { detail: { partner: "helio" } }));
+                  }}
                   className="group inline-flex items-center gap-3.5 px-5 py-3.5 rounded-xl border border-white/20 hover:border-[#ED3A33] active:border-[#ED3A33] bg-gradient-to-b from-white/[0.12] via-white/[0.05] to-white/[0.02] hover:from-white/[0.15] hover:to-white/[0.04] backdrop-blur-xl shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.35)] hover:shadow-[0_0_24px_rgba(237,58,51,0.35),inset_0_1px_1px_0_rgba(237,58,51,0.3)] active:scale-[0.98] transition-all duration-300"
                 >
                   <div className="inline-flex items-center">

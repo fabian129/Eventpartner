@@ -7,7 +7,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Send, CheckCircle, ArrowRight, ExternalLink, Calendar, Loader2, Clock } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import Link from "next/link";
@@ -47,6 +47,30 @@ export function RequestFormSection({ cms }: { cms?: {
     dateFrom: '', dateTo: '', dateMonth: '',
     budget: '', message: '',
   });
+  const [partner, setPartner] = useState<{ name: string; venue?: string } | null>(null);
+
+  useEffect(() => {
+    const handlePartner = (e: Event) => {
+      const detail = (e as CustomEvent<{ partner: string; venue?: string }>).detail;
+      if (detail && detail.partner === 'helio') {
+        setPartner({ name: 'Helio', venue: detail.venue });
+        setForm(prev => ({
+          ...prev,
+          country: prev.country || (sv ? 'Sverige' : 'Sweden'),
+          city: detail.venue || prev.city,
+        }));
+      }
+    };
+    window.addEventListener('ep:select-partner', handlePartner);
+
+    if (typeof window !== 'undefined') {
+      if (window.location.hash.includes('partner=helio') || window.location.search.includes('partner=helio')) {
+        handlePartner(new CustomEvent('ep:select-partner', { detail: { partner: 'helio' } }));
+      }
+    }
+
+    return () => window.removeEventListener('ep:select-partner', handlePartner);
+  }, [sv]);
 
   const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setForm(prev => ({ ...prev, [field]: e.target.value }));
@@ -56,8 +80,8 @@ export function RequestFormSection({ cms }: { cms?: {
     setLoading(true);
     setError('');
 
-    if (form.guests && parseInt(form.guests, 10) < 50) {
-      setError(sv ? 'Minsta antal deltagare är 50.' : 'Minimum number of guests is 50.');
+    if (form.guests && parseInt(form.guests, 10) < 1) {
+      setError(sv ? 'Minsta antal deltagare är 1.' : 'Minimum number of guests is 1.');
       setLoading(false);
       return;
     }
@@ -89,6 +113,8 @@ export function RequestFormSection({ cms }: { cms?: {
         body: JSON.stringify({
           type: 'event-inquiry',
           locale,
+          partner: partner?.name,
+          partnerVenue: partner?.venue || (partner?.name === 'Helio' ? form.city : undefined),
           company: form.company,
           contact: form.contact,
           email: form.email,
@@ -198,6 +224,42 @@ export function RequestFormSection({ cms }: { cms?: {
             ))}
           </div>
 
+          {/* Helio Partner Banner */}
+          {partner && partner.name === 'Helio' && (
+            <div className="mb-6 p-4 md:p-5 rounded-2xl border border-[#ED3A33]/40 bg-[#ED3A33]/[0.08] backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_4px_20px_rgba(237,58,51,0.12)]">
+              <div className="flex items-start sm:items-center gap-3.5">
+                <div className="w-8 h-8 rounded-lg bg-[#ED3A33] flex items-center justify-center text-white shrink-0 font-bold text-xs shadow-[0_0_12px_rgba(237,58,51,0.5)]">
+                  H
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#FF6666] font-semibold">
+                      {sv ? "Helio Partneravtal aktiverat" : "Helio Partner Agreement Active"}
+                    </span>
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#ED3A33]/25 text-white border border-[#ED3A33]/30">
+                      -10%
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-[13px] text-[var(--text-muted)] mt-0.5">
+                    {sv
+                      ? `Garanterat minst 10% rabatt hos Helios 7 anläggningar.${partner.venue ? ` Förvald anläggning: ${partner.venue}.` : ''}`
+                      : `Guaranteed at least 10% discount across Helio's 7 venues.${partner.venue ? ` Selected venue: ${partner.venue}.` : ''}`}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setPartner(null);
+                  setForm(prev => ({ ...prev, city: '' }));
+                }}
+                className="self-end sm:self-center text-xs font-mono text-[var(--text-dim)] hover:text-[var(--text-primary)] transition-colors underline cursor-pointer"
+              >
+                {sv ? "Återställ" : "Reset"}
+              </button>
+            </div>
+          )}
+
           {/* Form fields — Row 1: Contact info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
             <div>
@@ -225,8 +287,27 @@ export function RequestFormSection({ cms }: { cms?: {
               <input type="text" placeholder={t('fields.location.placeholder')} required className={inputClass} value={form.country} onChange={set('country')} />
             </div>
             <div>
-              <label className={labelClass}>{t('fields.city.label')}</label>
-              <input type="text" placeholder={t('fields.city.placeholder')} className={inputClass} value={form.city} onChange={set('city')} />
+              <label className={labelClass}>{partner?.name === 'Helio' ? (sv ? "Helio anläggning" : "Helio Venue") : t('fields.city.label')}</label>
+              {partner?.name === 'Helio' ? (
+                <select
+                  className={inputClass}
+                  value={form.city}
+                  onChange={set('city')}
+                >
+                  <option value="">{sv ? "Välj anläggning (valfritt)" : "Select venue (optional)"}</option>
+                  {[
+                    "Helio Sundbyberg",
+                    "Helio Slussen",
+                    "Helio Slottsbacken",
+                    "Helio Hornstull",
+                    "Helio Frösundavik",
+                    "Helio GT30 Grev Ture",
+                    "Helio Stockholm City",
+                  ].map(v => <option key={v} value={v}>{v}</option>)}
+                </select>
+              ) : (
+                <input type="text" placeholder={t('fields.city.placeholder')} className={inputClass} value={form.city} onChange={set('city')} />
+              )}
             </div>
           </div>
 
@@ -246,8 +327,8 @@ export function RequestFormSection({ cms }: { cms?: {
               <label className={labelClass}>{t('fields.guests.label')}{requiredStar}</label>
               <input
                 type="number"
-                placeholder={locale === 'sv' ? 'Ange exakt antal (minst 50)' : 'Enter exact number (min 50)'}
-                min={50}
+                placeholder={locale === 'sv' ? 'Ange exakt antal' : 'Enter exact number'}
+                min={1}
                 required
                 className={inputClass}
                 value={form.guests}

@@ -61,16 +61,16 @@ export async function POST(req: NextRequest) {
 
 /* ── Event Inquiry Form ── */
 async function handleEventInquiry(data: Record<string, any>) {
-  const { company, contact, email, phone, country, city, eventType, guests, date, budget, responseTime, message, locale } = data;
+  const { company, contact, email, phone, country, city, eventType, guests, date, budget, responseTime, message, locale, partner, partnerVenue } = data;
 
   // Validation
   if (!company || !contact || !email || !phone || !country || !guests) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
-  if (parseInt(guests) < 50) {
+  if (parseInt(guests) < 1) {
     return NextResponse.json(
-      { error: locale === 'sv' ? 'Minsta antal deltagare är 50.' : 'Minimum number of guests is 50.' },
+      { error: locale === 'sv' ? 'Minsta antal deltagare är 1.' : 'Minimum number of guests is 1.' },
       { status: 400 }
     );
   }
@@ -117,7 +117,9 @@ async function handleEventInquiry(data: Record<string, any>) {
     from: FROM_EMAIL,
     to: TO_EMAILS,
     replyTo: email,
-    subject: `🎯 New Event Inquiry — ${esc(company)}`,
+    subject: partner
+      ? `🎯 New Event Inquiry [${esc(partner)} Partner 10%] — ${esc(company)}`
+      : `🎯 New Event Inquiry — ${esc(company)}`,
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <div style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px;">
@@ -126,6 +128,12 @@ async function handleEventInquiry(data: Record<string, any>) {
         </div>
 
         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          ${partner ? `
+          <tr style="border-bottom: 2px solid #ED3A33; background: #fff5f5;">
+            <td style="padding: 12px 8px; color: #ED3A33; font-weight: 700; width: 140px;">Partneravtal</td>
+            <td style="padding: 12px 8px; font-weight: 700; color: #ED3A33;">${esc(partner)} (minst 10% rabatt)${partnerVenue ? ` — ${esc(partnerVenue)}` : ''}</td>
+          </tr>
+          ` : ''}
           <tr style="border-bottom: 1px solid #eee;">
             <td style="padding: 12px 0; color: #666; width: 140px;">Company</td>
             <td style="padding: 12px 0; font-weight: 600;">${esc(company)}</td>
@@ -632,9 +640,9 @@ async function handleDetailedInquiry(data: Record<string, any>) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
-  if (parseInt(guests) < 50) {
+  if (parseInt(guests) < 1) {
     return NextResponse.json(
-      { error: locale === 'sv' ? 'Minsta antal deltagare är 50.' : 'Minimum number of guests is 50.' },
+      { error: locale === 'sv' ? 'Minsta antal deltagare är 1.' : 'Minimum number of guests is 1.' },
       { status: 400 }
     );
   }

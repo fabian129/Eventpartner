@@ -189,6 +189,7 @@ export function CountryPageClient({ country }: { country: Country }) {
                       <select className={inputClass} required
                         value={form.guests} onChange={(e) => update("guests", e.target.value)}>
                         <option value="">Select</option>
+                        <option>1-50</option>
                         <option>50-100</option>
                         <option>100-300</option>
                         <option>300-1000</option>

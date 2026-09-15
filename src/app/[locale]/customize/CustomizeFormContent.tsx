@@ -114,8 +114,8 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
     setLoading(true);
     setError("");
 
-    if (form.guests && parseInt(form.guests, 10) < 50) {
-      setError(sv ? 'Minsta antal deltagare är 50.' : 'Minimum number of guests is 50.');
+    if (form.guests && parseInt(form.guests, 10) < 1) {
+      setError(sv ? 'Minsta antal deltagare är 1.' : 'Minimum number of guests is 1.');
       setLoading(false);
       return;
     }
@@ -256,7 +256,7 @@ export function CustomizeFormContent({ cms }: { cms?: CustomizeCMS }) {
                   {eventTypes.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
-              <div><label className={labelClass}>{sv ? "Antal gäster" : "Number of guests"}{star}</label><input type="number" placeholder={sv ? "Ange exakt antal (minst 50)" : "Enter exact number (min 50)"} min={50} required className={inputClass} value={form.guests} onChange={set('guests')} /></div>
+              <div><label className={labelClass}>{sv ? "Antal gäster" : "Number of guests"}{star}</label><input type="number" placeholder={sv ? "Ange exakt antal" : "Enter exact number"} min={1} required className={inputClass} value={form.guests} onChange={set('guests')} /></div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               <div><label className={labelClass}>{sv ? "Startdatum" : "Start date"}{star}</label><input type="date" min={new Date().toISOString().split('T')[0]} required className={inputClass} value={form.startDate} onChange={set('startDate')} /></div>
