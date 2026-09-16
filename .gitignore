@@ -56,3 +56,6 @@ gmail_att_mob.json
 MALIN_FEEDBACK_PLAN.md
 .pontus_img/
 gmail_pontus.json
+node_modules
+.next
+.zaitex-arbetslas

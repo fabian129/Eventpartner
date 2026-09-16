@@ -1,7 +1,20 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
+import { NextRequest, NextResponse } from "next/server";
 
-export default createMiddleware(routing);
+const handleI18n = createMiddleware(routing);
+
+export default function middleware(request: NextRequest) {
+  const host = request.headers.get("host") || "";
+  if (host.startsWith("www.eventpartner.io")) {
+    const url = request.nextUrl.clone();
+    url.host = "eventpartner.io";
+    url.protocol = "https";
+    return NextResponse.redirect(url, 301);
+  }
+
+  return handleI18n(request);
+}
 
 export const config = {
   // Match all pathnames except:
