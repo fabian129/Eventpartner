@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cvent Packages for Venues</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050608;
+    --bg-panel:#0B0D12;
+    --bg-panel-2:#0F1218;
+    --line: rgba(243,245,247,0.10);
+    --line-strong: rgba(243,245,247,0.18);
+    --white:#F3F5F7;
+    --muted:#8B93A6;
+    --muted-dim:#5B6172;
+    --cyan:#22E6EF;
+    --cyan-dim:#0E8A91;
+    --violet:#5B3EE8;
+    --cyan-glow:#0076AA;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Quicksand', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:var(--white);
+    text-wrap:balance;
+  }
+  em{font-style:italic;color:var(--cyan);}
+  .mono{
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-size:0.7rem;
+    color:var(--muted);
+  }
+  a{color:inherit;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;position:relative;z-index:2;}
+  .glow{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:0;}
+  .glow-violet{background:var(--violet);opacity:0.35;}
+  .glow-cyan{background:var(--cyan-glow);opacity:0.35;}
+  /* ---------- LOGO ---------- */
+  .logo{display:flex;align-items:center;gap:11px;}
+  .logo svg{display:block;flex-shrink:0;}
+  .logo-text{font-family:'Quicksand',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:0.02em;}
+  .logo-text span{color:var(--cyan);}
+  .logo-tag{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted-dim);display:block;margin-top:1px;}
+  /* ---------- NAV ---------- */
+  nav.top{
+    position:sticky;top:0;z-index:50;
+    background:rgba(5,6,8,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px;gap:16px;flex-wrap:wrap;}
+  .nav-right{display:flex;align-items:center;gap:16px;}
+  .lang-switch{
+    display:flex;align-items:center;gap:7px;
+    border:1px solid var(--line-strong);border-radius:20px;
+    padding:5px 9px;background:var(--bg-panel);
+  }
+  .lang-btn{
+    display:block;position:relative;
+    width:24px;height:17px;padding:0;
+    background:none;border:none;cursor:pointer;
+    border-radius:3px;overflow:hidden;
+    opacity:0.42;filter:grayscale(85%) brightness(0.9);
+    transition:opacity .18s ease, filter .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+  .lang-btn svg{display:block;width:100%;height:100%;}
+  .lang-btn:hover{opacity:0.75;filter:grayscale(30%);}
+  .lang-btn[aria-pressed="true"]{
+    opacity:1;filter:none;transform:translateY(-1px);
+    box-shadow:0 0 0 1.5px var(--cyan), 0 0 10px rgba(34,230,239,0.35);
+  }
+  .nav-cta{
+    background:var(--cyan);color:#04191B;
+    padding:10px 20px;border-radius:var(--radius);
+    font-size:0.85rem;font-weight:600;text-decoration:none;
+    border:1px solid var(--cyan);
+    transition:opacity .15s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{opacity:0.85;}
+  .cobrand-badge{
+    display:flex;align-items:center;gap:11px;
+    background:#FFFFFF;border-radius:9px;
+    padding:6px 13px;
+    box-shadow:0 4px 14px -6px rgba(0,0,0,0.4);
+  }
+  .cobrand-badge img{display:block;width:auto;}
+  .cobrand-badge .cobrand-divider{width:1px;align-self:stretch;background:#D8DBDF;border-radius:1px;}
+  .cobrand-badge .cobrand-cvent{height:14px;}
+  .cobrand-badge .cobrand-ep{height:28px;}
+  .cobrand-badge--footer{padding:8px 17px;gap:14px;}
+  .cobrand-badge--footer .cobrand-cvent{height:18px;}
+  .cobrand-badge--footer .cobrand-ep{height:36px;}
+  @media (max-width: 620px){
+    .cobrand-badge{display:none;}
+  }
+  /* ---------- HERO ---------- */
+  header.hero{position:relative;overflow:hidden;padding:100px 0 70px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;}
+  .finder-card{
+    position:relative;
+    aspect-ratio:16/11;
+    border-radius:var(--radius);
+    border:1px solid var(--line-strong);
+    background:var(--bg-panel);
+    overflow:hidden;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    text-decoration:none;
+    padding:24px;
+    text-align:center;
+  }
+  .finder-card::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:28px 28px;opacity:0.5;
+  }
+  .finder-card::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(34,230,239,0.14), transparent 55%),
+      radial-gradient(circle at 75% 75%, rgba(91,62,232,0.18), transparent 55%);
+  }
+  .finder-card:hover{border-color:var(--cyan-dim);}
+  .finder-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:transparent;}
+  .finder-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg, rgba(5,6,8,0.62) 0%, rgba(5,6,8,0.05) 34%, rgba(5,6,8,0.05) 56%, rgba(5,6,8,0.8) 100%);}
+  .finder-play-hint{position:relative;z-index:1;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-strong);background:rgba(5,6,8,0.5);display:flex;align-items:center;justify-content:center;color:var(--cyan);opacity:0.9;}
+  .finder-mute-btn{position:absolute;z-index:2;bottom:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line-strong);background:rgba(5,6,8,0.65);backdrop-filter:blur(4px);color:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:border-color .15s ease, color .15s ease;}
+  .finder-mute-btn:hover, .finder-mute-btn:focus-visible{border-color:var(--cyan);color:var(--cyan);outline:none;}
+  .finder-mute-btn[hidden]{display:none;}
+  .finder-card .finder-badge, .finder-card .finder-cta{position:relative;z-index:1;}
+  .finder-card .finder-badge{align-self:flex-start;}
+  .finder-badge{
+    position:relative;z-index:1;
+    font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--cyan);border:1px solid var(--cyan-dim);padding:4px 9px;border-radius:20px;
+    background:rgba(5,6,8,0.6);backdrop-filter:blur(4px);
+  }
+  .finder-number{
+    position:relative;z-index:1;
+    font-family:'Quicksand',sans-serif;font-weight:700;font-size:3.6rem;color:var(--white);line-height:1;
+  }
+  .finder-label{position:relative;z-index:1;max-width:26ch;color:var(--muted);font-size:0.92rem;}
+  .finder-cta{position:relative;z-index:1;font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--cyan);}
+  .glow-violet.g1{width:520px;height:520px;top:-220px;right:-140px;}
+  .glow-cyan.g2{width:460px;height:460px;bottom:-260px;left:-160px;}
+  .eyebrow{color:var(--cyan);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--cyan);display:inline-block;}
+  h1.headline{font-size:clamp(2.5rem,5.2vw,4.1rem);max-width:16ch;line-height:1.1;font-weight:600;}
+  .hero-sub{max-width:50ch;margin-top:26px;font-size:1.08rem;color:var(--muted);}
+  .hero-actions{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--cyan);color:#04191B;padding:15px 26px;border-radius:var(--radius);
+    text-decoration:none;font-weight:700;font-size:0.95rem;border:1px solid var(--cyan);
+    transition:transform .15s ease, opacity .15s ease;display:inline-block;
+  }
+  .btn-primary:hover{transform:translateY(-1px);opacity:0.92;}
+  .btn-ghost{
+    padding:15px 22px;border-radius:var(--radius);text-decoration:none;font-weight:500;font-size:0.95rem;
+    border:1px solid var(--line-strong);color:var(--white);display:inline-block;
+  }
+  .btn-ghost:hover{border-color:var(--cyan);}
+  .btn-cal{display:inline-flex;align-items:center;gap:9px;color:var(--white);}
+  .btn-cal svg{flex-shrink:0;color:var(--muted);}
+  .btn-cal:hover svg{color:var(--cyan);}
+  .book-link{
+    display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+    font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--cyan);text-decoration:none;
+  }
+  .book-link:hover{text-decoration:underline;}
+  .proof-strip{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:76px;
+    background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  }
+  .proof-strip div{background:var(--bg-panel);padding:22px 24px;}
+  .proof-strip b{font-family:'Space Mono',monospace;font-size:1.5rem;color:var(--cyan);display:block;}
+  .proof-strip span{font-size:0.8rem;color:var(--muted);display:block;margin-top:4px;}
+  /* ---------- TRUST LOGOS ---------- */
+  section.trust{background:var(--bg);border-top:1px solid var(--line);padding:70px 0;}
+  .trust-lead{max-width:66ch;margin:0 auto 46px;text-align:center;color:var(--muted);font-size:1.22rem;line-height:1.65;}
+  .trust-lead b{color:var(--white);}
+  .logo-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:14px;}
+  .logo-item{
+    background:#FFFFFF;border-radius:12px;
+    width:150px;height:92px;padding:16px 20px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 0 rgba(255,255,255,0.04) inset, 0 8px 20px -12px rgba(0,0,0,0.6);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .logo-item img{
+    max-width:100%;max-height:100%;width:auto;height:auto;
+    display:block;object-fit:contain;
+    filter:grayscale(100%);opacity:0.82;
+    transition:filter .18s ease, opacity .18s ease;
+  }
+  .logo-item:hover{transform:translateY(-3px);box-shadow:0 1px 0 rgba(255,255,255,0.04) inset, 0 14px 28px -12px rgba(34,230,239,0.28);}
+  .logo-item:hover img{filter:grayscale(0%);opacity:1;}
+  @media (max-width:560px){.logo-item{width:120px;height:78px;padding:12px 16px;}}
+  /* ---------- STAT BAND ---------- */
+  section.stat-band{
+    position:relative;padding:100px 0;background:var(--bg-panel);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center;overflow:hidden;
+  }
+  section.stat-band p{
+    font-family:'Space Mono',monospace;font-size:clamp(1.1rem,2.4vw,1.55rem);line-height:1.55;
+    max-width:800px;margin:0 auto;color:var(--muted);
+  }
+  section.stat-band p b{color:var(--white);font-weight:700;}
+  section.stat-band .mono{display:block;margin-bottom:24px;text-align:center;color:var(--cyan-dim);}
+  section.stat-band .mono::before{display:none;}
+  /* ---------- BEAT / COMPETITOR STAT ---------- */
+  section.beatstat{background:var(--bg-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-top:56px;}
+  .beatstat .section-head{margin:0 auto 44px;text-align:center;max-width:840px;}
+  .beatstat .section-head h2{font-size:clamp(1.5rem,2.7vw,2.05rem);line-height:1.35;}
+  .beatstat .section-head h2 em{color:var(--cyan);font-style:normal;}
+  .beat-grid{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:22px;}
+  .beat-box{border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--bg);padding:32px 26px;text-align:center;}
+  .beat-box--lead{border-color:var(--cyan-dim);background:linear-gradient(160deg, rgba(34,230,239,0.08), transparent 55%),var(--bg);}
+  .beat-box-label{display:block;font-family:'Space Mono',monospace;font-size:0.64rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-dim);margin-bottom:20px;}
+  .beat-box-num{display:block;font-family:'Quicksand',sans-serif;font-weight:700;font-size:clamp(2rem,4.3vw,2.9rem);color:var(--cyan);line-height:1;}
+  .beat-box-num small{font-size:0.42em;font-weight:600;letter-spacing:0.02em;margin-left:4px;}
+  .beat-box-desc{display:block;color:var(--white);margin-top:14px;font-size:0.96rem;line-height:1.4;}
+  .beat-box-period{display:block;font-family:'Space Mono',monospace;font-size:0.86rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--cyan-dim);margin-top:18px;padding-top:14px;border-top:1px solid var(--line);}
+  .beat-vs{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-weight:700;color:var(--cyan);font-size:1.9rem;letter-spacing:0.03em;}
+  .beat-vs-squiggle{width:52px;height:14px;overflow:visible;color:var(--cyan);flex-shrink:0;}
+  .beat-vs-squiggle path{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:100;stroke-dashoffset:100;animation:beatVsDraw 2.8s ease-in-out infinite;}
+  @keyframes beatVsDraw{
+    0%{stroke-dashoffset:100;opacity:0.3;}
+    42%{stroke-dashoffset:0;opacity:1;}
+    72%{stroke-dashoffset:0;opacity:1;}
+    100%{stroke-dashoffset:-100;opacity:0.3;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .beat-vs-squiggle path{animation:none;stroke-dashoffset:0;opacity:0.9;}
+  }
+  .beat-competitors{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:var(--radius);margin-top:26px;overflow:hidden;}
+  .beat-comp{flex:1 1 160px;padding:20px 16px;border-right:1px solid var(--line);border-top:1px solid var(--line);text-align:center;margin-top:-1px;}
+  .beat-comp:first-child{border-top:none;}
+  .beat-comp:last-child{border-right:none;}
+  .beat-comp-name{display:block;font-weight:600;font-size:0.82rem;color:var(--white);margin-bottom:8px;}
+  .beat-comp-logo{display:block;height:26px;width:auto;max-width:100%;margin:0 auto 10px;object-fit:contain;opacity:0.92;}
+  .beat-comp-num{display:block;font-family:'Space Mono',monospace;color:var(--cyan-dim);font-size:0.88rem;}
+  .beat-source{font-size:0.72rem;color:var(--muted-dim);text-align:center;margin-top:22px;font-style:italic;}
+  @media (max-width:760px){
+    .beat-grid{grid-template-columns:1fr;}
+    .beat-vs{padding:2px 0;}
+    .beat-comp{flex:1 1 45%;border-top:1px solid var(--line);}
+    .beat-comp:nth-child(2n){border-right:none;}
+  }
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:100px 0;position:relative;}
+  .section-head{max-width:60ch;margin-bottom:56px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head .mono{color:var(--cyan);margin-bottom:14px;display:block;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem);}
+  .section-head p{color:var(--muted);margin-top:14px;font-size:1.02rem;}
+  /* ---------- PAIN / DOT GRID ---------- */
+  section.pain{background:var(--bg);}
+  .pain-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .pain-copy h2{font-size:clamp(1.8rem,3.4vw,2.5rem);line-height:1.18;}
+  .pain-copy p{color:var(--muted);margin-top:20px;font-size:1rem;max-width:46ch;}
+  .dotgrid{display:grid;grid-template-columns:repeat(10,1fr);gap:9px;}
+  .dotgrid .dot{width:100%;aspect-ratio:1;border-radius:3px;background:var(--line-strong);}
+  .dotgrid .dot.lit{background:var(--cyan);}
+  .dotgrid .dot.dot-diamond{background-size:cover;background-position:center;box-shadow:0 0 0 2px rgba(34,230,239,0.55);}
+  /* ---------- PROCESS ---------- */
+  section.process{background:var(--bg-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .process-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line);}
+  .process-list li{display:grid;grid-template-columns:70px 1fr;gap:24px;padding:30px 0;border-bottom:1px solid var(--line);align-items:start;}
+  .process-list .num{font-family:'Space Mono',monospace;color:var(--cyan);font-size:0.95rem;padding-top:4px;}
+  .process-list h3{font-size:1.25rem;margin-bottom:8px;font-weight:600;}
+  .process-list p{color:var(--muted);margin:0;max-width:58ch;}
+  /* ---------- QUICK COMPARE TILES ---------- */
+  section.tiles{background:var(--bg);}
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .cat-tile{
+    border-radius:var(--radius);border:1px solid var(--line);padding:26px 22px;min-height:150px;
+    display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;
+  }
+  .cat-tile::before{content:"";position:absolute;inset:0;opacity:0.55;}
+  .cat-tile .mono{position:relative;z-index:1;color:var(--cyan-dim);margin-bottom:8px;}
+  .cat-tile h3{font-size:1.15rem;font-weight:600;position:relative;z-index:1;}
+  .cat-tile span.desc{font-size:0.82rem;color:var(--muted);position:relative;z-index:1;margin-top:4px;display:block;}
+  .cat-tile .pop{position:absolute;top:16px;right:16px;z-index:1;font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--cyan-dim);padding:3px 8px;border-radius:20px;background:rgba(5,6,8,0.6);}
+  .cat-tile.c1::before{background:radial-gradient(circle at 30% 20%, rgba(34,230,239,0.22), transparent 60%);}
+  .cat-tile.c2::before{background:radial-gradient(circle at 70% 30%, rgba(91,62,232,0.26), transparent 60%);}
+  .cat-tile.c3::before{background:radial-gradient(circle at 30% 80%, rgba(0,118,170,0.32), transparent 60%);}
+  .cat-tile.c4::before{background:radial-gradient(circle at 70% 70%, rgba(34,230,239,0.22), transparent 60%);}
+  .cat-tile.c5{grid-column:span 4;min-height:110px;flex-direction:row;align-items:center;justify-content:space-between;}
+  .cat-tile.c5::before{background:radial-gradient(circle at 50% 50%, rgba(91,62,232,0.24), transparent 70%);}
+  /* ---------- PACKAGES ---------- */
+  section.packages{background:var(--bg-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch;}
+  .price-card{
+    background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 26px;display:flex;flex-direction:column;position:relative;
+  }
+  .price-card.featured{border-color:var(--cyan-dim);background:linear-gradient(160deg, rgba(34,230,239,0.06), transparent 55%),var(--bg);}
+  .price-card .pop{
+    position:absolute;top:-11px;left:26px;
+    font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;
+    color:#04191B;background:var(--cyan);padding:4px 10px;border-radius:20px;font-weight:700;
+  }
+  .price-card .tier-mono{color:var(--cyan-dim);margin-bottom:10px;}
+  .price-card h3{font-size:1.3rem;margin-bottom:6px;}
+  .price-card .promise{font-style:italic;color:var(--cyan);font-size:0.95rem;margin-bottom:16px;}
+  .price-card .story{color:var(--muted);font-size:0.9rem;margin-bottom:22px;flex-grow:0;}
+  .price-card ul{list-style:none;margin:0 0 24px;padding:0;flex-grow:1;}
+  .price-card li{
+    display:flex;gap:9px;align-items:flex-start;font-size:0.86rem;color:var(--white);
+    padding:9px 0;border-top:1px solid var(--line);
+  }
+  .price-card li:first-child{border-top:none;}
+  .price-card li::before{content:"✓";color:var(--cyan);font-weight:700;flex-shrink:0;}
+  .price-card .btn-ghost{text-align:center;width:100%;padding:13px 20px;font-size:0.88rem;}
+  .price-card.featured .btn-ghost{background:var(--cyan);color:#04191B;border-color:var(--cyan);font-weight:700;}
+  /* ---------- COMPARE TABLE ---------- */
+  section.compare{background:var(--bg);}
+  .compare-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);}
+  @media (min-width:760px){.compare-wrap{overflow:visible;}}
+  table.compare-table{width:100%;border-collapse:collapse;min-width:720px;font-size:0.86rem;}
+  table.compare-table th,table.compare-table td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);}
+  table.compare-table thead th{
+    font-family:'Space Mono',monospace;font-size:0.66rem;text-transform:uppercase;letter-spacing:0.06em;
+    color:var(--muted);background:var(--bg-panel);white-space:nowrap;
+  }
+  table.compare-table thead th:first-child{color:var(--white);}
+  table.compare-table tbody th{font-weight:500;color:var(--white);font-size:0.86rem;position:relative;}
+  table.compare-table td{text-align:center;color:var(--muted-dim);}
+  table.compare-table td.yes{color:var(--cyan);font-weight:700;}
+  table.compare-table tbody tr:last-child th, table.compare-table tbody tr:last-child td{border-bottom:none;}
+  /* ---------- INFO POPUP ---------- */
+  .info-ico{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:16px;height:16px;border-radius:50%;flex-shrink:0;
+    border:1px solid var(--muted-dim);color:var(--muted);background:transparent;padding:0;
+    font-family:'Space Mono',monospace;font-size:0.6rem;font-style:italic;font-weight:700;
+    margin-left:7px;position:relative;cursor:pointer;vertical-align:middle;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .info-ico:hover, .info-ico:focus-visible{border-color:var(--cyan);color:var(--cyan);background:rgba(34,230,239,0.08);outline:none;}
+  .info-modal-overlay{
+    position:fixed;inset:0;background:rgba(5,6,8,0.72);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;padding:24px;
+    z-index:200;opacity:0;visibility:hidden;transition:opacity .2s ease, visibility .2s ease;
+  }
+  .info-modal-overlay.open{opacity:1;visibility:visible;}
+  .info-modal{
+    position:relative;width:100%;max-width:700px;max-height:min(800px,88vh);overflow-y:auto;
+    background:var(--bg-panel-2);border:1px solid var(--line-strong);border-radius:16px;
+    padding:32px 30px 30px;box-shadow:0 30px 70px -20px rgba(0,0,0,0.75);
+    transform:translateY(14px) scale(0.98);transition:transform .22s cubic-bezier(.2,.8,.3,1);
+  }
+  .info-modal.has-img{
+    max-width:min(94vw,1700px);max-height:88vh;overflow:hidden;padding-top:44px;
+    display:flex;align-items:stretch;gap:28px;
+  }
+  .info-modal-overlay.open .info-modal{transform:translateY(0) scale(1);}
+  .info-modal-close{
+    position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;
+    border:1px solid var(--line-strong);background:var(--bg-panel);color:var(--muted);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;line-height:1;
+    z-index:1;transition:border-color .15s ease, color .15s ease;
+  }
+  .info-modal-close:hover, .info-modal-close:focus-visible{border-color:var(--cyan);color:var(--cyan);outline:none;}
+  .info-modal-text{min-width:0;}
+  .info-modal.has-img .info-modal-text{flex:0 0 320px;max-width:320px;max-height:calc(88vh - 74px);overflow-y:auto;padding-right:4px;}
+  .info-modal-media{min-width:0;}
+  .info-modal.has-img .info-modal-media{flex:1 1 auto;display:flex;align-items:flex-start;justify-content:center;min-width:0;}
+  .info-modal-img{width:auto;max-width:100%;height:auto;border-radius:10px;margin:0 auto 20px;display:block;border:1px solid var(--line);}
+  .info-modal.has-img .info-modal-img{max-height:calc(88vh - 110px);object-fit:contain;margin:0;}
+  .info-modal-img[hidden]{display:none;}
+  .info-modal-title{font-family:'Quicksand',sans-serif;font-weight:700;font-size:1.35rem;line-height:1.3;color:var(--white);margin:0 0 14px;padding-right:30px;}
+  .info-modal-body{font-family:'Inter',sans-serif;font-size:0.98rem;line-height:1.65;color:var(--muted);}
+  .info-modal-body p{margin:0 0 12px;}
+  .info-modal-body p:last-child{margin-bottom:0;}
+  @media (max-width:520px){
+    .info-modal{padding:26px 20px 24px;border-radius:14px;}
+    .info-modal-title{font-size:1.18rem;}
+  }
+  @media (max-width:760px){
+    .info-modal.has-img{
+      flex-direction:column;max-width:min(94vw,560px);max-height:88vh;overflow-y:auto;
+      padding:32px 30px 30px;gap:0;
+    }
+    .info-modal.has-img .info-modal-media{order:-1;margin-bottom:20px;max-height:none;}
+    .info-modal.has-img .info-modal-text{flex:0 0 auto;max-width:100%;max-height:none;overflow:visible;padding-right:0;}
+    .info-modal.has-img .info-modal-img{max-height:60vh;width:100%;}
+  }
+  /* ---------- MATCH BANNER ---------- */
+  section.match{background:var(--bg-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .match-shell{
+    display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;
+    border:1px solid var(--line-strong);border-radius:var(--radius);padding:36px 40px;
+    background:linear-gradient(120deg, rgba(91,62,232,0.14), transparent 60%);
+  }
+  .match-shell h3{font-size:1.4rem;margin-bottom:8px;}
+  .match-shell p{color:var(--muted);max-width:52ch;margin:0;font-size:0.95rem;}
+  .match-badge{font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--violet);border:1px solid rgba(91,62,232,0.5);padding:5px 10px;border-radius:20px;text-transform:uppercase;margin-bottom:14px;display:inline-block;}
+  /* ---------- FORM ---------- */
+  section.capture{background:var(--bg);}
+  .capture-shell{border:1px solid var(--line);border-radius:var(--radius);display:grid;grid-template-columns:0.85fr 1.15fr;overflow:hidden;background:var(--bg-panel);}
+  .capture-info{padding:52px 44px;border-right:1px solid var(--line);}
+  .capture-info h2{font-size:1.7rem;margin-bottom:16px;}
+  .capture-info p{color:var(--muted);margin-bottom:32px;}
+  .mini-stats{display:flex;gap:28px;margin-bottom:32px;}
+  .mini-stats div b{font-family:'Space Mono',monospace;color:var(--cyan);font-size:1.3rem;display:block;}
+  .mini-stats div span{font-size:0.75rem;color:var(--muted);}
+  .capture-info ul{list-style:none;padding:0;margin:0;}
+  .capture-info li{display:flex;align-items:flex-start;gap:10px;padding:9px 0;font-size:0.88rem;color:var(--muted);}
+  .capture-info li .check-ico{flex:0 0 auto;color:var(--cyan);margin-top:1px;}
+  form{padding:52px 44px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:0.75rem;color:var(--muted);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;}
+  .field input, .field select, .field textarea{
+    width:100%;padding:12px 14px;border:1px solid var(--line-strong);border-radius:6px;
+    font-family:'Inter',sans-serif;font-size:0.92rem;color:var(--white);background:var(--bg-panel-2);
+  }
+  .field input::placeholder, .field textarea::placeholder{color:var(--muted-dim);}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--cyan);outline-offset:1px;border-color:var(--cyan);}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .field-row.three{grid-template-columns:1fr 1fr 1fr;}
+  .headroom-box{margin-bottom:16px;padding:16px 18px;border:1px solid var(--cyan-dim);border-radius:var(--radius);background:rgba(34,230,239,0.06);}
+  .headroom-label-row{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+  .headroom-label{font-size:0.75rem;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;}
+  .info-dot{display:inline-flex;color:var(--muted);}
+  .headroom-desc{font-size:0.82rem;color:var(--muted);margin:0 0 14px;line-height:1.45;}
+  .headroom-btns{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;}
+  .headroom-btn{padding:10px 2px;border:1px solid var(--line-strong);border-radius:6px;background:var(--bg-panel-2);color:var(--white);font-family:'Inter',sans-serif;font-size:0.76rem;font-weight:600;cursor:pointer;transition:all .15s ease;text-align:center;white-space:nowrap;}
+  .headroom-btn:hover{border-color:var(--cyan);}
+  .headroom-btn.active{background:rgba(34,230,239,0.14);border-color:var(--cyan);color:var(--cyan);}
+  .submit-btn{
+    width:100%;padding:15px;background:var(--cyan);color:#04191B;border:none;border-radius:8px;
+    font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:8px;transition:opacity .15s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .submit-btn:hover{opacity:0.88;}
+  .submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .form-note{font-size:0.76rem;color:var(--muted-dim);margin-top:12px;}
+  .success-msg{
+    display:none;background:rgba(34,230,239,0.12);border:1px solid var(--cyan-dim);color:var(--white);
+    padding:16px 18px;border-radius:8px;font-size:0.9rem;margin-bottom:18px;
+  }
+  .success-msg.show{display:block;}
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--bg);border-top:1px solid var(--line);padding:36px 0;font-size:0.82rem;color:var(--muted-dim);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  footer a.crosslink{color:var(--cyan-dim);text-decoration:none;}
+  footer a.crosslink:hover{color:var(--cyan);text-decoration:underline;}
+  @media (max-width: 900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .capture-shell{grid-template-columns:1fr;}
+    .capture-info{border-right:none;border-bottom:1px solid var(--line);}
+    .cat-grid{grid-template-columns:1fr 1fr;}
+    .cat-tile.c5{grid-column:span 2;flex-direction:column;align-items:flex-start;gap:14px;}
+    .price-grid{grid-template-columns:1fr 1fr;}
+    .pain-layout{grid-template-columns:1fr;}
+    .proof-strip{grid-template-columns:1fr 1fr;}
+    .process-list li{grid-template-columns:44px 1fr;}
+    .field-row, .field-row.three{grid-template-columns:1fr;}
+    .headroom-btns{grid-template-columns:repeat(4,1fr);}
+  }
+  @media (max-width: 620px){
+    .cat-grid{grid-template-columns:1fr;}
+    .cat-tile.c5{grid-column:span 1;}
+    .price-grid{grid-template-columns:1fr;}
+    .match-shell{flex-direction:column;align-items:flex-start;}
+    .headroom-btns{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<nav class="top">
+  <div class="wrap">
+    <div class="logo">
+      <div class="cobrand-badge" aria-label="Official Cvent partner"><img class="cobrand-cvent" src="/venue-packages-assets/img-01-547229e1f091.webp" alt="Cvent"><span class="cobrand-divider"></span><img class="cobrand-ep" src="/venue-packages-assets/img-02-df2a6fc886e4.webp" alt="EventPartner"></div>
+      <div>
+        <span class="logo-text">EVENT<span>PARTNER</span></span>
+        <span class="logo-tag" id="logoTag">Certified Cvent sales partner</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language / Språk">
+        <button type="button" class="lang-btn" data-lang="sv" aria-pressed="true" title="Svenska" aria-label="Svenska">
+          <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="60" height="40" fill="#006AA7"/>
+            <rect x="19" width="9" height="40" fill="#FECC02"/>
+            <rect y="15.5" width="60" height="9" fill="#FECC02"/>
+          </svg>
+        </button>
+        <button type="button" class="lang-btn" data-lang="no" aria-pressed="false" title="Norsk bokmål" aria-label="Norsk bokmål">
+          <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="60" height="40" fill="#EF2B2D"/>
+            <rect x="19" width="9" height="40" fill="#FFFFFF"/>
+            <rect y="15.5" width="60" height="9" fill="#FFFFFF"/>
+            <rect x="21.5" width="4" height="40" fill="#002868"/>
+            <rect y="18" width="60" height="4" fill="#002868"/>
+          </svg>
+        </button>
+        <button type="button" class="lang-btn" data-lang="da" aria-pressed="false" title="Dansk" aria-label="Dansk">
+          <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="60" height="40" fill="#C60C30"/>
+            <rect x="19" width="9" height="40" fill="#FFFFFF"/>
+            <rect y="15.5" width="60" height="9" fill="#FFFFFF"/>
+          </svg>
+        </button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English" aria-label="English">
+          <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="60" height="40" fill="#00247D"/>
+            <path d="M0,0 60,40M60,0 0,40" stroke="#FFFFFF" stroke-width="7"/>
+            <path d="M0,0 60,40M60,0 0,40" stroke="#CF142B" stroke-width="2.6"/>
+            <path d="M30,0V40M0,20H60" stroke="#FFFFFF" stroke-width="11"/>
+            <path d="M30,0V40M0,20H60" stroke="#CF142B" stroke-width="6.5"/>
+          </svg>
+        </button>
+      </div>
+      <a href="#form" class="nav-cta" id="navCta">Request a quote</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="glow glow-violet g1"></div>
+  <div class="glow glow-cyan g2"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow mono" id="heroEyebrow">Cvent marketing packages for venues</div>
+        <h1 class="headline" id="heroHeadline">Where companies actually book their events.</h1>
+        <p class="hero-sub" id="heroSub">Cvent is the world's largest platform for corporate events, with over SEK 200 billion in booking volume over the past 12 months. As Cvent's Scandinavian partner — backed by 27 years of industry experience — we help you fill vacant hotel rooms and meeting spaces by making sure you're visible where companies actually search, compare and book their events.</p>
+        <div class="hero-actions">
+          <a href="#form" class="btn-primary" id="heroPrimaryBtn">Request a quote</a>
+          <a href="https://cal.com/eventpartner/15min" target="_blank" rel="noopener" class="btn-ghost btn-cal">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.3" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.5H21" stroke="currentColor" stroke-width="1.8"/><path d="M8 2.5V6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 2.5V6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 13L10.5 15.5L16 10" stroke="var(--cyan)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span id="heroBookBtn">Book a meeting</span>
+          </a>
+        </div>
+      </div>
+      <div class="finder-card" id="vslCard">
+        <!-- VSL video: replace the src below with the final hosted video file URL (mp4, ideally H.264, a few MB, no YouTube/iframe embed). Also set a real poster="" image URL if you want a branded first-frame instead of the default background. -->
+        <video class="finder-video" id="vslVideo" autoplay muted loop playsinline preload="metadata">
+          <source id="vslVideoSource" src="REPLACE-WITH-VSL-VIDEO-URL.mp4" type="video/mp4">
+        </video>
+        <div class="finder-scrim"></div>
+        <span class="finder-badge" id="finderBadge">EventPartner × Cvent</span>
+        <span class="finder-play-hint" id="vslPlayHint" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 5V19L19 12L8 5Z" fill="currentColor"/></svg></span>
+        <a href="#packages" class="finder-cta" id="finderCta">See what's included ↓</a>
+        <button type="button" class="finder-mute-btn" id="vslMuteBtn" aria-pressed="false" aria-label="Unmute video" hidden>
+          <svg id="vslMuteIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 9V15H8L13 20V4L8 9H4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 8L22 16M22 8L17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="proof-strip">
+      <div><b id="proofNum1">24,000+</b><span id="proofLabel1">companies booking on Cvent</span></div>
+      <div><b id="proofNum2">217,000+</b><span id="proofLabel2">active event planners</span></div>
+      <div><b id="proofNum3">26 years</b><span id="proofLabel3">Cvent experience, est. 1999</span></div>
+      <div><b id="proofNum4">90%+</b><span id="proofLabel4">of planners shortlist Top Responders only</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="trust">
+  <div class="wrap">
+    <p class="trust-lead" id="trustLead">89 out of 100 Fortune 100 companies book their corporate events through Cvent. In Scandinavia, more than <b>SEK 3.65 billion</b> worth of events are booked through Cvent — by many of the region's largest companies, including:</p>
+    <div class="logo-row">
+      <span class="logo-item"><img src="/venue-packages-assets/img-03-55790dd433f9.webp" alt="Ericsson" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-04-a957b165b3a2.webp" alt="Novo Nordisk" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-05-26b70f51c08e.webp" alt="Electrolux" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-06-7744f7ce20ed.webp" alt="Siemens" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-07-72a5e9b48741.webp" alt="Salesforce" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-08-ac4850d0b067.webp" alt="Cisco" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-09-8c3a1a6f64e4.webp" alt="Visa" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-10-ce1bec4a84d8.webp" alt="Oracle" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-11-4166b0718435.webp" alt="Ford" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-12-764e64dcd61b.webp" alt="Deloitte" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-13-0804488b0676.webp" alt="Apple" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-14-b1987430022a.webp" alt="Mastercard" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-15-b926650d7d04.webp" alt="AstraZeneca" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-16-5faf2ec23080.webp" alt="PwC" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-17-b96b8cef5f67.webp" alt="Uber" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-18-129681ea6b37.webp" alt="JPMorgan Chase" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-19-9deb0877fb3a.webp" alt="Schneider Electric" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-20-0db61e6d3624.webp" alt="Dell Technologies" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-21-4528c6309d66.webp" alt="IBM" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-22-f30c6eabc716.webp" alt="Accenture" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-23-21c2e46f3ca4.webp" alt="Barclays" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-24-486f2356a8e9.webp" alt="Aon" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-25-cdb526ceb9a5.webp" alt="AWS" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-26-19497d75b586.webp" alt="Reuters" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-27-3a254e166aa5.webp" alt="Sanofi" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-28-3006a9d8bc6d.webp" alt="Cognizant" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-29-7480fb763f83.webp" alt="Optimizely" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-30-93e32457a57e.webp" alt="National Geographic" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-31-6deef19dd9fb.webp" alt="Hitachi Energy" loading="lazy"></span>
+      <span class="logo-item"><img src="/venue-packages-assets/img-32-05f5e62ed42d.webp" alt="Delta Air Lines" loading="lazy"></span>
+    </div>
+  </div>
+</section>
+
+<section class="beatstat">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="beatH2">In <em>one quarter</em>, we generate more business for Swedish venues than our five biggest competitors turn over together <em>in a full year</em>.</h2>
+    </div>
+    <div class="beat-grid">
+      <div class="beat-box beat-box--lead">
+        <span class="beat-box-label" id="beatLabel1">Sweden — one quarter vs. one full year</span>
+        <span class="beat-box-num" id="beatNum1">662.5<small>MSEK</small></span>
+        <span class="beat-box-desc" id="beatDesc1">Booking volume via Cvent in Sweden</span>
+        <span class="beat-box-period" id="beatPeriod1">Per quarter</span>
+      </div>
+      <span class="beat-vs">VS.<svg class="beat-vs-squiggle" viewBox="0 0 64 14" aria-hidden="true"><path pathLength="100" d="M2 9 Q9 2 16 9 T30 9 T44 9 T58 9"/></svg></span>
+      <div class="beat-box">
+        <span class="beat-box-label" id="beatLabel2">Sweden — one quarter vs. one full year</span>
+        <span class="beat-box-num" id="beatNum2">644.1<small>MSEK</small></span>
+        <span class="beat-box-desc" id="beatDesc2">Combined annual revenue from 5 established players in Sweden</span>
+        <span class="beat-box-period" id="beatPeriod2">Per year</span>
+      </div>
+    </div>
+    <div class="beat-competitors">
+      <div class="beat-comp"><img class="beat-comp-logo" src="/venue-packages-assets/img-33-61552f817725.webp" alt="Svenska Möten"><span class="beat-comp-num" id="beatCompNum1">373.7 MSEK</span></div>
+      <div class="beat-comp"><img class="beat-comp-logo" src="/venue-packages-assets/img-34-e300b11a316c.webp" alt="EventLogic"><span class="beat-comp-num" id="beatCompNum2">150.1 MSEK</span></div>
+      <div class="beat-comp"><img class="beat-comp-logo" src="/venue-packages-assets/img-35-1eb20902ee80.webp" alt="Meetly"><span class="beat-comp-num" id="beatCompNum3">81.4 MSEK</span></div>
+      <div class="beat-comp"><img class="beat-comp-logo" src="/venue-packages-assets/img-36-b39e9ec441f1.webp" alt="MICE Bokningsbolaget"><span class="beat-comp-num" id="beatCompNum4">26.4 MSEK</span></div>
+      <div class="beat-comp"><img class="beat-comp-logo" src="/venue-packages-assets/img-37-35d3e89150e4.webp" alt="Kontur Konferens"><span class="beat-comp-num" id="beatCompNum5">12.5 MSEK</span></div>
+    </div>
+    <p class="beat-source" id="beatSource">Sources: Annual reports and publicly available financial information, most recently reported fiscal year.</p>
+  </div>
+</section>
+
+<section class="pain">
+  <div class="wrap">
+    <div class="pain-layout">
+      <div class="pain-copy">
+        <h2 id="painH2">Your venue is one of 340,000+ listed on Cvent.<br><em>Most of them are invisible.</em></h2>
+        <p id="painP">Getting listed isn't the same as getting booked. Planners compare dozens of venues in minutes, and most only ever see the ones that respond fastest, look the most convincing, and show up first. A basic listing won't do that for you — we make sure your venue is one of the ones they actually see.</p>
+      </div>
+      <div class="dotgrid" id="dotgrid"></div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono" id="processMono">How it works</span>
+      <h2 id="processH2">We set up, launch and manage your Cvent presence</h2>
+      <p id="processP">You don't need to become a Cvent expert. Tell us about your venue and what business you want — we handle the setup, the campaigns and the ongoing optimization.</p>
+    </div>
+    <ul class="process-list">
+      <li>
+        <span class="num">01</span>
+        <div><h3 id="step1H3">Tell us about your venue</h3><p id="step1P">Share your capacity, meeting spaces, current Cvent status and the type of business you want to win.</p></div>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <div><h3 id="step2H3">We match you to a package</h3><p id="step2P">Minimum, Growth, Premium or Portfolio — chosen around your goals, not a generic tier.</p></div>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <div><h3 id="step3H3">We launch and optimize</h3><p id="step3P">Enhanced profile, targeted campaigns and ongoing reporting — managed end-to-end by EventPartner's Cvent team.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="tiles">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono" id="tilesMono">Four ways to grow on Cvent</span>
+      <h2 id="tilesH2">Pick the level of visibility your venue needs</h2>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-tile c1"><span class="mono">Minimum &#128142;</span><h3 id="tile1H3">Be Found</h3><span class="desc" id="tile1Span">Top Responder &#8211; 20&times; more bookings</span></div>
+      <div class="cat-tile c2"><span class="mono">Growth &#128142;&#128142;</span><h3 id="tile2H3">Get Discovered</h3><span class="desc" id="tile2Span">Reach more active event planners</span></div>
+      <div class="cat-tile c3"><span class="pop" id="tile3Pop">Most popular</span><span class="mono">Premium &#128142;&#128142;&#128142;</span><h3 id="tile3H3">Become the First Choice</h3><span class="desc" id="tile3Span">Create demand with the right companies</span></div>
+      <div class="cat-tile c4"><span class="mono">Portfolio &#128142;&#128142;&#128142;&#128142;</span><h3 id="tile4H3">Reach Everyone</h3><span class="desc" id="tile4Span">Reach your entire potential market</span></div>
+      <div class="cat-tile c5"><h3 id="tile5H3">See exactly what's included in each package</h3><a href="#packages" class="btn-ghost" id="tile5Btn">Compare packages ↓</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="packages" id="packages">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="mono" id="pkgMono">The packages</span>
+      <h2 id="pkgH2">How much of the bookings do you want to win?</h2>
+      <p id="pkgP">Choose how visible you want to be, who you want to reach, and how much of the bookings you want to win.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <span class="tier-mono mono">Minimum &#128142;</span>
+        <h3 id="c1H3">Be Found</h3>
+        <p class="promise" id="c1Promise">Build a stronger presence where planners are already searching.</p>
+        <p class="story" id="c1Story">You're already on Cvent. We make sure you're presented in a way that actually sells the venue — so when a planner compares you against ten other options, it's obvious why you belong on the shortlist.</p>
+        <ul>
+          <li id="c1Li1">Enhanced Listing &amp; richer venue profile</li>
+          <li id="c1Li2">More photos &amp; visual content</li>
+          <li id="c1Li3">Promotions &amp; Special Offers</li>
+          <li id="c1Li4">Top Responder status when criteria are met</li>
+          <li id="c1Li5">Profile &amp; messaging optimization</li>
+          <li id="c1Li6">Ongoing updates</li>
+        </ul>
+        <a href="#form" class="btn-ghost" id="c1Cta">Ask about Minimum</a>
+      </div>
+      <div class="price-card">
+        <span class="tier-mono mono">Growth &#128142;&#128142;</span>
+        <h3 id="c2H3">Get Discovered</h3>
+        <p class="promise" id="c2Promise">Don't just wait to be found — get in front of more active planners.</p>
+        <p class="story" id="c2Story">Planners on Cvent are actively looking for a venue right now — they're just not necessarily searching for you. Growth moves you from hoping they find you, to making sure more of them do.</p>
+        <ul>
+          <li id="c2Li1">Everything in Minimum</li>
+          <li id="c2Li2">Premium / Diamond Listing</li>
+          <li id="c2Li3">Search Ads &amp; Suggested Ads</li>
+          <li id="c2Li4">Sponsored search placements</li>
+          <li id="c2Li5">Destination &amp; regional placements</li>
+          <li id="c2Li6">Need-date promotions</li>
+        </ul>
+        <a href="#form" class="btn-ghost" id="c2Cta">Ask about Growth</a>
+      </div>
+      <div class="price-card featured">
+        <span class="pop" id="c3Pop">Most popular</span>
+        <span class="tier-mono mono">Premium &#128142;&#128142;&#128142;</span>
+        <h3 id="c3H3">Create Demand</h3>
+        <p class="promise" id="c3Promise">Reach the right planners, for the right business, at the right time.</p>
+        <p class="story" id="c3Story">We stop asking "how do you want to advertise?" and start with "which business do you actually want?" — then target the markets, dates and planner types that get you there.</p>
+        <ul>
+          <li id="c3Li1">Everything in Growth</li>
+          <li id="c3Li2">Market &amp; planner targeting</li>
+          <li id="c3Li3">Competitor / comp-set targeting</li>
+          <li id="c3Li4">Retargeting &amp; video retargeting</li>
+          <li id="c3Li5">15–30 sec video ads</li>
+          <li id="c3Li6">Email newsletter &amp; sponsored content</li>
+          <li id="c3Li7">Dedicated landing pages</li>
+        </ul>
+        <a href="#form" class="btn-ghost" id="c3Cta">Ask about Premium</a>
+      </div>
+      <div class="price-card">
+        <span class="tier-mono mono">Portfolio &#128142;&#128142;&#128142;&#128142;</span>
+        <h3 id="c4H3">Own Your Market</h3>
+        <p class="promise" id="c4Promise">Your complete Cvent growth engine — plus EventPartner's own sales layer.</p>
+        <p class="story" id="c4Story">Built for venues that don't just want visibility — they want to use the world's largest meetings &amp; events ecosystem as an active growth channel, with EventPartner driving strategy alongside you.</p>
+        <ul>
+          <li id="c4Li1">Everything in Premium</li>
+          <li id="c4Li2">Planner Navigator &amp; intent data</li>
+          <li id="c4Li3">Missed-opportunity &amp; new-planner discovery</li>
+          <li id="c4Li4">CventIQ AI-driven recommendations</li>
+          <li id="c4Li5">Interactive floor plans, 3D &amp; virtual tours</li>
+          <li id="c4Li6">Off-platform retargeting</li>
+          <li id="c4Li7">Dedicated EventPartner growth manager</li>
+        </ul>
+        <a href="#form" class="btn-ghost" id="c4Cta">Ask about Portfolio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stat-band">
+  <div class="wrap">
+    <span class="mono" id="statMono">By the numbers</span>
+    <p id="statText">Venues with <b>Top Responder</b> status win, on average, <b>20x more RFPs</b> — because 9 out of 10 planners only shortlist venues that carry the badge.</p>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono" id="cmpMono">Side by side</span>
+      <h2 id="cmpH2">Compare what's included</h2>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th id="cmpHeadIncluded">What's included</th>
+            <th>Minimum &#128142;</th>
+            <th>Growth &#128142;&#128142;</th>
+            <th>Premium &#128142;&#128142;&#128142;</th>
+            <th>Portfolio &#128142;&#128142;&#128142;&#128142;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th id="cmpRow1">Improved venue profile<button type="button" class="info-ico" data-row="cmpRow1" aria-label="More information">i</button></th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow2">More photos &amp; richer content<button type="button" class="info-ico" data-row="cmpRow2" aria-label="More information">i</button></th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow3">Current offers &amp; promotions<button type="button" class="info-ico" data-row="cmpRow3" aria-label="More information">i</button></th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow4">Premium / Diamond visibility in search<button type="button" class="info-ico" data-row="cmpRow4" aria-label="More information">i</button></th><td>—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow5">Shown as a recommended option<button type="button" class="info-ico" data-row="cmpRow5" aria-label="More information">i</button></th><td>—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow6">Need-date &amp; destination promotion<button type="button" class="info-ico" data-row="cmpRow6" aria-label="More information">i</button></th><td>—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow7">Market &amp; planner targeting<button type="button" class="info-ico" data-row="cmpRow7" aria-label="More information">i</button></th><td>—</td><td>—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow8">Competitor / comp-set targeting<button type="button" class="info-ico" data-row="cmpRow8" aria-label="More information">i</button></th><td>—</td><td>—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow9">Retargeting &amp; video ads<button type="button" class="info-ico" data-row="cmpRow9" aria-label="More information">i</button></th><td>—</td><td>—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow10">Email, content &amp; dedicated landing pages<button type="button" class="info-ico" data-row="cmpRow10" aria-label="More information">i</button></th><td>—</td><td>—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow11">Planner intent data &amp; prospecting<button type="button" class="info-ico" data-row="cmpRow11" aria-label="More information">i</button></th><td>—</td><td>—</td><td>—</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow12">Missed-opportunity &amp; new-planner discovery<button type="button" class="info-ico" data-row="cmpRow12" aria-label="More information">i</button></th><td>—</td><td>—</td><td>—</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow13">CventIQ AI-driven recommendations<button type="button" class="info-ico" data-row="cmpRow13" aria-label="More information">i</button></th><td>—</td><td>—</td><td>—</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow14">Interactive floor plans, 3D &amp; virtual tours<button type="button" class="info-ico" data-row="cmpRow14" aria-label="More information">i</button></th><td>—</td><td>—</td><td>—</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow15">Off-platform retargeting<button type="button" class="info-ico" data-row="cmpRow15" aria-label="More information">i</button></th><td>—</td><td>—</td><td>—</td><td class="yes">✓</td></tr>
+          <tr><th id="cmpRow16">Dedicated EventPartner growth manager<button type="button" class="info-ico" data-row="cmpRow16" aria-label="More information">i</button></th><td>—</td><td>—</td><td>—</td><td class="yes">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="match">
+  <div class="wrap">
+    <div class="match-shell">
+      <div>
+        <span class="match-badge" id="matchBadge">Free package match</span>
+        <h3 id="matchH3">Not sure which package fits your venue?</h3>
+        <p id="matchP">Tell us your goals and current Cvent status — we'll recommend the right starting point in a short call. No pressure, no obligation.</p>
+      </div>
+      <a href="https://cal.com/eventpartner/15min" target="_blank" rel="noopener" class="btn-ghost" id="matchBtn">Book a free call</a>
+    </div>
+  </div>
+</section>
+
+<section class="capture" id="form">
+  <div class="wrap">
+    <div class="capture-shell">
+      <div class="capture-info">
+        <h2 id="capH2">Request a quote right away.<br><em>We'll put together the right package for you.</em></h2>
+        <p id="capP">Fill in the form and we'll send you a tailored quote with a recommended package and price.<br><br>Want to go through the quote together? Book a 15-minute meeting and we'll walk through everything and answer your questions.</p>
+        <div class="mini-stats">
+          <div><b>24h</b><span id="miniLabel1">Quote within 24h</span></div>
+          <div><b>4</b><span id="miniLabel2">Package tiers</span></div>
+          <div><b>15 min</b><span id="miniLabel3">Walkthrough</span></div>
+        </div>
+        <ul>
+          <li><svg class="check-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 12.5L10.5 15.5L16.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="capLi1">Quote tailored to your venue</span></li>
+          <li><svg class="check-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 12.5L10.5 15.5L16.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="capLi2">Clear package, price and what's included</span></li>
+          <li><svg class="check-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 12.5L10.5 15.5L16.5 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="capLi3">We set everything up for you at the start</span></li>
+        </ul>
+      </div>
+      <form id="leadForm">
+        <div class="success-msg" id="successMsg">Thanks! Your email app should have opened with your request pre-filled — hit send and EventPartner will be in touch within 24 hours.</div>
+        <div class="field-row three">
+          <div class="field"><label for="venue" id="lblVenue">Company name</label><input type="text" id="venue" placeholder="Your company name" required></div>
+          <div class="field"><label for="orgnr" id="lblOrgNr">Organization number</label><input type="text" id="orgnr" placeholder="e.g. 556677-8899"></div>
+          <div class="field"><label for="contact" id="lblContact">Contact person</label><input type="text" id="contact" placeholder="Name" required></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="email" id="lblEmail">Email</label><input type="email" id="email" placeholder="you@venue.com" required></div>
+          <div class="field"><label for="phone" id="lblPhone">Phone</label><input type="tel" id="phone" placeholder="+46 70 123 45 67"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="city" id="lblCity">City</label><input type="text" id="city" placeholder="e.g. Stockholm"></div>
+          <div class="field"><label for="capacity" id="lblCapacity">Max event capacity</label><input type="number" id="capacity" placeholder="e.g. 250"></div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="status" id="lblStatus">Currently on Cvent?</label>
+            <select id="status">
+              <option>Not listed yet</option>
+              <option>Yes — basic listing</option>
+              <option>Yes — Diamond listing</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pkg" id="lblPkg">Package you're interested in</label>
+            <select id="pkg">
+              <option>Not sure — recommend one</option>
+              <option>Minimum — Be Found</option>
+              <option>Growth — Get Discovered</option>
+              <option>Premium — Create Demand</option>
+              <option>Portfolio — Own Your Market</option>
+            </select>
+          </div>
+        </div>
+        <div class="headroom-box">
+          <div class="headroom-label-row">
+            <span class="headroom-label" id="lblHeadroom">How much more capacity do you have to accept?</span>
+            <span class="info-dot" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <p class="headroom-desc" id="hrDesc">Choose roughly what share of your total capacity (100%) you could fill with more bookings. This covers hotel rooms, meeting rooms and events.</p>
+          <div class="headroom-btns" id="headroomBtns" role="group" aria-label="How much more capacity do you have to accept?">
+            <button type="button" class="headroom-btn" id="hrBtn1">5–10%</button>
+            <button type="button" class="headroom-btn" id="hrBtn2">10–20%</button>
+            <button type="button" class="headroom-btn" id="hrBtn3">20–30%</button>
+            <button type="button" class="headroom-btn" id="hrBtn4">30–40%</button>
+            <button type="button" class="headroom-btn" id="hrBtn5">40–50%</button>
+            <button type="button" class="headroom-btn" id="hrBtn6">50%+</button>
+            <button type="button" class="headroom-btn" id="hrBtn7">Not sure</button>
+          </div>
+          <input type="hidden" id="headroom" value="">
+        </div>
+        <div class="field">
+          <label for="message" id="lblMessage">Message (optional)</label>
+          <textarea id="message" rows="3" placeholder="Tell us about your venue — meeting spaces, occupancy goals, target markets, or anything else we should know..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">Request my quote →</button>
+        <a href="https://cal.com/eventpartner/15min" target="_blank" rel="noopener" class="book-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.3" stroke="currentColor" stroke-width="2"/><path d="M3 9.5H21" stroke="currentColor" stroke-width="2"/><path d="M8 2.5V6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 2.5V6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span id="capBookLink">Want to go through the quote together? Book a 15-minute meeting →</span>
+        </a>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cobrand-badge cobrand-badge--footer" aria-label="Official Cvent partner"><img class="cobrand-cvent" src="/venue-packages-assets/img-01-547229e1f091.webp" alt="Cvent"><span class="cobrand-divider"></span><img class="cobrand-ep" src="/venue-packages-assets/img-02-df2a6fc886e4.webp" alt="EventPartner"></div>
+    <span id="footerText">EventPartner — Cvent marketing packages for venues</span>
+    <a class="crosslink" href="https://eventpartner.io" target="_blank" rel="noopener" id="footerLink">Also booking events for companies? See eventpartner.io ↗</a>
+  </div>
+</footer>
+
+<div class="info-modal-overlay" id="infoModalOverlay">
+  <div class="info-modal" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+    <button type="button" class="info-modal-close" id="infoModalClose" aria-label="Close">✕</button>
+    <div class="info-modal-text">
+      <h3 class="info-modal-title" id="infoModalTitle"></h3>
+      <div class="info-modal-body" id="infoModalBody"></div>
+    </div>
+    <div class="info-modal-media">
+      <img class="info-modal-img" id="infoModalImg" src="" alt="" hidden>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Pain-point dot grid: all lit, one cell is the diamond (your venue, standing out)
+  const dotgrid = document.getElementById('dotgrid');
+  const DIAMOND_IDX = 0;
+  const DIAMOND_URI = '/venue-packages-assets/img-38-65b192ebc2df.webp';
+  for (let i = 0; i < 100; i++) {
+    const d = document.createElement('div');
+    if (i === DIAMOND_IDX) {
+      d.className = 'dot dot-diamond';
+      d.style.backgroundImage = 'url(' + DIAMOND_URI + ')';
+    } else {
+      d.className = 'dot lit';
+    }
+    dotgrid.appendChild(d);
+  }
+
+  /* ---------------- i18n ---------------- */
+  const SV = {
+    logoTag: 'Certifierad Cvent-säljpartner',
+    navCta: 'Be om offert',
+    heroEyebrow: 'Cvent marketingpaket för anläggningar',
+    heroHeadline: 'Syns där företagen faktiskt bokar sina event.',
+    heroSub: 'Cvent är världens största plattform för företagsevent, med över 200 miljarder kronor i bokningsvolym de senaste 12 månaderna. Som Cvents skandinaviska partner – med 27 års erfarenhet i branschen – hjälper vi er att fylla lediga hotellrum och konferenslokaler genom att synas där företagen faktiskt söker, jämför och bokar sina event.',
+    heroPrimaryBtn: 'Be om offert',
+    heroGhostBtn: 'Jämför paket',
+    finderBadge: 'EventPartner × Cvent',
+    finderLabel: 'paket — en tillväxtmotor byggd runt er anläggnings mål',
+    finderCta: 'Se vad som ingår ↓',
+    proofNum1: '~200 MDR SEK', proofLabel1: 'global bokningsvolym via Cvent',
+    proofNum2: '~3,65 MDR SEK*', proofLabel2: 'nordisk volym 2026',
+    proofNum3: '~2,65 MDR SEK*', proofLabel3: 'svensk volym 2026',
+    proofNum4: '+165%', proofLabel4: 'RFP-takt i Sverige vs samma period 2025',
+    trustLead: '89 av 100 Fortune 100-företag bokar sina företagsevent via Cvent. I Skandinavien bokas event för över <b>3,65 miljarder kronor</b> via Cvent, av många av regionens största företag, såsom:',
+    statMono: 'Siffrorna',
+    statText: 'Anläggningar med <b>Top Responder</b>-status vinner i snitt <b>20x fler RFP:er</b> — eftersom 9 av 10 planners bara shortlistar anläggningar med den statusen.',
+    beatH2: 'På <em>ett kvartal</em> genererar vi mer affärer till svenska anläggningar än våra fem största konkurrenter tillsammans omsätter <em>på ett helt år</em>.',
+    beatLabel1: 'Sverige — ett kvartal vs. ett helt år', beatNum1: '662,5<small>MSEK</small>', beatDesc1: 'Bokningsvolym via Cvent i Sverige', beatPeriod1: 'Per kvartal',
+    beatLabel2: 'Sverige — ett kvartal vs. ett helt år', beatNum2: '644,1<small>MSEK</small>', beatDesc2: 'Sammanlagd årlig omsättning från 5 etablerade aktörer i Sverige', beatPeriod2: 'Per år',
+    beatCompNum1: '373,7 MSEK', beatCompNum2: '150,1 MSEK', beatCompNum3: '81,4 MSEK', beatCompNum4: '26,4 MSEK', beatCompNum5: '12,5 MSEK',
+    beatSource: 'Källor: Årsredovisningar och offentligt tillgänglig finansiell information för senaste redovisade räkenskapsår.',
+    painH2: 'Er anläggning är en av 340 000+ listade på Cvent.<br><em>De flesta av dem syns aldrig.</em>',
+    painP: 'Att vara listad är inte samma sak som att bli bokad. Planners jämför tiotals anläggningar på några minuter, och de flesta ser bara de som svarar snabbast, ser mest övertygande ut och dyker upp först. En vanlig baslistning gör inte det jobbet åt er — vi ser till att er anläggning är en av dem planners faktiskt ser.',
+    processMono: 'Så funkar det',
+    processH2: 'Vi sätter upp, lanserar och sköter er Cvent-närvaro',
+    processP: 'Ni behöver inte bli Cvent-experter. Berätta om er anläggning och vilken affär ni vill ha — vi sköter uppsättning, kampanjer och löpande optimering.',
+    step1H3: 'Berätta om er anläggning', step1P: 'Dela er kapacitet, mötesytor, nuvarande Cvent-status och vilken typ av affär ni vill vinna.',
+    step2H3: 'Vi matchar er mot ett paket', step2P: 'Minimum, Growth, Premium eller Portfolio — valt utifrån era mål, inte en generisk nivå.',
+    step3H3: 'Vi lanserar och optimerar', step3P: 'Förbättrad profil, riktade kampanjer och löpande rapportering — helt hanterat av EventPartners Cvent-team.',
+    tilesMono: 'Fyra sätt att växa på Cvent',
+    tilesH2: 'Välj den synlighetsnivå er anläggning behöver',
+    tile1H3: 'Bli hittad', tile1Span: 'Top Responder – 20× fler bokningar',
+    tile2H3: 'Bli upptäckt', tile2Span: 'Nå fler aktiva eventplanerare',
+    tile3Pop: 'Mest populär', tile3H3: 'Bli förstahandsvalet', tile3Span: 'Skapa efterfrågan hos rätt företag',
+    tile4H3: 'Nå ut till alla', tile4Span: 'Nå hela er potentiella marknad',
+    tile5H3: 'Se exakt vad som ingår i varje paket', tile5Btn: 'Jämför paket ↓',
+    pkgMono: 'Paketen',
+    pkgH2: 'Hur stor del av bokningarna vill ni ta?',
+    pkgP: 'Välj hur mycket ni vill synas, vilka ni vill nå och hur stor del av bokningarna ni vill ta.',
+    c1H3: 'Bli hittad', c1Promise: 'Bygg en starkare närvaro där planners redan söker.',
+    c1Story: 'Ni finns redan på Cvent. Vi ser till att ni presenteras på ett sätt som faktiskt säljer anläggningen — så när en planner jämför er med tio andra alternativ är det uppenbart varför ni hör hemma på shortlisten.',
+    c1Li1: 'Enhanced Listing &amp; rikare anläggningsprofil', c1Li2: 'Fler bilder &amp; mer visuellt innehåll', c1Li3: 'Kampanjer &amp; specialerbjudanden',
+    c1Li4: 'Top Responder-status när kraven uppfylls', c1Li5: 'Optimering av profil &amp; budskap', c1Li6: 'Löpande uppdateringar', c1Cta: 'Fråga om Minimum',
+    c2H3: 'Bli upptäckt', c2Promise: 'Vänta inte på att bli hittade — synas för fler aktiva planners.',
+    c2Story: 'Planners på Cvent letar aktivt efter en anläggning just nu — de söker bara inte nödvändigtvis efter er. Growth flyttar er från att hoppas att de hittar er, till att se till att fler faktiskt gör det.',
+    c2Li1: 'Allt i Minimum', c2Li2: 'Premium- / Diamond-listning', c2Li3: 'Search Ads &amp; Suggested Ads', c2Li4: 'Sponsrade sökplaceringar',
+    c2Li5: 'Destinations- &amp; regionplaceringar', c2Li6: 'Need-date-kampanjer', c2Cta: 'Fråga om Growth',
+    c3Pop: 'Mest populär', c3H3: 'Skapa efterfrågan', c3Promise: 'Nå rätt planners, för rätt affär, vid rätt tillfälle.',
+    c3Story: 'Vi slutar fråga "hur vill ni annonsera?" och börjar med "vilken affär vill ni faktiskt ha?" — och riktar sedan marknader, datum och planner-typer som tar er dit.',
+    c3Li1: 'Allt i Growth', c3Li2: 'Marknads- &amp; planner-targeting', c3Li3: 'Konkurrent-/comp-set-targeting', c3Li4: 'Retargeting &amp; video-retargeting',
+    c3Li5: '15–30 sek videoannonser', c3Li6: 'Nyhetsbrev &amp; sponsrat innehåll', c3Li7: 'Dedikerade landningssidor', c3Cta: 'Fråga om Premium',
+    c4H3: 'Äg er marknad', c4Promise: 'Er kompletta Cvent-tillväxtmotor — plus EventPartners eget säljlager.',
+    c4Story: 'Byggt för anläggningar som inte bara vill ha synlighet — de vill använda världens största ekosystem för möten &amp; event som en aktiv tillväxtkanal, med EventPartner som driver strategin tillsammans med er.',
+    c4Li1: 'Allt i Premium', c4Li2: 'Planner Navigator &amp; intentdata', c4Li3: 'Missade affärer &amp; nya planners', c4Li4: 'CventIQ AI-drivna rekommendationer',
+    c4Li5: 'Interaktiva planritningar, 3D &amp; virtuella visningar', c4Li6: 'Retargeting utanför plattformen', c4Li7: 'Dedikerad tillväxtansvarig från EventPartner', c4Cta: 'Fråga om Portfolio',
+    cmpMono: 'Sida vid sida', cmpH2: 'Jämför vad som ingår', cmpHeadIncluded: 'Vad som ingår',
+    cmpRow1: 'Förbättrad anläggningsprofil<button type="button" class="info-ico" data-row="cmpRow1" aria-label="Mer information">i</button>',
+    cmpRow2: 'Fler bilder &amp; rikare innehåll<button type="button" class="info-ico" data-row="cmpRow2" aria-label="Mer information">i</button>',
+    cmpRow3: 'Aktuella erbjudanden &amp; kampanjer<button type="button" class="info-ico" data-row="cmpRow3" aria-label="Mer information">i</button>',
+    cmpRow4: 'Premium-/Diamond-synlighet i sök<button type="button" class="info-ico" data-row="cmpRow4" aria-label="Mer information">i</button>',
+    cmpRow5: 'Visas som rekommenderat alternativ<button type="button" class="info-ico" data-row="cmpRow5" aria-label="Mer information">i</button>',
+    cmpRow6: 'Need-date- &amp; destinationskampanjer<button type="button" class="info-ico" data-row="cmpRow6" aria-label="Mer information">i</button>',
+    cmpRow7: 'Marknads- &amp; planner-targeting<button type="button" class="info-ico" data-row="cmpRow7" aria-label="Mer information">i</button>', cmpRow8: 'Konkurrent-/comp-set-targeting<button type="button" class="info-ico" data-row="cmpRow8" aria-label="Mer information">i</button>', cmpRow9: 'Retargeting &amp; videoannonser<button type="button" class="info-ico" data-row="cmpRow9" aria-label="Mer information">i</button>',
+    cmpRow10: 'E-post, innehåll &amp; dedikerade landningssidor<button type="button" class="info-ico" data-row="cmpRow10" aria-label="Mer information">i</button>', cmpRow11: 'Planner-intentdata &amp; prospektering<button type="button" class="info-ico" data-row="cmpRow11" aria-label="Mer information">i</button>', cmpRow12: 'Missade affärer &amp; nya planners<button type="button" class="info-ico" data-row="cmpRow12" aria-label="Mer information">i</button>',
+    cmpRow13: 'CventIQ AI-drivna rekommendationer<button type="button" class="info-ico" data-row="cmpRow13" aria-label="Mer information">i</button>', cmpRow14: 'Interaktiva planritningar, 3D &amp; virtuella visningar<button type="button" class="info-ico" data-row="cmpRow14" aria-label="Mer information">i</button>', cmpRow15: 'Retargeting utanför plattformen<button type="button" class="info-ico" data-row="cmpRow15" aria-label="Mer information">i</button>',
+    cmpRow16: 'Dedikerad tillväxtansvarig från EventPartner<button type="button" class="info-ico" data-row="cmpRow16" aria-label="Mer information">i</button>',
+    matchBadge: 'Gratis paketrådgivning', matchH3: 'Osäker på vilket paket som passar er anläggning?',
+    matchP: 'Berätta om era mål och nuvarande Cvent-status — vi rekommenderar rätt startpunkt i ett kort samtal. Inget säljtryck, inga förpliktelser.',
+    matchBtn: 'Boka ett gratis samtal',
+    capH2: 'Be om en offert direkt.<br><em>Vi tar fram rätt paket för er.</em>',
+    capP: 'Fyll i formuläret så skickar vi en skräddarsydd offert med rekommenderat paket och pris.<br><br>Vill ni gå igenom offerten tillsammans? Boka ett 15-minuters möte, så går vi igenom allt och svarar på era frågor.',
+    miniLabel1: 'Offert inom 24h', miniLabel2: 'Paketnivåer', miniLabel3: 'Genomgång',
+    capLi1: 'Offert anpassad efter er anläggning', capLi2: 'Tydligt paket, pris och vad som ingår', capLi3: 'Vi sätter upp allt åt er vid start',
+    successMsg: 'Tack! Din e-postapp bör ha öppnats med din förfrågan ifylld — tryck skicka så hör EventPartner av sig inom 24 timmar.',
+    lblVenue: 'Företagsnamn', lblOrgNr: 'Organisationsnummer', lblContact: 'Kontaktperson', lblEmail: 'E-post', lblPhone: 'Telefon',
+    lblCity: 'Stad', lblCapacity: 'Max antal gäster', lblStatus: 'Listade på Cvent idag?', lblPkg: 'Vilket paket är ni intresserade av?', lblMessage: 'Meddelande (valfritt)',
+    lblHeadroom: 'Hur mycket mer har ni kapacitet att ta emot?', hrDesc: 'Välj ungefär hur stor del av er totala kapacitet (100%) som ni har möjlighet att fylla med fler bokningar. Det gäller hotellrum, konferenser och event.',
+    hrBtn1: '5–10 %', hrBtn2: '10–20 %', hrBtn3: '20–30 %', hrBtn4: '30–40 %', hrBtn5: '40–50 %', hrBtn6: '50 % eller mer', hrBtn7: 'Osäker',
+    submitBtn: 'Be om min offert →',
+    footerText: 'EventPartner — Cvent marketingpaket för anläggningar',
+    footerLink: 'Bokar ni även event åt företag? Se eventpartner.io ↗',
+    heroBookBtn: 'Boka ett möte',
+    capBookLink: 'Vill ni gå igenom offerten tillsammans? Boka ett 15-minuters möte →',
+    ph_venue: 'Ert företags namn', ph_orgnr: 't.ex. 556677-8899', ph_contact: 'Namn', ph_city: 't.ex. Stockholm', ph_capacity: 't.ex. 250',
+    ph_message: 'Berätta om er anläggning — mötesytor, beläggningsmål, målmarknader eller annat vi bör veta...',
+    opt_status: ['Inte listade än', 'Ja — baslistning', 'Ja — Diamond-listning', 'Osäker'],
+    opt_pkg: ['Osäker — rekommendera ett', 'Minimum — Bli hittad', 'Growth — Bli upptäckt', 'Premium — Skapa efterfrågan', 'Portfolio — Äg er marknad']
+  };
+
+  const NO = {
+    logoTag: 'Sertifisert Cvent-salgspartner',
+    navCta: 'Be om tilbud',
+    heroEyebrow: 'Cvent markedsføringspakker for lokaler',
+    heroHeadline: 'Synlige der bedriftene faktisk booker sine arrangementer.',
+    heroSub: 'Cvent er verdens største plattform for bedriftsarrangementer, med over 200 milliarder kroner i bookingvolum de siste 12 månedene. Som Cvents skandinaviske partner – med 27 års bransjeerfaring – hjelper vi dere med å fylle ledige hotellrom og møtelokaler ved å sørge for at dere er synlige der bedriftene faktisk søker, sammenligner og booker sine arrangementer.',
+    heroPrimaryBtn: 'Be om tilbud',
+    heroGhostBtn: 'Sammenlign pakker',
+    finderBadge: 'EventPartner × Cvent',
+    finderLabel: 'pakker — én vekstmotor, bygget rundt lokalets mål',
+    finderCta: 'Se hva som er inkludert ↓',
+    proofNum1: '201,16 MDR NOK', proofLabel1: 'global bookingvolum via Cvent',
+    proofNum2: '~270M NOK*', proofLabel2: 'norsk volum 2026',
+    proofNum3: '14%', proofLabel3: 'av skandinavisk RFP-volum',
+    proofNum4: '~200BN NOK', proofLabel4: 'i virksomhet vunnet gjennom Cvent globalt',
+    trustLead: '89 av 100 Fortune 100-selskaper booker sine bedriftsarrangementer via Cvent. I Skandinavia bookes det arrangementer for over <b>3,65 milliarder kroner</b> via Cvent, av mange av regionens største selskaper, som:',
+    statMono: 'Tallene',
+    statText: 'Lokaler med <b>Top Responder</b>-status vinner i snitt <b>20x flere RFP-er</b> — fordi 9 av 10 planleggere kun shortlister lokaler med denne statusen.',
+    beatH2: 'På <em>ett kvartal</em> genererer vi mer forretning til svenske lokaler enn det våre fem største konkurrenter omsetter sammen <em>på ett helt år</em>.',
+    beatLabel1: 'Sverige — ett kvartal vs. ett helt år', beatNum1: '662,5<small>MSEK</small>', beatDesc1: 'Bookingvolum via Cvent i Sverige', beatPeriod1: 'Per kvartal',
+    beatLabel2: 'Sverige — ett kvartal vs. ett helt år', beatNum2: '644,1<small>MSEK</small>', beatDesc2: 'Samlet årlig omsetning fra 5 etablerte aktører i Sverige', beatPeriod2: 'Per år',
+    beatCompNum1: '373,7 MSEK', beatCompNum2: '150,1 MSEK', beatCompNum3: '81,4 MSEK', beatCompNum4: '26,4 MSEK', beatCompNum5: '12,5 MSEK',
+    beatSource: 'Kilder: Årsregnskaper og offentlig tilgjengelig finansiell informasjon for senest rapporterte regnskapsår.',
+    painH2: 'Deres lokale er ett av 340 000+ listet på Cvent.<br><em>De fleste av dem er usynlige.</em>',
+    painP: 'Å være listet er ikke det samme som å bli booket. Planleggere sammenligner dusinvis av lokaler på noen minutter, og de fleste ser bare dem som svarer raskest, ser mest overbevisende ut og dukker opp først. En vanlig baselisting gjør ikke den jobben for dere — vi sørger for at lokalet deres er ett av dem planleggerne faktisk ser.',
+    processMono: 'Slik fungerer det',
+    processH2: 'Vi setter opp, lanserer og drifter Cvent-tilstedeværelsen deres',
+    processP: 'Dere trenger ikke bli Cvent-eksperter. Fortell oss om lokalet og hvilken type forretning dere vil ha — vi tar hånd om oppsett, kampanjer og løpende optimalisering.',
+    step1H3: 'Fortell oss om lokalet', step1P: 'Del kapasitet, møterom, nåværende Cvent-status og typen forretning dere vil vinne.',
+    step2H3: 'Vi matcher dere med en pakke', step2P: 'Minimum, Growth, Premium eller Portfolio — valgt ut fra deres mål, ikke en generisk pakke.',
+    step3H3: 'Vi lanserer og optimaliserer', step3P: 'Forbedret profil, målrettede kampanjer og løpende rapportering — fullt driftet av EventPartners Cvent-team.',
+    tilesMono: 'Fire måter å vokse på Cvent',
+    tilesH2: 'Velg synlighetsnivået lokalet trenger',
+    tile1H3: 'Bli funnet', tile1Span: 'Top Responder – 20× flere bookinger',
+    tile2H3: 'Bli oppdaget', tile2Span: 'Nå flere aktive arrangementsplanleggere',
+    tile3Pop: 'Mest populær', tile3H3: 'Bli førstevalget', tile3Span: 'Skap etterspørsel hos de riktige bedriftene',
+    tile4H3: 'Nå ut til alle', tile4Span: 'Nå hele deres potensielle marked',
+    tile5H3: 'Se nøyaktig hva som er inkludert i hver pakke', tile5Btn: 'Sammenlign pakker ↓',
+    pkgMono: 'Pakkene',
+    pkgH2: 'Hvor stor del av bookingene vil dere ta?',
+    pkgP: 'Velg hvor synlige dere vil være, hvem dere vil nå, og hvor stor del av bookingene dere vil ta.',
+    c1H3: 'Bli funnet', c1Promise: 'Bygg en sterkere tilstedeværelse der planleggerne allerede søker.',
+    c1Story: 'Dere er allerede på Cvent. Vi sørger for at dere presenteres på en måte som faktisk selger lokalet — så når en planlegger sammenligner dere med ti andre alternativer, er det åpenbart hvorfor dere hører hjemme på shortlisten.',
+    c1Li1: 'Enhanced Listing &amp; rikere lokaleprofil', c1Li2: 'Flere bilder &amp; mer visuelt innhold', c1Li3: 'Kampanjer &amp; spesialtilbud',
+    c1Li4: 'Top Responder-status når kravene oppfylles', c1Li5: 'Optimalisering av profil &amp; budskap', c1Li6: 'Løpende oppdateringer', c1Cta: 'Spør om Minimum',
+    c2H3: 'Bli oppdaget', c2Promise: 'Ikke bare vent på å bli funnet — kom foran flere aktive planleggere.',
+    c2Story: 'Planleggere på Cvent leter aktivt etter et lokale akkurat nå — de søker bare ikke nødvendigvis etter dere. Growth flytter dere fra å håpe at de finner dere, til å sørge for at flere faktisk gjør det.',
+    c2Li1: 'Alt i Minimum', c2Li2: 'Premium-/Diamond-listing', c2Li3: 'Search Ads &amp; Suggested Ads', c2Li4: 'Sponsede søkeplasseringer',
+    c2Li5: 'Destinasjons- &amp; regionplasseringer', c2Li6: 'Need-date-kampanjer', c2Cta: 'Spør om Growth',
+    c3Pop: 'Mest populær', c3H3: 'Skap etterspørsel', c3Promise: 'Nå de riktige planleggerne, for riktig forretning, til riktig tid.',
+    c3Story: 'Vi slutter å spørre "hvordan vil dere annonsere?" og starter med "hvilken forretning vil dere faktisk ha?" — og retter deretter markeder, datoer og planlegger-typer som tar dere dit.',
+    c3Li1: 'Alt i Growth', c3Li2: 'Markeds- &amp; planlegger-targeting', c3Li3: 'Konkurrent-/comp-set-targeting', c3Li4: 'Retargeting &amp; video-retargeting',
+    c3Li5: '15–30 sek videoannonser', c3Li6: 'Nyhetsbrev &amp; sponset innhold', c3Li7: 'Dedikerte landingssider', c3Cta: 'Spør om Premium',
+    c4H3: 'Eie markedet deres', c4Promise: 'Deres komplette Cvent-vekstmotor — pluss EventPartners eget salgslag.',
+    c4Story: 'Bygget for lokaler som ikke bare vil ha synlighet — de vil bruke verdens største økosystem for møter &amp; events som en aktiv vekstkanal, med EventPartner som driver strategien sammen med dere.',
+    c4Li1: 'Alt i Premium', c4Li2: 'Planner Navigator &amp; intensjonsdata', c4Li3: 'Tapte muligheter &amp; oppdagelse av nye planleggere', c4Li4: 'CventIQ AI-drevne anbefalinger',
+    c4Li5: 'Interaktive plantegninger, 3D &amp; virtuelle omvisninger', c4Li6: 'Retargeting utenfor plattformen', c4Li7: 'Dedikert vekstansvarlig fra EventPartner', c4Cta: 'Spør om Portfolio',
+    cmpMono: 'Side om side', cmpH2: 'Sammenlign hva som er inkludert', cmpHeadIncluded: 'Hva som er inkludert',
+    cmpRow1: 'Forbedret lokaleprofil<button type="button" class="info-ico" data-row="cmpRow1" aria-label="Mer informasjon">i</button>',
+    cmpRow2: 'Flere bilder &amp; rikere innhold<button type="button" class="info-ico" data-row="cmpRow2" aria-label="Mer informasjon">i</button>',
+    cmpRow3: 'Aktuelle tilbud &amp; kampanjer<button type="button" class="info-ico" data-row="cmpRow3" aria-label="Mer informasjon">i</button>',
+    cmpRow4: 'Premium-/Diamond-synlighet i søk<button type="button" class="info-ico" data-row="cmpRow4" aria-label="Mer informasjon">i</button>',
+    cmpRow5: 'Vises som anbefalt alternativ<button type="button" class="info-ico" data-row="cmpRow5" aria-label="Mer informasjon">i</button>',
+    cmpRow6: 'Need-date- &amp; destinasjonskampanjer<button type="button" class="info-ico" data-row="cmpRow6" aria-label="Mer informasjon">i</button>',
+    cmpRow7: 'Markeds- &amp; planlegger-targeting<button type="button" class="info-ico" data-row="cmpRow7" aria-label="Mer informasjon">i</button>', cmpRow8: 'Konkurrent-/comp-set-targeting<button type="button" class="info-ico" data-row="cmpRow8" aria-label="Mer informasjon">i</button>', cmpRow9: 'Retargeting &amp; videoannonser<button type="button" class="info-ico" data-row="cmpRow9" aria-label="Mer informasjon">i</button>',
+    cmpRow10: 'E-post, innhold &amp; dedikerte landingssider<button type="button" class="info-ico" data-row="cmpRow10" aria-label="Mer informasjon">i</button>', cmpRow11: 'Planlegger-intensjonsdata &amp; prospektering<button type="button" class="info-ico" data-row="cmpRow11" aria-label="Mer informasjon">i</button>', cmpRow12: 'Tapte muligheter &amp; nye planleggere<button type="button" class="info-ico" data-row="cmpRow12" aria-label="Mer informasjon">i</button>',
+    cmpRow13: 'CventIQ AI-drevne anbefalinger<button type="button" class="info-ico" data-row="cmpRow13" aria-label="Mer informasjon">i</button>', cmpRow14: 'Interaktive plantegninger, 3D &amp; virtuelle omvisninger<button type="button" class="info-ico" data-row="cmpRow14" aria-label="Mer informasjon">i</button>', cmpRow15: 'Retargeting utenfor plattformen<button type="button" class="info-ico" data-row="cmpRow15" aria-label="Mer informasjon">i</button>',
+    cmpRow16: 'Dedikert vekstansvarlig fra EventPartner<button type="button" class="info-ico" data-row="cmpRow16" aria-label="Mer informasjon">i</button>',
+    matchBadge: 'Gratis pakkeråd', matchH3: 'Usikker på hvilken pakke som passer lokalet deres?',
+    matchP: 'Fortell oss om målene og nåværende Cvent-status — vi anbefaler riktig utgangspunkt i en kort samtale. Ingen press, ingen forpliktelser.',
+    matchBtn: 'Book en gratis samtale',
+    capH2: 'Be om et tilbud med en gang.<br><em>Vi setter sammen riktig pakke for dere.</em>',
+    capP: 'Fyll ut skjemaet, så sender vi et skreddersydd tilbud med anbefalt pakke og pris.<br><br>Vil dere gå gjennom tilbudet sammen? Book et 15-minutters møte, så går vi gjennom alt og svarer på spørsmålene deres.',
+    miniLabel1: 'Tilbud innen 24h', miniLabel2: 'Pakkenivåer', miniLabel3: 'Gjennomgang',
+    capLi1: 'Tilbud tilpasset lokalet deres', capLi2: 'Tydelig pakke, pris og hva som er inkludert', capLi3: 'Vi setter opp alt for dere ved oppstart',
+    successMsg: 'Takk! E-postappen din skal ha åpnet seg med forespørselen ferdig utfylt — trykk send, så tar EventPartner kontakt innen 24 timer.',
+    lblVenue: 'Firmanavn', lblOrgNr: 'Organisasjonsnummer', lblContact: 'Kontaktperson', lblEmail: 'E-post', lblPhone: 'Telefon',
+    lblCity: 'By', lblCapacity: 'Maks antall gjester', lblStatus: 'Listet på Cvent i dag?', lblPkg: 'Hvilken pakke er dere interessert i?', lblMessage: 'Melding (valgfritt)',
+    lblHeadroom: 'Hvor mye mer kapasitet har dere til å ta imot?', hrDesc: 'Velg omtrent hvor stor del av deres totale kapasitet (100 %) dere har mulighet til å fylle med flere bookinger. Det gjelder hotellrom, konferanser og arrangementer.',
+    hrBtn1: '5–10 %', hrBtn2: '10–20 %', hrBtn3: '20–30 %', hrBtn4: '30–40 %', hrBtn5: '40–50 %', hrBtn6: '50 % eller mer', hrBtn7: 'Usikker',
+    submitBtn: 'Be om tilbudet mitt →',
+    footerText: 'EventPartner — Cvent markedsføringspakker for lokaler',
+    footerLink: 'Booker dere også events for bedrifter? Se eventpartner.io ↗',
+    heroBookBtn: 'Book et møte',
+    capBookLink: 'Vil dere gå gjennom tilbudet sammen? Book et 15-minutters møte →',
+    ph_venue: 'Firmaets navn', ph_orgnr: 'f.eks. 987 654 325', ph_contact: 'Navn', ph_city: 'f.eks. Oslo', ph_capacity: 'f.eks. 250',
+    ph_message: 'Fortell oss om lokalet — møterom, beleggsmål, målmarkeder eller annet vi bør vite...',
+    opt_status: ['Ikke listet ennå', 'Ja — baselisting', 'Ja — Diamond-listing', 'Usikker'],
+    opt_pkg: ['Usikker — anbefal en', 'Minimum — Bli funnet', 'Growth — Bli oppdaget', 'Premium — Skap etterspørsel', 'Portfolio — Eie markedet deres']
+  };
+
+  const DA = {
+    logoTag: 'Certificeret Cvent-salgspartner',
+    navCta: 'Bed om et tilbud',
+    heroEyebrow: 'Cvent marketingpakker til lokaler',
+    heroHeadline: 'Synlige, der hvor virksomhederne rent faktisk booker deres events.',
+    heroSub: 'Cvent er verdens største platform for firmaevents, med over 200 milliarder kroner i bookingvolumen de seneste 12 måneder. Som Cvents skandinaviske partner – med 27 års brancheerfaring – hjælper vi jer med at fylde ledige hotelværelser og mødelokaler ved at sikre, at I er synlige, der hvor virksomhederne rent faktisk søger, sammenligner og booker deres events.',
+    heroPrimaryBtn: 'Bed om et tilbud',
+    heroGhostBtn: 'Sammenlign pakker',
+    finderBadge: 'EventPartner × Cvent',
+    finderLabel: 'pakker — én vækstmotor bygget omkring jeres lokales mål',
+    finderCta: 'Se hvad der er inkluderet ↓',
+    proofNum1: '~195 MDR DKK*', proofLabel1: 'globalt bookingvolumen via Cvent',
+    proofNum2: '~2,8 MDR DKK*', proofLabel2: 'nordisk volumen 2026',
+    proofNum3: '~1,9 MDR DKK*', proofLabel3: 'dansk volumen 2026',
+    proofNum4: '+140%*', proofLabel4: 'RFP-vækst i Danmark vs. samme periode 2025',
+    trustLead: '89 ud af 100 Fortune 100-virksomheder booker deres firmaevents via Cvent. I Skandinavien bookes der events for over <b>3,65 milliarder kroner</b> via Cvent, af mange af regionens største virksomheder, såsom:',
+    statMono: 'Tallene',
+    statText: 'Lokaler med <b>Top Responder</b>-status vinder i gennemsnit <b>20x flere RFP-er</b> — fordi 9 ud af 10 planlæggere kun shortlister lokaler med denne status.',
+    beatH2: 'På <em>ét kvartal</em> genererer vi mere forretning til svenske lokaler, end vores fem største konkurrenter tilsammen omsætter <em>på ét helt år</em>.',
+    beatLabel1: 'Sverige — et kvartal vs. et helt år', beatNum1: '662,5<small>MSEK</small>', beatDesc1: 'Bookingvolumen via Cvent i Sverige', beatPeriod1: 'Per kvartal',
+    beatLabel2: 'Sverige — et kvartal vs. et helt år', beatNum2: '644,1<small>MSEK</small>', beatDesc2: 'Samlet årlig omsætning fra 5 etablerede aktører i Sverige', beatPeriod2: 'Per år',
+    beatCompNum1: '373,7 MSEK', beatCompNum2: '150,1 MSEK', beatCompNum3: '81,4 MSEK', beatCompNum4: '26,4 MSEK', beatCompNum5: '12,5 MSEK',
+    beatSource: 'Kilder: Årsregnskaber og offentligt tilgængelig finansiel information for senest rapporterede regnskabsår.',
+    painH2: 'Jeres lokale er ét ud af 340.000+ listet på Cvent.<br><em>De fleste af dem ses aldrig.</em>',
+    painP: 'At være listet er ikke det samme som at blive booket. Planlæggere sammenligner snesevis af lokaler på få minutter, og de fleste ser kun dem, der svarer hurtigst, ser mest overbevisende ud og dukker op først. En almindelig baselisting gør ikke det arbejde for jer — vi sørger for, at jeres lokale er ét af dem, planlæggerne rent faktisk ser.',
+    processMono: 'Sådan fungerer det',
+    processH2: 'Vi sætter op, lancerer og driver jeres Cvent-tilstedeværelse',
+    processP: 'I behøver ikke blive Cvent-eksperter. Fortæl os om jeres lokale og hvilken forretning I vil have — vi klarer opsætning, kampagner og løbende optimering.',
+    step1H3: 'Fortæl os om jeres lokale', step1P: 'Del kapacitet, mødelokaler, nuværende Cvent-status og hvilken type forretning I vil vinde.',
+    step2H3: 'Vi matcher jer med en pakke', step2P: 'Minimum, Growth, Premium eller Portfolio — valgt ud fra jeres mål, ikke et generisk niveau.',
+    step3H3: 'Vi lancerer og optimerer', step3P: 'Forbedret profil, målrettede kampagner og løbende rapportering — fuldt håndteret af EventPartners Cvent-team.',
+    tilesMono: 'Fire måder at vokse på Cvent',
+    tilesH2: 'Vælg det synlighedsniveau jeres lokale har brug for',
+    tile1H3: 'Bliv fundet', tile1Span: 'Top Responder – 20× flere bookinger',
+    tile2H3: 'Bliv opdaget', tile2Span: 'Nå flere aktive eventplanlæggere',
+    tile3Pop: 'Mest populær', tile3H3: 'Bliv førstevalget', tile3Span: 'Skab efterspørgsel hos de rigtige virksomheder',
+    tile4H3: 'Nå ud til alle', tile4Span: 'Nå hele jeres potentielle marked',
+    tile5H3: 'Se præcis hvad der er inkluderet i hver pakke', tile5Btn: 'Sammenlign pakker ↓',
+    pkgMono: 'Pakkerne',
+    pkgH2: 'Hvor stor en del af bookingerne vil I tage?',
+    pkgP: 'Vælg hvor synlige I vil være, hvem I vil nå, og hvor stor en del af bookingerne I vil tage.',
+    c1H3: 'Bliv fundet', c1Promise: 'Byg en stærkere tilstedeværelse dér, hvor planlæggerne allerede søger.',
+    c1Story: 'I findes allerede på Cvent. Vi sørger for, at I præsenteres på en måde, der rent faktisk sælger lokalet — så når en planlægger sammenligner jer med ti andre muligheder, er det tydeligt, hvorfor I hører hjemme på shortlisten.',
+    c1Li1: 'Enhanced Listing &amp; rigere lokaleprofil', c1Li2: 'Flere billeder &amp; mere visuelt indhold', c1Li3: 'Kampagner &amp; specialtilbud',
+    c1Li4: 'Top Responder-status når kravene opfyldes', c1Li5: 'Optimering af profil &amp; budskab', c1Li6: 'Løbende opdateringer', c1Cta: 'Spørg om Minimum',
+    c2H3: 'Bliv opdaget', c2Promise: 'Vent ikke på at blive fundet — vis jer for flere aktive planlæggere.',
+    c2Story: 'Planlæggere på Cvent leder aktivt efter et lokale lige nu — de søger bare ikke nødvendigvis efter jer. Growth flytter jer fra at håbe, de finder jer, til at sikre, at flere rent faktisk gør.',
+    c2Li1: 'Alt i Minimum', c2Li2: 'Premium-/Diamond-listing', c2Li3: 'Search Ads &amp; Suggested Ads', c2Li4: 'Sponsorerede søgeplaceringer',
+    c2Li5: 'Destinations- &amp; regionplaceringer', c2Li6: 'Need-date-kampagner', c2Cta: 'Spørg om Growth',
+    c3Pop: 'Mest populær', c3H3: 'Skab efterspørgsel', c3Promise: 'Nå de rigtige planlæggere, til den rigtige forretning, på det rigtige tidspunkt.',
+    c3Story: 'Vi stopper med at spørge "hvordan vil I annoncere?" og starter med "hvilken forretning vil I faktisk have?" — og målretter derefter markeder, datoer og planlæggertyper, der bringer jer derhen.',
+    c3Li1: 'Alt i Growth', c3Li2: 'Markeds- &amp; planlægger-targeting', c3Li3: 'Konkurrent-/comp-set-targeting', c3Li4: 'Retargeting &amp; video-retargeting',
+    c3Li5: '15–30 sek. videoannoncer', c3Li6: 'Nyhedsbrev &amp; sponsoreret indhold', c3Li7: 'Dedikerede landingssider', c3Cta: 'Spørg om Premium',
+    c4H3: 'Ejer jeres marked', c4Promise: 'Jeres komplette Cvent-vækstmotor — plus EventPartners eget salgslag.',
+    c4Story: 'Bygget til lokaler, der ikke bare vil have synlighed — de vil bruge verdens største økosystem for møder &amp; events som en aktiv vækstkanal, med EventPartner som driver strategien sammen med jer.',
+    c4Li1: 'Alt i Premium', c4Li2: 'Planner Navigator &amp; intentdata', c4Li3: 'Tabte muligheder &amp; nye planlæggere', c4Li4: 'CventIQ AI-drevne anbefalinger',
+    c4Li5: 'Interaktive plantegninger, 3D &amp; virtuelle rundvisninger', c4Li6: 'Retargeting uden for platformen', c4Li7: 'Dedikeret vækstansvarlig fra EventPartner', c4Cta: 'Spørg om Portfolio',
+    cmpMono: 'Side om side', cmpH2: 'Sammenlign hvad der er inkluderet', cmpHeadIncluded: 'Hvad der er inkluderet',
+    cmpRow1: 'Forbedret lokaleprofil<button type="button" class="info-ico" data-row="cmpRow1" aria-label="Mere information">i</button>',
+    cmpRow2: 'Flere billeder &amp; rigere indhold<button type="button" class="info-ico" data-row="cmpRow2" aria-label="Mere information">i</button>',
+    cmpRow3: 'Aktuelle tilbud &amp; kampagner<button type="button" class="info-ico" data-row="cmpRow3" aria-label="Mere information">i</button>',
+    cmpRow4: 'Premium-/Diamond-synlighed i søgning<button type="button" class="info-ico" data-row="cmpRow4" aria-label="Mere information">i</button>',
+    cmpRow5: 'Vises som anbefalet mulighed<button type="button" class="info-ico" data-row="cmpRow5" aria-label="Mere information">i</button>',
+    cmpRow6: 'Need-date- &amp; destinationskampagner<button type="button" class="info-ico" data-row="cmpRow6" aria-label="Mere information">i</button>',
+    cmpRow7: 'Markeds- &amp; planlægger-targeting<button type="button" class="info-ico" data-row="cmpRow7" aria-label="Mere information">i</button>', cmpRow8: 'Konkurrent-/comp-set-targeting<button type="button" class="info-ico" data-row="cmpRow8" aria-label="Mere information">i</button>', cmpRow9: 'Retargeting &amp; videoannoncer<button type="button" class="info-ico" data-row="cmpRow9" aria-label="Mere information">i</button>',
+    cmpRow10: 'E-mail, indhold &amp; dedikerede landingssider<button type="button" class="info-ico" data-row="cmpRow10" aria-label="Mere information">i</button>', cmpRow11: 'Planlægger-intentdata &amp; prospektering<button type="button" class="info-ico" data-row="cmpRow11" aria-label="Mere information">i</button>', cmpRow12: 'Tabte muligheder &amp; nye planlæggere<button type="button" class="info-ico" data-row="cmpRow12" aria-label="Mere information">i</button>',
+    cmpRow13: 'CventIQ AI-drevne anbefalinger<button type="button" class="info-ico" data-row="cmpRow13" aria-label="Mere information">i</button>', cmpRow14: 'Interaktive plantegninger, 3D &amp; virtuelle rundvisninger<button type="button" class="info-ico" data-row="cmpRow14" aria-label="Mere information">i</button>', cmpRow15: 'Retargeting uden for platformen<button type="button" class="info-ico" data-row="cmpRow15" aria-label="Mere information">i</button>',
+    cmpRow16: 'Dedikeret vækstansvarlig fra EventPartner<button type="button" class="info-ico" data-row="cmpRow16" aria-label="Mere information">i</button>',
+    matchBadge: 'Gratis pakkerådgivning', matchH3: 'Usikker på hvilken pakke der passer til jeres lokale?',
+    matchP: 'Fortæl os om jeres mål og nuværende Cvent-status — vi anbefaler det rigtige udgangspunkt i en kort samtale. Intet salgspres, ingen forpligtelser.',
+    matchBtn: 'Book en gratis samtale',
+    capH2: 'Bed om et tilbud med det samme.<br><em>Vi sammensætter den rigtige pakke til jer.</em>',
+    capP: 'Udfyld formularen, så sender vi et skræddersyet tilbud med anbefalet pakke og pris.<br><br>Vil I gennemgå tilbuddet sammen? Book et 15-minutters møde, så gennemgår vi det hele og svarer på jeres spørgsmål.',
+    miniLabel1: 'Tilbud inden for 24t', miniLabel2: 'Pakkeniveauer', miniLabel3: 'Gennemgang',
+    capLi1: 'Tilbud tilpasset jeres lokale', capLi2: 'Tydelig pakke, pris og hvad der er inkluderet', capLi3: 'Vi sætter det hele op for jer ved opstart',
+    successMsg: 'Tak! Din e-mail-app skulle nu være åbnet med din forespørgsel udfyldt — tryk send, så hører I fra EventPartner inden for 24 timer.',
+    lblVenue: 'Virksomhedsnavn', lblOrgNr: 'CVR-nummer', lblContact: 'Kontaktperson', lblEmail: 'E-mail', lblPhone: 'Telefon',
+    lblCity: 'By', lblCapacity: 'Maks. antal gæster', lblStatus: 'Listet på Cvent i dag?', lblPkg: 'Hvilken pakke er I interesseret i?', lblMessage: 'Besked (valgfrit)',
+    lblHeadroom: 'Hvor meget mere kapacitet har I til at tage imod?', hrDesc: 'Vælg cirka hvor stor en del af jeres samlede kapacitet (100 %) I har mulighed for at fylde med flere bookinger. Det gælder hotelværelser, konferencer og events.',
+    hrBtn1: '5–10 %', hrBtn2: '10–20 %', hrBtn3: '20–30 %', hrBtn4: '30–40 %', hrBtn5: '40–50 %', hrBtn6: '50 % eller mere', hrBtn7: 'Usikker',
+    submitBtn: 'Bed om mit tilbud →',
+    footerText: 'EventPartner — Cvent marketingpakker til lokaler',
+    footerLink: 'Booker I også events for virksomheder? Se eventpartner.io ↗',
+    heroBookBtn: 'Book et møde',
+    capBookLink: 'Vil I gennemgå tilbuddet sammen? Book et 15-minutters møde →',
+    ph_venue: 'Jeres virksomheds navn', ph_orgnr: 'f.eks. 12345678', ph_contact: 'Navn', ph_city: 'f.eks. København', ph_capacity: 'f.eks. 250',
+    ph_message: 'Fortæl os om jeres lokale — mødelokaler, belægningsmål, målmarkeder eller andet vi bør vide...',
+    opt_status: ['Ikke listet endnu', 'Ja — baselisting', 'Ja — Diamond-listing', 'Usikker'],
+    opt_pkg: ['Usikker — anbefal en', 'Minimum — Bliv fundet', 'Growth — Bliv opdaget', 'Premium — Skab efterspørgsel', 'Portfolio — Ejer jeres marked']
+  };
+
+  // Capture the original English content once, so EN can be restored exactly.
+  const textIds = Object.keys(SV).filter(k => !k.startsWith('ph_') && !k.startsWith('opt_'));
+  const EN = {};
+  textIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) EN[id] = el.innerHTML;
+  });
+  const placeholderMap = { ph_venue: 'venue', ph_orgnr: 'orgnr', ph_contact: 'contact', ph_city: 'city', ph_capacity: 'capacity', ph_message: 'message' };
+  const EN_PH = {};
+  Object.keys(placeholderMap).forEach(k => {
+    const el = document.getElementById(placeholderMap[k]);
+    if (el) EN_PH[k] = el.getAttribute('placeholder');
+  });
+  const EN_OPT = {
+    opt_status: Array.from(document.getElementById('status').options).map(o => o.text),
+    opt_pkg: Array.from(document.getElementById('pkg').options).map(o => o.text)
+  };
+  const DICTS = { en: EN, sv: SV, no: NO, da: DA };
+
+  const ROW_INFO = {
+    en: {
+      cmpRow1: { title: 'Improved venue profile', body: '<b>Think of your Diamond Profile as your digital storefront on Cvent.</b> You can invest in driving more planners to the profile, but if it doesn\'t convince them once they get there, you lose the deal. Diamond Profile helps you present your venue at its best and <b>turn visibility into more relevant RFPs.</b>', img: '/venue-packages-assets/img-39-16038b35db5c.webp' },
+      cmpRow2: { title: 'More photos &amp; richer content', body: '<b>More photos and a clearer presentation keep planners on your profile instead of scrolling on to the next venue.</b> Every venue gets one hero image at the base level, but an upgraded listing gives you room for extra photo galleries, video, and even a virtual tour — and remember, it\'s the first 1-2 lines of your description that actually get read, so they need to sell you immediately. Through Profile Enhancement, Cvent\'s own experts can also review and improve your profile for you.', img: '/venue-packages-assets/img-40-976b0bc7cb5f.webp' },
+      cmpRow3: { title: 'Current offers &amp; promotions', body: 'With Promotions Hub, you can showcase your current offers and seasonal promotions directly on your Cvent profile — visible to planners right when they\'re comparing options. The right offer at the right moment can be the difference between being just another name on the list and being the venue that actually gets the RFP.', img: '/venue-packages-assets/img-41-aab5661436e8.webp' },
+      cmpRow4: { title: 'Premium / Diamond visibility in search', body: 'Search Ads give your venue maximum visibility when planners start searching for venues in a specific region. You get premium placement on one of the most important pages in the Cvent Supplier Network — right where planners begin their search.\n\nThink Google, but for venues on Cvent. When a planner starts looking for a venue in your region, you get a premium spot at the very start of that search journey — putting you in front of more potential customers before they\'ve even narrowed down their shortlist.', img: '/venue-packages-assets/img-42-cc371a2338be.webp' },
+      cmpRow5: { title: 'Shown as a recommended option', body: '<b>Think Google Ads — but right at the moment of purchase inside Cvent.</b> When a planner is actively building their shortlist and about to send out an RFP, your venue can be surfaced as a recommended option. You\'re not just visible to the right audience — <b>you\'re visible exactly when that audience is about to book.</b>', img: '/venue-packages-assets/img-43-422f13d11b66.webp' },
+      cmpRow6: { title: 'Need-date &amp; destination promotion', body: 'Got fantastic occupancy in September but need more bookings in November? Then you shouldn\'t put the same effort into both months.\n\nWith Need-date campaigns, you can focus your marketing on the dates where you actually have rooms and meeting capacity to sell — and get in front of planners who are actively searching for their next destination or venue for exactly those dates.', img: '/venue-packages-assets/img-44-48237263205b.webp' },
+      cmpRow7: { title: 'Market &amp; planner targeting', body: '<b>With Comp Set Booster, you choose 4-10 named competitors yourself</b> — and get shown directly on their profile pages when planners are comparing options. Want to reach beyond your own region? Comp Market Booster extends your reach into additional major metro areas, putting you in front of planners who haven\'t even considered your destination yet.', img: '/venue-packages-assets/img-45-9e49160a4311.webp' },
+      cmpRow8: { title: 'Competitor / comp-set targeting', body: 'Imagine a planner is searching for venues in Stockholm and Copenhagen — but hasn\'t decided on a destination yet. With Competitive Market Ads, a venue in, say, Oslo can appear in that process and say: “Have you considered us?”\n\nSo you\'re not just competing for the booking — you\'re competing for the destination itself. You reach planners before they\'ve decided, and can win business from competing markets.', img: '/venue-packages-assets/img-46-b01747cb0755.webp' },
+      cmpRow9: { title: 'Retargeting &amp; video ads', body: 'Your ads can appear at several points in the planner\'s journey — on comparable venues\' profile pages, in the final step of RFP submission under ”These Also Match Your Needs,” on the planner\'s own Suppliers &amp; Responses dashboard, and even when another venue declines a request. Combined with video ads, you get multiple fresh chances to get in front of the same planner instead of relying on a single placement.', img: '/venue-packages-assets/img-47-e39c604a4c7a.webp' },
+      cmpRow10: { title: 'Email, content &amp; dedicated landing pages', body: 'Beyond your own profile, you can get featured in Cvent\'s own content channels — the blog, the ”The Cventure” newsletter reaching 50,000+ recipients every month, and the Destination Guide with over 13,900 pages of destination content. If you\'re a luxury property or have wedding business, Cvent Luxury and Wedding Spot are dedicated channels aimed at exactly that audience.', img: '/venue-packages-assets/img-48-6564b32ba770.webp' },
+      cmpRow11: { title: 'Planner intent data &amp; prospecting', body: '<b>Planner Navigator turns Cvent from a channel where you wait for booking requests into an active sales tool.</b> You can identify the right planners booking in your area, reach out to them directly, and work proactively to fill the dates where you actually need more business.', img: '/venue-packages-assets/img-49-67664b6ace93.webp' },
+      cmpRow12: { title: 'Missed-opportunity &amp; new-planner discovery', body: 'Imagine a corporate customer sends an RFP to five of your competitors — but not to you. With RFP Showcase, you can still get the chance to discover that relevant deal before the customer has decided, show what you can offer, and compete for the booking.', img: '/venue-packages-assets/img-50-682f2db402c6.webp' },
+      cmpRow13: { title: 'CventIQ AI-driven recommendations', body: 'CventIQ is the AI behind Cvent, built specifically for the meetings and events industry. For hotels and venues, that means <b>AI plus Cvent\'s enormous pool of event data can help your sales team work faster, understand demand better, and make smarter decisions about which deals to prioritize.</b>\n\n<b>Think of it as an AI assistant for your venue sales team — backed by Cvent\'s event data and over 25 years of meetings and events market experience.</b>\n\nCventIQ helps you cut down on admin, understand your opportunities better, and put more of your sales team\'s time toward <b>the right RFPs and the right customers — with the goal of winning more profitable bookings.</b>', img: '/venue-packages-assets/img-51-9fa8d7a007ef.webp' },
+      cmpRow14: { title: 'Interactive floor plans, 3D &amp; virtual tours', body: 'It\'s the difference between showing a customer a few photos of an empty room and actually letting them picture what their event could look like. With photorealistic 3D, you sell the vision and the experience — not just square meters and capacity. Let customers experience the space and visualize their event, anywhere, anytime. You can even mirror the 3D experience on your own website for double the value.\n\nInteractive floor plans let planners explore your entire venue digitally and immediately understand which spaces exist, how they relate to each other, how many people they hold, and which layouts are possible — so they can walk through your venue online before ever setting foot in it.', img: '/venue-packages-assets/img-52-f89e04794777.webp' },
+      cmpRow15: { title: 'Off-platform retargeting', body: 'A planner might look at 10–20 different venues and then leave Cvent to continue their research elsewhere. With Ad Retargeting, your venue doesn\'t have to disappear from view. You keep showing up for that planner on YouTube, Meta and other sites — so it\'s your name they remember when it\'s time to choose. One of the strongest forms of direct marketing toward the very best event buyers.', img: '/venue-packages-assets/img-53-d98ae6d2ef46.webp' },
+      cmpRow16: { title: 'Dedicated EventPartner growth manager', body: '<b>Every tool above is powerful — but only if someone actually uses it.</b> Many venues get access to the Cvent platform and then stay at the base level, because no one internally has time to optimize the profile, test ads, or track which campaigns are actually driving more RFPs. With a dedicated growth manager from EventPartner, you get a named contact who owns your account, monitors performance on an ongoing basis, and proactively adjusts your Cvent presence — so the investment actually turns into more bookings, not just another login.' },
+    },
+    sv: {
+      cmpRow1: { title: 'Förbättrad anläggningsprofil', body: '<b>Tänk på Diamond Profile som er digitala butik på Cvent.</b> Ni kan investera i att få fler eventplanerare till profilen, men om den inte övertygar dem när de väl kommer dit tappar ni affären. Diamond Profile hjälper er att presentera anläggningen från sin bästa sida och <b>omvandla synlighet till fler relevanta förfrågningar.</b>', img: '/venue-packages-assets/img-39-16038b35db5c.webp' },
+      cmpRow2: { title: 'Fler bilder &amp; rikare innehåll', body: '<b>Fler bilder och en tydligare presentation gör att fler planerare stannar kvar på er profil istället för att scrolla vidare till nästa anläggning.</b> Alla anläggningar får en huvudbild som grundnivå, men med en uppgraderad listning får ni plats för fler bildgallerier, video och till och med en virtuell rundtur — och kom ihåg att det är de första 1–2 raderna i beskrivningen som faktiskt läses, så de behöver sälja in er direkt. Via Profile Enhancement kan Cvents egna experter dessutom granska och förbättra er profil åt er.', img: '/venue-packages-assets/img-40-976b0bc7cb5f.webp' },
+      cmpRow3: { title: 'Aktuella erbjudanden &amp; kampanjer', body: 'Med Promotions Hub kan ni lyfta fram aktuella erbjudanden och säsongskampanjer direkt på er Cvent-profil — synligt för eventplanerare precis när de jämför alternativ. Rätt erbjudande vid rätt tillfälle kan vara det som avgör om ni blir en av flera på listan, eller den anläggning som faktiskt får förfrågan.', img: '/venue-packages-assets/img-41-aab5661436e8.webp' },
+      cmpRow4: { title: 'Premium-/Diamond-synlighet i sök', body: 'Search Ads ger er anläggning maximal synlighet när eventplanerare börjar söka efter anläggningar i en specifik region. Ni får en premiumplacering på en av de viktigaste sidorna i Cvent Supplier Network — där planerarna börjar sin sökning.\n\nTänk Google — fast för anläggningar på Cvent. När en eventplanerare börjar leta efter en anläggning i er region får ni en premiumplacering där sökresan börjar. Ni hamnar helt enkelt framför fler potentiella kunder innan de hunnit välja vilka anläggningar de vill gå vidare med.', img: '/venue-packages-assets/img-42-cc371a2338be.webp' },
+      cmpRow5: { title: 'Visas som rekommenderat alternativ', body: '<b>Tänk Google Ads — fast precis vid köpögonblicket inne i Cvent.</b> När en eventplanerare aktivt bygger sin shortlist och ska skicka ut en RFP kan er anläggning lyftas fram som ett rekommenderat alternativ. Ni syns alltså inte bara för rätt målgrupp — <b>ni syns när målgruppen faktiskt är på väg att boka.</b>', img: '/venue-packages-assets/img-43-422f13d11b66.webp' },
+      cmpRow6: { title: 'Need-date- &amp; destinationskampanjer', body: 'Har ni fantastiskt bra beläggning i september men behöver fler bokningar i november? Då ska ni inte lägga samma kraft på båda månaderna.\n\nMed Need-date-kampanjer kan ni fokusera marknadsföringen på de datum där ni faktiskt har rum och möteskapacitet att sälja — och exponera dem mot eventplanerare som aktivt söker efter nästa destination eller anläggning just då.', img: '/venue-packages-assets/img-44-48237263205b.webp' },
+      cmpRow7: { title: 'Marknads- &amp; planner-targeting', body: '<b>Med Comp Set Booster väljer ni själva 4–10 namngivna konkurrenter</b> — och synas då direkt på deras profilsidor när planerare jämför alternativ. Vill ni nå bortom er egen region kan Comp Market Booster dessutom utöka räckvidden till fler storstadsregioner, så ni marknadsförs mot planerare som ännu inte ens övervägt er destination.', img: '/venue-packages-assets/img-45-9e49160a4311.webp' },
+      cmpRow8: { title: 'Konkurrent-/comp-set-targeting', body: 'Tänk att en eventplanerare söker efter anläggningar i Stockholm och Köpenhamn — men ännu inte bestämt destination. Med Competitive Market Ads kan en anläggning i exempelvis Oslo synas i den processen och säga: ”Har ni övervägt oss?”\n\nNi konkurrerar alltså inte bara om bokningen — ni konkurrerar om själva destinationen. Ni når eventplanerare innan de har bestämt sig, och kan vinna affärer från konkurrerande marknader.', img: '/venue-packages-assets/img-46-b01747cb0755.webp' },
+      cmpRow9: { title: 'Retargeting &amp; videoannonser', body: 'Era annonser kan visas på flera ställen i planerarens resa — på jämförbara anläggningars profilsidor, i sista steget av RFP-inlämningen under ”These Also Match Your Needs”, på planerarens egen Suppliers &amp; Responses-dashboard, och till och med när en annan anläggning tackar nej till en förfrågan. Kombinerat med videoannonser får ni flera nya chanser att synas för samma planerare, snarare än att förlita er på en enda placering.', img: '/venue-packages-assets/img-47-e39c604a4c7a.webp' },
+      cmpRow10: { title: 'E-post, innehåll &amp; dedikerade landningssidor', body: 'Utöver er egen profil kan ni synas i Cvents egna innehållskanaler — bloggen, nyhetsbrevet ”The Cventure” som når 50 000+ mottagare varje månad, och Destination Guide med över 13 900 sidor destinationsinnehåll. Är ni en lyxanläggning eller har ni bröllopsaffär finns även Cvent Luxury respektive Wedding Spot som dedikerade kanaler mot precis den målgruppen.', img: '/venue-packages-assets/img-48-6564b32ba770.webp' },
+      cmpRow11: { title: 'Planner-intentdata &amp; prospektering', body: '<b>Planner Navigator gör att Cvent går från en kanal där ni väntar på bokningsförfrågningar till ett aktivt säljverktyg.</b> Ni kan identifiera rätt eventplanerare som bokar i ert område, kontakta dem direkt och arbeta proaktivt för att fylla de datum där ni faktiskt behöver mer affärer.', img: '/venue-packages-assets/img-49-67664b6ace93.webp' },
+      cmpRow12: { title: 'Missade affärer &amp; nya planners', body: 'Tänk att en företagskund skickar en RFP till fem av era konkurrenter — men inte till er. Med RFP Showcase kan ni fortfarande få möjlighet att upptäcka den relevanta affären innan kunden har bestämt sig, visa vad ni kan erbjuda och konkurrera om bokningen.', img: '/venue-packages-assets/img-50-682f2db402c6.webp' },
+      cmpRow13: { title: 'CventIQ AI-drivna rekommendationer', body: 'CventIQ är AI:n bakom Cvent, utvecklad specifikt för mötes- och eventbranschen. För hotell och anläggningar innebär det att <b>AI och Cvents stora mängd eventdata kan hjälpa säljteamet att arbeta snabbare, förstå efterfrågan bättre och fatta smartare beslut kring vilka affärer de ska prioritera.</b>\n\n<b>Tänk en AI-assistent för ert anläggningssälj — men med Cvents eventdata och över 25 års erfarenhet av mötes- och eventmarknaden bakom sig.</b>\n\nCventIQ hjälper er att minska administrationen, förstå affärsmöjligheterna bättre och lägga mer av säljteamets tid på <b>rätt RFP:er och rätt kunder — med målet att vinna fler lönsamma bokningar.</b>', img: '/venue-packages-assets/img-51-9fa8d7a007ef.webp' },
+      cmpRow14: { title: 'Interaktiva planritningar, 3D &amp; virtuella visningar', body: 'Det är skillnaden mellan att visa kunden några bilder på en tom lokal och att faktiskt låta dem se framför sig hur deras event skulle kunna bli. Med fotorealistisk 3D kan ni sälja visionen och upplevelsen — inte bara kvadratmeter och kapacitet. Låt kunden uppleva lokalen och visualisera sitt event, var som helst, när som helst. Ni kan även spegla 3D-upplevelsen på er egen hemsida för dubbelt värde.\n\nInteraktiva planritningar låter eventplaneraren utforska hela anläggningen digitalt och direkt förstå vilka lokaler som finns, hur de ligger i förhållande till varandra, hur många personer de rymmer och vilka olika möbleringar som är möjliga — så de kan gå runt i anläggningen digitalt innan de ens har besökt den.', img: '/venue-packages-assets/img-52-f89e04794777.webp' },
+      cmpRow15: { title: 'Retargeting utanför plattformen', body: 'En eventplanerare kanske tittar på 10–20 olika anläggningar och lämnar sedan Cvent för att fortsätta sin research. Med Ad Retargeting behöver er anläggning inte försvinna ur bilden. Ni kan fortsätta synas för planeraren på YouTube, Meta och andra webbplatser — så att det är just ert namn de kommer ihåg när det är dags att välja. En av de starkaste formerna av direkt marknadsföring mot de absolut bästa eventköparna.', img: '/venue-packages-assets/img-53-d98ae6d2ef46.webp' },
+      cmpRow16: { title: 'Dedikerad tillväxtansvarig från EventPartner', body: '<b>Alla verktyg ovan är kraftfulla — men bara om någon faktiskt använder dem.</b> Många anläggningar får tillgång till Cvents plattform och stannar sedan vid grundnivån, för att ingen internt hinner optimera profilen, testa annonser eller följa upp vilka kampanjer som faktiskt ger fler RFP:er. Med en dedikerad tillväxtansvarig från EventPartner får ni en namngiven kontakt som äger ert konto, bevakar resultaten löpande och proaktivt justerar er Cvent-närvaro — så att investeringen faktiskt omsätts i fler bokningar, inte bara fler inloggningsuppgifter.' },
+    },
+    no: {
+      cmpRow1: { title: 'Forbedret lokaleprofil', body: '<b>Tenk på Diamond Profile som butikkvinduet deres på Cvent.</b> Dere kan investere i å få flere planleggere til profilen, men hvis den ikke overbeviser dem når de først er der, taper dere affæren. Diamond Profile hjelper dere å presentere lokalet fra sin beste side og <b>gjøre synlighet om til flere relevante forespørsler.</b>', img: '/venue-packages-assets/img-39-16038b35db5c.webp' },
+      cmpRow2: { title: 'Flere bilder &amp; rikere innhold', body: '<b>Flere bilder og en tydeligere presentasjon gjør at flere planleggere blir værende på profilen deres i stedet for å bla videre til neste lokale.</b> Alle lokaler får ett hovedbilde som grunnivå, men med en oppgradert listing får dere plass til flere bildegallerier, video og til og med en virtuell rundtur — og husk at det er de første 1–2 linjene i beskrivelsen som faktisk blir lest, så de må selge dere inn med en gang. Via Profile Enhancement kan Cvents egne eksperter i tillegg gjennomgå og forbedre profilen deres.', img: '/venue-packages-assets/img-40-976b0bc7cb5f.webp' },
+      cmpRow3: { title: 'Aktuelle tilbud &amp; kampanjer', body: 'Med Promotions Hub kan dere fremheve aktuelle tilbud og sesongkampanjer direkte på Cvent-profilen deres — synlig for planleggere akkurat når de sammenligner alternativer. Riktig tilbud til rett tid kan være det som avgjør om dere blir én av flere på listen, eller lokalet som faktisk får forespørselen.', img: '/venue-packages-assets/img-41-aab5661436e8.webp' },
+      cmpRow4: { title: 'Premium-/Diamond-synlighet i søk', body: 'Search Ads gir lokalet maksimal synlighet når planleggere begynner å søke etter lokaler i en bestemt region. Dere får en premiumplassering på en av de viktigste sidene i Cvent Supplier Network — der planleggerne starter søket sitt.\n\nTenk Google — bare for lokaler på Cvent. Når en planlegger begynner å lete etter et lokale i deres region, får dere en premiumplassering der søket starter. Dere havner rett og slett foran flere potensielle kunder før de har rukket å velge hvilke lokaler de vil gå videre med.', img: '/venue-packages-assets/img-42-cc371a2338be.webp' },
+      cmpRow5: { title: 'Vises som anbefalt alternativ', body: '<b>Tenk Google Ads — bare akkurat i kjøpsøyeblikket inne i Cvent.</b> Når en planlegger aktivt bygger shortlisten sin og skal sende ut en RFP, kan lokalet løftes frem som et anbefalt alternativ. Dere vises altså ikke bare for riktig målgruppe — <b>dere vises når målgruppen faktisk er på vei til å booke.</b>', img: '/venue-packages-assets/img-43-422f13d11b66.webp' },
+      cmpRow6: { title: 'Need-date- &amp; destinasjonskampanjer', body: 'Har dere fantastisk god belegning i september, men trenger flere bookinger i november? Da bør dere ikke legge samme kraft i begge månedene.\n\nMed Need-date-kampanjer kan dere fokusere markedsføringen på datoene der dere faktisk har rom og møtekapasitet å selge — og eksponere dem mot planleggere som aktivt søker etter neste destinasjon eller lokale akkurat da.', img: '/venue-packages-assets/img-44-48237263205b.webp' },
+      cmpRow7: { title: 'Markeds- &amp; planlegger-targeting', body: '<b>Med Comp Set Booster velger dere selv 4–10 navngitte konkurrenter</b> — og vises da direkte på profilsidene deres når planleggere sammenligner alternativer. Vil dere nå utover egen region, kan Comp Market Booster i tillegg utvide rekkevidden til flere storbyregioner, slik at dere markedsføres mot planleggere som ennå ikke har vurdert destinasjonen deres.', img: '/venue-packages-assets/img-45-9e49160a4311.webp' },
+      cmpRow8: { title: 'Konkurrent-/comp-set-targeting', body: 'Tenk at en planlegger søker etter lokaler i Stockholm og København — men ennå ikke har bestemt destinasjon. Med Competitive Market Ads kan et lokale i for eksempel Oslo vises i den prosessen og si: «Har dere vurdert oss?»\n\nDere konkurrerer altså ikke bare om bookingen — dere konkurrerer om selve destinasjonen. Dere når planleggere før de har bestemt seg, og kan vinne forretning fra konkurrerende markeder.', img: '/venue-packages-assets/img-46-b01747cb0755.webp' },
+      cmpRow9: { title: 'Retargeting &amp; videoannonser', body: 'Annonsene deres kan vises på flere steder i planleggerens reise — på sammenlignbare lokalers profilsider, i siste steg av RFP-innsendingen under ”These Also Match Your Needs”, på planleggerens egen Suppliers &amp; Responses-dashboard, og til og med når et annet lokale takker nei til en forespørsel. Kombinert med videoannonser får dere flere nye sjanser til å bli sett av samme planlegger, i stedet for å stole på én enkelt plassering.', img: '/venue-packages-assets/img-47-e39c604a4c7a.webp' },
+      cmpRow10: { title: 'E-post, innhold &amp; dedikerte landingssider', body: 'Utover egen profil kan dere bli vist i Cvents egne innholdskanaler — bloggen, nyhetsbrevet ”The Cventure” som når 50 000+ mottakere hver måned, og Destination Guide med over 13 900 sider destinasjonsinnhold. Er dere et luksuslokale eller har bryllupsforretning, finnes også Cvent Luxury og Wedding Spot som dedikerte kanaler mot akkurat den målgruppen.', img: '/venue-packages-assets/img-48-6564b32ba770.webp' },
+      cmpRow11: { title: 'Planlegger-intensjonsdata &amp; prospektering', body: '<b>Planner Navigator gjør at Cvent går fra en kanal der dere venter på bookingforespørsler, til et aktivt salgsverktøy.</b> Dere kan identifisere de riktige planleggerne som booker i deres område, kontakte dem direkte og jobbe proaktivt for å fylle datoene der dere faktisk trenger mer forretning.', img: '/venue-packages-assets/img-49-67664b6ace93.webp' },
+      cmpRow12: { title: 'Tapte muligheter &amp; nye planleggere', body: 'Tenk at en bedriftskunde sender en RFP til fem av konkurrentene deres — men ikke til dere. Med RFP Showcase kan dere likevel få muligheten til å oppdage den relevante forretningsmuligheten før kunden har bestemt seg, vise hva dere kan tilby og konkurrere om bookingen.', img: '/venue-packages-assets/img-50-682f2db402c6.webp' },
+      cmpRow13: { title: 'CventIQ AI-drevne anbefalinger', body: 'CventIQ er AI-en bak Cvent, utviklet spesifikt for møte- og eventbransjen. For hoteller og lokaler betyr det at <b>AI og Cvents enorme mengde eventdata kan hjelpe salgsteamet med å jobbe raskere, forstå etterspørselen bedre og ta smartere beslutninger om hvilken forretning de skal prioritere.</b>\n\n<b>Tenk en AI-assistent for lokalsalget deres — men med Cvents eventdata og over 25 års erfaring fra møte- og eventmarkedet i ryggen.</b>\n\nCventIQ hjelper dere med å redusere administrasjonen, forstå forretningsmulighetene bedre og bruke mer av salgsteamets tid på <b>riktige RFP-er og riktige kunder — med mål om å vinne flere lønnsomme bookinger.</b>', img: '/venue-packages-assets/img-51-9fa8d7a007ef.webp' },
+      cmpRow14: { title: 'Interaktive plantegninger, 3D &amp; virtuelle omvisninger', body: 'Det er forskjellen mellom å vise kunden noen bilder av et tomt rom og faktisk la dem se for seg hvordan arrangementet deres kan bli. Med fotorealistisk 3D kan dere selge visjonen og opplevelsen — ikke bare kvadratmeter og kapasitet. La kunden oppleve lokalet og visualisere arrangementet sitt, hvor som helst, når som helst. Dere kan også speile 3D-opplevelsen på deres egen nettside for dobbel verdi.\n\nInteraktive plantegninger lar planleggeren utforske hele lokalet digitalt og umiddelbart forstå hvilke rom som finnes, hvordan de ligger i forhold til hverandre, hvor mange personer de rommer og hvilke møbleringer som er mulige — slik at de kan gå rundt i lokalet digitalt før de i det hele tatt har besøkt det.', img: '/venue-packages-assets/img-52-f89e04794777.webp' },
+      cmpRow15: { title: 'Retargeting utenfor plattformen', body: 'En planlegger ser kanskje på 10–20 forskjellige lokaler og forlater deretter Cvent for å fortsette researchen sin. Med Ad Retargeting trenger ikke lokalet deres å forsvinne fra bildet. Dere kan fortsette å vises for planleggeren på YouTube, Meta og andre nettsteder — slik at det er nettopp navnet deres de husker når det er tid for å velge. En av de sterkeste formene for direkte markedsføring mot de aller beste eventkjøperne.', img: '/venue-packages-assets/img-53-d98ae6d2ef46.webp' },
+      cmpRow16: { title: 'Dedikert vekstansvarlig fra EventPartner', body: '<b>Alle verktøyene ovenfor er kraftfulle — men bare hvis noen faktisk bruker dem.</b> Mange lokaler får tilgang til Cvent-plattformen og blir så værende på grunnivået, fordi ingen internt rekker å optimalisere profilen, teste annonser eller følge opp hvilke kampanjer som faktisk gir flere RFP-er. Med en dedikert vekstansvarlig fra EventPartner får dere en navngitt kontakt som eier kontoen deres, følger resultatene løpende og proaktivt justerer Cvent-tilstedeværelsen deres — slik at investeringen faktisk gir flere bookinger, ikke bare enda en innlogging.' },
+    },
+    da: {
+      cmpRow1: { title: 'Forbedret lokaleprofil', body: '<b>Tænk på jeres Diamond Profile som jeres digitale butiksvindue på Cvent.</b> I kan investere i at få flere planlæggere til profilen, men hvis den ikke overbeviser dem, når de først er der, mister I forretningen. Diamond Profile hjælper jer med at præsentere lokalet fra sin bedste side og <b>omdanne synlighed til flere relevante forespørgsler.</b>', img: '/venue-packages-assets/img-39-16038b35db5c.webp' },
+      cmpRow2: { title: 'Flere billeder &amp; rigere indhold', body: '<b>Flere billeder og en tydeligere præsentation gør, at flere planlæggere bliver på jeres profil i stedet for at scrolle videre til det næste lokale.</b> Alle lokaler får ét hovedbillede som grundniveau, men med en opgraderet listing får I plads til flere billedgallerier, video og ligefrem en virtuel rundvisning — og husk, at det er de første 1-2 linjer i beskrivelsen, der rent faktisk bliver læst, så de skal sælge jer med det samme. Via Profile Enhancement kan Cvents egne eksperter desuden gennemgå og forbedre jeres profil.', img: '/venue-packages-assets/img-40-976b0bc7cb5f.webp' },
+      cmpRow3: { title: 'Aktuelle tilbud &amp; kampagner', body: 'Med Promotions Hub kan I fremhæve jeres aktuelle tilbud og sæsonkampagner direkte på jeres Cvent-profil — synligt for planlæggere lige når de sammenligner muligheder. Det rigtige tilbud på det rigtige tidspunkt kan være det, der afgør, om I bliver ét ud af flere på listen, eller det lokale, der rent faktisk får forespørgslen.', img: '/venue-packages-assets/img-41-aab5661436e8.webp' },
+      cmpRow4: { title: 'Premium-/Diamond-synlighed i søgning', body: 'Search Ads giver jeres lokale maksimal synlighed, når planlæggere begynder at søge efter lokaler i en bestemt region. I får en premiumplacering på en af de vigtigste sider i Cvent Supplier Network — dér hvor planlæggerne starter deres søgning.\n\nTænk Google — bare for lokaler på Cvent. Når en planlægger begynder at lede efter et lokale i jeres region, får I en premiumplacering, hvor søgningen starter. I havner simpelthen foran flere potentielle kunder, inden de har nået at vælge, hvilke lokaler de vil gå videre med.', img: '/venue-packages-assets/img-42-cc371a2338be.webp' },
+      cmpRow5: { title: 'Vises som anbefalet mulighed', body: '<b>Tænk Google Ads — bare lige i købsøjeblikket inde i Cvent.</b> Når en planlægger aktivt bygger sin shortlist og skal sende en RFP ud, kan jeres lokale fremhæves som en anbefalet mulighed. I bliver altså ikke kun vist til den rigtige målgruppe — <b>I bliver vist, når målgruppen rent faktisk er ved at booke.</b>', img: '/venue-packages-assets/img-43-422f13d11b66.webp' },
+      cmpRow6: { title: 'Need-date- &amp; destinationskampagner', body: 'Har I fantastisk god belægning i september, men skal bruge flere bookinger i november? Så skal I ikke lægge samme kraft i begge måneder.\n\nMed Need-date-kampagner kan I fokusere markedsføringen på de datoer, hvor I rent faktisk har værelser og mødekapacitet at sælge — og blive vist til planlæggere, der aktivt søger efter deres næste destination eller lokale netop da.', img: '/venue-packages-assets/img-44-48237263205b.webp' },
+      cmpRow7: { title: 'Markeds- &amp; planlægger-targeting', body: '<b>Med Comp Set Booster vælger I selv 4-10 navngivne konkurrenter</b> — og bliver derefter vist direkte på deres profilsider, når planlæggere sammenligner muligheder. Vil I nå ud over jeres egen region, kan Comp Market Booster desuden udvide rækkevidden til flere storbyregioner, så I markedsføres over for planlæggere, der endnu ikke har overvejet jeres destination.', img: '/venue-packages-assets/img-45-9e49160a4311.webp' },
+      cmpRow8: { title: 'Konkurrent-/comp-set-targeting', body: 'Forestil jer, at en planlægger søger efter lokaler i Stockholm og København — men endnu ikke har besluttet destination. Med Competitive Market Ads kan et lokale i for eksempel Oslo dukke op i den proces og sige: »Har I overvejet os?«\n\nI konkurrerer altså ikke kun om bookingen — I konkurrerer om selve destinationen. I når planlæggere, før de har besluttet sig, og kan vinde forretning fra konkurrerende markeder.', img: '/venue-packages-assets/img-46-b01747cb0755.webp' },
+      cmpRow9: { title: 'Retargeting &amp; videoannoncer', body: 'Jeres annoncer kan vises flere steder i planlæggerens rejse — på sammenlignelige lokalers profilsider, i sidste trin af RFP-indsendelsen under ”These Also Match Your Needs”, på planlæggerens egen Suppliers &amp; Responses-dashboard, og selv når et andet lokale takker nej til en forespørgsel. Kombineret med videoannoncer får I flere nye chancer for at blive set af den samme planlægger, i stedet for at stole på én enkelt placering.', img: '/venue-packages-assets/img-47-e39c604a4c7a.webp' },
+      cmpRow10: { title: 'E-mail, indhold &amp; dedikerede landingssider', body: 'Ud over jeres egen profil kan I blive vist i Cvents egne indholdskanaler — bloggen, nyhedsbrevet ”The Cventure”, der når 50.000+ modtagere hver måned, og Destination Guide med over 13.900 sider destinationsindhold. Er I et luksuslokale eller har bryllupsforretning, findes også Cvent Luxury og Wedding Spot som dedikerede kanaler til netop den målgruppe.', img: '/venue-packages-assets/img-48-6564b32ba770.webp' },
+      cmpRow11: { title: 'Planlægger-intentdata &amp; prospektering', body: '<b>Planner Navigator gør, at Cvent går fra en kanal, hvor I venter på bookingforespørgsler, til et aktivt salgsværktøj.</b> I kan identificere de rigtige planlæggere, der booker i jeres område, kontakte dem direkte og arbejde proaktivt for at fylde de datoer, hvor I rent faktisk mangler forretning.', img: '/venue-packages-assets/img-49-67664b6ace93.webp' },
+      cmpRow12: { title: 'Tabte muligheder &amp; nye planlæggere', body: 'Forestil jer, at en erhvervskunde sender en RFP til fem af jeres konkurrenter — men ikke til jer. Med RFP Showcase kan I stadig få muligheden for at opdage den relevante forretningsmulighed, før kunden har besluttet sig, vise hvad I kan tilbyde, og konkurrere om bookingen.', img: '/venue-packages-assets/img-50-682f2db402c6.webp' },
+      cmpRow13: { title: 'CventIQ AI-drevne anbefalinger', body: 'CventIQ er AI\'en bag Cvent, udviklet specifikt til mødes- og eventbranchen. For hoteller og lokaler betyder det, at <b>AI og Cvents enorme mængde eventdata kan hjælpe salgsteamet med at arbejde hurtigere, forstå efterspørgslen bedre og træffe smartere beslutninger om, hvilken forretning de skal prioritere.</b>\n\n<b>Tænk en AI-assistent til jeres lokalesalg — men med Cvents eventdata og over 25 års erfaring fra mødes- og eventmarkedet i ryggen.</b>\n\nCventIQ hjælper jer med at reducere administrationen, forstå forretningsmulighederne bedre og bruge mere af salgsteamets tid på <b>de rigtige RFP\'er og de rigtige kunder — med målet om at vinde flere rentable bookinger.</b>', img: '/venue-packages-assets/img-51-9fa8d7a007ef.webp' },
+      cmpRow14: { title: 'Interaktive plantegninger, 3D &amp; virtuelle rundvisninger', body: 'Det er forskellen på at vise kunden nogle billeder af et tomt lokale og rent faktisk lade dem se for sig, hvordan deres event kunne blive. Med fotorealistisk 3D kan I sælge visionen og oplevelsen — ikke kun kvadratmeter og kapacitet. Lad kunden opleve lokalet og visualisere deres event, hvor som helst, når som helst. I kan også spejle 3D-oplevelsen på jeres egen hjemmeside for dobbelt værdi.\n\nInteraktive plantegninger lader planlæggeren udforske hele lokalet digitalt og med det samme forstå, hvilke rum der findes, hvordan de ligger i forhold til hinanden, hvor mange personer de rummer, og hvilke møbleringer der er mulige — så de kan gå rundt i lokalet digitalt, inden de overhovedet har besøgt det.', img: '/venue-packages-assets/img-52-f89e04794777.webp' },
+      cmpRow15: { title: 'Retargeting uden for platformen', body: 'En planlægger kigger måske på 10-20 forskellige lokaler og forlader derefter Cvent for at fortsætte sin research. Med Ad Retargeting behøver jeres lokale ikke forsvinde ud af billedet. I bliver ved med at blive vist for planlæggeren på YouTube, Meta og andre websteder — så det er netop jeres navn, de husker, når det er tid til at vælge. En af de stærkeste former for direkte markedsføring mod de allerbedste eventkøbere.', img: '/venue-packages-assets/img-53-d98ae6d2ef46.webp' },
+      cmpRow16: { title: 'Dedikeret vækstansvarlig fra EventPartner', body: '<b>Alle værktøjerne ovenfor er stærke — men kun hvis nogen rent faktisk bruger dem.</b> Mange lokaler får adgang til Cvent-platformen og bliver så hængende på grundniveauet, fordi ingen internt når at optimere profilen, teste annoncer eller følge op på, hvilke kampagner der rent faktisk giver flere RFP\'er. Med en dedikeret vækstansvarlig fra EventPartner får I en navngiven kontakt, der ejer jeres konto, følger resultaterne løbende og proaktivt justerer jeres Cvent-tilstedeværelse — så investeringen rent faktisk bliver til flere bookinger, ikke bare endnu et login.' },
+    },
+  };
+  const OPENED = { en: 'Email app opened ✓', sv: 'E-postappen öppnades ✓', no: 'E-postappen ble åpnet ✓', da: 'E-mail-appen blev åbnet ✓' };
+
+  let currentLang = 'sv';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    const dict = DICTS[lang] || EN;
+    textIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && dict[id] !== undefined) el.innerHTML = dict[id];
+    });
+    const phDict = lang === 'en' ? EN_PH : dict;
+    Object.keys(placeholderMap).forEach(k => {
+      const el = document.getElementById(placeholderMap[k]);
+      if (el && phDict[k] !== undefined) el.setAttribute('placeholder', phDict[k]);
+    });
+    const statusOpts = lang === 'en' ? EN_OPT.opt_status : dict.opt_status;
+    const pkgOpts = lang === 'en' ? EN_OPT.opt_pkg : dict.opt_pkg;
+    Array.from(document.getElementById('status').options).forEach((o, i) => { o.text = statusOpts[i]; });
+    Array.from(document.getElementById('pkg').options).forEach((o, i) => { o.text = pkgOpts[i]; });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('ep-lang', lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  });
+
+  let startLang = 'sv';
+  try {
+    const validLangs = ['sv', 'en', 'no', 'da'];
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    const saved = localStorage.getItem('ep-lang');
+    if (validLangs.includes(urlLang)) {
+      startLang = urlLang; // explicit campaign link (?lang=da etc.) always wins
+    } else if (validLangs.includes(saved)) {
+      startLang = saved;
+    }
+  } catch (e) {}
+  applyLang(startLang);
+
+  /* ---------------- Info popups (compare table) ---------------- */
+  const infoOverlay = document.getElementById('infoModalOverlay');
+  const infoModalEl = document.getElementById('infoModal');
+  const infoTitleEl = document.getElementById('infoModalTitle');
+  const infoBodyEl = document.getElementById('infoModalBody');
+  const infoImgEl = document.getElementById('infoModalImg');
+  const infoCloseBtn = document.getElementById('infoModalClose');
+  let infoLastFocused = null;
+
+  function openInfoModal(rowId) {
+    const langData = ROW_INFO[currentLang] || ROW_INFO.en;
+    const entry = (langData && langData[rowId]) || (ROW_INFO.en && ROW_INFO.en[rowId]);
+    if (!entry) return;
+    infoTitleEl.innerHTML = entry.title;
+    infoBodyEl.innerHTML = entry.body.split('\n\n').map(function(p) { return '<p>' + p + '</p>'; }).join('');
+    if (entry.img) {
+      infoImgEl.src = entry.img;
+      infoImgEl.alt = entry.title.replace(/<[^>]*>/g, '');
+      infoImgEl.hidden = false;
+      infoModalEl.classList.add('has-img');
+    } else {
+      infoImgEl.hidden = true;
+      infoImgEl.removeAttribute('src');
+      infoModalEl.classList.remove('has-img');
+    }
+    infoLastFocused = document.activeElement;
+    infoOverlay.classList.add('open');
+    infoCloseBtn.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeInfoModal() {
+    infoOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if (infoLastFocused && typeof infoLastFocused.focus === 'function') infoLastFocused.focus();
+  }
+
+  // Delegated on document (not bound per-button) because applyLang() rewrites each
+  // row's innerHTML on language switch, which would otherwise destroy and recreate
+  // these buttons and silently drop any listeners attached directly to them.
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.info-ico');
+    if (!btn) return;
+    e.preventDefault();
+    openInfoModal(btn.dataset.row);
+  });
+
+  infoCloseBtn.addEventListener('click', closeInfoModal);
+  infoOverlay.addEventListener('click', (e) => {
+    if (e.target === infoOverlay) closeInfoModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && infoOverlay.classList.contains('open')) closeInfoModal();
+  });
+
+  /* ---------------- Lead form -> pre-filled email ---------------- */
+  const form = document.getElementById('leadForm');
+  const successMsg = document.getElementById('successMsg');
+  const submitBtn = document.getElementById('submitBtn');
+  const TO_EMAIL = 'joakim@hardcallsales.se';
+
+  const headroomBtns = document.querySelectorAll('.headroom-btn');
+  const headroomInput = document.getElementById('headroom');
+  function selectHeadroom(btn) {
+    headroomBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    headroomInput.value = btn.textContent.trim();
+  }
+  headroomBtns.forEach(btn => {
+    btn.addEventListener('click', () => selectHeadroom(btn));
+  });
+  if (headroomBtns.length) selectHeadroom(headroomBtns[0]);
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const venue = document.getElementById('venue').value;
+    const orgnr = document.getElementById('orgnr').value;
+    const contact = document.getElementById('contact').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const city = document.getElementById('city').value;
+    const capacity = document.getElementById('capacity').value;
+    const status = document.getElementById('status').value;
+    const pkg = document.getElementById('pkg').value;
+    const headroom = document.getElementById('headroom').value;
+    const message = document.getElementById('message').value;
+
+    const subject = 'Cvent package request — ' + (venue || 'New venue');
+    const bodyLines = [
+      'Venue: ' + venue,
+      'Organization number: ' + orgnr,
+      'Contact person: ' + contact,
+      'Email: ' + email,
+      'Phone: ' + phone,
+      'City: ' + city,
+      'Max event capacity: ' + capacity,
+      'Currently on Cvent: ' + status,
+      'Package of interest: ' + pkg,
+      'Capacity headroom: ' + headroom,
+      '',
+      'Message:',
+      message
+    ];
+    const mailto = 'mailto:' + TO_EMAIL
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+
+    window.location.href = mailto;
+    successMsg.classList.add('show');
+    const original = submitBtn.textContent;
+    submitBtn.textContent = OPENED[document.documentElement.lang] || OPENED.en;
+    setTimeout(() => { submitBtn.textContent = original; }, 3000);
+  });
+
+  // ---- VSL hero video (autoplay muted, click-to-unmute; not YouTube/iframe) ----
+  (function(){
+    const video = document.getElementById('vslVideo');
+    if (!video) return;
+    const muteBtn = document.getElementById('vslMuteBtn');
+    const playHint = document.getElementById('vslPlayHint');
+    const MUTE_ICON = '<svg id="vslMuteIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 9V15H8L13 20V4L8 9H4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 8L22 16M22 8L17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    const UNMUTE_ICON = '<svg id="vslMuteIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 9V15H8L13 20V4L8 9H4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16.5 9C17.5 10 17.5 14 16.5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M19 6.5C21.5 9 21.5 15 19 17.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    function showEmpty(){
+      if (playHint) playHint.hidden = false;
+      if (muteBtn) muteBtn.hidden = true;
+    }
+    function showPlaying(){
+      if (playHint) playHint.hidden = true;
+      if (muteBtn) muteBtn.hidden = false;
+    }
+    video.addEventListener('playing', showPlaying);
+    video.addEventListener('error', showEmpty, true);
+    showEmpty();
+    setTimeout(function(){ if (video.readyState === 0) showEmpty(); }, 1500);
+    if (muteBtn) {
+      muteBtn.addEventListener('click', function(){
+        video.muted = !video.muted;
+        muteBtn.setAttribute('aria-pressed', String(!video.muted));
+        muteBtn.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
+        muteBtn.innerHTML = video.muted ? MUTE_ICON : UNMUTE_ICON;
+      });
+    }
+  })();
+</script>
+</body>
+</html>
