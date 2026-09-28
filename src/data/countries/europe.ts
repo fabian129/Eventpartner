@@ -265,11 +265,11 @@ export const EUROPE: Country[] = [
   {
     slug: "sweden", code: "se", name: "Sweden", nameSv: "Sverige", venues: "2,475+",
     topVenues: [
-      { name: "Stockholmsmässan", city: "Stockholm", capacity: "30 000+", type: "Event Venue" },
-      { name: "Svenska Mässan Gothia Towers", city: "Gothenburg", capacity: "18 000+", type: "Event Venue" },
-      { name: "Stockholm Waterfront Congress Centre", city: "Stockholm", capacity: "3 000", type: "Event Venue" },
-      { name: "Malmömässan", city: "Malmö", capacity: "10 000+", type: "Event Venue" },
-      { name: "Scandinavian XPO", city: "Stockholm/Arlanda", capacity: "8 000", type: "Event Venue" },
+      { name: "Stockholmsmässan", city: "Stockholm", capacity: "30 000+", type: "Event Venue", image: "/Images/venues/sweden/venue-1.jpg" },
+      { name: "Svenska Mässan Gothia Towers", city: "Gothenburg", capacity: "18 000+", type: "Event Venue", image: "/Images/venues/sweden/venue-6.jpg" },
+      { name: "Stockholm Waterfront Congress Centre", city: "Stockholm", capacity: "3 000", type: "Event Venue", image: "/Images/venues/sweden/venue-7.jpg" },
+      { name: "Malmömässan", city: "Malmö", capacity: "10 000+", type: "Event Venue", image: "/Images/venues/sweden/venue-10.jpg" },
+      { name: "Scandinavian XPO", city: "Stockholm/Arlanda", capacity: "8 000", type: "Event Venue", image: "/Images/venues/sweden/venue-13.jpg" },
     ],
   },
   {
