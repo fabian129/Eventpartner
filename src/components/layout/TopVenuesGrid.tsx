@@ -111,7 +111,7 @@ export function TopVenuesGrid({
             style={{ transition: "flex 0.5s ease" }}
           >
             <Image
-              src={getVenueImage(countrySlug, i, imageCount)}
+              src={venue.image || getVenueImage(countrySlug, i, imageCount)}
               alt={venue.name}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
