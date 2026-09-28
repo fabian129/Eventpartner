@@ -604,10 +604,10 @@ const CONTINENT_ICONS: Record<string, React.ComponentType<{ className?: string }
 
 const CONTINENT_GROUPS = [
   { id: 'europe',       label: 'Europe',        labelSv: 'Europa',                    regionSlugs: ['nordics','western-europe','central-europe','southern-europe','balkans-southeast','baltics','central-europe-extended','balkans-extended'] },
-  { id: 'middle-east',  label: 'Middle East',   labelSv: 'Mellanöstern',              regionSlugs: ['middle-east'] },
+  { id: 'north-america', label: 'North America', labelSv: 'Nordamerika',              regionSlugs: ['north-america'] },
   { id: 'africa',       label: 'Africa',        labelSv: 'Afrika',                    regionSlugs: ['africa'] },
   { id: 'asia-pacific', label: 'Asia',  labelSv: 'Asien', regionSlugs: ['asia-pacific'] },
-  { id: 'north-america', label: 'North America', labelSv: 'Nordamerika',              regionSlugs: ['north-america'] },
+  { id: 'middle-east',  label: 'Middle East',   labelSv: 'Mellanöstern',              regionSlugs: ['middle-east'] },
   { id: 'south-america', label: 'South America', labelSv: 'Sydamerika',               regionSlugs: ['south-america'] },
 ];
 
