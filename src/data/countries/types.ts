@@ -3,6 +3,8 @@ export type Venue = {
   city: string;
   capacity: string;
   type: string;
+  /** Optional venue-specific image (overrides the generic venue-best-N fallback) */
+  image?: string;
 };
 
 export type Country = {
