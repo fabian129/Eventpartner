@@ -39,7 +39,7 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
     },
     {
       question: sv ? "Vilka länder och städer täcker ni?" : "Which countries and cities do you cover?",
-      answer: sv ? "Vi har lokaler i 175 länder — från Island till Cypern, från Portugal till Finland. Totalt över 340 000 venues. Oavsett om ni behöver ett konferenshotell i Stockholm eller en galalokal i Barcelona, hittar vi rätt." : "We have venues in 175 countries — from Iceland to Cyprus, from Portugal to Finland. Over 340,000 venues in total. Whether you need a conference hotel in Stockholm or a gala venue in Barcelona, we'll find the right one.",
+      answer: sv ? "Vi har lokaler i 175 länder — från Island till Cypern, från Portugal till Finland. Totalt närmare 340 000 venues. Oavsett om ni behöver ett konferenshotell i Stockholm eller en galalokal i Barcelona, hittar vi rätt." : "We have venues in 175 countries — from Iceland to Cyprus, from Portugal to Finland. Nearly 340,000 venues in total. Whether you need a conference hotel in Stockholm or a gala venue in Barcelona, we'll find the right one.",
     },
     {
       question: sv ? "Kan ni hantera riktigt stora event?" : "Can you handle really large events?",
