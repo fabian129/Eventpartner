@@ -45,8 +45,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     ? "EventPartner — Allt ditt event behöver. En partner."
     : "EventPartner — Everything Your Event Needs. One Partner.";
   const description = sv
-    ? "Er kompletta partner för företagsevent i 175 länder. 340 000+ venues, en plattform — lokaler, leverantörer och förhandling, hanterat från start till mål."
-    : "Your complete partner for corporate events across 175 countries. 340,000+ venues, one platform — sourcing, suppliers and negotiation handled end to end.";
+    ? "Er kompletta partner för företagsevent i 175 länder. Närmare 340 000 venues, en plattform — lokaler, leverantörer och förhandling, hanterat från start till mål."
+    : "Your complete partner for corporate events across 175 countries. Nearly 340,000 venues, one platform — sourcing, suppliers and negotiation handled end to end.";
   return {
     metadataBase: new URL("https://eventpartner.io"),
     title: { default: title, template: "%s — EventPartner" },
