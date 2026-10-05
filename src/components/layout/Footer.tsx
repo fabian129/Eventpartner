@@ -242,17 +242,10 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
     }
   };
 
-  const ctaDescText = (() => {
-    const rawDesc = cms?.ctaDesc || (svLocale
-      ? "Alltid 3 skräddarsydda förslag som matchar era behov, från 48 timmar efter att vi mottagit er förfrågan."
-      : "Always 3 tailored proposals matching your needs, from 48 hours after we receive your inquiry.");
-    if (rawDesc.includes("24") || rawDesc.includes("23")) {
-      return svLocale
-        ? "Alltid 3 skräddarsydda förslag som matchar era behov, från 48 timmar efter att vi mottagit er förfrågan."
-        : "Always 3 tailored proposals matching your needs, from 48 hours after we receive your inquiry.";
-    }
-    return rawDesc;
-  })();
+  // No promised response time on standard inquiries (decided with Malin, Oct 2026).
+  const ctaDescText = svLocale
+    ? "Alltid 3 skräddarsydda förslag. Vi påbörjar varje förfrågan inom 12 timmar — snitt-svarstid 23h."
+    : "Always 3 tailored proposals. We start on every inquiry within 12 hours — average response time 23h.";
 
   return (
     <footer className="relative w-full bg-[#0A0A0A] border-t border-white/[0.06]">
