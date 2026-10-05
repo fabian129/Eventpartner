@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const sv = locale === "sv";
   return pageMetadata({ locale, path: "/faq",
     title: sv ? "Vanliga frågor" : "FAQ",
-    description: sv ? "Svar på vanliga frågor om EventPartner — kostnad, svarstid, 340 000+ venues i 175 länder och hur bokningsprocessen fungerar." : "Answers to common questions about EventPartner — pricing, response times, 340,000+ venues across 175 countries and how booking works." });
+    description: sv ? "Svar på vanliga frågor om EventPartner — kostnad, svarstid, närmare 340 000 venues i 175 länder och hur bokningsprocessen fungerar." : "Answers to common questions about EventPartner — pricing, response times, nearly 340,000 venues across 175 countries and how booking works." });
 }
 
 export default async function FaqPage({ params }: { params: Promise<{ locale: string }> }) {
