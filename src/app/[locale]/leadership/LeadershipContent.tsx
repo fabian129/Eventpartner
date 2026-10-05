@@ -2,7 +2,10 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Linkedin } from "lucide-react";
+import { ArrowRight, Calendar, Linkedin } from "lucide-react";
+import { useLocale } from "next-intl";
+import { TEAM_BY_NAME } from "@/lib/teamMembers";
+import { openCalBooking } from "@/components/booking/BookingModal";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -15,6 +18,8 @@ interface TeamMember {
 }
 
 export function LeadershipContent({ headline, description, teamMembers, sectionLabel, sectionLabelRight, ctaHeadline, ctaDescription }: { headline: string; description: string; teamMembers: TeamMember[]; sectionLabel?: string; sectionLabelRight?: string; ctaHeadline?: string; ctaDescription?: string }) {
+  const locale = useLocale();
+  const bookLabel = locale === "sv" ? "Boka möte" : "Book a meeting";
   return (
     <main className="relative w-full pt-32 md:pt-44 pb-20 md:pb-32 overflow-hidden">
       <div className="absolute inset-0 dot-grid dot-grid-fade-from-right pointer-events-none opacity-50" />
@@ -80,6 +85,16 @@ export function LeadershipContent({ headline, description, teamMembers, sectionL
                   <Linkedin className="w-3.5 h-3.5" />
                   LinkedIn
                 </a>
+              )}
+              {TEAM_BY_NAME[member.name]?.calLink && (
+                <button
+                  type="button"
+                  onClick={() => openCalBooking(TEAM_BY_NAME[member.name].calLink as string)}
+                  className="mt-4 w-full inline-flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-[14px] font-medium bg-[var(--bg-card)] hover:bg-purple hover:text-white hover:border-purple text-[var(--text-primary)] border border-[var(--border-default)] transition-colors duration-300"
+                >
+                  <Calendar className="w-4 h-4" />
+                  {bookLabel}
+                </button>
               )}
             </motion.div>
           ))}
