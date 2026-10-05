@@ -18,6 +18,61 @@ const VENUE_TYPE_SV: Record<string, string> = {
   "Conference Hall": "Konferenshall",
 };
 
+/** City names that differ in Swedish (data is stored in English). */
+const CITY_SV: Record<string, string> = {
+  "Algiers": "Alger",
+  "Athens": "Aten",
+  "Beijing": "Peking",
+  "Brussels": "Bryssel",
+  "Brussels/Zaventem": "Bryssel/Zaventem",
+  "Bucharest": "Bukarest",
+  "Cairo": "Kairo",
+  "Cape Town": "Kapstaden",
+  "Cologne": "Köln",
+  "Copenhagen": "Köpenhamn",
+  "Dead Sea": "Döda havet",
+  "Florence": "Florens",
+  "Gardermoen/Oslo Airport": "Gardermoen/Oslo flygplats",
+  "Geneva": "Genève",
+  "Ghent": "Gent",
+  "Gothenburg": "Göteborg",
+  "Havana": "Havanna",
+  "Helsinki": "Helsingfors",
+  "Ho Chi Minh City": "Ho Chi Minh-staden",
+  "Lisbon": "Lissabon",
+  "Luxemburg City": "Luxemburg",
+  "Munich": "München",
+  "Oulu": "Uleåborg",
+  "Prague": "Prag",
+  "Reykjavik": "Reykjavík",
+  "Rome": "Rom",
+  "Tampere": "Tammerfors",
+  "Turku": "Åbo",
+  "Victoria Falls": "Victoriafallen",
+  "Vienna": "Wien",
+  "Warsaw": "Warszawa",
+  "Zurich": "Zürich",
+};
+
+/** A few entries in the data are stored in Swedish — English names for /en. */
+const CITY_EN: Record<string, string> = {
+  "Belgrad": "Belgrade",
+  "Haag": "The Hague",
+  "Kreta": "Crete",
+  "Luxemburg City": "Luxembourg City",
+  "Luzern": "Lucerne",
+  "Milano": "Milan",
+};
+
+const CAPACITY_EN: Record<string, string> = {
+  "10 000+ beroende på setup": "10,000+ depending on setup",
+  "mycket stor — över 150 000 m² eventyta": "very large — over 150,000 m² of event space",
+};
+
+export function localizeCity(city: string, sv: boolean): string {
+  return sv ? CITY_SV[city] || city : CITY_EN[city] || city;
+}
+
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 /* Fallback images if no venue-specific image exists */
@@ -144,11 +199,11 @@ export function TopVenuesGrid({
               <div className="flex items-center gap-3 text-[13px] text-white/60">
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="w-3 h-3" />
-                  {venue.city}
+                  {localizeCity(venue.city, sv)}
                 </span>
                 <span className="inline-flex items-center gap-1">
                   <Users className="w-3 h-3" />
-                  {venue.capacity}
+                  {sv ? venue.capacity : CAPACITY_EN[venue.capacity] || venue.capacity}
                 </span>
               </div>
               <p className="text-[12px] text-white/40 mt-1.5">{sv ? VENUE_TYPE_SV[venue.type] || venue.type : venue.type}</p>
