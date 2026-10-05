@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Globe, Heart, Shield, Zap, Users, MapPin, Calendar, Award, ArrowRight } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
-import { fixVenueCount } from "@/lib/venueCount";
+import { fixVenueCount, fixClaims } from "@/lib/venueCount";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const ICON_MAP: Record<string, any> = { heart: Heart, zap: Zap, globe: Globe, shield: Shield };
@@ -106,7 +106,7 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
             <motion.div key={v.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.08 * i, ease: EASE }} className="relative p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] group hover:border-tiffany/20 hover:shadow-lg hover:shadow-tiffany/[0.03] transition-all duration-300">
               <div className="w-10 h-10 rounded-xl bg-tiffany/10 flex items-center justify-center mb-5"><v.icon className="w-5 h-5 text-tiffany" /></div>
               <h3 className="text-lg font-medium text-[var(--text-primary)] mb-2">{v.title}</h3>
-              <p className="text-[15px] text-[var(--text-secondary)] leading-[1.7]">{v.description}</p>
+              <p className="text-[15px] text-[var(--text-secondary)] leading-[1.7]">{fixClaims(v.description, sv)}</p>
             </motion.div>
           ))}
         </div>
@@ -137,7 +137,7 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
         <motion.a href="/#request" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }} className="group flex items-center justify-between p-8 md:p-10 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-tiffany/30 transition-all duration-300">
           <div>
             <p className="text-xl md:text-2xl font-display font-medium text-[var(--text-primary)] mb-2">{cms?.ctaHeadline || t('ctaHeadline')}</p>
-            <p className="text-[var(--text-secondary)] text-sm">{cms?.ctaDescription || t('ctaDescription')}</p>
+            <p className="text-[var(--text-secondary)] text-sm">{fixClaims(cms?.ctaDescription, sv) || t('ctaDescription')}</p>
           </div>
           <div className="w-12 h-12 rounded-xl bg-tiffany/10 border border-tiffany/20 flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-tiffany transition-all duration-300 shrink-0 ml-6"><ArrowRight className="w-5 h-5" /></div>
         </motion.a>
