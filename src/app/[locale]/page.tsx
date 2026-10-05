@@ -39,8 +39,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     logo: "https://eventpartner.io/icon.png",
     description:
       locale === "sv"
-        ? "Komplett partner för företagsevent — 340 000+ venues i 175 länder. Lokaler, leverantörer och förhandling, hanterat från start till mål."
-        : "Complete partner for corporate events — 340,000+ venues across 175 countries. Sourcing, suppliers and negotiation handled end to end.",
+        ? "Komplett partner för företagsevent — närmare 340 000 venues i 175 länder. Lokaler, leverantörer och förhandling, hanterat från start till mål."
+        : "Complete partner for corporate events — nearly 340,000 venues across 175 countries. Sourcing, suppliers and negotiation handled end to end.",
     areaServed: "Worldwide",
     sameAs: [
       "https://www.instagram.com/eventpartner.io/",
