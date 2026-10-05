@@ -424,7 +424,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
               {svLocale ? "Global närvaro" : "Global Presence"}
             </h4>
             <span className="font-mono text-[10px] text-white/15 tracking-wide">
-              {svLocale ? "— 340 000+ venues i 175 länder" : "— 340,000+ venues across 175 countries"}
+              {svLocale ? "— närmare 340 000 venues i 175 länder" : "— nearly 340,000 venues across 175 countries"}
             </span>
           </div>
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
