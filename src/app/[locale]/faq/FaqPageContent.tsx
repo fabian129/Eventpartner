@@ -80,7 +80,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
     },
     {
       question: sv ? "Vilka länder täcker ni?" : "Which countries do you cover?",
-      answer: sv ? "Vi arbetar i 175 länder med tillgång till 340 000+ lokaler. Från Skandinavien till Medelhavet kan vi hitta den perfekta lokalen för ert event var som helst i världen." : "We operate across 175 countries with access to 340,000+ venues. From Scandinavia to the Mediterranean, we can source the perfect venue for your event anywhere around the globe."
+      answer: sv ? "Vi arbetar i 175 länder med tillgång till närmare 340 000 lokaler. Från Skandinavien till Medelhavet kan vi hitta den perfekta lokalen för ert event var som helst i världen." : "We operate across 175 countries with access to nearly 340,000 venues. From Scandinavia to the Mediterranean, we can source the perfect venue for your event anywhere around the globe."
     },
     {
       question: sv ? "Kostar det något att använda EventPartners tjänst?" : "Is there a cost to use EventPartner's service?",
