@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from 'next-intl';
+import { fixVenueCount } from "@/lib/venueCount";
 import Image from "next/image";
 import { MapPin, Users, Calendar, Award, Linkedin } from "lucide-react";
 import { TEAM_MEMBERS } from "@/lib/teamMembers";
@@ -106,7 +107,7 @@ export function AboutSection({ cms, showTeam = true }: AboutProps) {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2 + i * 0.08, ease: EASE }}
                 >
-                  <span className="font-display text-2xl font-medium text-[var(--text-primary)] block leading-none">{stat.value}</span>
+                  <span className="font-display text-2xl font-medium text-[var(--text-primary)] block leading-none">{fixVenueCount(stat.value, sv)}</span>
                   <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mt-1 block">{stat.label}</span>
                 </motion.div>
               ))}
