@@ -4,6 +4,19 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { MapPin, Users } from "lucide-react";
 import type { Venue } from "@/data/countries";
+import { useLocale } from "next-intl";
+
+const VENUE_TYPE_SV: Record<string, string> = {
+  "Hotel & Conference": "Hotell & konferens",
+  "Convention center": "Kongresscenter",
+  "Event Venue": "Eventlokal",
+  "Event venue": "Eventlokal",
+  "Resort & Conference": "Resort & konferens",
+  "Exhibition center": "Mässcenter",
+  "Conference center": "Konferenscenter",
+  "Exhibition and trade center": "Mäss- och handelscenter",
+  "Conference Hall": "Konferenshall",
+};
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -77,6 +90,7 @@ export function TopVenuesGrid({
   countrySlug: string;
 }) {
   const displayVenues = venues.slice(0, 5);
+  const sv = useLocale() === "sv";
   const imageCount = IMAGE_COUNTS[countrySlug] || 0;
 
   return (
@@ -89,9 +103,9 @@ export function TopVenuesGrid({
           transition={{ duration: 0.7, ease: EASE }}
           className="mb-8"
         >
-          <p className="section-label mb-2">Popular venues</p>
+          <p className="section-label mb-2">{sv ? "Populära lokaler" : "Popular venues"}</p>
           <h2 className="font-display text-2xl md:text-3xl font-medium tracking-tight text-[var(--text-primary)]">
-            Top {venues.length} in {countryName}
+            {sv ? `Topp ${venues.length} i ${countryName}` : `Top ${venues.length} in ${countryName}`}
           </h2>
         </motion.div>
       </div>
@@ -137,7 +151,7 @@ export function TopVenuesGrid({
                   {venue.capacity}
                 </span>
               </div>
-              <p className="text-[12px] text-white/40 mt-1.5">{venue.type}</p>
+              <p className="text-[12px] text-white/40 mt-1.5">{sv ? VENUE_TYPE_SV[venue.type] || venue.type : venue.type}</p>
             </div>
           </div>
         ))}
