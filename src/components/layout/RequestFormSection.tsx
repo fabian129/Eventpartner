@@ -12,6 +12,7 @@ import { Send, CheckCircle, ArrowRight, ExternalLink, Calendar, Loader2, Clock }
 import { useTheme } from "@/components/utils/ThemeProvider";
 import Link from "next/link";
 import { openBookingPicker } from "@/components/booking/BookingModal";
+import { fixClaims } from "@/lib/venueCount";
 
 /** Team members customers can book a meeting with (shown as stacked avatars). */
 const MEETING_HOSTS = [
@@ -469,7 +470,7 @@ export function RequestFormSection({ cms }: { cms?: {
               </span>
             </button>
             <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--text-dim)]">
-              {cms?.disclaimer || t('disclaimer')}
+              {fixClaims(cms?.disclaimer, sv) || t('disclaimer')}
             </span>
           </div>
         </motion.form>
