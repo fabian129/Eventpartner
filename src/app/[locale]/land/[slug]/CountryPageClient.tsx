@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { TopVenuesGrid } from "@/components/layout/TopVenuesGrid";
+import { TopVenuesGrid, localizeCity } from "@/components/layout/TopVenuesGrid";
 import type { Country } from "@/data/countries";
 import { useLocale } from "next-intl";
 
@@ -271,7 +271,7 @@ export function CountryPageClient({ country }: { country: Country }) {
 
                   <div>
                     <label className={labelClass}>{t.city}</label>
-                    <input type="text" placeholder={t.cityPh(country.topVenues[0]?.city || t.capital)} className={inputClass}
+                    <input type="text" placeholder={t.cityPh(country.topVenues[0]?.city ? localizeCity(country.topVenues[0].city, sv) : t.capital)} className={inputClass}
                       value={form.city} onChange={(e) => update("city", e.target.value)} />
                   </div>
 
