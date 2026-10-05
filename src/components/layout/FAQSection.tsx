@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations, useLocale } from 'next-intl';
+import { fixClaims } from "@/lib/venueCount";
 import { ChevronDown } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import { DotGrid } from "@/components/ui/DotGrid";
@@ -62,11 +63,7 @@ export function FAQSection({ cms }: { cms?: FaqCMS }) {
   const rawFaqs = cms?.items?.length ? cms.items : DEFAULT_FAQS;
   const faqs = rawFaqs.map(faq => ({
     ...faq,
-    answer: faq.answer
-      .replace(/within 24 hours/gi, "from 48 hours")
-      .replace(/inom 24 timmar/gi, "från 48 timmar")
-      .replace(/24h/gi, "48h")
-      .replace(/24 timmar/gi, "48 timmar")
+    answer: fixClaims(faq.answer, sv)
   }));
 
   return (
