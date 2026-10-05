@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import { Send, CheckCircle, ArrowRight, ExternalLink, Calendar, Loader2, Clock } from "lucide-react";
 import { useTheme } from "@/components/utils/ThemeProvider";
 import Link from "next/link";
-import { BOOKING_LINKS } from "@/lib/bookingLinks";
+import { openBookingPicker } from "@/components/booking/BookingModal";
 
 /** Team members customers can book a meeting with (shown as stacked avatars). */
 const MEETING_HOSTS = [
@@ -510,10 +510,9 @@ export function RequestFormSection({ cms }: { cms?: {
               </p>
             </div>
           </div>
-          <a
-            href={BOOKING_LINKS.requestForm}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={openBookingPicker}
             className={`w-full md:w-auto inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl text-[14px] font-medium transition-colors ${
               isDark 
                 ? 'bg-white/5 hover:bg-white/10 text-white border border-white/10' 
@@ -522,7 +521,7 @@ export function RequestFormSection({ cms }: { cms?: {
           >
             <Calendar className="w-4 h-4" />
             {cms?.meetingButton || t('meetingSection.cta')}
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>
