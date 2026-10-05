@@ -228,7 +228,7 @@
       "Quarterly comprehensive reporting & ESG / sustainability data",
       "Enterprise governance aligned with CSRD, NIS2 & travel management",
       "Reports",
-      "Priority response within 48h",
+      "Priority response within 12h",
       "On average 14% discount",
       "Liability insurance up to €10,000,000 / 100,000,000 SEK",
       "Complimentary site inspections"
@@ -476,7 +476,7 @@
     "heroHeadlineAccent": "EventPartner.",
     "heroIntroText": "We connect companies with the right venues and suppliers. We negotiate on your behalf and make sure your event is memorable and creates real value. External events and internal gatherings have never been easier to create than with EventPartner VIP.",
     "heroStats": [
-      { "value": "from 48h", "label": "Priority response" },
+      { "value": "12h", "label": "Priority response" },
       { "value": "14%", "label": "Avg. discount" },
       { "value": "175", "label": "Countries" },
       { "value": "1:1", "label": "Dedicated manager" }
@@ -489,7 +489,7 @@
     "manifestoBody2": "Whether you're planning 5 events per year or 50, VIP clients receive custom contract terms, exclusive venue access, and strategic support to optimise your entire event portfolio.",
     "manifestoMotto": "Priority is not a perk — it's the standard.",
     "manifestoStats": [
-      { "value": "from 48h", "label": "Priority response" },
+      { "value": "12h", "label": "Priority response" },
       { "value": "Avg. 14%", "label": "Discounts" },
       { "value": "1:1", "label": "Account manager" },
       { "value": "Custom", "label": "Contract terms" }
@@ -511,7 +511,7 @@
       "Aligned with enterprise governance: CSRD, ESG, NIS2 compliance",
       "Advanced spend control & travel management integration",
       "Access to the EventPartner AI Assistant",
-      "Priority response within 48h",
+      "Priority response within 12h",
       "Liability insurance up to €10,000,000 / 100,000,000 SEK",
       "Custom contract & billing terms"
     ],
