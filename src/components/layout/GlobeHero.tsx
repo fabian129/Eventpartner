@@ -473,7 +473,7 @@ function GlobeExplorer() {
                   <span className="text-tiffany">{geSv ? "eventlokal" : "event venue"}</span>
                 </h2>
                 <p className="text-[13px] text-white/35 leading-relaxed mb-5">
-                  {geSv ? "Utforska 340 000+ venues i 175 länder. Välj en region för att bläddra bland länder och hitta lokaler som passar ert event." : "Explore 340,000+ venues across 175 countries. Select a region to browse countries and discover venues tailored to your event."}
+                  {geSv ? "Utforska närmare 340 000 venues i 175 länder. Välj en region för att bläddra bland länder och hitta lokaler som passar ert event." : "Explore nearly 340,000 venues across 175 countries. Select a region to browse countries and discover venues tailored to your event."}
                 </p>
                 <div className="flex flex-col gap-2.5">
                   <div className="flex items-center gap-3">
@@ -510,7 +510,7 @@ function GlobeExplorer() {
                 <defs><path id="orb-hero" d="M 250,250 m -235,0 a 235,235 0 1,1 470,0 a 235,235 0 1,1 -470,0" fill="none" /></defs>
                 <circle cx="250" cy="250" r="235" fill="none" stroke="white" strokeWidth="0.3" opacity="0.08" />
                 <text fill="white" opacity="0.15" style={{ fontSize: "9px", fontFamily: "'JetBrains Mono',monospace", letterSpacing: "0.25em", textTransform: "uppercase" }}>
-                  <textPath href="#orb-hero" startOffset="0%">{geSv ? "EVENTPARTNER • 340 000+ VENUES • 175 LÄNDER • EVENTPARTNER • 340 000+ VENUES • 175 LÄNDER •" : "EVENTPARTNER • 340,000+ VENUES • 175 COUNTRIES • EVENTPARTNER • 340,000+ VENUES • 175 COUNTRIES •"}</textPath>
+                  <textPath href="#orb-hero" startOffset="0%">{geSv ? "EVENTPARTNER • ~340 000 VENUES • 175 LÄNDER • EVENTPARTNER • ~340 000 VENUES • 175 LÄNDER •" : "EVENTPARTNER • ~340,000 VENUES • 175 COUNTRIES • EVENTPARTNER • ~340,000 VENUES • 175 COUNTRIES •"}</textPath>
                 </text>
               </svg>
             </div>
@@ -678,11 +678,11 @@ function MobileVenueExplorer() {
         </h2>
         <div className="flex justify-center gap-6 mt-4">
           {(mvSv ? [
-            { value: '340 000+', label: 'Venues' },
+            { value: '~340 000', label: 'Venues' },
             { value: '175', label: 'Länder' },
             { value: '23h', label: mvSv ? 'Snitt-svarstid' : 'Avg. Response' },
           ] : [
-            { value: '340,000+', label: 'Venues' },
+            { value: '~340,000', label: 'Venues' },
             { value: '175', label: 'Countries' },
             { value: '23h', label: 'Avg. Response' },
           ]).map(s => (
