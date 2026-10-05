@@ -13,6 +13,13 @@ import { useTheme } from "@/components/utils/ThemeProvider";
 import Link from "next/link";
 import { BOOKING_LINKS } from "@/lib/bookingLinks";
 
+/** Team members customers can book a meeting with (shown as stacked avatars). */
+const MEETING_HOSTS = [
+  { name: "Jennifer Ström", image: "/Images/Team/jennifer.webp" },
+  { name: "Karolina Schauerova", image: "/Images/Team/karolina.webp" },
+  { name: "Berivan Batak", image: "/Images/Team/berivan.webp" },
+];
+
 export function RequestFormSection({ cms }: { cms?: {
   badge?: string;
   headline?: string;
@@ -467,7 +474,7 @@ export function RequestFormSection({ cms }: { cms?: {
           </div>
         </motion.form>
 
-        {/* Book Meeting Alternative with Malin */}
+        {/* Book Meeting Alternative with the team */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -477,15 +484,23 @@ export function RequestFormSection({ cms }: { cms?: {
           style={{ boxShadow: isDark ? "0 4px 40px rgba(0,0,0,0.15)" : "0 4px 40px rgba(0,0,0,0.04)" }}
         >
           <div className="flex items-center gap-5 w-full md:w-auto">
-            <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 border border-[var(--border-default)]">
-              {/* Real Malin picture */}
-              <Image 
-                src="/Images/Team/malin-color-real.webp" 
-                alt="Malin Berlin — EventPartner"
-                width={80} 
-                height={80} 
-                className="w-full h-full object-cover"
-              />
+            <div className="flex shrink-0 -space-x-4 md:-space-x-5">
+              {MEETING_HOSTS.map((host, i) => (
+                <div
+                  key={host.name}
+                  title={host.name}
+                  className="relative w-14 h-14 md:w-[72px] md:h-[72px] rounded-full overflow-hidden border-[3px] border-[var(--bg-primary)] shadow-md transition-transform duration-300 hover:-translate-y-1"
+                  style={{ zIndex: MEETING_HOSTS.length - i }}
+                >
+                  <Image
+                    src={host.image}
+                    alt={`${host.name} — EventPartner`}
+                    width={72}
+                    height={72}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
             </div>
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-purple mb-1">{cms?.meetingLabel || t('meetingSection.label')}</p>
