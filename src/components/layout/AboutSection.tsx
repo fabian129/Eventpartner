@@ -45,7 +45,7 @@ export function AboutSection({ cms, showTeam = true }: AboutProps) {
   const sv = useLocale() === 'sv';
 
   const DEFAULT_STATS = [
-    { value: sv ? "340 000+" : "340,000+", label: sv ? "Venues världen över" : "Venues worldwide" },
+    { value: sv ? "~340 000" : "~340,000", label: sv ? "Venues världen över" : "Venues worldwide" },
     { value: "175", label: sv ? "Länder" : "Countries" },
     { value: "10+", label: sv ? "Års erfarenhet" : "Years of experience" },
   ];
