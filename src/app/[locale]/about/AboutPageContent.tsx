@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Globe, Heart, Shield, Zap, Users, MapPin, Calendar, Award, ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { fixVenueCount } from "@/lib/venueCount";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const ICON_MAP: Record<string, any> = { heart: Heart, zap: Zap, globe: Globe, shield: Shield };
@@ -28,6 +29,7 @@ interface AboutCMS {
 
 export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
   const t = useTranslations('aboutPage');
+  const sv = useLocale() === 'sv';
 
   const defaultStats = t.raw('stats') as { value: string; label: string }[];
   const stats = cms?.stats || defaultStats;
@@ -69,7 +71,7 @@ export function AboutPageContent({ cms }: { cms?: AboutCMS }) {
           {stats.map((stat, i) => { const IC = STAT_ICONS[i] || MapPin; return (
             <motion.div key={stat.label} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: EASE }} className="relative p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] group hover:border-tiffany/30 transition-all duration-300">
               <IC className="w-4 h-4 text-tiffany mb-4 opacity-60" />
-              <span className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] block leading-none">{stat.value}</span>
+              <span className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] block leading-none">{fixVenueCount(stat.value, sv)}</span>
               <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-muted)] mt-2 block">{stat.label}</span>
             </motion.div>
           ); })}
