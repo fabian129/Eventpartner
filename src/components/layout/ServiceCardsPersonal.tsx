@@ -46,8 +46,8 @@ const SERVICES = [
   {
     title: "Venue Sourcing",
     titleSv: "Lokalbokning",
-    desc: "340,000+ venues in 175 countries. Always 3 proposals with Fast Proposal Delivery.",
-    descSv: "340 000+ lokaler i 175 länder. Alltid 3 förslag med snabb leverans.",
+    desc: "Nearly 340,000 venues in 175 countries. Always 3 proposals with Fast Proposal Delivery.",
+    descSv: "Närmare 340 000 lokaler i 175 länder. Alltid 3 förslag med snabb leverans.",
     image: "/Images/group-people-restaurant.webp",
     label: "04",
     icon: "globe" as const,
@@ -208,7 +208,7 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-[var(--border-default)] pt-5">
             {(cms?.stats || [
-              { label: sv ? "Lokaler" : "Venues", value: sv ? "340 000+" : "340,000+" },
+              { label: sv ? "Lokaler" : "Venues", value: sv ? "~340 000" : "~340,000" },
               { label: sv ? "Länder" : "Countries", value: "175" },
               { label: sv ? "Snitt-svarstid" : "Avg. Response", value: "23h" },
               { label: sv ? "Förslag" : "Proposals", value: "3+" },
