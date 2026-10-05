@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Crown, Star, Shield, Users, Clock, Gift, ArrowRight, Check, Sparkles, X, Send, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
-import { BOOKING_LINKS } from "@/lib/bookingLinks";
+import { openBookingPicker } from "@/components/booking/BookingModal";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -270,7 +270,7 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
       <section className="max-w-[1200px] mx-auto px-6 md:px-10 pb-24 md:pb-32">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: EASE }}>
           <div className="max-w-[800px] grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-3 md:gap-4">
-            <a href={BOOKING_LINKS.vip} target="_blank" rel="noopener noreferrer" className="group text-left flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[var(--text-muted)] transition-all duration-300 min-h-[130px] w-full">
+            <a href="#" onClick={(e) => { e.preventDefault(); openBookingPicker(); }} className="group text-left flex flex-col justify-between p-6 md:p-7 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-default)] hover:border-[var(--text-muted)] transition-all duration-300 min-h-[130px] w-full">
               <span className="text-[13px] font-semibold text-[var(--text-secondary)]">{cms?.ctaCard1Title || t('ctaCard1Title')}</span>
               <div className="flex items-end justify-between mt-4 w-full">
                 <p className="text-[15px] md:text-[17px] text-[var(--text-muted)] leading-snug max-w-[200px]">{cms?.ctaCard1Desc || t('ctaCard1Desc')}</p>
@@ -412,9 +412,8 @@ export function VIPPageContent({ cms }: { cms?: VIPCMS }) {
                     <p className="text-xs text-[var(--text-muted)]">
                       {t('modalMeetingText')}{" "}
                       <a
-                        href={BOOKING_LINKS.vip}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="#"
+                        onClick={(e) => { e.preventDefault(); setIsModalOpen(false); openBookingPicker(); }}
                         className="text-purple hover:text-purple-light transition-colors font-medium underline"
                       >
                         {t('modalMeetingLink')}
