@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { REGIONS } from "@/data/regions";
 import { COUNTRIES } from "@/data/countries";
+import { fixVenueCount } from "@/lib/venueCount";
 import { useSmoothScroll } from "@/components/utils/SmoothScroll";
 
 const FOOTER_LINKS = {
@@ -345,7 +346,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
                 </div>
               </Link>
               <p className="text-[13px] text-white/35 leading-relaxed max-w-xs mb-6">
-                {cms?.brandDesc || t('tagline')}
+                {fixVenueCount(cms?.brandDesc, svLocale) || t('tagline')}
               </p>
 
               {/* Social Links */}
