@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from 'next-intl';
+import { fixVenueCount } from "@/lib/venueCount";
 import Image from "next/image";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -215,7 +216,7 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
             ]).map((s) => (
               <div key={s.label}>
                 <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--text-dim)] block mb-1">{s.label}</span>
-                <span className="font-display text-[17px] font-medium text-[var(--text-primary)]">{s.value}</span>
+                <span className="font-display text-[17px] font-medium text-[var(--text-primary)]">{fixVenueCount(s.value, sv)}</span>
               </div>
             ))}
           </div>
@@ -235,7 +236,7 @@ export function ServiceCardsPersonal({ cms }: { cms?: ServicesCMS }) {
             const merged = cmsCard ? {
               ...fallback,
               title: cmsCard.title || fallback.title,
-              desc: cmsCard.desc || fallback.desc,
+              desc: fixVenueCount(cmsCard.desc, sv) || fallback.desc,
             } : fallback;
             return (
               <div key={service.title} className="aspect-[4/3] md:aspect-[3/2]">
