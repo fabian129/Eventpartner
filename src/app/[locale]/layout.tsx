@@ -12,6 +12,7 @@ import { SmoothScroll } from "@/components/utils/SmoothScroll";
 import { SidebarNav } from "@/components/layout/SidebarNav";
 import { ShopProvider } from "@/components/shop/ShopProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { BookingModal } from "@/components/booking/BookingModal";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
@@ -111,6 +112,7 @@ export default async function LocaleLayout({
               <SmoothScroll>
                 {children}
               </SmoothScroll>
+              <BookingModal />
             </ShopProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
