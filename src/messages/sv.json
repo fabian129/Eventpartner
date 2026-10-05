@@ -228,7 +228,7 @@
       "Kvartalsvis omfattande rapportering samt ESG- & hållbarhetsdata",
       "Enterprise-governance anpassad för CSRD, NIS2 & travel management",
       "Rapporter",
-      "Prioriterat svar inom 48h",
+      "Prioriterat svar inom 12h",
       "I snitt 14% rabatt",
       "Ansvarsförsäkring upp till 100 000 000 SEK / €10 000 000",
       "Kostnadsfria platsbesiktningar"
@@ -476,7 +476,7 @@
     "heroHeadlineAccent": "EventPartner.",
     "heroIntroText": "Vi kopplar samman företag med rätt lokaler och leverantörer. Vi förhandlar åt er, och ser till att ert event blir minnesvärt och skapar värde. Både externa event och interna sammankomster har aldrig varit enklare att skapa än med EventPartner VIP.",
     "heroStats": [
-      { "value": "48h", "label": "Prioriterat svar" },
+      { "value": "12h", "label": "Prioriterat svar" },
       { "value": "14%", "label": "Snittbesparing" },
       { "value": "175", "label": "Länder" },
       { "value": "1:1", "label": "Dedikerad kontaktperson" }
@@ -489,7 +489,7 @@
     "manifestoBody2": "Oavsett om du planerar 5 event per år eller 50, får VIP-kunder anpassade avtalsvillkor, exklusiv tillgång till lokaler och strategiskt stöd för att optimera hela din eventportfölj.",
     "manifestoMotto": "Prioritet är inte en förmån — det är standarden.",
     "manifestoStats": [
-      { "value": "48h", "label": "Prioriterat svar" },
+      { "value": "12h", "label": "Prioriterat svar" },
       { "value": "I snitt 14%", "label": "Rabatter" },
       { "value": "1:1", "label": "Account manager" },
       { "value": "Anpassat", "label": "Avtalsvillkor" }
@@ -511,7 +511,7 @@
       "Anpassat för enterprise-krav: CSRD, ESG och NIS2-governance",
       "Avancerad kostnadskontroll & travel management",
       "Tillgång till EventPartner AI-assistent",
-      "Prioriterat svar inom 48h",
+      "Prioriterat svar inom 12h",
       "Ansvarsförsäkring upp till 100 000 000 SEK / €10 000 000",
       "Anpassade avtals- & faktureringsvillkor"
     ],
