@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const sv = locale === "sv";
   return pageMetadata({ locale, path: "/about",
     title: sv ? "Om oss" : "About Us",
-    description: sv ? "EventPartner gör företagseventplanering lika smidig som en hotellbokning — 340 000+ venues i 175 länder och 30+ års samlad erfarenhet." : "EventPartner makes corporate event planning as easy as booking a hotel — 340,000+ venues across 175 countries and 30+ years of combined experience." });
+    description: sv ? "EventPartner gör företagseventplanering lika smidig som en hotellbokning — närmare 340 000 venues i 175 länder och 30+ års samlad erfarenhet." : "EventPartner makes corporate event planning as easy as booking a hotel — nearly 340,000 venues across 175 countries and 30+ years of combined experience." });
 }
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
