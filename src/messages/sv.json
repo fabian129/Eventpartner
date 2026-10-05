@@ -90,7 +90,7 @@
     "cta": "Få en gratis offert",
     "ctaSub": "Gratis · Inga förpliktelser · Snabb leverans av förslag",
     "stats": {
-      "venues": { "value": "340 000+", "label": "Lokaler" },
+      "venues": { "value": "~340 000", "label": "Lokaler" },
       "countries": { "value": "175", "label": "Länder" },
       "response": { "value": "23h", "label": "Snitt-svarstid" },
       "proposals": { "value": "3+", "label": "Förslag per förfrågan" }
@@ -541,7 +541,7 @@
     "heroHeadlineLine3": "event.",
     "heroSubtitle": "EventPartner grundades på en idé: att göra företagseventplanering lika smidigt som att boka ett hotellrum. Med ett nätverk som sträcker sig över 175 länder och djup branschexpertis gör vi det möjligt — varje dag.",
     "stats": [
-      { "value": "340 000+", "label": "Lokaler världen över" },
+      { "value": "~340 000", "label": "Lokaler världen över" },
       { "value": "175", "label": "Länder" },
       { "value": "10+", "label": "Års erfarenhet" }
     ],
