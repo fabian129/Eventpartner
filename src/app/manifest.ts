@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "EventPartner",
     short_name: "EventPartner",
     description:
-      "Your complete partner for corporate events across 175 countries. 340,000+ venues, one platform.",
+      "Your complete partner for corporate events across 175 countries. Nearly 340,000 venues, one platform.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a0a0a",
