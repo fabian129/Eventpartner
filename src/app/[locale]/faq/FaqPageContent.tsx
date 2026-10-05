@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "next-intl";
+import { fixClaims } from "@/lib/venueCount";
 import { ChevronDown, MessageCircle, ArrowRight, HelpCircle, Search } from "lucide-react";
 import { useSmoothScroll } from "@/components/utils/SmoothScroll";
 
@@ -110,11 +111,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
   const rawFaqs = cms?.faqs || DEFAULT_FAQS;
   const faqs = rawFaqs.map(faq => ({
     ...faq,
-    answer: faq.answer
-      .replace(/within 24 hours/gi, "from 48 hours")
-      .replace(/inom 24 timmar/gi, "från 48 timmar")
-      .replace(/24h/gi, "48h")
-      .replace(/24 timmar/gi, "48 timmar")
+    answer: fixClaims(faq.answer, sv)
   }));
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [searchQuery, setSearchQuery] = useState("");
@@ -292,7 +289,7 @@ export function FaqPageContent({ cms }: { cms?: FaqCMS }) {
               {cms?.ctaHeadline || (sv ? "Har du fler frågor?" : "Still have questions?")}
             </p>
             <p className="text-[var(--text-secondary)] text-sm">
-              {cms?.ctaDescription || (sv ? "Skicka din fråga så återkommer vi inom 23 timmar." : "Send us your inquiry and we'll get back to you within 23 hours.")}
+              {fixClaims(cms?.ctaDescription, sv) || (sv ? "Skicka din fråga så återkommer vi i snitt inom 23 timmar." : "Send us your inquiry and we'll get back to you within 23 hours on average.")}
             </p>
           </div>
           <div className="w-12 h-12 rounded-xl bg-tiffany/10 border border-tiffany/20 flex items-center justify-center group-hover:bg-tiffany group-hover:text-black text-tiffany transition-all duration-300 shrink-0 ml-6">
