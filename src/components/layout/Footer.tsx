@@ -2,7 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
-import { Instagram, Linkedin, Facebook, Globe, ArrowRight, Mail, ChevronDown, MapPin } from "lucide-react";
+import { Instagram, Linkedin, Globe, ArrowRight, Mail, ChevronDown, MapPin } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -65,9 +65,8 @@ const FOOTER_LINKS_SV: typeof FOOTER_LINKS = {
 };
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://instagram.com", Icon: Instagram },
-  { label: "LinkedIn", href: "https://linkedin.com", Icon: Linkedin },
-  { label: "Facebook", href: "https://facebook.com", Icon: Facebook },
+  { label: "Instagram", href: "https://www.instagram.com/eventpartner.io/", Icon: Instagram },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/eventpartner-global", Icon: Linkedin },
 ];
 
 // Curated inspiration images for the newsletter visual strip
