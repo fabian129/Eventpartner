@@ -8,6 +8,7 @@ import { usePrintfulCart } from "@/context/PrintfulCartContext";
 import { VPPShowcase } from "@/components/shop/VPPShowcase";
 import { LogoTicker } from "@/components/layout/LogoTicker";
 import { ShoppingBag, ArrowRight } from "lucide-react";
+import { openBookingPicker } from "@/components/booking/BookingModal";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -199,9 +200,8 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
       {/* Bottom CTA */}
       <section className="relative max-w-[1200px] mx-auto px-6 md:px-10">
         <motion.a
-          href="https://cal.com/eventpartner/15min"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#"
+          onClick={(e) => { e.preventDefault(); openBookingPicker(); }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
