@@ -180,7 +180,7 @@ function RegionAccordion({ label, regionSlugs }: { label: string; regionSlugs: s
               {countries.map((country, i) => (
                 <span key={country!.slug} className="inline">
                   <Link
-                    href={`/${locale}/land/${country!.slug}`}
+                    href={`/land/${country!.slug}`}
                     className="text-[11px] text-white/30 hover:text-tiffany transition-colors duration-200"
                   >
                     {sv ? (country!.nameSv || country!.name) : country!.name}
