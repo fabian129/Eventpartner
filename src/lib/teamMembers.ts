@@ -12,6 +12,8 @@ export interface TeamMember {
   image: string;
   linkedin: string;
   bio?: string;
+  /** Cal.com link ("user/event") — set = bookable from the site's meeting popup */
+  calLink?: string;
 }
 
 export const TEAM_MEMBERS: TeamMember[] = [
@@ -42,6 +44,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     initials: "BB",
     image: "/Images/Team/berivan.webp",
     linkedin: "https://www.linkedin.com/in/berivan-batak/",
+    calLink: "berivan-batak-eventpartner/15min",
   },
   {
     name: "Karolina Schauerova",
@@ -49,6 +52,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     initials: "KS",
     image: "/Images/Team/karolina.webp",
     linkedin: "https://www.linkedin.com/in/karolina-schauerova/",
+    calLink: "karolina-schauerova-eventpartner/15min",
   },
   {
     name: "Jennifer Ström",
@@ -56,6 +60,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     initials: "JS",
     image: "/Images/Team/jennifer.webp",
     linkedin: "https://www.linkedin.com/in/jennifer-stroem/",
+    calLink: "jennifer-strom-eventpartner/15min",
   },
   {
     name: "Johanna Glaad",
