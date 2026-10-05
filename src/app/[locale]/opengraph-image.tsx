@@ -7,7 +7,7 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "EventPartner — 340,000+ venues across 175 countries";
+export const alt = "EventPartner — nearly 340,000 venues across 175 countries";
 
 export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -70,12 +70,12 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
         <div style={{ display: "flex", gap: 56 }}>
           {(sv
             ? [
-                ["340 000+", "Venues"],
+                ["~340 000", "Venues"],
                 ["175", "Länder"],
                 ["Snabb", "Leverans"],
               ]
             : [
-                ["340,000+", "Venues"],
+                ["~340,000", "Venues"],
                 ["175", "Countries"],
                 ["Fast", "Delivery"],
               ]
