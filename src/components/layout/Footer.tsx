@@ -288,7 +288,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
               </div>
             </div>
             <p className="text-sm text-white/40 mb-6 leading-relaxed">
-              {cms?.newsletterDesc || "Sign up for our free newsletter — and get access to exclusive offers and discounts."}
+              {cms?.newsletterDesc || (svLocale ? "Prenumerera på vårt kostnadsfria nyhetsbrev — och få tillgång till exklusiva erbjudanden och rabatter." : "Sign up for our free newsletter — and get access to exclusive offers and discounts.")}
             </p>
 
             {subscribed ? (
@@ -350,7 +350,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
 
               {/* Social Links */}
               <div className="flex items-center gap-2.5">
-                <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-white/25 mr-1">{cms?.socialLabel || "Follow us:"}</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-white/25 mr-1">{cms?.socialLabel || (svLocale ? "Följ oss:" : "Follow us:")}</span>
                 {SOCIAL_LINKS.map(({ label, href, Icon }) => (
                   <a
                     key={label}
@@ -447,7 +447,7 @@ export function Footer({ cms }: { cms?: FooterCMS }) {
             className="group flex items-center justify-between p-5 md:p-6 rounded-2xl bg-gradient-to-r from-tiffany/10 to-[#6B3FA0]/10 border border-white/[0.06] hover:border-tiffany/20 transition-all duration-300"
           >
             <div>
-              <p className="text-white text-sm md:text-base font-medium mb-1">{cms?.ctaTitle || "Send your inquiry today"}</p>
+              <p className="text-white text-sm md:text-base font-medium mb-1">{cms?.ctaTitle || (svLocale ? "Skicka er förfrågan idag" : "Send your inquiry today")}</p>
               <p className="text-white/35 text-xs md:text-sm">{ctaDescText}</p>
             </div>
             <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-tiffany group-hover:border-tiffany group-hover:text-black text-white/40 transition-all duration-300 shrink-0 ml-4">
