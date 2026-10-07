@@ -119,8 +119,8 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
       {/* ─── VPP Product Showcase + Quote Form ─── */}
       <VPPShowcase />
 
-      {/* How It Works */}
-      <section className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-16 md:mb-24">
+      {/* How It Works (merch) — anchor target for /shop#merch, e.g. from the connect page */}
+      <section id="merch" className="relative max-w-[1200px] mx-auto px-6 md:px-10 mb-16 md:mb-24 scroll-mt-28">
         <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: EASE }}>
           <div className="flex items-center gap-4 mb-8">
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-tiffany">{t('howItWorks.label')}</span>
