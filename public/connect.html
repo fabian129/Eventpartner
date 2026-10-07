@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0B">
+<meta name="robots" content="noindex, nofollow">
+<title>EventPartner</title>
+<meta name="description" content="Digital business card · EventPartner">
+<link rel="icon" href="https://eventpartner.io/Images/logos/ep-icon-chrome.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>
+/* =========================================================
+   EDIT HERE – everything on the page comes from this block.
+   Pontus:  eventpartner.io/connect?p=pontus
+   Malin:   eventpartner.io/connect?p=malin
+   ========================================================= */
+const SITE = "https://eventpartner.io";
+const CONFIG = {
+  company: "EventPartner",
+  legalName: "EventPartner Global AB",
+  website: SITE + "/en",
+  shop: SITE + "/en/shop",
+  logo: SITE + "/Images/logos/ep-icon-chrome.png",
+  eventTag: "Cvent CONNECT Europe · London 2026",
+  // Where form leads go. Empty = the visitor's e-mail app opens with the details filled in.
+  // For automatic collection: create a free form at formspree.io and paste its URL here.
+  formEndpoint: "",
+  people: {
+    pontus: {
+      name: "Pontus Bredal-Hansen",
+      title: "CEO & Co-founder",
+      photo: SITE + "/Images/Team/pontus.webp",
+      email: "pontus@eventpartner.io",
+      phone: "+46 70 850 63 04",
+      linkedin: "https://www.linkedin.com/in/pontus-bredal-hansen-51a07a110/",
+      booking: "https://cal.com/pontus-bredal-hansen-eventpartner/15min"
+    },
+    malin: {
+      name: "Malin Berlin",
+      title: "Managing Director & Co-founder",
+      photo: SITE + "/Images/Team/malin-farg.webp",
+      heroZoom: 1.35, heroFocus: "53% 10%",     // full-length photo: zoom towards the face
+      avatarZoom: 3.2, avatarFocus: "53% 9%",
+      email: "malin@eventpartner.io",
+      phone: "+46 73 261 40 64",
+      linkedin: "https://www.linkedin.com/in/malinberlins/",
+      booking: "https://cal.com/eventpartner/15min"
+    }
+  },
+  defaultPerson: "pontus",
+  videoCards: [
+    { name: "Video Brochure", note: "Print meets motion", sizes: "4.3″ · 5″ · 7″ · 10″", img: SITE + "/Images/vpp/vpp_brochure.png" },
+    { name: "Video Business Card", note: "Leave an impression", sizes: "2.4″", img: SITE + "/Images/vpp/sothebys_cards_on_slate_1783434005267.png" },
+    { name: "Video Box", note: "Unboxing as experience", sizes: "5″ · 7″ · 10″", img: SITE + "/Images/vpp/vpp_box.png" },
+    { name: "Video Mailer", note: "Direct mail, redefined", sizes: "4.3″ · 5″ · 7″", img: SITE + "/Images/vpp/vpp_mailer.png" }
+  ],
+  merch: [
+    { name: "Zip hoodie", img: "https://files.cdn.printful.com/files/f2f/f2ff379aa221af94fc9cc7309c0d7ae3_preview.png" },
+    { name: "Cap", img: "https://files.cdn.printful.com/files/a72/a72f10570acc80ece358c9b455970c05_preview.png" },
+    { name: "Backpack", img: "https://files.cdn.printful.com/files/431/431eb021517d843c74ca8e18824ccb27_preview.png" },
+    { name: "Mug", img: "https://files.cdn.printful.com/files/ab8/ab84ebd359040c4cba74f564464decb9_preview.png" }
+  ]
+};
+</script>
+<style>
+/* Layout: one phone-width column on black. Full-bleed B&W portrait, name in a fine serif,
+   a row of round actions, then video cards (swipe), merch, and the sample offer. Single dark look by design. */
+:root{
+  --bg:#0A0A0B;
+  --panel:#141416;
+  --panel-2:#1B1B1E;
+  --line:rgba(255,255,255,.09);
+  --fg:#F4F2EE;
+  --muted:#9A978F;
+  --gold:#C8A96A;        /* the foil line on the video brochure */
+  --gold-soft:rgba(200,169,106,.14);
+  --teal:#6AD8D2;        /* eventpartner.io accent, used only as a tiny signal */
+  --ok:#7FD1A8;
+  --serif:"Quicksand", system-ui, sans-serif;
+  --sans:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Space Mono", ui-monospace, Menlo, monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased;
+  padding-bottom:env(safe-area-inset-bottom,0)}
+.page{max-width:460px;margin:0 auto;display:flex;flex-direction:column}
+.pad{padding-inline:20px}
+img{max-width:100%;display:block;color:transparent}
+a{color:inherit}
+
+/* ---------- hero ---------- */
+.hero{position:relative;aspect-ratio:4/4.6;max-height:560px;overflow:hidden;background:#000}
+.hero .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(1) contrast(1.05)}
+.hero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,10,11,.55) 0%,rgba(10,10,11,0) 22%,rgba(10,10,11,0) 48%,rgba(10,10,11,.85) 78%,var(--bg) 100%)}
+.topbar{position:absolute;z-index:2;top:calc(env(safe-area-inset-top,0px) + 16px);left:20px;right:20px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:8px;font:600 .9rem var(--sans);letter-spacing:.01em}
+.brand img{height:22px;width:auto}
+.tag{font:400 .6rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);
+  border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 10px;backdrop-filter:blur(6px)}
+.id{position:absolute;z-index:2;left:20px;right:20px;bottom:18px}
+.kicker{font:400 .62rem var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:22px;height:1px;background:var(--gold)}
+h1{font:700 clamp(2.1rem,9.5vw,2.7rem)/1 var(--serif);margin:10px 0 6px;letter-spacing:-.01em;text-wrap:balance}
+.title{color:var(--muted);font-size:.95rem}
+
+/* ---------- actions ---------- */
+.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+.act{display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;background:none;border:0;color:var(--fg);cursor:pointer;font:500 .72rem var(--sans);padding:0}
+.act .ring{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:var(--panel)}
+.act svg{width:20px;height:20px}
+.act:focus-visible .ring,.btn:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.act[hidden]{display:none!important}
+
+.book{margin-top:22px;display:flex;align-items:center;gap:12px;padding:12px 14px 12px 12px;border-radius:20px;text-decoration:none;
+  background:linear-gradient(135deg,#1d1a14,#121214 60%);border:1px solid rgba(200,169,106,.35)}
+.book .av{width:54px;height:54px;border-radius:50%;overflow:hidden;flex:none;border:1px solid rgba(200,169,106,.5)}
+.book .av img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1)}
+.book .t{flex:1;min-width:0}
+.book b{display:block;font:600 clamp(.8rem,3.6vw,.9rem)/1.3 var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.book span{color:var(--muted);font-size:.82rem}
+.book .arrow{width:38px;height:38px;border-radius:50%;background:var(--gold);color:#17130b;display:grid;place-items:center;flex:none}
+.book .arrow svg{width:18px;height:18px}
+
+/* ---------- sections ---------- */
+section{margin-top:44px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.eyebrow{font:400 .6rem var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 6px}
+h2{font:700 1.65rem/1.1 var(--serif);margin:0;letter-spacing:-.005em}
+.more{font-size:.8rem;color:var(--muted);text-decoration:none;white-space:nowrap}
+.more:hover{color:var(--fg)}
+.lede{color:var(--muted);margin:8px 0 0;max-width:36ch}
+
+/* video cards: swipe rail */
+.rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 20px 6px;margin-inline:-20px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.vc{flex:0 0 78%;scroll-snap-align:start;border-radius:20px;overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+.vc .img{aspect-ratio:1/1;background:#0d0d0e;overflow:hidden}
+.vc .img img{width:100%;height:100%;object-fit:cover;transform:scale(1.18)}
+.vc .cap{padding:14px 16px 16px;display:flex;justify-content:space-between;align-items:end;gap:10px}
+.vc b{display:block;font:700 1.15rem/1.2 var(--serif)}
+.vc i{font-style:normal;color:var(--muted);font-size:.8rem}
+.vc .sz{font:400 .62rem var(--mono);letter-spacing:.06em;color:var(--gold);text-align:right;white-space:nowrap}
+.price{margin-top:12px;font-size:.82rem;color:var(--muted)}
+.price b{color:var(--fg);font-weight:600}
+
+/* merch grid */
+.merch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mi{border-radius:18px;overflow:hidden;background:#FFFFFF;position:relative;aspect-ratio:1/1}
+.mi img{width:100%;height:100%;object-fit:cover}
+.mi span{position:absolute;left:10px;bottom:10px;font:400 .62rem var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:#1b1b1b;background:rgba(255,255,255,.8);padding:4px 8px;border-radius:999px}
+
+/* offer */
+.offer{border-radius:24px;padding:24px 20px;background:var(--panel);border:1px solid var(--line);position:relative;overflow:hidden}
+.offer::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+form{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+label{font-size:.78rem;font-weight:500;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+input,textarea{font:inherit;font-size:16px;color:var(--fg);background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:13px 14px;width:100%}
+textarea{min-height:80px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative;display:inline-flex}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:.84rem;color:var(--fg)}
+.chip input:checked+span{background:var(--gold);border-color:var(--gold);color:#17130b;font-weight:600}
+.chip input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:999px;border:0;cursor:pointer;
+  background:var(--fg);color:#0A0A0B;font:600 .98rem var(--sans);margin-top:4px}
+.fine{font-size:.74rem;color:var(--muted)}
+.done{display:none;padding:12px 14px;border-radius:14px;background:rgba(127,209,168,.1);border:1px solid rgba(127,209,168,.3);font-size:.88rem}
+.done.show{display:block}
+
+footer{margin:44px 0 36px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.78rem}
+footer img{height:26px;width:auto;opacity:.9}
+footer .swap a{color:var(--fg)}
+.sig{font:400 .6rem var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#5d5b56}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero .photo{animation:settle 1.4s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes settle{from{transform:scale(1.06)}to{transform:none}}
+}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="hero">
+    <img class="photo" id="photo" alt="">
+    <div class="topbar">
+      <div class="brand"><img id="logo" alt="">EventPartner</div>
+      <div class="tag" id="eventTag"></div>
+    </div>
+    <div class="id">
+      <div class="kicker" id="kicker"></div>
+      <h1 id="pName"></h1>
+      <div class="title" id="pTitle"></div>
+    </div>
+  </header>
+
+  <div class="pad">
+    <nav class="actions" aria-label="Contact">
+      <button class="act" id="saveContact" type="button"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>Save</button>
+      <a class="act" id="lnkPhone"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>Call</a>
+      <a class="act" id="lnkMail"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>E-mail</a>
+      <a class="act" id="lnkLinkedin" target="_blank" rel="noopener"><span class="ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.38-.03-3.16-1.93-3.16-1.93 0-2.22 1.5-2.22 3.06V21H9z"/></svg></span>LinkedIn</a>
+    </nav>
+
+    <a class="book" id="lnkBook" target="_blank" rel="noopener">
+      <span class="av"><img id="bookPhoto" alt=""></span>
+      <div class="t"><b id="bookTitle">Book a meeting</b><span>15 minutes · in London or online</span></div>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    </a>
+
+    <section aria-labelledby="vcH">
+      <div class="sec-head">
+        <div><p class="eyebrow">Video cards</p><h2 id="vcH">Print that plays</h2></div>
+        <a class="more" id="lnkShop1" target="_blank" rel="noopener">View all →</a>
+      </div>
+      <p class="lede">A real video screen inside a printed card. Invitations, venue showcases and thank-yous that stay on the desk.</p>
+      <div class="rail" id="rail" style="margin-top:16px"></div>
+      <p class="price">From <b>€15</b> per card · fully custom print and video</p>
+    </section>
+
+    <section aria-labelledby="mH">
+      <div class="sec-head">
+        <div><p class="eyebrow">Branded merch</p><h2 id="mH">Kept after the event</h2></div>
+        <a class="more" id="lnkShop2" target="_blank" rel="noopener">Shop →</a>
+      </div>
+      <div class="merch" id="merch"></div>
+    </section>
+
+    <section aria-labelledby="offerH">
+      <div class="offer">
+        <p class="eyebrow">For Cvent CONNECT attendees</p>
+        <h2 id="offerH">A free video card sample</h2>
+        <p class="lede">Leave your details and we'll send a sample with your own video, ready for your next event or sales meeting.</p>
+        <form id="leadForm" novalidate>
+          <label for="fName">Name<input id="fName" name="name" autocomplete="name" required></label>
+          <label for="fCompany">Company<input id="fCompany" name="company" autocomplete="organization" required></label>
+          <label for="fEmail">Work e-mail<input id="fEmail" name="email" type="email" autocomplete="email" required></label>
+          <div class="chips" role="group" aria-label="Interested in">
+            <label class="chip"><input type="checkbox" name="interest" value="Video cards" id="i1" checked><span>Video cards</span></label>
+            <label class="chip"><input type="checkbox" name="interest" value="Merch" id="i2"><span>Merch</span></label>
+            <label class="chip"><input type="checkbox" name="interest" value="Nordic buyer reach" id="i3"><span>Nordic buyer reach</span></label>
+          </div>
+          <label for="fNote">Anything else? (optional)<textarea id="fNote" name="note" placeholder="e.g. client event in Stockholm in March"></textarea></label>
+          <button class="btn" type="submit" id="submitBtn">Send me a sample</button>
+          <p class="fine">We only use your details to follow up on this request.</p>
+          <div class="done" id="done" role="status"></div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <footer class="pad">
+    <img id="logo2" alt="EventPartner">
+    <div id="fCo"></div>
+    <div class="swap" id="swap"></div>
+    <div class="sig">Everything your event needs · One partner</div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  const qs = new URLSearchParams(location.search);
+  const key = (qs.get("p")||CONFIG.defaultPerson).toLowerCase();
+  const P = CONFIG.people[key] || CONFIG.people[CONFIG.defaultPerson];
+  const $ = id => document.getElementById(id);
+  const first = P.name.split(" ")[0];
+
+  document.title = P.name + " · " + CONFIG.company;
+  $("photo").src = P.photo; $("photo").alt = P.name;
+  $("bookPhoto").src = P.photo;
+  if (P.heroZoom){ const h=$("photo"); h.style.objectPosition="50% 0%"; h.style.transformOrigin=P.heroFocus; h.style.animation="none"; h.style.transform="scale("+P.heroZoom+")"; }
+  if (P.avatarZoom){ const b=$("bookPhoto"); b.style.objectPosition="50% 0%"; b.style.transformOrigin=P.avatarFocus; b.style.transform="scale("+P.avatarZoom+")"; }
+  $("logo").src = CONFIG.logo; $("logo2").src = CONFIG.logo;
+  $("eventTag").textContent = "London 2026";
+  $("kicker").textContent = CONFIG.company;
+  $("pName").textContent = P.name.replace(/-/g,"\u2011");
+  $("pTitle").textContent = P.title;
+  $("bookTitle").textContent = "Book a meeting with " + first;
+  $("fCo").textContent = CONFIG.legalName + " · Stockholm";
+  ["lnkShop1","lnkShop2"].forEach(id=>$(id).href = CONFIG.shop);
+
+  $("lnkMail").href = "mailto:"+P.email;
+  if (P.linkedin) $("lnkLinkedin").href = P.linkedin; else $("lnkLinkedin").hidden = true;
+  if (P.phone) $("lnkPhone").href = "tel:"+P.phone.replace(/[^\d+]/g,""); else $("lnkPhone").hidden = true;
+  if (P.booking) $("lnkBook").href = P.booking;
+  else { $("lnkBook").href = "mailto:"+P.email+"?subject="+encodeURIComponent("Meeting at Cvent CONNECT London"); $("lnkBook").removeAttribute("target"); }
+  const visible = document.querySelectorAll(".act:not([hidden])").length;
+  document.querySelector(".actions").style.gridTemplateColumns = "repeat("+visible+",1fr)";
+
+  // products
+  $("rail").innerHTML = CONFIG.videoCards.map(v =>
+    `<article class="vc"><div class="img"><img loading="lazy" src="${v.img}" alt="${v.name}"></div>
+     <div class="cap"><div><b>${v.name}</b><i>${v.note}</i></div><div class="sz">${v.sizes}</div></div></article>`).join("");
+  $("merch").innerHTML = CONFIG.merch.map(m =>
+    `<div class="mi"><img loading="lazy" src="${m.img}" alt="${m.name}"><span>${m.name}</span></div>`).join("");
+
+  const other = Object.entries(CONFIG.people).find(([,o])=>o!==P);
+  if (other){ const [k,o]=other, a=document.createElement("a"); a.href="?p="+k; a.textContent=o.name;
+    $("swap").append("Also in London: ", a); }
+
+  // Save contact (.vcf)
+  $("saveContact").addEventListener("click", ()=>{
+    const parts = P.name.split(" "), fn = parts.shift();
+    const lines = ["BEGIN:VCARD","VERSION:3.0","N:"+parts.join(" ")+";"+fn+";;;","FN:"+P.name,
+      "ORG:"+CONFIG.legalName,"TITLE:"+P.title,"EMAIL;TYPE=WORK:"+P.email];
+    if (P.phone) lines.push("TEL;TYPE=CELL:"+P.phone);
+    lines.push("URL:"+CONFIG.website);
+    if (P.linkedin) lines.push("X-SOCIALPROFILE;TYPE=linkedin:"+P.linkedin);
+    lines.push("NOTE:Met at "+CONFIG.eventTag,"END:VCARD");
+    const url = URL.createObjectURL(new Blob([lines.join("\r\n")],{type:"text/vcard;charset=utf-8"}));
+    const a = document.createElement("a"); a.href=url; a.download=P.name.replace(/\s+/g,"_")+".vcf";
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),4000);
+  });
+
+  // Lead form
+  $("leadForm").addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const f=e.target, done=$("done"), btn=$("submitBtn");
+    const name=f.name.value.trim(), company=f.company.value.trim(), email=f.email.value.trim();
+    done.classList.add("show");
+    if(!name||!company||!/^\S+@\S+\.\S+$/.test(email)){ done.textContent="Please fill in your name, company and a valid e-mail address."; return; }
+    const interests=[...f.querySelectorAll('input[name=interest]:checked')].map(i=>i.value).join(", ")||"-";
+    const data={name,company,email,interests,note:f.note.value.trim(),met:P.name,source:CONFIG.eventTag};
+    if(CONFIG.formEndpoint){
+      btn.disabled=true; btn.textContent="Sending…";
+      try{ const r=await fetch(CONFIG.formEndpoint,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify(data)});
+        if(!r.ok) throw 0; done.textContent="Thank you, "+name.split(" ")[0]+". "+first+" will be in touch within a few days."; f.reset();
+      }catch(_){ done.textContent="That didn't go through. Please e-mail "+P.email+" directly."; }
+      btn.disabled=false; btn.textContent="Send me a sample";
+    } else {
+      const body=Object.entries(data).map(([k,v])=>k+": "+v).join("\n");
+      location.href="mailto:"+P.email+"?subject="+encodeURIComponent("Video card sample – "+company)+"&body="+encodeURIComponent(body);
+      done.textContent="Your e-mail app should open with your details filled in. Press send and "+first+" will be in touch.";
+    }
+  });
+})();
+</script>
+</body>
+</html>
