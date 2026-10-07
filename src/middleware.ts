@@ -13,6 +13,15 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
+  // Hidden digital business-card page (QR codes for Cvent CONNECT London).
+  // Served from public/connect.html, outside the /en and /sv locale routing.
+  const { pathname } = request.nextUrl;
+  if (pathname === "/connect" || pathname === "/connect/") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/connect.html";
+    return NextResponse.rewrite(url);
+  }
+
   return handleI18n(request);
 }
 
