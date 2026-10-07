@@ -9,6 +9,7 @@ import { VPPShowcase } from "@/components/shop/VPPShowcase";
 import { LogoTicker } from "@/components/layout/LogoTicker";
 import { ShoppingBag, ArrowRight } from "lucide-react";
 import { openBookingPicker } from "@/components/booking/BookingModal";
+import { useSmoothScroll } from "@/components/utils/SmoothScroll";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -59,6 +60,32 @@ export function ShopPageContent({ cms }: { cms?: ShopCMS }) {
     }
     fetchProducts();
   }, []);
+
+  // Opened as /shop#merch (e.g. from the connect page): the sections above load in
+  // after first paint and push merch down, so the browser's own jump lands too high.
+  // Re-align a few times while the layout settles, unless the visitor starts scrolling.
+  const lenis = useSmoothScroll();
+  useEffect(() => {
+    if (window.location.hash !== "#merch") return;
+    let stopped = false;
+    const stop = () => { stopped = true; };
+    const align = () => {
+      const el = document.getElementById("merch");
+      if (stopped || !el) return;
+      if (lenis) lenis.scrollTo(el, { offset: -112, immediate: true });
+      else el.scrollIntoView({ block: "start" });
+    };
+    window.addEventListener("wheel", stop, { passive: true });
+    window.addEventListener("touchstart", stop, { passive: true });
+    window.addEventListener("keydown", stop);
+    const timers = [300, 900, 1800, 3000, 4500].map((ms) => setTimeout(align, ms));
+    return () => {
+      timers.forEach(clearTimeout);
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop);
+    };
+  }, [lenis]);
 
 
 
