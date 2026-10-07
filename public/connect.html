@@ -43,7 +43,7 @@ const CONFIG = {
       title: "Managing Director & Co-founder",
       photo: SITE + "/Images/Team/malin-farg.webp",
       heroZoom: 1.35, heroFocus: "53% 10%",     // full-length photo: zoom towards the face
-      avatarZoom: 3.2, avatarFocus: "53% 9%",
+      avatarZoom: 2.4, avatarFocus: "52% 11%",
       email: "malin@eventpartner.io",
       phone: "+46 73 261 40 64",
       linkedin: "https://www.linkedin.com/in/malinberlins/",
@@ -163,12 +163,6 @@ form{display:flex;flex-direction:column;gap:12px;margin-top:18px}
 label{font-size:.78rem;font-weight:500;color:var(--muted);display:flex;flex-direction:column;gap:6px}
 input,textarea{font:inherit;font-size:16px;color:var(--fg);background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:13px 14px;width:100%}
 textarea{min-height:80px;resize:vertical}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{position:relative;display:inline-flex}
-.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-.chip span{padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-size:.84rem;color:var(--fg)}
-.chip input:checked+span{background:var(--gold);border-color:var(--gold);color:#17130b;font-weight:600}
-.chip input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:999px;border:0;cursor:pointer;
   background:var(--fg);color:#0A0A0B;font:600 .98rem var(--sans);margin-top:4px}
 .fine{font-size:.74rem;color:var(--muted)}
@@ -204,7 +198,7 @@ footer .swap a{color:var(--fg)}
 
   <div class="pad">
     <nav class="actions" aria-label="Contact">
-      <button class="act" id="saveContact" type="button"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>Save</button>
+      <a class="act" id="saveContact"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>Save</a>
       <a class="act" id="lnkPhone"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>Call</a>
       <a class="act" id="lnkMail"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>E-mail</a>
       <a class="act" id="lnkLinkedin" target="_blank" rel="noopener"><span class="ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.38-.03-3.16-1.93-3.16-1.93 0-2.22 1.5-2.22 3.06V21H9z"/></svg></span>LinkedIn</a>
@@ -243,12 +237,6 @@ footer .swap a{color:var(--fg)}
           <label for="fName">Name<input id="fName" name="name" autocomplete="name" required></label>
           <label for="fCompany">Company<input id="fCompany" name="company" autocomplete="organization" required></label>
           <label for="fEmail">Work e-mail<input id="fEmail" name="email" type="email" autocomplete="email" required></label>
-          <div class="chips" role="group" aria-label="Interested in">
-            <label class="chip"><input type="checkbox" name="interest" value="Video cards" id="i1" checked><span>Video cards</span></label>
-            <label class="chip"><input type="checkbox" name="interest" value="Merch" id="i2"><span>Merch</span></label>
-            <label class="chip"><input type="checkbox" name="interest" value="Nordic buyer reach" id="i3"><span>Nordic buyer reach</span></label>
-          </div>
-          <label for="fNote">Anything else? (optional)<textarea id="fNote" name="note" placeholder="e.g. client event in Stockholm in March"></textarea></label>
           <button class="btn" type="submit" id="submitBtn">Send me a sample</button>
           <p class="fine">We only use your details to follow up on this request.</p>
           <div class="done" id="done" role="status"></div>
@@ -285,7 +273,8 @@ footer .swap a{color:var(--fg)}
   $("pTitle").textContent = P.title;
   $("bookTitle").textContent = "Book a meeting with " + first;
   $("fCo").textContent = CONFIG.legalName + " · Stockholm";
-  ["lnkShop1","lnkShop2"].forEach(id=>$(id).href = CONFIG.shop);
+  $("lnkShop1").href = CONFIG.shop;
+  $("lnkShop2").href = CONFIG.shop + "#merch";
 
   $("lnkMail").href = "mailto:"+P.email;
   if (P.linkedin) $("lnkLinkedin").href = P.linkedin; else $("lnkLinkedin").hidden = true;
@@ -306,19 +295,9 @@ footer .swap a{color:var(--fg)}
   if (other){ const [k,o]=other, a=document.createElement("a"); a.href="?p="+k; a.textContent=o.name;
     $("swap").append("Also in London: ", a); }
 
-  // Save contact (.vcf)
-  $("saveContact").addEventListener("click", ()=>{
-    const parts = P.name.split(" "), fn = parts.shift();
-    const lines = ["BEGIN:VCARD","VERSION:3.0","N:"+parts.join(" ")+";"+fn+";;;","FN:"+P.name,
-      "ORG:"+CONFIG.legalName,"TITLE:"+P.title,"EMAIL;TYPE=WORK:"+P.email];
-    if (P.phone) lines.push("TEL;TYPE=CELL:"+P.phone);
-    lines.push("URL:"+CONFIG.website);
-    if (P.linkedin) lines.push("X-SOCIALPROFILE;TYPE=linkedin:"+P.linkedin);
-    lines.push("NOTE:Met at "+CONFIG.eventTag,"END:VCARD");
-    const url = URL.createObjectURL(new Blob([lines.join("\r\n")],{type:"text/vcard;charset=utf-8"}));
-    const a = document.createElement("a"); a.href=url; a.download=P.name.replace(/\s+/g,"_")+".vcf";
-    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),4000);
-  });
+  // Save contact: a real .vcf file (public/connect-<key>.vcf). A plain link works in
+  // iPhone Safari, in-app QR-scanner browsers and Android, where blob downloads fail.
+  $("saveContact").href = "/connect-" + (CONFIG.people[key] ? key : CONFIG.defaultPerson) + ".vcf";
 
   // Lead form
   $("leadForm").addEventListener("submit", async (e)=>{
@@ -327,8 +306,7 @@ footer .swap a{color:var(--fg)}
     const name=f.name.value.trim(), company=f.company.value.trim(), email=f.email.value.trim();
     done.classList.add("show");
     if(!name||!company||!/^\S+@\S+\.\S+$/.test(email)){ done.textContent="Please fill in your name, company and a valid e-mail address."; return; }
-    const interests=[...f.querySelectorAll('input[name=interest]:checked')].map(i=>i.value).join(", ")||"-";
-    const data={name,company,email,interests,note:f.note.value.trim(),met:P.name,source:CONFIG.eventTag};
+    const data={name,company,email,met:P.name,source:CONFIG.eventTag};
     if(CONFIG.formEndpoint){
       btn.disabled=true; btn.textContent="Sending…";
       try{ const r=await fetch(CONFIG.formEndpoint,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify(data)});
